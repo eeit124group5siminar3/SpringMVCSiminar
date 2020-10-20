@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member_SignUp.Member_DAO;
+import member_SignUp.model.Member_SignUp;
 
 @WebServlet("/Member_Login_Servlet")
 public class Member_Login_Servlet extends HttpServlet {
@@ -69,7 +69,7 @@ public class Member_Login_Servlet extends HttpServlet {
 			member_password = member_password.trim();
 		boolean sel = login_check.login_check(member_email, member_password);
 
-		Member_Bean login_bean = login_check.login_bean(member_email);
+		Member_SignUp login_bean = login_check.login_bean(member_email);
 		System.out.println(request.getParameter("remember"));
 		if (sel) {
 			if (rm != null) {

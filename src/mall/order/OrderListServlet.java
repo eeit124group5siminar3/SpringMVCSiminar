@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import mall.productModel.ProductOrderBean;
 import mall.service.OrderService;
-import member_SignUp.Member_Bean;
+import member_SignUp.model.Member_SignUp;
 
 
 
@@ -32,9 +32,9 @@ public class OrderListServlet extends HttpServlet {
 			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
 			return;
 		}
-		Member_Bean mb = (Member_Bean) session.getAttribute("login_ok");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 		if(mb==null) {
-			mb=(Member_Bean)session.getAttribute("login_guest");
+			mb=(Member_SignUp)session.getAttribute("login_guest");
 		}
 		OrderService os = new OrderService();
 		List<ProductOrderBean> memberOrders = os.getMemberOrders(mb.getMember_no());

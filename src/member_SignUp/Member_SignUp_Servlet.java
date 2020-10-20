@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member_SignUp.Member_Bean;
-import member_SignUp.Member_DAO;
+import member_SignUp.model.Member_SignUp;
 
 @WebServlet("/Member_SignUp_Servlet")
 public class Member_SignUp_Servlet extends HttpServlet {
@@ -89,7 +88,7 @@ public class Member_SignUp_Servlet extends HttpServlet {
 						if (check_date) {
 
 							// 建立Buyer_Object Bean
-							Member_Bean reg_buyer = new Member_Bean(member_permissions, member_email, member_password,
+							Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
 									member_name, member_birthday, member_cellphone, member_id, member_address,
 									member_gui_number);
 							// 建立getSession(true) 若沒有Session則會建立Session
@@ -119,7 +118,7 @@ public class Member_SignUp_Servlet extends HttpServlet {
 						if (check_date) {
 
 							// 建立Buyer_Object Bean
-							Member_Bean reg_buyer = new Member_Bean(member_permissions, member_email, member_password,
+							Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
 									member_name, member_birthday, member_cellphone, member_id, member_address,
 									member_gui_number);
 							// 建立getSession(true) 若沒有Session則會建立Session
@@ -152,8 +151,7 @@ public class Member_SignUp_Servlet extends HttpServlet {
 
 			// 建立Database Access Object,負責Table的Access
 			Member_DAO MemberDAO = new Member_DAO();
-			Member_Bean seller_data = (Member_Bean) request.getSession(true).getAttribute("reg_buyer");
-			String member_email = seller_data.getMember_email();
+			Member_SignUp seller_data = (Member_SignUp) request.getSession(true).getAttribute("reg_buyer");
 			if (MemberDAO.insert_member_sing_up(seller_data)) {
 				request.getSession().setAttribute("login_ok", seller_data);
 				// F5不會重複寫入

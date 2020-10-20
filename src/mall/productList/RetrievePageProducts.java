@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
-import member_SignUp.Member_Bean;
+import member_SignUp.model.Member_SignUp;
 
 /**
  * Servlet implementation class RetrievePageProducts
@@ -46,10 +46,10 @@ public class RetrievePageProducts extends HttpServlet {
 		}
 		// 登入成功後，Session範圍內才會有LoginOK對應的MemberBean物件
 
-		Member_Bean mb = (Member_Bean) session.getAttribute("login_ok");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 		// 取出使用者的memberId，後面的Cookie會用到
 		if (mb == null) {
-			mb = new Member_Bean();
+			mb = new Member_SignUp();
 			String sessionId = request.getRequestedSessionId();
 			memberId = sessionId;
 			mb.setMember_no(memberId);

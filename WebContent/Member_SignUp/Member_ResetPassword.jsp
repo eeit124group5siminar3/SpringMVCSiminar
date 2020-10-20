@@ -17,7 +17,7 @@ body {
 </head>
 <body>
 	<jsp:include page="/top.jsp" />
-	<jsp:useBean id="reg_buyer" class="member_SignUp.Member_Bean"
+	<jsp:useBean id="reg_buyer" class="member_SignUp.model.Member_SignUp"
 		scope="session" />
 	<h2>修改密碼</h2>
 	<form action=".\Member_ResetPassword_Servler" method="post">

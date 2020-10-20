@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
-import member_SignUp.Member_Bean;
+import member_SignUp.model.Member_SignUp;
 
 @WebServlet("/DisplayMaintainProduct")
 public class DisplayMaintainProduct extends HttpServlet {
@@ -43,7 +43,7 @@ public class DisplayMaintainProduct extends HttpServlet {
 		session.setAttribute("requestURI", requestURI);
 		// 此時session物件存在，讀取session物件內的LoginOK
 		// 以檢查使用者是否登入。
-		Member_Bean mb = (Member_Bean) session.getAttribute("login_ok");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 		if (mb == null) {
 			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
 			return;

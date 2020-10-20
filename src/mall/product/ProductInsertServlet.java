@@ -20,7 +20,7 @@ import javax.servlet.http.Part;
 import mall.SystemUtils2018;
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
-import member_SignUp.Member_Bean;
+import member_SignUp.model.Member_SignUp;
 
 @WebServlet("/ProductInsertServlet")
 
@@ -216,7 +216,7 @@ public class ProductInsertServlet extends HttpServlet {
 			ProductService productService = new ProductService();
 			int category=Integer.parseInt(categoryStr);
 			productService.setId(category);
-			Member_Bean mb=(Member_Bean)session.getAttribute("login_ok");
+			Member_SignUp mb=(Member_SignUp)session.getAttribute("login_ok");
 			producterId=mb.getMember_no();
 //			String categoryTag = productService.getCategoryTag();
 //			session.setAttribute("SelectCategoryTag", categoryTag);

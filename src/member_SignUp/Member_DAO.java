@@ -14,17 +14,14 @@ import java.util.Map;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import org.apache.naming.java.javaURLContextFactory;
-
-import member_SignUp.Member_Bean;
-import member_SignUp.Member_List;
+import member_SignUp.model.Member_SignUp;
 
 public class Member_DAO implements Member_List {
 
 	private DataSource ds = null;
 	private InitialContext ctxt = null;
 	private Connection conn = null;
-	static List<Member_Bean> list;
+	static List<Member_SignUp> list;
 
 	// 連線DB
 	public Member_DAO() {
@@ -43,13 +40,13 @@ public class Member_DAO implements Member_List {
 
 	// Seller table 轉物件
 	@Override
-	public List<Member_Bean> listmember_object() {
-		list = new ArrayList<Member_Bean>();
+	public List<Member_SignUp> listmember_object() {
+		list = new ArrayList<Member_SignUp>();
 		try (Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery("select * from member_signup");) {
 
 			while (rs.next()) {
-				Member_Bean dir = new Member_Bean();
+				Member_SignUp dir = new Member_SignUp();
 
 				dir.setMember_no(rs.getString("member_no"));
 				dir.setMember_email(rs.getString("member_email"));
@@ -74,7 +71,7 @@ public class Member_DAO implements Member_List {
 
 	// 會員註冊
 	@Override
-	public boolean insert_member_sing_up(Member_Bean member_data) {
+	public boolean insert_member_sing_up(Member_SignUp member_data) {
 
 		try {
 			String sqlString = "insert into member_signup(member_no,member_email,member_password,member_name,member_birthday,member_id,member_cellphone,member_address,member_permissions,member_gg,member_lock_acc) values("
@@ -101,9 +98,9 @@ public class Member_DAO implements Member_List {
 
 	// 會員註冊，驗證EMAIL
 	public boolean check_signup_email(String member_email) {
-		List<Member_Bean> email_check = listmember_object();
+		List<Member_SignUp> email_check = listmember_object();
 		for (int i = 0; i < email_check.size(); i++) {
-			Member_Bean object = email_check.get(i);
+			Member_SignUp object = email_check.get(i);
 			if (object.getMember_email().equals(member_email)) {
 				return false;
 			}
@@ -113,9 +110,9 @@ public class Member_DAO implements Member_List {
 
 	// 會員註冊，驗證身分證字號
 	public boolean check_signup_id(String member_id) {
-		List<Member_Bean> id_check = listmember_object();
+		List<Member_SignUp> id_check = listmember_object();
 		for (int i = 0; i < id_check.size(); i++) {
-			Member_Bean object = id_check.get(i);
+			Member_SignUp object = id_check.get(i);
 			if (object.getMember_id().equals(member_id)) {
 				return false;
 			}
@@ -125,7 +122,6 @@ public class Member_DAO implements Member_List {
 	
 	//會員註冊，確認生日日期
 	public boolean check_date(Date member_date1) {
-		java.util.Date member_date2=(java.util.Date) member_date1;
 		java.util.Date date = new java.util.Date();
 
 		if (member_date1.getTime() <= date.getTime()) {
@@ -209,7 +205,7 @@ public class Member_DAO implements Member_List {
 
 	// 登錄驗證，資料包Bean
 	public boolean login_check(String member_email, String member_password) {
-		List<Member_Bean> login_check = this.listmember_object();
+		this.listmember_object();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from member_signup where member_email='" + member_email + "'");
@@ -226,21 +222,21 @@ public class Member_DAO implements Member_List {
 	}
 
 	// 登錄資料包Bean
-	public Member_Bean login_bean(String email) {
-		List<Member_Bean> login_check = this.listmember_object();
+	public Member_SignUp login_bean(String email) {
+		this.listmember_object();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from member_signup where member_email='" + email + "'");
 			while (rs.next()) {
 				String member_no = rs.getString("member_no");
 				String member_email = rs.getString("member_email");
-				String check_password = rs.getString("member_password");
+				rs.getString("member_password");
 				String member_name = rs.getString("member_name");
 				String member_cellphone = rs.getString("member_cellphone");
 				String member_address = rs.getString("member_address");
 				String member_permissions = rs.getString("member_permissions");
 
-				Member_Bean bean = new Member_Bean(member_no, member_email, member_name, member_cellphone,
+				Member_SignUp bean = new Member_SignUp(member_no, member_email, member_name, member_cellphone,
 						member_address,member_permissions);
 				return bean;
 
@@ -253,7 +249,7 @@ public class Member_DAO implements Member_List {
 
 	// 忘記密碼
 	public String reset_password(String member_email, String member_id, String member_name, String member_cellphone) {
-		List<Member_Bean> login_check = this.listmember_object();
+		this.listmember_object();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from member_signup where member_email='" + member_email + "'");

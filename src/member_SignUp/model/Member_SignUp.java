@@ -1,10 +1,21 @@
-package member_SignUp;
+package member_SignUp.model;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Member_Bean implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Meber_SignUp")
+public class Member_SignUp implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String member_no;
 	private String member_email;
 	private String member_password;
@@ -18,18 +29,18 @@ public class Member_Bean implements Serializable {
 	private String member_gg;
 	private String member_lock_acc;
 
-	public Member_Bean() {
+	public Member_SignUp() {
 
 	}
 
 	// 登錄驗證Bean
-	public Member_Bean(String member_email, String member_password) {
+	public Member_SignUp(String member_email, String member_password) {
 		this.member_email = member_email;
 		this.member_password = member_password;
 	}
 
 	//登錄後資料包Bean
-	public Member_Bean(String member_no, String member_email, String member_name, String member_cellphone,
+	public Member_SignUp(String member_no, String member_email, String member_name, String member_cellphone,
 			String member_address,String member_permissions) {
 		this.member_no = member_no;
 		this.member_email = member_email;
@@ -40,7 +51,7 @@ public class Member_Bean implements Serializable {
 	}
 
 	// 註冊Bean
-	public Member_Bean(String member_permissions, String member_email, String member_password, String member_name,
+	public Member_SignUp(String member_permissions, String member_email, String member_password, String member_name,
 			Date member_birthday, String member_cellphone, String member_id, String member_address,
 			String member_gui_number) {
 
@@ -55,6 +66,9 @@ public class Member_Bean implements Serializable {
 		this.member_gui_number = member_gui_number;
 	}
 
+	@Id
+	@Column(name="MEMBER_NO")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public String getMember_no() {
 		return member_no;
 	}
@@ -63,6 +77,7 @@ public class Member_Bean implements Serializable {
 		this.member_no = member_no;
 	}
 
+	@Column(name="MEMBER_EMAIL")
 	public String getMember_email() {
 		return member_email;
 	}
@@ -71,6 +86,7 @@ public class Member_Bean implements Serializable {
 		this.member_email = member_email;
 	}
 
+	@Column(name="MEMBER_PASSWORD")
 	public String getMember_password() {
 		return member_password;
 	}
@@ -79,6 +95,7 @@ public class Member_Bean implements Serializable {
 		this.member_password = member_password;
 	}
 
+	@Column(name="MEMBER_NAME")
 	public String getMember_name() {
 		return member_name;
 	}
@@ -87,6 +104,7 @@ public class Member_Bean implements Serializable {
 		this.member_name = member_name;
 	}
 
+	@Column(name="MEMBER_BIRTHDAY")
 	public Date getMember_birthday() {
 		return member_birthday;
 	}
@@ -95,6 +113,7 @@ public class Member_Bean implements Serializable {
 		this.member_birthday = member_birthday;
 	}
 
+	@Column(name="MEMBER_ID")
 	public String getMember_id() {
 		return member_id;
 	}
@@ -103,6 +122,7 @@ public class Member_Bean implements Serializable {
 		this.member_id = member_id;
 	}
 
+	@Column(name="MEMBER_CELLPHONE")
 	public String getMember_cellphone() {
 		return member_cellphone;
 	}
@@ -111,6 +131,7 @@ public class Member_Bean implements Serializable {
 		this.member_cellphone = member_cellphone;
 	}
 
+	@Column(name="MEMBER_ADDRESS")
 	public String getMember_address() {
 		return member_address;
 	}
@@ -119,6 +140,7 @@ public class Member_Bean implements Serializable {
 		this.member_address = member_address;
 	}
 
+	@Column(name="MEMBER_GUI_NUMBER")
 	public String getMember_gui_number() {
 		return member_gui_number;
 	}
@@ -127,6 +149,7 @@ public class Member_Bean implements Serializable {
 		this.member_gui_number = member_gui_number;
 	}
 
+	@Column(name="MEMBER_PERMISSIONS")
 	public String getMember_permissions() {
 		return member_permissions;
 	}
@@ -135,6 +158,7 @@ public class Member_Bean implements Serializable {
 		this.member_permissions = member_permissions;
 	}
 
+	@Column(name="MEMBER_GG")
 	public String getMember_gg() {
 		return member_gg;
 	}
@@ -143,6 +167,7 @@ public class Member_Bean implements Serializable {
 		this.member_gg = member_gg;
 	}
 
+	@Column(name="MEMBER_LOCK_ACC")
 	public String getMember_lock_acc() {
 		return member_lock_acc;
 	}

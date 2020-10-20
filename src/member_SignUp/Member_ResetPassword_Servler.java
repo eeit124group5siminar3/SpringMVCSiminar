@@ -1,16 +1,14 @@
 package member_SignUp;
 
 import java.io.IOException;
-import java.security.cert.CertPathChecker;
-import java.sql.Date;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import member_SignUp.model.Member_SignUp;
 
 @WebServlet("/Member_ResetPassword_Servler")
 public class Member_ResetPassword_Servler extends HttpServlet {
@@ -70,7 +68,7 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 
 		if (sel_email != "NO DATA") {
 			// 建立Buyer_Object Bean
-			Member_Bean reg_buyer = new Member_Bean(member_email,sel_email);
+			Member_SignUp reg_buyer = new Member_SignUp(member_email,sel_email);
 			// 建立getSession(true) 若沒有Session則會建立Session
 			request.getSession(true).setAttribute("reg_buyer", reg_buyer);
 			// 把工作交給Buyer_SignUp_Check.jsp
@@ -90,7 +88,7 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 			String member_password;
 			String member_password1;
 			
-			Member_Bean a=(Member_Bean) request.getSession(true).getAttribute("reg_buyer");
+			Member_SignUp a=(Member_SignUp) request.getSession(true).getAttribute("reg_buyer");
 			String member_email=a.getMember_email();
 			
 			member_password = request.getParameter("member_password").trim();

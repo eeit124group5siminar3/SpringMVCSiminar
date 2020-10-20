@@ -20,7 +20,7 @@ import mall.productModel.OrderItem;
 import mall.productModel.ProductOrderBean;
 import mall.productModel.ProductOrderItemBean;
 import mall.service.OrderService;
-import member_SignUp.Member_Bean;
+import member_SignUp.model.Member_SignUp;
 
 
 /**
@@ -42,11 +42,11 @@ public class ProcessOrderServlet extends HttpServlet {
 			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
 			return;
 		}
-		Member_Bean mb = (Member_Bean) session.getAttribute("login_ok");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 		if (mb == null) {
 //			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
 //			return;
-			mb=(Member_Bean) session.getAttribute("login_guest");
+			mb=(Member_SignUp) session.getAttribute("login_guest");
 		}
 		
 		ShoppingCart sc = (ShoppingCart) session.getAttribute("ShoppingCart");
