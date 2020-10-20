@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>賣家登入</title>
+<style>
+fieldset {
+	width: 220px;
+	margin: auto;
+	margin-top: 200px;
+}
+
+form {
+	width: 200px;
+	margin: auto;
+	text-align: center;
+}
+
+button {
+	margin-top: 5px;
+}
+</style>
+</head>
+<body>
+	<fieldset>
+		<legend>賣家登入</legend>
+		<form action="./SellerServlet" method="post">
+			<label for="">帳號: <input type="text" name="email" id=""
+				size="10"></label><br> <label for="">密碼: <input
+				type="password" name="password" id="" size="10"></label><br> <label
+				for="">驗證碼: <input type="text" name="" id="" size="4"></label><br>
+			<button type="submit" name="login">登入</button>
+			<button type="reset">重置</button>
+		</form>
+		<a href="http://www.pchome.com.tw" style="float: left">忘記密碼?</a><a
+			href="SellerRegister.html" style="float: right">現在加入</a>
+	</fieldset>
+	<script src="./js/jquery-3.5.1.min.js"></script>
+	<script src="./js/jquery-ui.js"></script>
+	<script>
+       
+    
+    </script>
+</body>
+</html>

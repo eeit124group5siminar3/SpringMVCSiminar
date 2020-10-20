@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>賣家註冊</title>
+</head>
+<style>
+fieldset {
+	font-size: 20px;
+	width: 650px;
+	height: 50vh;
+	margin: auto;
+	padding: 30px;
+}
+
+p {
+	font-size: 15px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+button {
+	margin-top: 5px;
+}
+</style>
+<body>
+	<fieldset>
+		<legend>歡迎加入</legend>
+		<form action="./SellerServlet" method="post">
+			<div style="float: left">
+				<label for="">姓名: <input type="text" name="sellerName" id=""></label><br>
+				<label for="">生日: <input type="date" name="birthday" id=""></label><br>
+				<label for="">電話: <input type="tel" name="tel" id=""></label><br>
+				<label for="">統一編號: <input type="text" name="taxId" id=""></label><br>
+			</div>
+			<div style="float: right">
+				<label for="">登入信箱: <input type="email" name="email" id=""
+					required="required"></label><br>
+				<p>登入信箱即為帳號</p>
+				<label for="">登入密碼: <input type="password"
+					name="sellerPassword" id="" size="10" required="required"></label><br>
+				<label for="">確認密碼: <input type="password"
+					name="checkPassword" id="" size="10" required="required"></label> <label
+					for="">驗證碼: <input type="text" name="" id="" size="4"></label><br>
+			</div>
+			<div style="clear: both">
+				<label for="">地址: <input type="text" name="address" id=""
+					size="40"></label><br>
+				<button type="submit" name="register">註冊</button>
+				<button type="reset">重置</button>
+			</div>
+		</form>
+	</fieldset>
+</body>
+
+</html>
