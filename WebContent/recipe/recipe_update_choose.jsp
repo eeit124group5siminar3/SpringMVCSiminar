@@ -21,7 +21,7 @@ fieldset {
 <body>
 <%-- 	<jsp:useBean id="user_recipe" class="recipe.Recipe_Obj" scope="session"></jsp:useBean> --%>
 
-	<form action="./Recipe_Servlet_update" method="post"> 	
+	<form action="../Recipe_Servlet_update" method="post"> 	
 	<jsp:include page="/top.jsp" />
 		
 	<fieldset>

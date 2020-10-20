@@ -32,7 +32,7 @@ fieldset {
 <h1 style="text-align: center;">確認頁面</h1>
 	<jsp:useBean id="recipe_check" class="recipe.Recipe_Obj" scope="session"></jsp:useBean>
 	<fieldset>
-	<form action=".\Recipe_Servlet" method="post">
+	<form action="..\Recipe_Servlet" method="post">
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 			<tr>
 				<td>名稱</td>

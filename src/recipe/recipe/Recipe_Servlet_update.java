@@ -1,4 +1,4 @@
-package recipe;
+package recipe.recipe;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
 
-import oracle.net.aso.a;
-import sun.rmi.server.Dispatcher;
+import recipe.Recipe_Obj;
+import recipe.DAO.Recipe_DAO;
 
 /**
  * Servlet implementation class Recipe_Servlet_update

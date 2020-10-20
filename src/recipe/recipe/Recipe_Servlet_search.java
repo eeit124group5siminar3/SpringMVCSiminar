@@ -1,4 +1,4 @@
-package recipe;
+package recipe.recipe;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import recipe.Recipe_Obj;
+import recipe.DAO.Recipe_DAO;
 
 @WebServlet("/Recipe_Servlet_search")
 public class Recipe_Servlet_search extends HttpServlet {

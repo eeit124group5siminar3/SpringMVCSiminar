@@ -1,4 +1,4 @@
-package recipe;
+package recipe.recipe;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import recipe.Recipe_Obj;
+import recipe.DAO.Recipe_DAO;
 
 /**
  * Servlet implementation class Recipe_Servlet_delete
@@ -70,11 +73,11 @@ import javax.servlet.http.HttpSession;
 	//找出使用者擁有的食譜
 	private void ProcessFind(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException  {
 		Recipe_DAO rDAO=new Recipe_DAO();
-		//	Map<String, Recipe_Obj> map=rDAO.MapOfJavaBean(null);	
+//			Map<String, Recipe_Obj> map=rDAO.MapOfJavaBean(null);	
 		List<Recipe_Obj> list=rDAO.ListOfJavaBean();
-		//將抓到的值存到 uesr_recipe的list中
+//		將抓到的值存到 uesr_recipe的list中
 		ArrayList<Recipe_Obj> user_recipe=new ArrayList<Recipe_Obj>();	
-		//從list中抓到名為rec_id的資料
+//		從list中抓到名為rec_id的資料
 		for(Recipe_Obj a : list) {	
 			//利用陣列存取抓到的rec_id並用split 切割
 			String[] rec_id=a.getRec_id().split("\\-");
