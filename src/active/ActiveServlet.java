@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import recipe.Recipe_DAO;
+import recipe.DAO.Recipe_DAO;
 
 /**
  * Servlet implementation class ActiveServlet

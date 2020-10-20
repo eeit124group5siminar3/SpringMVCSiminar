@@ -1,4 +1,4 @@
-package recipe;
+package recipe.DAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,7 +16,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.apache.coyote.Request;
+import recipe.Recipe_Obj;
 
 //建構子
 public class Recipe_DAO {

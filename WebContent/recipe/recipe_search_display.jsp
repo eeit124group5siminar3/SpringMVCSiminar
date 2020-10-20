@@ -20,7 +20,7 @@ fieldset {
 </style>
 </head>
 <body>
-		<form action="./Recipe_Servlet_search" method="post" runat="server"> 
+		<form action="../Recipe_Servlet_search" method="post" runat="server"> 
 		<jsp:include page="/top.jsp" />			
 	<fieldset>
 		<legend>搜尋結果</legend>		

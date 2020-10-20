@@ -1,4 +1,4 @@
-package recipe;
+package recipe.recipe;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,9 +23,9 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.websocket.Decoder.BinaryStream;
 
 import org.apache.catalina.Session;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
-import jdk.internal.dynalink.beans.StaticClass;
+import recipe.Recipe_Obj;
+import recipe.DAO.Recipe_DAO;
 
 /**
  * Servlet implementation class Recipe_Servlet
