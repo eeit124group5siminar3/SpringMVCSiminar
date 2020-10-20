@@ -15,15 +15,15 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
-		<mapping
-			resource="tw/leonchen/model/HouseBean.hbm.xml" />
-		<mapping class="tw.leonchen.model.Department" />
-		<mapping class="tw.leonchen.model.Books"/>
-		<mapping class="tw.leonchen.model.BookDetail"/>
-		<mapping class="tw.leonchen.model.Stock"/>
-		<mapping class="tw.leonchen.model.StockTransaction"/>
-		<mapping class="tw.leonchen.model.Game"/>
-		<mapping class="tw.leonchen.model.Role"/>
-		<mapping class="tw.leonchen.model.Profiles"/>
+<!-- 		<mapping -->
+<!-- 			resource="tw/leonchen/model/HouseBean.hbm.xml" /> -->
+<!-- 		<mapping class="tw.leonchen.model.Department" /> -->
+<!-- 		<mapping class="tw.leonchen.model.Books"/> -->
+<!-- 		<mapping class="tw.leonchen.model.BookDetail"/> -->
+<!-- 		<mapping class="tw.leonchen.model.Stock"/> -->
+<!-- 		<mapping class="tw.leonchen.model.StockTransaction"/> -->
+<!-- 		<mapping class="tw.leonchen.model.Game"/> -->
+<!-- 		<mapping class="tw.leonchen.model.Role"/> -->
+<!-- 		<mapping class="tw.leonchen.model.Profiles"/> -->
 	</session-factory>
 </hibernate-configuration>
