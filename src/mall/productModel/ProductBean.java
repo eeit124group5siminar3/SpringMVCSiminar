@@ -4,7 +4,21 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+@Entity
+@Table(name = "product")
 public class ProductBean implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int productId;
 	private String product;
 	private String producterId;
@@ -21,13 +35,6 @@ public class ProductBean implements Serializable {
 	private int category;
 	private String producterName;
 
-	public String getProducterName() {
-		return producterName;
-	}
-
-	public void setProducterName(String producterName) {
-		this.producterName = producterName;
-	}
 
 	public ProductBean() {
 		super();
@@ -69,7 +76,16 @@ public class ProductBean implements Serializable {
 		this.description = description;
 		this.category = category;
 	}
-
+	@Id @Column(name="PRODUCTID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	public int getProductId() {
+		return productId;
+	}
+	
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	@Column(name = "CATEGORY")
 	public int getCategory() {
 		return category;
 	}
@@ -78,14 +94,7 @@ public class ProductBean implements Serializable {
 		this.category = category;
 	}
 
-	public int getProductId() {
-		return productId;
-	}
-
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
-
+	@Column(name = "PRODUCT")
 	public String getProduct() {
 		return product;
 	}
@@ -93,7 +102,7 @@ public class ProductBean implements Serializable {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-
+	@Column(name = "PRODUCTERID")
 	public String getProducterId() {
 		return producterId;
 	}
@@ -101,7 +110,7 @@ public class ProductBean implements Serializable {
 	public void setProducterId(String producterId) {
 		this.producterId = producterId;
 	}
-
+	@Column(name = "PRICE")
 	public double getPrice() {
 		return price;
 	}
@@ -109,7 +118,7 @@ public class ProductBean implements Serializable {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
+	@Column(name = "DISCOUNT")
 	public double getDiscount() {
 		return discount;
 	}
@@ -117,7 +126,7 @@ public class ProductBean implements Serializable {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
-
+	@Column(name = "COVERIMAGE")
 	public Blob getCoverImage() {
 		return coverImage;
 	}
@@ -125,7 +134,7 @@ public class ProductBean implements Serializable {
 	public void setCoverImage(Blob blob) {
 		this.coverImage = blob;
 	}
-
+	@Column(name = "FILENAME")
 	public String getFileName() {
 		return fileName;
 	}
@@ -133,7 +142,7 @@ public class ProductBean implements Serializable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
+	@Column(name = "STOCK")
 	public int getStock() {
 		return stock;
 	}
@@ -141,7 +150,7 @@ public class ProductBean implements Serializable {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
+	@Column(name = "ADDEDDATE")
 	public Date getAddedDate() {
 		return addedDate;
 	}
@@ -149,7 +158,7 @@ public class ProductBean implements Serializable {
 	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
 	}
-
+	@Column(name = "SHELFTIME")
 	public int getShelfTime() {
 		return shelfTime;
 	}
@@ -157,7 +166,7 @@ public class ProductBean implements Serializable {
 	public void setShelfTime(int shelfTime) {
 		this.shelfTime = shelfTime;
 	}
-
+	@Column(name = "CONTENT")
 	public int getContent() {
 		return content;
 	}
@@ -165,7 +174,7 @@ public class ProductBean implements Serializable {
 	public void setContent(int content) {
 		this.content = content;
 	}
-
+	@Column(name = "UNIT")
 	public String getUnit() {
 		return unit;
 	}
@@ -173,7 +182,7 @@ public class ProductBean implements Serializable {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-
+	@Column(name = "DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
@@ -182,4 +191,11 @@ public class ProductBean implements Serializable {
 		this.description = description;
 	}
 
+	@Transient
+	public String getProducterName() {
+		return producterName;
+	}
+	public void setProducterName(String producterName) {
+		this.producterName = producterName;
+	}
 }
