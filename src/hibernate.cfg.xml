@@ -17,7 +17,7 @@
 		<property name="hibernate.format_sql">true</property>
 <!-- 		<mapping -->
 <!-- 			resource="tw/leonchen/model/HouseBean.hbm.xml" /> -->
-		<mapping class="mall.productModel.Department" />
+		<mapping class="mall.productModel.ProductBean" />
 <!-- 		<mapping class="tw.leonchen.model.Books"/> -->
 <!-- 		<mapping class="tw.leonchen.model.BookDetail"/> -->
 <!-- 		<mapping class="tw.leonchen.model.Stock"/> -->
