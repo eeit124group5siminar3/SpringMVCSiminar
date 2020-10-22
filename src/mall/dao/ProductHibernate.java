@@ -34,9 +34,11 @@ public class ProductHibernate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SessionFactory factory=HibernateUtil.getSessionFactory();
 		Session session=factory.getCurrentSession();
-		ProductBean pb=session.get(ProductBean.class, 97);
+		ProductBean pb=session.get(ProductBean.class, 82);
 		System.out.println(pb.getProductId());
 		System.out.println(pb.getProduct());
+		System.out.println(pb.getCategoryBean().getId());
+		System.out.println(pb.getCategoryBean().getName());
 //		session.getTransaction().commit();
 //		HibernateUtil.closeSessionFactory();
 	}
