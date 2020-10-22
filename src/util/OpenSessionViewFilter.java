@@ -17,6 +17,7 @@ public class OpenSessionViewFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		SessionFactory factory = HibernateUtil.getSessionFactory();
+//		Session session = factory.openSession();
 		Session session = factory.getCurrentSession();
 		try {
 			session.beginTransaction();
