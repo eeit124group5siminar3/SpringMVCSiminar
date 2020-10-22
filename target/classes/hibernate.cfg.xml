@@ -18,6 +18,7 @@
 <!-- 		<mapping -->
 <!-- 			resource="tw/leonchen/model/HouseBean.hbm.xml" /> -->
 		<mapping class="mall.productModel.ProductBean" />
+		<mapping class="mall.productModel.CategoryBean" />
 <!-- 		<mapping class="tw.leonchen.model.Books"/> -->
 <!-- 		<mapping class="tw.leonchen.model.BookDetail"/> -->
 <!-- 		<mapping class="tw.leonchen.model.Stock"/> -->

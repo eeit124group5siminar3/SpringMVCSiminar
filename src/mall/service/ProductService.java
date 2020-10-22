@@ -4,15 +4,21 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.dao.ProductDAO;
 import mall.productModel.CategoryBean;
 import mall.productModel.ProductBean;
+import util.HibernateUtil;
 
 public class ProductService implements Serializable {
+	private static SessionFactory factory=HibernateUtil.getSessionFactory();
+	private static Session session=factory.getCurrentSession();
 	ProductDAO dao;
 
 	public ProductService() {
-		this.dao = new ProductDAO();
+		this.dao = new ProductDAO(session);
 	}
 
 	public int getTotalPages() {
