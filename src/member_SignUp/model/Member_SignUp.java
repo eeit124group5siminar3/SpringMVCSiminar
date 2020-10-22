@@ -8,15 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Meber_SignUp")
+@Table(name="Member_SignUp")
 public class Member_SignUp implements Serializable {
+	
 
 	private static final long serialVersionUID = 1L;
-	private String member_no;
+	private Integer member_no;
 	private String member_email;
 	private String member_password;
 	private String member_name;
@@ -26,8 +26,9 @@ public class Member_SignUp implements Serializable {
 	private String member_address;
 	private String member_gui_number;
 	private String member_permissions;
-	private String member_gg;
+	private Integer member_gg;
 	private String member_lock_acc;
+	private String e_paper;
 
 	public Member_SignUp() {
 
@@ -40,7 +41,7 @@ public class Member_SignUp implements Serializable {
 	}
 
 	//登錄後資料包Bean
-	public Member_SignUp(String member_no, String member_email, String member_name, String member_cellphone,
+	public Member_SignUp(Integer member_no, String member_email, String member_name, String member_cellphone,
 			String member_address,String member_permissions) {
 		this.member_no = member_no;
 		this.member_email = member_email;
@@ -69,11 +70,11 @@ public class Member_SignUp implements Serializable {
 	@Id
 	@Column(name="MEMBER_NO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public String getMember_no() {
+	public Integer getMember_no() {
 		return member_no;
 	}
 
-	public void setMember_no(String member_no) {
+	public void setMember_no(Integer member_no) {
 		this.member_no = member_no;
 	}
 
@@ -159,11 +160,11 @@ public class Member_SignUp implements Serializable {
 	}
 
 	@Column(name="MEMBER_GG")
-	public String getMember_gg() {
+	public Integer getMember_gg() {
 		return member_gg;
 	}
 
-	public void setMember_gg(String member_gg) {
+	public void setMember_gg(Integer member_gg) {
 		this.member_gg = member_gg;
 	}
 
@@ -176,4 +177,12 @@ public class Member_SignUp implements Serializable {
 		this.member_lock_acc = member_lock_acc;
 	}
 
+	@Column(name="E_PAPER")
+	public String getE_paper() {
+		return e_paper;
+	}
+	
+	public void setE_paper(String e_paper) {
+		this.e_paper = e_paper;
+	}
 }
