@@ -15,7 +15,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-
+import org.hibernate.Session;
 
 import mall.ProductStockException;
 import mall.productModel.ProductOrderBean;
@@ -26,9 +26,11 @@ public class OrderDAO {
 	private String BuyerId = null;
 	private Connection con;
 	int orderNo = 0;
+	private Session session;
 
 
-	public OrderDAO() {
+	public OrderDAO(Session session) {
+		this.session=session;
 	}
 
 

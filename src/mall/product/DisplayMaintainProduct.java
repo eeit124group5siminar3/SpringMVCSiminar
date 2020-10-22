@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
 import member_SignUp.model.Member_SignUp;
+import util.HibernateUtil;
 
 @WebServlet("/DisplayMaintainProduct")
 public class DisplayMaintainProduct extends HttpServlet {
@@ -59,8 +63,10 @@ public class DisplayMaintainProduct extends HttpServlet {
 				pageNo = 1;
 			}
 		}
-
-		ProductService service = new ProductService();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session hibernateSession = factory.getCurrentSession();
+		ProductService service = new ProductService(hibernateSession);
+		//
 		request.setAttribute("baBean", service);
 		//
 		service.setPageNo(pageNo);

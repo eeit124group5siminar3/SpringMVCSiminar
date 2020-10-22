@@ -17,10 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.SystemUtils2018;
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
 import member_SignUp.model.Member_SignUp;
+import util.HibernateUtil;
 
 @WebServlet("/ProductInsertServlet")
 
@@ -212,8 +216,10 @@ public class ProductInsertServlet extends HttpServlet {
 
 			// 將上傳的檔案轉換為 Blob 物件
 			Blob blob = SystemUtils2018.fileToBlob(is, sizeInBytes);
-
-			ProductService productService = new ProductService();
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session hibernateSession = factory.getCurrentSession();
+			ProductService productService = new ProductService(hibernateSession);
+			//
 			int category=Integer.parseInt(categoryStr);
 			productService.setId(category);
 			Member_SignUp mb=(Member_SignUp)session.getAttribute("login_ok");
