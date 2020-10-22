@@ -40,7 +40,7 @@ h2{
 </tr>
 <tr>
 	<td align="center"><a href="RetrievePageProducts"><img src="images/crop.png"></a></td>
-	<td align="center"><a href="MarketHome.jsp"><img src="images/market.png"></a></td>
+	<td align="center"><a href="marketSeller/MarketHome.jsp"><img src="images/market.png"></a></td>
 	<td align="center"><a href="recipe_workpage.jsp"><img src="images/recipe.png"></a></td>
 	<td align="center"><a href="ActiveHome.jsp"><img src="images/footprint.png"></a></td>
 	<td align="center"><a href="Member_SignUp/Member_Login.jsp"><img src="images/member.png"></a></td>

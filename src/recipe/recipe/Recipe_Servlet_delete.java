@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import recipe.Recipe_Obj;
 import recipe.DAO.Recipe_DAO;
+import recipe.recipe_bean.Recipe_Obj;
 
 /**
  * Servlet implementation class Recipe_Servlet_delete

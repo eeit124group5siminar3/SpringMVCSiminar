@@ -20,7 +20,7 @@ import active.ActiveDAO;
 /**
  * Servlet implementation class MarketUpdate
  */
-@WebServlet("/MarketUpdate")
+@WebServlet("/marketSeller/MarketUpdate")
 public class MarketUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
