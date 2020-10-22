@@ -24,19 +24,21 @@ public class Member_DAO implements Member_List {
 	static List<Member_SignUp> list;
 
 	// 連線DB
-	public Member_DAO() {
-		try {
-			ctxt = new InitialContext();
-			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/xe");
-			conn = ds.getConnection();
-
-			if (list == null) {
-				listmember_object();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
+	
+//	public Member_DAO() {
+//		try {
+//			ctxt = new InitialContext();
+//			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/xe");
+//			conn = ds.getConnection();
+//
+//			if (list == null) {
+//				listmember_object();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	// Seller table 轉物件
 	@Override

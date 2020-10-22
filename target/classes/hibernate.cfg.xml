@@ -15,8 +15,7 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
-<!-- 		<mapping -->
-<!-- 			resource="tw/leonchen/model/HouseBean.hbm.xml" /> -->
+
 		<mapping class="mall.productModel.ProductBean" />
 		<mapping class="mall.productModel.CategoryBean" />
 <!-- 		<mapping class="tw.leonchen.model.Books"/> -->
