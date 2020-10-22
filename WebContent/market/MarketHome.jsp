@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-<form action="./MarketHome" method="post">
+<form action="../MarketHome" method="post">
 <c:set var="funcName" value="CHE" scope="session" />
 <jsp:include page="/top.jsp" />
    	 <h1 align="center">商品管理</h1>
@@ -51,13 +51,13 @@
                     <td><c:out value="${IBean.description}"/></td>
                     <td><c:out value="${IBean.product_area}"/></td>
                     <td><c:out value="${IBean.price}"/></td>
-                    
-                   <td><!-- 
+                   
+                   <td> <!--
                  getImage所對應的Servlet會到資料庫讀取圖片並傳送給前端的瀏覽器
-              --> <img height='80' width='80'
+              <img height='80' width='80'
 				src='${pageContext.servletContext.contextPath}/RetrieveMarketImage?id=${IBean.product_id}&type=PRODUCT'>
 				</td>
-                    
+                    --> 
                 </tr>
             </c:forEach>
           

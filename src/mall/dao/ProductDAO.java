@@ -16,10 +16,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+
 import mall.productModel.CategoryBean;
 import mall.productModel.ProductBean;
 
 public class ProductDAO implements Serializable {
+	private Session session;
 	private static final long serialVersionUID = 1L;
 	private int productId = 0; // 查詢單筆商品會用到此代號
 	private int pageNo = 0; // 存放目前顯示之頁面的編號
@@ -35,14 +38,8 @@ public class ProductDAO implements Serializable {
 //	private String tagName = "";
 //	String selected = "";
 
-	public ProductDAO() {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/xe");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("ProductDAO()#建構子發生例外: " + ex.getMessage());
-		}
+	public ProductDAO(Session session) {
+		this.session=session;
 	}
 
 	// 計算販售的商品總共有幾頁
