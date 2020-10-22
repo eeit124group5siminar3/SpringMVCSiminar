@@ -6,9 +6,12 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 @Entity
@@ -34,7 +37,7 @@ public class ProductBean implements Serializable {
 	private String description;
 	private int category;
 	private String producterName;
-
+	private CategoryBean categoryBean;
 
 	public ProductBean() {
 		super();
@@ -77,7 +80,7 @@ public class ProductBean implements Serializable {
 		this.category = category;
 	}
 	@Id @Column(name="PRODUCTID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getProductId() {
 		return productId;
 	}
@@ -85,7 +88,8 @@ public class ProductBean implements Serializable {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-	@Column(name = "CATEGORY")
+//	@Column(name = "CATEGORY")
+	@Transient
 	public int getCategory() {
 		return category;
 	}
@@ -197,5 +201,14 @@ public class ProductBean implements Serializable {
 	}
 	public void setProducterName(String producterName) {
 		this.producterName = producterName;
+	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="CATEGORY")
+	public CategoryBean getCategoryBean() {
+		return categoryBean;
+	}
+
+	public void setCategoryBean(CategoryBean categoryBean) {
+		this.categoryBean = categoryBean;
 	}
 }
