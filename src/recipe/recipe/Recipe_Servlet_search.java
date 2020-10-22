@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import recipe.Recipe_Obj;
 import recipe.DAO.Recipe_DAO;
+import recipe.recipe_bean.Recipe_Obj;
 
 @WebServlet("/Recipe_Servlet_search")
 public class Recipe_Servlet_search extends HttpServlet {

@@ -12,11 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
+
 import javax.sql.DataSource;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import mall.productModel.CategoryBean;
 import mall.productModel.ProductBean;
@@ -131,82 +131,96 @@ public class ProductDAO implements Serializable {
 	}
 
 	public List<ProductBean> getPageProductsWithoutZero() {
-		List<ProductBean> list = new ArrayList<ProductBean>();
-		String sql0 = "select * from(select rownum as rn ,productId,product,producterId,member_name,price,discount,stock,content,unit,addedDate,shelfTime,Filename,CoverImage,description,category from (select * from product p,member_signup m where stock != 0 and producterId=member_no ORDER BY productId)) WHERE rn >= ? AND rn <= ?";
-		String sql = sql0;
+//		List<ProductBean> list = new ArrayList<ProductBean>();
+//		String sql0 = "select * from(select rownum as rn ,productId,product,producterId,member_name,price,discount,stock,content,unit,addedDate,shelfTime,Filename,CoverImage,description,category from (select * from product p,member_signup m where stock != 0 and producterId=member_no ORDER BY productId)) WHERE rn >= ? AND rn <= ?";
+//		String sql = sql0;
 		int startRecordNo = (pageNo - 1) * recordsPerPage + 1;
-		int endRecordNo = (pageNo) * recordsPerPage;
-		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
-			ps.setBigDecimal(1, new BigDecimal(startRecordNo));
-			ps.setBigDecimal(2, new BigDecimal(endRecordNo));
-			try (ResultSet rs = ps.executeQuery();) {
-
-				while (rs.next()) {
-					ProductBean bean = new ProductBean();
-					bean.setProductId(rs.getInt("productId"));
-					bean.setProduct(rs.getString("product"));
-					bean.setProducterId(rs.getString("producterId"));
-					bean.setPrice(rs.getDouble("price"));
-					bean.setDiscount(rs.getDouble("discount"));
-					bean.setStock(rs.getInt("stock"));
-					bean.setContent(rs.getInt("content"));
-					bean.setUnit(rs.getString("unit"));
-					bean.setAddedDate(rs.getDate("addedDate"));
-					bean.setShelfTime(rs.getInt("shelfTime"));
-					bean.setFileName(rs.getString("Filename"));
-					bean.setCoverImage(rs.getBlob("CoverImage"));
-					bean.setDescription(rs.getString("description"));
-					bean.setCategory(rs.getInt("category"));
-					bean.setProducterName(rs.getNString("member_name"));
-					list.add(bean);
-				}
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("getPageProducts()發生例外: " + ex.getMessage());
-		}
+//		int endRecordNo = (pageNo) * recordsPerPage;
+//		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
+//			ps.setBigDecimal(1, new BigDecimal(startRecordNo));
+//			ps.setBigDecimal(2, new BigDecimal(endRecordNo));
+//			try (ResultSet rs = ps.executeQuery();) {
+//
+//				while (rs.next()) {
+//					ProductBean bean = new ProductBean();
+//					bean.setProductId(rs.getInt("productId"));
+//					bean.setProduct(rs.getString("product"));
+//					bean.setProducterId(rs.getString("producterId"));
+//					bean.setPrice(rs.getDouble("price"));
+//					bean.setDiscount(rs.getDouble("discount"));
+//					bean.setStock(rs.getInt("stock"));
+//					bean.setContent(rs.getInt("content"));
+//					bean.setUnit(rs.getString("unit"));
+//					bean.setAddedDate(rs.getDate("addedDate"));
+//					bean.setShelfTime(rs.getInt("shelfTime"));
+//					bean.setFileName(rs.getString("Filename"));
+//					bean.setCoverImage(rs.getBlob("CoverImage"));
+//					bean.setDescription(rs.getString("description"));
+//					bean.setCategory(rs.getInt("category"));
+//					bean.setProducterName(rs.getNString("member_name"));
+//					list.add(bean);
+//				}
+//			}
+//		} catch (SQLException ex) {
+//			ex.printStackTrace();
+//			throw new RuntimeException("getPageProducts()發生例外: " + ex.getMessage());
+//		}
+		String hql="from ProductBean where stock != 0 ORDER BY ProductId";
+		Query<ProductBean> query=session.createQuery(hql);
+		query.setFirstResult(startRecordNo);
+		query.setMaxResults(5);
+		List<ProductBean> list=query.list();
 		return list;
 	}
 
 	public List<ProductBean> getPageProductsWithoutZero(String searchString) {
-		List<ProductBean> list = new ArrayList<ProductBean>();
-		String sql0 = "select * from(select rownum as rn ,productId,product,producterId,member_name,price,discount,stock,content,unit,addedDate,shelfTime,Filename,CoverImage,description,category from "
-				+ "(select * from product p,member_signup m where stock != 0 and producterId=member_no and (member_name like ? or product like ?) ORDER BY productId))"
-				+ " WHERE rn >= ? AND rn <= ?";
-		String sql = sql0;
+//		List<ProductBean> list = new ArrayList<ProductBean>();
+//		String sql0 = "select * from(select rownum as rn ,productId,product,producterId,member_name,price,discount,stock,content,unit,addedDate,shelfTime,Filename,CoverImage,description,category from "
+//				+ "(select * from product p,member_signup m where stock != 0 and producterId=member_no and (member_name like ? or product like ?) ORDER BY productId))"
+//				+ " WHERE rn >= ? AND rn <= ?";
+//		String sql = sql0;
 		int startRecordNo = (pageNo - 1) * recordsPerPage + 1;
-		int endRecordNo = (pageNo) * recordsPerPage;
-		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
-			ps.setString(1, "%"+searchString+"%");
-			ps.setString(2, "%"+searchString+"%");
-			ps.setBigDecimal(3, new BigDecimal(startRecordNo));
-			ps.setBigDecimal(4, new BigDecimal(endRecordNo));
-			try (ResultSet rs = ps.executeQuery();) {
-
-				while (rs.next()) {
-					ProductBean bean = new ProductBean();
-					bean.setProductId(rs.getInt("productId"));
-					bean.setProduct(rs.getString("product"));
-					bean.setProducterId(rs.getString("producterId"));
-					bean.setPrice(rs.getDouble("price"));
-					bean.setDiscount(rs.getDouble("discount"));
-					bean.setStock(rs.getInt("stock"));
-					bean.setContent(rs.getInt("content"));
-					bean.setUnit(rs.getString("unit"));
-					bean.setAddedDate(rs.getDate("addedDate"));
-					bean.setShelfTime(rs.getInt("shelfTime"));
-					bean.setFileName(rs.getString("Filename"));
-					bean.setCoverImage(rs.getBlob("CoverImage"));
-					bean.setDescription(rs.getString("description"));
-					bean.setCategory(rs.getInt("category"));
-					bean.setProducterName(rs.getNString("member_name"));
-					list.add(bean);
-				}
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("getPageProducts()發生例外: " + ex.getMessage());
-		}
+//		int endRecordNo = (pageNo) * recordsPerPage;
+//		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
+//			ps.setString(1, "%"+searchString+"%");
+//			ps.setString(2, "%"+searchString+"%");
+//			ps.setBigDecimal(3, new BigDecimal(startRecordNo));
+//			ps.setBigDecimal(4, new BigDecimal(endRecordNo));
+//			try (ResultSet rs = ps.executeQuery();) {
+//
+//				while (rs.next()) {
+//					ProductBean bean = new ProductBean();
+//					bean.setProductId(rs.getInt("productId"));
+//					bean.setProduct(rs.getString("product"));
+//					bean.setProducterId(rs.getString("producterId"));
+//					bean.setPrice(rs.getDouble("price"));
+//					bean.setDiscount(rs.getDouble("discount"));
+//					bean.setStock(rs.getInt("stock"));
+//					bean.setContent(rs.getInt("content"));
+//					bean.setUnit(rs.getString("unit"));
+//					bean.setAddedDate(rs.getDate("addedDate"));
+//					bean.setShelfTime(rs.getInt("shelfTime"));
+//					bean.setFileName(rs.getString("Filename"));
+//					bean.setCoverImage(rs.getBlob("CoverImage"));
+//					bean.setDescription(rs.getString("description"));
+//					bean.setCategory(rs.getInt("category"));
+//					bean.setProducterName(rs.getNString("member_name"));
+//					list.add(bean);
+//				}
+//			}
+//		} catch (SQLException ex) {
+//			ex.printStackTrace();
+//			throw new RuntimeException("getPageProducts()發生例外: " + ex.getMessage());
+//		}
+//		return list;
+		String hql="from from ProductBean where stock != 0 and  product like ?0) ORDER BY productId";
+		
+		Query<ProductBean> query=session.createQuery(hql);
+		query.setParameter(0, "%"+searchString+"%");
+//		query.setParameter(1, "%"+searchString+"%");
+		query.setFirstResult(startRecordNo);
+		query.setMaxResults(5);
+		List<ProductBean> list=query.list();
 		return list;
 	}
 
@@ -282,17 +296,24 @@ public class ProductDAO implements Serializable {
 
 	public long getRecordCountsWithoutZero() {
 		long count = 0; // 必須使用 long 型態
-		String sql = "SELECT count(1) FROM product where stock != 0";
-		try (Connection connection = ds.getConnection();
-				PreparedStatement ps = connection.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery();) {
-			if (rs.next()) {
-				count = rs.getLong(1);
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("getRecordCounts()發生例外: " + ex.getMessage());
-		}
+//		String sql = "SELECT count(1) FROM product where stock != 0";
+//		try (Connection connection = ds.getConnection();
+//				PreparedStatement ps = connection.prepareStatement(sql);
+//				ResultSet rs = ps.executeQuery();) {
+//			if (rs.next()) {
+//				count = rs.getLong(1);
+//			}
+//		} catch (SQLException ex) {
+//			ex.printStackTrace();
+//			throw new RuntimeException("getRecordCounts()發生例外: " + ex.getMessage());
+//		}
+		String hql="select count( * ) from ProductBean where stock != 0";
+
+		Query query = session.createQuery( hql );
+		Object objectNumber=query.uniqueResult();
+		long longNumber=(long)objectNumber;
+		count=(int)longNumber;
+//		count=(int)objectNumber;
 		return count;
 	}
 
@@ -570,34 +591,40 @@ public class ProductDAO implements Serializable {
 	}
 
 	public ProductBean getProduct(int productId) {
-		ProductBean bean = null;
-		String sql = "SELECT * FROM product WHERE productId = ?";
-
-		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
-			ps.setInt(1, productId);
-			try (ResultSet rs = ps.executeQuery();) {
-				if (rs.next()) {
-					bean = new ProductBean();
-					bean.setProductId(rs.getInt("productId"));
-					bean.setProduct(rs.getString("product"));
-					bean.setProducterId(rs.getString("producterId"));
-					bean.setPrice(rs.getDouble("price"));
-					bean.setDiscount(rs.getDouble("discount"));
-					bean.setStock(rs.getInt("stock"));
-					bean.setContent(rs.getInt("content"));
-					bean.setUnit(rs.getString("unit"));
-					bean.setAddedDate(rs.getDate("addedDate"));
-					bean.setShelfTime(rs.getInt("shelfTime"));
-					bean.setFileName(rs.getString("Filename"));
-					bean.setCoverImage(rs.getBlob("CoverImage"));
-					bean.setDescription(rs.getString("description"));
-					bean.setCategory(rs.getInt("category"));
-				}
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("getProduct()發生例外: " + ex.getMessage());
-		}
+//		ProductBean bean = null;
+//		String sql = "SELECT * FROM product WHERE productId = ?";
+//
+//		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
+//			ps.setInt(1, productId);
+//			try (ResultSet rs = ps.executeQuery();) {
+//				if (rs.next()) {
+//					bean = new ProductBean();
+//					bean.setProductId(rs.getInt("productId"));
+//					bean.setProduct(rs.getString("product"));
+//					bean.setProducterId(rs.getString("producterId"));
+//					bean.setPrice(rs.getDouble("price"));
+//					bean.setDiscount(rs.getDouble("discount"));
+//					bean.setStock(rs.getInt("stock"));
+//					bean.setContent(rs.getInt("content"));
+//					bean.setUnit(rs.getString("unit"));
+//					bean.setAddedDate(rs.getDate("addedDate"));
+//					bean.setShelfTime(rs.getInt("shelfTime"));
+//					bean.setFileName(rs.getString("Filename"));
+//					bean.setCoverImage(rs.getBlob("CoverImage"));
+//					bean.setDescription(rs.getString("description"));
+//					bean.setCategory(rs.getInt("category"));
+//				}
+//			}
+//		} catch (SQLException ex) {
+//			ex.printStackTrace();
+//			throw new RuntimeException("getProduct()發生例外: " + ex.getMessage());
+//		}
+//		return bean;
+		String hql="FROM ProductBean WHERE productId = ?0";
+		Query query=session.createQuery(hql);
+		query.setParameter(0, productId);
+		ProductBean bean=(ProductBean)query.uniqueResult();
 		return bean;
+		
 	}
 }

@@ -16,7 +16,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import recipe.Recipe_Obj;
+import recipe.recipe_bean.Recipe_Obj;
 
 //建構子
 public class Recipe_DAO {
@@ -25,7 +25,6 @@ public class Recipe_DAO {
 	InitialContext ctxt=null;
 	Connection conn=null;
 	Recipe_Obj rObj=new Recipe_Obj();
-	String kind=rObj.getCate();
 	
 	public Recipe_DAO() {
 //		System.out.println("enter recipe_DAO");

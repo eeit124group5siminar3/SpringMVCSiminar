@@ -30,7 +30,7 @@ fieldset {
 <body>
 <jsp:include page="/top.jsp" />
 <h1 style="text-align: center;">確認頁面</h1>
-	<jsp:useBean id="recipe_check" class="recipe.Recipe_Obj" scope="session"></jsp:useBean>
+	<jsp:useBean id="recipe_check" class="recipe.recipe_bean.Recipe_Obj" scope="session"></jsp:useBean>
 	<fieldset>
 	<form action="..\Recipe_Servlet" method="post">
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">

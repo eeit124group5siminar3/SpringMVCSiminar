@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
 import member_SignUp.model.Member_SignUp;
+import util.HibernateUtil;
 
 /**
  * Servlet implementation class RetrievePageProducts
@@ -88,31 +92,31 @@ public class RetrievePageProducts extends HttpServlet {
 				pageNo = 1;
 			}
 		}
-		ProductService service = new ProductService();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session hibernateSession = factory.getCurrentSession();
+		ProductService service = new ProductService(hibernateSession);
 		//
 		// 讀取一頁的書籍資料之前，告訴service，現在要讀哪一頁
 		service.setPageNo(pageNo);
 		request.setAttribute("baBean", service);
 		// service.getPageBooks()方法開始讀取一頁的書籍資料
 		Collection<ProductBean> coll = null;
-		String searchString=null;
-		if (request.getParameter("search")!=null) {
-		searchString=request.getParameter("searchString");}
-		else {
-			searchString=(String)session.getAttribute("searchString");
+		String searchString = null;
+		if (request.getParameter("search") != null) {
+			searchString = request.getParameter("searchString");
+		} else {
+			searchString = (String) session.getAttribute("searchString");
 		}
-		
 
-			if(searchString != null|| session.getAttribute("searchString")!=null) {
+		if (searchString != null || session.getAttribute("searchString") != null) {
 			coll = service.getPageProductsWithoutZero(searchString);
 			request.setAttribute("totalPages", service.getTotalPagesWithoutZero(searchString));
 			session.setAttribute("searchString", searchString);
-			}
-		else {
+		} else {
 			coll = service.getPageProductsWithoutZero();
 			request.setAttribute("totalPages", service.getTotalPagesWithoutZero());
 		}
-			
+
 		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		request.setAttribute("products_DPP", coll);

@@ -17,9 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.SystemUtils2018;
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
+import util.HibernateUtil;
 
 @WebServlet("/ProductUpdateServlet")
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
@@ -208,8 +212,9 @@ public class ProductUpdateServlet extends HttpServlet {
 				rd.forward(request, response);
 				return;
 			}
-
-			ProductService productService = new ProductService();
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session hibernateSession = factory.getCurrentSession();
+			ProductService productService = new ProductService(hibernateSession);
 			int category=Integer.parseInt(categoryStr);
 			productService.setId(category);
 			Blob blob = null;

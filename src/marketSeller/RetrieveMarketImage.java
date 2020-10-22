@@ -18,7 +18,7 @@ import mall.service.ProductService;
 /**
  * Servlet implementation class RetrieveMarketImage
  */
-@WebServlet("/RetrieveMarketImage")
+@WebServlet("/marketSeller/RetrieveMarketImage")
 public class RetrieveMarketImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
