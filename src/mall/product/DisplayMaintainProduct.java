@@ -52,7 +52,7 @@ public class DisplayMaintainProduct extends HttpServlet {
 			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
 			return;
 		}
-		String producterId=mb.getMember_no();
+		String producterId=mb.getMember_no().toString();
 		String pageNoStr = request.getParameter("pageNo");
 		if (pageNoStr == null) {
 			pageNo = 1;

@@ -67,7 +67,7 @@ public class ProductInsertServlet extends HttpServlet {
 
 		try {
 			String product = "";
-			String producterId = "";
+			String producterId ="";
 			String priceStr = "";
 			double price = 0;
 			String categoryStr = "";
@@ -223,7 +223,7 @@ public class ProductInsertServlet extends HttpServlet {
 			int category=Integer.parseInt(categoryStr);
 			productService.setId(category);
 			Member_SignUp mb=(Member_SignUp)session.getAttribute("login_ok");
-			producterId=mb.getMember_no();
+			producterId=mb.getMember_no().toString();
 //			String categoryTag = productService.getCategoryTag();
 //			session.setAttribute("SelectCategoryTag", categoryTag);
 			ProductBean bb = new ProductBean(product, producterId, price, blob, fileName, stock, null, shelfTime,
