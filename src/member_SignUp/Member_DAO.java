@@ -26,19 +26,19 @@ public class Member_DAO implements Member_List {
 	// 連線DB
 	
 	
-//	public Member_DAO() {
-//		try {
-//			ctxt = new InitialContext();
-//			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/xe");
-//			conn = ds.getConnection();
-//
-//			if (list == null) {
-//				listmember_object();
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public Member_DAO() {
+		try {
+			ctxt = new InitialContext();
+			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/xe");
+			conn = ds.getConnection();
+
+			if (list == null) {
+				listmember_object();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	// Seller table 轉物件
 	@Override
@@ -50,7 +50,7 @@ public class Member_DAO implements Member_List {
 			while (rs.next()) {
 				Member_SignUp dir = new Member_SignUp();
 
-				dir.setMember_no(rs.getString("member_no"));
+				dir.setMember_no(rs.getInt("member_no"));
 				dir.setMember_email(rs.getString("member_email"));
 				dir.setMember_password(rs.getString("member_password"));
 				dir.setMember_name(rs.getString("member_name"));
@@ -60,7 +60,7 @@ public class Member_DAO implements Member_List {
 				dir.setMember_address(rs.getNString("member_address"));
 				dir.setMember_gui_number(rs.getString("member_gui_number"));
 				dir.setMember_permissions(rs.getString("member_permissions"));
-				dir.setMember_gg(rs.getString("member_gg"));
+				dir.setMember_gg(rs.getInt("member_gg"));
 				dir.setMember_lock_acc(rs.getString("member_lock_acc"));
 
 				list.add(dir);
@@ -230,7 +230,7 @@ public class Member_DAO implements Member_List {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from member_signup where member_email='" + email + "'");
 			while (rs.next()) {
-				String member_no = rs.getString("member_no");
+				int member_no = rs.getInt("member_no");
 				String member_email = rs.getString("member_email");
 				rs.getString("member_password");
 				String member_name = rs.getString("member_name");

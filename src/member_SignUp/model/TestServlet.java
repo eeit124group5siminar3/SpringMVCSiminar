@@ -31,7 +31,6 @@ public class TestServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,14 +41,10 @@ public class TestServlet extends HttpServlet {
 		// 設定緩存
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader("Pragma", "no-cache");
-		response.setDateHeader("Expires", -1);
-
+		response.setDateHeader("Expires", -1);		
+		
 		if (request.getParameter("submit") != null)
 			gotoSubmitProcess(request, response);
-		
-		
-		SessionFactory factory=HibernateUtil.getSessionFactory();
-		Session session=factory.getCurrentSession();
 //		Member_SignUp db=session.get(Member_SignUp.class, 1);
 		
 //		System.out.println(db);
@@ -87,20 +82,26 @@ public class TestServlet extends HttpServlet {
 		member_cellphone = request.getParameter("member_cellphone").trim();
 		member_address = request.getParameter("member_address").trim();
 		member_gui_number = request.getParameter("member_gui_number").trim();
-		
+				
 		Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
 				member_name, member_birthday, member_cellphone, member_id, member_address,
 				member_gui_number);
+		String email = reg_buyer.getMember_email();
+		System.out.println("EEEEE"+email);
 		
-		
-		
-		if (select.insert_member_sing_up(reg_buyer)) {
-			// 建立getSession(true) 若沒有Session則會建立Session
-			request.getSession(true).setAttribute("reg_buyer", reg_buyer);
-			// 把工作交給Buyer_SignUp_Check.jsp
-			request.getRequestDispatcher("Member_SignUp/test1.jsp").forward(request,
-					response);
-			
+		if (select.check_signup_email(member_email) ) {
+			if (select.check_signup_id(member_id)) {
+				select.insert_member_sing_up(reg_buyer);
+				// 建立getSession(true) 若沒有Session則會建立Session
+				request.getSession(true).setAttribute("reg_buyer", reg_buyer);
+				// 把工作交給Buyer_SignUp_Check.jsp
+				request.getRequestDispatcher("Member_SignUp/test1.jsp").forward(request,
+						response);
+			}else {
+				System.out.println("身分證字號重複");
+			}
+		}else {
+			System.out.println("EMAIL重複");
 		}
 	}
 

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import member_SignUp.model.Member_SignUp;
-import tw.leonchen.model.HouseBean;
 
 public class Member_DAO implements Member_List {
 
@@ -27,85 +27,56 @@ public class Member_DAO implements Member_List {
 		this.session = session;
 	}
 
-	// Seller table 轉物件
-//	@Override
-//	public List<Member_SignUp> listmember_object() {
-//		list = new ArrayList<Member_SignUp>();
-//		try (Statement stmt = conn.createStatement();
-//				ResultSet rs = stmt.executeQuery("select * from member_signup");) {
-//
-//			while (rs.next()) {
-//				Member_SignUp dir = new Member_SignUp();
-//
-//				dir.setMember_no(rs.getString("member_no"));
-//				dir.setMember_email(rs.getString("member_email"));
-//				dir.setMember_password(rs.getString("member_password"));
-//				dir.setMember_name(rs.getString("member_name"));
-//				dir.setMember_birthday(rs.getDate("member_birthday"));
-//				dir.setMember_id(rs.getString("member_id"));
-//				dir.setMember_cellphone(rs.getString("member_cellphone"));
-//				dir.setMember_address(rs.getNString("member_address"));
-//				dir.setMember_gui_number(rs.getString("member_gui_number"));
-//				dir.setMember_permissions(rs.getString("member_permissions"));
-//				dir.setMember_gg(rs.getString("member_gg"));
-//				dir.setMember_lock_acc(rs.getString("member_lock_acc"));
-//
-//				list.add(dir);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return list;
-//	}
-
 	// 會員註冊
 	@Override
 	public boolean insert_member_sing_up(Member_SignUp member_data) {
-		//比對email，沒有資料=null
-		Member_SignUp inser = session.get(Member_SignUp.class, member_data.getMember_no());
-		Query query = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query check = query.setParameter(0, member_data.getMember_email());
-
-		if (inser == null) {
+		// 比對Email、ID是否重複
+		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query email = query_email.setParameter(0, member_data.getMember_email());
+		List<Member_SignUp> list_email = (List<Member_SignUp>) email.list();
+		
+		if (list_email.size() <= 0) {
 			session.save(member_data);
+			System.out.println("會員資料註冊成功");
 			return true;
 		}
 		return false;
 	}
 
 	// 會員註冊，驗證EMAIL
-//	public boolean check_signup_email(String member_email) {
-//		List<Member_SignUp> email_check = listmember_object();
-//		for (int i = 0; i < email_check.size(); i++) {
-//			Member_SignUp object = email_check.get(i);
-//			if (object.getMember_email().equals(member_email)) {
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
+	public boolean check_signup_email(String member_email) {
+		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query email = query_email.setParameter(0, member_email);
+		List<String> list_email = email.list();
+		//Email不重複回傳0
+		System.out.println("123+++"+list_email.size());
+		if (list_email.size() <= 0) {
+			return true;
+		}
+		return false;
+	}
 
 	// 會員註冊，驗證身分證字號
-//	public boolean check_signup_id(String member_id) {
-//		List<Member_SignUp> id_check = listmember_object();
-//		for (int i = 0; i < id_check.size(); i++) {
-//			Member_SignUp object = id_check.get(i);
-//			if (object.getMember_id().equals(member_id)) {
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
+	public boolean check_signup_id(String member_id) {
+		Query query_id = session.createQuery("From Member_SignUp Where Member_id=?0");
+		Query id = query_id.setParameter(0, member_id);
+		List<Member_SignUp> list_id = (List<Member_SignUp>) id.list();
+		//ID不重複回傳0
+		if (list_id.size() <= 0) {
+			return true;
+		}
+		return false;
+	}
 
 	// 會員註冊，確認生日日期
-//	public boolean check_date(Date member_date1) {
-//		java.util.Date date = new java.util.Date();
-//
-//		if (member_date1.getTime() <= date.getTime()) {
-//			return true;
-//		}
-//		return false;
-//	}
+	public boolean check_date(Date member_date1) {
+		java.util.Date date = new java.util.Date();
+
+		if (member_date1.getTime() <= date.getTime()) {
+			return true;
+		}
+		return false;
+	}
 
 	// 會員註冊，驗證身分證字號是否正確
 //	public boolean check_id(String id) {
@@ -180,7 +151,7 @@ public class Member_DAO implements Member_List {
 //		return false;
 //	}
 
-	// 登錄驗證，資料包Bean
+	// 登錄驗證
 //	public boolean login_check(String member_email, String member_password) {
 //		this.listmember_object();
 //		try {
