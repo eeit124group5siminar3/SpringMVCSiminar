@@ -19,6 +19,10 @@
 		<mapping class="mall.productModel.ProductBean" />
 		<mapping class="mall.productModel.CategoryBean" />
 		<mapping class="member_SignUp.model.Member_SignUp" />
+		
+<!--    <mapping class="marketSeller.model.MarketProductTotalBean"/>
+		<mapping class="marketSeller.model.MarketProductImgBean"/>  -->
+		
 <!-- 		<mapping class="tw.leonchen.model.Books"/> -->
 <!-- 		<mapping class="tw.leonchen.model.BookDetail"/> -->
 <!-- 		<mapping class="tw.leonchen.model.Stock"/> -->
@@ -26,5 +30,6 @@
 <!-- 		<mapping class="tw.leonchen.model.Game"/> -->
 <!-- 		<mapping class="tw.leonchen.model.Role"/> -->
 <!-- 		<mapping class="tw.leonchen.model.Profiles"/> -->
+         
 	</session-factory>
 </hibernate-configuration>
