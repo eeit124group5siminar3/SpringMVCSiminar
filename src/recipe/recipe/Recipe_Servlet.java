@@ -46,10 +46,10 @@ public class Recipe_Servlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charser=UTF-8");
 		HttpSession session = request.getSession(true); 
 		session.setAttribute("memberID", "a21");
-		response.setContentType("text/html;charser=UTF-8");
-		request.setCharacterEncoding("UTF-8");
 		
 		
 		
@@ -112,13 +112,15 @@ public class Recipe_Servlet extends HttpServlet {
 		method=request.getParameter("method").trim();
 		gram_A=request.getParameter("gram_A").trim();
 		System.out.println(request.getParameter("recipe_name"));
-
+		
 		
 		System.out.println("set values done");
 		
-		Recipe_Bean recipe_check=new Recipe_Bean(name,ingredients_A,ingredients_B,ingredients_C,ingredients_D,desc,cate,method,gram_A);
+		Recipe_Bean recipe_check=new Recipe_Bean(name,ingredients_A,ingredients_B,ingredients_C,ingredients_D,desc,cate,method);
+		System.out.println(recipe_check.getName());
 		request.getSession(true).setAttribute("recipe_check", recipe_check);
-		response.sendRedirect("recipe/recipe_display.jsp");
+//	request.getRequestDispatcher("recipe/recipe_display.jsp").forward(request, response);
+		response.sendRedirect("./recipe/recipe_display.jsp");
 		
 	}
 
@@ -133,7 +135,7 @@ public class Recipe_Servlet extends HttpServlet {
 		Recipe_Bean recipe_detail=(Recipe_Bean)request.getSession(true).getAttribute("recipe_check");
 
 		Recipe_Bean bean = null ;
-		if(rDAO.insert(bean)){
+		if(rDAO.insert(recipe_detail)){
 			  session.save(recipe_detail);
 	          System.out.println("Get some SQL commands done!");
 	          request.getSession(true).invalidate();
