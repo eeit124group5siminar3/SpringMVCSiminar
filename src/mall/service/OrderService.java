@@ -9,25 +9,24 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.dao.OrderDAO;
+import mall.dao.ProductDAO;
 import mall.productModel.ProductOrderBean;
 import mall.productModel.ProductOrderItemBean;
+import util.HibernateUtil;
 
 public class OrderService {
-	private DataSource ds;
+	private static final SessionFactory factory=HibernateUtil.getSessionFactory();
+	private static final Session session=factory.getCurrentSession();
 
 	private OrderDAO odao;
 //	private MemberDao mdao;
 
 	public OrderService() {
-		try {
-			Context ctx = new InitialContext();
-			ds 	  = (DataSource) ctx.lookup("java:comp/env/jdbc/xe");
-			odao  = new OrderDAO();
-//			mdao  = new MemberDaoImpl_Jdbc();
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
+		this.odao = new OrderDAO(session);
 	}
 
 	// 這是一個交易

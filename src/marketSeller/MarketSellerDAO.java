@@ -9,7 +9,6 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
 import active.Active;
 import mall.productModel.ProductBean;
 import marketSeller.MarketSellerBean;
@@ -46,6 +45,7 @@ public class MarketSellerDAO {
 	}
 	//上架商品轉物件====================================================
 	public List<MarketSellerBean> listMarketSellerBeans(){
+		
 		List<MarketSellerBean> list= new ArrayList<MarketSellerBean>();
 	    DataSource ds = null;
 	    InitialContext ctxt = null;
@@ -57,7 +57,7 @@ public class MarketSellerDAO {
 			Statement stmt= conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select t.product_id,t.product_name,t.product_area,t.price"
 			+ ",n.product_id,n.product_img,n.description"
-			+ " from MARKET_PRODUCT_TOTAL t,MARKET_SELLER_ID n "
+			+ " from MARKET_PRODUCT_TOTAL t,MARKET_PRODUCT_IMG n "
 			+ "where t.product_id=n.product_id "
 			+ " order by 1");
 			
@@ -90,7 +90,7 @@ public class MarketSellerDAO {
 				+ " (product_id,product_name, product_area,price) "
 				+ " VALUES ((concat(\'a\',p1.nextval)), ?, ?, ?)";
 		
-        String sql2=  "INSERT INTO MARKET_SELLER_ID "
+        String sql2=  "INSERT INTO MARKET_PRODUCT_IMG "
 				+ " (product_id,product_img,description) "
 				+ " VALUES ((concat(\'a\',p1.currval)),?, ?)";
         InputStream blobStream = null;
@@ -131,7 +131,7 @@ public class MarketSellerDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql2="DELETE FROM MARKET_PRODUCT_TOTAL where PRODUCT_ID = ?";
-		String sql1="DELETE FROM MARKET_SELLER_ID where PRODUCT_ID = ?";
+		String sql1="DELETE FROM MARKET_PRODUCT_IMG where PRODUCT_ID = ?";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql1);
@@ -200,7 +200,7 @@ public class MarketSellerDAO {
 		ResultSet rs = null;
 		String sql="select t.product_id,t.product_name,t.product_area,t.price "
 				+ ",n.product_id,n.product_img,n.description "
-				+ " from MARKET_PRODUCT_TOTAL t JOIN MARKET_SELLER_ID n "
+				+ " from MARKET_PRODUCT_TOTAL t JOIN MARKET_PRODUCT_IMG n "
 				+ " on( t.product_id=n.product_id) "
 				+ "WHERE t.product_id=?";
 
@@ -258,7 +258,7 @@ public class MarketSellerDAO {
   		Connection con = null;
   		PreparedStatement pstmt = null;
   		String sql1="UPDATE MARKET_PRODUCT_TOTAL set product_name=?,product_area=?,price=? where product_id = ?";
-  		String sql2="UPDATE MARKET_SELLER_ID set description=? where product_id = ?";
+  		String sql2="UPDATE MARKET_PRODUCT_IMG set description=? where product_id = ?";
   		try {
 
   			con = ds.getConnection();

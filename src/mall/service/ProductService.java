@@ -1,7 +1,6 @@
 package mall.service;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -13,13 +12,17 @@ import mall.productModel.ProductBean;
 import util.HibernateUtil;
 
 public class ProductService implements Serializable {
-	private static SessionFactory factory=HibernateUtil.getSessionFactory();
-	private static Session session=factory.getCurrentSession();
+//	private static final SessionFactory factory=HibernateUtil.getSessionFactory();
+//	private static Session session=factory.getCurrentSession();
+	private  Session session;
 	ProductDAO dao;
 
-	public ProductService() {
+	
+	public ProductService(Session session) {
 		this.dao = new ProductDAO(session);
 	}
+
+	
 
 	public int getTotalPages() {
 		return dao.getTotalPages();

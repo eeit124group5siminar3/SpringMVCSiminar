@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
+import util.HibernateUtil;
 
 /**
  * Servlet implementation class ProductPreUpdateServlet
@@ -34,7 +38,9 @@ public class ProductPreUpdateServlet extends HttpServlet {
 			productId = Integer.parseInt(strProductId);
 		}
 
-		ProductService productService = new ProductService();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session hibernateSession = factory.getCurrentSession();
+		ProductService productService = new ProductService(hibernateSession);
 		ProductBean bean = productService.getProduct(productId);
 		session.setAttribute("bean", bean);
 

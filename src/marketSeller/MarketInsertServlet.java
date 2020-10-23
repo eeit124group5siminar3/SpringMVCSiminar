@@ -32,7 +32,7 @@ import mall.SystemUtils2018;
 /**
  * Servlet implementation class MarketSellerServlet
  */
-@WebServlet("/MarketSellerServlet")
+@WebServlet("/marketSeller/MarketSellerServlet")
 //啟動檔案上傳的功能：
 //1. <form>標籤的 method屬性必須是"post", 而且
 //enctype屬性必須是"multipart/form-data"

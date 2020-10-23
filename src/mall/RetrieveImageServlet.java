@@ -12,12 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
 // 
 // 程式功能：
 // 本Servlet 類別會依據傳入的主鍵呼叫Service元件以讀取該主鍵所對應的紀錄，取出該紀錄內的BLOB欄，
 // 進而讀取存放在BLOB欄內的圖片資料，然後傳回給提出請求的瀏覽器。
+import util.HibernateUtil;
 
 @WebServlet("/RetrieveImageServlet")
 public class RetrieveImageServlet extends HttpServlet {
@@ -37,7 +41,9 @@ public class RetrieveImageServlet extends HttpServlet {
 			String type = request.getParameter("type"); 
 			switch(type.toUpperCase()){
 				case "PRODUCT":
-					ProductService productService = new ProductService();
+					SessionFactory factory = HibernateUtil.getSessionFactory();
+					Session hibernateSession = factory.getCurrentSession();
+					ProductService productService = new ProductService(hibernateSession);
 					int nId = 0;
 					try {
 						nId = Integer.parseInt(id);
