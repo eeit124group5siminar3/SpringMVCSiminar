@@ -40,7 +40,7 @@ public class RetrievePageProducts extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// 先取出session物件
 		HttpSession session = request.getSession();
-		String memberId = null;
+//		String memberId = null;
 		// 如果session物件不存在
 		if (session == null) {
 			// 請使用者登入
@@ -54,8 +54,9 @@ public class RetrievePageProducts extends HttpServlet {
 		// 取出使用者的memberId，後面的Cookie會用到
 		if (mb == null) {
 			mb = new Member_SignUp();
-			String sessionId = request.getRequestedSessionId();
-			memberId = sessionId;
+//			String sessionId = request.getRequestedSessionId();
+//			memberId = sessionId;
+			int memberId=123456;
 			mb.setMember_no(memberId);
 			session.setAttribute("login_guest", mb);
 		}

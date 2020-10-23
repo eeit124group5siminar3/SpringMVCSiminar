@@ -135,6 +135,7 @@ public class ProductDAO implements Serializable {
 //		String sql0 = "select * from(select rownum as rn ,productId,product,producterId,member_name,price,discount,stock,content,unit,addedDate,shelfTime,Filename,CoverImage,description,category from (select * from product p,member_signup m where stock != 0 and producterId=member_no ORDER BY productId)) WHERE rn >= ? AND rn <= ?";
 //		String sql = sql0;
 		int startRecordNo = (pageNo - 1) * recordsPerPage + 1;
+		
 //		int endRecordNo = (pageNo) * recordsPerPage;
 //		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
 //			ps.setBigDecimal(1, new BigDecimal(startRecordNo));

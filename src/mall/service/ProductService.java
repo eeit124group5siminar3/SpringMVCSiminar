@@ -17,9 +17,12 @@ public class ProductService implements Serializable {
 	private  Session session;
 	ProductDAO dao;
 
+	
 	public ProductService(Session session) {
 		this.dao = new ProductDAO(session);
 	}
+
+	
 
 	public int getTotalPages() {
 		return dao.getTotalPages();
