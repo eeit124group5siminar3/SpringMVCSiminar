@@ -30,9 +30,9 @@ fieldset {
 <body>
 <jsp:include page="/top.jsp" />
 <h1 style="text-align: center;">確認頁面</h1>
-	<jsp:useBean id="recipe_check" class="recipe.recipe_bean.Recipe_Obj" scope="session"></jsp:useBean>
+	<jsp:useBean id="recipe_check" class="recipe.recipe_bean.Recipe_Bean" ></jsp:useBean>
 	<fieldset>
-	<form action="..\Recipe_Servlet" method="post">
+	<form action="..\Recipe_Servlet" method="post" scope="session">
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 			<tr>
 				<td>名稱</td>
@@ -46,10 +46,10 @@ fieldset {
 				<td>食材</td>
 				<td><jsp:getProperty name="recipe_check" property="ingredients_A" /></td>
 			</tr>
-			<tr>
-				<td>份量</td>
-				<td><jsp:getProperty name="recipe_check" property="gram_A" /></td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>份量</td> -->
+<%-- 				<td><jsp:getProperty name="recipe_check" property="gram_A" /></td> --%>
+<!-- 			</tr> -->
 			<tr>
 				<td>介紹</td>
 				<td><jsp:getProperty name="recipe_check" property="desc" /></td>

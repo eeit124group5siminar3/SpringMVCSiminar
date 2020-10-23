@@ -21,17 +21,17 @@ public class Recipe_Bean {
 	private String desc;
 	private String cate;
 	private String rec_id;
-	private Date up_date;
-	private String gram_A;
+//	private Date up_date;
+//	private String gram_A;
 	private String method;
 	public String FileName;
-	private InputStream data;
+//	private InputStream data;
 //	private Blob sb;
 //	private FileInputStream fis;
 
 	public Recipe_Bean(String name, String ingredients_A, String ingredients_B, 
 			String ingredients_C,String ingredients_D, String desc, String cate
-			,String method,String gram_A) {
+			,String method) {
 		this.name = name;
 		this.ingredients_A = ingredients_A;
 		this.ingredients_B = ingredients_B;
@@ -44,7 +44,7 @@ public class Recipe_Bean {
 //		this. data=data;
 //		this. sb=sb;
 		this.method=method;
-		this.gram_A=gram_A;
+//		this.gram_A=gram_A;
 //		this.fis=fis;
 	}
 
@@ -74,13 +74,13 @@ public class Recipe_Bean {
 		this.rec_id = rec_id;
 	}
 	
-	
-	public InputStream getData() {
-		return data;
-	}
-	public void setData(InputStream data) {
-		this.data = data;
-	}
+//	@Column(name="data")
+//	public InputStream getData() {
+//		return data;
+//	}
+//	public void setData(InputStream data) {
+//		this.data = data;
+//	}
 	
 	
 	@Column(name="filename")
@@ -91,12 +91,12 @@ public class Recipe_Bean {
 		FileName = fileName;
 	}
 
-	public Date getUp_date() {
-		return up_date;
-	}
-	public void setUp_date(Date up_date) {
-		this.up_date = up_date;
-	}
+//	public Date getUp_date() {
+//		return up_date;
+//	}
+//	public void setUp_date(Date up_date) {
+//		this.up_date = up_date;
+//	}
 	
 	@Column(name="recipe_name")
 	public String getName() {
@@ -163,11 +163,11 @@ public class Recipe_Bean {
 	}
 	
 	
-	public String getGram_A() {
-		return gram_A;
-	}
-
-	public void setGram_A(String gram_A) {
-		this.gram_A = gram_A;
-	}
+//	public String getGram_A() {
+//		return gram_A;
+//	}
+//
+//	public void setGram_A(String gram_A) {
+//		this.gram_A = gram_A;
+//	}
 }
