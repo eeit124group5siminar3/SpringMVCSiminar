@@ -63,15 +63,15 @@ public class ProductService implements Serializable {
 		return dao.getProduct(productId);
 	}
 
-	public int updateProduct(ProductBean bean, long sizeInBytes) {
+	public ProductBean updateProduct(ProductBean bean, long sizeInBytes) {
 		return dao.updateProduct(bean, sizeInBytes);
 	}
 
-	public int deleteProduct(int no) {
+	public ProductBean deleteProduct(int no) {
 		return dao.deleteProduct(no);
 	}
 
-	public int saveProduct(ProductBean bean) {
+	public ProductBean saveProduct(ProductBean bean) {
 		return dao.saveProduct(bean);
 	}
 

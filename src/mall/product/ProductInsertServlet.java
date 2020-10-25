@@ -223,12 +223,13 @@ public class ProductInsertServlet extends HttpServlet {
 			int category=Integer.parseInt(categoryStr);
 			productService.setId(category);
 			Member_SignUp mb=(Member_SignUp)session.getAttribute("login_ok");
-			producterId=mb.getMember_no().toString();
+//			producterId=mb.getMember_no().toString();
+			producterId="123";
 //			String categoryTag = productService.getCategoryTag();
 //			session.setAttribute("SelectCategoryTag", categoryTag);
 			ProductBean bb = new ProductBean(product, producterId, price, blob, fileName, stock, null, shelfTime,
 					content, unit, description, category);
-
+//			System.out.println(bb.getFileName());
 			productService.saveProduct(bb);
 			successMsgs.put("success", "資料新增成功");
 			// 新增成功，通知瀏覽器對新網址發出請求

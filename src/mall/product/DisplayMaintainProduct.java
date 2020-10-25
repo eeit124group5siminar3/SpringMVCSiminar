@@ -34,25 +34,26 @@ public class DisplayMaintainProduct extends HttpServlet {
 			throws ServletException, IOException {
 		
 		 //先取出session物件
-		HttpSession session = request.getSession(false);
+//		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		// 紀錄目前請求的RequestURI,以便使用者登入成功後能夠回到原本的畫面
 		String requestURI = request.getRequestURI();
 		// System.out.println("requestURI=" + requestURI);
 		// 如果session物件不存在
-		if (session == null || session.isNew()) {
-			// 請使用者登入
-			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
-			return;
-		}
+//		if (session == null || session.isNew()) {
+//			// 請使用者登入
+//			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
+//			return;
+//		}
 		session.setAttribute("requestURI", requestURI);
 		// 此時session物件存在，讀取session物件內的LoginOK
 		// 以檢查使用者是否登入。
-		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
-		if (mb == null) {
-			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
-			return;
-		}
-		String producterId=mb.getMember_no().toString();
+//		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+//		if (mb == null) {
+//			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
+//			return;
+//		}
+//		String producterId=mb.getMember_no().toString();
 		String pageNoStr = request.getParameter("pageNo");
 		if (pageNoStr == null) {
 			pageNo = 1;
@@ -71,9 +72,11 @@ public class DisplayMaintainProduct extends HttpServlet {
 		//
 		service.setPageNo(pageNo);
 		service.setRecordsPerPage(RECORDS_PER_PAGE);
-		Collection<ProductBean> coll = service.getPageProducts(producterId);
+		Collection<ProductBean> coll = service.getPageProducts();
+//		Collection<ProductBean> coll = service.getPageProducts(producterId);
 		session.setAttribute("pageNo", pageNo);
-		request.setAttribute("totalPages", service.getTotalPages(producterId));
+		request.setAttribute("totalPages", service.getTotalPages());
+//		request.setAttribute("totalPages", service.getTotalPages(producterId));
 		request.setAttribute("products_DPP", coll);
 		// 交由listBooks.jsp來顯示某頁的書籍資料，同時準備『第一頁』、
 		// 『前一頁』、『下一頁』、『最末頁』等資料
