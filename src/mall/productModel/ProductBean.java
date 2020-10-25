@@ -12,8 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.eclipse.jdt.internal.compiler.ast.TrueLiteral;
+import org.hibernate.type.TrueFalseType;
 @Entity
 @Table(name = "product")
 public class ProductBean implements Serializable {
@@ -88,8 +92,8 @@ public class ProductBean implements Serializable {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-//	@Column(name = "CATEGORY")
-	@Transient
+	@Column(name = "CATEGORY")
+//	@Transient
 	public int getCategory() {
 		return category;
 	}
@@ -154,7 +158,7 @@ public class ProductBean implements Serializable {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	@Column(name = "ADDEDDATE")
+	@Column(name = "ADDEDDATE" ,updatable= false)
 	public Date getAddedDate() {
 		return addedDate;
 	}
@@ -202,7 +206,7 @@ public class ProductBean implements Serializable {
 	public void setProducterName(String producterName) {
 		this.producterName = producterName;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="CATEGORY")
 	public CategoryBean getCategoryBean() {
 		return categoryBean;
