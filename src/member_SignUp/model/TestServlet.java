@@ -87,6 +87,7 @@ public class TestServlet extends HttpServlet {
 				member_name, member_birthday, member_cellphone, member_id, member_address,
 				member_gui_number);
 		String email = reg_buyer.getMember_email();
+		System.out.println(select.login_check(member_email, member_password));
 		System.out.println("EEEEE"+email);
 		
 		if (select.check_signup_email(member_email) ) {
