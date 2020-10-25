@@ -3,6 +3,7 @@ package active.farmer.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -12,8 +13,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "activeFarmer")
@@ -26,14 +30,14 @@ public class ActiveFarmer implements Serializable {
 	private String actAddr;
 	private String tel;
 	private Date actDate;
-	private Timestamp actTimeSta;
-	private Timestamp actTimeEnd;
+	private Date actTimeSta;
+	private Date actTimeEnd;
 	private int numLim;
 	private String memberNo;
 	private int price;
 	private String actDescri;
 	private String imgName;
-	private Blob actImg;
+	private byte[] actImg;
 	private int actLock;
 	private ActSignUp actSignUp;
 
@@ -42,9 +46,9 @@ public class ActiveFarmer implements Serializable {
 	}
 
 	public ActiveFarmer(int actId, String actName, String actType, String actAddr, String tel, Date actDate,
-			Timestamp actTimeSta, Timestamp actTimeEnd, int numLim, String memberNo, int price, String actDescri,
-			String imgName, Blob actImg, int actLock, ActSignUp actSignUp) {
-
+			Date actTimeSta, Date actTimeEnd, int numLim, String memberNo, int price, String actDescri, String imgName,
+			byte[] actImg, int actLock, ActSignUp actSignUp) {
+		super();
 		this.actId = actId;
 		this.actName = actName;
 		this.actType = actType;
@@ -111,6 +115,7 @@ public class ActiveFarmer implements Serializable {
 	}
 
 	@Column(name = "actDate")
+	@Temporal(TemporalType.DATE)
 	public Date getActDate() {
 		return actDate;
 	}
@@ -120,20 +125,22 @@ public class ActiveFarmer implements Serializable {
 	}
 
 	@Column(name = "actTimeSta")
-	public Timestamp getActTimeSta() {
+	@Temporal(TemporalType.TIME)
+	public Date getActTimeSta() {
 		return actTimeSta;
 	}
 
-	public void setActTimeSta(Timestamp actTimeSta) {
+	public void setActTimeSta(Date actTimeSta) {
 		this.actTimeSta = actTimeSta;
 	}
 
 	@Column(name = "actTimeEnd")
-	public Timestamp getActTimeEnd() {
+	@Temporal(TemporalType.TIME)
+	public Date getActTimeEnd() {
 		return actTimeEnd;
 	}
 
-	public void setActTimeEnd(Timestamp actTimeEnd) {
+	public void setActTimeEnd(Date actTimeEnd) {
 		this.actTimeEnd = actTimeEnd;
 	}
 
@@ -183,12 +190,13 @@ public class ActiveFarmer implements Serializable {
 	}
 
 	@Column(name = "actImg")
-	public Blob getActImg() {
-		return actImg;
+	@Lob
+	public void setActImg(byte[] actImg) {
+		this.actImg = actImg;
 	}
 
-	public void setActImg(Blob actImg) {
-		this.actImg = actImg;
+	public void setActLock(int actLock) {
+		this.actLock = actLock;
 	}
 
 	@Column(name = "actLock")
@@ -196,8 +204,8 @@ public class ActiveFarmer implements Serializable {
 		return actLock;
 	}
 
-	public void setActLock(int actLock) {
-		this.actLock = actLock;
+	public byte[] getActImg() {
+		return actImg;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "activeFarmer", cascade = CascadeType.ALL)

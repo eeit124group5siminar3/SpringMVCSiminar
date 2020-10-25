@@ -25,7 +25,6 @@ body {
 </head>
 <body>
 <h1 align="center">活動修改:一日農夫</h1>
-	<form action="./ActiveUpdateServlet" method="post">
 		<fieldset>
 			<legend>活動基本資料</legend>
 			<c:forEach var="Active" items="${list}">
@@ -79,10 +78,6 @@ body {
 			<div>
 				<label for="">活動海報:</label> <br> 
 				<input type="file" id="actImg" name="actImg">
-			</div>
-			<div>
-				<label for="">活動影片:</label> <br> 
-				<input type="file" id="actVideo" name="actVideo">
 			</div>
 		  </c:forEach>
 			<input name="update" type="submit" value="更新" > 

@@ -75,10 +75,6 @@ body {
 					<label for="">活動海報:</label> <br> 
 					<input type="file" id="actImg" name="actImg">
 				</div>
-				<div>
-					<label for="">活動影片:</label> <br> 
-					<input type="file"id="actVideo" name="actVideo">
-				</div>
 				<br>
 				<input name="apply" type="submit" value="申請"> 
 				<input name="acthome" type="submit" value="活動首頁">
