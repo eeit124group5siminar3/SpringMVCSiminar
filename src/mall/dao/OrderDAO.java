@@ -24,7 +24,7 @@ import mall.productModel.ProductOrderItemBean;
 
 public class OrderDAO {
 	private String BuyerId = null;
-	private Connection con;
+//	private Connection con;
 	int orderNo = 0;
 	private Session session;
 
@@ -176,9 +176,9 @@ public class OrderDAO {
 		this.BuyerId = BuyerId;
 	}
 
-	public void setConnection(Connection con) {
-		this.con = con;
-	}
+//	public void setConnection(Connection con) {
+//		this.con = con;
+//	}
 
 	public List<ProductOrderBean> getAllOrders() {
 		DataSource ds = null;
