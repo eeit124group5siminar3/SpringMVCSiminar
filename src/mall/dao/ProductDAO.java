@@ -643,7 +643,7 @@ public class ProductDAO implements Serializable {
 			Date date=new Date(now.getTime());
 			bean.setAddedDate(date);
 			session.save(bean);
-			bean.setCategory(bean.getCategory());
+//			bean.setCategory(bean.getCategory());
 			return bean;
 		}
 		return null;

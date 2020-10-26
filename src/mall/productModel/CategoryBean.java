@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -52,7 +51,7 @@ public class CategoryBean implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@OneToOne(fetch = FetchType.LAZY,mappedBy = "product",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "product",cascade = CascadeType.ALL)
 	public Set<ProductBean> getProductBean() {
 		return productBean;
 	}

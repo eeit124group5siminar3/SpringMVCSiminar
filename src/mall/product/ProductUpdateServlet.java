@@ -3,6 +3,7 @@ package mall.product;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -212,6 +213,7 @@ public class ProductUpdateServlet extends HttpServlet {
 				rd.forward(request, response);
 				return;
 			}
+			
 			SessionFactory factory = HibernateUtil.getSessionFactory();
 			Session hibernateSession = factory.getCurrentSession();
 			ProductService productService = new ProductService(hibernateSession);
@@ -220,9 +222,11 @@ public class ProductUpdateServlet extends HttpServlet {
 			Blob blob = null;
 			if (sizeInBytes != -1) {
 				blob = SystemUtils2018.fileToBlob(is, sizeInBytes);
+			}else {
+				blob=bb.getCoverImage();
 			}
 			ProductBean newBean = new ProductBean(bb.getProductId(), product, producterId, price, discount, blob, fileName,
-					stock, null, shelfTime, content, unit, description, category);
+					stock, bb.getAddedDate(), shelfTime, content, unit, description, category);
 			productService.updateProduct(newBean, sizeInBytes);
 			RequestDispatcher rd = request.getRequestDispatcher("DisplayMaintainProduct?pageNo=" + pageNo);
 			rd.forward(request, response);

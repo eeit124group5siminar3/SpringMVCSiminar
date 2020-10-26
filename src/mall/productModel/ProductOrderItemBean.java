@@ -15,6 +15,7 @@ public class ProductOrderItemBean implements Serializable{
 	private	Date shippingDate;
 	private	int status;
 	private String producterName;
+	private ProductOrderBean productOrderBean;
 	public String getProducterName() {
 		return producterName;
 	}
