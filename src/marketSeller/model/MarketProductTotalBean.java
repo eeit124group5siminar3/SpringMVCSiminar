@@ -28,6 +28,20 @@ public class MarketProductTotalBean {
 	private Integer quantity;
 	private MarketProductImgBean marketProductImgBean;
 	
+	public MarketProductTotalBean(String productId, String productName, String productArea, String productCatgory,
+			Integer price, String unit, String discount, Integer quantity, MarketProductImgBean marketProductImgBean) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productArea = productArea;
+		this.productCatgory = productCatgory;
+		this.price = price;
+		this.unit = unit;
+		this.discount = discount;
+		this.quantity = quantity;
+		this.marketProductImgBean = marketProductImgBean;
+	}
+
 	public MarketProductTotalBean() {
 		
 	}
@@ -42,7 +56,27 @@ public class MarketProductTotalBean {
 		
 	}
 	
+
 	
+	public MarketProductTotalBean(String productId, String email, String marketName, String productName,
+			String productArea, String productCatgory, Integer price, Integer report, String unit, String discount,
+			String putOut, Integer quantity, MarketProductImgBean marketProductImgBean) {
+		super();
+		this.productId = productId;
+		this.email = email;
+		this.marketName = marketName;
+		this.productName = productName;
+		this.productArea = productArea;
+		this.productCatgory = productCatgory;
+		this.price = price;
+		this.report = report;
+		this.unit = unit;
+		this.discount = discount;
+		this.putOut = putOut;
+		this.quantity = quantity;
+		this.marketProductImgBean = marketProductImgBean;
+	}
+
 	@Id @Column(name = "PRODUCT_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public String getProductId() {

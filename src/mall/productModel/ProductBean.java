@@ -72,26 +72,7 @@ public class ProductBean implements Serializable {
 		this.category = category;
 	}
 
-	public ProductBean(int productId, String product, String producterId, double price, double discount,
-			Blob coverImage, String fileName, int stock, Date addedDate, int shelfTime, int content, String unit,
-			String description, int category) {
-		super();
-		this.productId = productId;
-		this.product = product;
-		this.producterId = producterId;
-		this.price = price;
-		this.discount = discount;
-		this.coverImage = coverImage;
-		this.fileName = fileName;
-		this.stock = stock;
-		this.addedDate = addedDate;
-		this.shelfTime = shelfTime;
-		this.content = content;
-		this.unit = unit;
-		this.description = description;
-		this.category = category;
 	
-	}
 	@Id @Column(name="PRODUCTID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getProductId() {
