@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.ha.backend.Sender;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 

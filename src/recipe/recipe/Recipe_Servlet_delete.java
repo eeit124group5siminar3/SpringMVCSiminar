@@ -45,15 +45,6 @@ import util.HibernateUtil;
 		HttpSession session = request.getSession(true); 
 		session.setAttribute("memberID","a001");	
 		ProcessFind(request, response);	
-		
-		
-		
-		
-		
-		
-
-		RequestDispatcher rd=request.getRequestDispatcher("recipe/recipe_update.jsp");
-		rd.forward(request, response);
 
 	}
 	
