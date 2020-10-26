@@ -18,5 +18,10 @@ public class MarketProductDao {
 		List<MarketProductTotalBean> list = query.list();
 		return list;
 	}
+	
+	public MarketProductTotalBean select(String productId) {
+		return session.get(MarketProductTotalBean.class, productId);
+	}
+	
 
 }
