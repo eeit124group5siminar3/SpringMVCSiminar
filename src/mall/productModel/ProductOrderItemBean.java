@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 @Entity
-@Table(name="oederDetails")
+@Table(name="orderDetails")
 public class ProductOrderItemBean implements Serializable{
 	private int itemId;
 	private	int orderId;

@@ -768,7 +768,7 @@ public class ProductDAO implements Serializable {
 		ProductBean bean=session.get(ProductBean.class,productId);
 //		session.get(CategoryBean.class, bean.getCategory());
 //		System.out.println(session.get(CategoryBean.class, bean.getCategory()));
-		System.out.println(bean.getCategory());
+//		System.out.println(bean.getCategory());
 //		bean.setCategoryBean(session.get(CategoryBean.class, bean.getCategory()));
 		return bean;
 
