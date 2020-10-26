@@ -21,10 +21,6 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 
 	private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
 	private static final String CHARSET_CODE = "UTF-8";
-	
-	SessionFactory factory = HibernateUtil.getSessionFactory();
-	Session session = factory.getCurrentSession();
-
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -59,6 +55,9 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 	// 取Buyer_SignUp資料
 	public void gotoSubmitProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
 
 		String member_email;
 		String member_id;
@@ -92,6 +91,8 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 
 		try {
 
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session session = factory.getCurrentSession();
 
 			String member_password;
 			String member_password1;
