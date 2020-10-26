@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@ body {
 </head>
 	<body>
 		<h1 align="center">活動申請:一日農夫</h1>
-		<form action="insert" method="post">
+		<form action="<c:url value='/ActiveSupplyServlet'/>" method="post">
 			<div>
 			<fieldset>
 				<legend>活動基本資料</legend>

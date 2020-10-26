@@ -48,7 +48,7 @@ public class ActiveFarmer implements Serializable {
 	public ActiveFarmer(int actId, String actName, String actType, String actAddr, String tel, Date actDate,
 			Date actTimeSta, Date actTimeEnd, int numLim, String memberNo, int price, String actDescri, String imgName,
 			byte[] actImg, int actLock, ActSignUp actSignUp) {
-		super();
+		
 		this.actId = actId;
 		this.actName = actName;
 		this.actType = actType;

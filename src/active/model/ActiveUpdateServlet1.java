@@ -1,4 +1,4 @@
-package active;
+package active.model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +21,8 @@ import javax.sql.DataSource;
 /**
  * Servlet implementation class ActiveUpdateServlet
  */
-@WebServlet("/ActiveUpdateServlet")
-public class ActiveUpdateServlet extends HttpServlet {
+@WebServlet("/ActiveUpdateServlet1")
+public class ActiveUpdateServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

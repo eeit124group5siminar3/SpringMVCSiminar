@@ -21,8 +21,10 @@
 		
 		<mapping class="member_SignUp.model.Member_SignUp" />
 		
-<!-- 		<mapping class="marketSeller.model.MarketProductTotalBean"/> -->
-<!-- 		<mapping class="marketSeller.model.MarketProductImgBean"/> -->
+		<mapping class="marketSeller.model.MarketProductTotalBean"/>
+		<mapping class="marketSeller.model.MarketProductImgBean"/>
+		
+		<mapping class="active.model.Active"/>
 		
 <!-- 		<mapping class="active.farmer.model.ActiveFarmer"/> -->
 <!-- 		<mapping class="active.farmer.model.ActSignUp"/> -->
