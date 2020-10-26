@@ -113,7 +113,7 @@ public class ProductOrderBean implements Serializable{
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderForm", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productOrderBean", cascade = CascadeType.ALL)
 	public Set<ProductOrderItemBean> getItems() {
 		return items;
 	}
