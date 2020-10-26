@@ -2,6 +2,9 @@ package recipe.DAO;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
+import active.farmer.model.ActiveFarmer;
+
 import java.util.List;
 
 import recipe.recipe_bean.Recipe_Bean;
@@ -31,18 +34,6 @@ public class Recipe_DAO_hibernate {
 		return true;
 	}
 
-//	public List<Recipe_Bean> update(Recipe_Bean rObj) {
-//		session.beginTransaction();
-//		String hql="From Recipe_Bean where recipe_id=?0";
-//		Query<Recipe_Bean> query=session.createQuery(hql);
-////		query.setParameter(0, rec_id);
-//		
-//		
-//		session.update(rObj);
-//		System.out.println(33);
-//		return list ;
-//
-//	}
 	
 	public Recipe_Bean update(String rec_id, Recipe_Bean bean) {
 		session.beginTransaction();
@@ -91,15 +82,27 @@ public class Recipe_DAO_hibernate {
 
 	public boolean delete(String rec_id) {
 		session.beginTransaction();
-		System.out.println(2);
-		String hql = "DELETE recipe WHERE recipe_id = ?";  
-		System.out.println(3);
-		Query query = session.createQuery(hql);  
-		query.setParameter(0, rec_id);
-		return true;
-
+		
+//		System.out.println(2);
+//		System.out.println(rec_id);
+//		String hql = "delete Recipe_Bean where recipe_id = ?0";  
+//		System.out.println(3);
+//		Query query = session.createQuery(hql);  
+//		query.setParameter(0, rec_id);
+//		session.delete(rec_id);
+//		session.getTransaction().commit();
+		System.out.println(rec_id);
+//		return true;
+		Recipe_Bean result = session.get(Recipe_Bean.class, rec_id);
+//		Recipe_Bean result = session.get(rec_id,Recipe_Bean.class);
+		System.out.println(rec_id);
+			if(result!=null) {
+			session.delete(result);
+			session.getTransaction().commit();
+			return true;
+		}
+			return false;
+		}
+		
 	}
 
-
-
-}
