@@ -19,8 +19,6 @@ import javax.sql.DataSource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import active.Active;
-import active.ActiveDAO;
 import marketSeller.model.MarketProductDao;
 import marketSeller.model.MarketProductTotalBean;
 import util.HibernateUtil;
@@ -114,15 +112,15 @@ public class MarketHome extends HttpServlet {
 	}
 
 	private void processSelectAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		SessionFactory factory = HibernateUtil.getSessionFactory();
-//        Session session = factory.getCurrentSession();
-//        
-//        MarketProductDao mDao = new MarketProductDao(session);
-//        List<MarketProductTotalBean> mBean =mDao.selectAll();
-//        request.setAttribute("listinsert", mBean);
-//		RequestDispatcher dispatcher =request.getRequestDispatcher("MarketHome.jsp");
-//		dispatcher.forward(request, response);
-//		   return;
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        
+        MarketProductDao mDao = new MarketProductDao(session);
+        List<MarketProductTotalBean> mBean =mDao.selectAll();
+        request.setAttribute("listinsert", mBean);
+		RequestDispatcher dispatcher =request.getRequestDispatcher("MarketHome.jsp");
+		dispatcher.forward(request, response);
+		   return;
 	}
 	
 	

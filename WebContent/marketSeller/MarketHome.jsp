@@ -42,22 +42,27 @@
                 <th>商品描述</th>
                 <th>商品出產地</th>
                 <th>價格</th>
+                <th>單位</th>
+                
+                <th>數量</th>
                 <th>圖片</th>
             </tr>
             <c:forEach var="IBean" items="${listinsert}">
                 <tr>
-                    <td>${IBean.product_id}</td>
-                    <td><c:out value="${IBean.product_name}"/></td>
-                    <td><c:out value="${IBean.description}"/></td>
-                    <td><c:out value="${IBean.product_area}"/></td>
+                    <td>${IBean.productId}</td>
+                    <td><c:out value="${IBean.productName}"/></td>
+                    <td><c:out value="${IBean.marketProductImgBean.description}"/></td>                    
+                    <td><c:out value="${IBean.productArea}"/></td>
                     <td><c:out value="${IBean.price}"/></td>
+                    <td><c:out value="${IBean.unit}"/></td>
+                    <td><c:out value="${IBean.quantity}"/></td>
+                
                    
-                   <td> <!--
-                 getImage所對應的Servlet會到資料庫讀取圖片並傳送給前端的瀏覽器 --> 
+                   <td>  
               <img height='80' width='80'
-				src='${pageContext.servletContext.contextPath}/RetrieveMarketImage?id=${IBean.product_id}&type=PRODUCT'>
+				src='${pageContext.servletContext.contextPath}/marketSeller/RetrieveMarketImage?id=${IBean.marketProductImgBean.productId}&type=PRODUCT'>
 				</td>
-                   
+                 
                 </tr>
             </c:forEach>
           
