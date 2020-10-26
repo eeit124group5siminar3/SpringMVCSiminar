@@ -5,11 +5,14 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -110,7 +113,7 @@ public class ProductOrderBean implements Serializable{
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderForm", cascade = CascadeType.ALL)
 	public Set<ProductOrderItemBean> getItems() {
 		return items;
 	}
