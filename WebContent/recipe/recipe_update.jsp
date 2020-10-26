@@ -100,8 +100,9 @@ fieldset {
 			</c:forEach>
 			<br>
 			<div style="text-align: center;">
-				<label for=""><input type="submit" name="submit" value="送出"></label> <label
-					for=""><input type="reset" value="取消"></label>
+				<label for=""><input type="submit" name="submit" value="送出"></label><label for="" > <input type="reset"
+			onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="取消"></input>
+		</label>
 			</div>
 			
 			</fieldset>

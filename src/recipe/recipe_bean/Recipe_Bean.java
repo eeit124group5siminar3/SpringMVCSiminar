@@ -66,7 +66,7 @@ public class Recipe_Bean {
 	}
 	
 	@Id @Column(name="recipe_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public String getRec_id() {
 		return rec_id;
 	}
