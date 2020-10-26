@@ -18,6 +18,8 @@
 
 		<mapping class="mall.productModel.ProductBean" />
 		<mapping class="mall.productModel.CategoryBean" />
+		<mapping class="mall.productModel.ProductOrderBean" />
+		<mapping class="mall.productModel.ProductOrderItemBean" />
 		
 		<mapping class="member_SignUp.model.Member_SignUp" />
 		

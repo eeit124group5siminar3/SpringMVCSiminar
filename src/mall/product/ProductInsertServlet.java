@@ -194,6 +194,7 @@ public class ProductInsertServlet extends HttpServlet {
 
 					} else { // 表示此份資料是上傳的檔案
 						fileName = getFileName(p); // 由變數 p 中取出檔案名稱
+						System.out.println(fileName);
 						fileName = adjustFileName(fileName, IMAGE_FILENAME_LENGTH);
 						if (fileName != null && fileName.trim().length() > 0) {
 							sizeInBytes = p.getSize();

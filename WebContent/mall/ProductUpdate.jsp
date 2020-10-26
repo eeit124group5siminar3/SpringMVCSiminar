@@ -51,7 +51,7 @@
 					<c:set var="unit" value='${bean.unit}' />
 					<c:set var="category" value='${bean.category}' />
 					<c:set var="discount" value='${bean.discount}' />
-					<c:set var="addedDate" value='${bean.addedDate}' />
+<%-- 					<c:set var="addedDate" value='${bean.addedDate}' /> --%>
 				</c:when>
 				<c:otherwise>
 					<!-- 
@@ -66,7 +66,7 @@
 					<c:set var="unit" value='${bean.unit}' />
 					<c:set var="category" value='${bean.category}' />
 					<c:set var="discount" value='${bean.discount}' />
-					<c:set var="addedDate" value='${bean.addedDate}' />
+<%-- 					<c:set var="addedDate" value='${bean.addedDate}' /> --%>
 				</c:otherwise>
 			</c:choose>
 			<div id="afterProductInsert">
