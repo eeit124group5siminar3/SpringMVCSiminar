@@ -33,11 +33,10 @@ public class Member_DAO implements Member_List {
 
 		// HQL語法搜尋
 		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query email = query_email.setParameter(0, member_data.getMember_email());
+		Query result = query_email.setParameter(0, member_data.getMember_email());
 
 		// 若無資料回傳null
-		if (email.uniqueResult() == null) {
-			Member_SignUp email_bean = (Member_SignUp) email.uniqueResult();
+		if (result.uniqueResult() == null) {
 			session.save(member_data);
 			System.out.println("會員資料註冊成功");
 			return true;
@@ -50,10 +49,10 @@ public class Member_DAO implements Member_List {
 
 		// HQL語法搜尋
 		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query email = query_email.setParameter(0, member_email);
+		Query result = query_email.setParameter(0, member_email);
 
 		// 若無資料回傳null
-		if (email.uniqueResult() == null) {
+		if (result.uniqueResult() == null) {
 			return true;
 		}
 		return false;
@@ -64,10 +63,10 @@ public class Member_DAO implements Member_List {
 
 		// HQL語法搜尋
 		Query query_id = session.createQuery("From Member_SignUp Where Member_id=?0");
-		Query id = query_id.setParameter(0, member_id);
+		Query result = query_id.setParameter(0, member_id);
 
 		// 若無資料回傳null
-		if (id.uniqueResult() == null) {
+		if (result.uniqueResult() == null) {
 			return true;
 		}
 		return false;
@@ -78,11 +77,11 @@ public class Member_DAO implements Member_List {
 
 		// HQL語法搜尋
 		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query email = query_email.setParameter(0, member_email);
+		Query result = query_email.setParameter(0, member_email);
 
 		// 有資料就做判斷
-		if (email.uniqueResult() != null) {
-			Member_SignUp email_bean = (Member_SignUp) email.uniqueResult();
+		if (result.uniqueResult() != null) {
+			Member_SignUp email_bean = (Member_SignUp) result.uniqueResult();
 			String password = email_bean.getMember_password();
 			if (member_password.equals(password)) {
 				return true;
@@ -96,11 +95,11 @@ public class Member_DAO implements Member_List {
 
 		// HQL語法搜尋
 		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query email = query_email.setParameter(0, member_email);
+		Query result = query_email.setParameter(0, member_email);
 
 		// 有資料就做判斷
-		if (email.uniqueResult() != null) {
-			Member_SignUp member_bean = (Member_SignUp) email.uniqueResult();
+		if (result.uniqueResult() != null) {
+			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
 			return member_bean;
 		}
 		return null;
@@ -111,20 +110,20 @@ public class Member_DAO implements Member_List {
 
 		// HQL語法搜尋
 		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query email = query_email.setParameter(0, member_email);
-		
-		// 有資料就做判斷
-		if (email.uniqueResult() != null) {
-			//把資料包成Bean
-			Member_SignUp member_bean = (Member_SignUp) email.uniqueResult();
+		Query result = query_email.setParameter(0, member_email);
 
-			//從Bean取各個資料出來
+		// 有資料就做判斷
+		if (result.uniqueResult() != null) {
+			// 把資料包成Bean
+			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
+
+			// 從Bean取各個資料出來
 			String check_id = member_bean.getMember_id();
 			String check_name = member_bean.getMember_name();
 			String check_cellphone = member_bean.getMember_cellphone();
 			String password = member_bean.getMember_password();
 
-			//做資料比對，正確回傳PassWord
+			// 做資料比對，正確回傳PassWord
 			if (check_id.equals(member_id) && check_name.equals(member_name)
 					&& check_cellphone.equals(member_cellphone)) {
 				return password;
@@ -134,25 +133,17 @@ public class Member_DAO implements Member_List {
 	}
 
 	// 忘記密碼，修改密碼
-//	public boolean updata_member_password(String member_data, String password) {
-//
-//		try {
-//			String sqlString = "update member_signup set MEMBER_PASSWORD='" + password + "' where member_email='"
-//					+ member_data + "'";
-//
-//			Statement stmt = conn.createStatement();
-//			System.out.println(sqlString);
-//			int updatecount = stmt.executeUpdate(sqlString);
-//			stmt.close();
-//			if (updatecount >= 1) {
-//				return true;
-//			} else {
-//				return false;
-//			}
-//		} catch (Exception e) {
-//			System.err.println("修改資料失敗，請洽承志哥:" + e);
-//			return false;
-//		}
-//	}
+	public boolean updata_member_password(String member_email, String password) {
+
+		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query result = query_email.setParameter(0, member_email);
+
+		if (result.uniqueResult() != null) {
+			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
+			member_bean.setMember_password(password);
+			return true;
+		}
+		return false;
+	}
 
 }
