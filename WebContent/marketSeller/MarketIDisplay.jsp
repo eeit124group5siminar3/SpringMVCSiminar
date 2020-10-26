@@ -17,7 +17,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <h2>
 新增商品如下請確認
 </h2>
-<form action=".\MarketServlet" method="post">
+<form action=".\MarketSellerServlet" method="post">
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
 <tr bgcolor="#FFFFE1">
     <td>商品名稱:</td>

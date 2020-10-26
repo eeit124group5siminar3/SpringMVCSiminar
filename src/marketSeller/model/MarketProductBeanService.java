@@ -12,13 +12,10 @@ public class MarketProductBeanService implements IMarketProductBeanService {
 		
 		return mDao.selectAll();
 	}
-
 	@Override
-	public MarketProductTotalBean select(String productId) {
-		// TODO Auto-generated method stub
-		return mDao.select(productId);
+	public boolean delete(String productId) {
+		return mDao.delete(productId);
 	}
-	
-	
 
+	
 }

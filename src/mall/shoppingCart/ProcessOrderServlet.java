@@ -96,10 +96,12 @@ public class ProcessOrderServlet extends HttpServlet {
 			// (Hibernate規定：自動遞增的主鍵，其對應之物件的欄位必須是null)，絕對不可以是零。
 			ProductOrderItemBean oib = new ProductOrderItemBean(0, oi.getProductId(),oi.getProducterId(), description, oi.getQty(), 
 										oi.getPrice(), oi.getDiscount());
+			oib.setProductOrderBean(ob);
 			items.add(oib);
 		}
 		// 執行到此，購物車內所有購買的商品已經全部轉換為為OrderItemBean物件，並放在Items內
-		ob.setItems(items);  
+		ob.setItems(items); 
+		
 		try {
 			SessionFactory factory = HibernateUtil.getSessionFactory();
 			Session hibernateSession = factory.getCurrentSession();

@@ -48,6 +48,7 @@ public class ProductPreUpdateServlet extends HttpServlet {
 //		String categoryTag = productService.getCategoryTag();
 //		request.setAttribute("SelectCategoryTag", categoryTag);
 		productService.setSelected(bean.getCategory());
+//		System.out.println(bean.getCategoryBean().getId());
 		productService.setTagName("categoryId");
 		String categoryTag = productService.getSelectTag();
 		session.setAttribute("SelectCategoryTag", categoryTag);

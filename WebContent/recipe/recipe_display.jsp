@@ -30,9 +30,9 @@ fieldset {
 <body>
 <jsp:include page="/top.jsp" />
 <h1 style="text-align: center;">確認頁面</h1>
-	<jsp:useBean id="recipe_check" class="recipe.recipe_bean.Recipe_Bean" ></jsp:useBean>
+	<jsp:useBean id="recipe_check" class="recipe.recipe_bean.Recipe_Bean" scope="session"></jsp:useBean>
 	<fieldset>
-	<form action="..\Recipe_Servlet" method="post" scope="session">
+	<form action="<c:url value='Recipe_Servlet'></c:url>" method="post" >
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 			<tr>
 				<td>名稱</td>
@@ -71,6 +71,9 @@ fieldset {
 		<br>
 		<center>
 			<input type="submit" name="confirm" value="確認" />
+			<label for="" style="text-align:center;"> <input type="reset"
+			onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
+		</label>
 		</center>
 	</form>
 	</fieldset>

@@ -106,8 +106,11 @@ body {
 			</div>
 			<br>
 			<div style="text-align: center;">
-				<label for=""><input type="submit" name="submit" value="送出"></label> <label
-					for=""><input type="reset" value="取消"></label>
+				<label for=""><input type="submit" name="submit" value="送出"></label>  <label
+					for="">
+<!-- 					<input type="reset" id=""cancel" value="取消" onclick="no()"> -->
+					<input type ="reset" onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
+					</label>
 			</div>
 		</form>
 	</fieldset>

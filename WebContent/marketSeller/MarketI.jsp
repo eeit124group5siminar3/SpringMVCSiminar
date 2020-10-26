@@ -19,7 +19,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
-<form action="<c:url value='MarketSellerServlet'></c:url>" method="post" enctype="multipart/form-data">
+<form action="<c:url value='MarketIServlet'></c:url>" method="post" enctype="multipart/form-data">
 <jsp:include page="/top.jsp" />
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
 <tr>

@@ -29,6 +29,10 @@ import util.HibernateUtil;
 @WebServlet("/marketSeller/MarketHome")
 public class MarketHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request,response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -46,17 +50,21 @@ public class MarketHome extends HttpServlet {
 			if(request.getParameter("selectall") != null) {
 				processSelectAll(request,response);
 			}
-			if(request.getParameter("goinsert") != null) {
+			else if(request.getParameter("goinsert") != null) {
 				response.sendRedirect("MarketI.jsp");
 			}
 			
-			if(request.getParameter("home") != null) {
+			else if(request.getParameter("home") != null) {
 				response.sendRedirect("top.jsp");
-			}if(request.getParameter("delect") != null) {				
+			}
+			else if(request.getParameter("delect") != null) {				
 				processDelet(request,response);
 			}
-			if(request.getParameter("update") != null) {
+			
+			else if(request.getParameter("update") != null) {
 				processUpdate(request,response);
+			}else {
+				processSelectAll(request,response);
 			}	
 		}catch(NamingException ne) {
 			System.out.println("Naming Service Lookup Exception");
@@ -98,16 +106,17 @@ public class MarketHome extends HttpServlet {
 
 
 	private void processDelet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		MarketSellerDAO marketDAO = new MarketSellerDAO();
-		List<MarketSellerBean> listmarketBeans = marketDAO.listMarketSellerBeans();
-		String selectid = request.getParameter("productid");
-		for (MarketSellerBean act : listmarketBeans) {
-			if(act.getProduct_id().equals(selectid)){
-				marketDAO.delete(selectid);
-				response.sendRedirect("MarketS.jsp");
-			}
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        String selectid = request.getParameter("productid");
+        
+        MarketProductDao mDao = new MarketProductDao(session);
+        boolean mBean = mDao.delete(selectid);
+		if (mBean==true) {
+			response.sendRedirect("MarketS.jsp");
+		} else {
+           System.out.println("失敗");
 		}
-		
 		return;
 	}
 

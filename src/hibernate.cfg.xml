@@ -18,6 +18,8 @@
 
 		<mapping class="mall.productModel.ProductBean" />
 		<mapping class="mall.productModel.CategoryBean" />
+		<mapping class="mall.productModel.ProductOrderBean" />
+		<mapping class="mall.productModel.ProductOrderItemBean" />
 		
 		<mapping class="member_SignUp.model.Member_SignUp" />
 		
@@ -30,7 +32,7 @@
 <!-- 		<mapping class="active.farmer.model.ActSignUp"/> -->
 		
 		
-<!-- 		<mapping class="tw.leonchen.model.Books"/> -->
+		<mapping class="recipe.recipe_bean.Recipe_Bean"/>
 <!-- 		<mapping class="tw.leonchen.model.BookDetail"/> -->
 <!-- 		<mapping class="tw.leonchen.model.Stock"/> -->
 <!-- 		<mapping class="tw.leonchen.model.StockTransaction"/> -->

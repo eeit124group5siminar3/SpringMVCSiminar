@@ -18,17 +18,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.websocket.Decoder.BinaryStream;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import recipe.DAO.Recipe_DAO;
 import recipe.DAO.Recipe_DAO_hibernate;
 import recipe.recipe_bean.Recipe_Bean;
-import recipe.recipe_bean.Recipe_Obj;
 import util.HibernateUtil;
 
 /**
@@ -53,20 +48,23 @@ public class Recipe_Servlet extends HttpServlet {
 		
 		
 		
-//		if(request.getParameter("upload")!=null) {
+		if(request.getParameter("upload")!=null) {
 //			response.sendRedirect("recipe_upload.jsp");
-//		}
-//		if(request.getParameter("update")!=null) {
-//			Recipe_Servlet_update rsUpdate=new Recipe_Servlet_update();
-//			rsUpdate.doPost(request, response);	
-//			}
-//		if(request.getParameter("search")!=null) {
+			request.getRequestDispatcher("recipe/recipe_upload.jsp").forward(request, response);
+		}
+		if(request.getParameter("update")!=null) {
+			Recipe_Servlet_update rsUpdate=new Recipe_Servlet_update();
+			rsUpdate.doPost(request, response);	
+			}
+		if(request.getParameter("search")!=null) {
 //			response.sendRedirect("recipe_search.jsp");
-//		}
-//		if(request.getParameter("del")!=null) {
-//			Recipe_Servlet_delete rsDelete=new Recipe_Servlet_delete();
-//			rsDelete.doPost(request, response);	
-//		}
+			request.getRequestDispatcher("recipe/recipe_search.jsp").forward(request, response);
+
+		}
+		if(request.getParameter("del")!=null) {
+			Recipe_Servlet_delete rsDelete=new Recipe_Servlet_delete();
+			rsDelete.doPost(request, response);	
+		}
 		
 		
 		//---------新增資料-----------
@@ -119,28 +117,27 @@ public class Recipe_Servlet extends HttpServlet {
 		Recipe_Bean recipe_check=new Recipe_Bean(name,ingredients_A,ingredients_B,ingredients_C,ingredients_D,desc,cate,method);
 		System.out.println(recipe_check.getName());
 		request.getSession(true).setAttribute("recipe_check", recipe_check);
-//	request.getRequestDispatcher("recipe/recipe_display.jsp").forward(request, response);
-		response.sendRedirect("./recipe/recipe_display.jsp");
+	request.getRequestDispatcher("recipe/recipe_display.jsp").forward(request, response);
+//		response.sendRedirect("./recipe/recipe_display.jsp");
 		
 	}
 
 	//---------新增資料確認頁面--------
 	private void gotoConfirmProcess(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		SessionFactory factory=HibernateUtil.getSessionFactory();
-		Session session=factory.getCurrentSession();
-		Recipe_DAO_hibernate rDAO=new Recipe_DAO_hibernate(session);
+		Session hibernatesession=factory.getCurrentSession();
+		Recipe_DAO_hibernate rDAO=new Recipe_DAO_hibernate(hibernatesession);
 
 		
 		System.out.println("call insert DAO");
 		Recipe_Bean recipe_detail=(Recipe_Bean)request.getSession(true).getAttribute("recipe_check");
 
-		Recipe_Bean bean = null ;
 		if(rDAO.insert(recipe_detail)){
-			  session.save(recipe_detail);
 	          System.out.println("Get some SQL commands done!");
 	          request.getSession(true).invalidate();
 	          
 		}
+		
 		System.out.println("over");
 		response.sendRedirect("recipe/recipe_workpage.jsp");
 

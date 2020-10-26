@@ -18,20 +18,9 @@
      <div align="center">
         <table  style="border:8px #FFD382 groove;"border="1" cellpadding="5">
             <tr>
-                <th> <input name="goinsert" type="submit" value="新增商品"></th>
+            <th> <input name="goinsert" type="submit" value="新增商品"></th>
             <th> <input name="selectall" type="submit" value="顯示商品"></th>
             </tr>
-                        <tr>
-	            <td style="border:0px" colspan="4"></td>
-            	<td style="border:0px" colspan="5">
-            	<label for="">商品編號:</label> 
-				<input type="text" id="productid" name="productid">
-				&nbsp;&nbsp;&nbsp;
-				<input name="delect" type="submit" value="刪除">
-				<input name="update" type="submit" value="更新"> 	            	
-            	</td>
-            </tr>
-
         </table>
     </div> 
     <div align="center">
@@ -43,9 +32,10 @@
                 <th>商品出產地</th>
                 <th>價格</th>
                 <th>單位</th>
-                
                 <th>數量</th>
                 <th>圖片</th>
+                <th>修改 刪除</th>
+                
             </tr>
             <c:forEach var="IBean" items="${listinsert}">
                 <tr>
@@ -55,14 +45,19 @@
                     <td><c:out value="${IBean.productArea}"/></td>
                     <td><c:out value="${IBean.price}"/></td>
                     <td><c:out value="${IBean.unit}"/></td>
-                    <td><c:out value="${IBean.quantity}"/></td>
-                
-                   
+                    <td><c:out value="${IBean.quantity}"/></td>      
                    <td>  
               <img height='80' width='80'
 				src='${pageContext.servletContext.contextPath}/marketSeller/RetrieveMarketImage?id=${IBean.marketProductImgBean.productId}&type=PRODUCT'>
 				</td>
-                 
+				<td>
+				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
+              
+                 <input name="delect" type="submit" value="刪除">
+                 	&nbsp;&nbsp;
+				 <input type="hidden"  id="productid" name="productid" value="${IBean.productId}">	 
+				 <input name="update" type="submit" value="更新"> 	 
+			     </td>
                 </tr>
             </c:forEach>
           

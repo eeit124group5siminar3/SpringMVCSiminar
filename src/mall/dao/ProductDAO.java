@@ -546,12 +546,14 @@ public class ProductDAO implements Serializable {
 ////				}
 //		bean.setCoverImage(blob);
 //		ProductBean result = session.get(ProductBean.class, bean.getProductId());
-		System.out.println(bean.getProductId());
+//		System.out.println(bean.getProductId());
 //		if (result != null) {
 //			System.out.println(result.getProductId());
 //			System.out.println(bean.getProductId());
+		CategoryBean categoryBean = session.get(CategoryBean.class, bean.getCategory());
+//		bean.setCategoryBean(categoryBean);
 			session.update(bean);
-			bean.setCategory(bean.getCategory());
+//			bean.setCategory(bean.getCategory());
 //			result.
 //			result=bean;
 //			System.out.println(result);
@@ -642,6 +644,7 @@ public class ProductDAO implements Serializable {
 			java.util.Date now=new java.util.Date();
 			Date date=new Date(now.getTime());
 			bean.setAddedDate(date);
+//			bean.setCategoryBean(session.get(CategoryBean.class, bean.getCategory()));
 			session.save(bean);
 //			bean.setCategory(bean.getCategory());
 			return bean;
@@ -758,10 +761,15 @@ public class ProductDAO implements Serializable {
 //			throw new RuntimeException("getProduct()發生例外: " + ex.getMessage());
 //		}
 //		return bean;
-		String hql = "FROM ProductBean WHERE productId = ?0";
-		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
-		query.setParameter(0, productId);
-		ProductBean bean = (ProductBean) query.uniqueResult();
+//		String hql = "FROM ProductBean WHERE productId = ?0";
+//		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
+//		query.setParameter(0, productId);
+//		ProductBean bean = (ProductBean) query.uniqueResult();
+		ProductBean bean=session.get(ProductBean.class,productId);
+//		session.get(CategoryBean.class, bean.getCategory());
+//		System.out.println(session.get(CategoryBean.class, bean.getCategory()));
+//		System.out.println(bean.getCategory());
+//		bean.setCategoryBean(session.get(CategoryBean.class, bean.getCategory()));
 		return bean;
 
 	}
