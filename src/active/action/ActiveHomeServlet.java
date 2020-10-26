@@ -111,7 +111,9 @@ public class ActiveHomeServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException, ParseException{
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
+		
 		int actId = Integer.parseInt(request.getParameter("actId"));
+		System.out.println(actId);
 		ActiveDAO aDao = new ActiveDAO(hsession);
 		List<Active> list = new ArrayList<Active>();
 		list.add(aDao.select(actId));

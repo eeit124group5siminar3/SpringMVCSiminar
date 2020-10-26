@@ -31,7 +31,7 @@ body {
 			<c:forEach var="Active" items="${list}">
 			<div>
 				<label for="">編號:${Active.actId}</label>
-				<input type=text name="actId" value="${Active.actId}" readonly/>
+				<input type="hidden" value="${Active.actId}" />
 			</div>
 			<div>
 				<label for="">活動名稱:</label>

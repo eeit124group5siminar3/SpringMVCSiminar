@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-	<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
+	
 		<c:set var="funcName" value="ACT" scope="session" />
 		<jsp:include page="/top.jsp" />
 		<h1 align="center">一日農夫</h1>
@@ -53,10 +53,12 @@
 						<td><c:out value="${Active.dateSta}" /> 到 <c:out
 								value="${Active.dateEnd}" /></td>
 						<td>
+						<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
 							<input type="hidden" id="actId" name="actId" value="${Active.actId}">
-							<input name="delete" type="submit" value="刪除"}>
+							<input name="delete" type="submit" value="刪除">
 								&nbsp;&nbsp; 
 							<input name="update" type="submit" value="更新">
+							</form>
 						</td>
 					</tr>
 				</c:forEach>
@@ -71,6 +73,6 @@
 			</table>
 		</div>
 
-	</form>
+	
 </body>
 </html>
