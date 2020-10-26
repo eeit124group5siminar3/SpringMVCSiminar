@@ -223,6 +223,7 @@ public class ProductUpdateServlet extends HttpServlet {
 			if (sizeInBytes != -1) {
 				blob = SystemUtils2018.fileToBlob(is, sizeInBytes);
 			}else {
+				fileName=bb.getFileName();
 				blob=bb.getCoverImage();
 			}
 			ProductBean newBean = new ProductBean(bb.getProductId(), product, producterId, price, discount, blob, fileName,
