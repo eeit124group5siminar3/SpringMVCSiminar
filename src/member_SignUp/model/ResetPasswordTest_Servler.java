@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import member_SignUp.model.Member_SignUp;
+import member_SignUp.util.SignUp_Function;
 import util.HibernateUtil;
 
 @WebServlet("/ResetPasswordTest_Servler")
@@ -48,8 +49,8 @@ public class ResetPasswordTest_Servler extends HttpServlet {
 
 		if (request.getParameter("submit") != null)
 			gotoSubmitProcess(request, response);
-//		else if (request.getParameter("confirm") != null)
-//			gotoConfirmProcess(request, response);
+		else if (request.getParameter("confirm") != null)
+			gotoConfirmProcess(request, response);
 	}
 
 	// 取Buyer_SignUp資料
@@ -86,39 +87,42 @@ public class ResetPasswordTest_Servler extends HttpServlet {
 	}
 	
 
-//	public void gotoConfirmProcess(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//
-//		try {
-//
-//
-//			String member_password;
-//			String member_password1;
-//			
-//			Member_SignUp a=(Member_SignUp) request.getSession(true).getAttribute("reg_buyer");
-//			String member_email=a.getMember_email();
-//			
-//			member_password = request.getParameter("member_password").trim();
-//			member_password1 = request.getParameter("member_password1").trim();
-//
-//			Member_DAO check_password = new Member_DAO();
-//			if (check_password.check_password(member_password, member_password1)) {
-//				System.out.println("123");
-//				boolean check = check_password.updata_member_password(member_email, member_password);
-//				System.out.println("321");
-//				if (check) {
-//					request.getSession(true).invalidate();
-//					String contextPath = request.getContextPath();
-//					response.sendRedirect(contextPath + "/Member_SignUp/Member_ResetPassword_OK.jsp");
-//				}
-//			}else {
-//				request.getRequestDispatcher("Member_SignUp/Member_ResetPassword_Alert.jsp").forward(request, response);
-//			}
-//			
-//		} catch (Exception ne) {
-//			System.out.println("Naming Service Lookup Exception");
-//		}
-//
-//	}
+	public void gotoConfirmProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		try {
+
+			SessionFactory factory=HibernateUtil.getSessionFactory();
+			Session session=factory.getCurrentSession();
+
+			String member_password;
+			String member_password1;
+			
+			Member_SignUp a=(Member_SignUp) request.getSession(true).getAttribute("reg_buyer");
+			String member_email=a.getMember_email();
+			
+			member_password = request.getParameter("member_password").trim();
+			member_password1 = request.getParameter("member_password1").trim();
+
+			Member_DAO check_password = new Member_DAO(session);
+			SignUp_Function check_password1 = new SignUp_Function();
+			if (check_password1.check_password(member_password, member_password1)) {
+				System.out.println("123");
+				boolean check = check_password.updata_member_password(member_email, member_password);
+				System.out.println("321");
+				if (check) {
+					request.getSession(true).invalidate();
+					String contextPath = request.getContextPath();
+					response.sendRedirect(contextPath + "/Member_SignUp/Member_ResetPassword_OK.jsp");
+				}
+			}else {
+				request.getRequestDispatcher("Member_SignUp/Member_ResetPassword_Alert.jsp").forward(request, response);
+			}
+			
+		} catch (Exception ne) {
+			System.out.println("Naming Service Lookup Exception");
+		}
+
+	}
 
 }
