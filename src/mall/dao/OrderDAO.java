@@ -176,9 +176,9 @@ public class OrderDAO {
 		this.BuyerId = BuyerId;
 	}
 
-	public void setConnection(Connection con) {
-		this.con = con;
-	}
+//	public void setConnection(Connection con) {
+//		this.con = con;
+//	}
 
 	public List<ProductOrderBean> getAllOrders() {
 		DataSource ds = null;
