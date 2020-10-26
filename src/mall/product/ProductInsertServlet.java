@@ -17,10 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.SystemUtils2018;
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
-import member_SignUp.Member_Bean;
+import member_SignUp.model.Member_SignUp;
+import util.HibernateUtil;
 
 @WebServlet("/ProductInsertServlet")
 
@@ -63,7 +67,7 @@ public class ProductInsertServlet extends HttpServlet {
 
 		try {
 			String product = "";
-			String producterId = "";
+			String producterId ="";
 			String priceStr = "";
 			double price = 0;
 			String categoryStr = "";
@@ -190,6 +194,7 @@ public class ProductInsertServlet extends HttpServlet {
 
 					} else { // 表示此份資料是上傳的檔案
 						fileName = getFileName(p); // 由變數 p 中取出檔案名稱
+						System.out.println(fileName);
 						fileName = adjustFileName(fileName, IMAGE_FILENAME_LENGTH);
 						if (fileName != null && fileName.trim().length() > 0) {
 							sizeInBytes = p.getSize();
@@ -212,17 +217,20 @@ public class ProductInsertServlet extends HttpServlet {
 
 			// 將上傳的檔案轉換為 Blob 物件
 			Blob blob = SystemUtils2018.fileToBlob(is, sizeInBytes);
-
-			ProductService productService = new ProductService();
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session hibernateSession = factory.getCurrentSession();
+			ProductService productService = new ProductService(hibernateSession);
+			//
 			int category=Integer.parseInt(categoryStr);
 			productService.setId(category);
-			Member_Bean mb=(Member_Bean)session.getAttribute("login_ok");
-			producterId=mb.getMember_no();
+			Member_SignUp mb=(Member_SignUp)session.getAttribute("login_ok");
+//			producterId=mb.getMember_no().toString();
+			producterId="123";
 //			String categoryTag = productService.getCategoryTag();
 //			session.setAttribute("SelectCategoryTag", categoryTag);
 			ProductBean bb = new ProductBean(product, producterId, price, blob, fileName, stock, null, shelfTime,
 					content, unit, description, category);
-
+//			System.out.println(bb.getFileName());
 			productService.saveProduct(bb);
 			successMsgs.put("success", "資料新增成功");
 			// 新增成功，通知瀏覽器對新網址發出請求

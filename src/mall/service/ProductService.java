@@ -1,19 +1,28 @@
 package mall.service;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import mall.dao.ProductDAO;
 import mall.productModel.CategoryBean;
 import mall.productModel.ProductBean;
+import util.HibernateUtil;
 
 public class ProductService implements Serializable {
+//	private static final SessionFactory factory=HibernateUtil.getSessionFactory();
+//	private static Session session=factory.getCurrentSession();
+	private  Session session;
 	ProductDAO dao;
 
-	public ProductService() {
-		this.dao = new ProductDAO();
+	
+	public ProductService(Session session) {
+		this.dao = new ProductDAO(session);
 	}
+
+	
 
 	public int getTotalPages() {
 		return dao.getTotalPages();
@@ -54,15 +63,15 @@ public class ProductService implements Serializable {
 		return dao.getProduct(productId);
 	}
 
-	public int updateProduct(ProductBean bean, long sizeInBytes) {
+	public ProductBean updateProduct(ProductBean bean, long sizeInBytes) {
 		return dao.updateProduct(bean, sizeInBytes);
 	}
 
-	public int deleteProduct(int no) {
+	public ProductBean deleteProduct(int no) {
 		return dao.deleteProduct(no);
 	}
 
-	public int saveProduct(ProductBean bean) {
+	public ProductBean saveProduct(ProductBean bean) {
 		return dao.saveProduct(bean);
 	}
 

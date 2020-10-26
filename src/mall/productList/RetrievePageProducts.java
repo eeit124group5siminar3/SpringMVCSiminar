@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
-import member_SignUp.Member_Bean;
+import member_SignUp.model.Member_SignUp;
+import util.HibernateUtil;
 
 /**
  * Servlet implementation class RetrievePageProducts
@@ -36,7 +40,7 @@ public class RetrievePageProducts extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// 先取出session物件
 		HttpSession session = request.getSession();
-		String memberId = null;
+//		String memberId = null;
 		// 如果session物件不存在
 		if (session == null) {
 			// 請使用者登入
@@ -46,12 +50,13 @@ public class RetrievePageProducts extends HttpServlet {
 		}
 		// 登入成功後，Session範圍內才會有LoginOK對應的MemberBean物件
 
-		Member_Bean mb = (Member_Bean) session.getAttribute("login_ok");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 		// 取出使用者的memberId，後面的Cookie會用到
 		if (mb == null) {
-			mb = new Member_Bean();
-			String sessionId = request.getRequestedSessionId();
-			memberId = sessionId;
+			mb = new Member_SignUp();
+//			String sessionId = request.getRequestedSessionId();
+//			memberId = sessionId;
+			int memberId=123456;
 			mb.setMember_no(memberId);
 			session.setAttribute("login_guest", mb);
 		}
@@ -88,31 +93,31 @@ public class RetrievePageProducts extends HttpServlet {
 				pageNo = 1;
 			}
 		}
-		ProductService service = new ProductService();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session hibernateSession = factory.getCurrentSession();
+		ProductService service = new ProductService(hibernateSession);
 		//
 		// 讀取一頁的書籍資料之前，告訴service，現在要讀哪一頁
 		service.setPageNo(pageNo);
 		request.setAttribute("baBean", service);
 		// service.getPageBooks()方法開始讀取一頁的書籍資料
 		Collection<ProductBean> coll = null;
-		String searchString=null;
-		if (request.getParameter("search")!=null) {
-		searchString=request.getParameter("searchString");}
-		else {
-			searchString=(String)session.getAttribute("searchString");
+		String searchString = null;
+		if (request.getParameter("search") != null) {
+			searchString = request.getParameter("searchString");
+		} else {
+			searchString = (String) session.getAttribute("searchString");
 		}
-		
 
-			if(searchString != null|| session.getAttribute("searchString")!=null) {
+		if (searchString != null || session.getAttribute("searchString") != null) {
 			coll = service.getPageProductsWithoutZero(searchString);
 			request.setAttribute("totalPages", service.getTotalPagesWithoutZero(searchString));
 			session.setAttribute("searchString", searchString);
-			}
-		else {
+		} else {
 			coll = service.getPageProductsWithoutZero();
 			request.setAttribute("totalPages", service.getTotalPagesWithoutZero());
 		}
-			
+
 		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		request.setAttribute("products_DPP", coll);

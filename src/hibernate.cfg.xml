@@ -15,10 +15,22 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
-<!-- 		<mapping -->
-<!-- 			resource="tw/leonchen/model/HouseBean.hbm.xml" /> -->
-<!-- 		<mapping class="tw.leonchen.model.Department" /> -->
-<!-- 		<mapping class="tw.leonchen.model.Books"/> -->
+
+		<mapping class="mall.productModel.ProductBean" />
+		<mapping class="mall.productModel.CategoryBean" />
+		<mapping class="mall.productModel.ProductOrderBean" />
+		<mapping class="mall.productModel.ProductOrderItemBean" />
+		
+		<mapping class="member_SignUp.model.Member_SignUp" />
+		
+		<mapping class="marketSeller.model.MarketProductTotalBean"/>
+		<mapping class="marketSeller.model.MarketProductImgBean"/>
+		
+		<mapping class="active.farmer.model.ActiveFarmer"/>
+		<mapping class="active.farmer.model.ActSignUp"/>
+		
+		
+		<mapping class="recipe.recipe_bean.Recipe_Bean"/>
 <!-- 		<mapping class="tw.leonchen.model.BookDetail"/> -->
 <!-- 		<mapping class="tw.leonchen.model.Stock"/> -->
 <!-- 		<mapping class="tw.leonchen.model.StockTransaction"/> -->

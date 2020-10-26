@@ -5,7 +5,18 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="orderForm")
 public class ProductOrderBean implements Serializable{
 	private int orderId;
 	private String buyerId;
@@ -45,55 +56,64 @@ public class ProductOrderBean implements Serializable{
 		
 		this.items=items;
 	}
+	@Id @Column(name="ORDERID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getOrderId() {
 		return orderId;
 	}
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
+	@Column(name="BUYERID")
 	public String getBuyerId() {
 		return buyerId;
 	}
 	public void setBuyerId(String buyerId) {
 		this.buyerId = buyerId;
 	}
+	@Column(name="BUYERNAME")
 	public String getBuyerName() {
 		return buyerName;
 	}
 	public void setBuyerName(String buyerName) {
 		this.buyerName = buyerName;
 	}
+	@Column(name="ADDRESS")
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	@Column(name="TEL")
 	public String getTel() {
 		return tel;
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+	@Column(name="BNO")
 	public String getBNo() {
 		return bNo;
 	}
 	public void setBNo(String bNo) {
 		this.bNo = bNo;
 	}
+	@Column(name="TOTAL")
 	public double getTotal() {
 		return total;
 	}
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	@Column(name="ORDERDATE",updatable = false)
 	public Date getOrderDate() {
 		return orderDate;
 	}
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productOrderBean", cascade = CascadeType.ALL)
 	public Set<ProductOrderItemBean> getItems() {
 		return items;
 	}

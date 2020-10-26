@@ -1,8 +1,9 @@
-package mall.product;
+	package mall.product;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,9 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.SystemUtils2018;
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
+import util.HibernateUtil;
 
 @WebServlet("/ProductUpdateServlet")
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
@@ -92,13 +97,6 @@ public class ProductUpdateServlet extends HttpServlet {
 								errorMsgs.put("errProduct", "必須輸入品名");
 							} else {
 								request.setAttribute("product", product);
-							}
-						} else if (fldName.equals("producterId")) {
-							producterId = value;
-							if (producterId == null || producterId.trim().length() == 0) {
-								errorMsgs.put("errProducterId", "必須輸入生產者");
-							} else {
-								request.setAttribute("producterId", producterId);
 							}
 						} else if (fldName.equals("price")) {
 							priceStr = value;
@@ -186,17 +184,19 @@ public class ProductUpdateServlet extends HttpServlet {
 							if (categoryStr == null || categoryStr.trim().length() == 0) {
 								errorMsgs.put("errCategory", "必須輸入類型");
 							}
-//							request.setAttribute("category", categoryStr);
+							request.setAttribute("categoryId", categoryStr);
 						}
 
 					} else {
 						fileName = getFileName(p); // 由變數 p 中取出檔案名稱
+						System.out.println(fileName);
 						fileName = adjustFileName(fileName, IMAGE_FILENAME_LENGTH);
 						if (fileName != null && fileName.trim().length() > 0) {
 							sizeInBytes = p.getSize();
 							is = p.getInputStream();
 						} else {
 							sizeInBytes = -1;
+							fileName=adjustFileName(bb.getFileName(), IMAGE_FILENAME_LENGTH);
 						}
 					}
 				}
@@ -208,16 +208,21 @@ public class ProductUpdateServlet extends HttpServlet {
 				rd.forward(request, response);
 				return;
 			}
-
-			ProductService productService = new ProductService();
+			
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session hibernateSession = factory.getCurrentSession();
+			ProductService productService = new ProductService(hibernateSession);
 			int category=Integer.parseInt(categoryStr);
 			productService.setId(category);
 			Blob blob = null;
 			if (sizeInBytes != -1) {
 				blob = SystemUtils2018.fileToBlob(is, sizeInBytes);
+			}else {
+				blob=bb.getCoverImage();
+//				fileName=bb.getFileName();
 			}
-			ProductBean newBean = new ProductBean(bb.getProductId(), product, producterId, price, discount, blob, fileName,
-					stock, null, shelfTime, content, unit, description, category);
+			ProductBean newBean = new ProductBean(bb.getProductId(), product, bb.getProducterId(), price, discount, blob, fileName,
+					stock, bb.getAddedDate(), shelfTime, content, unit, description, category);
 			productService.updateProduct(newBean, sizeInBytes);
 			RequestDispatcher rd = request.getRequestDispatcher("DisplayMaintainProduct?pageNo=" + pageNo);
 			rd.forward(request, response);
@@ -249,4 +254,5 @@ public class ProductUpdateServlet extends HttpServlet {
 		}
 		return null;
 	}
+	
 }

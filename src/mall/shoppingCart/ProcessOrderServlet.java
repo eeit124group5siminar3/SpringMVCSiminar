@@ -14,13 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import mall.ShoppingCart;
 import mall.productModel.OrderItem;
 import mall.productModel.ProductOrderBean;
 import mall.productModel.ProductOrderItemBean;
 import mall.service.OrderService;
-import member_SignUp.Member_Bean;
+import mall.service.ProductService;
+import member_SignUp.model.Member_SignUp;
+import util.HibernateUtil;
 
 
 /**
@@ -36,18 +40,18 @@ public class ProcessOrderServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String finalDecision = request.getParameter("finalDecision");		
-//		HttpSession session = request.getSession();
-		HttpSession session = request.getSession(false);
-		if (session == null) {   // 使用逾時
-			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
-			return;
-		}
-		Member_Bean mb = (Member_Bean) session.getAttribute("login_ok");
-		if (mb == null) {
+		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession(false);
+//		if (session == null) {   // 使用逾時
 //			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
 //			return;
-			mb=(Member_Bean) session.getAttribute("login_guest");
-		}
+//		}
+//		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+//		if (mb == null) {
+////			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
+////			return;
+//			mb=(Member_SignUp) session.getAttribute("login_guest");
+//		}
 		
 		ShoppingCart sc = (ShoppingCart) session.getAttribute("ShoppingCart");
 		if (sc == null) {
@@ -62,7 +66,8 @@ public class ProcessOrderServlet extends HttpServlet {
 			response.sendRedirect(response.encodeRedirectURL (request.getContextPath()));
 			return;  			// 一定要記得 return 
 		}
-		String memberId = mb.getMember_no();
+//		String memberId = mb.getMember_no();
+		String memberId ="a1";
 	// 取出會員代號
 //		String memberId="aaa";
 		double totalAmount = Math.round(sc.getSubtotal() * 1.05);  	// 計算訂單總金額 
@@ -91,12 +96,17 @@ public class ProcessOrderServlet extends HttpServlet {
 			// (Hibernate規定：自動遞增的主鍵，其對應之物件的欄位必須是null)，絕對不可以是零。
 			ProductOrderItemBean oib = new ProductOrderItemBean(0, oi.getProductId(),oi.getProducterId(), description, oi.getQty(), 
 										oi.getPrice(), oi.getDiscount());
+			oib.setProductOrderBean(ob);
 			items.add(oib);
 		}
 		// 執行到此，購物車內所有購買的商品已經全部轉換為為OrderItemBean物件，並放在Items內
-		ob.setItems(items);  
+		ob.setItems(items); 
+		
 		try {
-			OrderService orderService = new OrderService();
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session hibernateSession = factory.getCurrentSession();
+			OrderService orderService = new OrderService(hibernateSession);
+	
 			orderService.persistOrder(ob);
 			session.removeAttribute("ShoppingCart");
 			response.sendRedirect(response.encodeRedirectURL (request.getContextPath()+"/mall/ThanksForOrdering.jsp"));

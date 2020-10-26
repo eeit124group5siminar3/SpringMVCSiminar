@@ -9,7 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import mall.productModel.ProductBean;
 import mall.service.ProductService;
+import util.HibernateUtil;
 
 /**
  * Servlet implementation class ProductDeleteServlet
@@ -28,9 +33,11 @@ public class ProductDeleteServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String pId = request.getParameter("productId");
 		int productId = Integer.parseInt(pId);
-		ProductService service = new ProductService();
-		int n = service.deleteProduct(productId);
-		if (n == 1) {
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session hibernateSession = factory.getCurrentSession();
+		ProductService service = new ProductService(hibernateSession);
+		ProductBean n = service.deleteProduct(productId);
+		if (n !=null) {
 			session.setAttribute("ProductDeleteMsg", "商品編號(" + pId + ")刪除成功");
 		} else {
 			session.setAttribute("ProductDeleteMsg", "商品編號(" + pId + ")刪除失敗");

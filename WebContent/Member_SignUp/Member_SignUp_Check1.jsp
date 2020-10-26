@@ -24,7 +24,7 @@ body {
 <body>
 <jsp:include page="/top.jsp" />
 	<!-- 直接用Bean抓取DAO資料出來 -->
-	<jsp:useBean id="reg_buyer" class="member_SignUp.Member_Bean"
+	<jsp:useBean id="reg_buyer" class="member_SignUp.model.Member_SignUp"
 		scope="session" />
 	<h2>會員註冊資料如下</h2>
 	<form action=".\Member_SignUp_Servlet" method="post">

@@ -1,4 +1,4 @@
-package mall.product;
+	package mall.product;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.productModel.ProductBean;
 import mall.service.ProductService;
-import member_SignUp.Member_Bean;
+import member_SignUp.model.Member_SignUp;
+import util.HibernateUtil;
 
 @WebServlet("/DisplayMaintainProduct")
 public class DisplayMaintainProduct extends HttpServlet {
@@ -30,25 +34,26 @@ public class DisplayMaintainProduct extends HttpServlet {
 			throws ServletException, IOException {
 		
 		 //先取出session物件
-		HttpSession session = request.getSession(false);
+//		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		// 紀錄目前請求的RequestURI,以便使用者登入成功後能夠回到原本的畫面
 		String requestURI = request.getRequestURI();
 		// System.out.println("requestURI=" + requestURI);
 		// 如果session物件不存在
-		if (session == null || session.isNew()) {
-			// 請使用者登入
-			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
-			return;
-		}
+//		if (session == null || session.isNew()) {
+//			// 請使用者登入
+//			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
+//			return;
+//		}
 		session.setAttribute("requestURI", requestURI);
 		// 此時session物件存在，讀取session物件內的LoginOK
 		// 以檢查使用者是否登入。
-		Member_Bean mb = (Member_Bean) session.getAttribute("login_ok");
-		if (mb == null) {
-			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
-			return;
-		}
-		String producterId=mb.getMember_no();
+//		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+//		if (mb == null) {
+//			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
+//			return;
+//		}
+//		String producterId=mb.getMember_no().toString();
 		String pageNoStr = request.getParameter("pageNo");
 		if (pageNoStr == null) {
 			pageNo = 1;
@@ -59,15 +64,19 @@ public class DisplayMaintainProduct extends HttpServlet {
 				pageNo = 1;
 			}
 		}
-
-		ProductService service = new ProductService();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session hibernateSession = factory.getCurrentSession();
+		ProductService service = new ProductService(hibernateSession);
+		//
 		request.setAttribute("baBean", service);
 		//
 		service.setPageNo(pageNo);
 		service.setRecordsPerPage(RECORDS_PER_PAGE);
-		Collection<ProductBean> coll = service.getPageProducts(producterId);
+		Collection<ProductBean> coll = service.getPageProducts();
+//		Collection<ProductBean> coll = service.getPageProducts(producterId);
 		session.setAttribute("pageNo", pageNo);
-		request.setAttribute("totalPages", service.getTotalPages(producterId));
+		request.setAttribute("totalPages", service.getTotalPages());
+//		request.setAttribute("totalPages", service.getTotalPages(producterId));
 		request.setAttribute("products_DPP", coll);
 		// 交由listBooks.jsp來顯示某頁的書籍資料，同時準備『第一頁』、
 		// 『前一頁』、『下一頁』、『最末頁』等資料
