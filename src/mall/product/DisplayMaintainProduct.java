@@ -1,4 +1,4 @@
-package mall.product;
+	package mall.product;
 
 import java.io.IOException;
 import java.util.Collection;

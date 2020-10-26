@@ -19,13 +19,12 @@ import mall.productModel.ProductOrderItemBean;
 import util.HibernateUtil;
 
 public class OrderService {
-	private static final SessionFactory factory=HibernateUtil.getSessionFactory();
-	private static final Session session=factory.getCurrentSession();
+	private Session session;
 
 	private OrderDAO odao;
 //	private MemberDao mdao;
 
-	public OrderService() {
+	public OrderService(Session session) {
 		this.odao = new OrderDAO(session);
 	}
 
