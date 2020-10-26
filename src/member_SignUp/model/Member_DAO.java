@@ -17,8 +17,8 @@ public class Member_DAO implements Member_List {
 	public boolean insert_member_sing_up(Member_SignUp member_data) {
 
 		// HQL語法搜尋
-		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query result = query_email.setParameter(0, member_data.getMember_email());
+		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query<?> result = query_email.setParameter(0, member_data.getMember_email());
 
 		// 若無資料回傳null
 		if (result.uniqueResult() == null) {
@@ -33,8 +33,8 @@ public class Member_DAO implements Member_List {
 	public boolean check_signup_email(String member_email) {
 
 		// HQL語法搜尋
-		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query result = query_email.setParameter(0, member_email);
+		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query<?> result = query_email.setParameter(0, member_email);
 
 		// 若無資料回傳null
 		if (result.uniqueResult() == null) {
@@ -47,8 +47,8 @@ public class Member_DAO implements Member_List {
 	public boolean check_signup_id(String member_id) {
 
 		// HQL語法搜尋
-		Query query_id = session.createQuery("From Member_SignUp Where Member_id=?0");
-		Query result = query_id.setParameter(0, member_id);
+		Query<?> query_id = session.createQuery("From Member_SignUp Where Member_id=?0");
+		Query<?> result = query_id.setParameter(0, member_id);
 
 		// 若無資料回傳null
 		if (result.uniqueResult() == null) {
@@ -61,8 +61,8 @@ public class Member_DAO implements Member_List {
 	public boolean login_check(String member_email, String member_password) {
 
 		// HQL語法搜尋
-		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query result = query_email.setParameter(0, member_email);
+		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query<?> result = query_email.setParameter(0, member_email);
 
 		// 有資料就做判斷
 		if (result.uniqueResult() != null) {
@@ -79,8 +79,8 @@ public class Member_DAO implements Member_List {
 	public Member_SignUp login_bean(String member_email) {
 
 		// HQL語法搜尋
-		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query result = query_email.setParameter(0, member_email);
+		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query<?> result = query_email.setParameter(0, member_email);
 
 		// 有資料就做判斷
 		if (result.uniqueResult() != null) {
@@ -94,8 +94,8 @@ public class Member_DAO implements Member_List {
 	public String reset_password(String member_email, String member_id, String member_name, String member_cellphone) {
 
 		// HQL語法搜尋
-		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query result = query_email.setParameter(0, member_email);
+		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query<?> result = query_email.setParameter(0, member_email);
 		
 
 		// 有資料就做判斷
@@ -129,8 +129,8 @@ public class Member_DAO implements Member_List {
 	// 忘記密碼，修改密碼
 	public boolean updata_member_password(String member_email, String password) {
 
-		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query result = query_email.setParameter(0, member_email);
+		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query<?> result = query_email.setParameter(0, member_email);
 
 		if (result.uniqueResult() != null) {
 			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
