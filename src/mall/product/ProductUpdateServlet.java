@@ -1,4 +1,4 @@
-package mall.product;
+	package mall.product;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -98,13 +98,6 @@ public class ProductUpdateServlet extends HttpServlet {
 							} else {
 								request.setAttribute("product", product);
 							}
-						} else if (fldName.equals("producterId")) {
-							producterId = value;
-							if (producterId == null || producterId.trim().length() == 0) {
-								errorMsgs.put("errProducterId", "必須輸入生產者");
-							} else {
-								request.setAttribute("producterId", producterId);
-							}
 						} else if (fldName.equals("price")) {
 							priceStr = value;
 							priceStr = priceStr.trim();
@@ -191,17 +184,19 @@ public class ProductUpdateServlet extends HttpServlet {
 							if (categoryStr == null || categoryStr.trim().length() == 0) {
 								errorMsgs.put("errCategory", "必須輸入類型");
 							}
-//							request.setAttribute("category", categoryStr);
+							request.setAttribute("categoryId", categoryStr);
 						}
 
 					} else {
 						fileName = getFileName(p); // 由變數 p 中取出檔案名稱
+						System.out.println(fileName);
 						fileName = adjustFileName(fileName, IMAGE_FILENAME_LENGTH);
 						if (fileName != null && fileName.trim().length() > 0) {
 							sizeInBytes = p.getSize();
 							is = p.getInputStream();
 						} else {
 							sizeInBytes = -1;
+							fileName=adjustFileName(bb.getFileName(), IMAGE_FILENAME_LENGTH);
 						}
 					}
 				}
@@ -224,8 +219,9 @@ public class ProductUpdateServlet extends HttpServlet {
 				blob = SystemUtils2018.fileToBlob(is, sizeInBytes);
 			}else {
 				blob=bb.getCoverImage();
+//				fileName=bb.getFileName();
 			}
-			ProductBean newBean = new ProductBean(bb.getProductId(), product, producterId, price, discount, blob, fileName,
+			ProductBean newBean = new ProductBean(bb.getProductId(), product, bb.getProducterId(), price, discount, blob, fileName,
 					stock, bb.getAddedDate(), shelfTime, content, unit, description, category);
 			productService.updateProduct(newBean, sizeInBytes);
 			RequestDispatcher rd = request.getRequestDispatcher("DisplayMaintainProduct?pageNo=" + pageNo);
@@ -258,4 +254,5 @@ public class ProductUpdateServlet extends HttpServlet {
 		}
 		return null;
 	}
+	
 }

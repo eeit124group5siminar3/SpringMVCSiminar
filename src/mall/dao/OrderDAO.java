@@ -24,7 +24,7 @@ import mall.productModel.ProductOrderItemBean;
 
 public class OrderDAO {
 	private String BuyerId = null;
-	private Connection con;
+//	private Connection con;
 	int orderNo = 0;
 	private Session session;
 
