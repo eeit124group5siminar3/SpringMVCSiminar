@@ -26,16 +26,13 @@
 		<mapping class="marketSeller.model.MarketProductTotalBean"/>
 		<mapping class="marketSeller.model.MarketProductImgBean"/>
 		
-		<mapping class="active.farmer.model.ActiveFarmer"/>
-		<mapping class="active.farmer.model.ActSignUp"/>
+		<mapping class="active.model.Active"/>
+		
+<!-- 		<mapping class="active.farmer.model.ActiveFarmer"/> -->
+<!-- 		<mapping class="active.farmer.model.ActSignUp"/> -->
 		
 		
-<!-- 		<mapping class="tw.leonchen.model.Books"/> -->
-<!-- 		<mapping class="tw.leonchen.model.BookDetail"/> -->
-<!-- 		<mapping class="tw.leonchen.model.Stock"/> -->
-<!-- 		<mapping class="tw.leonchen.model.StockTransaction"/> -->
-<!-- 		<mapping class="tw.leonchen.model.Game"/> -->
-<!-- 		<mapping class="tw.leonchen.model.Role"/> -->
-<!-- 		<mapping class="tw.leonchen.model.Profiles"/> -->
+		<mapping class="recipe.recipe_bean.Recipe_Bean"/>
+
 	</session-factory>
 </hibernate-configuration>

@@ -28,6 +28,8 @@ public class Recipe_Bean {
 //	private InputStream data;
 //	private Blob sb;
 //	private FileInputStream fis;
+	
+	
 
 	public Recipe_Bean(String name, String ingredients_A, String ingredients_B, 
 			String ingredients_C,String ingredients_D, String desc, String cate
@@ -66,7 +68,7 @@ public class Recipe_Bean {
 	}
 	
 	@Id @Column(name="recipe_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public String getRec_id() {
 		return rec_id;
 	}

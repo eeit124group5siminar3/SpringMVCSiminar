@@ -21,10 +21,6 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 
 	private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
 	private static final String CHARSET_CODE = "UTF-8";
-	
-	SessionFactory factory = HibernateUtil.getSessionFactory();
-	Session session = factory.getCurrentSession();
-
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -59,6 +55,9 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 	// 取Buyer_SignUp資料
 	public void gotoSubmitProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
 
 		String member_email;
 		String member_id;
@@ -73,8 +72,10 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 		member_name = request.getParameter("member_name").trim();
 		member_cellphone = request.getParameter("member_cellphone").trim();
 		String sel_email = member_dao.reset_password(member_email, id_upper, member_name, member_cellphone);
+		System.out.println(sel_email);
 
 		if (sel_email != "NO DATA") {
+			member_dao.updata_member_password(member_email, sel_email);
 			// 建立Buyer_Object Bean
 			Member_SignUp reg_buyer = new Member_SignUp(member_email,sel_email);
 			// 建立getSession(true) 若沒有Session則會建立Session
@@ -92,6 +93,8 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 
 		try {
 
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session session = factory.getCurrentSession();
 
 			String member_password;
 			String member_password1;

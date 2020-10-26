@@ -12,8 +12,7 @@ import mall.productModel.ProductBean;
 import util.HibernateUtil;
 
 public class ProductService implements Serializable {
-//	private static final SessionFactory factory=HibernateUtil.getSessionFactory();
-//	private static Session session=factory.getCurrentSession();
+
 	private  Session session;
 	ProductDAO dao;
 
@@ -83,9 +82,6 @@ public class ProductService implements Serializable {
 		dao.setSelected(category);
 	}
 
-//	public String getCategoryTag() {
-//		return dao.getCategoryTag();
-//	}
 	public CategoryBean getCategoryById() {
 		return dao.getCategoryById();
 	}

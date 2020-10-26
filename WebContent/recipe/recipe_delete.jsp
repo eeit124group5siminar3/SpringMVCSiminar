@@ -21,7 +21,7 @@ fieldset {
 <body>
 <%-- 	<jsp:useBean id="user_recipe" class="recipe.Recipe_Obj" scope="session"></jsp:useBean> --%>
 
-	<form action="../Recipe_Servlet_delete" method="post" > 	
+	<form action="../Recipe_Servlet_delete_submit" method="post" > 	
 	<jsp:include page="/top.jsp" />	
 	<fieldset>
 		<legend>刪除食譜</legend>		
@@ -39,7 +39,9 @@ fieldset {
 		</div>
 		<div style="text-align: center;">
 			<label for=""><input type="submit" name="delete" value="刪除"></label> 
-			<label for=""><input type="reset" value="取消"></label>
+			<label for="" style="text-align:center;"> 
+					<input type ="reset" onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
+		</label>
 		</div>
 			
 	</fieldset>

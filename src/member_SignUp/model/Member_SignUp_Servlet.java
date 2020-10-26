@@ -24,9 +24,6 @@ public class Member_SignUp_Servlet extends HttpServlet {
 	private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
 	private static final String CHARSET_CODE = "UTF-8";
 	
-	SessionFactory factory = HibernateUtil.getSessionFactory();
-	Session session = factory.getCurrentSession();
-
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 	}
@@ -60,6 +57,9 @@ public class Member_SignUp_Servlet extends HttpServlet {
 	// 取Buyer_SignUp資料
 	public void gotoSubmitProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
 		
 		String member_permissions;
 		String member_email;
@@ -99,7 +99,7 @@ public class Member_SignUp_Servlet extends HttpServlet {
 
 							// 建立Buyer_Object Bean
 							Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
-									member_name, member_birthday, member_cellphone, member_id, member_address,
+									member_name, member_birthday, member_cellphone, id_upper, member_address,
 									member_gui_number);
 							// 建立getSession(true) 若沒有Session則會建立Session
 							request.getSession(true).setAttribute("reg_buyer", reg_buyer);
@@ -158,6 +158,9 @@ public class Member_SignUp_Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+			
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session session = factory.getCurrentSession();
 
 			// 建立Database Access Object,負責Table的Access
 			Member_DAO MemberDAO = new Member_DAO(session);

@@ -36,7 +36,7 @@ div{
 		<h1 style="text-align: center;">食譜管理</h1>
 		<div>
 			<input type="submit" name="upload" value="上傳" />
-<!-- 		</form> -->
+<!-- 		</form> --> 
 
 <!-- 		<form action="./Recipe_Servlet_update" method="post"> -->
 			<input type="submit" name="update" value="更新" />

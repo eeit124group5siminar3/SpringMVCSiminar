@@ -26,6 +26,9 @@ body {
 		請輸入: <input type="text" name="input" />
 	
 		<label for=""><input type="submit" name="search" value="查詢"></label>
+		<label>					
+		<input type ="reset" onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
+		</label>
 	</div>
 	</form>
 

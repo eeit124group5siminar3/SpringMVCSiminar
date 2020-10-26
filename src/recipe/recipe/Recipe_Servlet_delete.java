@@ -12,8 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.id.enhanced.HiLoOptimizer;
+
 import recipe.DAO.Recipe_DAO;
+import recipe.DAO.Recipe_DAO_hibernate;
+import recipe.recipe_bean.Recipe_Bean;
 import recipe.recipe_bean.Recipe_Obj;
+import util.HibernateUtil;
 
 /**
  * Servlet implementation class Recipe_Servlet_delete
@@ -37,48 +44,23 @@ import recipe.recipe_bean.Recipe_Obj;
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(true); 
 		session.setAttribute("memberID","a001");	
-		
-		
-		if(request.getParameter("delete")!=null) {
-			ProcessDelete(request,response);
-			request.getRequestDispatcher("recipe_workpage.jsp").forward(request, response);
-		}else if(request.getParameter("ID")==null) {
-			ProcessFind(request, response);	
-			return;
-		}if(request.getParameter("ID")!=null) {
-			ProcessDelete(request,response);
-		}
-		RequestDispatcher rd=request.getRequestDispatcher("/recipe_update.jsp");
-		rd.forward(request, response);
-	}
-
-
-
-	private void ProcessDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Recipe_DAO rDAO=new Recipe_DAO();
-		Recipe_Obj rObj=new Recipe_Obj();
-		System.out.println(request.getParameter("ID"));
-		rObj.setRec_id(request.getParameter("ID"));
-		if(rDAO.delete(rObj)){
-
-	          System.out.println("Get some SQL commands done!");
-	          request.getSession(true).invalidate();
-	          
-		}
-		System.out.println("over");
+		ProcessFind(request, response);	
 
 	}
 	
 
 	//找出使用者擁有的食譜
 	private void ProcessFind(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException  {
-		Recipe_DAO rDAO=new Recipe_DAO();
+		SessionFactory factory=HibernateUtil.createSessionFactory();
+		Session hibernatesession=factory.getCurrentSession();
+		
+		Recipe_DAO_hibernate rDAO=new Recipe_DAO_hibernate(hibernatesession);
 //			Map<String, Recipe_Obj> map=rDAO.MapOfJavaBean(null);	
-		List<Recipe_Obj> list=rDAO.ListOfJavaBean();
+		List<Recipe_Bean> list=rDAO.listOfJavaBean();
 //		將抓到的值存到 uesr_recipe的list中
-		ArrayList<Recipe_Obj> user_recipe=new ArrayList<Recipe_Obj>();	
+		ArrayList<Recipe_Bean> user_recipe=new ArrayList<Recipe_Bean>();	
 //		從list中抓到名為rec_id的資料
-		for(Recipe_Obj a : list) {	
+		for(Recipe_Bean a : list) {	
 			//利用陣列存取抓到的rec_id並用split 切割
 			String[] rec_id=a.getRec_id().split("\\-");
 			for(int i=0;i<rec_id.length;i++) {
@@ -88,7 +70,7 @@ import recipe.recipe_bean.Recipe_Obj;
 			}			
 		}
 		request.setAttribute("user_recipe", user_recipe);		
-		RequestDispatcher rd=request.getRequestDispatcher("/recipe_delete.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("recipe/recipe_delete.jsp");
 		rd.forward(request, response);		
 
 		}

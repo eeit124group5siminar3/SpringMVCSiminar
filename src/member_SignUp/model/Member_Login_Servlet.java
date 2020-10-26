@@ -22,9 +22,6 @@ public class Member_Login_Servlet extends HttpServlet {
 
 	private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
 	private static final String CHARSET_CODE = "UTF-8";
-	
-	SessionFactory factory = HibernateUtil.getSessionFactory();
-	Session session = factory.getCurrentSession();
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -58,6 +55,9 @@ public class Member_Login_Servlet extends HttpServlet {
 	public void gotoSubmitProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
 		Cookie cookieUser = null;
 		Cookie cookiePassword = null;
 		Cookie cookieRemember = null;
@@ -107,7 +107,9 @@ public class Member_Login_Servlet extends HttpServlet {
 			response.addCookie(cookieUser);
 			response.addCookie(cookiePassword);			
 			response.addCookie(cookieRemember);
-
+			
+			System.out.println(login_bean.getMember_name());
+			
 			request.getSession().setAttribute("login_ok", login_bean);
 
 			request.getRequestDispatcher("Member_SignUp/Member_Login_OK.jsp").forward(request, response);

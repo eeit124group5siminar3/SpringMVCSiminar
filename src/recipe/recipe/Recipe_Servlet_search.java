@@ -1,6 +1,8 @@
 package recipe.recipe;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import recipe.DAO.Recipe_DAO;
+import recipe.DAO.Recipe_DAO_hibernate;
+import recipe.recipe_bean.Recipe_Bean;
 import recipe.recipe_bean.Recipe_Obj;
+import util.HibernateUtil;
 
 @WebServlet("/Recipe_Servlet_search")
 public class Recipe_Servlet_search extends HttpServlet {
@@ -39,17 +47,23 @@ public class Recipe_Servlet_search extends HttpServlet {
 	}
 
 	private void ProcessSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Recipe_Obj rObj=new Recipe_Obj();
-		rObj.setCate(request.getParameter("input"));		
-		Recipe_DAO rDAO=new Recipe_DAO();
-		List<Recipe_Obj> list=rDAO.ListOfsearch(rObj);
-//		for(Recipe_Obj a : list) {
-//			System.out.println(a.getName());
-//		}
+		SessionFactory factory=HibernateUtil.createSessionFactory();
+		Session hibernatesession=factory.getCurrentSession();	
+		Recipe_DAO_hibernate rDAO=new Recipe_DAO_hibernate(hibernatesession);
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
 		
-		request.setAttribute("ListToken", list);
-		RequestDispatcher rd=request.getRequestDispatcher("/recipe_search_display.jsp");
-		rd.forward(request, response);
+		List<Recipe_Bean> list=rDAO.ListOfSearch(request.getParameter("input"));
+		
+		for(Recipe_Bean r:list) {
+			System.out.println(r.getDesc());
+			System.out.println(r.getName());
+		}
+
+		
+//		request.setAttribute("ListToken", list);
+//		RequestDispatcher rd=request.getRequestDispatcher("/recipe_search_display.jsp");
+//		rd.forward(request, response);
 	}
 
 }
