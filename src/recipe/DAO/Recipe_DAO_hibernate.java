@@ -31,26 +31,39 @@ public class Recipe_DAO_hibernate {
 		return true;
 	}
 
+//	public List<Recipe_Bean> update(Recipe_Bean rObj) {
+//		session.beginTransaction();
+//		String hql="From Recipe_Bean where recipe_id=?0";
+//		Query<Recipe_Bean> query=session.createQuery(hql);
+////		query.setParameter(0, rec_id);
+//		
+//		
+//		session.update(rObj);
+//		System.out.println(33);
+//		return list ;
+//
+//	}
+	
 	public Recipe_Bean update(String rec_id, Recipe_Bean bean) {
-		Recipe_Bean result = session.get(Recipe_Bean.class, rec_id);
-
-		if (result != null) {
-
+		session.beginTransaction();
+//		System.out.println("rec_id  DAO= "+rec_id);
+//		Recipe_Bean result = session.get(Recipe_Bean.class,rec_id );
+//		
+//		if(result!=null) {
+			bean.setRec_id(rec_id);
+			System.out.println(bean.getName());
 			session.update(bean);
-		}
-
-		return result;
+//		}
+			session.getTransaction().commit();
+		return bean;
 	}
 
 	public List<Recipe_Bean> listOfJavaBean() {
 		session.beginTransaction();
 		String hql="From Recipe_Bean";
 		Query query=session.createQuery(hql);
-//		Query<Recipe_Bean> query = session.createQuery("From Recipe_Bean", Recipe_Bean.class);
 		List<Recipe_Bean> list = query.list();
-		System.out.println(2);
-		System.out.println(list);
-		session.getTransaction().commit();
+//		session.getTransaction().commit();
 		return list;
 
 	}
@@ -64,32 +77,29 @@ public class Recipe_DAO_hibernate {
 		return list;
 
 	}
+	
+	public List<Recipe_Bean> partSearch(String rec_id){
+		session.beginTransaction();
+		String hql="From Recipe_Bean where recipe_id=?0";
+		Query<Recipe_Bean> query=session.createQuery(hql);
+		query.setParameter(0, rec_id);
+		List<Recipe_Bean> list=query.list();
+		session.getTransaction().commit();
+		return list;
+		
+	}
 
 	public boolean delete(String rec_id) {
-
-		Recipe_Bean result = session.get(Recipe_Bean.class, rec_id);
-		if (result != null) {
-			session.delete(result);
-			return true;
-		}
-
-		return false;
-
-//		String hql = "DELETE Person WHERE id = ?";  
-//		 
-//	    Query q = session.createQuery(hql);  
-//	    q.setString(0, id);  
-//	    //执行更新语句  
-//	    q.executeUpdate();  
-//	    //提交事务  
-//	    tran.commit();  
+		session.beginTransaction();
+		System.out.println(2);
+		String hql = "DELETE recipe WHERE recipe_id = ?";  
+		System.out.println(3);
+		Query query = session.createQuery(hql);  
+		query.setParameter(0, rec_id);
+		return true;
 
 	}
 
-//	public List<Recipe_Bean> partSearch(Recipe_Bean rec_id){
-//		String hql="From Recipe_Bean where rec_id=?";
-//		return list;
-//		
-//	}
+
 
 }

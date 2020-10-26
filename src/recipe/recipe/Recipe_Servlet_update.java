@@ -16,10 +16,8 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import recipe.DAO.Recipe_DAO;
 import recipe.DAO.Recipe_DAO_hibernate;
 import recipe.recipe_bean.Recipe_Bean;
-import recipe.recipe_bean.Recipe_Obj;
 import util.HibernateUtil;
 
 /**
@@ -46,46 +44,22 @@ public class Recipe_Servlet_update extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(true);
 		session.setAttribute("memberID", "a001");
-		if (request.getParameter("submit") != null) {
-			gotoSubmitProcess(request, response);
-			request.getRequestDispatcher("recipe_workpage.jsp").forward(request, response);
-		} else if (request.getParameter("name") == null) {
+		
+		 if (request.getParameter("name") == null) {
 			ProcessFind(request, response);
 			return;
 		}
 
-		if (request.getParameter("name") != null) {
+		 else if (request.getParameter("name") != null) {
 
 			ProcessUpdateDAO(request, response);
 //				System.out.println("---------------------------");
 //				System.out.println(request.getParameter("name"));		
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("recipe/recipe_update.jsp");
-		rd.forward(request, response);
+		request.getRequestDispatcher("recipe/recipe_update.jsp").forward(request, response);
 	}
 
-	// 送出修改
-	private void gotoSubmitProcess(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		SessionFactory factory = HibernateUtil.createSessionFactory();
-		Session hibernatesession = factory.getCurrentSession();
-		Recipe_DAO_hibernate rDAO = new Recipe_DAO_hibernate(hibernatesession);
-		Recipe_Bean rObj = new Recipe_Bean();
-//		if(rObj.getRec_id()!=null) {
-		rObj.setName(request.getParameter("name"));
-		rObj.setDesc(request.getParameter("desc"));
-		rObj.setCate(request.getParameter("cate"));
-		rObj.setMethod(request.getParameter("Method"));
-		rObj.setIngredients_A(request.getParameter("ingredients_A"));
-		rObj.setIngredients_B(request.getParameter("ingredients_B"));
-		rObj.setIngredients_C(request.getParameter("ingredients_C"));
-		rObj.setIngredients_D(request.getParameter("ingredients_D"));
-		rObj.setRec_id(request.getParameter("rec_id"));
-		System.out.println(request.getParameter("rec_id"));
 
-		rDAO.update(rObj.getRec_id(), rObj);
-		// response.sendRedirect("recipe_workpage.jsp");
-	}
 
 	// 查詢食譜的table
 	private void ProcessUpdateDAO(HttpServletRequest request, HttpServletResponse response)
@@ -94,29 +68,19 @@ public class Recipe_Servlet_update extends HttpServlet {
 		Session hibernatesession = factory.getCurrentSession();
 		Recipe_DAO_hibernate rDAO = new Recipe_DAO_hibernate(hibernatesession);
 		Recipe_Bean rObj = new Recipe_Bean();
+		List<Recipe_Bean> recipe_table = new ArrayList<Recipe_Bean>();
 
 		// 取出超連結的值
 		String test = request.getParameter("name");
 		String test2 = test.replaceAll("'", "");
 		rObj.setRec_id(test2);
 		System.out.println(rObj.getRec_id() + " =REC_ID");
+		System.out.println(test2);
 
-		List<Recipe_Bean> list = rDAO.listOfJavaBean();
-		ArrayList<Recipe_Bean> recipe_table = new ArrayList<Recipe_Bean>();
+		List<Recipe_Bean> list = rDAO.partSearch(test2);
 		for (Recipe_Bean r : list) {
-			if (test2 == r.getRec_id()) {
-				System.out.println(1);
 				System.out.println("Name"+r.getName());
-				r.getName();
-				r.getDesc();
-				r.getCate();
-				r.getMethod();
-				r.getIngredients_A();
-				r.getIngredients_B();
-				r.getIngredients_C();
-				r.getIngredients_D();
 				recipe_table.add(r);
-			}
 		}
 		request.setAttribute("recipe_table", recipe_table);
 
