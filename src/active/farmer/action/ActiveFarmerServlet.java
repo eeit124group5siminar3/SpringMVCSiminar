@@ -121,6 +121,7 @@ public class ActiveFarmerServlet extends HttpServlet {
 			hsession.getTransaction().rollback();
 			e.printStackTrace();
 		}
+		util.HibernateUtil.closeSessionFactory();
 	}
 	
 	public void processUpdate(HttpServletRequest request, HttpServletResponse response) {
