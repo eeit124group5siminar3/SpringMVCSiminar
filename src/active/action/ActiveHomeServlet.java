@@ -32,6 +32,8 @@ public class ActiveHomeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		
 		try {
 					
@@ -69,6 +71,7 @@ public class ActiveHomeServlet extends HttpServlet {
 
 	public void listActive(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		
 
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
@@ -123,9 +126,14 @@ public class ActiveHomeServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException, ParseException{
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
-		String actName = request.getParameter("actName");
+		String actName = request.getParameter("selectname");
 		ActiveDAO aDao = new ActiveDAO(hsession);
-		aDao.selectName(actName);
+		System.out.println(actName);
+		
+		List<Active> listAct = aDao.selectName(actName);
+		request.setAttribute("listAct", listAct);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Active/ActiveHome.jsp");
+		dispatcher.forward(request, response);
 		return;
 	}
 
@@ -134,7 +142,7 @@ public class ActiveHomeServlet extends HttpServlet {
 
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
-		int actId = Integer.parseInt(request.getParameter("actId"));
+//		int actId = Integer.parseInt(request.getParameter("actId"));
 		ActiveDAO aDao = new ActiveDAO(hsession);
 
 		Active act = new Active();
