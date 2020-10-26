@@ -20,7 +20,7 @@ public class CategoryBean implements Serializable {
 
 	private int id;
 	private String name;
-	private Set<ProductBean> productBean = new HashSet<ProductBean>();
+//	private Set<ProductBean> productBean = new HashSet<ProductBean>();
 
 	public CategoryBean() {
 		super();
@@ -51,13 +51,13 @@ public class CategoryBean implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "product",cascade = CascadeType.ALL)
-	public Set<ProductBean> getProductBean() {
-		return productBean;
-	}
-
-	public void setProductBean(Set<ProductBean> productBean) {
-		this.productBean = productBean;
-	}
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "product",cascade = CascadeType.ALL)
+//	public Set<ProductBean> getProductBean() {
+//		return productBean;
+//	}
+//
+//	public void setProductBean(Set<ProductBean> productBean) {
+//		this.productBean = productBean;
+//	}
 
 }
