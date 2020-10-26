@@ -72,8 +72,10 @@ public class Member_ResetPassword_Servler extends HttpServlet {
 		member_name = request.getParameter("member_name").trim();
 		member_cellphone = request.getParameter("member_cellphone").trim();
 		String sel_email = member_dao.reset_password(member_email, id_upper, member_name, member_cellphone);
+		System.out.println(sel_email);
 
 		if (sel_email != "NO DATA") {
+			member_dao.updata_member_password(member_email, sel_email);
 			// 建立Buyer_Object Bean
 			Member_SignUp reg_buyer = new Member_SignUp(member_email,sel_email);
 			// 建立getSession(true) 若沒有Session則會建立Session

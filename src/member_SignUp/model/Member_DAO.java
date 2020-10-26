@@ -90,12 +90,13 @@ public class Member_DAO implements Member_List {
 		return null;
 	}
 
-	// 忘記密碼
+	// 忘記密碼(回傳亂數密碼)
 	public String reset_password(String member_email, String member_id, String member_name, String member_cellphone) {
 
 		// HQL語法搜尋
 		Query query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query result = query_email.setParameter(0, member_email);
+		
 
 		// 有資料就做判斷
 		if (result.uniqueResult() != null) {
@@ -106,12 +107,20 @@ public class Member_DAO implements Member_List {
 			String check_id = member_bean.getMember_id();
 			String check_name = member_bean.getMember_name();
 			String check_cellphone = member_bean.getMember_cellphone();
-			String password = member_bean.getMember_password();
 
-			// 做資料比對，正確回傳PassWord
+			// 做資料比對，正確回傳亂數PassWord
 			if (check_id.equals(member_id) && check_name.equals(member_name)
 					&& check_cellphone.equals(member_cellphone)) {
-				return password;
+				
+				String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+				StringBuffer buffer = new StringBuffer();
+
+				for (int i = 1; i <= 10; i++) {
+					
+					char random = chars.charAt((int) (Math.random() * 62));
+					buffer.append(random);
+				}
+				return buffer.toString();
 			}
 		}
 		return "NO DATA";
