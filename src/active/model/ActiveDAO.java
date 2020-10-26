@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.aop.interceptor.SimpleTraceInterceptor;
 
 public class ActiveDAO {
 
@@ -30,8 +31,14 @@ public class ActiveDAO {
 	}
 	
 	// 查詢單筆資料ByName
-	public Active selectName(String actName) {
-		return session.get(Active.class, actName);
+	public List<Active> selectName(String actName) {
+		Query<Active> queryName = session.createQuery("From Active where actName like?1",Active.class);
+		queryName.setParameter(1, actName);
+		List<Active> activelist = queryName.getResultList();
+		return activelist;
+		
+		
+//		return session.get(Active.class, actName);
 	}
 
 	// 查詢多筆資料
@@ -43,12 +50,24 @@ public class ActiveDAO {
 	}
 
 	// 更新
-	public Active update(Active active) {
-		Active result = session.get(Active.class, active.getActId());
+	public Active update(int actId ,Active active) {
+		Active result = session.get(Active.class, actId);
 
-		if (result == null) {
-			session.saveOrUpdate(active);
-			return active;
+		if (result != null) {
+			
+			result.setActName(active.getActName());
+			result.setActType(active.getActType());
+			result.setActAddr(active.getActAddr());
+			result.setTel(active.getTel());
+			result.setActDate(active.getActDate());
+			result.setDateSta(active.getDateSta());
+			result.setDateEnd(active.getDateEnd());
+			result.setExpNum(active.getExpNum());
+			result.setPrice(active.getPrice());
+			result.setActDescri(active.getActDescri());
+			
+			return result ;
+			
 		}
 		return null;
 

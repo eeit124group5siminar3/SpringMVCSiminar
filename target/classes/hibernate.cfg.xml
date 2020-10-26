@@ -25,14 +25,11 @@
 		
 		<mapping class="marketSeller.model.MarketProductTotalBean"/>
 		<mapping class="marketSeller.model.MarketProductImgBean"/>
-<<<<<<< HEAD
 		
 		<mapping class="active.model.Active"/>
-=======
->>>>>>> 25cb34edb18adf12b6cf7595bded213b2dad38c5
 		
-		<mapping class="active.farmer.model.ActiveFarmer"/>
-		<mapping class="active.farmer.model.ActSignUp"/>
+<!-- 		<mapping class="active.farmer.model.ActiveFarmer"/> -->
+<!-- 		<mapping class="active.farmer.model.ActSignUp"/> -->
 		
 		
 		<mapping class="recipe.recipe_bean.Recipe_Bean"/>

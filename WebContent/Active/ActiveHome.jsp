@@ -22,13 +22,10 @@
 		<h1 align="center">一日農夫</h1>
 		<div align="center">
 			<table style="border: 8px #FFD382 groove;" border="1" cellpadding="5">
-				<caption>
-					<h2>活動列表</h2>
-				</caption>
+			<h2>活動列表</h2>
 				<tr>
 					<td style="border: 0px" align="right" colspan="10">
 						<input name="apply" type="submit" value="申請">
-						<input name="selectall" type="submit" value="查詢全部">
 					</td>
 				</tr>
 				<tr>
