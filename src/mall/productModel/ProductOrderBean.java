@@ -106,7 +106,7 @@ public class ProductOrderBean implements Serializable{
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	@Column(name="OEDERDATE",updatable = false)
+	@Column(name="ORDERDATE",updatable = false)
 	public Date getOrderDate() {
 		return orderDate;
 	}

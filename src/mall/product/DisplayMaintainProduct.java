@@ -78,8 +78,6 @@ public class DisplayMaintainProduct extends HttpServlet {
 		request.setAttribute("totalPages", service.getTotalPages());
 //		request.setAttribute("totalPages", service.getTotalPages(producterId));
 		request.setAttribute("products_DPP", coll);
-		// 交由listBooks.jsp來顯示某頁的書籍資料，同時準備『第一頁』、
-		// 『前一頁』、『下一頁』、『最末頁』等資料
 		RequestDispatcher rd = request.getRequestDispatcher("mall/ProductMaintainList.jsp");
 		rd.forward(request, response);
 		return;

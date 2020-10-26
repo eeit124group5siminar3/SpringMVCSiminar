@@ -38,7 +38,7 @@ public class OrderDetailServlet extends HttpServlet {
 		Session hibernateSession = factory.getCurrentSession();
 		OrderService orderService = new OrderService(hibernateSession);
 
-//		OrderService orderService = new OrderService();
+
 		ProductOrderBean ob = orderService.getOrder(no);
 		request.setAttribute("OrderBean", ob);   // 將OrderBean物件暫存到請求物件內
 		RequestDispatcher rd = request.getRequestDispatcher("/mall/ShowOrderDetail.jsp");

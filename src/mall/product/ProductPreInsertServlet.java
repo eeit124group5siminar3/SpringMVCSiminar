@@ -29,8 +29,6 @@ public class ProductPreInsertServlet extends HttpServlet {
 		productService.setTagName("categoryId");
 		String categoryTag = productService.getSelectTag();
 		request.getSession(false).setAttribute("SelectCategoryTag", categoryTag);
-//		String categoryTag = productService.getCategoryTag();
-//		request.getSession(false).setAttribute("SelectCategoryTag", categoryTag);
 
 		request.setAttribute("baBean", productService);
 		RequestDispatcher rd = request.getRequestDispatcher("mall/ProductInsert.jsp");

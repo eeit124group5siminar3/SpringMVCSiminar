@@ -1,4 +1,4 @@
-package mall.dao;
+package active.model;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,23 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import mall.productModel.ProductBean;
-import util.HibernateUtil;
-
 /**
- * Servlet implementation class ProductHibernate
+ * Servlet implementation class test
  */
-@WebServlet("/ProductHibernate")
-public class ProductHibernate extends HttpServlet {
+@WebServlet("/test")
+public class test extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductHibernate() {
+    public test() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +26,8 @@ public class ProductHibernate extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SessionFactory factory=HibernateUtil.getSessionFactory();
-		Session session=factory.getCurrentSession();
-		ProductBean pb=session.get(ProductBean.class, 82);
-		System.out.println(pb.getProductId());
-		System.out.println(pb.getProduct());
-//		System.out.println(pb.getCategoryBean().getId());
-//		System.out.println(pb.getCategoryBean().getName());
-//		session.getTransaction().commit();
-//		HibernateUtil.closeSessionFactory();
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

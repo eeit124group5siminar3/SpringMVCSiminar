@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+=======
    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+>>>>>>> 25cb34edb18adf12b6cf7595bded213b2dad38c5
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +47,7 @@ h2{
 	<td align="center"><a href="RetrievePageProducts"><img src="images/crop.png"></a></td>
 	<td align="center"><a href="<c:url value='marketSeller/MarketHome?'/>"><img src="images/market.png"></a></td>
 	<td align="center"><a href="recipe_workpage.jsp"><img src="images/recipe.png"></a></td>
-	<td align="center"><a href="ActiveHome.jsp"><img src="images/footprint.png"></a></td>
+	<td align="center"><a href="<c:url value='/ActiveHomeServlet'/>"><img src="images/footprint.png"></a></td>
 	<td align="center"><a href="Member_SignUp/Member_Login.jsp"><img src="images/member.png"></a></td>
 </tr>
 <tr>
