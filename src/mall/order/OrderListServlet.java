@@ -45,7 +45,6 @@ public class OrderListServlet extends HttpServlet {
 		Session hibernateSession = factory.getCurrentSession();
 		OrderService orderService = new OrderService(hibernateSession);
 
-//		OrderService os = new OrderService();
 		List<ProductOrderBean> memberOrders = orderService.getMemberOrders("a1");
 //		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(mb.getMember_no().toString());
 		request.setAttribute("memberOrders", memberOrders);

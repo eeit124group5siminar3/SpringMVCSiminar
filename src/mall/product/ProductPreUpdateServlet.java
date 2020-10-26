@@ -44,14 +44,13 @@ public class ProductPreUpdateServlet extends HttpServlet {
 		ProductBean bean = productService.getProduct(productId);
 		session.setAttribute("bean", bean);
 
-//		productService.setSelected(bean.getCategory());
-//		String categoryTag = productService.getCategoryTag();
-//		request.setAttribute("SelectCategoryTag", categoryTag);
+
+
 		productService.setSelected(bean.getCategory());
-//		System.out.println(bean.getCategoryBean().getId());
+
 		productService.setTagName("categoryId");
 		String categoryTag = productService.getSelectTag();
-		session.setAttribute("SelectCategoryTag", categoryTag);
+		request.setAttribute("SelectCategoryTag", categoryTag);
 
 		RequestDispatcher rd = request.getRequestDispatcher("mall//ProductUpdate.jsp");
 		rd.forward(request, response);

@@ -23,7 +23,7 @@ body {
 </head>
 	<body>
 		<h1 align="center">活動申請:一日農夫</h1>
-		<form action="./ActiveServlet" method="post">
+		<form action="insert" method="post">
 			<div>
 			<fieldset>
 				<legend>活動基本資料</legend>
@@ -74,10 +74,6 @@ body {
 				<div>
 					<label for="">活動海報:</label> <br> 
 					<input type="file" id="actImg" name="actImg">
-				</div>
-				<div>
-					<label for="">活動影片:</label> <br> 
-					<input type="file"id="actVideo" name="actVideo">
 				</div>
 				<br>
 				<input name="apply" type="submit" value="申請"> 

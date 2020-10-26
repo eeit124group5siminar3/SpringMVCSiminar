@@ -9,7 +9,8 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import active.Active;
+
+import active.model.Active;
 import mall.productModel.ProductBean;
 import marketSeller.MarketSellerBean;
 
