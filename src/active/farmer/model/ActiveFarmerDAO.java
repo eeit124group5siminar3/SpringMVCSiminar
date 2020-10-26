@@ -23,6 +23,10 @@ public class ActiveFarmerDAO {
 
 		// 如果id不存在執行insert,反之則否
 		if (result == null) {
+			java.util.Date date = new java.util.Date();
+			Date actDate=new Date(date.getTime());
+			activefarmer.setActDate(actDate);
+			
 			session.save(activefarmer);
 			return activefarmer;
 		}

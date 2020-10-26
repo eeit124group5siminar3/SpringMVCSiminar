@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 @Entity
 @Table(name = "product")
 public class ProductBean implements Serializable {
@@ -26,7 +29,7 @@ public class ProductBean implements Serializable {
 	private String product;
 	private String producterId;
 	private double price;
-	private double discount;
+	private double discount=1;
 	private Blob coverImage;
 	private String fileName;
 	private int stock;
@@ -38,6 +41,15 @@ public class ProductBean implements Serializable {
 	private int category;
 	private String producterName;
 	private CategoryBean categoryBean;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="CATEGORY")
+	public CategoryBean getCategoryBean() {
+		return categoryBean;
+	}
+
+	public void setCategoryBean(CategoryBean categoryBean) {
+		this.categoryBean = categoryBean;
+	}
 
 	public ProductBean() {
 		super();
@@ -78,6 +90,7 @@ public class ProductBean implements Serializable {
 		this.unit = unit;
 		this.description = description;
 		this.category = category;
+	
 	}
 	@Id @Column(name="PRODUCTID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -88,7 +101,9 @@ public class ProductBean implements Serializable {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-//	@Column(name = "CATEGORY")
+//	@GenericGenerator(name="generator",strategy="foreign",parameters=@Parameter(name="property",value="productCategory"))
+//	@GeneratedValue(generator = "generator")
+//	@Column(name = "CATEGORY" )
 	@Transient
 	public int getCategory() {
 		return category;
@@ -106,12 +121,12 @@ public class ProductBean implements Serializable {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-	@Column(name = "PRODUCTERID")
+	@Column(name = "PRODUCTERID",updatable= false)
 	public String getProducterId() {
 		return producterId;
 	}
 
-	public void setProducterId(String producterId) {
+	public void setProducterId(String producterId ) {
 		this.producterId = producterId;
 	}
 	@Column(name = "PRICE")
@@ -154,7 +169,7 @@ public class ProductBean implements Serializable {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	@Column(name = "ADDEDDATE")
+	@Column(name = "ADDEDDATE" ,updatable= false)
 	public Date getAddedDate() {
 		return addedDate;
 	}
@@ -202,13 +217,5 @@ public class ProductBean implements Serializable {
 	public void setProducterName(String producterName) {
 		this.producterName = producterName;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="CATEGORY")
-	public CategoryBean getCategoryBean() {
-		return categoryBean;
-	}
 
-	public void setCategoryBean(CategoryBean categoryBean) {
-		this.categoryBean = categoryBean;
-	}
 }

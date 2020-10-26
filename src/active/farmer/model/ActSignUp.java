@@ -11,19 +11,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
 
 @Entity
 @Table(name = "actSignUp")
 public class ActSignUp {
 	private int actId;
 	private Date SignStaDate;
-	private Timestamp SignStaTime;
+	private Date SignStaTime;
 	private Date SignEndDate;
-	private Timestamp SignEndTime;
+	private Date SignEndTime;
 	private int actNum;
 	private String sigStat;
 	private ActiveFarmer activeFarmer;
@@ -32,9 +33,9 @@ public class ActSignUp {
 
 	}
 
-	public ActSignUp(int actId, Date signStaDate, Timestamp signStaTime, Date signEndDate, Timestamp signEndTime,
-			int actNum, String sigStat, ActiveFarmer activeFarmer) {
-		
+	public ActSignUp(int actId, Date signStaDate, Date signStaTime, Date signEndDate, Date signEndTime, int actNum,
+			String sigStat, ActiveFarmer activeFarmer) {
+		super();
 		this.actId = actId;
 		SignStaDate = signStaDate;
 		SignStaTime = signStaTime;
@@ -45,8 +46,9 @@ public class ActSignUp {
 		this.activeFarmer = activeFarmer;
 	}
 
-	@GenericGenerator(name = "generator",strategy = "foreign",parameters = @Parameter(name="property",value = "activeFarmer"))
-	@Id @GeneratedValue(generator = "generator")
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "activeFarmer"))
+	@Id
+	@GeneratedValue(generator = "generator")
 	@Column(name = "actId")
 	public int getActId() {
 		return actId;
@@ -57,6 +59,7 @@ public class ActSignUp {
 	}
 
 	@Column(name = "signStaDate")
+	@Temporal(TemporalType.DATE)
 	public Date getSignStaDate() {
 		return SignStaDate;
 	}
@@ -66,15 +69,17 @@ public class ActSignUp {
 	}
 
 	@Column(name = "signStaTime")
-	public Timestamp getSignStaTime() {
+	@Temporal(TemporalType.TIME)
+	public Date getSignStaTime() {
 		return SignStaTime;
 	}
 
-	public void setSignStaTime(Timestamp signStaTime) {
+	public void setSignStaTime(Date signStaTime) {
 		SignStaTime = signStaTime;
 	}
 
 	@Column(name = "signEndDate")
+	@Temporal(TemporalType.DATE)
 	public Date getSignEndDate() {
 		return SignEndDate;
 	}
@@ -84,11 +89,12 @@ public class ActSignUp {
 	}
 
 	@Column(name = "signEndTime")
-	public Timestamp getSignEndTime() {
+	@Temporal(TemporalType.TIME)
+	public Date getSignEndTime() {
 		return SignEndTime;
 	}
 
-	public void setSignEndTime(Timestamp signEndTime) {
+	public void setSignEndTime(Date signEndTime) {
 		SignEndTime = signEndTime;
 	}
 

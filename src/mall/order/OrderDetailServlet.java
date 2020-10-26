@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.productModel.ProductOrderBean;
 import mall.productModel.ProductOrderItemBean;
 import mall.service.OrderService;
+import util.HibernateUtil;
 
 
 /**
@@ -30,8 +34,11 @@ public class OrderDetailServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String orderId = request.getParameter("orderId");
 		int no = Integer.parseInt(orderId.trim());
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session hibernateSession = factory.getCurrentSession();
+		OrderService orderService = new OrderService(hibernateSession);
 
-		OrderService orderService = new OrderService();
+//		OrderService orderService = new OrderService();
 		ProductOrderBean ob = orderService.getOrder(no);
 		request.setAttribute("OrderBean", ob);   // 將OrderBean物件暫存到請求物件內
 		RequestDispatcher rd = request.getRequestDispatcher("/mall/ShowOrderDetail.jsp");

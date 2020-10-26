@@ -37,8 +37,8 @@ public class ProductHibernate extends HttpServlet {
 		ProductBean pb=session.get(ProductBean.class, 82);
 		System.out.println(pb.getProductId());
 		System.out.println(pb.getProduct());
-		System.out.println(pb.getCategoryBean().getId());
-		System.out.println(pb.getCategoryBean().getName());
+//		System.out.println(pb.getCategoryBean().getId());
+//		System.out.println(pb.getCategoryBean().getName());
 //		session.getTransaction().commit();
 //		HibernateUtil.closeSessionFactory();
 	}
