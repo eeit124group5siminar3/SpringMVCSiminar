@@ -1,6 +1,7 @@
 package marketSeller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import active.model.ActiveDAO;
+import marketSeller.model.MarketProductDao;
+import marketSeller.model.MarketProductImgBean;
+import marketSeller.model.MarketProductTotalBean;
+import util.HibernateUtil;
 
 /**
  * Servlet implementation class MarketUpdate
@@ -31,14 +39,7 @@ public class MarketUpdate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		     
-		DataSource ds=null;
-		InitialContext ctxt= null;
-		Connection conn= null;
-		try {
-			ctxt = new InitialContext();
-			ds=(DataSource) ctxt.lookup("java:comp/env/jdbc/xe");
-			conn = ds.getConnection();
+
 			
 			//修改
 			if(request.getParameter("update") != null) {
@@ -47,40 +48,42 @@ public class MarketUpdate extends HttpServlet {
 			if(request.getParameter("acthome") != null) {
 				response.sendRedirect("MarketHome.jsp");
 			}
-		}catch(NamingException ne) {
-			System.out.println("Naming Service Lookup Exception");
-		}catch (SQLException e) {
-		      System.out.println("Database Connection Error"); 
-	    } finally {
-	      try {
-	    	  if (conn != null) conn.close();
-	      	} catch (Exception e) {
-	        System.out.println("Connection Pool Error!");
-	      	}
-	      }
-	      
+ 
 	}
 
 	private void processUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String productid = request.getParameter("productid");
-		MarketSellerDAO marketSellerDAO = new MarketSellerDAO();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+	
+
+		MarketProductDao mDao = new MarketProductDao(session);
 		
-		List<MarketSellerBean> list = new ArrayList<MarketSellerBean>();
-		MarketSellerBean Bean = new MarketSellerBean();
+		MarketProductTotalBean mBean1 = new MarketProductTotalBean();
+		MarketProductImgBean mBean2 = new MarketProductImgBean();
 		
-		Bean.setProduct_id(productid);
-		String product_name = request.getParameter("product_name");
-		Bean.setProduct_name(product_name);
-		String description = request.getParameter("description");
-		Bean.setDescription(description);
-		String product_area = request.getParameter("product_area");
-		Bean.setProduct_area(product_area);
-		String price = request.getParameter("price");
-		Bean.setPrice(Integer.parseInt(price));
+		int productId =Integer.parseInt(request.getParameter("productId"));
+		mBean1.setProductId(productId);
+		mBean2.setProductId(productId);
+//		mBean.setProductId(productId);
+		String product_name=request.getParameter("productName");
+		mBean1.setProductName(product_name);
+		String description =request.getParameter("description");
+		mBean2.setDescription(description);
+		String productArea=request.getParameter("productArea");
+		mBean1.setProductArea(productArea);
+		String unit =request.getParameter("unit");
+		mBean1.setUnit(unit);
+		String quantity =request.getParameter("quantity");
+		mBean1.setQuantity(Integer.parseInt(quantity));
+		String price =request.getParameter("price");
+		mBean1.setQuantity(Integer.parseInt(price));
 		
-		list.add(Bean);
-		marketSellerDAO.update(Bean);		
-		response.sendRedirect("MarketS.jsp");
+		mBean1.setMarketProductImgBean(mBean2);
+		mBean2.setMarketProductTotalBean(mBean1);
+		
+		mDao.update(mBean1);
+//		RequestDispatcher rd = request.getRequestDispatcher("/marketSeller/MarketS.jsp");
+		response.sendRedirect("../MarketS.jsp");
 	}
 
 }

@@ -20,12 +20,17 @@ public class MarketProductBeanService implements IMarketProductBeanService {
 		return mDao.selectAll();
 	}
 	@Override
-	public boolean delete(String productId) {
+	public boolean delete(int productId) {
 		return mDao.delete(productId);
 	}
 	@Override
     public MarketProductTotalBean insert(MarketProductTotalBean bean) {
     	return mDao.insert(bean);
     }
+	@Override
+    public MarketProductTotalBean update(MarketProductTotalBean bean) {
+    	return mDao.update(bean);
+    }
+	
 	
 }

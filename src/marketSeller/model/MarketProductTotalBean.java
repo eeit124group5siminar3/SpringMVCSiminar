@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "market_Product_Total")
 public class MarketProductTotalBean {
-	private String productId;
+	private int productId;
 	private String email;
 	private String marketName;
 	private String productName;
@@ -28,7 +28,7 @@ public class MarketProductTotalBean {
 	private Integer quantity;
 	private MarketProductImgBean marketProductImgBean;
 	
-	public MarketProductTotalBean(String productId, String productName, String productArea, String productCatgory,
+	public MarketProductTotalBean(int productId, String productName, String productArea, String productCatgory,
 			Integer price, String unit, String discount, Integer quantity, MarketProductImgBean marketProductImgBean) {
 		super();
 		this.productId = productId;
@@ -46,8 +46,8 @@ public class MarketProductTotalBean {
 		
 	}
 	
-	public MarketProductTotalBean(String productId,String productName,String productArea,Integer price,String unit,Integer quantity) {
-		this.productId=productId;
+	public MarketProductTotalBean(String productName,String productArea,Integer price,String unit,Integer quantity) {
+		
 		this.productName=productName;
 		this.productArea=productArea;
 		this.price=price;
@@ -58,7 +58,7 @@ public class MarketProductTotalBean {
 	
 
 	
-	public MarketProductTotalBean(String productId, String email, String marketName, String productName,
+	public MarketProductTotalBean(int productId, String email, String marketName, String productName,
 			String productArea, String productCatgory, Integer price, Integer report, String unit, String discount,
 			String putOut, Integer quantity, MarketProductImgBean marketProductImgBean) {
 		super();
@@ -79,10 +79,10 @@ public class MarketProductTotalBean {
 
 	@Id @Column(name = "PRODUCT_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public String getProductId() {
+	public int getProductId() {
 		return productId;
 	}
-	public void setProductId(String productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 	

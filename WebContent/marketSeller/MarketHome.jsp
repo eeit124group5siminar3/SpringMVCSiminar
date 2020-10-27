@@ -55,7 +55,7 @@
               
                  <input name="delect" type="submit" value="刪除">
                  	&nbsp;&nbsp;
-				 <input type="hidden"  id="productid" name="productid" value="${IBean.productId}">	 
+
 				 <input name="update" type="submit" value="更新"> 	 
 			     </td>
                 </tr>
