@@ -23,27 +23,37 @@ body {
 </head>
 <body>
 <h1 align="center">商品管理</h1>
-	<form action="./MarketUpdate" method="post">
+<form action="<c:url value='MarketUpdate'></c:url>" method="post">
 		<fieldset>
 			<legend>商品資料</legend>
 			<c:forEach var="product" items="${list}">
 			<div>
-				<label for="">編號:${product.product_id}</label>
-				<input type=hidden name="productid" value="${product.product_id}"/>
+				<label for="">編號:${product.productId}</label>
+				<input type=hidden name="productId" value="${product.productId}"/>
 			</div>
 			<div>
 				<label for="">商品名稱:</label>
-				<input type="text" id="product_Name" name="product_name" value="${product.product_name}" >
+				<input type="text" id="productName" name="productName" value="${product.productName}" >
 			</div>
 			<div>
 				<label for="">商品描述:</label> 
-				<textarea name="description" id="description" cols="60" rows="4" >${product.description}</textarea>
+				<textarea name="description" id="description" cols="60" rows="4" >${product.marketProductImgBean.description}</textarea>
 				
 			</div>
 			<div>
 				<label for="">商品出產地:</label> 
-				<input type="text" id="product_area" name="product_area" value="${product.product_area}">
+				<input type="text" id="productArea" name="productArea" value="${product.productArea}">
 			</div>
+			
+		    <div>
+				<label for="">單位:</label> 
+				<input type="text" id="unit" name="unit" value="${product.unit}">
+			</div>
+			 <div>
+				<label for="">數量:</label> 
+				<input type="text" id="quantity" name="quantity" value="${product.quantity}">
+			</div>
+			
 			<div>
 				<label for="">價格:</label> 
 				<input type="text" id="price" name="price" value="${product.price}">

@@ -19,6 +19,8 @@ import recipe.DAO.Recipe_DAO;
 import recipe.DAO.Recipe_DAO_hibernate;
 import recipe.recipe_bean.Recipe_Bean;
 import recipe.recipe_bean.Recipe_Obj;
+import recipe.service.Recipe_Service;
+import recipe.service.recipe_Service_interface;
 import util.HibernateUtil;
 
 @WebServlet("/Recipe_Servlet_search")
@@ -30,14 +32,12 @@ public class Recipe_Servlet_search extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		doGet(request, response);
 		response.setContentType("text/html;charser=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		if(request.getParameter("search")!=null) {
@@ -46,24 +46,24 @@ public class Recipe_Servlet_search extends HttpServlet {
 		
 	}
 
+	//用戶或訪客查詢所有食譜
 	private void ProcessSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SessionFactory factory=HibernateUtil.createSessionFactory();
 		Session hibernatesession=factory.getCurrentSession();	
-		Recipe_DAO_hibernate rDAO=new Recipe_DAO_hibernate(hibernatesession);
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		recipe_Service_interface Service=new Recipe_Service(hibernatesession);
+		System.out.println(request.getParameter("input"));
+		List<Recipe_Bean> list=Service.ListOfSearch(request.getParameter("input"));
 		
-		List<Recipe_Bean> list=rDAO.ListOfSearch(request.getParameter("input"));
-		
-		for(Recipe_Bean r:list) {
-			System.out.println(r.getDesc());
-			System.out.println(r.getName());
-		}
+		//test
+//		for(Recipe_Bean r:list) {
+//			System.out.println(r.getDesc());
+//			System.out.println(r.getName());
+//		}
 
-		
-//		request.setAttribute("ListToken", list);
-//		RequestDispatcher rd=request.getRequestDispatcher("/recipe_search_display.jsp");
-//		rd.forward(request, response);
+
+		request.setAttribute("ListToken", list);
+		RequestDispatcher rd=request.getRequestDispatcher("recipe/recipe_search_display.jsp");
+		rd.forward(request, response);
 	}
 
 }

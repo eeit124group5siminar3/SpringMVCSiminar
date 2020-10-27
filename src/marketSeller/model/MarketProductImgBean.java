@@ -18,7 +18,7 @@ import org.hibernate.annotations.Parameter;
 @Entity
 @Table(name = "market_Product_Img")
 public class MarketProductImgBean {
-	private String productId;
+	private int productId;
 	private String description;
 	private Blob productImg ;
 	private MarketProductTotalBean marketProductTotalBean;
@@ -26,10 +26,10 @@ public class MarketProductImgBean {
 	@GenericGenerator(name ="generator", strategy = "foreign", parameters = @Parameter(name="property", value = "marketProductTotalBean"))
 	@Id @Column(name = "PRODUCT_ID")
 	@GeneratedValue(generator = "generator")
-	public String getProductId() {
+	public int getProductId() {
 		return productId;
 	}
-	public void setProductId(String productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 	

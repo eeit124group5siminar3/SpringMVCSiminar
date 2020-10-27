@@ -2,7 +2,7 @@ package mall.productModel;
 
 public class OrderItem {
 	private String product;
-	private String producterId;
+	private int producterId;
 	private String producterName;
 	private int content;
 	private String unit;
@@ -13,7 +13,7 @@ public class OrderItem {
 	public OrderItem() {
 		super();
 	}
-	public OrderItem(String product, String producterId,int content, String unit, Integer qty, Integer productId,
+	public OrderItem(String product, int producterId,int content, String unit, Integer qty, Integer productId,
 			Double price, Double discount,String producterName) {
 		super();
 		this.product = product;
@@ -32,10 +32,10 @@ public class OrderItem {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-	public String getProducterId() {
+	public int getProducterId() {
 		return producterId;
 	}
-	public void setProducterId(String producterId) {
+	public void setProducterId(int producterId) {
 		this.producterId = producterId;
 	}
 	public int getContent() {

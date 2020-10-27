@@ -19,7 +19,7 @@ body {
 </style>
 </head>
 <body>
-	<form action="../Recipe_Servlet_search" method="post">
+	<form action="<c:url value='Recipe_Servlet_search'></c:url>" method="post">
 	<jsp:include page="/top.jsp" />
 	<h2 style="text-align: center;">搜尋食譜</h2>
 	<div style="text-align: center;">	
