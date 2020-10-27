@@ -34,17 +34,17 @@ public class DisplayMaintainProduct extends HttpServlet {
 			throws ServletException, IOException {
 		
 		 //先取出session物件
-//		HttpSession session = request.getSession(false);
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+//		HttpSession session = request.getSession();
 		// 紀錄目前請求的RequestURI,以便使用者登入成功後能夠回到原本的畫面
 		String requestURI = request.getRequestURI();
 		// System.out.println("requestURI=" + requestURI);
 		// 如果session物件不存在
-//		if (session == null || session.isNew()) {
-//			// 請使用者登入
-//			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
-//			return;
-//		}
+		if (session == null || session.isNew()) {
+			// 請使用者登入
+			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
+			return;
+		}
 		session.setAttribute("requestURI", requestURI);
 		// 此時session物件存在，讀取session物件內的LoginOK
 		// 以檢查使用者是否登入。

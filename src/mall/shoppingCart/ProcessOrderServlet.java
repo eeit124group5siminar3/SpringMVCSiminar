@@ -40,18 +40,18 @@ public class ProcessOrderServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String finalDecision = request.getParameter("finalDecision");		
-		HttpSession session = request.getSession();
-//		HttpSession session = request.getSession(false);
-//		if (session == null) {   // 使用逾時
+//		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		if (session == null) {   // 使用逾時
+			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
+			return;
+		}
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+		if (mb == null) {
 //			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
 //			return;
-//		}
-		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
-//		if (mb == null) {
-////			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
-////			return;
-//			mb=(Member_SignUp) session.getAttribute("login_guest");
-//		}
+			mb=(Member_SignUp) session.getAttribute("login_guest");
+		}
 		
 		ShoppingCart sc = (ShoppingCart) session.getAttribute("ShoppingCart");
 		if (sc == null) {
