@@ -36,58 +36,59 @@ public class ActiveUpdateServlet extends HttpServlet {
 				updateActive(request, response);
 			}
 			if (request.getParameter("acthome") != null) {
-				response.sendRedirect("Active/ActiveHome.jsp");
+				request.getRequestDispatcher("ActiveHomeServlet").forward(request, response);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	//更新資料
 	public void updateActive(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ParseException {
+
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
 		ActiveDAO aDao = new ActiveDAO(hsession);
 
-		Active act = new Active();
-//		act.setActId(actId);
-		String actName = request.getParameter("actName");
-		act.setActName(actName);
-		String actType = request.getParameter("actType");
-		act.setActType(actType);
-		String actAddr = request.getParameter("actAddr");
-		act.setActAddr(actAddr);
-		String tel = request.getParameter("tel");
-		act.setTel(tel);
-		String actDate = request.getParameter("actDate");
-		act.setActDate(new SimpleDateFormat("yyyy-MM-dd").parse(actDate));
-		String dateSta = request.getParameter("dateSta");
-		System.out.println(dateSta);
-		act.setDateSta(new SimpleDateFormat("yyyy-MM-dd").parse(dateSta));
-		String dateEnd = request.getParameter("dateEnd");
-		act.setDateEnd(new SimpleDateFormat("yyyy-MM-dd").parse(dateEnd));
-		String expNum = request.getParameter("expNum");
-		act.setExpNum(Integer.parseInt(expNum));
-		String price = request.getParameter("price");
-		act.setPrice(Integer.parseInt(price));
+		
+			Active act = new Active();
+			int actId = Integer.parseInt(request.getParameter("actId"));
+			act.setActId(actId);
+			System.out.println("測試測試" + actId);
+			String actName = request.getParameter("actName");
+			act.setActName(actName);
+			String actType = request.getParameter("actType");
+			act.setActType(actType);
+			String actAddr = request.getParameter("actAddr");
+			act.setActAddr(actAddr);
+			String tel = request.getParameter("tel");
+			act.setTel(tel);
+			String actDate = request.getParameter("actDate");
+			act.setActDate(new SimpleDateFormat("yyyy-MM-dd").parse(actDate));
+			String dateSta = request.getParameter("dateSta");
+			System.out.println(dateSta);
+			act.setDateSta(new SimpleDateFormat("yyyy-MM-dd").parse(dateSta));
+			String dateEnd = request.getParameter("dateEnd");
+			act.setDateEnd(new SimpleDateFormat("yyyy-MM-dd").parse(dateEnd));
+			String expNum = request.getParameter("expNum");
+			act.setExpNum(Integer.parseInt(expNum));
+			String price = request.getParameter("price");
+			act.setPrice(Integer.parseInt(price));
+			String actDescri = request.getParameter("actDescri");
+			act.setActDescri(actDescri);
 
-		System.out.println("-----------------");
-		System.out.println(act);
-		aDao.insert(act);
-		aDao.update(act);
-		System.out.println("新增成功");
-		response.sendRedirect("Active/ActiveSucc.jsp");
+			System.out.println("-----------------");
+			System.out.println(act);
+			System.out.println();
+			aDao.update(actId, act);
+			response.sendRedirect("Active/ActiveSucc.jsp");
 
 	}
-
 }

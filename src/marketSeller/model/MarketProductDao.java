@@ -29,13 +29,13 @@ public class MarketProductDao {
 		return false;
 	}
 	
-//	public MarketProductTotalBean insert(MarketProductTotalBean bean) {
-//		MarketProductTotalBean result =session.get(MarketProductTotalBean.class,bean.getProductId());
-//		
-//		if (result==null) {
-//			session.save(bean);
-//			return bean;
-//		}
-//		return null;
-//	}
+	public MarketProductTotalBean insert(MarketProductTotalBean bean) {
+		MarketProductTotalBean result =session.get(MarketProductTotalBean.class,bean.getProductId());
+		
+		if (result==null) {
+			session.save(bean);
+			return bean;
+		}
+		return null;
+	}
 }

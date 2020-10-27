@@ -1,8 +1,5 @@
 package member_SignUp.model;
 
-import java.util.List;
-
-import member_SignUp.model.Member_SignUp;
 
 public interface Member_List {
 

@@ -3,7 +3,6 @@ package active.action;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +31,8 @@ public class ActiveHomeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		
 		try {
 					
@@ -51,7 +52,6 @@ public class ActiveHomeServlet extends HttpServlet {
 				response.sendRedirect("index.jsp");
 			}else {
 				listActive(request, response);
-				System.out.print("123");
 			}
 			
 		}catch (SQLException e) {	
@@ -69,6 +69,7 @@ public class ActiveHomeServlet extends HttpServlet {
 
 	public void listActive(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		
 
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
@@ -82,6 +83,7 @@ public class ActiveHomeServlet extends HttpServlet {
 
 	}
 
+	//導向新增頁面
 	public void showApplyForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Active/ActiveApply.jsp");
@@ -89,6 +91,7 @@ public class ActiveHomeServlet extends HttpServlet {
 		return;
 	}
 
+	//導向更新頁面
 	public void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
@@ -104,11 +107,14 @@ public class ActiveHomeServlet extends HttpServlet {
 		return;
 	}
 	
+	//查詢ByID for PreUpedate
 	public void selectById(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ParseException{
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
+		
 		int actId = Integer.parseInt(request.getParameter("actId"));
+		System.out.println(actId);
 		ActiveDAO aDao = new ActiveDAO(hsession);
 		List<Active> list = new ArrayList<Active>();
 		list.add(aDao.select(actId));
@@ -119,61 +125,26 @@ public class ActiveHomeServlet extends HttpServlet {
 		return;
 	}
 	
+	//查詢ByName
 	public void selectByName(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ParseException{
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
-		String actName = request.getParameter("actName");
-		ActiveDAO aDao = new ActiveDAO(hsession);
-		aDao.selectName(actName);
-		return;
-	}
-
-	public void insertActive(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException, ParseException {
-
-		SessionFactory factory = HibernateUtil.getSessionFactory();
-		Session hsession = factory.getCurrentSession();
-		int actId = Integer.parseInt(request.getParameter("actId"));
-		ActiveDAO aDao = new ActiveDAO(hsession);
-
-		Active act = new Active();
-//		act.setAct_id(act_id);
-		String actName = request.getParameter("actName");
-		act.setActName(actName);
-		String actType = request.getParameter("actType");
-		act.setActType(actType);
-		String actAddr = request.getParameter("actAddr");
-		act.setActAddr(actAddr);
-		String tel = request.getParameter("tel");
-		act.setTel(tel);
-		String actDate = request.getParameter("actDate");
-		act.setActDate(new SimpleDateFormat("yyyy-MM-dd").parse(actDate));
-		String dateSta = request.getParameter("dateSta");
-		System.out.println(dateSta);
-		act.setDateSta(new SimpleDateFormat("yyyy-MM-dd").parse(dateSta));
-		String dateEnd = request.getParameter("dateEnd");
-		act.setDateEnd(new SimpleDateFormat("yyyy-MM-dd").parse(dateEnd));
-		String expNum = request.getParameter("expNum");
-		act.setExpNum(Integer.parseInt(expNum));
-		String price = request.getParameter("price");
-		act.setPrice(Integer.parseInt(price));
-
-		System.out.println("-----------------");
-		System.out.println(act);
-		aDao.insert(act);
-		System.out.println("新增成功");
-		response.sendRedirect("ActiveSucc.jsp");
-		return;
-
-	}
-
-	public void updateActive(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
 		
-
+		String actName = request.getParameter("selectname");
+		ActiveDAO aDao = new ActiveDAO(hsession);
+		System.out.println(actName);
+			
+		List<Active> listAct = aDao.selectName(actName);
+		request.setAttribute("listAct", listAct);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Active/ActiveHome.jsp");
+		dispatcher.forward(request, response);
+		return;
+		
 	}
 
+
+	//刪除方法
 	public void deleteActive(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 

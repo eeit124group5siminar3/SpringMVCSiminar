@@ -19,7 +19,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
-<form action="<c:url value='MarketIServlet'></c:url>" method="post" enctype="multipart/form-data">
+<form action="<c:url value='/marketSeller/model/MarketInsertServlet'></c:url>" method="post" enctype="multipart/form-data">
 <jsp:include page="/top.jsp" />
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
 <tr>
@@ -59,6 +59,26 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
            
     </td>
 </tr>
+<tr>
+    <td>數量:</td>
+    <td><input type="text" name="quantity" id="quantity" size="10" maxlength="10"
+       value="${requestScope.quantity}" size="5" />
+           <font color='red' size='-1'>
+              ${ErrMsg.errQuantity}
+           </font>           
+           
+    </td>
+</tr>
+ <tr>
+    <td>單位:</td>
+        <td><input type="text" name="unit" id="unit" size="10" maxlength="10"
+       value="${requestScope.unit}" size="5" />
+           <font color='red' size='-1'>
+              ${ErrMsg.errUnit}
+           </font>  
+           
+    </td>
+ </tr>
     <tr height='36'>
         <td >圖片</td>
         <td >

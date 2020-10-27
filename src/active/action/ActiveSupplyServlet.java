@@ -38,23 +38,21 @@ public class ActiveSupplyServlet extends HttpServlet {
 				insertActive(request, response);
 			}
 			if (request.getParameter("acthome") != null) {
-				response.sendRedirect("Active/ActiveHome.jsp");
+				request.getRequestDispatcher("ActiveHomeServlet").forward(request, response);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	
+	//新增方法
 	public void insertActive(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ParseException {
 
@@ -67,34 +65,25 @@ public class ActiveSupplyServlet extends HttpServlet {
 //		act.setAct_id(act_id);
 		String actName = request.getParameter("actName");
 		act.setActName(actName);
-		System.out.println("1");
 		String actType = request.getParameter("actType");
 		act.setActType(actType);
-		System.out.println("2");
 		String actAddr = request.getParameter("actAddr");
 		act.setActAddr(actAddr);
-		System.out.println("3");
 		String tel = request.getParameter("tel");
 		act.setTel(tel);
-		System.out.println("4");
 		String actDate = request.getParameter("actDate");
 		act.setActDate(new SimpleDateFormat("yyyy-MM-dd").parse(actDate));
-		System.out.println("5");
 		String dateSta = request.getParameter("dateSta");
 		System.out.println(dateSta);
 		act.setDateSta(new SimpleDateFormat("yyyy-MM-dd").parse(dateSta));
 		String dateEnd = request.getParameter("dateEnd");
 		act.setDateEnd(new SimpleDateFormat("yyyy-MM-dd").parse(dateEnd));
-		System.out.println("6");
 		String expNum = request.getParameter("expNum");
 		act.setExpNum(Integer.parseInt(expNum));
-		System.out.println("7");
 		String price = request.getParameter("price");
 		act.setPrice(Integer.parseInt(price));
-		System.out.println("8");
 		String actDescri = request.getParameter("actDescri");
 		act.setActDescri(actDescri);
-		System.out.println("9");
 
 		System.out.println("-----------------");
 		System.out.println(act);

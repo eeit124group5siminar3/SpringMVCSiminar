@@ -37,12 +37,12 @@ body {
 			<tr>
 				<td>設定新密碼</td>
 				<td><input type="password" name="member_password" size="30"
-					maxlength="30" placeholder="必填"></td>
+					maxlength="30" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="密碼長度至少8碼，須包含大寫、小寫英文及數字" placeholder="必填" required></td>
 			</tr>
 			<tr>
 				<td>再輸入一次新密碼</td>
 				<td><input type="password" name="member_password1" size="30"
-					maxlength="30" placeholder="必填"></td>
+					maxlength="30"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="密碼長度至少8碼，須包含大寫、小寫英文及數字" placeholder="必填" required></td>
 			</tr>
 
 
