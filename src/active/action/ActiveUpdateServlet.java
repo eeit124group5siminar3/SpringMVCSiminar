@@ -36,31 +36,28 @@ public class ActiveUpdateServlet extends HttpServlet {
 				updateActive(request, response);
 			}
 			if (request.getParameter("acthome") != null) {
-				response.sendRedirect("Active/ActiveHome.jsp");
+				request.getRequestDispatcher("ActiveHomeServlet").forward(request, response);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	//更新資料
 	public void updateActive(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ParseException {
 
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hsession = factory.getCurrentSession();
 		ActiveDAO aDao = new ActiveDAO(hsession);
-//
-//		try {
+
+		
 			Active act = new Active();
 			int actId = Integer.parseInt(request.getParameter("actId"));
 			act.setActId(actId);
@@ -93,10 +90,5 @@ public class ActiveUpdateServlet extends HttpServlet {
 			aDao.update(actId, act);
 			response.sendRedirect("Active/ActiveSucc.jsp");
 
-//			hsession.getTransaction().commit();
-//		} catch (Exception e) {
-//			hsession.getTransaction().rollback();
-//			e.printStackTrace();
-//		}
 	}
 }
