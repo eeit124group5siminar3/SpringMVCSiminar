@@ -48,38 +48,38 @@ body {
 			</div>
 			<div>
 				<label for="">活動地址:</label> 
-				<input type="text" id="actAddr" name="actAddr" value="${Active.actAddr}" required="required">
+				<input type="text" id="actAddr" name="actAddr" value="${Active.actAddr}" >
 			</div>
 			<div>
 				<label for="">連絡電話:</label> 
-				<input type="text" id="tel" name="tel" value="${Active.tel}" required="required">
+				<input type="text" id="tel" name="tel" value="${Active.tel}">
 			</div>
 			<div>
 				<label for="">活動日期:</label> 
-				<input type="date" id="actDate" name="actDate" value="${Active.actDate}" required="required">
+				<input type="date" id="actDate" name="actDate" value="${Active.actDate}">
 			</div>
 			<div>
 				<label for="">報名起始日:</label> 
-				<input type="date" id="dateSta" name="dateSta" value="${Active.dateSta}" required="required"> 
+				<input type="date" id="dateSta" name="dateSta" value="${Active.dateSta}"> 
 				<label for="">報名結束日:</label> 
-				<input type="date" id="dateEnd" name="dateEnd" value="${Active.dateEnd}" required="required">
+				<input type="date" id="dateEnd" name="dateEnd" value="${Active.dateEnd}">
 			</div>
 			<div>
 				<label for="">活動人數:</label> 
-				<input type="text" id="expNum" name="expNum" value="${Active.expNum}" required="required">
+				<input type="text" id="expNum" name="expNum" value="${Active.expNum}">
 			</div>
 			<div>
 				<label for="">活動費用:</label> 
-				<input type="text" id="price" name="price" value="${Active.price}" required="required">
+				<input type="text" id="price" name="price" value="${Active.price}">
 			</div>
 			<div>
 				<label for="">活動描述:</label> <br>
-				<textarea cols="50" rows="6"  id="actDescri" name="actDescri" value="${Active.actDescri}" ></textarea>
+				<textarea cols="50" rows="6"  id="actDescri" name="actDescri" value="${Active.actDescri}"></textarea>
 			</div>
-<!-- 			<div> -->
-<!-- 				<label for="">活動海報:</label> <br>  -->
-<!-- 				<input type="file" id="actImg" name="actImg"> -->
-<!-- 			</div> -->
+			<div>
+				<label for="">活動海報:</label> <br> 
+				<input type="file" id="actImg" name="actImg">
+			</div>
 			
 		  </c:forEach>
 			<input name="update" type="submit" value="更新" > 
