@@ -3,8 +3,6 @@ package recipe.DAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import active.farmer.model.ActiveFarmer;
-
 import java.util.List;
 
 import recipe.recipe_bean.Recipe_Bean;
