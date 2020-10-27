@@ -46,7 +46,7 @@ public class ProcessOrderServlet extends HttpServlet {
 //			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
 //			return;
 //		}
-//		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 //		if (mb == null) {
 ////			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp"  );
 ////			return;
@@ -66,8 +66,8 @@ public class ProcessOrderServlet extends HttpServlet {
 			response.sendRedirect(response.encodeRedirectURL (request.getContextPath()));
 			return;  			// 一定要記得 return 
 		}
-//		String memberId = mb.getMember_no();
-		String memberId ="a1";
+		int memberId = mb.getMember_no();
+//		String memberId ="a1";
 	// 取出會員代號
 //		String memberId="aaa";
 		double totalAmount = Math.round(sc.getSubtotal() * 1.05);  	// 計算訂單總金額 

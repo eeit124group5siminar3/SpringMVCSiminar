@@ -56,7 +56,7 @@ public class ProductDAO implements Serializable {
 		return totalPages;
 	}
 
-	public int getTotalPages(String producterId) {
+	public int getTotalPages(int producterId) {
 		// 注意下一列敘述的每一個型態轉換
 		totalPages = (int) (Math.ceil(getRecordCounts(producterId) / (double) recordsPerPage));
 
@@ -112,7 +112,7 @@ public class ProductDAO implements Serializable {
 		return list;
 	}
 
-	public List<ProductBean> getPageProducts(String producterId) {
+	public List<ProductBean> getPageProducts(int producterId) {
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "from ProductBean where stock != 0 and producterId = ?0 ORDER BY ProductId";
 		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
@@ -134,7 +134,7 @@ public class ProductDAO implements Serializable {
 		return count;
 	}
 
-	public long getRecordCounts(String producterId) {
+	public long getRecordCounts(int producterId) {
 		int count = 0; // 必須使用 long 型態
 		String hql = "select count( * ) from ProductBean where producterId=?0";
 

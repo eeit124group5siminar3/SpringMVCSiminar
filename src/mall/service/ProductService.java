@@ -26,14 +26,14 @@ public class ProductService implements Serializable {
 	public int getTotalPages() {
 		return dao.getTotalPages();
 	}
-	public int getTotalPages(String producterId) {
+	public int getTotalPages(int producterId) {
 		return dao.getTotalPages(producterId);
 	}
 
 	public List<ProductBean> getPageProducts() {
 		return dao.getPageProducts();
 	}
-	public List<ProductBean> getPageProducts(String producterId) {
+	public List<ProductBean> getPageProducts(int producterId) {
 		return dao.getPageProducts(producterId);
 	}
 

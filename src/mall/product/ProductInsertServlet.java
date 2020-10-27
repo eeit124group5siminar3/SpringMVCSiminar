@@ -57,17 +57,17 @@ public class ProductInsertServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Map<String, String> errorMsgs = new HashMap<String, String>();
-		Map<String, String> successMsgs = new HashMap<String, String>();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		Map<String, String> errorMsgs = new HashMap<String, String>();
+		Map<String, String> successMsgs = new HashMap<String, String>();
 		HttpSession session = request.getSession();
 		request.setAttribute("ErrMsg", errorMsgs);
 		session.setAttribute("successMsg", successMsgs);
 
 		try {
 			String product = "";
-			String producterId ="";
+			int producterId =0;
 			String priceStr = "";
 			double price = 0;
 			String categoryStr = "";
@@ -216,8 +216,8 @@ public class ProductInsertServlet extends HttpServlet {
 			int category=Integer.parseInt(categoryStr);
 			productService.setId(category);
 			Member_SignUp mb=(Member_SignUp)session.getAttribute("login_ok");
-//			producterId=mb.getMember_no().toString();
-			producterId="123";
+			producterId=mb.getMember_no();
+//			producterId="123";
 			ProductBean bb = new ProductBean(product, producterId, price, blob, fileName, stock, null, shelfTime,
 					content, unit, description, category);
 			productService.saveProduct(bb);
