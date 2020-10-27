@@ -20,11 +20,10 @@ import recipe.DAO.Recipe_DAO;
 import recipe.DAO.Recipe_DAO_hibernate;
 import recipe.recipe_bean.Recipe_Bean;
 import recipe.recipe_bean.Recipe_Obj;
+import recipe.service.Recipe_Service;
+import recipe.service.recipe_Service_interface;
 import util.HibernateUtil;
 
-/**
- * Servlet implementation class Recipe_Servlet_delete
- */
 @WebServlet("/Recipe_Servlet_delete")
 	public class Recipe_Servlet_delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -54,9 +53,9 @@ import util.HibernateUtil;
 		SessionFactory factory=HibernateUtil.createSessionFactory();
 		Session hibernatesession=factory.getCurrentSession();
 		
-		Recipe_DAO_hibernate rDAO=new Recipe_DAO_hibernate(hibernatesession);
+		recipe_Service_interface Service = new Recipe_Service(hibernatesession);
 //			Map<String, Recipe_Obj> map=rDAO.MapOfJavaBean(null);	
-		List<Recipe_Bean> list=rDAO.listOfJavaBean();
+		List<Recipe_Bean> list=Service.listOfJavaBean();
 //		將抓到的值存到 uesr_recipe的list中
 		ArrayList<Recipe_Bean> user_recipe=new ArrayList<Recipe_Bean>();	
 //		從list中抓到名為rec_id的資料

@@ -24,32 +24,27 @@ import org.hibernate.SessionFactory;
 
 import recipe.DAO.Recipe_DAO_hibernate;
 import recipe.recipe_bean.Recipe_Bean;
+import recipe.service.Recipe_Service;
+import recipe.service.recipe_Service_interface;
 import util.HibernateUtil;
 
-/**
- * Servlet implementation class Recipe_Servlet
- */
 @WebServlet("/Recipe_Servlet")
 public class Recipe_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//	private static final int IMAGE_FILENAME_LENGTH = 20;
        
     public Recipe_Servlet() {
         super();
     }
     
+	//因為資料庫沒有設定自動新增序列所有會有問題,我是使用自己輸入的值
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charser=UTF-8");
-		HttpSession session = request.getSession(true); 
-		session.setAttribute("memberID", "a21");
-		
-		
+//		HttpSession session = request.getSession(true); 
+//		session.setAttribute("memberID", "a21");
 		
 		if(request.getParameter("upload")!=null) {
-//			response.sendRedirect("recipe_upload.jsp");
 			request.getRequestDispatcher("recipe/recipe_upload.jsp").forward(request, response);
 		}
 		if(request.getParameter("update")!=null) {
@@ -57,7 +52,6 @@ public class Recipe_Servlet extends HttpServlet {
 			rsUpdate.doPost(request, response);	
 			}
 		if(request.getParameter("search")!=null) {
-//			response.sendRedirect("recipe_search.jsp");
 			request.getRequestDispatcher("recipe/recipe_search.jsp").forward(request, response);
 
 		}
@@ -78,13 +72,13 @@ public class Recipe_Servlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 
 	}
 	
 	
 	//---------新增資料-----------
+	//
 
 	private void gotoSubmitProcess(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String name;
@@ -117,29 +111,31 @@ public class Recipe_Servlet extends HttpServlet {
 		Recipe_Bean recipe_check=new Recipe_Bean(name,ingredients_A,ingredients_B,ingredients_C,ingredients_D,desc,cate,method);
 		System.out.println(recipe_check.getName());
 		request.getSession(true).setAttribute("recipe_check", recipe_check);
-	request.getRequestDispatcher("recipe/recipe_display.jsp").forward(request, response);
+		request.getRequestDispatcher("recipe/recipe_display.jsp").forward(request, response);
+	
+	//因為session的緣故 , 會無法傳送資料
 //		response.sendRedirect("./recipe/recipe_display.jsp");
 		
 	}
 
 	//---------新增資料確認頁面--------
-	private void gotoConfirmProcess(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void gotoConfirmProcess(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		SessionFactory factory=HibernateUtil.getSessionFactory();
 		Session hibernatesession=factory.getCurrentSession();
-		Recipe_DAO_hibernate rDAO=new Recipe_DAO_hibernate(hibernatesession);
+		recipe_Service_interface Service=new Recipe_Service(hibernatesession);
 
 		
 		System.out.println("call insert DAO");
 		Recipe_Bean recipe_detail=(Recipe_Bean)request.getSession(true).getAttribute("recipe_check");
 
-		if(rDAO.insert(recipe_detail)){
+		if(Service.insert(recipe_detail)){
 	          System.out.println("Get some SQL commands done!");
 	          request.getSession(true).invalidate();
 	          
 		}
 		
 		System.out.println("over");
-		response.sendRedirect("recipe/recipe_workpage.jsp");
+		request.getRequestDispatcher("recipe/upload_success.jsp").forward(request, response);
 
 	}
 

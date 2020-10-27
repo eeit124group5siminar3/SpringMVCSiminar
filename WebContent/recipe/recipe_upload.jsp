@@ -30,7 +30,7 @@ body {
 <jsp:include page="/top.jsp" />
 	<fieldset>
 		<legend>上傳食譜</legend>
-		<form action="../Recipe_Servlet" method="post" runat="server"> 
+		<form action="<c:url value='Recipe_Servlet'></c:url>" method="post" runat="server"> 
 <!-- 		enctype="multipart/form-data" >-->		
 			<div class="line">
 				<label for="">名稱: <input type="text" name="recipe_name" /></label>

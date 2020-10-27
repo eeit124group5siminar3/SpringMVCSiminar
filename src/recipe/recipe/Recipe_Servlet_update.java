@@ -18,16 +18,14 @@ import org.hibernate.SessionFactory;
 
 import recipe.DAO.Recipe_DAO_hibernate;
 import recipe.recipe_bean.Recipe_Bean;
+import recipe.service.Recipe_Service;
+import recipe.service.recipe_Service_interface;
 import util.HibernateUtil;
 
-/**
- * Servlet implementation class Recipe_Servlet_update
- */
 @WebServlet("/Recipe_Servlet_update")
 public class Recipe_Servlet_update extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Session session;
-
+	
 	public Recipe_Servlet_update() {
 		super();
 	}
@@ -39,10 +37,11 @@ public class Recipe_Servlet_update extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		doGet(request, response);
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(true);
+		
+		//這邊我自己先設定recipe_id的值 , a001 代表使用者id
 		session.setAttribute("memberID", "a001");
 		
 		 if (request.getParameter("name") == null) {
@@ -56,7 +55,6 @@ public class Recipe_Servlet_update extends HttpServlet {
 //				System.out.println("---------------------------");
 //				System.out.println(request.getParameter("name"));		
 		}
-		request.getRequestDispatcher("recipe/recipe_update.jsp").forward(request, response);
 	}
 
 
@@ -66,7 +64,7 @@ public class Recipe_Servlet_update extends HttpServlet {
 			throws ServletException, IOException {
 		SessionFactory factory = HibernateUtil.createSessionFactory();
 		Session hibernatesession = factory.getCurrentSession();
-		Recipe_DAO_hibernate rDAO = new Recipe_DAO_hibernate(hibernatesession);
+		recipe_Service_interface Service = new Recipe_Service(hibernatesession);
 		Recipe_Bean rObj = new Recipe_Bean();
 		List<Recipe_Bean> recipe_table = new ArrayList<Recipe_Bean>();
 
@@ -77,12 +75,15 @@ public class Recipe_Servlet_update extends HttpServlet {
 		System.out.println(rObj.getRec_id() + " =REC_ID");
 		System.out.println(test2);
 
-		List<Recipe_Bean> list = rDAO.partSearch(test2);
+		//查詢使用者所擁有的食譜中,其中一筆資料
+		List<Recipe_Bean> list = Service.partSearch(test2);
 		for (Recipe_Bean r : list) {
 				System.out.println("Name"+r.getName());
 				recipe_table.add(r);
 		}
 		request.setAttribute("recipe_table", recipe_table);
+		request.getRequestDispatcher("recipe/recipe_update.jsp").forward(request, response);
+
 
 	}
 
@@ -90,19 +91,10 @@ public class Recipe_Servlet_update extends HttpServlet {
 	private void ProcessFind(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		SessionFactory factory = HibernateUtil.createSessionFactory();
-		
 		Session hibernatesession = factory.getCurrentSession();
+		recipe_Service_interface Service = new Recipe_Service(hibernatesession);
+		List<Recipe_Bean> list =Service.listOfJavaBean();
 		
-
-		Recipe_DAO_hibernate rDAO = new Recipe_DAO_hibernate(hibernatesession);
-	
-		List<Recipe_Bean> list =rDAO.listOfJavaBean();
-
-		PrintWriter out = response.getWriter();
-//		out.print(list);
-//		for(Recipe_Bean b : list) {	
-//			System.out.println(b.getName());
-//		}
 //		//將抓到的值存到 uesr_recipe的list中
 		ArrayList<Recipe_Bean> user_recipe = new ArrayList<Recipe_Bean>();
 		// 從list中抓到名為rec_id的資料

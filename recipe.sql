@@ -1,12 +1,12 @@
 --------------------------------------------------------
---  �w�إ��ɮ� - �P���@-�Q��-12-2020   
+--  已建立檔案 - 星期二-十月-27-2020   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table RECIPE
 --------------------------------------------------------
 
   CREATE TABLE "EX"."RECIPE" 
-   (	"RECIPE_ID" VARCHAR2(100 BYTE), 
+   (	"RECIPE_ID" VARCHAR2(20 BYTE), 
 	"RECIPE_DESC" VARCHAR2(500 BYTE), 
 	"CATEGORY" VARCHAR2(20 BYTE), 
 	"RECIPE_NAME" VARCHAR2(20 BYTE), 
@@ -30,3 +30,34 @@
   STORAGE(INITIAL 106496 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)) ;
+REM INSERTING into EX.RECIPE
+SET DEFINE OFF;
+Insert into EX.RECIPE (RECIPE_ID,RECIPE_DESC,CATEGORY,RECIPE_NAME,METHOD,INGREDIENTS_A,INGREDIENTS_B,INGREDIENTS_C,INGREDIENTS_D,FILENAME) values ('a001-1','好吃','豬肉','水餃','method1','豬肉餡',null,null,null,null);
+Insert into EX.RECIPE (RECIPE_ID,RECIPE_DESC,CATEGORY,RECIPE_NAME,METHOD,INGREDIENTS_A,INGREDIENTS_B,INGREDIENTS_C,INGREDIENTS_D,FILENAME) values ('a001-2','讚','雞肉','咖哩飯','method2','咖哩塊',null,null,null,null);
+Insert into EX.RECIPE (RECIPE_ID,RECIPE_DESC,CATEGORY,RECIPE_NAME,METHOD,INGREDIENTS_A,INGREDIENTS_B,INGREDIENTS_C,INGREDIENTS_D,FILENAME) values ('a001-3','棒','豬肉','陽春麵','method3','麵食',null,null,null,null);
+Insert into EX.RECIPE (RECIPE_ID,RECIPE_DESC,CATEGORY,RECIPE_NAME,METHOD,INGREDIENTS_A,INGREDIENTS_B,INGREDIENTS_C,INGREDIENTS_D,FILENAME) values ('a001-4','多汁','雞肉','雞腿飯','method4','雞腿',null,null,null,null);
+Insert into EX.RECIPE (RECIPE_ID,RECIPE_DESC,CATEGORY,RECIPE_NAME,METHOD,INGREDIENTS_A,INGREDIENTS_B,INGREDIENTS_C,INGREDIENTS_D,FILENAME) values ('a001-5','酥脆','豬肉','排骨飯','method5','排骨',null,null,null,null);
+Insert into EX.RECIPE (RECIPE_ID,RECIPE_DESC,CATEGORY,RECIPE_NAME,METHOD,INGREDIENTS_A,INGREDIENTS_B,INGREDIENTS_C,INGREDIENTS_D,FILENAME) values ('a001-6','軟Q','牛肉','壽司','method6','飯',null,null,null,null);
+Insert into EX.RECIPE (RECIPE_ID,RECIPE_DESC,CATEGORY,RECIPE_NAME,METHOD,INGREDIENTS_A,INGREDIENTS_B,INGREDIENTS_C,INGREDIENTS_D,FILENAME) values ('a001-7','很好吃','牛肉','牛肉麵','method7','麵',null,null,null,null);
+Insert into EX.RECIPE (RECIPE_ID,RECIPE_DESC,CATEGORY,RECIPE_NAME,METHOD,INGREDIENTS_A,INGREDIENTS_B,INGREDIENTS_C,INGREDIENTS_D,FILENAME) values ('a001-8','非常好吃','豬肉','拉麵','method8','麵',null,null,null,null);
+--------------------------------------------------------
+--  DDL for Index RECIPE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "EX"."RECIPE_PK" ON "EX"."RECIPE" ("RECIPE_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table RECIPE
+--------------------------------------------------------
+
+  ALTER TABLE "EX"."RECIPE" MODIFY ("RECIPE_ID" NOT NULL ENABLE);
+  ALTER TABLE "EX"."RECIPE" ADD CONSTRAINT "RECIPE_PK" PRIMARY KEY ("RECIPE_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
