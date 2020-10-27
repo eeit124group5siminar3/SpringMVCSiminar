@@ -5,7 +5,7 @@
 --  DDL for Table MARKET_PRODUCT_TOTAL
 --------------------------------------------------------
 
-  CREATE TABLE MARKET_PRODUCT_TOTAL" 
+  CREATE TABLE MARKET_PRODUCT_TOTAL
    (	"EMAIL" VARCHAR2(255 BYTE), 
 	"MARKET_NAME" VARCHAR2(50 BYTE), 
 	"PRODUCT_ID" NUMBER, 
