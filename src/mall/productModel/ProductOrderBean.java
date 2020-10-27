@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name="orderForm")
 public class ProductOrderBean implements Serializable{
 	private int orderId;
-	private String buyerId;
+	private int buyerId;
 	private String buyerName;
 	private String address;
 	private String tel;
@@ -27,7 +27,7 @@ public class ProductOrderBean implements Serializable{
 	private double total;
 	private	Date orderDate;
 	private Set<ProductOrderItemBean> items = new LinkedHashSet<>();
-	public ProductOrderBean(String buyerId, String buyerName, String address, String tel, String bNo, double total,
+	public ProductOrderBean(int buyerId, String buyerName, String address, String tel, String bNo, double total,
 			Date orderDate,Set<ProductOrderItemBean> items) {
 		super();
 		this.buyerId = buyerId;
@@ -42,7 +42,7 @@ public class ProductOrderBean implements Serializable{
 	public ProductOrderBean() {
 		super();
 	}
-	public ProductOrderBean(int orderId, String buyerId, String buyerName, String address, String tel, String bNo,
+	public ProductOrderBean(int orderId, int buyerId, String buyerName, String address, String tel, String bNo,
 			double total, Date orderDate,Set<ProductOrderItemBean> items) {
 		super();
 		this.orderId = orderId;
@@ -65,10 +65,10 @@ public class ProductOrderBean implements Serializable{
 		this.orderId = orderId;
 	}
 	@Column(name="BUYERID")
-	public String getBuyerId() {
+	public int getBuyerId() {
 		return buyerId;
 	}
-	public void setBuyerId(String buyerId) {
+	public void setBuyerId(int buyerId) {
 		this.buyerId = buyerId;
 	}
 	@Column(name="BUYERNAME")

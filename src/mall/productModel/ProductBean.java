@@ -27,7 +27,7 @@ public class ProductBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int productId;
 	private String product;
-	private String producterId;
+	private int producterId;
 	private double price;
 	private double discount=1;
 	private Blob coverImage;
@@ -55,7 +55,7 @@ public class ProductBean implements Serializable {
 		super();
 	}
 
-	public ProductBean(String product, String producterId, double price, Blob coverImage, String fileName, int stock,
+	public ProductBean(String product, int producterId, double price, Blob coverImage, String fileName, int stock,
 			Date addedDate, int shelfTime, int content, String unit, String description, int category) {
 		super();
 		this.product = product;
@@ -71,16 +71,13 @@ public class ProductBean implements Serializable {
 		this.description = description;
 		this.category = category;
 	}
-
-	public ProductBean(int productId, String product, String producterId, double price, double discount,
-			Blob coverImage, String fileName, int stock, Date addedDate, int shelfTime, int content, String unit,
-			String description, int category) {
+	public ProductBean(int productId,String product, int producterId, double price,Double discount, Blob coverImage, String fileName, int stock,
+			Date addedDate, int shelfTime, int content, String unit, String description, int category) {
 		super();
-		this.productId = productId;
+		this.producterId=producterId;
 		this.product = product;
 		this.producterId = producterId;
 		this.price = price;
-		this.discount = discount;
 		this.coverImage = coverImage;
 		this.fileName = fileName;
 		this.stock = stock;
@@ -90,8 +87,9 @@ public class ProductBean implements Serializable {
 		this.unit = unit;
 		this.description = description;
 		this.category = category;
-	
 	}
+
+	
 	@Id @Column(name="PRODUCTID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getProductId() {
@@ -122,11 +120,11 @@ public class ProductBean implements Serializable {
 		this.product = product;
 	}
 	@Column(name = "PRODUCTERID",updatable= false)
-	public String getProducterId() {
+	public int getProducterId() {
 		return producterId;
 	}
 
-	public void setProducterId(String producterId ) {
+	public void setProducterId(int producterId ) {
 		this.producterId = producterId;
 	}
 	@Column(name = "PRICE")

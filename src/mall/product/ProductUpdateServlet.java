@@ -41,6 +41,8 @@ public class ProductUpdateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
 		if (!session.isNew()) {
 			bb = (ProductBean) session.getAttribute("bean");
@@ -50,13 +52,10 @@ public class ProductUpdateServlet extends HttpServlet {
 		String pageNo = "1";
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		Map<String, String> successMsgs = new HashMap<String, String>();
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
 		request.setAttribute("ErrMsg", errorMsgs);
 		session.setAttribute("successMsg", successMsgs);
 		try {
 			String product = "";
-			String producterId = "";
 			String priceStr = "";
 			double price = 0;
 			String categoryStr = "";
@@ -221,8 +220,10 @@ public class ProductUpdateServlet extends HttpServlet {
 				blob=bb.getCoverImage();
 //				fileName=bb.getFileName();
 			}
+			
 			ProductBean newBean = new ProductBean(bb.getProductId(), product, bb.getProducterId(), price, discount, blob, fileName,
 					stock, bb.getAddedDate(), shelfTime, content, unit, description, category);
+			
 			productService.updateProduct(newBean, sizeInBytes);
 			RequestDispatcher rd = request.getRequestDispatcher("DisplayMaintainProduct?pageNo=" + pageNo);
 			rd.forward(request, response);

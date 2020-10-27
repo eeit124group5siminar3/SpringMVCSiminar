@@ -67,7 +67,7 @@
 		  </td>
 		  <td class='menuData'>
 			<div class='menu' style="width:80px">
-		      <c:if test="${ funcName != 'BMT'  && login_ok.member_permissions>0}">
+		      <c:if test="${ funcName != 'BMT'  && login_ok.member_permissions==1}">
 				<a href="<c:url value='/DisplayMaintainProduct' />">
                                             商品維護
                 </a>

@@ -50,7 +50,7 @@ public class BuyProductServlet extends HttpServlet {
 				session.setAttribute("ShoppingCart", cart);   
 			}
 			String product 		= request.getParameter("product");
-			String producterId 		= request.getParameter("producterId");
+			String producterIdstr 		= request.getParameter("producterId");
 			String unit 	= request.getParameter("unit");
 			String pageNo 		= request.getParameter("pageNo");
 			String qtyStr 		= request.getParameter("qty");
@@ -71,6 +71,7 @@ public class BuyProductServlet extends HttpServlet {
 			double price = 0 ; 
 			double discount = 0 ;
 			int content=0;
+			int producterId=0;
 			try{
 				// 進行資料型態的轉換
 				qty = Integer.parseInt(qtyStr.trim());
@@ -78,6 +79,7 @@ public class BuyProductServlet extends HttpServlet {
 				content = Integer.parseInt(contentStr.trim());
 				price = Double.parseDouble(priceStr.trim());
 				discount = Double.parseDouble(discountStr.trim());
+				producterId=Integer.parseInt(producterIdstr.trim());
 				
 			} catch(NumberFormatException e){
 				throw new ServletException(e); 

@@ -19,7 +19,7 @@ public class ProductOrderItemBean implements Serializable{
 	private int itemId;
 	private	int orderId;
 	private int productId;
-	private	String producterId;
+	private	int producterId;
 	private	String description;
 	private	int amount;
 	private	double unitPrice;
@@ -38,7 +38,7 @@ public class ProductOrderItemBean implements Serializable{
 	public ProductOrderItemBean() {
 		super();
 	}
-	public ProductOrderItemBean(int orderId, int productId, String producterId, String description, int amount,
+	public ProductOrderItemBean(int orderId, int productId, int producterId, String description, int amount,
 			double unitPrice, double discount) {
 		super();
 		this.orderId = orderId;
@@ -49,7 +49,7 @@ public class ProductOrderItemBean implements Serializable{
 		this.unitPrice = unitPrice;
 		this.discount = discount;
 	}
-	public ProductOrderItemBean(int itemId, int orderId, int productId, String producterId, String description,
+	public ProductOrderItemBean(int itemId, int orderId, int productId, int producterId, String description,
 			int amount, double unitPrice, double discount, Date shippingDate, int status) {
 		super();
 		this.itemId = itemId;
@@ -86,10 +86,10 @@ public class ProductOrderItemBean implements Serializable{
 		this.productId = productId;
 	}
 	@Column(name="PRODUCTERID")
-	public String getProducterId() {
+	public int getProducterId() {
 		return producterId;
 	}
-	public void setProducterId(String producterId) {
+	public void setProducterId(int producterId) {
 		this.producterId = producterId;
 	}
 	@Column(name="DESCRIPTION")

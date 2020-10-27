@@ -14,5 +14,10 @@ body {
 <body>
 <jsp:include page="/top.jsp" />
 	<h2>修改成功</h2>
+	<h2>請重新登錄</h2>
+	<br>
+	<a>5秒後自動跳轉至登錄頁面</a><br>
+	<a>如果沒有跳轉，請按</a><a href="Member_Login.jsp">這裡</a>！！！
+	<%response.setHeader("refresh","5;URL=Member_Login.jsp");%>
 </body>
 </html>

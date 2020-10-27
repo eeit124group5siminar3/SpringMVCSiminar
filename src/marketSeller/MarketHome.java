@@ -84,23 +84,21 @@ public class MarketHome extends HttpServlet {
 
 
 	private void processUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String selectid = request.getParameter("productid"); 
-		MarketSellerDAO marketDAO = new MarketSellerDAO();
-		List<MarketSellerBean> listmarketBeans = marketDAO.listMarketSellerBeans();
-		System.out.println(listmarketBeans);
-		List<MarketSellerBean> list = new ArrayList<MarketSellerBean>();
-		for (MarketSellerBean act : listmarketBeans) {
-			if(act.getProduct_id().equals(selectid)){
-				marketDAO.selectId(selectid );
-				list.add(act);
-			}
-			System.out.println(list);
-		}
-		
-		request.setAttribute("list", list);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("MarketU.jsp");
-        dispatcher.forward(request, response);      
-		return;
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        
+        String selectid = request.getParameter("productid");
+        int id = Integer.valueOf(selectid);
+        
+        MarketProductDao mDao = new MarketProductDao(session);
+        List<MarketProductTotalBean> list = new ArrayList<MarketProductTotalBean>();
+        list.add(mDao.select(id));
+        
+        request.setAttribute("list", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/marketSeller/MarketU.jsp");
+        dispatcher.forward(request, response);
+        return;
+       
 	}
 
 
@@ -109,15 +107,11 @@ public class MarketHome extends HttpServlet {
 		SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         String selectid = request.getParameter("productid");
-        
+        int id = Integer.valueOf(selectid);
         MarketProductDao mDao = new MarketProductDao(session);
-        boolean mBean = mDao.delete(selectid);
-		if (mBean==true) {
-			response.sendRedirect("MarketS.jsp");
-		} else {
-           System.out.println("失敗");
-		}
-		return;
+        mDao.delete(id);
+	    response.sendRedirect("MarketS.jsp");
+		
 	}
 
 	private void processSelectAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

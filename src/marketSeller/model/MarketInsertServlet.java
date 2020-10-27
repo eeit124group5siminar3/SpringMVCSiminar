@@ -1,4 +1,4 @@
-package marketSeller;
+package marketSeller.model;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -25,14 +26,18 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import mall.SystemUtils2018;
+import util.HibernateUtil;
 
 
 
 /**
  * Servlet implementation class MarketSellerServlet
  */
-@WebServlet("/marketSeller/MarketSellerServlet")
+@WebServlet("/marketSeller/model/MarketInsertServlet")
 //啟動檔案上傳的功能：
 //1. <form>標籤的 method屬性必須是"post", 而且
 //enctype屬性必須是"multipart/form-data"
@@ -83,6 +88,9 @@ public class MarketInsertServlet extends HttpServlet {
 			String fileName = "";
 			String priceStr = "";
 			Integer price= 0;
+			String quantityStr="";
+			Integer quantity=0;
+			String unit="";
 			String description = "";
 			long sizeInBytes = 0;
 			InputStream is = null;
@@ -140,6 +148,31 @@ public class MarketInsertServlet extends HttpServlet {
 							}
 							request.setAttribute("price", priceStr);
 						}   
+						
+						else if (fldName.equals("quantity")) {
+							quantityStr = value;
+							quantityStr = quantityStr.trim();
+							if (quantityStr == null || quantityStr.trim().length() == 0) {
+								errorMsgs.put("errQuantity", "必須輸入數量");
+							} else {
+								try {
+									quantity = Integer.parseInt(quantityStr);
+								} catch (NumberFormatException e) {
+									errorMsgs.put("errQuantity", "價格必須是數值");
+								}
+							}
+							request.setAttribute("quantity", quantityStr);
+						} 
+						if (fldName.equals("unit")) {
+							unit = value;
+							if (value == null || unit.trim().length() == 0) {
+								errorMsgs.put("errUnit", "必須輸入商單位");
+							} else {
+								request.setAttribute("unit", unit);
+							}
+						}
+						
+						
 
 					} else { // 表示此份資料是上傳的檔案
 						fileName = getFileName(p); // 由變數 p 中取出檔案名稱
@@ -158,27 +191,43 @@ public class MarketInsertServlet extends HttpServlet {
 			// 如果輸入資料有錯誤
 			if (!errorMsgs.isEmpty()) {
 				// 轉交給原輸入資料的網頁來顯示錯誤訊息
-				RequestDispatcher rd = request.getRequestDispatcher("MarketI.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/marketSeller/MarketI.jsp");
 				rd.forward(request, response);
 				return;
 			}
 
 			// 將上傳的檔案轉換為 Blob 物件
 			Blob blob = SystemUtils2018.fileToBlob(is, sizeInBytes);
-
-			MarketServlet marketServlet = new MarketServlet();
-
-			MarketSellerBean bb = new MarketSellerBean(product_name,product_area,price,blob,null,description);
-
-			marketServlet.saveProduct(bb);
+            
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+	        Session insession = factory.getCurrentSession();
+	        MarketProductBeanService productService = new MarketProductBeanService(insession);
+	        
+	        MarketProductTotalBean b1 =new MarketProductTotalBean();
+	        MarketProductImgBean b2 =new MarketProductImgBean();
+            b1.setProductName(product_name);
+            b2.setDescription(description);
+            b1.setProductArea(product_area);
+            b1.setPrice(price);
+            b1.setUnit(unit);
+            b1.setQuantity(quantity);
+            b2.setProductImg(blob);
+            
+            b1.setMarketProductImgBean(b2);
+            b2.setMarketProductTotalBean(b1);
+            
+           productService.insert(b1);
+           
 			successMsgs.put("success", "資料新增成功");
 			// 新增成功，通知瀏覽器對新網址發出請求
-			response.sendRedirect(response.encodeRedirectURL("MarketS.jsp"));
+			response.sendRedirect(response.encodeRedirectURL("../MarketS.jsp"));
+//			RequestDispatcher rd = request.getRequestDispatcher("/marketSeller/MarketS.jsp");
+//			rd.forward(request, response);
 			return;
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorMsgs.put("Exception", e.getMessage());
-			RequestDispatcher rd = request.getRequestDispatcher("MarketI.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/marketSeller/MarketI.jsp");
 			rd.forward(request, response);
 		}
 	}
