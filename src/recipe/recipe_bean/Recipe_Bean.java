@@ -21,15 +21,18 @@ public class Recipe_Bean {
 	private String desc;
 	private String cate;
 	private String rec_id;
-//	private Date up_date;
-//	private String gram_A;
 	private String method;
 	public String FileName;
+	
+	
+//	private Date up_date;
+//	private String gram_A;
 //	private InputStream data;
 //	private Blob sb;
 //	private FileInputStream fis;
 	
-	
+	public Recipe_Bean() {
+	}
 
 	public Recipe_Bean(String name, String ingredients_A, String ingredients_B, 
 			String ingredients_C,String ingredients_D, String desc, String cate
@@ -41,11 +44,13 @@ public class Recipe_Bean {
 		this.ingredients_D = ingredients_D;
 		this.desc = desc;
 		this.cate = cate;
+		this.method=method;
+		
+		
 //		this.rec_id = rec_id;
 //		this.FileName=FileName;
 //		this. data=data;
 //		this. sb=sb;
-		this.method=method;
 //		this.gram_A=gram_A;
 //		this.fis=fis;
 	}
@@ -64,11 +69,11 @@ public class Recipe_Bean {
 //	}
 	
 	
-	public Recipe_Bean() {
-	}
+
 	
 	@Id @Column(name="recipe_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	//因為資料庫沒有設定自動新增所有會有問題
 	public String getRec_id() {
 		return rec_id;
 	}

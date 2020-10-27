@@ -48,12 +48,12 @@ public class DisplayMaintainProduct extends HttpServlet {
 		session.setAttribute("requestURI", requestURI);
 		// 此時session物件存在，讀取session物件內的LoginOK
 		// 以檢查使用者是否登入。
-//		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
-//		if (mb == null) {
-//			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
-//			return;
-//		}
-//		String producterId=mb.getMember_no().toString();
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+		if (mb == null) {
+			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
+			return;
+		}
+		int producterId=mb.getMember_no();
 		String pageNoStr = request.getParameter("pageNo");
 		if (pageNoStr == null) {
 			pageNo = 1;
@@ -72,11 +72,11 @@ public class DisplayMaintainProduct extends HttpServlet {
 		//
 		service.setPageNo(pageNo);
 		service.setRecordsPerPage(RECORDS_PER_PAGE);
-		Collection<ProductBean> coll = service.getPageProducts();
-//		Collection<ProductBean> coll = service.getPageProducts(producterId);
+//		Collection<ProductBean> coll = service.getPageProducts();
+		Collection<ProductBean> coll = service.getPageProducts(producterId);
 		session.setAttribute("pageNo", pageNo);
-		request.setAttribute("totalPages", service.getTotalPages());
-//		request.setAttribute("totalPages", service.getTotalPages(producterId));
+//		request.setAttribute("totalPages", service.getTotalPages());
+		request.setAttribute("totalPages", service.getTotalPages(producterId));
 		request.setAttribute("products_DPP", coll);
 		RequestDispatcher rd = request.getRequestDispatcher("mall/ProductMaintainList.jsp");
 		rd.forward(request, response);
