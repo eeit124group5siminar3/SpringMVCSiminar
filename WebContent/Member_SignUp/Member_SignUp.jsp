@@ -82,9 +82,14 @@ body {
 				<td>統一編號</td>
 				<td><input type="text" name="member_gui_number" size="20"
 					value="" pattern="\d{8}" title="需輸入8位數字" placeholder="選填"></td>
-			</tr>
-
+			</tr>	
+				
+				
 		</table>
+					<div align="center">
+						<input type="checkbox" name="e_paper" value="1" checked="true"> <label>訂閱電子報</label>
+					</div>
+					<br>
 		<center>
 			<input type="submit" name="submit" value="送出"> <input
 				type="reset" value="重置">

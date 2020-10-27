@@ -70,6 +70,7 @@ public class Member_SignUp_Servlet extends HttpServlet {
 		String member_id;
 		String member_address;
 		String member_gui_number;
+		String e_paper;
 		
 
 		Member_DAO member_dao = new Member_DAO(session);
@@ -86,26 +87,40 @@ public class Member_SignUp_Servlet extends HttpServlet {
 		member_cellphone = request.getParameter("member_cellphone").trim();
 		member_address = request.getParameter("member_address").trim();
 		member_gui_number = request.getParameter("member_gui_number").trim();
+		e_paper = request.getParameter("e_paper");
 		boolean sel_email = member_dao.check_signup_email(member_email); // email驗證
 		boolean sel_id = member_dao.check_signup_id(id_upper); // ID驗證
 		boolean check_id = signup_function.check_id(id_upper); // ID檢查碼驗證
 		boolean check_date = signup_function.check_date(member_birthday);
+		System.out.println("電子報"+e_paper);
 
 		if (member_permissions.equals("0")) {
 			if (sel_email) {
 				if (sel_id) {
 					if (check_id) {
 						if (check_date) {
+							if (e_paper != null) {
+								// 建立Buyer_Object Bean
+								Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
+										member_name, member_birthday, member_cellphone, id_upper, member_address,
+										member_gui_number,e_paper);
+								// 建立getSession(true) 若沒有Session則會建立Session
+								request.getSession(true).setAttribute("reg_buyer", reg_buyer);
+								// 把工作交給Buyer_SignUp_Check.jsp
+								request.getRequestDispatcher("Member_SignUp/Member_SignUp_Check0.jsp").forward(request,
+										response);
+							}else {
+								// 建立Buyer_Object Bean
+								Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
+										member_name, member_birthday, member_cellphone, id_upper, member_address,
+										member_gui_number,e_paper);
+								// 建立getSession(true) 若沒有Session則會建立Session
+								request.getSession(true).setAttribute("reg_buyer", reg_buyer);
+								// 把工作交給Buyer_SignUp_Check.jsp
+								request.getRequestDispatcher("Member_SignUp/Member_SignUp_Check1.jsp").forward(request,
+										response);
+							}
 
-							// 建立Buyer_Object Bean
-							Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
-									member_name, member_birthday, member_cellphone, id_upper, member_address,
-									member_gui_number);
-							// 建立getSession(true) 若沒有Session則會建立Session
-							request.getSession(true).setAttribute("reg_buyer", reg_buyer);
-							// 把工作交給Buyer_SignUp_Check.jsp
-							request.getRequestDispatcher("Member_SignUp/Member_SignUp_Check0.jsp").forward(request,
-									response);
 						} else {
 							request.getRequestDispatcher("Member_SignUp/Member_SignUp_Alert_Birthday.jsp")
 									.forward(request, response);
@@ -126,16 +141,28 @@ public class Member_SignUp_Servlet extends HttpServlet {
 				if (sel_id) {
 					if (check_id) {
 						if (check_date) {
+							if (e_paper != null) {
+								// 建立Buyer_Object Bean
+								Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
+										member_name, member_birthday, member_cellphone, member_id, member_address,
+										member_gui_number,e_paper);
+								// 建立getSession(true) 若沒有Session則會建立Session
+								request.getSession(true).setAttribute("reg_buyer", reg_buyer);
+								// 把工作交給Buyer_SignUp_Check.jsp
+								request.getRequestDispatcher("Member_SignUp/Member_SignUp_Check2.jsp").forward(request,
+										response);
+							}else {
+								// 建立Buyer_Object Bean
+								Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
+										member_name, member_birthday, member_cellphone, member_id, member_address,
+										member_gui_number,e_paper);
+								// 建立getSession(true) 若沒有Session則會建立Session
+								request.getSession(true).setAttribute("reg_buyer", reg_buyer);
+								// 把工作交給Buyer_SignUp_Check.jsp
+								request.getRequestDispatcher("Member_SignUp/Member_SignUp_Check3.jsp").forward(request,
+										response);						
+							}
 
-							// 建立Buyer_Object Bean
-							Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
-									member_name, member_birthday, member_cellphone, member_id, member_address,
-									member_gui_number);
-							// 建立getSession(true) 若沒有Session則會建立Session
-							request.getSession(true).setAttribute("reg_buyer", reg_buyer);
-							// 把工作交給Buyer_SignUp_Check.jsp
-							request.getRequestDispatcher("Member_SignUp/Member_SignUp_Check1.jsp").forward(request,
-									response);
 						} else {
 							request.getRequestDispatcher("Member_SignUp/Member_SignUp_Alert_Birthday.jsp")
 									.forward(request, response);

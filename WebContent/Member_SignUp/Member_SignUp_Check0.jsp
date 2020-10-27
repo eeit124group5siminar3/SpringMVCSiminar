@@ -86,6 +86,13 @@ body {
 						property="member_gui_number" /></td>
 			</tr>
 		</table>
+		<div align="center">
+						<input type="checkbox" checked="true" disabled> <label>訂閱電子報</label>
+					</div>
+					<div style="display: none">
+						<jsp:getProperty name="reg_buyer" property="e_paper" />
+					</div>
+					<br>
 		<center>
 			<input type="submit" name="confirm" value="確認" /> <input
 				type="button" onclick="history.back()" value="修改"></input>

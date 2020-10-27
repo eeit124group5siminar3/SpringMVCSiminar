@@ -54,7 +54,7 @@ public class Member_SignUp implements Serializable {
 	// 註冊Bean
 	public Member_SignUp(String member_permissions, String member_email, String member_password, String member_name,
 			Date member_birthday, String member_cellphone, String member_id, String member_address,
-			String member_gui_number) {
+			String member_gui_number,String e_paper) {
 
 		this.member_permissions = member_permissions;
 		this.member_email = member_email;
@@ -65,6 +65,7 @@ public class Member_SignUp implements Serializable {
 		this.member_cellphone = member_cellphone;
 		this.member_address = member_address;
 		this.member_gui_number = member_gui_number;
+		this.e_paper = e_paper;
 	}
 
 	@Id

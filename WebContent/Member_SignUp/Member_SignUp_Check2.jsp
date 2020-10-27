@@ -35,12 +35,12 @@ body {
 				<td>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" id="customRadioInline1"
-							class="custom-control-input" checked="true" disabled> <label
+							class="custom-control-input" disabled> <label
 							class="custom-control-label" for="customRadioInline1">買家</label>
 					</div>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" id="customRadioInline2"
-							class="custom-control-input" disabled> <label
+							class="custom-control-input" checked="true" disabled> <label
 							class="custom-control-label" for="customRadioInline2">買家與賣家</label>
 					</div>
 					<div style="display: none">
@@ -87,7 +87,7 @@ body {
 			</tr>
 		</table>
 		<div align="center">
-						<input type="checkbox" disabled> <label>訂閱電子報</label>
+						<input type="checkbox" checked="true" disabled> <label>訂閱電子報</label>
 					</div>
 					<div style="display: none">
 						<jsp:getProperty name="reg_buyer" property="e_paper" />
