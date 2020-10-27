@@ -81,7 +81,7 @@ public class OrderDAO {
 		return list;
 	}
 
-	public List<ProductOrderBean> getMemberOrders(String BuyerId) {
+	public List<ProductOrderBean> getMemberOrders(int BuyerId) {
 		String hql="from ProductOrderBean where BuyerId = ?0 Order by orderDate desc ";
 		Query query=session.createQuery(hql);
 		query.setParameter(0, BuyerId);

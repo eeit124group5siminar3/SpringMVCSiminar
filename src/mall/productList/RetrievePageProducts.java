@@ -68,7 +68,7 @@ public class RetrievePageProducts extends HttpServlet {
 //			memberId = mb.getMember_no();
 //		}
 		// BookService介面負責讀取資料庫內Book表格內某一頁的書籍資料，並能新增、修改、刪除
-		// 書籍資料等。
+		
 
 		// 讀取瀏覽送來的 pageNo
 		String pageNoStr = request.getParameter("pageNo");
