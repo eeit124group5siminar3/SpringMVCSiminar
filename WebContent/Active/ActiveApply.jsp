@@ -46,36 +46,38 @@ body {
 				</div>
 				<div>
 					<label for="">活動地址:</label> 
-					<input type="text" id="actAddr" name="actAddr">
+					<input type="text" id="actAddr" name="actAddr" required="required">
 				</div>
 				<div>
 					<label for="">連絡電話:</label> 
-					<input type="text" id="tel" name="tel">
+					<input type="text" id="tel" name="tel" required="required">
 				</div>
 				<div>
 					<label for="">活動日期:</label> 
-					<input type="date" id="actDate" name="actDate">
+					<input type="date" id="actDate" name="actDate" required="required">
 				</div>
 				<div>
 					<label for="">報名起始日:</label> 
-					<input type="date" id="dateSta" name="dateSta"> 
+					<input type="date" id="dateSta" name="dateSta" required="required"> 
 					<label for="">報名結束日:</label> 
-					<input type="date" id="dateEnd" name="dateEnd"/>
+					<input type="date" id="dateEnd" name="dateEnd" required="required"/>
 				</div>
 				<div>
-					<label for="">活動人數:</label> <input type="text" id="expNum" name="expNum">
+					<label for="">活動人數:</label> 
+					<input type="text" id="expNum" name="expNum" required="required">
 				</div>
 				<div>
-					<label for="">活動費用:</label> <input type="text" id="price" name="price">
+					<label for="">活動費用:</label> 
+					<input type="text" id="price" name="price" required="required">
 				</div>
 				<div>
 					<label for="">活動描述:</label> <br>
-					<textarea cols="50" rows="6" id="actDescri" name="actDescri"></textarea>
+					<textarea cols="50" rows="6" id="actDescri" name="actDescri" ></textarea>
 				</div>
-				<div>
-					<label for="">活動海報:</label> <br> 
-					<input type="file" id="actImg" name="actImg">
-				</div>
+<!-- 				<div> -->
+<!-- 					<label for="">活動海報:</label> <br>  -->
+<!-- 					<input type="file" id="actImg" name="actImg"> -->
+<!-- 				</div> -->
 				<br>
 				<input name="apply" type="submit" value="申請"> 
 				<input name="acthome" type="submit" value="活動首頁">
