@@ -73,17 +73,18 @@ public class MarketUpdate extends HttpServlet {
 		mBean1.setProductArea(productArea);
 		String unit =request.getParameter("unit");
 		mBean1.setUnit(unit);
-		String quantity =request.getParameter("quantity");
-		mBean1.setQuantity(Integer.parseInt(quantity));
 		String price =request.getParameter("price");
 		mBean1.setQuantity(Integer.parseInt(price));
+		String quantity =request.getParameter("quantity");
+		mBean1.setQuantity(Integer.parseInt(quantity));
 		
 		mBean1.setMarketProductImgBean(mBean2);
 		mBean2.setMarketProductTotalBean(mBean1);
 		
 		mDao.update(mBean1);
 //		RequestDispatcher rd = request.getRequestDispatcher("/marketSeller/MarketS.jsp");
-		response.sendRedirect("../MarketS.jsp");
+		response.sendRedirect("./MarketS.jsp");
+		
 	}
 
 }

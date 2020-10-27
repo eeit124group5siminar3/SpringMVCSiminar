@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.sun.org.apache.bcel.internal.generic.Select;
+
 
 public class MarketProductBeanService implements IMarketProductBeanService {
 	private MarketProductDao mDao;
