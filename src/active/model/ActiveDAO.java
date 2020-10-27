@@ -33,7 +33,7 @@ public class ActiveDAO {
 	// 查詢單筆資料ByName
 	public List<Active> selectName(String actName) {
 		Query<Active> queryName = session.createQuery("From Active where actName like?1",Active.class);
-		queryName.setParameter(1, actName);
+		queryName.setParameter(1, "%"+actName+"%");
 		List<Active> activelist = queryName.getResultList();
 		return activelist;
 		

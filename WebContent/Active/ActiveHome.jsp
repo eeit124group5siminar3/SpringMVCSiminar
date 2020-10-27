@@ -16,17 +16,18 @@
 </style>
 </head>
 <body>
-	
 		<c:set var="funcName" value="ACT" scope="session" />
 		<jsp:include page="/top.jsp" />
 		<h1 align="center">一日農夫</h1>
 		<div align="center">
 			<table style="border: 8px #FFD382 groove;" border="1" cellpadding="5">
 			<h2>活動列表</h2>
-				<tr>
+				<tr>			
 					<td style="border: 0px" align="right" colspan="10">
+					<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
 						<input name="apply" type="submit" value="申請">
-					</td>
+					</form>
+					</td>				
 				</tr>
 				<tr>
 					<th>活動編號</th>
@@ -53,11 +54,11 @@
 						<td><c:out value="${Active.dateSta}" /> 到 <c:out
 								value="${Active.dateEnd}" /></td>
 						<td>
-						<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
-							<input type="hidden" id="actId" name="actId" value="${Active.actId}">
-							<input name="delete" type="submit" value="刪除">
-								&nbsp;&nbsp; 
-							<input name="update" type="submit" value="更新">
+							<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
+								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
+								<input name="delete" type="submit" value="刪除">
+									&nbsp;&nbsp; 
+								<input name="update" type="submit" value="更新">
 							</form>
 						</td>
 					</tr>
@@ -65,10 +66,14 @@
 				<tr>
 					<td style="border: 0px" colspan="4"></td>
 
-					<td style="border: 0px" colspan="6"><label for="">活動名稱:</label>
-						<input type="text" id="selectname" name="selectname">
-						&nbsp;&nbsp;&nbsp; <input name="selectone" type="submit"
-						value="查詢單筆"></td>
+					<td style="border: 0px" colspan="6">
+						<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
+							<label for="">活動名稱:</label>
+							<input type="text" id="selectname" name="selectname">
+							&nbsp;&nbsp;&nbsp; <input name="selectone" type="submit"
+							value="查詢單筆">
+						</form>
+					</td>
 				</tr>
 			</table>
 		</div>
