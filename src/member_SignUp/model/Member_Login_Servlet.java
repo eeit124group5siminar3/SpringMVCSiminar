@@ -108,7 +108,6 @@ public class Member_Login_Servlet extends HttpServlet {
 			response.addCookie(cookiePassword);			
 			response.addCookie(cookieRemember);
 			
-			System.out.println(login_bean.getMember_name());
 			
 			request.getSession().setAttribute("login_ok", login_bean);
 
