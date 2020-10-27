@@ -198,7 +198,7 @@ public class MarketInsertServlet extends HttpServlet {
 
 			// 將上傳的檔案轉換為 Blob 物件
 			Blob blob = SystemUtils2018.fileToBlob(is, sizeInBytes);
-            
+            //hi
 			SessionFactory factory = HibernateUtil.getSessionFactory();
 	        Session insession = factory.getCurrentSession();
 	        MarketProductBeanService productService = new MarketProductBeanService(insession);
