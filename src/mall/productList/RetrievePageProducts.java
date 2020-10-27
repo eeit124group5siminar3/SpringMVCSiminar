@@ -50,8 +50,8 @@ public class RetrievePageProducts extends HttpServlet {
 		}
 		// 登入成功後，Session範圍內才會有LoginOK對應的MemberBean物件
 		int memberId = 0;
-//		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
-		Member_SignUp mb =null;
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+//		Member_SignUp mb =null;
 		// 取出使用者的memberId，後面的Cookie會用到
 		if (mb == null) {
 			mb = new Member_SignUp();
@@ -60,7 +60,7 @@ public class RetrievePageProducts extends HttpServlet {
 			memberId = 123456;
 			mb.setMember_no(memberId);
 			mb.setMember_permissions("1");
-			session.setAttribute("login_ok", mb);
+			session.setAttribute("login_guest", mb);
 		} else {
 			memberId = mb.getMember_no();
 		}
