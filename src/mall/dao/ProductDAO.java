@@ -206,7 +206,6 @@ public class ProductDAO implements Serializable {
 	// 修改一筆書籍資料
 
 	public ProductBean updateProduct(ProductBean bean, long sizeInBytes) {
-		CategoryBean categoryBean = session.get(CategoryBean.class, bean.getCategory());
 			session.update(bean);
 			return bean;
 	}
