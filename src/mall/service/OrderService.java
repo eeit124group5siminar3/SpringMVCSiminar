@@ -63,7 +63,7 @@ public class OrderService {
 		return odao.getAllOrders();
 	}
 
-	public List<ProductOrderBean> getMemberOrders(String memberId) {
+	public List<ProductOrderBean> getMemberOrders(int memberId) {
 		return odao.getMemberOrders(memberId);
 	}
 }
