@@ -5,7 +5,7 @@
 --  DDL for Table MARKET_PRODUCT_IMG
 --------------------------------------------------------
 
-  CREATE TABLE MARKET_PRODUCT_IMG" 
+  CREATE TABLE MARKET_PRODUCT_IMG
    (	"PRODUCT_IMG" BLOB, 
 	"DESCRIPTION" VARCHAR2(225 BYTE), 
 	"PRODUCT_ID" NUMBER
