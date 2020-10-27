@@ -16,6 +16,7 @@
 <jsp:include page="/top.jsp" />
    	 <h1 align="center">商品管理</h1>
      <div align="center">
+     <div>圖片尚未能更新</div>
      <form action="<c:url value='MarketHome'></c:url>" method="post">
         <table  style="border:8px #FFD382 groove;"border="1" cellpadding="5">
             <tr>
@@ -35,7 +36,7 @@
                 <th>價格</th>
                 <th>單位</th>
                 <th>數量</th>
-          <!--       <th>圖片</th>  -->
+               <th>圖片</th> 
                 <th>修改 刪除</th>
                 
             </tr>
@@ -48,11 +49,11 @@
                     <td><c:out value="${IBean.price}"/></td>
                     <td><c:out value="${IBean.unit}"/></td>
                     <td><c:out value="${IBean.quantity}"/></td>      
- <!--                <td>  
+                <td>  
               <img height='80' width='80'
 				src='${pageContext.servletContext.contextPath}/marketSeller/RetrieveMarketImage?id=${IBean.marketProductImgBean.productId}&type=PRODUCT'>
 				</td>
-				-->    
+				 
 				<td>
 				<form action="<c:url value='MarketHome'></c:url>" method="post">
 				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">

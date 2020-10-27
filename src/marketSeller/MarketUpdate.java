@@ -74,7 +74,8 @@ public class MarketUpdate extends HttpServlet {
 		String unit =request.getParameter("unit");
 		mBean1.setUnit(unit);
 		String price =request.getParameter("price");
-		mBean1.setQuantity(Integer.parseInt(price));
+		mBean1.setPrice(Integer.parseInt(price));
+		System.out.println("價格"+price);
 		String quantity =request.getParameter("quantity");
 		mBean1.setQuantity(Integer.parseInt(quantity));
 		
