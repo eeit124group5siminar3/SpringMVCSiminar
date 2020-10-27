@@ -74,10 +74,10 @@ public class DisplayMaintainProduct extends HttpServlet {
 		service.setRecordsPerPage(RECORDS_PER_PAGE);
 		
 //		Collection<ProductBean> coll = service.getPageProducts();
-		Collection<ProductBean> coll = service.getPageProducts(producterId);
 		session.setAttribute("pageNo", pageNo);
 //		request.setAttribute("totalPages", service.getTotalPages());
 		request.setAttribute("totalPages", service.getTotalPages(producterId));
+		Collection<ProductBean> coll = service.getPageProducts(producterId);
 		request.setAttribute("products_DPP", coll);
 		RequestDispatcher rd = request.getRequestDispatcher("mall/ProductMaintainList.jsp");
 		rd.forward(request, response);

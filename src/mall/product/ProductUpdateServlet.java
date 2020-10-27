@@ -220,15 +220,25 @@ public class ProductUpdateServlet extends HttpServlet {
 				blob=bb.getCoverImage();
 //				fileName=bb.getFileName();
 			}
+			bb.setProduct(product);
+			bb.setPrice(price);
+			bb.setDiscount(discount);
+			bb.setCoverImage(blob);
+			bb.setFileName(fileName);
+			bb.setStock(stock);
+			bb.setShelfTime(shelfTime);
+			bb.setCategory(category);
+			bb.setContent(content);
+			bb.setUnit(unit);
+			bb.setDescription(description);
+//			ProductBean newBean = new ProductBean(bb.getProductId(), product, bb.getProducterId(), price, discount, blob, fileName,
+//					stock, bb.getAddedDate(), shelfTime, content, unit, description, category);
 			
-			ProductBean newBean = new ProductBean(bb.getProductId(), product, bb.getProducterId(), price, discount, blob, fileName,
-					stock, bb.getAddedDate(), shelfTime, content, unit, description, category);
-			
-			productService.updateProduct(newBean, sizeInBytes);
+			productService.updateProduct(bb, sizeInBytes);
 			
 //			hibernateSession.getTransaction().commit();
 //			hibernateSession.beginTransaction();
-//			response.sendRedirect("/DisplayMaintainProduct");
+//			response.sendRedirect("./DisplayMaintainProduct");
 			RequestDispatcher rd = request.getRequestDispatcher("DisplayMaintainProduct?pageNo=" + pageNo);
 			rd.forward(request, response);
 			return;
