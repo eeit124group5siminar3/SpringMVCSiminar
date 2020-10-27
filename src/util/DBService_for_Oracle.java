@@ -10,8 +10,8 @@ public class DBService_for_Oracle {
 
 
 	private static final String DBURL_Oracle = "jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1";
-	public static final String USERID_Oracle = "hr";
-	public static final String PSWD_Oracle = "hr";
+	public static final String USERID_Oracle = "seminar";
+	public static final String PSWD_Oracle = "seminar";
 
 
 	private static final String DROP_PRODUCT = "DROP TABLE PRODUCT";
