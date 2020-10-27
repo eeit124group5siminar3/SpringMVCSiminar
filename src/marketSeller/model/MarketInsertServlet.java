@@ -217,9 +217,12 @@ public class MarketInsertServlet extends HttpServlet {
             b2.setMarketProductTotalBean(b1);
             
            productService.insert(b1);
+           
 			successMsgs.put("success", "資料新增成功");
 			// 新增成功，通知瀏覽器對新網址發出請求
-			response.sendRedirect(response.encodeRedirectURL("/marketSeller/MarketS.jsp"));
+			response.sendRedirect(response.encodeRedirectURL("../MarketS.jsp"));
+//			RequestDispatcher rd = request.getRequestDispatcher("/marketSeller/MarketS.jsp");
+//			rd.forward(request, response);
 			return;
 		} catch (Exception e) {
 			e.printStackTrace();

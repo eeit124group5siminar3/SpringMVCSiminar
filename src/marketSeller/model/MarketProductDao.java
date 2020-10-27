@@ -19,7 +19,12 @@ public class MarketProductDao {
 		return list;
 	}
 	
-	public boolean delete(String productId) {
+	public MarketProductTotalBean select(int productId) {
+		return session.get(MarketProductTotalBean.class, productId);
+	}
+	
+	//刪除
+	public boolean delete(int productId) {
 	MarketProductTotalBean result =session.get(MarketProductTotalBean.class,productId);
 		
 		if (result!=null) {
@@ -28,7 +33,7 @@ public class MarketProductDao {
 		}
 		return false;
 	}
-	
+	//新增
 	public MarketProductTotalBean insert(MarketProductTotalBean bean) {
 		MarketProductTotalBean result =session.get(MarketProductTotalBean.class,bean.getProductId());
 		
@@ -38,4 +43,11 @@ public class MarketProductDao {
 		}
 		return null;
 	}
+	
+	//更新
+	public MarketProductTotalBean update(MarketProductTotalBean bean) {
+	    session.update(bean);
+	    return bean;
+		}
+	
 }
