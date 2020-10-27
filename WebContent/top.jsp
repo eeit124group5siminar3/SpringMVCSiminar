@@ -45,7 +45,7 @@
 						<div class='menu'>
 							<c:if test="${ funcName != 'CHE' }">
 								<a
-									href="<c:url value='${request.contextPath}/MarketHome.jsp' />">
+									href="<c:url value='${request.contextPath}/marketSeller/MarketHome.jsp' />">
 									市場 </a>
 							</c:if>
 							<c:if test="${ funcName == 'CHE' }"> 
@@ -57,7 +57,7 @@
 						<div class='menu'>
 							<c:if test="${ funcName != 'ORD' }">
 								<a
-									href="<c:url value='${request.contextPath}/recipe_workpage.jsp' />">
+									href="<c:url value='${request.contextPath}/recipe/recipe_workpage.jsp' />">
 									食譜 </a>
 							</c:if>
 							<c:if test="${ funcName == 'ORD' }"> 
@@ -69,7 +69,7 @@
 						<div class='menu'>
 							<c:if test="${ funcName != 'ACT' }">
 								<a
-									href="<c:url value='${request.contextPath}/ActiveHome.jsp' />">
+									href="<c:url value='${request.contextPath}/Active/ActiveHome.jsp' />">
 									活動 </a>
 							</c:if>
 							<c:if test="${ funcName == 'ACT' }"> 
