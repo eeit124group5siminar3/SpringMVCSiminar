@@ -114,13 +114,14 @@ public class ProductDAO implements Serializable {
 
 	public List<ProductBean> getPageProducts(int producterId) {
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ProductBean where stock != 0 and producterId = ?0 ORDER BY ProductId";
+		String hql = "from ProductBean where stock != 0 and producterId =?0 ORDER BY ProductId";
 		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
 		query.setParameter(0, producterId);
 		query.setFirstResult(startRecordNo);
 		query.setMaxResults(5);
 		List<ProductBean> list = query.list();
 		return list;
+		
 	}
 
 	public long getRecordCounts() {
@@ -203,10 +204,24 @@ public class ProductDAO implements Serializable {
 
 
 
-	// 修改一筆書籍資料
+
 
 	public ProductBean updateProduct(ProductBean bean, long sizeInBytes) {
+//			ProductBean result=session.get(ProductBean.class, bean.getProductId());
+//			if(result!=null) {
+//				result.setProducterName(bean.getProducterName());
+//				result.setPrice(bean.getPrice());
+//				result.setShelfTime(bean.getShelfTime());
+//				result.setStock(bean.getStock());
+//				result.setContent(bean.getContent());
+//				result.setUnit(bean.getUnit());
+//				result.setDiscount(bean.getDiscount());
+//				result.setCategory(bean.getCategory());
+//				result.setCoverImage(bean.getCoverImage());
+//				result.setDescription(bean.getDescription());
+//			}
 			session.update(bean);
+//			session.getTransaction().commit();
 			return bean;
 	}
 

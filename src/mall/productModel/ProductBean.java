@@ -119,6 +119,7 @@ public class ProductBean implements Serializable {
 	public void setProduct(String product) {
 		this.product = product;
 	}
+//	@Column(name = "PRODUCTERID")
 	@Column(name = "PRODUCTERID",updatable= false)
 	public int getProducterId() {
 		return producterId;

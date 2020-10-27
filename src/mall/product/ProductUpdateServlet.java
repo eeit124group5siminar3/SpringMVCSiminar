@@ -225,6 +225,10 @@ public class ProductUpdateServlet extends HttpServlet {
 					stock, bb.getAddedDate(), shelfTime, content, unit, description, category);
 			
 			productService.updateProduct(newBean, sizeInBytes);
+			
+//			hibernateSession.getTransaction().commit();
+//			hibernateSession.beginTransaction();
+//			response.sendRedirect("/DisplayMaintainProduct");
 			RequestDispatcher rd = request.getRequestDispatcher("DisplayMaintainProduct?pageNo=" + pageNo);
 			rd.forward(request, response);
 			return;

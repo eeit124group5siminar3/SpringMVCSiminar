@@ -36,17 +36,17 @@ public class OrderListServlet extends HttpServlet {
 			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
 			return;
 		}
-//		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
-//		if(mb==null) {
-//			mb=(Member_SignUp)session.getAttribute("login_guest");
-//		}
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+		if(mb==null) {
+			mb=(Member_SignUp)session.getAttribute("login_guest");
+		}
 		
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session hibernateSession = factory.getCurrentSession();
 		OrderService orderService = new OrderService(hibernateSession);
 
-		List<ProductOrderBean> memberOrders = orderService.getMemberOrders("a1");
-//		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(mb.getMember_no().toString());
+
+		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(mb.getMember_no());
 		request.setAttribute("memberOrders", memberOrders);
 		RequestDispatcher rd = request.getRequestDispatcher("/mall/OrderList.jsp");
 		rd.forward(request, response);

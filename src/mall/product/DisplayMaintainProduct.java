@@ -72,6 +72,7 @@ public class DisplayMaintainProduct extends HttpServlet {
 		//
 		service.setPageNo(pageNo);
 		service.setRecordsPerPage(RECORDS_PER_PAGE);
+		
 //		Collection<ProductBean> coll = service.getPageProducts();
 		Collection<ProductBean> coll = service.getPageProducts(producterId);
 		session.setAttribute("pageNo", pageNo);
