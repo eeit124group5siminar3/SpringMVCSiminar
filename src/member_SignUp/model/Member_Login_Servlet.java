@@ -111,7 +111,8 @@ public class Member_Login_Servlet extends HttpServlet {
 			
 			request.getSession().setAttribute("login_ok", login_bean);
 
-			request.getRequestDispatcher("Member_SignUp/Member_Login_OK.jsp").forward(request, response);
+			response.sendRedirect("Member_SignUp/Member_Login_OK.jsp");
+//			request.getRequestDispatcher("Member_SignUp/Member_Login_OK.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("Member_SignUp/Member_Login_Alert.jsp").forward(request, response);
 		}
