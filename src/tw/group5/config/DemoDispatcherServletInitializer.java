@@ -16,28 +16,29 @@ import tw.group5.util.OpenSessionInViewFilter;
 //Web.xml
 public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	@Override
-	protected Filter[] getServletFilters() {
-	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
-	characterEncodingFilter.setEncoding("UTF-8");
-	characterEncodingFilter.setForceEncoding(true);
-	return new Filter[] {characterEncodingFilter};
-	}
+//	@Override
+//	protected Filter[] getServletFilters() {
+//	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
+//	characterEncodingFilter.setEncoding("UTF-8");
+//	characterEncodingFilter.setForceEncoding(true);
+//	return new Filter[] {characterEncodingFilter};
+//	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class[] {RootAppConfig.class};
 	}
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {SpringMVCJavaConfig.class};
-	}
+//	@Override
+//	protected Class<?>[] getServletConfigClasses() {
+//		return new Class[] {SpringMVCJavaConfig.class};
+//	}
 
-	@Override
-	protected String[] getServletMappings() {
-		return new String[] {"/"};
-	}
+//	@Override
+//	protected String[] getServletMappings() {
+//		return new String[] {"/"};
+//	}
+	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
