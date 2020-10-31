@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
@@ -13,7 +13,7 @@
 		base-package="tw.kevintsou" />
 	<mvc:annotation-driven />
 	<tx:annotation-driven />
-<!-- 	<bean id="helloController" name="/hello.controller" -->
+ 	<bean id="helloController" name="/hello.controller" -->
 <!-- 		class="tw.kevintsou.controller.HelloController" /> -->
 <!-- 	<bean -->
 <!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
@@ -47,8 +47,8 @@
 <!-- 				<ref bean="jsonView" /> -->
 <!-- 			</list> -->
 <!-- 		</property> -->
-<!-- 	</bean> -->
+<!-- 	</bean> 
 
 
 
-</beans>
+</beans>-->
