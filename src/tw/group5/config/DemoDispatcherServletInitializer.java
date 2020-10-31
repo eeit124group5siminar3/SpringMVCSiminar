@@ -44,8 +44,8 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 		rootContext.register(SpringMVCJavaConfig.class);
 		rootContext.setServletContext(servletContext);
 		ServletRegistration.Dynamic mvc = servletContext.addServlet("mvc", new DispatcherServlet(rootContext));
-//		mvc.setLoadOnStartup(1);
-//		mvc.addMapping("/");
+		mvc.setLoadOnStartup(1);
+		mvc.addMapping("/");
 		FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("endcodingFilter", new CharacterEncodingFilter());
 		filterRegistration.setInitParameter("encoding", "UTF-8");
 		filterRegistration.setInitParameter("forceEncoding", "true");
