@@ -49,12 +49,13 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 	}
 
 	public SpringMVCJavaConfig() {
-		addProperties();
+		
 	}
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
+		addProperties();
 	}
 
 	// 設定view處理者
@@ -68,28 +69,28 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 	}
 
 	// 獲得DataSource
-	@Bean
-	public DataSource getJndiObjectFactoryBean() {
-		JndiObjectFactoryBean factoryBean = new JndiObjectFactoryBean();
-		factoryBean.setJndiName("java:comp/env/jdbc/xe");
-		DataSource ds = (DataSource) factoryBean.getObject();
-		return ds;
-	}
+//	@Bean
+//	public DataSource getJndiObjectFactoryBean() {
+//		JndiObjectFactoryBean factoryBean = new JndiObjectFactoryBean();
+//		factoryBean.setJndiName("java:comp/env/jdbc/xe");
+//		DataSource ds = (DataSource) factoryBean.getObject();
+//		return ds;
+//	}
 
-	// 獲得SessionFactory
-	@Bean(destroyMethod = "destroy")
-	public LocalSessionFactoryBean sessionFactory() {
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(getJndiObjectFactoryBean());
-		sessionFactory.setPackagesToScan("tw.group5");
-		Properties hibernateProperties = new Properties();
-		hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
-		hibernateProperties.put("hibernate.current_session_context_class", "thread");
-		hibernateProperties.put("hibernate.show_sql", "true");
-		hibernateProperties.put("hibernate.format_sql", "true");
-		sessionFactory.setHibernateProperties(hibernateProperties);
-		return sessionFactory;
-	}
+//	// 獲得SessionFactory
+//	@Bean(destroyMethod = "destroy")
+//	public LocalSessionFactoryBean sessionFactory() {
+//		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//		sessionFactory.setDataSource(getJndiObjectFactoryBean());
+//		sessionFactory.setPackagesToScan("tw.group5");
+//		Properties hibernateProperties = new Properties();
+//		hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
+//		hibernateProperties.put("hibernate.current_session_context_class", "thread");
+//		hibernateProperties.put("hibernate.show_sql", "true");
+//		hibernateProperties.put("hibernate.format_sql", "true");
+//		sessionFactory.setHibernateProperties(hibernateProperties);
+//		return sessionFactory;
+//	}
 
 	// 增加屬性
 	public void addProperties() {
