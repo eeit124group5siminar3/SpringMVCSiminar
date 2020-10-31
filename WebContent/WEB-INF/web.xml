@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
@@ -18,7 +18,7 @@
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
-<!-- 	<listener> -->
+ 	<listener> -->
 <!-- 		<listener-class>util.SessionFactoryListener</listener-class> -->
 <!-- 	</listener> -->
 <!-- 	<filter> -->
@@ -28,7 +28,7 @@
 <!-- 	<filter-mapping> -->
 <!-- 		<filter-name>OpenSessionViewFilter</filter-name> -->
 <!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
+<!-- 	</filter-mapping> 
 	<filter>
 		<filter-name>myCharacterEncodingFiler</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -51,7 +51,7 @@
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	</listener>-->
 
 	<!-- <filter> -->
 	<!-- <filter-name>OpenSessionInViewFilter</filter-name> -->
@@ -64,7 +64,7 @@
 	<!-- <filter-mapping> -->
 	<!-- <filter-name>OpenSessionInViewFilter</filter-name> -->
 	<!-- <url-pattern>/*</url-pattern> -->
-	<!-- </filter-mapping> -->
+	<!-- </filter-mapping> 
 	<servlet>
 		<servlet-name>mvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -79,4 +79,4 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<response-character-encoding>UTF-8</response-character-encoding>
-</web-app>
+</web-app>-->
