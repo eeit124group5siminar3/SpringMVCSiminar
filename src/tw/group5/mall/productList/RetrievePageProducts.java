@@ -14,11 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
-import tw.group5.util.HibernateUtil;
 
 /**
  * Servlet implementation class RetrievePageProducts
@@ -26,7 +28,8 @@ import tw.group5.util.HibernateUtil;
 @WebServlet("/RetrievePageProducts")
 public class RetrievePageProducts extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	@Autowired 
+	private LocalSessionFactoryBean sessionFactory;
 	int pageNo = 1;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -97,8 +100,11 @@ public class RetrievePageProducts extends HttpServlet {
 				pageNo = 1;
 			}
 		}
-		SessionFactory factory = HibernateUtil.getSessionFactory();
-		Session hibernateSession = factory.getCurrentSession();
+//		SessionFactory factory = HibernateUtil.getSessionFactory();
+		System.out.println(sessionFactory);
+		SessionFactory sessionFactory1=(SessionFactory) sessionFactory;
+		System.out.println(sessionFactory1);
+		Session hibernateSession = sessionFactory1.getCurrentSession();
 		ProductService service = new ProductService(hibernateSession);
 		//
 		// 讀取一頁的書籍資料之前，告訴service，現在要讀哪一頁

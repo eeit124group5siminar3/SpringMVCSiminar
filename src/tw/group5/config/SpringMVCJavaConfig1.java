@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -101,34 +102,44 @@ public class SpringMVCJavaConfig1 implements WebMvcConfigurer {
 	}
 	
 	//獲得jsonView
-	@Bean
-	public MappingJackson2JsonView jsonView() {
-		MappingJackson2JsonView mj2jv=new MappingJackson2JsonView();
-		mj2jv.setPrettyPrint(true);
-		return mj2jv;
-	}
+//	@Bean
+//	public MappingJackson2JsonView jsonView() {
+//		MappingJackson2JsonView mj2jv=new MappingJackson2JsonView();
+//		mj2jv.setPrettyPrint(true);
+//		return mj2jv;
+//	}
 	
 	//註冊用Json顯示的類別
-	@Bean
-	 public Jaxb2Marshaller jaxbMarshaller() {
-		Jaxb2Marshaller jaxb2Marshaller=new Jaxb2Marshaller();
-//		jaxb2Marshaller.setClassesToBeBound(classesToBeBound);
-		return jaxb2Marshaller;
-	 }
+//	@Bean
+//	 public Jaxb2Marshaller jaxbMarshaller() {
+//		Jaxb2Marshaller jaxb2Marshaller=new Jaxb2Marshaller();
+////		jaxb2Marshaller.setClassesToBeBound(classesToBeBound);
+//		return jaxb2Marshaller;
+//	 }
 	
 	//註冊JsonView
 	@Bean
-	public ContentNegotiatingViewResolver getContentNegotiatingViewResolver() {
-		ContentNegotiatingViewResolver contentNegotiatingViewResolver=new ContentNegotiatingViewResolver();
-		List<View> list =new ArrayList<View>();
-		list.add(jsonView());
-		contentNegotiatingViewResolver.setDefaultViews(list);
-		return contentNegotiatingViewResolver;
+//	public ContentNegotiatingViewResolver getContentNegotiatingViewResolver() {
+//		ContentNegotiatingViewResolver contentNegotiatingViewResolver=new ContentNegotiatingViewResolver();
+//		List<View> list =new ArrayList<View>();
+//		list.add(jsonView());
+//		contentNegotiatingViewResolver.setDefaultViews(list);
+//		return contentNegotiatingViewResolver;
+//	}
+
+//註冊View
+//	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+//		registry.addRedirectViewController("/", "/FrontPage");
+//		registry.addViewController("/");
+//		addViewController("/").setViewName("redirect:FrontPage");
+		WebMvcConfigurer.super.addViewControllers(registry);
+//		return "/FrontPage";
 	}
 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-//		registry.addViewController("/").setViewName("redirect:myFormPage.controller");
-		WebMvcConfigurer.super.addViewControllers(registry);
-	}
+//	@Override
+//	public void configureViewResolvers(ViewResolverRegistry registry) {
+//		// TODO Auto-generated method stub
+//		WebMvcConfigurer.super.configureViewResolvers(registry);
+//	}
 }
