@@ -4,19 +4,22 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.sql.Update;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import tw.group5.recipe.DAO.Recipe_DAO_hibernate;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 
+@Service
 public class Recipe_Service implements recipe_Service_interface {
+	@Autowired
 	private Recipe_DAO_hibernate rDAO;
 	
-	public Recipe_Service(Session session) {
-		rDAO=new Recipe_DAO_hibernate(session);
-	}
+//	public Recipe_Service(Session session) {
+//		rDAO=new Recipe_DAO_hibernate(session);
+//	}
 	
 	@Override
-	//因為資料庫沒有設定自動新增所有會有問題
 	public boolean insert(Recipe_Bean bean) {
 		return rDAO.insert(bean);
 	}
