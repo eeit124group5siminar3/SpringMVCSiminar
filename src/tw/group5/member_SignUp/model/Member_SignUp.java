@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name="Member_SignUp")
+@Component("myMemberSignUp")
 public class Member_SignUp implements Serializable {
 	
 
