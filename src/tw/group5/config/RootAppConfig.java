@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScans(value = { @ComponentScan("tw.group5")})
 //@PropertySource("classpath:db.properties")
-public class RootAppConfig1 {
+public class RootAppConfig {
 	
 
 	@Bean
@@ -37,7 +37,7 @@ public class RootAppConfig1 {
 		return ds;
 	}
 	
-	@Bean(name="sessionFactory",destroyMethod = "destroy")
+	@Bean(destroyMethod = "destroy")
 	public LocalSessionFactoryBean sessionFactory() throws IllegalArgumentException, NamingException {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setDataSource(dataSource());

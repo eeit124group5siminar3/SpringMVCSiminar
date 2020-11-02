@@ -25,7 +25,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 //@PropertySource("classpath:jdbc.properties")
 //mvc-servlet.xml
-public class SpringMVCJavaConfig1 implements WebMvcConfigurer {
+public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //	@Autowired
 //	private Environment env;
 
@@ -37,7 +37,7 @@ public class SpringMVCJavaConfig1 implements WebMvcConfigurer {
 		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/pages/js/");
 	}
 
-	public SpringMVCJavaConfig1() {
+	public SpringMVCJavaConfig() {
 		
 	}
 
@@ -118,7 +118,7 @@ public class SpringMVCJavaConfig1 implements WebMvcConfigurer {
 //	 }
 	
 	//註冊JsonView
-	@Bean
+//	@Bean
 //	public ContentNegotiatingViewResolver getContentNegotiatingViewResolver() {
 //		ContentNegotiatingViewResolver contentNegotiatingViewResolver=new ContentNegotiatingViewResolver();
 //		List<View> list =new ArrayList<View>();
@@ -129,17 +129,13 @@ public class SpringMVCJavaConfig1 implements WebMvcConfigurer {
 
 //註冊View
 //	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
+//	public void addViewControllers(ViewControllerRegistry registry) {
 //		registry.addRedirectViewController("/", "/FrontPage");
 //		registry.addViewController("/");
 //		addViewController("/").setViewName("redirect:FrontPage");
-		WebMvcConfigurer.super.addViewControllers(registry);
+//		WebMvcConfigurer.super.addViewControllers(registry);
 //		return "/FrontPage";
-	}
-
-//	@Override
-//	public void configureViewResolvers(ViewResolverRegistry registry) {
-//		// TODO Auto-generated method stub
-//		WebMvcConfigurer.super.configureViewResolvers(registry);
 //	}
+
+
 }

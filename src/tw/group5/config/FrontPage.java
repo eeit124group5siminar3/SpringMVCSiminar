@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class FrontPage {
-	@RequestMapping(path = "/FrontPage",method = RequestMethod.GET)
+	@RequestMapping(path = "/",method = RequestMethod.GET)
 public String entryPage() {
 	return "index.jsp";
 }
