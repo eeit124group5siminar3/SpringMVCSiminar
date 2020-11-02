@@ -23,7 +23,7 @@ body {
 <jsp:include page="/top.jsp" />
 	<script type="text/javascript">
 		if (!alert("帳號或密碼輸入錯誤，請重新輸入"))
-			document.location = "Member_SignUp/Member_Login.jsp";
+			document.location = "/login.controller";
 	</script>
 </body>
 </html>
