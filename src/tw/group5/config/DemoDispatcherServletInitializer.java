@@ -33,18 +33,19 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
 	characterEncodingFilter.setEncoding("UTF-8");
 	characterEncodingFilter.setForceEncoding(true);
-	Filter OpenSessionInViewFilter=new OpenSessionInViewFilter();
-	return new Filter[] {characterEncodingFilter,OpenSessionInViewFilter};
+	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
+	return new Filter[] {characterEncodingFilter,openSessionInViewFilter};
 	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {RootAppConfig1.class};
+		return new Class[] {RootAppConfig.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {SpringMVCJavaConfig1.class};
+		
+		return new Class[] {SpringMVCJavaConfig.class};
 	}
 
 	@Override
@@ -52,15 +53,15 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 		return new String[] {"/"};
 	}
 
-	@Override
-	protected void registerContextLoaderListener(ServletContext servletContext) {
-		super.registerContextLoaderListener(servletContext);
-	}
-	
+//	@Override
+//	protected void registerContextLoaderListener(ServletContext servletContext) {
+//		super.registerContextLoaderListener(servletContext);
+//	}
+//	
 //	@Override
 //	public void onStartup(ServletContext servletContext) throws ServletException {
 //		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-//		rootContext.register(SpringMVCJavaConfig1.class);
+//		rootContext.register(SpringMVCJavaConfig.class);
 //		rootContext.setServletContext(servletContext);
 //		ServletRegistration.Dynamic mvc = servletContext.addServlet("mvc", new DispatcherServlet(rootContext));
 //		mvc.setLoadOnStartup(1);
