@@ -1,6 +1,6 @@
 package tw.group5.config;
 
-import javax.servlet.Filter;
+
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,13 +16,13 @@ import tw.group5.util.OpenSessionInViewFilter;
 //Web.xml
 public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	@Override
-	protected Filter[] getServletFilters() {
-	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
-	characterEncodingFilter.setEncoding("UTF-8");
-	characterEncodingFilter.setForceEncoding(true);
-	return new Filter[] {characterEncodingFilter};
-	}
+//	@Override
+//	protected Filter[] getServletFilters() {
+//	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
+//	characterEncodingFilter.setEncoding("UTF-8");
+//	characterEncodingFilter.setForceEncoding(true);
+//	return new Filter[] {characterEncodingFilter};
+//	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
@@ -38,14 +38,15 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
 	}
+	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(SpringMVCJavaConfig.class);
 		rootContext.setServletContext(servletContext);
 		ServletRegistration.Dynamic mvc = servletContext.addServlet("mvc", new DispatcherServlet(rootContext));
-//		mvc.setLoadOnStartup(1);
-//		mvc.addMapping("/");
+		mvc.setLoadOnStartup(1);
+		mvc.addMapping("/");
 		FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("endcodingFilter", new CharacterEncodingFilter());
 		filterRegistration.setInitParameter("encoding", "UTF-8");
 		filterRegistration.setInitParameter("forceEncoding", "true");
@@ -57,5 +58,17 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 	}
+
+//	@Override
+//	protected Class<?>[] getServletConfigClasses() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	protected String[] getServletMappings() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

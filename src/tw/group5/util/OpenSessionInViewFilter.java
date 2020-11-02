@@ -13,12 +13,15 @@ import javax.servlet.annotation.WebFilter;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class OpenSessionInViewFilter implements Filter {
+	@Autowired
 	private WebApplicationContext context;
+	@Autowired
 	private SessionFactory sessionFactory;
 	@Override
 	public void init(FilterConfig config) throws ServletException {
