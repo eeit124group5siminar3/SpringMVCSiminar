@@ -26,12 +26,12 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {RootAppConfig.class};
+		return new Class[] {RootAppConfig1.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] {SpringMVCJavaConfig.class};
+		return new Class[] {SpringMVCJavaConfig1.class};
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(SpringMVCJavaConfig.class);
+		rootContext.register(SpringMVCJavaConfig1.class);
 		rootContext.setServletContext(servletContext);
 		ServletRegistration.Dynamic mvc = servletContext.addServlet("mvc", new DispatcherServlet(rootContext));
 		mvc.setLoadOnStartup(1);
@@ -59,16 +59,5 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 	}
 
-//	@Override
-//	protected Class<?>[] getServletConfigClasses() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	protected String[] getServletMappings() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }

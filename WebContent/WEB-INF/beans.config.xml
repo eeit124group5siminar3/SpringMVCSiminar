@@ -11,7 +11,7 @@
 <!-- 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"> -->
 <!-- 	<context:annotation-config /> -->
 <!-- 	<context:component-scan -->
-<!-- 		base-package="tw.kevintsou" /> -->
+<!-- 		base-package="tw.group5" /> -->
 <!-- 	<mvc:annotation-driven /> -->
 <!-- 	<tx:annotation-driven -->
 <!-- 		transaction-manager="transactionManager" /> -->

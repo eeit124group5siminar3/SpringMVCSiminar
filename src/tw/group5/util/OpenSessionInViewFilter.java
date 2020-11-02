@@ -9,8 +9,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 //@WebFilter("/*")
 public class OpenSessionInViewFilter implements Filter {
-	@Autowired
+@Autowired
 	private WebApplicationContext context;
-	@Autowired
+@Autowired
 	private SessionFactory sessionFactory;
 	@Override
 	public void init(FilterConfig config) throws ServletException {

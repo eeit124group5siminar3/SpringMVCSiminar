@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 //@PropertySource("classpath:db.properties")
-public class RootAppConfig {
+public class RootAppConfig1 {
 	
 
 	@Bean

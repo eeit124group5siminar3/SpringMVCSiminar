@@ -24,7 +24,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 //@PropertySource("classpath:jdbc.properties")
 //mvc-servlet.xml
-public class SpringMVCJavaConfig implements WebMvcConfigurer {
+public class SpringMVCJavaConfig1 implements WebMvcConfigurer {
 //	@Autowired
 //	private Environment env;
 
@@ -36,7 +36,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/pages/js/");
 	}
 
-	public SpringMVCJavaConfig() {
+	public SpringMVCJavaConfig1() {
 		
 	}
 
