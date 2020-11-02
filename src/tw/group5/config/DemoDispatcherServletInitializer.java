@@ -1,6 +1,6 @@
 package tw.group5.config;
 
-import javax.servlet.Filter;
+
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -29,15 +29,15 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 		return new Class[] {RootAppConfig.class};
 	}
 
-//	@Override
-//	protected Class<?>[] getServletConfigClasses() {
-//		return new Class[] {SpringMVCJavaConfig.class};
-//	}
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class[] {SpringMVCJavaConfig.class};
+	}
 
-//	@Override
-//	protected String[] getServletMappings() {
-//		return new String[] {"/"};
-//	}
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] {"/"};
+	}
 	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
@@ -58,5 +58,17 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 
 		servletContext.addListener(new ContextLoaderListener(rootContext));
 	}
+
+//	@Override
+//	protected Class<?>[] getServletConfigClasses() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	protected String[] getServletMappings() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

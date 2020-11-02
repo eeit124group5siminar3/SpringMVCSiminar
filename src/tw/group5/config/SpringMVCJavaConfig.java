@@ -2,22 +2,10 @@ package tw.group5.config;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
-import org.springframework.jndi.JndiObjectFactoryBean;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -32,13 +20,13 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "tw.group5")
-@EnableTransactionManagement
+//@EnableTransactionManagement
 
-@PropertySource("classpath:jdbc.properties")
+//@PropertySource("classpath:jdbc.properties")
 //mvc-servlet.xml
 public class SpringMVCJavaConfig implements WebMvcConfigurer {
-	@Autowired
-	private Environment env;
+//	@Autowired
+//	private Environment env;
 
 	// 增加資源處理者
 	@Override
@@ -55,7 +43,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
-		addProperties();
+		
 	}
 
 	// 設定view處理者
@@ -68,7 +56,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 		return viewResolver;
 	}
 
-	// 獲得DataSource
+//	 獲得DataSource
 //	@Bean
 //	public DataSource getJndiObjectFactoryBean() {
 //		JndiObjectFactoryBean factoryBean = new JndiObjectFactoryBean();
@@ -93,16 +81,16 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //	}
 
 	// 增加屬性
-	public void addProperties() {
-		String driverClassName = env.getRequiredProperty("datasource.driverClassName");
-		String url = env.getRequiredProperty("datasource.url");
-		String username = env.getRequiredProperty("datasource.username");
-		String password = env.getRequiredProperty("datasource.password");
-		System.out.println("driverClassName = " + driverClassName);
-		System.out.println("url = " + url);
-		System.out.println("username = " + username);
-		System.out.println("password = " + password);
-	}
+//	public void addProperties() {
+//		String driverClassName = env.getRequiredProperty("datasource.driverClassName");
+//		String url = env.getRequiredProperty("datasource.url");
+//		String username = env.getRequiredProperty("datasource.username");
+//		String password = env.getRequiredProperty("datasource.password");
+//		System.out.println("driverClassName = " + driverClassName);
+//		System.out.println("url = " + url);
+//		System.out.println("username = " + username);
+//		System.out.println("password = " + password);
+//	}
 
 	// 獲得multipart處理者
 	@Bean
