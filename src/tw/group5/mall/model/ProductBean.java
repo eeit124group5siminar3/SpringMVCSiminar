@@ -40,16 +40,16 @@ public class ProductBean implements Serializable {
 	private String description;
 	private int category;
 	private String producterName;
-//	private CategoryBean categoryBean;
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name="CATEGORY")
-//	public CategoryBean getCategoryBean() {
-//		return categoryBean;
-//	}
-//
-//	public void setCategoryBean(CategoryBean categoryBean) {
-//		this.categoryBean = categoryBean;
-//	}
+	private CategoryBean categoryBean;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="category")
+	public CategoryBean getCategoryBean() {
+		return categoryBean;
+	}
+
+	public void setCategoryBean(CategoryBean categoryBean) {
+		this.categoryBean = categoryBean;
+	}
 
 	public ProductBean() {
 		super();
@@ -99,10 +99,10 @@ public class ProductBean implements Serializable {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-	@GenericGenerator(name="generator",strategy="foreign",parameters=@Parameter(name="property",value="productCategory"))
-	@GeneratedValue(generator = "generator")
-	@Column(name = "CATEGORY" )
-//	@Transient
+//	@GenericGenerator(name="generator",strategy="foreign",parameters=@Parameter(name="property",value="productCategory"))
+//	@GeneratedValue(generator = "generator")
+//	@Column(name = "CATEGORY" )
+	@Transient
 	public int getCategory() {
 		return category;
 	}

@@ -14,14 +14,22 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "market_Product_Img")
+@Component("market_Product_Img")
 public class MarketProductImgBean {
 	private int productId;
 	private String description;
 	private Blob productImg ;
 	private MarketProductTotalBean marketProductTotalBean;
+	
+	public  MarketProductImgBean() {
+		
+	}
+	
+	
 	
 	@GenericGenerator(name ="generator", strategy = "foreign", parameters = @Parameter(name="property", value = "marketProductTotalBean"))
 	@Id @Column(name = "PRODUCT_ID")

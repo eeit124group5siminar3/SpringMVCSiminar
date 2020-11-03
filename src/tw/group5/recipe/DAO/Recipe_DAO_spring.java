@@ -1,27 +1,35 @@
 package tw.group5.recipe.DAO;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 
 import java.util.List;
 
-public class Recipe_DAO_hibernate {
+@Repository
+public class Recipe_DAO_spring {
 	// 取得Session
-	private Session session;
+	@Autowired @Qualifier("sessionFactory")
+	private SessionFactory sessionFactory;
 	private java.util.List<Recipe_Bean> list;
+	
 
-	public Recipe_DAO_hibernate() {
+//	public Recipe_DAO_spring() {
+//
+//	}
 
-	}
-
-	public Recipe_DAO_hibernate(Session session) {
-		this.session = session;
-	}
+//	public Recipe_DAO_hibernate(Session session) {
+//		this.session = session;
+//	}
 
 	//Recipe_Servlet_insert
 	public boolean insert(Recipe_Bean bean) {
+		Session session =sessionFactory.getCurrentSession();
 		try {
 			System.out.println(bean.getRec_id());
 			session.save(bean);
@@ -36,6 +44,7 @@ public class Recipe_DAO_hibernate {
 
 	//Recipe_Servlet_update
 	public Recipe_Bean update(String rec_id, Recipe_Bean bean) {
+			Session session =sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			bean.setRec_id(rec_id);
 			System.out.println(bean.getName());
@@ -47,9 +56,10 @@ public class Recipe_DAO_hibernate {
 
 	//取得資料庫所有資料
 	public List<Recipe_Bean> listOfJavaBean() {
+		Session session =sessionFactory.getCurrentSession();
 		session.beginTransaction();
 		String hql="From Recipe_Bean";
-		Query query=session.createQuery(hql);
+		Query query=session.createQuery(hql,Recipe_Bean.class);
 		List<Recipe_Bean> list = query.list();
 //		session.getTransaction().commit();
 		return list;
@@ -59,9 +69,10 @@ public class Recipe_DAO_hibernate {
 	//查詢某資料
 	//Recipe_Servlet_search
 	public List<Recipe_Bean> ListOfSearch(String cate) {
+		Session session =sessionFactory.getCurrentSession();
 		session.beginTransaction();
 		String hql = "From Recipe_Bean where category =?0 ";
-		Query<Recipe_Bean> query = session.createQuery(hql);
+		Query<Recipe_Bean> query = session.createQuery(hql,Recipe_Bean.class);
 		query.setParameter(0, cate);
 		List<Recipe_Bean> list = query.list();
 
@@ -72,9 +83,10 @@ public class Recipe_DAO_hibernate {
 	//Recipe_Servlet_update
 	//查詢使用者擁有食譜中,其中一筆資料
 	public List<Recipe_Bean> partSearch(String rec_id){
+		Session session =sessionFactory.getCurrentSession();
 		session.beginTransaction();
 		String hql="From Recipe_Bean where recipe_id=?0";
-		Query<Recipe_Bean> query=session.createQuery(hql);
+		Query<Recipe_Bean> query=session.createQuery(hql,Recipe_Bean.class);
 		query.setParameter(0, rec_id);
 		
 		List<Recipe_Bean> list=query.list();
@@ -85,6 +97,7 @@ public class Recipe_DAO_hibernate {
 
 	//Recipe_Servlet_delete
 	public boolean delete(String rec_id) {
+		Session session =sessionFactory.getCurrentSession();
 		session.beginTransaction();
 		System.out.println(rec_id);
 		Recipe_Bean result = session.get(Recipe_Bean.class, rec_id);

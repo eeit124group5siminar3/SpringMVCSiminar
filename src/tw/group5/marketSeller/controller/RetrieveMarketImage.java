@@ -1,4 +1,4 @@
-package tw.group5.marketSeller;
+package tw.group5.marketSeller.controller;
 
 import java.io.IOException;
 import java.io.InputStream;

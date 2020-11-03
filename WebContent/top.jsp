@@ -117,7 +117,7 @@
 						</c:if></td>
 				</tr>
 				<tr height='20px'>
-					<td width='300px' colspan='9'><small>${pageContext.session.id }</small>
+<%-- 					<td width='300px' colspan='9'><small>${pageContext.session.id }</small> --%>
 					</td>
 				</tr>
 
