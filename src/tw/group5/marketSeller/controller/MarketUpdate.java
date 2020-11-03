@@ -1,4 +1,4 @@
-package tw.group5.marketSeller;
+package tw.group5.marketSeller.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,9 +20,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import tw.group5.active.model.ActiveDAO;
-import tw.group5.marketSeller.model.MarketProductDao;
-import tw.group5.marketSeller.model.MarketProductImgBean;
-import tw.group5.marketSeller.model.MarketProductTotalBean;
 import tw.group5.util.HibernateUtil;
 
 /**

@@ -49,10 +49,10 @@
                     <td><c:out value="${IBean.price}"/></td>
                     <td><c:out value="${IBean.unit}"/></td>
                     <td><c:out value="${IBean.quantity}"/></td>      
-                <td>  
+             <!--    <td>  
               <img height='80' width='80'
 				src='${pageContext.servletContext.contextPath}/marketSeller/RetrieveMarketImage?id=${IBean.marketProductImgBean.productId}&type=PRODUCT'>
-				</td>
+				</td> -->
 				 
 				<td>
 				<form action="<c:url value='MarketHome'></c:url>" method="post">
