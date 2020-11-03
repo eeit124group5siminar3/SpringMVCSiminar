@@ -29,6 +29,10 @@ public class Member_Service {
 		return memberDao.reset_password(member_email, member_id, member_name, member_cellphone);
 	}
 	
+	public Member_SignUp reset_bean(String member_email) {
+		return memberDao.reset_bean(member_email);
+	}
+	
 	public boolean updata_member_password(String member_email, String password) {
 		return memberDao.updata_member_password(member_email, password);
 	}
