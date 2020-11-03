@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MarketHome  {
 
 	
-//	@RequestMapping(path = "/selectAll.controller" ,method = RequestMethod.GET )
-//	public String selectAll(Model m) {
-//		System.out.println("來到MarketHome的Controller");
+	@RequestMapping(path = "/selectAll.controller" ,method = RequestMethod.GET )
+	public String selectAll(Model m) {
+		System.out.println("來到MarketHome的Controller");
 //		m.addAttribute("",)
-//		return "marketSeller/MarketHome";
-//	}
+		return "marketSeller/MarketHome";
+	}
 	
 	
 

@@ -11,8 +11,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name = "market_Product_Total")
+@Component("market_Product_Total")
 public class MarketProductTotalBean {
 	private int productId;
 	private String email;

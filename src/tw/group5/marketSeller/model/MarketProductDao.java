@@ -6,20 +6,22 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-
-import marketSeller.model.MarketProductTotalBean;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 
-@Repository
+@Repository("MarketProductDao")
 public class MarketProductDao {
 	
-	@Autowired @Qualifier("sessionFactory")
+	@Autowired 
+	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
 	
 	private Session session;
+	
+	public MarketProductDao() {
+		
+	}
 	
 	public MarketProductDao(Session session) {
 		this.session=session;

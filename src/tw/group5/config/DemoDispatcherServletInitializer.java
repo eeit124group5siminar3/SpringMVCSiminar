@@ -55,11 +55,11 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 		return new String[] {"/"};
 	}
 
-//	@Override
-//	protected void registerContextLoaderListener(ServletContext servletContext) {
-//		super.registerContextLoaderListener(servletContext);
-//	}
-//	
+	@Override
+	protected void registerContextLoaderListener(ServletContext servletContext) {
+		super.registerContextLoaderListener(servletContext);
+	}
+	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
