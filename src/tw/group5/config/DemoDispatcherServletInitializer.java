@@ -15,7 +15,6 @@ import javax.servlet.ServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.internal.FilterConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
@@ -25,19 +24,19 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import tw.group5.member_SignUp.util.Member_Cookie;
 import tw.group5.util.OpenSessionInViewFilter;
 //Web.xml
 public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-//	@Override
-//	protected Filter[] getServletFilters() {
-//	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
-//	characterEncodingFilter.setEncoding("UTF-8");
-//	characterEncodingFilter.setForceEncoding(true);
-//	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
-//	
-//	return new Filter[] {characterEncodingFilter,openSessionInViewFilter};
-//	}
+	@Override
+	protected Filter[] getServletFilters() {
+	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
+	characterEncodingFilter.setEncoding("UTF-8");
+	characterEncodingFilter.setForceEncoding(true);
+	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
+	return new Filter[] {characterEncodingFilter,openSessionInViewFilter,new Member_Cookie()};
+	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
