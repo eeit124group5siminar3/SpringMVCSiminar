@@ -15,6 +15,7 @@ import javax.servlet.ServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.internal.FilterConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
@@ -34,6 +35,7 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 //	characterEncodingFilter.setEncoding("UTF-8");
 //	characterEncodingFilter.setForceEncoding(true);
 //	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
+//	
 //	return new Filter[] {characterEncodingFilter,openSessionInViewFilter};
 //	}
 
@@ -61,6 +63,8 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.scan("/tw/group5/");
+		rootContext.refresh();
 		rootContext.register(SpringMVCJavaConfig.class);
 		rootContext.setServletContext(servletContext);
 		ServletRegistration.Dynamic mvc = servletContext.addServlet("mvc", new DispatcherServlet(rootContext));

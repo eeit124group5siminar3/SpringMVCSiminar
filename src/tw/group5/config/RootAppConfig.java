@@ -56,7 +56,7 @@ public class RootAppConfig {
 	}
 	
 	@Bean(name = "transactionManager")
-	@Autowired
+//	@Autowired
 	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory);
