@@ -24,18 +24,19 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import tw.group5.member_SignUp.util.Member_Cookie;
 import tw.group5.util.OpenSessionInViewFilter;
 //Web.xml
 public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-//	@Override
-//	protected Filter[] getServletFilters() {
-//	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
-//	characterEncodingFilter.setEncoding("UTF-8");
-//	characterEncodingFilter.setForceEncoding(true);
-//	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
-//	return new Filter[] {characterEncodingFilter,openSessionInViewFilter};
-//	}
+	@Override
+	protected Filter[] getServletFilters() {
+	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
+	characterEncodingFilter.setEncoding("UTF-8");
+	characterEncodingFilter.setForceEncoding(true);
+	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
+	return new Filter[] {characterEncodingFilter,openSessionInViewFilter,new Member_Cookie()};
+	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {

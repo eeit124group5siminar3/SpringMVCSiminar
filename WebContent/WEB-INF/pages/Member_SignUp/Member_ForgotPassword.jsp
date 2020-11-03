@@ -24,7 +24,7 @@ body {
 <body>
 	<jsp:include page="/top.jsp" />
 	<h2>忘記密碼</h2>
-	<form action="..\Member_ResetPassword_Servler" method="post">
+	<form action="forgotPwd.controller" method="post">
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 		<br>
 			<tr>

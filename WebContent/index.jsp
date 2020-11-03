@@ -46,7 +46,7 @@ h2{
 	<td align="center"><a href="<c:url value='marketSeller/MarketHome?'/>"><img src="images/market.png"></a></td>
 	<td align="center"><a href="recipe/recipe_workpage.jsp"><img src="images/recipe.png"></a></td>
 	<td align="center"><a href="<c:url value='/ActiveHomeServlet'/>"><img src="images/footprint.png"></a></td>
-	<td align="center"><a href="Member_SignUp/Member_Login.jsp"><img src="images/member.png"></a></td>
+	<td align="center"><a href="login.controller"><img src="images/member.png"></a></td>
 </tr>
 <tr>
 	<td align="center"><h3>商城</h3></td>
