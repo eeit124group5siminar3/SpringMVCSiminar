@@ -1,6 +1,5 @@
 package tw.group5.marketSeller.model;
 
-import java.sql.Blob;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,15 +21,13 @@ import org.springframework.stereotype.Component;
 public class MarketProductImgBean {
 	private int productId;
 	private String description;
-	private Blob productImg ;
+	private byte[] productImg ;
 	private MarketProductTotalBean marketProductTotalBean;
 	
 	public  MarketProductImgBean() {
 		
 	}
-	
-	
-	
+
 	@GenericGenerator(name ="generator", strategy = "foreign", parameters = @Parameter(name="property", value = "marketProductTotalBean"))
 	@Id @Column(name = "PRODUCT_ID")
 	@GeneratedValue(generator = "generator")
@@ -50,10 +47,10 @@ public class MarketProductImgBean {
 	}
 	
 	@Column(name = "PRODUCT_IMG")
-	public Blob getProductImg() {
+	public byte[] getProductImg() {
 		return productImg;
 	}
-	public void setProductImg(Blob productImg) {
+	public void setProductImg(byte[] productImg) {
 		this.productImg = productImg;
 	}
 	
