@@ -43,19 +43,19 @@ fieldset {
 			</tr>
 			<tr>
 				<td>食材</td>
-				<td>${ingredients_A} /></td>
+				<td>${ingredients_A}</td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td>份量</td> -->
-<%-- 				<td>${gram_A}</td> --%>
-<!-- 			</tr> -->
+			<tr>
+				<td>份量</td>
+				<td>${gram_A}</td>
+			</tr>
 			<tr>
 				<td>介紹</td>
 				<td>${desc}</td>
 			</tr>
 			<tr>
 				<td>料理方法</td>
-				<td>${method} /></td>
+				<td>${method}</td>
 			</tr>
 <!-- 			<tr> -->
 <!-- 				<td>照片</td> -->
@@ -72,6 +72,7 @@ fieldset {
 			<input type="submit" name="confirm" value="確認" />
 			<label for="" style="text-align:center;"> <input type="reset"
 			onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
+		
 		</label>
 		</center>
 	</form>
