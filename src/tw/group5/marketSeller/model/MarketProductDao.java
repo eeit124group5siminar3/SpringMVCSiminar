@@ -3,15 +3,28 @@ package tw.group5.marketSeller.model;
 import java.util.List;
 
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
+import marketSeller.model.MarketProductTotalBean;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
+
+@Repository
 public class MarketProductDao {
+	
+	@Autowired @Qualifier("sessionFactory")
+	private SessionFactory sessionFactory;
+	
 	private Session session;
 	
 	public MarketProductDao(Session session) {
 		this.session=session;
 	}
+
 	//顯示全部商品
 	public List<MarketProductTotalBean> selectAll() {
 		Query<MarketProductTotalBean> query =session.createQuery("From MarketProductTotalBean", MarketProductTotalBean.class);
@@ -19,6 +32,7 @@ public class MarketProductDao {
 		return list;
 	}
 	
+	//查詢全部
 	public MarketProductTotalBean select(int productId) {
 		return session.get(MarketProductTotalBean.class, productId);
 	}
