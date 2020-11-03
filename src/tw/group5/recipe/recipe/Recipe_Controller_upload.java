@@ -1,5 +1,6 @@
 package tw.group5.recipe.recipe;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,12 +14,15 @@ import tw.group5.recipe.service.recipe_Service_interface;
 @Controller
 @SessionAttributes(names={"recipe_check"})
 public class Recipe_Controller_upload {
-	
+	@Autowired
 	private recipe_Service_interface service;
 	
 	@RequestMapping(path = "/uploadPage.controller",method=RequestMethod.GET)
-	public String uploadPage() {
-		return "recipe_upload";
+	public String uploadPage(Model m) {
+		Recipe_Bean bean=new Recipe_Bean();
+		m.addAttribute("details",bean);
+		return "recipe/recipe_upload";
+//		return "recipe/recipe_workpage";
 	}
 	
 	@RequestMapping(path="/uploadCheck.controller" ,method = RequestMethod.POST )

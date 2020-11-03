@@ -29,14 +29,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //	@Autowired
 //	private Environment env;
 
-	// 增加資源處理者
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/pages/images/");
-		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/pages/css/");
-		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/pages/js/");
-	}
-
+	
 	public SpringMVCJavaConfig() {
 		
 	}
@@ -136,6 +129,13 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //		WebMvcConfigurer.super.addViewControllers(registry);
 //		return "/FrontPage";
 //	}
+	// 增加資源處理者
+		@Override
+		public void addResourceHandlers(ResourceHandlerRegistry registry) {
+			registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/pages/images/");
+			registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/pages/css/");
+			registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/pages/js/");
+		}
 
 
 }

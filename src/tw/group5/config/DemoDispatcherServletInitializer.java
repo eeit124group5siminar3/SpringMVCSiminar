@@ -15,6 +15,7 @@ import javax.servlet.ServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.internal.FilterConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
@@ -34,6 +35,7 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 //	characterEncodingFilter.setEncoding("UTF-8");
 //	characterEncodingFilter.setForceEncoding(true);
 //	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
+//	
 //	return new Filter[] {characterEncodingFilter,openSessionInViewFilter};
 //	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.mall.dao.ProductDAO;
 import tw.group5.mall.model.CategoryBean;
@@ -22,7 +23,7 @@ public class ProductService implements Serializable {
 	}
 
 	
-
+//	@Transactional(rollbackFor = {Exception.class})
 	public int getTotalPages() {
 		return dao.getTotalPages();
 	}

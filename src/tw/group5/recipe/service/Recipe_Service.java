@@ -2,18 +2,16 @@ package tw.group5.recipe.service;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.group5.recipe.DAO.Recipe_DAO_hibernate;
+import tw.group5.recipe.DAO.Recipe_DAO_spring;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 
 @Service
 public class Recipe_Service implements recipe_Service_interface {
 	@Autowired
-	private Recipe_DAO_hibernate rDAO;
+	private Recipe_DAO_spring rDAO;
 	
 //	public Recipe_Service(Session session) {
 //		rDAO=new Recipe_DAO_hibernate(session);
