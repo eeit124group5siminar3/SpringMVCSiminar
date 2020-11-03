@@ -30,41 +30,40 @@ fieldset {
 <body>
 <jsp:include page="/top.jsp" />
 <h1 style="text-align: center;">確認頁面</h1>
-	<jsp:useBean id="recipe_check" class="tw.group5.recipe.recipe_Bean.Recipe_Bean" scope="session"></jsp:useBean>
 	<fieldset>
-	<form action="<c:url value='Recipe_Servlet'></c:url>" method="post" >
+	<form action='<c:url value="/uploadConfirm.controller"/>' method="post" >
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 			<tr>
 				<td>名稱</td>
-				<td><jsp:getProperty name="recipe_check" property="name" /></td>
+				<td>${name}</td>
 			</tr>
 			<tr>
 				<td>種類</td>
-				<td><jsp:getProperty name="recipe_check" property="cate" /></td>
+				<td>${cate}</td>
 			</tr>
 			<tr>
 				<td>食材</td>
-				<td><jsp:getProperty name="recipe_check" property="ingredients_A" /></td>
+				<td>${ingredients_A} /></td>
 			</tr>
 <!-- 			<tr> -->
 <!-- 				<td>份量</td> -->
-<%-- 				<td><jsp:getProperty name="recipe_check" property="gram_A" /></td> --%>
+<%-- 				<td>${gram_A}</td> --%>
 <!-- 			</tr> -->
 			<tr>
 				<td>介紹</td>
-				<td><jsp:getProperty name="recipe_check" property="desc" /></td>
+				<td>${desc}</td>
 			</tr>
 			<tr>
 				<td>料理方法</td>
-				<td><jsp:getProperty name="recipe_check" property="method" /></td>
+				<td>${method} /></td>
 			</tr>
 <!-- 			<tr> -->
 <!-- 				<td>照片</td> -->
-<%-- 				<td><jsp:getProperty name="rec_img" property="" /></td> --%>
+<%-- 				<td></td> --%>
 <!-- 			</tr> -->
 <!-- 			<tr> -->
 <!-- 				<td>檔名</td> -->
-<%-- 				<td><jsp:getProperty name="recipe_check" property="img" /></td> --%>
+<%-- 				<td></td> --%>
 <!-- 			</tr> -->
 
 		</table>

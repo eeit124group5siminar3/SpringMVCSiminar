@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name="recipe")
+@Component
 public class Recipe_Bean {
 	private String name;
 	private String ingredients_A;
@@ -73,7 +76,6 @@ public class Recipe_Bean {
 	
 	@Id @Column(name="recipe_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	//因為資料庫沒有設定自動新增所有會有問題
 	public String getRec_id() {
 		return rec_id;
 	}

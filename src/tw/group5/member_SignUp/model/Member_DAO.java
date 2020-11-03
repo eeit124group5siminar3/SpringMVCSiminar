@@ -1,22 +1,28 @@
 package tw.group5.member_SignUp.model;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
-public class Member_DAO implements Member_List {
 
-	private Session session;
+@Repository("memberDao")
+public class Member_DAO {
+
+	private SessionFactory sessionFactory;
 
 	// 連線DB
-	public Member_DAO(Session session) {
-		this.session = session;
+	@Autowired
+	public Member_DAO(@Qualifier("sessionFactory")SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 
 	// 會員註冊
-	@Override
 	public boolean insert_member_sing_up(Member_SignUp member_data) {
-
 		// HQL語法搜尋
+		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query<?> result = query_email.setParameter(0, member_data.getMember_email());
 
@@ -33,6 +39,7 @@ public class Member_DAO implements Member_List {
 	public boolean check_signup_email(String member_email) {
 
 		// HQL語法搜尋
+		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query<?> result = query_email.setParameter(0, member_email);
 
@@ -47,6 +54,7 @@ public class Member_DAO implements Member_List {
 	public boolean check_signup_id(String member_id) {
 
 		// HQL語法搜尋
+		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_id = session.createQuery("From Member_SignUp Where Member_id=?0");
 		Query<?> result = query_id.setParameter(0, member_id);
 
@@ -61,6 +69,7 @@ public class Member_DAO implements Member_List {
 	public boolean login_check(String member_email, String member_password) {
 
 		// HQL語法搜尋
+		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query<?> result = query_email.setParameter(0, member_email);
 
@@ -79,6 +88,7 @@ public class Member_DAO implements Member_List {
 	public Member_SignUp login_bean(String member_email) {
 
 		// HQL語法搜尋
+		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query<?> result = query_email.setParameter(0, member_email);
 
@@ -94,6 +104,7 @@ public class Member_DAO implements Member_List {
 	public String reset_password(String member_email, String member_id, String member_name, String member_cellphone) {
 
 		// HQL語法搜尋
+		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query<?> result = query_email.setParameter(0, member_email);
 		
@@ -129,6 +140,7 @@ public class Member_DAO implements Member_List {
 	// 忘記密碼，修改密碼
 	public boolean updata_member_password(String member_email, String password) {
 
+		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query<?> result = query_email.setParameter(0, member_email);
 

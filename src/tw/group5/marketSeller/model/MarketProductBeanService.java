@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import tw.group5.marketSeller.controller.IMarketProductBeanService;
+
 
 
 public class MarketProductBeanService implements IMarketProductBeanService {

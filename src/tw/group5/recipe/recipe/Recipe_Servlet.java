@@ -36,8 +36,6 @@ public class Recipe_Servlet extends HttpServlet {
         super();
     }
     
-	//因為資料庫沒有設定自動新增序列所有會有問題,我是使用自己輸入的值
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charser=UTF-8");
