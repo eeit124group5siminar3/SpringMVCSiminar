@@ -15,8 +15,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name = "active")
+@Component("active")
 public class Active implements Serializable {
 
 	private static final long serialVersionUID = 1L;
