@@ -39,7 +39,7 @@ button {
 	<jsp:include page="/top.jsp" />
 	<fieldset>
 		<legend>會員登入</legend>
-		<form action="..\Member_Login_Servlet" method="post">
+		<form action="checkLogin.controller" method="post">
 			<table cellspacing="2" cellpadding="1" border="1" width="100%">
 				<label for="">Email:<input type="text" name="email"
 					size="20" value="${requestScope.user}${param.email}"></label>

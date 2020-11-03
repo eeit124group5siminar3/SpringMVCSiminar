@@ -28,14 +28,14 @@ import tw.group5.util.OpenSessionInViewFilter;
 //Web.xml
 public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	@Override
-	protected Filter[] getServletFilters() {
-	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
-	characterEncodingFilter.setEncoding("UTF-8");
-	characterEncodingFilter.setForceEncoding(true);
-	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
-	return new Filter[] {characterEncodingFilter,openSessionInViewFilter};
-	}
+//	@Override
+//	protected Filter[] getServletFilters() {
+//	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
+//	characterEncodingFilter.setEncoding("UTF-8");
+//	characterEncodingFilter.setForceEncoding(true);
+//	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
+//	return new Filter[] {characterEncodingFilter,openSessionInViewFilter};
+//	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
@@ -58,25 +58,25 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 //		super.registerContextLoaderListener(servletContext);
 //	}
 //	
-//	@Override
-//	public void onStartup(ServletContext servletContext) throws ServletException {
-//		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-//		rootContext.register(SpringMVCJavaConfig.class);
-//		rootContext.setServletContext(servletContext);
-//		ServletRegistration.Dynamic mvc = servletContext.addServlet("mvc", new DispatcherServlet(rootContext));
-//		mvc.setLoadOnStartup(1);
-//		mvc.addMapping("/");
-//		FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("endcodingFilter", new CharacterEncodingFilter());
-//		filterRegistration.setInitParameter("encoding", "UTF-8");
-//		filterRegistration.setInitParameter("forceEncoding", "true");
-//		filterRegistration.addMappingForUrlPatterns(null, false, "/*");
-//		filterRegistration = servletContext.addFilter("OpenSessionInViewFilter", OpenSessionInViewFilter.class);
-//		//filterRegistration.setInitParameter("sessionFactoryBeanName", "sessionFactory");
-//		filterRegistration.addMappingForUrlPatterns(null, true, "/*");
-//		filterRegistration.addMappingForServletNames(null, true, "mvc");
-//
-//		servletContext.addListener(new ContextLoaderListener(rootContext));
-//	}
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.register(SpringMVCJavaConfig.class);
+		rootContext.setServletContext(servletContext);
+		ServletRegistration.Dynamic mvc = servletContext.addServlet("mvc", new DispatcherServlet(rootContext));
+		mvc.setLoadOnStartup(1);
+		mvc.addMapping("/");
+		FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("endcodingFilter", new CharacterEncodingFilter());
+		filterRegistration.setInitParameter("encoding", "UTF-8");
+		filterRegistration.setInitParameter("forceEncoding", "true");
+		filterRegistration.addMappingForUrlPatterns(null, false, "/*");
+		filterRegistration = servletContext.addFilter("OpenSessionInViewFilter", OpenSessionInViewFilter.class);
+		//filterRegistration.setInitParameter("sessionFactoryBeanName", "sessionFactory");
+		filterRegistration.addMappingForUrlPatterns(null, true, "/*");
+		filterRegistration.addMappingForServletNames(null, true, "mvc");
+
+		servletContext.addListener(new ContextLoaderListener(rootContext));
+	}
 
 
 }

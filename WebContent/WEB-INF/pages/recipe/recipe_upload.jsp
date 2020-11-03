@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +31,10 @@ body {
 <jsp:include page="/top.jsp" />
 	<fieldset>
 		<legend>上傳食譜</legend>
-		<form action="<c:url value='Recipe_Servlet'></c:url>" method="post" runat="server"> 
+		<form:form action="uploadCheck.controller" method="get" modelAttribute="details" runat="server"> 
 <!-- 		enctype="multipart/form-data" >-->		
 			<div class="line">
-				<label for="">名稱: <input type="text" name="recipe_name" /></label>
+				<form:label path="recipe_name">名稱: <form:input type="text" path="recipe_name" /></form:label>
 
 			</div>
 			<br>
@@ -47,72 +48,73 @@ body {
 			</div>
 			<br>
 			<div id="line">
-				<label for="">食材: <input type="text" name="ingredients_A" /> 份 
-				</label> 
-				<label for="">份量: <input type="text" name="gram_A" /> g 
-				</label>
+				<form:label path="ingredients_A">食材: <form:input type="text" path="ingredients_A" /> 份 
+				</form:label> 
+				<form:label path="gram_A">份量: <form:input type="text" path="gram_A" /> g 
+				</form:label>
 			</div>
 			<br>
 			<div id="line">
-				<label for="">食材: <input type="text" name="ingredients_B" />
+				<form:label path="ingredients_B">食材: <form:input type="text" path="ingredients_B" />
 					份
-				</label> 
-				<label for="">份量: <input type="text" name="gram_B" /> g
-				</label>
-			</div>
-			<br>
-
-			<div id="line">
-				<label for="">食材: <input type="text" name="ingredients_C" />
-					份
-				</label> 
-				<label for="">份量: <input type="text" name="gram_C" /> g
-				</label>
+				</form:label> 
+				<form:label path="gram_B">份量: <form:input type="text" path="gram_B" /> g
+				</form:label>
 			</div>
 			<br>
 
 			<div id="line">
-				<label for="">食材: <input type="text" name="ingredients_D" />
+				<form:label path="ingredients_C">食材: <form:input type="text" path="ingredients_C" />
 					份
-				</label> 
-				<label for="">份量: <input type="text" name="gram_D" /> g
-				</label>
+				</form:label> 
+				<form:label path="gram_C">份量: <form:input type="text" path="gram_C" /> g
+				</form:label>
+			</div>
+			<br>
+
+			<div id="line">
+				<form:label path="ingredients_D">食材: <form:input type="text" path="ingredients_D" />
+					份
+				</form:label> 
+				<form:label path="gram_D">份量: <form:input type="text" path="gram_D" /> g
+				</form:label>
 			</div>
 			<br>
 			<div class="input-dyna-add"></div>
-			<!-- 食材: <input type="text" class="add" name="ingredients" disabled/> 份
-                份量: <input type="text" class="add" name="gram" disabled/> g
+			<!-- 食材: <form:input type="text" class="add" path="ingredients" disabled/> 份
+                份量: <form:input type="text" class="add" path="gram" disabled/> g
                 <br> -->
 			<button id="btn" onclick="addinput()">新增</button>
 
 			<hr>
 			<div class="">
-				<label for="">方法: </label>
-				<textarea cols="40" rows="5" name="method"></textarea>
+				<form:label path="method">方法: </form:label>
+				<textarea cols="40" rows="5" path="method"></textarea>
 			</div>
 			<br>
 			<div class="">
-				<label for="">介紹: </label>
-				<textarea cols="40" rows="5" name="desc"></textarea>
+				<form:label path="desc">介紹: </form:label>
+				<textarea cols="40" rows="5" path="desc"></textarea>
 			</div>
 			<br>
 			<div>
-<!-- 				<label for="">照片上傳: </label><input type="file" name="img" /> -->
+<!-- 				<form:label for="">照片上傳: </form:label><input type="file" name="img" /> -->
 
   			<img id="blah" src="#" alt="your image" />
   			<br>
-  			<input type='file' id="imgInp" name="img" />
+  			<form:input type='file' id="imgInp" path="img" />
 
 			</div>
 			<br>
 			<div style="text-align: center;">
-				<label for=""><input type="submit" name="submit" value="送出"></label>  <label
+				<label><input type="submit" name="submit" value="送出"></label>  
+				<label
 					for="">
 <!-- 					<input type="reset" id=""cancel" value="取消" onclick="no()"> -->
 					<input type ="reset" onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
-					</label>
+				</label>
 			</div>
-		</form>
+		</form:form>
 	</fieldset>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
