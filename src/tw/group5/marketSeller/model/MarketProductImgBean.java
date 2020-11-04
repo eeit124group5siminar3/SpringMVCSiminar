@@ -21,9 +21,11 @@ import org.springframework.stereotype.Component;
 public class MarketProductImgBean {
 	private int productId;
 	private String description;
+	private String img_name;
 	private byte[] productImg ;
 	private MarketProductTotalBean marketProductTotalBean;
-	
+
+
 	public  MarketProductImgBean() {
 		
 	}
@@ -53,6 +55,17 @@ public class MarketProductImgBean {
 	public void setProductImg(byte[] productImg) {
 		this.productImg = productImg;
 	}
+	
+	@Column(name = "IMG_NAME")
+	public String getImg_name() {
+		return img_name;
+	}
+
+	public void setImg_name(String img_name) {
+		this.img_name = img_name;
+	}
+	
+	
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn

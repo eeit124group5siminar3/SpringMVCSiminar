@@ -28,7 +28,7 @@ public class MarketProductDao {
 		return list;
 	}
 	
-	//查詢全部
+	//查詢單筆
 	public MarketProductTotalBean select(int productId) {
 		return getSession().get(MarketProductTotalBean.class, productId);
 	}
