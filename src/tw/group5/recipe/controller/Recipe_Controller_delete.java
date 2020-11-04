@@ -1,5 +1,4 @@
 package tw.group5.recipe.controller;
-
 import org.springframework.stereotype.Controller;
 
 @Controller
