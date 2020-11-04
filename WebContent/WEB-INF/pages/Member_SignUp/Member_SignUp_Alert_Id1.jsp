@@ -23,7 +23,7 @@ body {
 <jsp:include page="/top.jsp" />
 	<script type="text/javascript">
 		if (!alert("身分證字號已被使用，請重新輸入"))
-			document.location = "Member_SignUp/Member_SignUp.jsp";
+			document.location = "goMemberSignUp.controller";
 	</script>
 </body>
 </html>
