@@ -21,7 +21,7 @@ fieldset {
 <body>
 <%-- 	<jsp:useBean id="user_recipe" class="recipe.Recipe_Obj" scope="session"></jsp:useBean> --%>
 
-	<form action='<c:url value="/updateProcess.controller"/>' method="post"> 	
+	<form action="../Recipe_Servlet_update" method="post"> 	
 	<jsp:include page="/top.jsp" />
 		
 	<fieldset>
@@ -29,10 +29,9 @@ fieldset {
 		<h2>已上傳食譜</h2>		
 		<c:forEach  var='BeanToken' items="${user_recipe}">		
 			<div>
-				<label>
-					<a href="<c:url value='/updateProcess.controller?choose=${BeanToken.rec_id}' />">${BeanToken.name}</a> 
-				</label>
-<%-- 				<a href="Recipe_Servlet_update?name='${BeanToken.rec_id}'">${BeanToken.name}</a> --%>
+<%-- 						${BeanToken.rec_id} --%>
+			
+				<a href="Recipe_Servlet_update?name='${BeanToken.rec_id}'">${BeanToken.name}</a>
 			</div>		
 			<br>
 

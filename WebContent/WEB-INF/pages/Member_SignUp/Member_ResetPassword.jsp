@@ -20,7 +20,7 @@ body {
 	<jsp:useBean id="reg_buyer" class="tw.group5.member_SignUp.model.Member_SignUp"
 		scope="session" />
 	<h2>修改密碼</h2>
-	<form action="resetPwd.controller" method="post">
+	<form action=".\Member_ResetPassword_Servler" method="post">
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 			<tr style="display:none">
 				<td>Email</td>

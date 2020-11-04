@@ -16,21 +16,20 @@ import org.springframework.stereotype.Component;
 @Table(name="recipe")
 @Component
 public class Recipe_Bean {
-	private String rec_id;
 	private String name;
-	private String desc;
-	private String cate;
-	private String method;
 	private String ingredients_A;
 	private String ingredients_B;
 	private String ingredients_C;
 	private String ingredients_D;
-	private int gram_A;
+	private String desc;
+	private String cate;
+	private String rec_id;
+	private String method;
 	public String FileName;
-	private int member_no;
 	
 	
 //	private Date up_date;
+//	private String gram_A;
 //	private InputStream data;
 //	private Blob sb;
 //	private FileInputStream fis;
@@ -40,7 +39,7 @@ public class Recipe_Bean {
 
 	public Recipe_Bean(String name, String ingredients_A, String ingredients_B, 
 			String ingredients_C,String ingredients_D, String desc, String cate
-			,String method,int gram_A) {
+			,String method) {
 		this.name = name;
 		this.ingredients_A = ingredients_A;
 		this.ingredients_B = ingredients_B;
@@ -49,13 +48,13 @@ public class Recipe_Bean {
 		this.desc = desc;
 		this.cate = cate;
 		this.method=method;
-		this.gram_A=gram_A;
 		
 		
 //		this.rec_id = rec_id;
 //		this.FileName=FileName;
 //		this. data=data;
 //		this. sb=sb;
+//		this.gram_A=gram_A;
 //		this.fis=fis;
 	}
 
@@ -76,7 +75,7 @@ public class Recipe_Bean {
 
 	
 	@Id @Column(name="recipe_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public String getRec_id() {
 		return rec_id;
 	}
@@ -156,7 +155,7 @@ public class Recipe_Bean {
 		this.desc = desc;
 	}
 	
-	@Column(name="category")
+	@Column(name="CATEGORY")
 	public String getCate() {
 		return cate;
 	}
@@ -164,7 +163,7 @@ public class Recipe_Bean {
 		this.cate = cate;
 	}
 	
-	@Column(name="method")
+	@Column(name="METHOD")
 	public String getMethod() {
 		return method;
 	}
@@ -172,21 +171,12 @@ public class Recipe_Bean {
 		this.method = method;
 	}
 	
-	@Column(name="gram_A")
-	public int getGram_A() {
-		return gram_A;
-	}
-
-	public void setGram_A(int gram_A) {
-		this.gram_A = gram_A;
-	}
-
-	@Column(name="member_no")
-	public int getMember_no() {
-		return member_no;
-	}
-
-	public void setMember_no(int member_no) {
-		this.member_no = member_no;
-	}
+	
+//	public String getGram_A() {
+//		return gram_A;
+//	}
+//
+//	public void setGram_A(String gram_A) {
+//		this.gram_A = gram_A;
+//	}
 }

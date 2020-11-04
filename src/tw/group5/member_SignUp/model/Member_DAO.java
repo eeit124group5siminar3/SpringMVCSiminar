@@ -120,7 +120,7 @@ public class Member_DAO {
 			String check_cellphone = member_bean.getMember_cellphone();
 
 			// 做資料比對，正確回傳亂數PassWord
-			if (check_id.equals(member_id.toUpperCase()) && check_name.equals(member_name)
+			if (check_id.equals(member_id) && check_name.equals(member_name)
 					&& check_cellphone.equals(member_cellphone)) {
 				
 				String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -151,21 +151,5 @@ public class Member_DAO {
 		}
 		return false;
 	}
-	
-	//忘記密碼，資料包Bean回傳修改密碼
-	public Member_SignUp reset_bean(String member_email) {
-		Session session = sessionFactory.getCurrentSession();
-		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query<?> result = query_email.setParameter(0, member_email);
-		
-		if (result.uniqueResult() != null) {
-			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
-			String email = member_bean.getMember_email();
-			String password = member_bean.getMember_password();
-			Member_SignUp rest_bean = new Member_SignUp(email,password);
-			return rest_bean;
-		}
-		return null;
-		
-	}
+
 }

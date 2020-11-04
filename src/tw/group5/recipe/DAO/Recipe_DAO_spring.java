@@ -45,20 +45,20 @@ public class Recipe_DAO_spring {
 	//Recipe_Servlet_update
 	public Recipe_Bean update(String rec_id, Recipe_Bean bean) {
 			Session session =sessionFactory.getCurrentSession();
-//			session.beginTransaction();
+			session.beginTransaction();
 			bean.setRec_id(rec_id);
 			System.out.println(bean.getName());
 			session.update(bean);
 
-//			session.getTransaction().commit();
+			session.getTransaction().commit();
 		return bean;
 	}
 
 	//取得資料庫所有資料
 	public List<Recipe_Bean> listOfJavaBean() {
 		Session session =sessionFactory.getCurrentSession();
-//		session.beginTransaction();
-		String hql="From Recipe_Bean order by member_no";
+		session.beginTransaction();
+		String hql="From Recipe_Bean";
 		Query query=session.createQuery(hql,Recipe_Bean.class);
 		List<Recipe_Bean> list = query.list();
 //		session.getTransaction().commit();
@@ -70,7 +70,7 @@ public class Recipe_DAO_spring {
 	//Recipe_Servlet_search
 	public List<Recipe_Bean> ListOfSearch(String cate) {
 		Session session =sessionFactory.getCurrentSession();
-//		session.beginTransaction();
+		session.beginTransaction();
 		String hql = "From Recipe_Bean where category =?0 ";
 		Query<Recipe_Bean> query = session.createQuery(hql,Recipe_Bean.class);
 		query.setParameter(0, cate);
@@ -84,7 +84,7 @@ public class Recipe_DAO_spring {
 	//查詢使用者擁有食譜中,其中一筆資料
 	public List<Recipe_Bean> partSearch(String rec_id){
 		Session session =sessionFactory.getCurrentSession();
-//		session.beginTransaction();
+		session.beginTransaction();
 		String hql="From Recipe_Bean where recipe_id=?0";
 		Query<Recipe_Bean> query=session.createQuery(hql,Recipe_Bean.class);
 		query.setParameter(0, rec_id);
@@ -98,13 +98,13 @@ public class Recipe_DAO_spring {
 	//Recipe_Servlet_delete
 	public boolean delete(String rec_id) {
 		Session session =sessionFactory.getCurrentSession();
-//		session.beginTransaction();
+		session.beginTransaction();
 		System.out.println(rec_id);
 		Recipe_Bean result = session.get(Recipe_Bean.class, rec_id);
 		System.out.println(rec_id);
 			if(result!=null) {
 			session.delete(result);
-//			session.getTransaction().commit();
+			session.getTransaction().commit();
 			return true;
 		}
 			return false;

@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	response.setContentType("text/html;charset=UTF-8");
@@ -49,9 +49,8 @@ button {
 					size="20" value="${requestScope.password}${param.password}"></label>
 				<br>
 				<br>
-				<input type="checkbox" name="remember"
-					<c:if test='${requestScope.remember==true}'>checked='checked'</c:if>
-					value="true">
+				<input type="checkbox" name="remember" <c:if test='${requestScope.remember==true}'>checked='checked'</c:if> 
+             value="true">
 				<label for="">記住Email與密碼</label>
 				<br>
 				<button type="submit" name="login">登入</button>
@@ -59,8 +58,8 @@ button {
 				</form>
 				<br>
 				<br>
-				<a href="forgotResetPwd.controller" style="float: left">忘記密碼</a>
-				<a href="memberSignUp.controller" style="float: right">註冊</a>
+				<a href="Member_ForgotPassword.jsp" style="float: left">忘記密碼</a>
+				<a href="Member_SignUp.jsp" style="float: right">註冊</a>
 				</fieldset>
 </body>
 </html>

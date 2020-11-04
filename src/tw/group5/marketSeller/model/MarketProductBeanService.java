@@ -3,16 +3,18 @@ package tw.group5.marketSeller.model;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+import tw.group5.marketSeller.controller.IMarketProductBeanService;
 
 
-@Service
+
 public class MarketProductBeanService implements IMarketProductBeanService {
-	@Autowired
 	private MarketProductDao mDao;
+	private  Session session;
 	
-
+	public MarketProductBeanService(Session insession) {
+		this.mDao=new MarketProductDao(insession);
+	}
 
 	@Override
 	public List<MarketProductTotalBean> selectAll() {

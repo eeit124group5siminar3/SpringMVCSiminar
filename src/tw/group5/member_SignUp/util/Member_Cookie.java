@@ -13,7 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/*")
+@WebFilter("/Member_SignUp/Member_Login.jsp")
 public class Member_Cookie implements Filter {
 	public Member_Cookie() {
 

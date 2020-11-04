@@ -24,7 +24,7 @@
 						<div class='menu'>
 							<c:if test="${empty login_ok}">
 								<a
-									href="<c:url value='login.controller' />">
+									href="<c:url value='${request.contextPath}/Member_SignUp/Member_Login.jsp' />">
 									登入 </a>
 							</c:if>
 						</div>
@@ -86,7 +86,7 @@
 							<c:if test="${empty login_ok}">
 								<c:if test="${ funcName != 'REG' }">
 									<a
-										href="<c:url value='memberSignUp.controller' />">
+										href="<c:url value='${request.contextPath}/Member_SignUp/Member_SignUp.jsp' />">
 										註冊 </a>
 								</c:if>
 
@@ -108,7 +108,7 @@
 					<td class='menuData'>
 						<div class='menu'>
 							<c:if test="${ ! empty login_ok }">
-								<a href="<c:url value='removeSession.controller' />"> 登出 </a>
+								<a href="<c:url value='${request.contextPath}/Member_LoginOut_Servlet' />"> 登出 </a>
 							</c:if>
 						</div>
 					</td>

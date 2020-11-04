@@ -20,7 +20,7 @@ fieldset {
 </style>
 </head>
 <body>
-	<form action='<c:url value="/submitChoose.controller"/>' method="post" runat="server">
+	<form action="<c:url value='Recipe_Servlet_update_submit'></c:url>" method="post" runat="server">
 	<jsp:include page="/top.jsp" />	
 	<fieldset>
 		<legend>修改食譜</legend>		
@@ -30,8 +30,8 @@ fieldset {
 			<label for="">名稱: <input type="text" name="name" value="${BeanToken.name}" /></label>
 		</div>
 			<br>
-			<div>
-				<label>種類: </label> <select name="cate">
+			<div class="">
+				<label for="">種類: </label> <select name="cate">
 					<option value="雞肉">雞肉</option>
 					<option value="豬肉">豬肉</option>
 					<option value="牛肉">牛肉</option>
@@ -40,17 +40,17 @@ fieldset {
 			</div>		
 			<br>
 			<div id="line">
-				<label>食材: <input type="text" name="ingredients_A" value="${BeanToken.ingredients_A}" /> 份 
+				<label for="">食材: <input type="text" name="ingredients_A" value="${BeanToken.ingredients_A}" /> 份 
 				</label> 
 <%-- 				<label for="">份量: <input type="text" name="recipe_table" value="${BeanToken.gram_A}" /> g  --%>
 <!-- 				</label> -->
 			</div>
 			<br>
 			<div id="line">
-				<label>食材: <input type="text" name="ingredients_B" value="${BeanToken.ingredients_B}" />
+				<label for="">食材: <input type="text" name="ingredients_B" value="${BeanToken.ingredients_B}" />
 					份
  				</label> 
-<%--				<label>份量: <input type="text" name="gram_B" value="${BeanToken.gram_B}" /> g --%>
+<%--				<label for="">份量: <input type="text" name="gram_B" value="${BeanToken.gram_B}" /> g --%>
 <!-- 				</label> -->
 			</div>
 			<br>
@@ -59,16 +59,16 @@ fieldset {
 				<label for="">食材: <input type="text" name="ingredients_C" value="${BeanToken.ingredients_C}" />
 					份
 				</label>
-<%-- 				 <label>份量: <input type="text" name="gram_C" value="${BeanToken.gram_C}" /> g --%>
+<%-- 				 <label for="">份量: <input type="text" name="gram_C" value="${BeanToken.gram_C}" /> g --%>
 <!-- 				</label> -->
 			</div>
 			<br>
 
 			<div id="line">
-				<label>食材: <input type="text" name="ingredients_D" value="${BeanToken.ingredients_D}" />
+				<label for="">食材: <input type="text" name="ingredients_D" value="${BeanToken.ingredients_D}" />
 					份
 				</label> 
-<%-- 				<label>份量: <input type="text" name="gram_D" value="${BeanToken.gram_D}" /> g --%>
+<%-- 				<label for="">份量: <input type="text" name="gram_D" value="${BeanToken.gram_D}" /> g --%>
 <!-- 				</label> -->
 			</div>
 			<br>
@@ -79,18 +79,18 @@ fieldset {
 			<button id="btn" onclick="addinput()">新增</button>
 
 			<hr>
-			<div>
-				<label>方法: </label>
+			<div class="">
+				<label for="">方法: </label>
 				<textarea cols="40" rows="5" name="method" >${BeanToken.method}</textarea>
 			</div>
 			<br>
-			<div>
-				<label>介紹: </label>
+			<div class="">
+				<label for="">介紹: </label>
 				<textarea cols="40" rows="5" name="desc" >${BeanToken.desc}</textarea>
 			</div>
 			<br>
 			<div>
-<!-- 				<label>照片上傳: </label><input type="file" name="img" /> -->
+<!-- 				<label for="">照片上傳: </label><input type="file" name="img" /> -->
 
   			<img id="blah" src="#" alt="your image" />
   			<br>
@@ -100,9 +100,8 @@ fieldset {
 			</c:forEach>
 			<br>
 			<div style="text-align: center;">
-				<label><input type="submit" name="action" value="確認修改"></label>
-				<label><input type="submit" name="action" value="刪除"></label>
-				<label><input type="reset"
+				<label for=""><input type="submit" name="submit" value="送出"></label>
+				<label for="" > <input type="reset"
 			onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="取消"></input>
 		</label>
 			</div>

@@ -4,9 +4,6 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-
-@Component("myFunction")
 public class SignUp_Function {
 
 	// 會員註冊，確認生日日期不大於今日

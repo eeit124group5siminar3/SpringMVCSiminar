@@ -22,9 +22,8 @@ body {
 <body>
 <jsp:include page="/top.jsp" />
 	<script type="text/javascript">
-	
 		if (!alert("二次密碼輸入錯誤，請重新輸入"))
-			document.location = "forgotResetPwd.controller";
+			document.location = "Member_SignUp/Member_ResetPassword.jsp";
 	</script>
 </body>
 </html>
