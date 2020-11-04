@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>upload recipe</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <style>
 
@@ -28,30 +28,32 @@ body {
 <jsp:include page="/top.jsp" />
 	<fieldset>
 		<legend>上傳食譜</legend>
-<%-- 		<form:form action="uploadCheck.controller" method="post" modelAttribute="details" runat="server">  --%>
+<%-- 		<form:form action='<c:url value="/uploadSubmit.controller"/>' method="post" modelAttribute="details" runat="server">  --%>
+			<form:form action="uploadSubmit.controller" method="post" modelAttribute="details" runat="server">
 		
-<!-- 			<div class="line"> -->
-<%-- 				<form:label path="recipe_name">名稱: </form:label> --%>
-<%-- 				<form:input path="recipe_name" type="text"/> --%>
+		
+			<div class="line">
+				<form:label path="name">名稱: </form:label>
+				<form:input path="name"/>
 
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- <!-- 			<div class=""> --> -->
-<%-- <%--  				<form:label path="">種類: </form:label> <select name="cate"> --%> --%>
-<!-- <!-- 					<option value="雞肉">雞肉</option> --> -->
-<!-- <!-- 					<option value="豬肉">豬肉</option> --> -->
-<!-- <!-- 					<option value="牛肉">牛肉</option> --> -->
-<!-- <!-- 					<option value="蔬食">蔬食</option> --> -->
-<!-- <!-- 				</select> --> -->
-<!-- <!-- 			</div> --> -->
-<!-- 			<br> -->
-<!-- 			<div id="line"> -->
-<%-- 				<form:label path="ingredients_A">食材: <form:input type="text" path="ingredients_A" /> 份  --%>
-<%-- 				</form:label>  --%>
-<%-- 				<form:label path="gram_A">份量: <form:input type="text" path="gram_A" /> g  --%>
-<%-- 				</form:label> --%>
-<!-- 			</div> -->
-<!-- 			<br> -->
+			</div>
+			<br>
+			<div>
+ 				<form:label path="cate">種類: </form:label> <select name="cate">
+					<option value="雞肉">雞肉</option>
+					<option value="豬肉">豬肉</option>
+					<option value="牛肉">牛肉</option>
+					<option value="蔬食">蔬食</option>
+				</select>
+			</div>
+			<br>
+			<div id="line">
+				<form:label path="ingredients_A">食材: </form:label> 
+				<form:input path="ingredients_A" /> 份 
+				<form:label path="gram_A">份量: </form:label>
+				<form:input path="gram_A" /> g
+			</div>
+			<br>
 <!-- 			<div id="line"> -->
 <%-- 				<form:label path="ingredients_B">食材: <form:input type="text" path="ingredients_B" /> --%>
 <!-- 					份 -->
@@ -78,41 +80,45 @@ body {
 <%-- 				</form:label> --%>
 <!-- 			</div> -->
 <!-- 			<br> -->
-<!-- <!-- 			<div class="input-dyna-add"></div> --> -->
-<%-- <%-- 			 食材: <form:input type="text" class="add" path="ingredients" disabled/> 份 --%> --%>
-<%-- <%--                  份量: <form:input type="text" class="add" path="gram" disabled/> g  --%> --%>
-<!-- <!--                 <br>   --> -->
-<!-- 			<button id="btn" onclick="addinput()">新增</button> -->
+<!-- 			<div class="input-dyna-add"></div> -->
+<%-- 			 食材: <form:input  class="add" path="ingredients" disabled /> 份 --%>
+<%--                 	 份量: <form:input  class="add" path="gram"disabled /> g  --%>
+<!--                 <br> -->
+<%-- 			<form:button id="btn" onclick="addinput()" value=>新增</form:button> --%>
 
 <!-- 			<hr> -->
-<!-- 			<div class=""> -->
-<%-- 				<form:label path="method">方法: </form:label> --%>
-<!-- 				<textarea cols="40" rows="5" path="method"></textarea> -->
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div class=""> -->
-<%-- 				<form:label path="desc">介紹: </form:label> --%>
-<!-- 				<textarea cols="40" rows="5" path="desc"></textarea> -->
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div> -->
-<%-- <%--  				<form:label path="">照片上傳: </form:label><input type="file" name="img" />  --%> --%>
 
-<!--   			<img id="blah" src="#" alt="your image" /> -->
-<!--   			<br> -->
-<%--   			<form:input type='file' id="imgInp" path="img" /> --%>
+			<div>
+				<form:label path="desc">介紹: </form:label>
+				<br>
+				<textarea cols="40" rows="5" path="desc"></textarea>
+			</div>
+			<br>
+			<div>
+				<form:label path="method">料理方法: </form:label>
+				<br>
+				<textarea cols="40" rows="5" path="method"></textarea>
+			</div>
+			<br>
+			<div>
+				<%--  				<form:label path="">照片上傳: </form:label><input type="file" name="img" />  --%>
 
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div style="text-align: center;"> -->
-<!-- 				<label><input type="submit" name="submit" value="送出"></label>   -->
-<!-- 				<label -->
-<!-- 					for=""> -->
-<!-- <!-- 					<input type="reset" id=""cancel" value="取消" onclick="no()"> --> -->
-<!-- 					<input type ="reset" onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input> -->
-<!-- 				</label> -->
-<!-- 			</div> -->
-<%-- 		</form:form> --%>
+				<!--   			<img id="blah" src="#" alt="your image" /> -->
+				<!--   			<br> -->
+				<%--   			<form:input type='file' id="imgInp" path="img" /> --%>
+
+				<!-- 			</div> -->
+				<!-- 			<br> -->
+				<div style="text-align: center;">
+					<form:button value="submit">送出</form:button>
+					<%-- 					<form:button onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="reset">回首頁</form:button> --%>
+					<label> <%--  					<a href="<c:url value='./index.jsp' />">回首頁</a> --%>
+						<a href="<c:url value='./recipe_workpage.jsp' />">回首頁</a> 
+						<%-- <a href="<c:url value='./recipe/recipe_workpage.jsp' />">回首頁</a> --%>
+					</label>
+
+				</div>
+		</form:form>
 	</fieldset>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="

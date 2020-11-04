@@ -41,7 +41,6 @@ public class Recipe_Servlet_update extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(true);
 		
-		//這邊我自己先設定recipe_id的值 , a001 代表使用者id
 		session.setAttribute("memberID", "a001");
 		
 		 if (request.getParameter("name") == null) {
