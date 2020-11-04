@@ -1,4 +1,4 @@
-package tw.group5.active.action;
+package tw.group5.active.controller;
 
 import java.sql.Date;
 import java.util.List;
