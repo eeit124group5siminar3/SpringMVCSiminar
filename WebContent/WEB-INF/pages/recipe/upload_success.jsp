@@ -14,9 +14,14 @@
 </head>
 <body>
 	<jsp:include page="/top.jsp" />
-	<center>
-		<h2>更新成功</h2>
-		<input type ="reset" onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
-	</center>
+	<form action="workpage.controller" method="post">
+		<div style="text-align: center;">
+			<h2>上傳成功</h2>
+			<label> 
+				<input type="submit" name="back" value="回首頁" />
+			</label>
+		</div>
+	</form>
+
 </body>
 </html>
