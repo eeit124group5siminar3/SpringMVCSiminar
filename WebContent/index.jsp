@@ -45,7 +45,7 @@ h2{
 	<td align="center"><a href="RetrievePageProducts"><img src="images/crop.png"></a></td>
 	<td align="center"><a href="<c:url value='/selectAll.controller'/>"><img src="images/market.png"></a></td>
 	<td align="center"><a href="recipe/recipe_workpage.jsp"><img src="images/recipe.png"></a></td>
-	<td align="center"><a href="<c:url value='/ActiveHomeServlet'/>"><img src="images/footprint.png"></a></td>
+	<td align="center"><a href="<c:url value='/activeHomeSelectAll.controller'/>"><img src="images/footprint.png"></a></td>
 	<td align="center"><a href="Member_SignUp/Member_Login.jsp"><img src="images/member.png"></a></td>
 </tr>
 <tr>

@@ -23,11 +23,16 @@
 			<table style="border: 8px #FFD382 groove;" border="1" cellpadding="5">
 			<h2>活動列表</h2>
 				<tr>			
-					<td style="border: 0px" align="right" colspan="10">
-					<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
+					<td style="border: 0px" align="right" colspan="9">
+					<form action="activePreInsert.controller" method="get">
 						<input name="apply" type="submit" value="申請">
 					</form>
-					</td>				
+					</td>
+					<td style="border: 0px" align="right" colspan="1">	
+					<form action="activeHomeSelectAll.controller" method="get">
+						<input name="selectAll" type="submit" value="查詢全部">
+					</form>
+					</td>			
 				</tr>
 				<tr>
 					<th>活動編號</th>
@@ -54,12 +59,15 @@
 						<td><c:out value="${Active.dateSta}" /> 到 <c:out
 								value="${Active.dateEnd}" /></td>
 						<td>
-							<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
+							<form action="<c:url value='/acitveDelet.controller'/>" method="post">
 								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
 								<input name="delete" type="submit" value="刪除">
-									&nbsp;&nbsp; 
+							</form> 
+							<form action="activePreUpdate.controller" method="post">
+								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
 								<input name="update" type="submit" value="更新">
 							</form>
+							
 						</td>
 					</tr>
 				</c:forEach>
@@ -67,11 +75,11 @@
 					<td style="border: 0px" colspan="4"></td>
 
 					<td style="border: 0px" colspan="6">
-						<form action="<c:url value='/ActiveHomeServlet'/>" method="post">
+						<form action="<c:url value='/activeSelectone.controller'/>" method="get">
 							<label for="">活動名稱:</label>
 							<input type="text" id="selectname" name="selectname">
-							&nbsp;&nbsp;&nbsp; <input name="selectone" type="submit"
-							value="查詢單筆">
+							&nbsp;&nbsp;&nbsp; 
+							<input name="selectone" type="submit" value="查詢單筆">
 						</form>
 					</td>
 				</tr>

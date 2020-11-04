@@ -65,6 +65,35 @@ public class Active implements Serializable {
 		this.actImg = actImg;
 		this.imgName = imgName;
 	}
+	
+	public Active(String actName, String actType, String actAddr, String tel,Date actDate, Date dateSta, Date dateEnd,int expNum, int price, String actDescri) {
+		this.actName = actName;
+		this.actType = actType;
+		this.actAddr = actAddr;
+		this.tel = tel;
+		this.actDate = actDate;
+		this.dateSta = dateSta;
+		this.dateEnd = dateEnd;
+		this.expNum = expNum;
+		this.price = price;		
+		this.actDescri = actDescri;
+		
+	}
+	
+	public Active(int actId, String actName, String actType, String actAddr, String tel,Date actDate, Date dateSta, Date dateEnd,int expNum, int price, String actDescri) {
+		this.actId = actId;
+		this.actName = actName;
+		this.actType = actType;
+		this.actAddr = actAddr;
+		this.tel = tel;
+		this.actDate = actDate;
+		this.dateSta = dateSta;
+		this.dateEnd = dateEnd;
+		this.expNum = expNum;
+		this.price = price;		
+		this.actDescri = actDescri;
+		
+	}
 
 	@Id
 	@Column(name = "actId")

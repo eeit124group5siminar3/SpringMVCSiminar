@@ -8,7 +8,7 @@
 <title>更新表單</title>
 <script language="javascript"> 
 //直接等於值 
-document.getElementById("actType").value="<c:out value='${Active.act_type}'/>"; 
+document.getElementById("actType").value="<c:out value='${Active.actType}'/>"; 
 </script> 
 <style>
 fieldset {
@@ -25,13 +25,14 @@ body {
 </head>
 <body>
 <h1 align="center">活動修改:一日農夫</h1>
-	<form action="<c:url value='/ActiveUpdateServlet'/>" method="post">
+	
 		<fieldset>
+		<form action="activeUpdate.controller" method="get">
 			<legend>活動基本資料</legend>
-			<c:forEach var="Active" items="${list}">
+			
 			<div>
 				<label for="">編號:${Active.actId}</label>
-				<input type="hidden" value="${Active.actId}" />
+				<input type="hidden" name="actId" value="${Active.actId}" />
 			</div>
 			<div>
 				<label for="">活動名稱:</label>
@@ -81,11 +82,12 @@ body {
 				<input type="file" id="actImg" name="actImg">
 			</div>
 			
-		  </c:forEach>
 			<input name="update" type="submit" value="更新" > 
+			</form>
+			<form action="activeHomeSelectAll.controller" method="get">			
 			<input name="acthome" type="submit" value="活動首頁">
-			
+			</form>
 		</fieldset>
-	</form>
+	
 </body>
 </html>
