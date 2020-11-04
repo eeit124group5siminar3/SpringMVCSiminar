@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 @Repository("activeDAO")
 public class ActiveDAO {
 
+	@Autowired
 	private SessionFactory sessionFactory;
+	
 	
 	@Autowired
 	public ActiveDAO(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
@@ -66,22 +68,22 @@ public class ActiveDAO {
 
 		if (result != null) {
 			
-//			result.setActName(active.getActName());
-//			result.setActType(active.getActType());
-//			result.setActAddr(active.getActAddr());
-//			result.setTel(active.getTel());
-//			result.setActDate(active.getActDate());
-//			result.setDateSta(active.getDateSta());
-//			result.setDateEnd(active.getDateEnd());
-//			result.setExpNum(active.getExpNum());
-//			result.setPrice(active.getPrice());
-//			result.setActDescri(active.getActDescri());
+			result.setActName(active.getActName());
+			result.setActType(active.getActType());
+			result.setActAddr(active.getActAddr());
+			result.setTel(active.getTel());
+			result.setActDate(active.getActDate());
+			result.setDateSta(active.getDateSta());
+			result.setDateEnd(active.getDateEnd());
+			result.setExpNum(active.getExpNum());
+			result.setPrice(active.getPrice());
+			result.setActDescri(active.getActDescri());
 			
-//			return result ;
+			return result ;
 			
 		}
-		return result ;
-//		return null;
+//		return result ;
+		return null;
 
 		
 	}

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
+
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +27,11 @@ body {
 </head>
 	<body>
 		<h1 align="center">活動申請:一日農夫</h1>
-		<form action="<c:url value='/ActiveSupplyServlet'/>" method="post">
+<%-- 		<form:form action="activeInsert.controller" method="post" modelAttribute="active"> --%>
 			<div>
 			<fieldset>
 				<legend>活動基本資料</legend>
+			<form action="activeInsert.controller" method="post">						
 				<div>
 					<label for="">編號: 待會告訴你</label>
 				</div>
@@ -63,10 +67,12 @@ body {
 					<input type="date" id="dateEnd" name="dateEnd"/>
 				</div>
 				<div>
-					<label for="">活動人數:</label> <input type="text" id="expNum" name="expNum">
+					<label for="">活動人數:</label> 
+					<input type="text" id="expNum" name="expNum">
 				</div>
 				<div>
-					<label for="">活動費用:</label> <input type="text" id="price" name="price">
+					<label for="">活動費用:</label> 
+					<input type="text" id="price" name="price">
 				</div>
 				<div>
 					<label for="">活動描述:</label> <br>
@@ -77,11 +83,13 @@ body {
 					<input type="file" id="actImg" name="actImg">
 				</div>
 				<br>
-				<input name="apply" type="submit" value="申請"> 
-				<input name="acthome" type="submit" value="活動首頁">
+					<input name="apply" type="submit" value="申請">
+				</form> 
+				<form action="activeHomeSelectAll.controller" method="get">
+					<input name="acthome" type="submit" value="活動首頁">
+				</form>
 			</fieldset>
 			</div>
-		</form>
 	
 	
 	</body>
