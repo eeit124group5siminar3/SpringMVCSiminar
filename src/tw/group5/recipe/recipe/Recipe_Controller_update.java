@@ -18,8 +18,6 @@ public class Recipe_Controller_update {
 	
 	@Autowired
 	private recipe_Service_interface service;
-	private String rec_id;
-	private Recipe_Bean bean;
 
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {
@@ -45,6 +43,8 @@ public class Recipe_Controller_update {
 	
 	@RequestMapping(path = "/updateSubmit.controller",method = RequestMethod.POST)
 	public String submitProcess(String rec_id, Recipe_Bean bean) {
+		bean.setMember_no(1);
+		System.out.println("rec_id= "+rec_id);
 		service.update(rec_id, bean);
 		return "recipe/update_success";
 	}
