@@ -23,7 +23,7 @@ body {
 <jsp:include page="/top.jsp" />
 	<script type="text/javascript">
 		if (!alert("資料輸入錯誤，請重新輸入"))
-			document.location = "Member_SignUp/Member_ForgotPassword.jsp";
+			document.location = "forgotResetPwd.controller";
 	</script>
 </body>
 </html>

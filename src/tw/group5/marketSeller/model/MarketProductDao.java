@@ -16,45 +16,39 @@ public class MarketProductDao {
 	@Autowired 
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
-	
-	private Session session;
-	
-	public MarketProductDao() {
-		
-	}
-	
-	public MarketProductDao(Session session) {
-		this.session=session;
+
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
 	}
 
 	//顯示全部商品
 	public List<MarketProductTotalBean> selectAll() {
-		Query<MarketProductTotalBean> query =session.createQuery("From MarketProductTotalBean", MarketProductTotalBean.class);
+		Query<MarketProductTotalBean> query =getSession().createQuery("From MarketProductTotalBean", MarketProductTotalBean.class);
 		List<MarketProductTotalBean> list = query.list();
 		return list;
 	}
 	
 	//查詢全部
 	public MarketProductTotalBean select(int productId) {
-		return session.get(MarketProductTotalBean.class, productId);
+		return getSession().get(MarketProductTotalBean.class, productId);
 	}
 	
 	//刪除
 	public boolean delete(int productId) {
-	MarketProductTotalBean result =session.get(MarketProductTotalBean.class,productId);
+	MarketProductTotalBean result =getSession().get(MarketProductTotalBean.class,productId);
 		
 		if (result!=null) {
-			session.delete(result);
+			getSession().delete(result);
 			return true;
 		}
 		return false;
 	}
 	//新增
 	public MarketProductTotalBean insert(MarketProductTotalBean bean) {
-		MarketProductTotalBean result =session.get(MarketProductTotalBean.class,bean.getProductId());
+		MarketProductTotalBean result =getSession().get(MarketProductTotalBean.class,bean.getProductId());
 		
 		if (result==null) {
-			session.save(bean);
+			getSession().save(bean);
 			return bean;
 		}
 		return null;
@@ -62,7 +56,7 @@ public class MarketProductDao {
 	
 	//更新
 	public MarketProductTotalBean update(MarketProductTotalBean bean) {
-	    session.update(bean);
+		getSession().update(bean);
 	    return bean;
 		}
 	

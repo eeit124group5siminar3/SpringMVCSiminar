@@ -26,7 +26,7 @@ body {
 <body>
 <jsp:include page="/top.jsp" />
 	<h2>會員註冊</h2>
-	<form action="..\Member_SignUp_Servlet" method="post">
+	<form action="memberSignUp.controller" method="post">
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 			<br>
 			<tr>

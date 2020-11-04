@@ -17,13 +17,12 @@
    	 <h1 align="center">商品管理</h1>
      <div align="center">
      <div>圖片尚未能更新</div>
-     <form action="<c:url value='MarketHome'></c:url>" method="post">
+     <form action="<c:url value='/delete.controller'></c:url>" method="post">
         <table  style="border:8px #FFD382 groove;"border="1" cellpadding="5">
             <tr>
             <th> <input name="goinsert" type="submit" value="新增商品"></th>
-            <th> <input name="selectall" type="submit" value="顯示商品"></th>
             </tr>
-        </table>
+        </table>        
         </form>
     </div> 
     <div align="center">
@@ -40,7 +39,7 @@
                 <th>修改 刪除</th>
                 
             </tr>
-            <c:forEach var="IBean" items="${listinsert}">
+            <c:forEach var="IBean" items="${list}">
                 <tr>
                     <td>${IBean.productId}</td>
                     <td><c:out value="${IBean.productName}"/></td>
@@ -55,14 +54,15 @@
 				</td> -->
 				 
 				<td>
-				<form action="<c:url value='MarketHome'></c:url>" method="post">
+				<form action="<c:url value='/delete.controller'></c:url>" method="post">
 				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
               
-                 <input name="delect" type="submit" value="刪除">
+                 <input  type="submit" value="刪除">
+                 </form>
                  	&nbsp;&nbsp;
-
-				 <input name="update" type="submit" value="更新"> 
-				  </form>	 
+                  <form action="<c:url value='/update.controller'></c:url>" method="post">
+				 <input type="submit" value="更新"> 
+				  	 </form>
 			     </td>
 			     
                 </tr>
