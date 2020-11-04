@@ -29,8 +29,8 @@ public class ActiveHomeController {
 	public String processSelectAll(Model m) {
 		List<Active> listAct = activeService.selectAll();
 		//判斷有無登入成功
-		Member_SignUp bean=(Member_SignUp )m.getAttribute("login_ok");
-		Integer member_no = bean.getMember_no();
+//		Member_SignUp bean=(Member_SignUp )m.getAttribute("login_ok");
+//		Integer member_no = bean.getMember_no();
 		m.addAttribute("listAct", listAct);
 		System.out.println(listAct);
 		return "active/ActiveHome";
