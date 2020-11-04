@@ -28,7 +28,9 @@ body {
 <jsp:include page="/top.jsp" />
 	<fieldset>
 		<legend>上傳食譜</legend>
-		<form:form action='<c:url value="/updateSubmit.controller"/>' method="post" modelAttribute="details" runat="server"> 
+<%-- 		<form:form action='<c:url value="/uploadSubmit.controller"/>' method="post" modelAttribute="details" runat="server">  --%>
+			<form:form action="uploadSubmit.controller" method="post" modelAttribute="details" runat="server">
+		
 		
 			<div class="line">
 				<form:label path="name">名稱: </form:label>

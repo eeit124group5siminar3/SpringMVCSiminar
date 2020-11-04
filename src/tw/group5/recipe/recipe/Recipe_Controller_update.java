@@ -41,13 +41,17 @@ public class Recipe_Controller_update {
 		return "recipe/recipe_update";
 	}
 	
-	@RequestMapping(path = "/updateSubmit.controller",method = RequestMethod.POST)
-	public String submitProcess(String rec_id, Recipe_Bean bean) {
+	@RequestMapping(path = "/submitChoose.controller",method = RequestMethod.POST)
+	public String submitChoose(@RequestParam String action,Recipe_Bean bean,String rec_id) {
 		bean.setMember_no(1);
-		System.out.println("rec_id= "+rec_id);
-		service.update(rec_id, bean);
-		return "recipe/update_success";
+		if(action.equals("確認修改")) {
+			service.update(rec_id, bean);
+			return "recipe/update_success";
+		}
+		if(action.equals("刪除")) {
+			service.delete(rec_id);
+			return "recipe/delete_success";
+		}
+		return rec_id;
 	}
-	
-	
 }

@@ -31,7 +31,8 @@ fieldset {
 <jsp:include page="/top.jsp" />
 <h1 style="text-align: center;">確認頁面</h1>
 	<fieldset>
-	<form action='<c:url value="/uploadConfirm.controller"/>' method="post" >
+<%-- 	<form action='<c:url value="/uploadConfirm.controller"/>' method="post" > --%>
+	<form action="uploadConfirm.controller" method="post" >
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 			<tr>
 				<td>名稱</td>

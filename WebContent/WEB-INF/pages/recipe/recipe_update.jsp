@@ -20,7 +20,7 @@ fieldset {
 </style>
 </head>
 <body>
-	<form action='<c:url value="/updateSubmit.controller"/>' method="post" runat="server">
+	<form action='<c:url value="/submitChoose.controller"/>' method="post" runat="server">
 	<jsp:include page="/top.jsp" />	
 	<fieldset>
 		<legend>修改食譜</legend>		
@@ -100,8 +100,9 @@ fieldset {
 			</c:forEach>
 			<br>
 			<div style="text-align: center;">
-				<label><input type="submit" name="submit" value="送出"></label>
-				<label> <input type="reset"
+				<label><input type="submit" name="action" value="確認修改"></label>
+				<label><input type="submit" name="action" value="刪除"></label>
+				<label><input type="reset"
 			onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="取消"></input>
 		</label>
 			</div>

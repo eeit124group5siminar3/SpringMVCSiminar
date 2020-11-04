@@ -45,12 +45,12 @@ public class Recipe_DAO_spring {
 	//Recipe_Servlet_update
 	public Recipe_Bean update(String rec_id, Recipe_Bean bean) {
 			Session session =sessionFactory.getCurrentSession();
-			session.beginTransaction();
+//			session.beginTransaction();
 			bean.setRec_id(rec_id);
 			System.out.println(bean.getName());
 			session.update(bean);
 
-			session.getTransaction().commit();
+//			session.getTransaction().commit();
 		return bean;
 	}
 
@@ -104,7 +104,7 @@ public class Recipe_DAO_spring {
 		System.out.println(rec_id);
 			if(result!=null) {
 			session.delete(result);
-			session.getTransaction().commit();
+//			session.getTransaction().commit();
 			return true;
 		}
 			return false;
