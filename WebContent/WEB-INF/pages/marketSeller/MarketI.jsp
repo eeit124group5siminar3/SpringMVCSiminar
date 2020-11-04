@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% 
 response.setContentType("text/html;charset=UTF-8");
@@ -19,7 +20,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
-<form action="<c:url value='/marketSeller/model/MarketInsertServlet'></c:url>" method="post" enctype="multipart/form-data">
+<form action="<c:url value='/MarketProduct.insert'></c:url>" method="post" enctype="multipart/form-data">
 <jsp:include page="/top.jsp" />
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
 <tr>
@@ -27,7 +28,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
     <td><input type="text" name="product_name" id="product_name" class='InputClass' size="20" maxlength="10"
      value="${requestScope.product_name}" size="20" />
            <font color='red' size='-1'>
-              ${ErrMsg.errProduct_name}
+              ${errors.errProduct_name}
            </font>
     </td>
 </tr>
@@ -36,7 +37,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
       <td>         
          <textarea name="description" cols="80" rows="4" value="${requestScope.description}" ></textarea>
          <font color='red' size='-1'>
-                ${ErrMsg.errDescription}
+                ${errors.errDescription}
             </font>
       </td>
     </tr>
@@ -45,7 +46,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
     <td><input type="text" name="product_area" id="product_area" size="20" maxlength="10"
        value="${requestScope.product_area}" size="20" />
            <font color='red' size='-1'>
-              ${ErrMsg.errProduct_area}
+              ${errors.errProduct_area}
            </font>
     </td>
 </tr>
@@ -54,7 +55,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
     <td><input type="text" name="price" id="price" size="10" maxlength="10"
        value="${requestScope.price}" size="5" />
            <font color='red' size='-1'>
-              ${ErrMsg.errPrice}
+              ${errors.errPrice}
            </font>           
            
     </td>
@@ -64,7 +65,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
     <td><input type="text" name="quantity" id="quantity" size="10" maxlength="10"
        value="${requestScope.quantity}" size="5" />
            <font color='red' size='-1'>
-              ${ErrMsg.errQuantity}
+              ${errors.errQuantity}
            </font>           
            
     </td>
@@ -74,7 +75,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
         <td><input type="text" name="unit" id="unit" size="10" maxlength="10"
        value="${requestScope.unit}" size="5" />
            <font color='red' size='-1'>
-              ${ErrMsg.errUnit}
+              ${errors.errUnit}
            </font>  
            
     </td>
@@ -83,14 +84,15 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
         <td >圖片</td>
         <td >
             <input style="background:#FFFFFF" class='InputClass'  type="file" accept="image/*" name="product_img" id="imgInp" size="25" /><br>
-            <font color='red' size='-1'>${ErrMsg.errPicture}</font></td>
+            <font color='red' size='-1'>${errors.errPicture}</font></td>
     </tr>
+     <form action="<c:url value='/MarketProduct.insert'></c:url>" method="POST">
         <tr height="36" >
       <td height="61" colspan="6" align="center">
-          
-         <input type="submit" name="Submit" value="新增" />
+         <input type="submit"  value="新增" />
       </td>
     </tr>
+     </form>
 </table>
 </form>
 
