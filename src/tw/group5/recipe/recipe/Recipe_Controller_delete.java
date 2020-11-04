@@ -1,4 +1,4 @@
-ackage tw.group5.recipe.recipe;
+package tw.group5.recipe.recipe;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
