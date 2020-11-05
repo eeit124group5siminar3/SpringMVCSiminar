@@ -11,6 +11,10 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 %>
 <html>
 <head>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>會員登錄</title>
 <style>
@@ -28,20 +32,24 @@ div {
 	margin-top: 50px;
 	margin-left: 25px;
 }
-
+#div{
+	margin-top:20px;
+	margin-left:15px;
+	width:150px;
+}
 </style>
 </head>
 <body>
-	<jsp:include page="/top.jsp" />
-
-<div>
-<a>會員管理</a>
+<jsp:include page="/left.jsp" />
+	
 
 
 
 
 
-</div>
+
+
+
 
 
 
