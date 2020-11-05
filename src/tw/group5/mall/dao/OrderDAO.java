@@ -10,6 +10,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.mall.ProductStockException;
 import tw.group5.mall.model.ProductBean;
@@ -17,6 +18,7 @@ import tw.group5.mall.model.ProductOrderBean;
 import tw.group5.mall.model.ProductOrderItemBean;
 
 @Repository
+@Transactional
 public class OrderDAO {
 	private String BuyerId = null;
 	int orderNo = 0;

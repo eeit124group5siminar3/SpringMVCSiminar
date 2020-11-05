@@ -9,11 +9,13 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.mall.model.CategoryBean;
 import tw.group5.mall.model.ProductBean;
 
 @Repository
+@Transactional
 public class ProductDAO {
 //	private Session session;
 //	private static final long serialVersionUID = 1L;
