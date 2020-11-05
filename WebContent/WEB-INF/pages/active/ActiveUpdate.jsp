@@ -27,7 +27,7 @@ body {
 <h1 align="center">活動修改:一日農夫</h1>
 	
 		<fieldset>
-		<form action="activeUpdate.controller" method="get">
+		<form action="activeUpdate.controller" method="post">
 			<legend>活動基本資料</legend>
 			
 			<div>

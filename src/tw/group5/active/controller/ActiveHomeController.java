@@ -1,8 +1,13 @@
 package tw.group5.active.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import oracle.security.o3logon.a;
 import tw.group5.active.model.Active;
@@ -23,10 +29,14 @@ public class ActiveHomeController {
 
 	@Autowired
 	private ActiveService activeService;
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	// 查詢全部(首頁跳轉)
 	@RequestMapping(path = "/activeHomeSelectAll.controller", method = RequestMethod.GET)
 	public String processSelectAll(Model m) {
+		
 		List<Active> listAct = activeService.selectAll();
 		//判斷有無登入成功
 //		Member_SignUp bean=(Member_SignUp )m.getAttribute("login_ok");
@@ -45,7 +55,7 @@ public class ActiveHomeController {
 	}
 
 	// 導向申請頁面
-	@RequestMapping(path = "/activePreInsert.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/activePreInsert.controller", method = RequestMethod.POST)
 	public String preInsert() {
 		return "active/ActiveApply";
 	}
@@ -56,8 +66,48 @@ public class ActiveHomeController {
 			@RequestParam("actAddr") String actAddr, @RequestParam("tel") String tel,
 			@RequestParam("actDate") Date actDate, @RequestParam("dateSta") Date dateSta,
 			@RequestParam("dateEnd") Date dateEnd, @RequestParam("expNum") int expNum, @RequestParam("price") int price,
-			@RequestParam("actDescri") String actDescri) {
-		Active aBean = new Active(actName, actType, actAddr, tel, actDate, dateSta, dateEnd, expNum, price, actDescri);
+			@RequestParam("actDescri") String actDescri,
+			@RequestParam("actImg") MultipartFile actImg) throws IllegalStateException, IOException {
+		
+		String imgName = actImg.getOriginalFilename();
+		String fileTempDirPath = request.getSession().getServletContext().getRealPath("/") + "UploadTempDir\\";
+		 
+		File dirPath = new File(fileTempDirPath);
+		  if (!dirPath.exists()) {
+			boolean status =dirPath.mkdir();
+			System.out.println("status:" + status);
+		}
+		  
+		String fileSavePath =fileTempDirPath +imgName;
+		File savFile = new File(fileSavePath);
+		actImg.transferTo(savFile);
+		System.out.println("fileSavePath: " + fileSavePath);
+		
+		Active aBean = new Active();
+		if(imgName!=null && imgName.length()!=0) {
+			try {
+				aBean.setImgName(imgName);
+				FileInputStream is1 =new FileInputStream(fileSavePath);
+				byte[] b = new byte[is1.available()];
+				is1.read(b);
+				is1.close();
+				aBean.setActImg(b);
+			}catch ( Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		aBean.setActName(actName);
+		aBean.setActAddr(actAddr);
+		aBean.setActType(actType);
+		aBean.setTel(tel);
+		aBean.setActDate(actDate);
+		aBean.setDateSta(dateSta);
+		aBean.setDateEnd(dateEnd);
+		aBean.setExpNum(expNum);
+		aBean.setPrice(price);
+		aBean.setActDescri(actDescri);
+		
 		activeService.insert(aBean);
 		return "redirect:/activeHomeSelectAll.controller";
 //		return "active/ActiveSucc";
@@ -80,7 +130,8 @@ public class ActiveHomeController {
 		return "active/ActiveUpdate";
 	}
 
-	@RequestMapping(path = "/activeUpdate.controller", method = RequestMethod.GET)
+	//更新
+	@RequestMapping(path = "/activeUpdate.controller", method = RequestMethod.POST)
 	public String processUpdate(@RequestParam("actId") int actId, @RequestParam("actName") String actName,
 			@RequestParam("actType") String actType, @RequestParam("actAddr") String actAddr,
 			@RequestParam("tel") String tel, @RequestParam("actDate") Date actDate,
