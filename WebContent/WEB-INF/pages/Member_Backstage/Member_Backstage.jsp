@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	response.setContentType("text/html;charset=UTF-8");
@@ -12,13 +12,38 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>會員註冊</title>
+<title>會員登錄</title>
+<style>
+body {
+	background: #EBFFEB;
+}
+
+form {
+	width: 200px;
+	margin: auto;
+	text-align: center;
+}
+
+div {
+	margin-top: 50px;
+	margin-left: 25px;
+}
+
+</style>
 </head>
 <body>
-<jsp:include page="/top.jsp" />
-	<script type="text/javascript">
-		if (!alert("身分證字號輸入錯誤，請重新輸入"))
-			document.location = "goMemberSignUp.controller";
-	</script>
+	<jsp:include page="/top.jsp" />
+
+<div>
+<a>會員管理</a>
+
+
+
+
+
+</div>
+
+
+
 </body>
 </html>

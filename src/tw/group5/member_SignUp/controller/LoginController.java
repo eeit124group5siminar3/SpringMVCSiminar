@@ -88,9 +88,11 @@ public class LoginController {
 	//登出
 	@RequestMapping(path = "/removeSession.controller", method = RequestMethod.GET)
 	public String processRemoveSession(HttpSession session,SessionStatus sessionStatus) {
+		
 		session.removeAttribute("login_ok");
 		session.invalidate();
 		sessionStatus.setComplete();
+
 		return "index";
 	}
 	

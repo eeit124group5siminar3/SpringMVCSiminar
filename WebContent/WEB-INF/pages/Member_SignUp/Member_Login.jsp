@@ -60,7 +60,7 @@ button {
 				<br>
 				<br>
 				<a href="forgotResetPwd.controller" style="float: left">忘記密碼</a>
-				<a href="memberSignUp.controller" style="float: right">註冊</a>
+				<a href="goMemberSignUp.controller" style="float: right">註冊</a>
 				</fieldset>
 </body>
 </html>
