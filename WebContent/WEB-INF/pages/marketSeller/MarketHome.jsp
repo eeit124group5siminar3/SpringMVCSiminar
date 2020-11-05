@@ -49,8 +49,9 @@
                     <td><c:out value="${IBean.unit}"/></td>
                     <td><c:out value="${IBean.quantity}"/></td>      
                 <td>  
-              <img height='80' width='80'
-				src=${IBean.marketProductImgBean.productImg}&type=PRODUCT>
+				<img  height='80' width='80'
+			        src=${IBean.marketProductImgBean.productImg}&type=PRODUCT>
+			        
 				</td>
 				 
 				<td>
@@ -60,20 +61,17 @@
                  <input  type="submit" value="刪除">
                  </form>
                  	&nbsp;&nbsp;
-                  <form action="<c:url value='/MarketProduct.goUpdateJsp'></c:url>" method="post">
+                  <form action="<c:url value='/MarketProduct.goUpdateJsp'></c:url>" method="get">
                   <input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
                   
 				 <input type="submit" value="更新"> 
 				  	 </form>
 			     </td>
-			     
                 </tr>
             </c:forEach>
           
         </table>
-    </div>   
-		
-	
-	
+    </div>  
+
 </body>
 </html>

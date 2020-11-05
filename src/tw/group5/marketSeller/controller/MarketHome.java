@@ -59,8 +59,8 @@ public class MarketHome {
 
 		return "marketSeller/MarketI";
 	}
-
-//	@ResponseBody
+	
+	//新增
 	@RequestMapping(path = "/MarketProduct.insert" ,method = RequestMethod.POST)
 	public String insert(@RequestParam(name = "product_name") String product_name,
 			@RequestParam(name = "description") String description,
