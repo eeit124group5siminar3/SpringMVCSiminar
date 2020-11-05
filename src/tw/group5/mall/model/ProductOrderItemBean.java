@@ -13,9 +13,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.stereotype.Component;
+@Component
 @Entity
 @Table(name="orderDetails")
 public class ProductOrderItemBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int itemId;
 	private	int orderId;
 	private int productId;
