@@ -23,7 +23,6 @@ body {
 </head>
 <body>
 <h1 align="center">商品管理</h1>
-<form action="<c:url value='MarketUpdate'></c:url>" method="post">
 		<fieldset>
 			<legend>商品資料</legend>
 			<c:forEach var="product" items="${list}">
@@ -68,6 +67,6 @@ body {
 			<input name="acthome" type="submit" value="活動首頁">
 			
 		</fieldset>
-	</form>
+	
 </body>
 </html>

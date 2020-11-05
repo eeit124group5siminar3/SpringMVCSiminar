@@ -25,11 +25,9 @@ public class MarketHomeUpdate {
 	
 	// 跳轉到修改jsp
 	@RequestMapping(path = "/MarketProduct.goUpdateJsp" ,method = RequestMethod.POST)
-	public String updateJsp(@RequestParam(name = "productid") String productid, Model m) {
-		int id = Integer.parseInt(productid);
-		List<MarketProductTotalBean> list =  (List<MarketProductTotalBean>) service.select(id);
-		
-		m.addAttribute("list", list);
+	public String updateJsp(@RequestParam(name = "productid") int productid, Model m) {
+		MarketProductTotalBean mBean = service.select(productid);
+		m.addAttribute("list",mBean);
 		return "marketSeller/MarketU";
 	}
 
