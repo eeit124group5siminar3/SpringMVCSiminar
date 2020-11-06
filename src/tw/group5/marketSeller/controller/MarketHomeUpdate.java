@@ -1,20 +1,24 @@
 package tw.group5.marketSeller.controller;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.sql.Blob;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import tw.group5.marketSeller.model.MarketProductBeanService;
 import tw.group5.marketSeller.model.MarketProductImgBean;
@@ -27,6 +31,8 @@ public class MarketHomeUpdate {
 	private MarketProductBeanService service;
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	ServletContext ctx;
 	
 	
 	// 跳轉到修改jsp
@@ -64,6 +70,32 @@ public class MarketHomeUpdate {
 		
 		
 		return "marketSeller/MarketS";
+	}
+	
+	@GetMapping("/ch04/_03/getBookImage")
+	public ResponseEntity<byte[]> getBookImage(@RequestParam("productId") Integer id) {
+		ResponseEntity<byte[]> re = null;
+		MarketProductImgBean bean = service.selectImg(id);
+		String filename = bean.getImg_name();
+		Blob blob = bean.getProductImg();
+		String mimeType = ctx.getMimeType(filename);
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			InputStream is = blob.getBinaryStream();
+			byte[] b = new byte[81920];
+			int len = 0;
+			while ((len = blob.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			headers.setContentType(mediaType);
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return re;
 	}
 	
 	
