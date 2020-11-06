@@ -12,7 +12,15 @@ public class BackstageController {
 		return "Member_Backstage/Member_Backstage";
 	}
 	
+	@RequestMapping(path = "/memberUpdate.controller", method = RequestMethod.GET)
+	public String MemberMemberUpdate() {
+		return "Member_Backstage/Member_Update";
+	}
 	
+	@RequestMapping(path = "/memberEvaluation.controller", method = RequestMethod.GET)
+	public String MemberMemberEvaluation() {
+		return "Member_Backstage/Member_Evaluation";
+	}
 	
 	
 	

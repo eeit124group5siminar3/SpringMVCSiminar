@@ -69,7 +69,7 @@ top:2px;
       <TD colspan='4'> 
          <TABLE style="background:#FFE4C4; border:1px solid black; width:820px" >
             <TR height='2'>
-               <TH width="270"><form action="<c:url value='RetrievePageProducts' />" method="POST">
+               <TH width="270"><form action="<c:url value='/RetrievePageProducts' />" method="GET">
                   <input type="text" name="searchString" value= ${searchString}><button type="submit" name="search">查詢</button>
                   </form></TH>
                <TH width="280">&nbsp;</TH>
@@ -118,7 +118,7 @@ top:2px;
                  getImage所對應的Servlet會到資料庫讀取圖片並傳送給前端的瀏覽器
               -->
         <img height='100' width='80' 
-     src='${pageContext.servletContext.contextPath}/RetrieveImageServlet?id=${aProductBean.productId}&type=PRODUCT'>
+     src=<c:url value='retrieveImageServlet?id=${aProductBean.productId}&type=PRODUCT' />>
          </TD>
          <TD height='32' width='560'>
              <TABLE border='1'>

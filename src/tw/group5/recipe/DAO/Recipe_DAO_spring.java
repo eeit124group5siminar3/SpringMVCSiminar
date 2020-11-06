@@ -15,6 +15,7 @@ import java.util.List;
 public class Recipe_DAO_spring {
 	// 取得Session
 	@Autowired @Qualifier("sessionFactory")
+//	@Autowired(required=false) 找不到時可設為null
 	private SessionFactory sessionFactory;
 	private java.util.List<Recipe_Bean> list;
 	

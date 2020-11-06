@@ -20,42 +20,40 @@ fieldset {
 </style>
 </head>
 <body>
-		<form  runat="server"> 
-		<jsp:include page="/top.jsp" />			
-	<fieldset>
-		<legend>搜尋結果</legend>		
-		<c:forEach  var='BeanToken' items="${List}">
-			<div class="line">
-			<a href='${BeanToken.name}'></a>
-				<label>名稱 : ${BeanToken.name}</label>
-			</div>
-			<br>
-			<div id="line">
-				<label>食材: ${BeanToken.ingredients_A} </label> 
-<%-- 				<label for="">份量: ${BeanToken.gram_A}  </label> g --%>
-			</div>
-			<br>
-			<div class="line">
-				<label>介紹 : ${BeanToken.desc}</label>
-			</div>
-			<br>			
-			<div class="line">
-				<label>料理方法 : ${BeanToken.method}</label>
-			</div>
-			<br>
-<!-- 			<div class="line"> -->
-<%-- 				<label>圖片 : ${BeanToken.method}</label> --%>
-<!-- 			</div> -->
-			<hr>
+	<form action="workpage.controller" method="post" runat="server">
+		<jsp:include page="/top.jsp" />
+		<fieldset>
+			<legend>搜尋結果</legend>
+			<c:forEach var='BeanToken' items="${List}">
+				<div class="line">
+					<a href='${BeanToken.name}'></a> <label>名稱 :
+						${BeanToken.name}</label>
+				</div>
+				<br>
+				<div id="line">
+					<label>食材: ${BeanToken.ingredients_A} </label>
+					<%-- 				<label for="">份量: ${BeanToken.gram_A}  </label> g --%>
+				</div>
+				<br>
+				<div class="line">
+					<label>介紹 : ${BeanToken.desc}</label>
+				</div>
+				<br>
+				<div class="line">
+					<label>料理方法 : ${BeanToken.method}</label>
+				</div>
+				<br>
+				<!-- 			<div class="line"> -->
+				<%-- 				<label>圖片 : ${BeanToken.method}</label> --%>
+				<!-- 			</div> -->
+				<hr>
 			</c:forEach>
-			
-			</fieldset>
-		</form>
-		
-	<center>
-		<label for="" style="text-align:center;"> 
-		<input type ="reset" onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
-		</label>
-	</center>
+			<div style="text-align: center;">
+				<label>
+					<input type="submit" name="back" value="回首頁" />
+				</label>
+			</div>
+		</fieldset>
+	</form>
 </body>
 </html>

@@ -1,13 +1,6 @@
-package tw.group5.recipe.recipe;
+package tw.group5.recipe.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import tw.group5.recipe.service.recipe_Service_interface;
-
-@Controller
+//@Controller
 public class Recipe_Controller_delete {
 //	
 //	@Autowired

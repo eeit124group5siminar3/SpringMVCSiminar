@@ -32,15 +32,16 @@ fieldset {
 				<label>
 					<a href="<c:url value='/updateProcess.controller?choose=${BeanToken.rec_id}' />">${BeanToken.name}</a> 
 				</label>
-<%-- 				<a href="Recipe_Servlet_update?name='${BeanToken.rec_id}'">${BeanToken.name}</a> --%>
 			</div>		
 			<br>
 
 		</c:forEach>
 		
-		<label for="" style="text-align:center;"> <input type="reset"
-			onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
-		</label>
+			<div style="text-align: center;">
+				<label>
+					<input type="submit" name="action" value="回首頁">
+				</label>
+			</div>
 	</fieldset>
 	</form>
 

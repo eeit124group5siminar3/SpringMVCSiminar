@@ -1,83 +1,120 @@
 package tw.group5.mall.productList;
 
-import java.io.IOException;
 import java.util.Collection;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.service.ProductService;
-import tw.group5.member_SignUp.model.Member_SignUp;
 
-/**
- * Servlet implementation class RetrievePageProducts
- */
-@WebServlet("/RetrievePageProducts")
-public class RetrievePageProducts extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	@Autowired 
-	private LocalSessionFactoryBean sessionFactory;
-	int pageNo = 1;
+@Controller
+@SessionAttributes(value = { "searchString", "pageNo" })
+public class RetrievePageProducts {
+	@Autowired
+	private HttpServletRequest request;
+	@Autowired
+	private ProductService service;
+	private Integer pageNo = 1;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
+	@GetMapping(value = "/RetrievePageProducts", produces = "text/HTML;charset=UTF-8")
+//	@Scope(value = "session")
+	public String retrievePageProducts(@RequestParam(value = "pageNo", required = false) String pageNoStr,
+			@RequestParam(value = "searchString", required = false) String searchString, Model model) {
+
+		HttpSession session = request.getSession();
+		if (pageNoStr == null) {
+			if (session.getAttribute("pageNo") != null) {
+				pageNo = (Integer) session.getAttribute("pageNo");
+			} else {
+				pageNo = 1;
+			}
+		} else {
+			pageNo = Integer.parseInt(pageNoStr);
+		}
+		model.addAttribute("baBean", service);
+		Collection<ProductBean> coll = null;
+		if (request.getParameter("search") != null) {
+			service.setPageNo(1);
+			pageNo = 1;
+		} else {
+			searchString = (String) session.getAttribute("searchString");
+		}
+		service.setPageNo(pageNo);
+
+		if (searchString != null) {
+			coll = service.getPageProductsWithoutZero(searchString);
+			model.addAttribute("totalPages", service.getTotalPagesWithoutZero(searchString));
+		} else {
+			coll = service.getPageProductsWithoutZero();
+			model.addAttribute("totalPages", service.getTotalPagesWithoutZero());
+		}
+		model.addAttribute("searchString", searchString);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("products_DPP", coll);
+		return "mall/ListProduct";
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+//	@GetMapping(value = "/search", produces = "text/HTML;charset=UTF-8")
+//	public String search(HttpServletRequest request,
+//			@RequestParam(value = "pageNo", defaultValue = "1") String pageNoStr,
+//			@RequestParam(value = "searchString", required = false) String search, Model model) {
 //		HttpSession session = request.getSession();
-		request.setCharacterEncoding("UTF-8");
-		// 先取出session物件
-		HttpSession session = request.getSession();
-//		String memberId = null;
-		// 如果session物件不存在
-		if (session == null) {
-			// 請使用者登入
+//		String searchString = (String) session.getAttribute("searchString");
+//		if (search == null || search.length() == 0) {
+//			searchString = search;
+//			System.err.println(searchString);
+//			model.addAttribute("searchString", searchString);
+//			System.err.println("searchString" + searchString);
+//		}
+//
+//		return retrievePageProducts(request,"1",model);
+//	}
+}
 
-			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index.jsp"));
-			return;
-		}
-		// 登入成功後，Session範圍內才會有LoginOK對應的MemberBean物件
-		int memberId = 0;
-		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
-//		Member_SignUp mb =null;
-		// 取出使用者的memberId，後面的Cookie會用到
-		if (mb == null) {
-			mb = new Member_SignUp();
-//			String sessionId = request.getRequestedSessionId();
-//			memberId = sessionId;
-			memberId = 123456;
-			mb.setMember_no(memberId);
-			mb.setMember_permissions("1");
-			session.setAttribute("login_guest", mb);
-		} else {
-			memberId = mb.getMember_no();
-		}
+// 先取出session物件
+
+////		String memberId = null;
+//		// 如果session物件不存在
+//		if (session == null) {
+//			// 請使用者登入
+//
+//			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index.jsp"));
+//			return;
+//		}
+//		// 登入成功後，Session範圍內才會有LoginOK對應的MemberBean物件
+//		int memberId = 0;
+//		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+////		Member_SignUp mb =null;
+//		// 取出使用者的memberId，後面的Cookie會用到
+//		if (mb == null) {
+//			mb = new Member_SignUp();
+////			String sessionId = request.getRequestedSessionId();
+////			memberId = sessionId;
+//			memberId = 123456;
+//			mb.setMember_no(memberId);
+//			mb.setMember_permissions("1");
+//			session.setAttribute("login_guest", mb);
+//		} else {
+//			memberId = mb.getMember_no();
+//		}
 //		else {			
 //			memberId = mb.getMember_no();
 //		}
-		// BookService介面負責讀取資料庫內Book表格內某一頁的書籍資料，並能新增、修改、刪除
-		
+// BookService介面負責讀取資料庫內Book表格內某一頁的書籍資料，並能新增、修改、刪除
 
-		// 讀取瀏覽送來的 pageNo
-		String pageNoStr = request.getParameter("pageNo");
-		// 如果讀不到，直接點選主功能表的『購物』就不會送 pageNo給後端伺服器
-		if (pageNoStr == null) {
-			pageNo = 1;
+// 讀取瀏覽送來的 pageNo
+
+// 如果讀不到，直接點選主功能表的『購物』就不會送 pageNo給後端伺服器
+
 //			// 讀取瀏覽器送來的所有 Cookies
 //			Cookie[] cookies = request.getCookies();
 //			if (cookies != null) {
@@ -93,61 +130,18 @@ public class RetrievePageProducts extends HttpServlet {
 //					}
 //				}
 //			}
-		} else {
-			try {
-				pageNo = Integer.parseInt(pageNoStr.trim());
-			} catch (NumberFormatException e) {
-				pageNo = 1;
-			}
-		}
-//		SessionFactory factory = HibernateUtil.getSessionFactory();
-		System.out.println(sessionFactory);
-		SessionFactory sessionFactory1=(SessionFactory) sessionFactory;
-		System.out.println(sessionFactory1);
-		Session hibernateSession = sessionFactory1.getCurrentSession();
-		ProductService service = new ProductService(hibernateSession);
-		//
-		// 讀取一頁的書籍資料之前，告訴service，現在要讀哪一頁
-		service.setPageNo(pageNo);
-		request.setAttribute("baBean", service);
-		// service.getPageBooks()方法開始讀取一頁的書籍資料
-		Collection<ProductBean> coll = null;
-		String searchString = null;
-		if (request.getParameter("search") != null) {
-			searchString = request.getParameter("searchString");
-		} else {
-			searchString = (String) session.getAttribute("searchString");
-		}
 
-		if (searchString != null || session.getAttribute("searchString") != null) {
-			coll = service.getPageProductsWithoutZero(searchString);
-			request.setAttribute("totalPages", service.getTotalPagesWithoutZero(searchString));
-			session.setAttribute("searchString", searchString);
-		} else {
-			coll = service.getPageProductsWithoutZero();
-			request.setAttribute("totalPages", service.getTotalPagesWithoutZero());
-		}
+// 將讀到的一頁資料放入request物件內，成為它的屬性物件
 
-		// 將讀到的一頁資料放入request物件內，成為它的屬性物件
-		session.setAttribute("pageNo", String.valueOf(pageNo));
-		request.setAttribute("products_DPP", coll);
-
-		// 使用Cookie來儲存目前讀取的網頁編號，Cookie的名稱為memberId + "pageNo"
-		// -----------------------
+// 使用Cookie來儲存目前讀取的網頁編號，Cookie的名稱為memberId + "pageNo"
+// -----------------------
 //		Cookie pnCookie = new Cookie(memberId + "pageNo", String.valueOf(pageNo));
-		// 設定Cookie的存活期為30天
+// 設定Cookie的存活期為30天
 //		pnCookie.setMaxAge(30 * 24 * 60 * 60);
-		// 設定Cookie的路徑為 Context Path
+// 設定Cookie的路徑為 Context Path
 //		pnCookie.setPath(request.getContextPath());
-		// 將Cookie加入回應物件內
+// 將Cookie加入回應物件內
 //		response.addCookie(pnCookie);
-		// -----------------------
-		// 交由listBooks.jsp來顯示某頁的書籍資料，同時準備『第一頁』、
-		// 『前一頁』、『下一頁』、『最末頁』等資料
-		RequestDispatcher rd = request.getRequestDispatcher("mall/ListProduct.jsp");
-		rd.forward(request, response);
-		return;
-
-	}
-
-}
+// -----------------------
+// 交由listBooks.jsp來顯示某頁的書籍資料，同時準備『第一頁』、
+// 『前一頁』、『下一頁』、『最末頁』等資料

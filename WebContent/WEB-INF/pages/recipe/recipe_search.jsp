@@ -29,13 +29,11 @@ body {
 			</label> 
 			
 			<label>
-				<input type="submit" name="search" value="查詢">
+				<input type="submit" name="action" value="查詢">
 			</label>
 			
 			<label> 
-				<input type="reset"
-					onclick="javascript:location.href='recipe/recipe_workpage.jsp'"
-					value="回到首頁"></input>
+				<input type="submit" name="action" value="回首頁">
 			</label>
 		</div>
 	</form>
