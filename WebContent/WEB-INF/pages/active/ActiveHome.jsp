@@ -23,8 +23,8 @@
 			<table style="border: 8px #FFD382 groove;" border="1" cellpadding="5">
 			<h2>活動列表</h2>
 				<tr>			
-					<td style="border: 0px" align="right" colspan="9">
-					<form action="activePreInsert.controller" method="get">
+					<td style="border: 0px" align="right" colspan="10">
+					<form action="activePreInsert.controller" method="post">
 						<input name="apply" type="submit" value="申請">
 					</form>
 					</td>
@@ -35,6 +35,7 @@
 					</td>			
 				</tr>
 				<tr>
+					<th>圖片</th> 					
 					<th>活動編號</th>
 					<th>活動名稱</th>
 					<th>活動地址</th>
@@ -48,6 +49,7 @@
 				</tr>
 				<c:forEach var="Active" items="${listAct}">
 					<tr>
+						<td width='80'><img src="${pageContext.request.contextPath }/${Active.actImg}"/></td> 
 						<td><c:out value="${Active.actId}" /></td>
 						<td><c:out value="${Active.actName}" /></td>
 						<td><c:out value="${Active.actAddr}" /></td>
@@ -72,7 +74,7 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td style="border: 0px" colspan="4"></td>
+					<td style="border: 0px" colspan="5"></td>
 
 					<td style="border: 0px" colspan="6">
 						<form action="<c:url value='/activeSelectone.controller'/>" method="get">
