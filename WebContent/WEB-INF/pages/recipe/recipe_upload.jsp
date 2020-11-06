@@ -91,16 +91,16 @@ body {
 			<div>
 				<form:label path="desc">介紹: </form:label>
 				<br>
-				<textarea cols="40" rows="5" path="desc"></textarea>
+				<form:textarea cols="40" rows="5" path="desc"></form:textarea>
 			</div>
 			<br>
 			<div>
 				<form:label path="method">料理方法: </form:label>
 				<br>
-				<textarea cols="40" rows="5" path="method"></textarea>
+				<form:textarea cols="40" rows="5" path="method"></form:textarea>
 			</div>
 			<br>
-			<div>
+<!-- 			<div> -->
 				<%--  				<form:label path="">照片上傳: </form:label><input type="file" name="img" />  --%>
 
 				<!--   			<img id="blah" src="#" alt="your image" /> -->
@@ -110,13 +110,18 @@ body {
 				<!-- 			</div> -->
 				<!-- 			<br> -->
 				<div style="text-align: center;">
-					<form:button value="submit">送出</form:button>
-					<%-- 					<form:button onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="reset">回首頁</form:button> --%>
-					<label> <%--  					<a href="<c:url value='./index.jsp' />">回首頁</a> --%>
-						<a href="<c:url value='./recipe_workpage.jsp' />">回首頁</a> 
+<%-- 					<form:button value="submit">送出</form:button> --%>
+<!-- 					<label>  -->
+<%-- 					<a href="<c:url value='./recipe_workpage.jsp' />">回首頁</a>  --%>
 						<%-- <a href="<c:url value='./recipe/recipe_workpage.jsp' />">回首頁</a> --%>
+<!-- 					</label> -->
+					
+					<label>
+						<input type="submit" name="action" value="送出" />
 					</label>
-
+					<label>
+						<input type="submit" name="action" value="回首頁" />
+					</label>
 				</div>
 		</form:form>
 	</fieldset>

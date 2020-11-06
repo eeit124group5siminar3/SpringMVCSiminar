@@ -10,11 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+//註明為persistent class
 @Entity
 @Table(name="recipe")
 @Component
+//Spring宣告
+//@Scope(value = "singleton")  預設
+//value = singleton 每次使用getBean()時,取得相同ID的物件,
+//會在ApplicationContext建立時產生,不希望自動產生 ,加上@Lazy(value = true)
+//prototype 代表ApplicationContext建立後不會主動產生,每次getBean()時,建立新物件,不會主動destory
+//request   代表request與bean結合,在同	request與同getBean(),取得相同id的物件
+//session   與request相同
 public class Recipe_Bean {
 	private String rec_id;
 	private String name;
