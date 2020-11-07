@@ -52,7 +52,7 @@ body {
 			</tr>
 			<tr>
 				<td>密碼</td>
-				<td><input type="text" name="member_password" minlength="8"
+				<td><input type="password" name="member_password" minlength="8"
 					size="30" maxlength="20"
 					pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 					title="密碼長度至少8碼，須包含大寫、小寫英文及數字" placeholder="password" required></td>
