@@ -31,7 +31,7 @@ body {
 			<div>
 			<fieldset>
 				<legend>活動基本資料</legend>
-			<form action="activeInsert.controller" method="post">						
+			<form action="activeInsert.controller" method="post" enctype="multipart/form-data">						
 				<div>
 					<label for="">編號: 待會告訴你</label>
 				</div>

@@ -23,51 +23,68 @@ body {
 </head>
 <body>
 <h1 align="center">商品管理</h1>
-<form action="<c:url value='MarketUpdate'></c:url>" method="post">
 		<fieldset>
+		<form action="<c:url value='/MarketProduct.Update'></c:url>" method="post">
 			<legend>商品資料</legend>
-			<c:forEach var="product" items="${list}">
+			
 			<div>
-				<label for="">編號:${product.productId}</label>
-				<input type=hidden name="productId" value="${product.productId}"/>
+				<label for="">編號:${list.productId}</label>
+				<input type=hidden name="productId" value="${list.productId}"/>
 			</div>
 			<div>
 				<label for="">商品名稱:</label>
-				<input type="text" id="productName" name="productName" value="${product.productName}" >
+				<input type="text" id="product_name" name="product_name" value="${list.productName}" >
+			 <font color='red' size='-1'>
+              ${errors.errProduct_name}
+           </font>
 			</div>
 			<div>
-				<label for="">商品描述:</label> 
-				<textarea name="description" id="description" cols="60" rows="4" >${product.marketProductImgBean.description}</textarea>
-				
+				<label for="">商品描述(75字以內):</label> 
+				<textarea name="description" id="description" cols="60" rows="4" >${list.marketProductImgBean.description}</textarea>
+		      <font color='red' size='-1'>
+                ${errors.errDescription}
+            </font>
 			</div>
 			<div>
 				<label for="">商品出產地:</label> 
-				<input type="text" id="productArea" name="productArea" value="${product.productArea}">
+				<input type="text" id="product_area" name="product_area" value="${list.productArea}">
 			</div>
 			
 		    <div>
 				<label for="">單位:</label> 
-				<input type="text" id="unit" name="unit" value="${product.unit}">
+				<input type="text" id="unit" name="unit" value="${list.unit}">
 			</div>
+           <font color='red' size='-1'>
+              ${errors.errUnit}
+           </font> 
+		
 			 <div>
 				<label for="">數量:</label> 
-				<input type="text" id="quantity" name="quantity" value="${product.quantity}">
+				<input type="text" id="quantity" name="quantity" value="${list.quantity}">
+           <font color='red' size='-1'>
+              ${errors.errQuantity}
+           </font>  
+				
 			</div>
 			
 			<div>
 				<label for="">價格:</label> 
-				<input type="text" id="price" name="price" value="${product.price}">
+				<input type="text" id="price" name="price" value="${list.price}">
+            <font color='red' size='-1'>
+              ${errors.errPrice}
+           </font> 
 			</div>
 <!-- 			<div> -->
 <!-- 				<label for="">圖片:</label> <br>  -->
 <!-- 				<input type="file" id="product" name="product"> -->
 <!-- 			</div> -->
 
-		  </c:forEach>
-			<input name="update" type="submit" value="更新" > 
-			<input name="acthome" type="submit" value="活動首頁">
-			
+			<input  type="submit" value="更新" > 
+			</form>
+			<form action="<c:url value='/MarketProduct.selectAll'></c:url>" method="get">
+			<input  type="submit" value="活動首頁">
+			</form>
 		</fieldset>
-	</form>
+	
 </body>
 </html>

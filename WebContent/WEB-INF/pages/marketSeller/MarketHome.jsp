@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>活動首頁</title>	
+<title>活動首頁</title>
+
 <style>
 
 </style>
@@ -17,10 +18,10 @@
    	 <h1 align="center">商品管理</h1>
      <div align="center">
      <div>圖片尚未能更新</div>
-     <form action="<c:url value='/delete.controller'></c:url>" method="post">
+     <form action="<c:url value='/MarketProduct.goInsertJsp'></c:url>" method=".GET">
         <table  style="border:8px #FFD382 groove;"border="1" cellpadding="5">
             <tr>
-            <th> <input name="goinsert" type="submit" value="新增商品"></th>
+            <th> <input  type="submit" value="新增商品"></th>
             </tr>
         </table>        
         </form>
@@ -48,30 +49,30 @@
                     <td><c:out value="${IBean.price}"/></td>
                     <td><c:out value="${IBean.unit}"/></td>
                     <td><c:out value="${IBean.quantity}"/></td>      
-             <!--    <td>  
-              <img height='80' width='80'
-				src='${pageContext.servletContext.contextPath}/marketSeller/RetrieveMarketImage?id=${IBean.marketProductImgBean.productId}&type=PRODUCT'>
-				</td> -->
+                <td>  
+				<img  height='80' width='80'
+			        src=${IBean.marketProductImgBean.productImg}&type=PRODUCT>
+			        
+				</td>
 				 
 				<td>
-				<form action="<c:url value='/delete.controller'></c:url>" method="post">
+				<form action="<c:url value='/MarketProduct.delete'></c:url>" method="post">
 				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
               
                  <input  type="submit" value="刪除">
                  </form>
                  	&nbsp;&nbsp;
-                  <form action="<c:url value='/update.controller'></c:url>" method="post">
+                  <form action="<c:url value='/MarketProduct.goUpdateJsp'></c:url>" method="get">
+                  <input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
+                  
 				 <input type="submit" value="更新"> 
 				  	 </form>
 			     </td>
-			     
                 </tr>
             </c:forEach>
           
         </table>
-    </div>   
-		
-	
-	
+    </div>  
+
 </body>
 </html>

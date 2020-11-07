@@ -1,32 +1,32 @@
 package tw.group5.mall.service;
 
-import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.mall.dao.ProductDAO;
 import tw.group5.mall.model.CategoryBean;
 import tw.group5.mall.model.ProductBean;
-import tw.group5.util.HibernateUtil;
 
-public class ProductService implements Serializable {
+@Service
+@Transactional
+public class ProductService {
 
-	private  Session session;
-	ProductDAO dao;
+//	private  Session session;
+	@Autowired
+	private ProductDAO dao;
 
-	
-	public ProductService(Session session) {
-		this.dao = new ProductDAO(session);
-	}
+//	public ProductService(Session session) {
+//		this.dao = new ProductDAO(session);
+//	}
 
-	
 //	@Transactional(rollbackFor = {Exception.class})
 	public int getTotalPages() {
 		return dao.getTotalPages();
 	}
+
 	public int getTotalPages(int producterId) {
 		return dao.getTotalPages(producterId);
 	}
@@ -34,6 +34,7 @@ public class ProductService implements Serializable {
 	public List<ProductBean> getPageProducts() {
 		return dao.getPageProducts();
 	}
+
 	public List<ProductBean> getPageProducts(int producterId) {
 		return dao.getPageProducts(producterId);
 	}
@@ -86,9 +87,11 @@ public class ProductService implements Serializable {
 	public CategoryBean getCategoryById() {
 		return dao.getCategoryById();
 	}
+
 	public String getSelectTag() {
 		return dao.getSelectTag();
 	}
+
 	public int getId() {
 		return dao.getId();
 	}
@@ -96,6 +99,7 @@ public class ProductService implements Serializable {
 	public void setId(int id) {
 		dao.setId(id);
 	}
+
 	public String getTagName() {
 		return dao.getTagName();
 	}
@@ -103,6 +107,7 @@ public class ProductService implements Serializable {
 	public void setTagName(String tagName) {
 		dao.setTagName(tagName);
 	}
+
 	public int getSelected() {
 		return dao.getSelected();
 	}
@@ -110,6 +115,7 @@ public class ProductService implements Serializable {
 	public List<ProductBean> getPageProductsWithoutZero() {
 		return dao.getPageProductsWithoutZero();
 	}
+
 	public List<ProductBean> getPageProductsWithoutZero(String searchString) {
 		return dao.getPageProductsWithoutZero(searchString);
 	}
@@ -117,6 +123,7 @@ public class ProductService implements Serializable {
 	public Object getTotalPagesWithoutZero() {
 		return dao.getTotalPagesWithoutZero();
 	}
+
 	public Object getTotalPagesWithoutZero(String searchString) {
 		return dao.getTotalPagesWithoutZero(searchString);
 	}

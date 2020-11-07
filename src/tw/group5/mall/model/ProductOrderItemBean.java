@@ -13,19 +13,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+@Component
 @Entity
 @Table(name="orderDetails")
 public class ProductOrderItemBean implements Serializable{
-	private int itemId;
-	private	int orderId;
-	private int productId;
-	private	int producterId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer itemId;
+	private	Integer orderId;
+	private Integer productId;
+	private	Integer producterId;
 	private	String description;
-	private	int amount;
-	private	double unitPrice;
-	private	double discount;
+	private	Integer amount;
+	private	Double unitPrice;
+	private	Double discount;
 	private	Date shippingDate;
-	private	int status;
+	private	Integer status;
 	private String producterName;
 	private ProductOrderBean productOrderBean;
 	@Transient
@@ -38,8 +46,8 @@ public class ProductOrderItemBean implements Serializable{
 	public ProductOrderItemBean() {
 		super();
 	}
-	public ProductOrderItemBean(int orderId, int productId, int producterId, String description, int amount,
-			double unitPrice, double discount) {
+	public ProductOrderItemBean(Integer orderId, Integer productId, Integer producterId, String description, Integer amount,
+			Double unitPrice, Double discount) {
 		super();
 		this.orderId = orderId;
 		this.productId = productId;
@@ -49,8 +57,8 @@ public class ProductOrderItemBean implements Serializable{
 		this.unitPrice = unitPrice;
 		this.discount = discount;
 	}
-	public ProductOrderItemBean(int itemId, int orderId, int productId, int producterId, String description,
-			int amount, double unitPrice, double discount, Date shippingDate, int status) {
+	public ProductOrderItemBean(Integer itemId, Integer orderId, Integer productId, Integer producterId, String description,
+			Integer amount, Double unitPrice, Double discount, Date shippingDate, Integer status) {
 		super();
 		this.itemId = itemId;
 		this.orderId = orderId;
@@ -65,31 +73,31 @@ public class ProductOrderItemBean implements Serializable{
 	}
 	@Id @Column(name="ITEMID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getItemId() {
+	public Integer getItemId() {
 		return itemId;
 	}
-	public void setItemId(int itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 	@Transient
-	public int getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(int orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 	@Column(name="PRODUCTID")
-	public int getProductId() {
+	public Integer getProductId() {
 		return productId;
 	}
-	public void setProductId(int productId) {
+	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
 	@Column(name="PRODUCTERID")
-	public int getProducterId() {
+	public Integer getProducterId() {
 		return producterId;
 	}
-	public void setProducterId(int producterId) {
+	public void setProducterId(Integer producterId) {
 		this.producterId = producterId;
 	}
 	@Column(name="DESCRIPTION")
@@ -100,24 +108,24 @@ public class ProductOrderItemBean implements Serializable{
 		this.description = description;
 	}
 	@Column(name="AMOUNT")
-	public int getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 	@Column(name="UNITPRICE")
-	public double getUnitPrice() {
+	public Double getUnitPrice() {
 		return unitPrice;
 	}
-	public void setUnitPrice(double unitPrice) {
+	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 	@Column(name="DISCOUNT")
-	public double getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
-	public void setDiscount(double discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 	@Column(name="SHIPPINGDATE", insertable = false)
@@ -128,10 +136,10 @@ public class ProductOrderItemBean implements Serializable{
 		this.shippingDate = shippingDate;
 	}
 	@Column(name="STATUS")
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	@ManyToOne(fetch = FetchType.LAZY)

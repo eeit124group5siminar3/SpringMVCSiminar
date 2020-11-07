@@ -15,19 +15,26 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+@Component
 @Entity
 @Table(name="orderForm")
 public class ProductOrderBean implements Serializable{
-	private int orderId;
-	private int buyerId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer orderId;
+	private Integer buyerId;
 	private String buyerName;
 	private String address;
 	private String tel;
 	private String bNo;
-	private double total;
+	private Double total;
 	private	Date orderDate;
 	private Set<ProductOrderItemBean> items = new LinkedHashSet<>();
-	public ProductOrderBean(int buyerId, String buyerName, String address, String tel, String bNo, double total,
+	public ProductOrderBean(Integer buyerId, String buyerName, String address, String tel, String bNo, Double total,
 			Date orderDate,Set<ProductOrderItemBean> items) {
 		super();
 		this.buyerId = buyerId;
@@ -42,8 +49,8 @@ public class ProductOrderBean implements Serializable{
 	public ProductOrderBean() {
 		super();
 	}
-	public ProductOrderBean(int orderId, int buyerId, String buyerName, String address, String tel, String bNo,
-			double total, Date orderDate,Set<ProductOrderItemBean> items) {
+	public ProductOrderBean(Integer orderId, Integer buyerId, String buyerName, String address, String tel, String bNo,
+			Double total, Date orderDate,Set<ProductOrderItemBean> items) {
 		super();
 		this.orderId = orderId;
 		this.buyerId = buyerId;
@@ -58,17 +65,17 @@ public class ProductOrderBean implements Serializable{
 	}
 	@Id @Column(name="ORDERID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(int orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 	@Column(name="BUYERID")
-	public int getBuyerId() {
+	public Integer getBuyerId() {
 		return buyerId;
 	}
-	public void setBuyerId(int buyerId) {
+	public void setBuyerId(Integer buyerId) {
 		this.buyerId = buyerId;
 	}
 	@Column(name="BUYERNAME")
@@ -100,10 +107,10 @@ public class ProductOrderBean implements Serializable{
 		this.bNo = bNo;
 	}
 	@Column(name="TOTAL")
-	public double getTotal() {
+	public Double getTotal() {
 		return total;
 	}
-	public void setTotal(double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 	@Column(name="ORDERDATE",updatable = false)

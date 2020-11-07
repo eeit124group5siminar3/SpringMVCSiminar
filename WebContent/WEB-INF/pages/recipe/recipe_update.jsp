@@ -100,14 +100,19 @@ fieldset {
 			</c:forEach>
 			<br>
 			<div style="text-align: center;">
-				<label><input type="submit" name="action" value="確認修改"></label>
-				<label><input type="submit" name="action" value="刪除"></label>
-				<label><input type="reset"
-			onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="取消"></input>
-		</label>
+
+				<label> 
+					<input type="submit" name="action" value="確認修改">
+				</label> 
+				<label> 
+					<input type="submit" name="action" value="刪除">
+				</label>
+				<label> 
+					<input type="submit" name="action" value="取消">
+				</label>
 			</div>
-			
-			</fieldset>
+
+		</fieldset>
 		</form>
 </body>
 </html>

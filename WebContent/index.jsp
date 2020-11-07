@@ -43,10 +43,21 @@ h2{
 </tr>
 <tr>
 	<td align="center"><a href="RetrievePageProducts"><img src="images/crop.png"></a></td>
-	<td align="center"><a href="<c:url value='/selectAll.controller'/>"><img src="images/market.png"></a></td>
+	<td align="center"><a href="<c:url value='/MarketProduct.selectAll'/>"><img src="images/market.png"></a></td>
 	<td align="center"><a href="recipe/recipe_workpage.jsp"><img src="images/recipe.png"></a></td>
 	<td align="center"><a href="<c:url value='/activeHomeSelectAll.controller'/>"><img src="images/footprint.png"></a></td>
-	<td align="center"><a href="login.controller"><img src="images/member.png"></a></td>
+	<td align="center">
+		<c:if test="${empty login_ok}">
+			<a href="<c:url value='login.controller' />">
+				<img src="images/member.png">
+			</a>
+        </c:if>
+        <c:if test="${!empty login_ok}">
+			<a href="<c:url value='backstage.controller' />">
+				<img src="images/member.png">
+			</a>
+        </c:if>
+    </td>
 </tr>
 <tr>
 	<td align="center"><h3>商城</h3></td>

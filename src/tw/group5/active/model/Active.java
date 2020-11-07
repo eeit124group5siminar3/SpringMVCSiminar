@@ -38,7 +38,7 @@ public class Active implements Serializable {
 	private int price;
 	private String actType;
 	private String actDescri;
-	private Blob actImg;
+	private byte[] actImg;
 	private String imgName;
 
 	public Active() {
@@ -47,7 +47,7 @@ public class Active implements Serializable {
 
 	public Active(int actId, String actName, String actAddr, String tel, int expNum, int actNum, String sigStat,
 			String memberNo, Date actDate, Date dateSta, Date dateEnd, int price, String actType, String actDescri,
-			Blob actImg, String imgName) {
+			byte[] actImg, String imgName) {
 		this.actId = actId;
 		this.actName = actName;
 		this.actAddr = actAddr;
@@ -228,12 +228,11 @@ public class Active implements Serializable {
 	}
 
 	@Column(name = "actImg")
-	@Lob
-	public Blob getActImg() {
+	public byte[] getActImg() {
 		return actImg;
 	}
 
-	public void setActImg(Blob actImg) {
+	public void setActImg(byte[] actImg) {
 		this.actImg = actImg;
 	}
 
@@ -241,6 +240,7 @@ public class Active implements Serializable {
 	public String getImgName() {
 		return imgName;
 	}
+
 
 	public void setImgName(String imgName) {
 		this.imgName = imgName;

@@ -15,7 +15,7 @@
 <table>
 <tr><td ALIGN='CENTER'><img src="images/farmer.png" style="width:200px; height:200px"></td></tr>
 <tr><td ALIGN='CENTER'><H1 >成功</H1></td></tr>
-<tr><td ALIGN='CENTER'><a href="<c:url value='/selectAll.controller'/>">返回</a>
+<tr><td ALIGN='CENTER'><a href="<c:url value='/MarketProduct.selectAll'/>">返回</a>
 </table>
 </div>
 </body>

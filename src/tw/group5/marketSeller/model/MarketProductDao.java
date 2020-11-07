@@ -1,5 +1,6 @@
 package tw.group5.marketSeller.model;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.query.Query;
@@ -28,9 +29,15 @@ public class MarketProductDao {
 		return list;
 	}
 	
-	//查詢全部
+	//查詢單筆
 	public MarketProductTotalBean select(int productId) {
 		return getSession().get(MarketProductTotalBean.class, productId);
+	}
+	
+	
+	//查詢圖
+	public MarketProductImgBean selectImg(int productId) {
+		return getSession().get(MarketProductImgBean.class, productId);
 	}
 	
 	//刪除
@@ -59,5 +66,5 @@ public class MarketProductDao {
 		getSession().update(bean);
 	    return bean;
 		}
-	
+
 }

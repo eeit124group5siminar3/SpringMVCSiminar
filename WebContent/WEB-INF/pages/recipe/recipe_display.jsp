@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%
 response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control","no-cache"); // HTTP 1.1
@@ -22,21 +23,24 @@ fieldset {
 	border :8px #FFD382 groove;
 	border-radius: 15px;
 }
-        table{
-            border-collapse: collapse;
-        }
+table{
+    border-collapse: collapse;
+}
 </style>
 </head>
 <body>
 <jsp:include page="/top.jsp" />
 <h1 style="text-align: center;">確認頁面</h1>
-	<fieldset>
 <%-- 	<form action='<c:url value="/uploadConfirm.controller"/>' method="post" > --%>
+<%-- 	<form:form action="uploadConfirm.controller" method="post" ModelAttribute="details2"> --%>
+<!-- 	<fieldset> -->
+
 	<form action="uploadConfirm.controller" method="post" >
+	<fieldset>
 		<table cellspacing="2" cellpadding="1" border="1" width="100%">
 			<tr>
 				<td>名稱</td>
-				<td>${name}</td>
+				<td >${name}</td>
 			</tr>
 			<tr>
 				<td>種類</td>
@@ -58,26 +62,63 @@ fieldset {
 				<td>料理方法</td>
 				<td>${method}</td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td>照片</td> -->
-<%-- 				<td></td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>檔名</td> -->
-<%-- 				<td></td> --%>
-<!-- 			</tr> -->
+			<tr>
+				<td>照片</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>檔名</td>
+				<td></td>
+			</tr>
 
 		</table>
-		<br>
-		<center>
-			<input type="submit" name="confirm" value="確認" />
-			<label for="" style="text-align:center;"> <input type="reset"
-			onclick="javascript:location.href='recipe/recipe_workpage.jsp'" value="回到首頁"></input>
-		
-		</label>
-		</center>
-	</form>
+			<br>
+<!-- 			<div> -->
+<%-- 				<form:label path="${name}">名稱:${name} </form:label> --%>
+<%-- 				<form:input type="hidden" path="${name}" /> --%>
+
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<form:label path="${cate}">種類:${cate} </form:label> --%>
+<%-- 				<form:input type="hidden" path="${cate}" /> --%>
+
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<form:label path="${ingredients_A}">食材:${ingredients_A} </form:label> --%>
+<%-- 				<form:input path="${ingredients_A}" /> --%>
+
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<form:label path="${gram_A}">份量:${gram_A} </form:label> --%>
+<%-- 				<form:input path="${gram_A}" /> --%>
+
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<form:label path="${desc}">介紹:${desc} </form:label> --%>
+<%-- 				<form:input path="${desc}" /> --%>
+
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<form:label path="${method}">料理方法:${method} </form:label> --%>
+<%-- 				<form:input path="${method}" /> --%>
+
+<!-- 			</div> -->
+			<br>
+			<div style="text-align: center;">
+					<label>
+						<input type="submit" name="action" value="送出" />
+					</label>
+					<label>
+						<input type="submit" name="action" value="回首頁" />
+					</label>
+				</div>
 	</fieldset>
+	</form>
 		
 </body>
 </html>

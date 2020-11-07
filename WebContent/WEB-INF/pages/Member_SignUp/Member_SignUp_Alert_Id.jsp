@@ -18,7 +18,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <jsp:include page="/top.jsp" />
 	<script type="text/javascript">
 		if (!alert("身分證字號輸入錯誤，請重新輸入"))
-			document.location = "Member_SignUp/Member_SignUp.jsp";
+			document.location = "goMemberSignUp.controller";
 	</script>
 </body>
 </html>

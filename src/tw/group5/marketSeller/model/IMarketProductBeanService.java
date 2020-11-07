@@ -7,6 +7,7 @@ public interface IMarketProductBeanService {
 	public boolean delete(int productId);
 	public  MarketProductTotalBean insert(MarketProductTotalBean bean);
 	public  MarketProductTotalBean update(MarketProductTotalBean bean);
-	
-
+	public MarketProductTotalBean select(int productId);
+	public MarketProductImgBean selectImg(int productId);
+   
 }
