@@ -1,24 +1,26 @@
 package tw.group5.mall.model;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope(value = "prototype")
 public class OrderItem {
 	private String product;
-	private int producterId;
+	private Integer producterId;
 	private String producterName;
-	private int content;
+	private Integer content;
 	private String unit;
-	private int qty = 0;
-	private int productId = 0;
-	private double price = 0.0;
-	private double discount = 1.0;
+	private Integer qty = 0;
+	private Integer productId = 0;
+	private Double price = 0.0;
+	private Double discount = 1.0;
 
 	public OrderItem() {
 		super();
 	}
 
-	public OrderItem(String product, int producterId, int content, String unit, Integer qty, Integer productId,
+	public OrderItem(String product, Integer producterId, Integer content, String unit, Integer qty, Integer productId,
 			Double price, Double discount, String producterName) {
 		super();
 		this.product = product;
@@ -40,19 +42,19 @@ public class OrderItem {
 		this.product = product;
 	}
 
-	public int getProducterId() {
+	public Integer getProducterId() {
 		return producterId;
 	}
 
-	public void setProducterId(int producterId) {
+	public void setProducterId(Integer producterId) {
 		this.producterId = producterId;
 	}
 
-	public int getContent() {
+	public Integer getContent() {
 		return content;
 	}
 
-	public void setContent(int content) {
+	public void setContent(Integer content) {
 		this.content = content;
 	}
 
