@@ -71,32 +71,33 @@ public class MarketHomeUpdate {
 		
 		return "marketSeller/MarketS";
 	}
-	
-	@GetMapping("/ch04/_03/getBookImage")
-	public ResponseEntity<byte[]> getBookImage(@RequestParam("productId") Integer id) {
-		ResponseEntity<byte[]> re = null;
-		MarketProductImgBean bean = service.selectImg(id);
-		String filename = bean.getImg_name();
-		Blob blob = bean.getProductImg();
-		String mimeType = ctx.getMimeType(filename);
-		MediaType mediaType = MediaType.valueOf(mimeType);
-		HttpHeaders headers = new HttpHeaders();
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			InputStream is = blob.getBinaryStream();
-			byte[] b = new byte[81920];
-			int len = 0;
-			while ((len = blob.read(b)) != -1) {
-				baos.write(b, 0, len);
-			}
-			headers.setContentType(mediaType);
-			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return re;
-	}
+//	
+//	@GetMapping("/ch04/_03/getBookImage")
+//	public ResponseEntity<byte[]> getBookImage(@RequestParam("productId") Integer id) {
+//		ResponseEntity<byte[]> re = null;
+//		MarketProductImgBean bean = service.selectImg(id);
+//		String filename = bean.getImg_name();
+//		byte[] byte1 = bean.getProductImg();
+//		
+//		String mimeType = ctx.getMimeType(filename);
+//		MediaType mediaType = MediaType.valueOf(mimeType);
+//		HttpHeaders headers = new HttpHeaders();
+//		try {
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//			InputStream is = blob.getBinaryStream();
+//			byte[] b = new byte[81920];
+//			int len = 0;
+//			while ((len = is.read(b)) != -1) {
+//				baos.write(b, 0, len);
+//			}
+//			headers.setContentType(mediaType);
+//			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return re;
+//	}
 	
 	
 
