@@ -30,6 +30,9 @@ public class MarketProductBeanService implements IMarketProductBeanService {
 	public boolean delete(int productId) {
 		return mDao.delete(productId);
 	}
+	
+
+	
 	@Override
     public MarketProductTotalBean insert(MarketProductTotalBean bean) {
     	return mDao.insert(bean);
@@ -38,6 +41,11 @@ public class MarketProductBeanService implements IMarketProductBeanService {
     public MarketProductTotalBean update(MarketProductTotalBean bean) {
     	return mDao.update(bean);
     }
+
+	@Override
+	public MarketProductImgBean selectImg(int productId) {
+		return mDao.selectImg(productId);
+	}
 	
 	
 }

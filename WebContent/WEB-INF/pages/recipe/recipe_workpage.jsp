@@ -25,29 +25,18 @@ div{
 </style>
 </head>
 <body>
-	
-	
-		<!-- 		<a href="recipe_upload.jsp" name="upload_rec">新增食譜</a><br> -->
-		<!-- 		<a href="recipe.Recipe_Servlet_update" name="update_rec">修改食譜 </a><br> -->
-		<!-- 		<a href="recipe_upload.jsp" name="">搜尋食譜 </a><br> -->
-		<form action="../Recipe_Servlet" method="post">
+		<form action='<c:url value="/function.controller"/>' method="post">
 		<c:set var="funcName" value="ORD" scope="session" /> 
 		<jsp:include page="/top.jsp" />
 		<h1 style="text-align: center;">食譜管理</h1>
 		<div>
-			<input type="submit" name="upload" value="上傳" />
-<!-- 		</form> --> 
+			<input type="submit" name="action" value="上傳食譜" />
 
-<!-- 		<form action="./Recipe_Servlet_update" method="post"> -->
-			<input type="submit" name="update" value="更新" />
-<!-- 		</form> -->
+			<input type="submit" name="action" value="修改食譜" />
 
-<!-- 		<form action="./Recipe_Servlet_search" method="post"> -->
-			<input type="submit" name="search" value="搜尋" />
-<!-- 		</form> -->
+			<input type="submit" name="action" value="搜尋料理" />
 
-<!-- 		<form action="./Recipe_Servlet_delete" method="post"> -->
-			<input type="submit" name="del" value="刪除" />
+<!-- 			<input type="submit" name="action" value="刪除" /> -->
 			</div>
 		</form>
 
