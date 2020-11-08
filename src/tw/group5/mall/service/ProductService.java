@@ -66,8 +66,8 @@ public class ProductService {
 		return dao.getProduct(productId);
 	}
 
-	public ProductBean updateProduct(ProductBean bean, long sizeInBytes) {
-		return dao.updateProduct(bean, sizeInBytes);
+	public ProductBean updateProduct(ProductBean bean) {
+		return dao.updateProduct(bean);
 	}
 
 	public ProductBean deleteProduct(int no) {
@@ -134,4 +134,6 @@ public class ProductService {
 		dao.setMaintainPageNo(maintainPageNo);
 		
 	}
+
+
 }

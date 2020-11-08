@@ -214,7 +214,7 @@ public class ProductDAO {
 
 
 
-	public ProductBean updateProduct(ProductBean bean, long sizeInBytes) {
+	public ProductBean updateProduct(ProductBean bean) {
 //			ProductBean result=session.get(ProductBean.class, bean.getProductId());
 //			if(result!=null) {
 //				result.setProducterName(bean.getProducterName());

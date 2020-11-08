@@ -32,7 +32,8 @@
 			</div>
 			<!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 			<!-- 而且method屬性必須是 "post" -->
-			<form:form id="form1" method="post" action=<c:url value="/ProductInsertServlet" />
+			<form:form id="form1" name="form1" method="post"
+				action=<c:url value="/ProductInsertServlet" />
 				enctype="multipart/form-data" modelAttribute="Insert">
 
 				<table class="table_color" width="940" border="2" align="center"
@@ -57,41 +58,41 @@
 					</tr>
 					<tr height='36'>
 						<td width="120" align="center" class="title_font">產品名稱</td>
-						<td width="350"><form:input name="product" 
-								type="text" path="product" 
+						<td width="350"><form:input name="product" class='InputClass'
+								type="text" id="product" path="product" 
 								size="6" /> <font color='red' size='-1'>
 								${ErrMsg.errProduct} </font></td>
 						<td width="120" align="center" class="title_font">價格</td>
-						<td width="350"><form:input name="price" 
-								type="text" path="price"  size="6" />
+						<td width="350"><form:input name="price" class='InputClass'
+								type="text" id="price" path="price"  size="6" />
 							<font color='red' size='-1'> ${ErrMsg.errPrice} </font></td>
 					</tr>
 					<tr height='36'>
 						<td width="120" align="center" class="title_font">保質期</td>
 						<td width="350"><form:input name="shelfTime"
-								 type="text" 
+								class='InputClass' type="text" id="shelfTime"
 								path="shelfTime" size="6" />天 <font
 							color='red' size='-1'> ${ErrMsg.errShelfTime} </font></td>
 						<td width="120" align="center" class="title_font">庫存</td>
-						<td width="350"><form:input name="stock" 
-								type="text"  path="stock" size="6" />
+						<td width="350"><form:input name="stock" class='InputClass'
+								type="text" id="stock" path="stock" size="6" />
 							<font color='red' size='-1'> ${ErrMsg.errStock} </font></td>
 					</tr>
 					<tr height='36'>
 						<td width="120" class="title_font"><div align="center">內含數量</div></td>
-						<td width="350"><form:input  name="content"
-								type="text" path="content"
+						<td width="350"><form:input class='InputClass' name="content"
+								type="text" id="content" path="content"
 								size="6" /> <Font color='red' size='-1'>
 								${ErrMsg.errContent} </Font></td>
 						<td width="120" class="title_font"><div align="center">數量單位</div></td>
-						<td width="350"><form:input name="unit"
-								type="text" path="unit" size="6" />
+						<td width="350"><form:input class='InputClass' name="unit"
+								type="text" id="unit" path="unit" size="6" />
 							<font color='red' size='-1'> ${ErrMsg.errUnit} </font></td>
 					</tr>
 					<tr height='36'>
 						<td width="120" align="center" class="title_font">圖片</td>
 						<td colspan="1"><form:input style="background:#FFFFFF"
-								 type="file" name="uploadFile" path="coverImage" size="25" /><br>
+								class='InputClass' type="file" name="uploadFile" path="coverImage" size="25" /><br>
 							<font color='red' size='-1'>${ErrMsg.errPicture}</font></td>
 						<td width="120" align="center" class="title_font">類型</td>
 						<td colspan="1">${sessionScope.SelectCategoryTag} <font
@@ -107,10 +108,7 @@
 					</tr>
 
 					<tr height="36">
-						<td height="61" colspan="6" align="center">
-						<input type="submit" value="submit">
-<%-- 						<form:button value="Send">Submit</form:button> --%>
-						</td>
+						<td height="61" colspan="6" align="center"><form:button value="Send">Submit</form:button></td>
 					</tr>
 				</table>
 			</form:form>
