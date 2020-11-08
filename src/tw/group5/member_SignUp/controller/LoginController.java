@@ -1,5 +1,6 @@
 package tw.group5.member_SignUp.controller;
 
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,9 +88,8 @@ public class LoginController {
 	
 	//登出
 	@RequestMapping(path = "/removeSession.controller", method = RequestMethod.GET)
-	public String processRemoveSession(HttpServletRequest request,HttpSession session,SessionStatus sessionStatus) {
-		HttpSession abc = request.getSession(false);
-		abc.invalidate();
+	public String processRemoveSession(HttpSession session,SessionStatus sessionStatus) {
+
 		session.removeAttribute("login_ok");
 		session.invalidate();
 		sessionStatus.setComplete();
