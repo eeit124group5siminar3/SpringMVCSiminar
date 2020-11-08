@@ -1,15 +1,28 @@
 package tw.group5.active.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +45,12 @@ public class ActiveHomeController {
 	
 	@Autowired
 	private HttpServletRequest request;
+	
+	@Autowired
+	ServletContext ctx;
+
+	@Autowired
+	private HttpServletResponse response;
 
 	// 查詢全部(首頁跳轉)
 	@RequestMapping(path = "/activeHomeSelectAll.controller", method = RequestMethod.GET)
@@ -53,6 +72,38 @@ public class ActiveHomeController {
 		m.addAttribute("listAct", listAct);
 		return "active/ActiveHome";
 	}
+	
+	
+	
+	
+	//讀取圖片
+	
+//	public String readImg(@RequestParam("actId") int actId){
+//		Active aBean = activeService.select(actId);
+//		String filename = aBean.getImgName();
+//		byte[] img = aBean.getActImg();
+//		String mimeType = ctx.getMimeType(filename);
+//		MediaType mediaType = MediaType.valueOf(mimeType);
+//		HttpHeaders headers = new HttpHeaders();
+//		try {
+//			OutputStream outputStream=response.getOutputStream();
+//			InputStream in=new ByteArrayInputStream(img);			
+//			int len=0;
+//			byte[]buf=new byte[1024];
+//			while((len=in.read(buf,0,1024))!=-1){
+//				outputStream.write(buf, 0, len);
+//			}
+//			outputStream.close();
+//			//準備相關資料 noCache表不存入快取
+//			headers.setContentType(mediaType);
+//			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//			//最後回傳成位元組陣列 (baos.toByteArray()回應本體、headers回應標頭、HttpStatus.OK狀態)
+//			return = new 0 (FileUtils.readFileToByteArray(outputStream) , headers, HttpStatus.OK);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "active/ActiveHome";
+//	}
 
 	// 導向申請頁面
 	@RequestMapping(path = "/activePreInsert.controller", method = RequestMethod.POST)
@@ -72,11 +123,11 @@ public class ActiveHomeController {
 		String imgName = actImg.getOriginalFilename();
 		String fileTempDirPath = request.getSession().getServletContext().getRealPath("/") + "UploadTempDir\\";
 		 
-		File dirPath = new File(fileTempDirPath);
-		  if (!dirPath.exists()) {
-			boolean status =dirPath.mkdir();
-			System.out.println("status:" + status);
-		}
+//		File dirPath = new File(fileTempDirPath);
+//		  if (!dirPath.exists()) {
+//			boolean status =dirPath.mkdirs();
+//			System.out.println("status:" + status);
+//		}
 		  
 		String fileSavePath =fileTempDirPath +imgName;
 		File savFile = new File(fileSavePath);
@@ -138,8 +189,10 @@ public class ActiveHomeController {
 			@RequestParam("dateSta") Date dateSta, @RequestParam("dateEnd") Date dateEnd,
 			@RequestParam("expNum") int expNum, @RequestParam("price") int price,
 			@RequestParam("actDescri") String actDescri) {
+		
 		Active aBean = new Active(actId, actName, actType, actAddr, tel, actDate, dateSta, dateEnd, expNum, price,
 				actDescri);
+		
 		activeService.update(actId, aBean);
 		return "redirect:/activeHomeSelectAll.controller";
 //		return "active/ActiveSucc";

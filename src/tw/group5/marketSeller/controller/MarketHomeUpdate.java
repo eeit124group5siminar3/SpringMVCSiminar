@@ -6,6 +6,7 @@ import java.sql.Blob;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,33 +73,38 @@ public class MarketHomeUpdate {
 		
 		return "marketSeller/MarketS";
 	}
-//	
-//	@GetMapping("/ch04/_03/getBookImage")
-//	public ResponseEntity<byte[]> getBookImage(@RequestParam("productId") Integer id) {
-//		ResponseEntity<byte[]> re = null;
-//		MarketProductImgBean bean = service.selectImg(id);
-//		String filename = bean.getImg_name();
-//		byte[] byte1 = bean.getProductImg();
+	
+	
+//	public void getMarketProductImg(HttpServletResponse response, @PathVariable("productId") int productId)throws Exception {
 //		
-//		String mimeType = ctx.getMimeType(filename);
-//		MediaType mediaType = MediaType.valueOf(mimeType);
-//		HttpHeaders headers = new HttpHeaders();
-//		try {
-//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//			InputStream is = blob.getBinaryStream();
-//			byte[] b = new byte[81920];
-//			int len = 0;
-//			while ((len = is.read(b)) != -1) {
-//				baos.write(b, 0, len);
-//			}
-//			headers.setContentType(mediaType);
-//			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-//			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return re;
 //	}
+	
+	@GetMapping("/MarketProduct.getImg")
+	public ResponseEntity<byte[]> getBookImage(@RequestParam("productId") Integer id) {
+		ResponseEntity<byte[]> re = null;
+		MarketProductImgBean bean = service.selectImg(id);
+		String filename = bean.getImg_name();
+		Blob blob = bean.getProductImg();
+		
+		String mimeType = ctx.getMimeType(filename);
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			InputStream is = blob.getBinaryStream();
+			byte[] b = new byte[81920];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			headers.setContentType(mediaType);
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return re;
+	}
 	
 	
 

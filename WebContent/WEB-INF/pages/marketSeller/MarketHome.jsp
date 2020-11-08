@@ -51,9 +51,10 @@
                     <td><c:out value="${IBean.quantity}"/></td>      
                 <td>  
 				<img  height='80' width='80'
-			        src=${IBean.marketProductImgBean.productImg}&type=PRODUCT>
+			        src="/MarketProduct.getImg/<c:out value='${IBean.marketProductImgBean.productImg}'/>">
 			        
-				</td>
+			        </td>
+			
 				 
 				<td>
 				<form action="<c:url value='/MarketProduct.delete'></c:url>" method="post">
