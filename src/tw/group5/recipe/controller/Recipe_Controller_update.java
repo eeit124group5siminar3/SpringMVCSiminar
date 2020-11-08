@@ -18,6 +18,8 @@ public class Recipe_Controller_update {
 	
 	@Autowired
 	private recipe_Service_interface service;
+	
+	private Recipe_Bean bean;
 
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {

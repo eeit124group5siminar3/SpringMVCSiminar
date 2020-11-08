@@ -37,11 +37,11 @@ body {
 				</div>
 				<div>
 					<label for="">活動名稱:</label> <input type="text" id="actName"
-						name="actName">
+						name="actName" required="required">
 				</div>
 				<div>
 					<label for="">活動類型:</label> 
-					<select name="actType">
+					<select name="actType" >
 						<option value="體驗類">體驗類</option>
 						<option value="採收類">採收類</option>
 						<option value="文藝類">文藝類</option>
@@ -50,29 +50,29 @@ body {
 				</div>
 				<div>
 					<label for="">活動地址:</label> 
-					<input type="text" id="actAddr" name="actAddr">
+					<input type="text" id="actAddr" name="actAddr" required="required">
 				</div>
 				<div>
 					<label for="">連絡電話:</label> 
-					<input type="text" id="tel" name="tel">
+					<input type="text" id="tel" name="tel" required="required">
 				</div>
 				<div>
 					<label for="">活動日期:</label> 
-					<input type="date" id="actDate" name="actDate">
+					<input type="date" id="actDate" name="actDate" required="required">
 				</div>
 				<div>
 					<label for="">報名起始日:</label> 
-					<input type="date" id="dateSta" name="dateSta"> 
+					<input type="date" id="dateSta" name="dateSta" required="required"> 
 					<label for="">報名結束日:</label> 
-					<input type="date" id="dateEnd" name="dateEnd"/>
+					<input type="date" id="dateEnd" name="dateEnd" required="required">
 				</div>
 				<div>
 					<label for="">活動人數:</label> 
-					<input type="text" id="expNum" name="expNum">
+					<input type="text" id="expNum" name="expNum" required="required">
 				</div>
 				<div>
 					<label for="">活動費用:</label> 
-					<input type="text" id="price" name="price">
+					<input type="text" id="price" name="price" required="required">
 				</div>
 				<div>
 					<label for="">活動描述:</label> <br>
@@ -80,7 +80,7 @@ body {
 				</div>
 				<div>
 					<label for="">活動海報:</label> <br> 
-					<input type="file" id="actImg" name="actImg">
+					<input type="file" id="actImg" name="actImg" required="required">
 				</div>
 				<br>
 					<input name="apply" type="submit" value="申請">

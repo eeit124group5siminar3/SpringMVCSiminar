@@ -46,7 +46,7 @@ public class OrderDAO {
 		ProductOrderBean pob = (ProductOrderBean) session.get(ProductOrderBean.class, orderNo2);
 		Set<ProductOrderItemBean> items = new HashSet<ProductOrderItemBean>();
 		String hql = "From ProductOrderItemBean where orderId=?0";
-		Query query = session.createQuery(hql);
+		Query<ProductOrderItemBean> query = session.createQuery(hql,ProductOrderItemBean.class);
 		query.setParameter(0, orderNo2);
 		List<ProductOrderItemBean> list = query.list();
 		for (ProductOrderItemBean item : list) {
@@ -67,7 +67,7 @@ public class OrderDAO {
 	public List<ProductOrderBean> getAllOrders() {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ProductOrderBean";
-		Query query = session.createQuery(hql);
+		Query<ProductOrderBean> query = session.createQuery(hql,ProductOrderBean.class);
 		List<ProductOrderBean> list = query.list();
 		for (ProductOrderBean order : list) {
 			order = getOrder(order.getOrderId());
@@ -80,7 +80,7 @@ public class OrderDAO {
 	public List<ProductOrderBean> getMemberOrders(int BuyerId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ProductOrderBean where BuyerId = ?0 Order by orderDate desc ";
-		Query query = session.createQuery(hql);
+		Query<ProductOrderBean> query = session.createQuery(hql,ProductOrderBean.class);
 		query.setParameter(0, BuyerId);
 		List<ProductOrderBean> list = query.list();
 		for (ProductOrderBean order : list) {

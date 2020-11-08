@@ -44,7 +44,7 @@
 		  <td class='menuData'>
 			<div class='menu'>
 			  <c:if test="${ funcName != 'CHE' }">
-			     <a href="<c:url value='/mall/ProductShowCart.jsp' />">
+			     <a href="<c:url value='/productShowCart' />">
 				     結帳 
 				 </a>
 			  </c:if>

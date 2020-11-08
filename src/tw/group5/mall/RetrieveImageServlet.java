@@ -2,8 +2,11 @@ package tw.group5.mall;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Blob;
+
+import javax.activation.MimeType;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,7 @@ import tw.group5.mall.service.ProductService;
 @Controller
 public class RetrieveImageServlet {
 	@Autowired
-	private HttpServletRequest request;
+	private ServletContext servletContext;
 	@Autowired
 	private ProductService productService;
 
@@ -53,8 +56,11 @@ public class RetrieveImageServlet {
 		}
 		if (is == null) {
 			fileName = "NoImage.png";
-			is = request.getServletContext().getResourceAsStream("/images/" + fileName);
+			is = servletContext.getResourceAsStream("/images/" + fileName);
 		}
+//		String mimeType=servletContext.getMimeType(fileName);
+//		MediaType mediaType=MediaType.valueOf(mimeType);
+//		headers.setContentType(mediaType);
 
 //		
 //		File file=new File(fileName);
@@ -72,7 +78,7 @@ public class RetrieveImageServlet {
 
 	private byte[] readInputStream(InputStream inStream) throws Exception {
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-		byte[] buffer = new byte[1024];
+		byte[] buffer = new byte[81920];
 		int len = 0;
 		while ((len = inStream.read(buffer)) != -1) {
 			outStream.write(buffer, 0, len);
@@ -81,15 +87,15 @@ public class RetrieveImageServlet {
 		return outStream.toByteArray();
 	}
 
-	private void readInputStreamToOutStream(InputStream inStream, OutputStream outStream) throws Exception {
-		byte[] buffer = new byte[1024];
-		int len = 0;
-		while ((len = inStream.read(buffer)) != -1) {
-			outStream.write(buffer, 0, len);
-		}
-		inStream.close();
-		outStream.close();
-	}
+//	private void readInputStreamToOutStream(InputStream inStream, OutputStream outStream) throws Exception {
+//		byte[] buffer = new byte[1024];
+//		int len = 0;
+//		while ((len = inStream.read(buffer)) != -1) {
+//			outStream.write(buffer, 0, len);
+//		}
+//		inStream.close();
+//		outStream.close();
+//	}
 
 //	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 //		OutputStream os = null;

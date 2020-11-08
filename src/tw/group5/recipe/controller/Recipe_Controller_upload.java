@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
@@ -31,6 +32,8 @@ public class Recipe_Controller_upload {
 //		if(request.getSession(true).getAttribute("name")==null) {
 		Recipe_Bean bean=new Recipe_Bean();
 		m.addAttribute("details",bean);
+		System.out.println(session.getAttribute("mem_no"));
+//		bean.setMember_no((Recipe_Bean)session.getAttribute("mem_no"));
 //		}
 		return "recipe/recipe_upload";
 	}
@@ -45,7 +48,6 @@ public class Recipe_Controller_upload {
 			m.addAttribute("method", bean.getMethod());
 			m.addAttribute("ingredients_A", bean.getIngredients_A());
 			m.addAttribute("gram_A", bean.getGram_A());
-			
 //			session.setAttribute("recipe_check",bean);
 			System.out.println("done");
 			return "recipe/recipe_display";

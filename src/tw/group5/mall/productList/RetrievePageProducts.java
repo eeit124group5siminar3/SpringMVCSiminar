@@ -18,34 +18,33 @@ import tw.group5.mall.service.ProductService;
 @Controller
 @SessionAttributes(value = { "searchString", "pageNo" })
 public class RetrievePageProducts {
-	@Autowired
-	private HttpServletRequest request;
+//	@Autowired
+//	private HttpServletRequest request;
 	@Autowired
 	private ProductService service;
 	private Integer pageNo = 1;
 
 	@GetMapping(value = "/RetrievePageProducts", produces = "text/HTML;charset=UTF-8")
 //	@Scope(value = "session")
-	public String retrievePageProducts(@RequestParam(value = "pageNo", required = false) String pageNoStr,
-			@RequestParam(value = "searchString", required = false) String searchString, Model model) {
+	public String retrievePageProducts(@RequestParam(value = "pageNo", required = false) Integer pageNo,
+			@RequestParam(value = "searchString", required = false) String searchString,
+			@RequestParam(value = "search", required = false) String search, Model model) {
 
-		HttpSession session = request.getSession();
-		if (pageNoStr == null) {
-			if (session.getAttribute("pageNo") != null) {
-				pageNo = (Integer) session.getAttribute("pageNo");
+//		HttpSession session = request.getSession();
+		if (pageNo == null) {
+			if (model.getAttribute("pageNo") != null) {
+				pageNo = (Integer) model.getAttribute("pageNo");
 			} else {
 				pageNo = 1;
 			}
-		} else {
-			pageNo = Integer.parseInt(pageNoStr);
-		}
+		} 
 		model.addAttribute("baBean", service);
 		Collection<ProductBean> coll = null;
-		if (request.getParameter("search") != null) {
+		if (search != null) {
 			service.setPageNo(1);
 			pageNo = 1;
 		} else {
-			searchString = (String) session.getAttribute("searchString");
+			searchString = (String) model.getAttribute("searchString");
 		}
 		service.setPageNo(pageNo);
 
