@@ -1,6 +1,8 @@
 package tw.group5.marketSeller.model;
 
 
+import java.sql.Blob;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +24,7 @@ public class MarketProductImgBean {
 	private int productId;
 	private String description;
 	private String img_name;
-	private byte[] productImg ;
+	private Blob productImg ;
 	private MarketProductTotalBean marketProductTotalBean;
 
 
@@ -49,11 +51,11 @@ public class MarketProductImgBean {
 	}
 	
 	@Column(name = "PRODUCT_IMG")
-	public byte[] getProductImg() {
+	public Blob getProductImg() {
 		return productImg;
 	}
-	public void setProductImg(byte[] productImg) {
-		this.productImg = productImg;
+	public void setProductImg(Blob b) {
+		this.productImg = b;
 	}
 	
 	@Column(name = "IMG_NAME")
