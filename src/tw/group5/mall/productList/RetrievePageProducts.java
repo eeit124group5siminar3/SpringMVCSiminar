@@ -7,13 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.service.ProductService;
+import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(value = { "searchString", "pageNo" })
+@SessionAttributes(value = { "searchString", "pageNo", "login_ok","login_guest"})
 public class RetrievePageProducts {
 //	@Autowired
 //	private HttpServletRequest request;
@@ -25,9 +27,14 @@ public class RetrievePageProducts {
 //	@Scope(value = "session")
 	public String retrievePageProducts(@RequestParam(value = "pageNo", required = false) Integer pageNo,
 			@RequestParam(value = "searchString", required = false) String searchString,
-			@RequestParam(value = "search", required = false) String search, Model model) {
-
-//		HttpSession session = request.getSession();
+			@RequestParam(value = "search", required = false) String search,
+			@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb,
+			Model model) {
+		if(mb==null) {
+			mb=new Member_SignUp();
+			mb.setMember_no(1);
+			model.addAttribute("login_guest",mb);
+		}
 		if (pageNo == null) {
 			if (model.getAttribute("pageNo") != null) {
 				pageNo = (Integer) model.getAttribute("pageNo");

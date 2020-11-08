@@ -52,8 +52,8 @@ public class ProcessOrderServlet {
 //			model.addAttribute("ShoppingCart", null);
 //			return "redirect:/ProcessOrderServlet";
 //		}
-//		Integer memberId = mb.getMember_no();
-		Integer memberId=1;
+		Integer memberId = mb.getMember_no();
+//		Integer memberId=1;
 		double totalAmount = Math.round(cart.getSubtotal() * 1.05);
 		Date today = new Date();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);

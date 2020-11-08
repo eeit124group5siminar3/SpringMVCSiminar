@@ -22,12 +22,12 @@ public class OrderListServlet {
 	@GetMapping(value = "/OrderListServlet")
 	public String orderListServlet(@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb,
 			 Model model) {
-//		if (mb == null) {
-//			mb = (Member_SignUp) model.getAttribute("login_guest");
-//		}
-//		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(mb.getMember_no());
+		if (mb == null) {
+			mb = (Member_SignUp) model.getAttribute("login_guest");
+		}
+		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(mb.getMember_no());
 		
-		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(1);
+//		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(1);
 		model.addAttribute("memberOrders", memberOrders);
 		return "/mall/OrderList";
 	}

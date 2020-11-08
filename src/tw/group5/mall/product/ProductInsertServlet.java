@@ -19,6 +19,11 @@ import javax.servlet.http.Part;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 
 import tw.group5.mall.SystemUtils2018;
 import tw.group5.mall.model.ProductBean;
@@ -26,7 +31,7 @@ import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.util.HibernateUtil;
 
-@WebServlet("/ProductInsertServlet")
+//@WebServlet("/ProductInsertServlet")
 
 // 啟動檔案上傳的功能：
 // 1. <form>標籤的 method屬性必須是"post", 而且
@@ -49,14 +54,21 @@ import tw.group5.util.HibernateUtil;
 // 否則存放在主記憶體。
 // maxFileSize: 上傳單一檔案之長度限制，如果超過此數值，Container會丟出例外
 // maxRequestSize: 上傳所有檔案的總長度限制，如果超過此數值，Container會丟出例外
-@MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
-		* 1024 * 500 * 5)
-public class ProductInsertServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+//@MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
+//		* 1024 * 500 * 5)
+@Controller
+public class ProductInsertServlet{
 	public static final int IMAGE_FILENAME_LENGTH = 20;
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	@PostMapping(value = "/ProductInsertServlet")
+	public String productInsertServlet(Model model,@ModelAttribute(value="Insert") ProductBean insert)
+			{
+		
+		
+		
+		
+		
+		
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		Map<String, String> errorMsgs = new HashMap<String, String>();
