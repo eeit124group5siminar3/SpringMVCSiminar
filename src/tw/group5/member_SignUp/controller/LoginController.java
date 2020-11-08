@@ -87,8 +87,9 @@ public class LoginController {
 	
 	//登出
 	@RequestMapping(path = "/removeSession.controller", method = RequestMethod.GET)
-	public String processRemoveSession(HttpSession session,SessionStatus sessionStatus) {
-		
+	public String processRemoveSession(HttpServletRequest request,HttpSession session,SessionStatus sessionStatus) {
+		HttpSession abc = request.getSession(false);
+		abc.invalidate();
 		session.removeAttribute("login_ok");
 		session.invalidate();
 		sessionStatus.setComplete();
