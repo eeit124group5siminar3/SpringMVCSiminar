@@ -24,7 +24,7 @@ public class MarketProductImgBean {
 	private int productId;
 	private String description;
 	private String img_name;
-	private Blob productImg ;
+	private byte[] productImg ;
 	private MarketProductTotalBean marketProductTotalBean;
 
 
@@ -51,10 +51,10 @@ public class MarketProductImgBean {
 	}
 	
 	@Column(name = "PRODUCT_IMG")
-	public Blob getProductImg() {
+	public byte[] getProductImg() {
 		return productImg;
 	}
-	public void setProductImg(Blob b) {
+	public void setProductImg(byte[] b) {
 		this.productImg = b;
 	}
 	

@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.group5.mall.model.ProductBean;
 import tw.group5.marketSeller.model.MarketProductBeanService;
 import tw.group5.marketSeller.model.MarketProductImgBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
@@ -34,7 +36,7 @@ public class MarketHomeUpdate {
 	@Autowired
 	private HttpServletRequest request;
 	@Autowired
-	ServletContext ctx;
+	private ServletContext servletContext;
 	
 	
 	// 跳轉到修改jsp
@@ -75,37 +77,18 @@ public class MarketHomeUpdate {
 	}
 	
 	
-//	public void getMarketProductImg(HttpServletResponse response, @PathVariable("productId") int productId)throws Exception {
-//		
-//	}
-	
 	@GetMapping("/MarketProduct.getImg")
-	public ResponseEntity<byte[]> getBookImage(@RequestParam("productId") Integer id) {
-		ResponseEntity<byte[]> re = null;
-		MarketProductImgBean bean = service.selectImg(id);
-		String filename = bean.getImg_name();
-		Blob blob = bean.getProductImg();
-		
-		String mimeType = ctx.getMimeType(filename);
-		MediaType mediaType = MediaType.valueOf(mimeType);
-		HttpHeaders headers = new HttpHeaders();
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			InputStream is = blob.getBinaryStream();
-			byte[] b = new byte[81920];
-			int len = 0;
-			while ((len = is.read(b)) != -1) {
-				baos.write(b, 0, len);
-			}
-			headers.setContentType(mediaType);
-			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return re;
+	@ResponseBody
+	public ResponseEntity<byte[]> getProductImage(@RequestParam("productId") Integer id) {
+	   HttpHeaders headers = new HttpHeaders();  //HttpHeaders headers 設定檔  HttpHeaders bodys 裡面的內容
+	   headers.setCacheControl(CacheControl.noCache());
+	   headers.setPragma("no-cache");
+	   headers.setExpires(0L);
+	   headers.setContentType(MediaType.IMAGE_JPEG);
+	   MarketProductImgBean bean = service.selectImg(id); 
+	   byte[] image = bean.getProductImg() ;
+	   System.out.println("圖片呢");
+	   return new ResponseEntity<byte[]>(image, HttpStatus.OK);
 	}
-	
-	
 
 }
