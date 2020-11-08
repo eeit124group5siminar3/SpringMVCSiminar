@@ -13,7 +13,7 @@ import tw.group5.mall.model.ProductBean;
 
 @Service
 @Transactional
-@Scope(value = "session")
+//@Scope(value = "session")
 public class ProductService {
 
 //	private  Session session;

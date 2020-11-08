@@ -19,7 +19,7 @@ import tw.group5.mall.model.ProductOrderBean;
 import tw.group5.mall.model.ProductOrderItemBean;
 
 @Repository
-@Scope(value = "session")
+//@Scope(value = "session")
 public class OrderDAO {
 	private String BuyerId = null;
 	int orderNo = 0;

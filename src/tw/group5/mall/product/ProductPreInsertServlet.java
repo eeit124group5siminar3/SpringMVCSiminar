@@ -18,7 +18,6 @@ public class ProductPreInsertServlet{
 	@GetMapping(value = "/ProductPreInsertServlet")
 	public String productPreInsertServlet(Model model){
 		ProductBean insert=new ProductBean();
-		
 		productService.setTagName("categoryId");
 		String categoryTag = productService.getSelectTag();
 		model.addAttribute("SelectCategoryTag", categoryTag);

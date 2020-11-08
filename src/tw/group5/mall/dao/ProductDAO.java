@@ -14,7 +14,7 @@ import tw.group5.mall.model.CategoryBean;
 import tw.group5.mall.model.ProductBean;
 
 @Repository
-@Scope(value = "session")
+//@Scope(value = "session")
 public class ProductDAO {
 //	private Session session;
 //	private static final long serialVersionUID = 1L;

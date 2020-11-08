@@ -14,7 +14,7 @@ import tw.group5.mall.model.ProductOrderItemBean;
 
 @Service
 @Transactional
-@Scope(value = "session")
+//@Scope(value = "session")
 public class OrderService {
 //	private Session session;
 	@Autowired
