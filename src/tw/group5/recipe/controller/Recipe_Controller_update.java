@@ -3,6 +3,9 @@ package tw.group5.recipe.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,20 +22,28 @@ public class Recipe_Controller_update {
 	@Autowired
 	private recipe_Service_interface service;
 	
-	private Recipe_Bean bean;
-
+	@Autowired
+	private HttpSession session;
+	
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {
-		List<Recipe_Bean> list=service.listOfJavaBean();
-		List<Recipe_Bean> user_recipe=new ArrayList<Recipe_Bean>();
-		for (Recipe_Bean b : list) {
-			System.out.println(b.getMember_no());
-					if (b.getMember_no()==1) {
-						user_recipe.add(b);
+		if (session.getAttribute("mem_no") != null) {
+			Recipe_Bean bean = new Recipe_Bean();
+			bean.setMember_no((Integer) session.getAttribute("mem_no"));
+			System.out.println(bean.getMember_no());
+			List<Recipe_Bean> list = service.listOfJavaBean();
+			List<Recipe_Bean> user_recipe = new ArrayList<Recipe_Bean>();
+			System.out.println("------------------------------------");
+			for (Recipe_Bean b : list) {
+				System.out.println(b.getMember_no());
+				if (b.getMember_no().equals(bean.getMember_no())) {
+					user_recipe.add(b);
 				}
 			}
-		m.addAttribute("user_recipe",user_recipe);
-		return "recipe/recipe_update_choose";
+			m.addAttribute("user_recipe", user_recipe);
+			return "recipe/recipe_update_choose";
+		} else
+			return "Member_SignUp/Member_Login";
 	}
 	
 	@RequestMapping(path = "/updateProcess.controller",method = {RequestMethod.POST,RequestMethod.GET})
@@ -44,10 +55,10 @@ public class Recipe_Controller_update {
 			return "recipe/recipe_workpage";
 		} 
 		else {
-		System.out.println(rec_id);
-		List<Recipe_Bean> list = service.partSearch(rec_id);
-		m.addAttribute("recipe_table", list);
-		return "recipe/recipe_update";
+			System.out.println(rec_id);
+			List<Recipe_Bean> list = service.partSearch(rec_id);
+			m.addAttribute("recipe_table", list);
+			return "recipe/recipe_update";
 		}
 
 	}

@@ -100,22 +100,15 @@ body {
 				<form:textarea cols="40" rows="5" path="method"></form:textarea>
 			</div>
 			<br>
-<!-- 			<div> -->
-				<%--  				<form:label path="">照片上傳: </form:label><input type="file" name="img" />  --%>
+			<div>
+				<form:label path="img">照片上傳: </form:label>
+				<form:input type="file" path="img" />  
+				<img id="blah" src="#" alt="your image" /> <br>
+				<form:input type='file' id="imgInp" path="img" />
 
-				<!--   			<img id="blah" src="#" alt="your image" /> -->
-				<!--   			<br> -->
-				<%--   			<form:input type='file' id="imgInp" path="img" /> --%>
-
-				<!-- 			</div> -->
-				<!-- 			<br> -->
-				<div style="text-align: center;">
-<%-- 					<form:button value="submit">送出</form:button> --%>
-<!-- 					<label>  -->
-<%-- 					<a href="<c:url value='./recipe_workpage.jsp' />">回首頁</a>  --%>
-						<%-- <a href="<c:url value='./recipe/recipe_workpage.jsp' />">回首頁</a> --%>
-<!-- 					</label> -->
-					
+			</div>
+			<br>
+			<div style="text-align: center;">
 					<label>
 						<input type="submit" name="action" value="送出" />
 					</label>

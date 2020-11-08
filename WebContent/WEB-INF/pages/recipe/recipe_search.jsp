@@ -23,20 +23,34 @@ body {
 		<jsp:include page="/top.jsp" />
 		<h2 style="text-align: center;">搜尋食譜</h2>
 		<div style="text-align: center;">
-		
 			<label> 
-				請輸入: <input type="text" name="input" />
-			</label> 
 			
-			<label>
-				<input type="submit" name="action" value="查詢">
-			</label>
+					請輸入: <input type="text" name="input" id="inputVal" onblur="ch()"  placeholder="請輸入"/><span id="sp"></span>
 			
-			<label> 
-				<input type="submit" name="action" value="回首頁">
 			</label>
-		</div>
+			</div>
+			<br>
+			<div style="text-align: center;">
+				<label> 
+					<input type="submit" name="action" value="查詢">
+				</label> 
+				<label> 
+					<input type="submit" name="action" value="回首頁">
+				</label>
+			</div>
 	</form>
 
 </body>
+
+<script type="text/javascript">
+	function ch() {
+
+		let search = document.getElementById("inputVal").value;
+		let inputLen = search.length;
+		let spid = document.getElementById("sp");
+		if (search == "") {
+			spid.innerHTML = "請輸入";
+		}
+	}
+</script>
 </html>

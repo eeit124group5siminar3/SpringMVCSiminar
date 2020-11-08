@@ -3,6 +3,7 @@ package tw.group5.recipe.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.dom4j.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.BeanFactoryAnnotationUtils;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
-@SessionAttributes(names={"recipe_check","details"})
+@SessionAttributes(names={"details"})
 public class Recipe_Controller_upload {
 	@Autowired
 	private recipe_Service_interface service;
@@ -29,13 +30,14 @@ public class Recipe_Controller_upload {
 
 	@RequestMapping(path = "/uploadPage.controller",method=RequestMethod.GET)
 	public String uploadPage(Model m,HttpServletRequest request) {
-//		if(request.getSession(true).getAttribute("name")==null) {
-		Recipe_Bean bean=new Recipe_Bean();
-		m.addAttribute("details",bean);
-		System.out.println(session.getAttribute("mem_no"));
-//		bean.setMember_no((Recipe_Bean)session.getAttribute("mem_no"));
-//		}
-		return "recipe/recipe_upload";
+		if (session.getAttribute("mem_no") != null) {
+			Recipe_Bean bean = new Recipe_Bean();
+			bean.setMember_no((Integer) session.getAttribute("mem_no"));
+			System.out.println(bean.getMember_no());
+			m.addAttribute("details", bean);
+			return "recipe/recipe_upload";
+		} else
+			return "Member_SignUp/Member_Login";
 	}
 	
 	@RequestMapping(path="/uploadSubmit.controller" ,method = RequestMethod.POST )
@@ -48,6 +50,7 @@ public class Recipe_Controller_upload {
 			m.addAttribute("method", bean.getMethod());
 			m.addAttribute("ingredients_A", bean.getIngredients_A());
 			m.addAttribute("gram_A", bean.getGram_A());
+			
 //			session.setAttribute("recipe_check",bean);
 			System.out.println("done");
 			return "recipe/recipe_display";

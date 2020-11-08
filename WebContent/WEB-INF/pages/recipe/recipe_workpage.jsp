@@ -26,7 +26,7 @@ div{
 </head>
 <body>
 		<form action='<c:url value="/function.controller"/>' method="post">
-		<c:set var="funcName" value="ORD" scope="session" /> 
+<%-- 		<c:set var="funcName" value="ORD" scope="session" />  --%>
 		<jsp:include page="/top.jsp" />
 		<h1 style="text-align: center;">食譜管理</h1>
 		<div>
