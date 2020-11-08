@@ -77,33 +77,33 @@ public class ActiveHomeController {
 	
 	
 	//讀取圖片
-	public String readImg(@RequestParam("actId") int actId){
-		Active aBean = activeService.select(actId);
-		String filename = aBean.getImgName();
-		byte[] img = aBean.getActImg();
-		String mimeType = ctx.getMimeType(filename);
-		MediaType mediaType = MediaType.valueOf(mimeType);
-		HttpHeaders headers = new HttpHeaders();
-		try {
-			OutputStream outputStream=response.getOutputStream();
-			InputStream in=new ByteArrayInputStream(img);			
-			int len=0;
-			byte[]buf=new byte[1024];
-			while((len=in.read(buf,0,1024))!=-1){
-				outputStream.write(buf, 0, len);
-			}
-			outputStream.close();
-			//準備相關資料 noCache表不存入快取
-			headers.setContentType(mediaType);
-			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-			//最後回傳成位元組陣列 (baos.toByteArray()回應本體、headers回應標頭、HttpStatus.OK狀態)
-			return = new String (FileUtils.readFileToByteArray(outputStream) , headers, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return re;
-
-	}
+	
+//	public String readImg(@RequestParam("actId") int actId){
+//		Active aBean = activeService.select(actId);
+//		String filename = aBean.getImgName();
+//		byte[] img = aBean.getActImg();
+//		String mimeType = ctx.getMimeType(filename);
+//		MediaType mediaType = MediaType.valueOf(mimeType);
+//		HttpHeaders headers = new HttpHeaders();
+//		try {
+//			OutputStream outputStream=response.getOutputStream();
+//			InputStream in=new ByteArrayInputStream(img);			
+//			int len=0;
+//			byte[]buf=new byte[1024];
+//			while((len=in.read(buf,0,1024))!=-1){
+//				outputStream.write(buf, 0, len);
+//			}
+//			outputStream.close();
+//			//準備相關資料 noCache表不存入快取
+//			headers.setContentType(mediaType);
+//			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//			//最後回傳成位元組陣列 (baos.toByteArray()回應本體、headers回應標頭、HttpStatus.OK狀態)
+//			return = new 0 (FileUtils.readFileToByteArray(outputStream) , headers, HttpStatus.OK);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "active/ActiveHome";
+//	}
 
 	// 導向申請頁面
 	@RequestMapping(path = "/activePreInsert.controller", method = RequestMethod.POST)
