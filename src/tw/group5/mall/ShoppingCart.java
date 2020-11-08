@@ -2,8 +2,14 @@ package tw.group5.mall;
 
 import java.util.*;
 
-import tw.group5.mall.model.OrderItem;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
+import tw.group5.mall.model.OrderItem;
+@Component
+//@SessionScope
+//@Scope(value = "session")
 public class ShoppingCart {   
 	private Map<Integer, OrderItem> cart = new LinkedHashMap< >();
 	public ShoppingCart() {
@@ -46,6 +52,17 @@ public class ShoppingCart {
 		   return 0;
 		}
 	}
+	public void deleteAllBooks() {
+		Set<Integer> cartSet=cart.keySet();
+		for (Integer cartInteger :cartSet) {
+			cart.remove(cartInteger);
+		}
+	}
+//	@Override
+//	protected void finalize() throws Throwable {
+//	
+//		super.finalize();
+//	}
 	public int getItemNumber(){   // ShoppingCart.itemNumber
 		return cart.size();
 	}

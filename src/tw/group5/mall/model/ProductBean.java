@@ -26,20 +26,20 @@ public class ProductBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int productId;
+	private Integer productId;
 	private String product;
-	private int producterId;
-	private double price;
-	private double discount = 1;
+	private Integer producterId;
+	private Double price;
+	private Double discount = 1.0;
 	private Blob coverImage;
 	private String fileName;
-	private int stock;
+	private Integer stock;
 	private Date addedDate;
-	private int shelfTime;
-	private int content;
+	private Integer shelfTime;
+	private Integer content;
 	private String unit;
 	private String description;
-	private int category;
+	private Integer category;
 	private String producterName;
 	private CategoryBean categoryBean;
 
@@ -57,8 +57,8 @@ public class ProductBean implements Serializable {
 		super();
 	}
 
-	public ProductBean(String product, int producterId, double price, Blob coverImage, String fileName, int stock,
-			Date addedDate, int shelfTime, int content, String unit, String description, int category) {
+	public ProductBean(String product, Integer producterId, Double price, Blob coverImage, String fileName, Integer stock,
+			Date addedDate, Integer shelfTime, Integer content, String unit, String description, Integer category) {
 		super();
 		this.product = product;
 		this.producterId = producterId;
@@ -74,9 +74,9 @@ public class ProductBean implements Serializable {
 		this.category = category;
 	}
 
-	public ProductBean(int productId, String product, int producterId, double price, Double discount, Blob coverImage,
-			String fileName, int stock, Date addedDate, int shelfTime, int content, String unit, String description,
-			int category) {
+	public ProductBean(Integer productId, String product, Integer producterId, Double price, Double discount, Blob coverImage,
+			String fileName, Integer stock, Date addedDate, Integer shelfTime, Integer content, String unit, String description,
+			Integer category) {
 		super();
 		this.producterId = producterId;
 		this.product = product;
@@ -96,11 +96,11 @@ public class ProductBean implements Serializable {
 	@Id
 	@Column(name = "PRODUCTID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getProductId() {
+	public Integer getProductId() {
 		return productId;
 	}
 
-	public void setProductId(int productId) {
+	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
 
@@ -108,11 +108,11 @@ public class ProductBean implements Serializable {
 //	@GeneratedValue(generator = "generator")
 //	@Column(name = "CATEGORY" )
 	@Transient
-	public int getCategory() {
+	public Integer getCategory() {
 		return category;
 	}
 
-	public void setCategory(int category) {
+	public void setCategory(Integer category) {
 		this.category = category;
 	}
 
@@ -127,29 +127,29 @@ public class ProductBean implements Serializable {
 
 //	@Column(name = "PRODUCTERID")
 	@Column(name = "PRODUCTERID", updatable = false)
-	public int getProducterId() {
+	public Integer getProducterId() {
 		return producterId;
 	}
 
-	public void setProducterId(int producterId) {
+	public void setProducterId(Integer producterId) {
 		this.producterId = producterId;
 	}
 
 	@Column(name = "PRICE")
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
 	@Column(name = "DISCOUNT")
-	public double getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(double discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
@@ -172,11 +172,11 @@ public class ProductBean implements Serializable {
 	}
 
 	@Column(name = "STOCK")
-	public int getStock() {
+	public Integer getStock() {
 		return stock;
 	}
 
-	public void setStock(int stock) {
+	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
 
@@ -190,20 +190,20 @@ public class ProductBean implements Serializable {
 	}
 
 	@Column(name = "SHELFTIME")
-	public int getShelfTime() {
+	public Integer getShelfTime() {
 		return shelfTime;
 	}
 
-	public void setShelfTime(int shelfTime) {
+	public void setShelfTime(Integer shelfTime) {
 		this.shelfTime = shelfTime;
 	}
 
 	@Column(name = "CONTENT")
-	public int getContent() {
+	public Integer getContent() {
 		return content;
 	}
 
-	public void setContent(int content) {
+	public void setContent(Integer content) {
 		this.content = content;
 	}
 

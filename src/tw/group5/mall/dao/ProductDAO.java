@@ -9,17 +9,14 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import tw.group5.mall.model.CategoryBean;
 import tw.group5.mall.model.ProductBean;
 
 @Repository
-@Transactional
 public class ProductDAO {
 //	private Session session;
 //	private static final long serialVersionUID = 1L;
-	private int productId = 0; // 查詢單筆商品會用到此代號
+//	private int productId = 0; // 查詢單筆商品會用到此代號
 	private int pageNo = 0; // 存放目前顯示之頁面的編號
 	public final int RECORDS_PER_PAGE = 5;
 	private int recordsPerPage = RECORDS_PER_PAGE; // 預設值：每頁三筆
@@ -242,15 +239,13 @@ public class ProductDAO {
 
 	public ProductBean saveProduct(ProductBean bean) {
 		Session session = sessionFactory.getCurrentSession();
-		ProductBean result = session.get(ProductBean.class, bean.getProductId());
-		if (result == null) {
+		
 			java.util.Date now=new java.util.Date();
 			Date date=new Date(now.getTime());
 			bean.setAddedDate(date);
 			session.save(bean);
 			return bean;
-		}
-		return null;
+		
 	}
 
 	public int getSelected() {

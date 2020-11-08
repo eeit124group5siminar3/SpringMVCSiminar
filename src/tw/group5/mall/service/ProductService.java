@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import tw.group5.mall.dao.ProductDAO;
 import tw.group5.mall.model.CategoryBean;
 import tw.group5.mall.model.ProductBean;
 
 @Service
+@Transactional
 public class ProductService {
 
 //	private  Session session;

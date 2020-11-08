@@ -69,7 +69,7 @@ top:2px;
       <TD colspan='4'> 
          <TABLE style="background:#FFE4C4; border:1px solid black; width:820px" >
             <TR height='2'>
-               <TH width="270"><form action="<c:url value='RetrievePageProducts' />" method="POST">
+               <TH width="270"><form action="<c:url value='/RetrievePageProducts' />" method="GET">
                   <input type="text" name="searchString" value= ${searchString}><button type="submit" name="search">查詢</button>
                   </form></TH>
                <TH width="280">&nbsp;</TH>
@@ -92,7 +92,7 @@ top:2px;
             
             <TR height='2'>
                 <TD width="270">
-	               <A href="<c:url value='/mall/ProductShowCart.jsp?pageNo=${pageNo}' />" >
+	               <A href="<c:url value='/productShowCart?pageNo=${pageNo}' />" >
 	                                               購物清單
 	               </A>
 	            </TD>
@@ -118,7 +118,7 @@ top:2px;
                  getImage所對應的Servlet會到資料庫讀取圖片並傳送給前端的瀏覽器
               -->
         <img height='100' width='80' 
-     src='${pageContext.servletContext.contextPath}/RetrieveImageServlet?id=${aProductBean.productId}&type=PRODUCT'>
+     src=<c:url value='retrieveImageServlet?id=${aProductBean.productId}&type=PRODUCT' />>
          </TD>
          <TD height='32' width='560'>
              <TABLE border='1'>
@@ -135,7 +135,7 @@ top:2px;
           FORM表單的資料會送後端的 _03_listBooks.controller.BuyBookServlet.java
                          來處理 
        -->
-       <FORM  action="<c:url value='BuyProductServlet' />" method="POST">
+       <FORM  action="<c:url value='/BuyProductServlet' />" method="POST">
                                 購買數量:
                <input type='number' name='qty' style='width:60px' min='1' max='${aProductBean.stock}' required="required">
               <!--  <select name='qty'>

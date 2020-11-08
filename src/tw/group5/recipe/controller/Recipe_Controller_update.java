@@ -1,4 +1,4 @@
-package tw.group5.recipe.recipe;
+package tw.group5.recipe.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,8 @@ public class Recipe_Controller_update {
 	
 	@Autowired
 	private recipe_Service_interface service;
+	
+	private Recipe_Bean bean;
 
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {
@@ -34,11 +36,20 @@ public class Recipe_Controller_update {
 	}
 	
 	@RequestMapping(path = "/updateProcess.controller",method = {RequestMethod.POST,RequestMethod.GET})
-	public String updateProcess(@RequestParam(name="choose")String rec_id,Recipe_Bean bean,Model m) {
+	public String updateProcess(
+			@RequestParam(name="choose",required = false)String rec_id,
+//			@RequestParam(name="action")String rec_id,
+			@RequestParam(required = false)String action,Recipe_Bean bean,Model m) {
+		if ("回首頁".equals(action)) {
+			return "recipe/recipe_workpage";
+		} 
+		else {
 		System.out.println(rec_id);
-		List<Recipe_Bean> list=service.partSearch(rec_id);
-		m.addAttribute("recipe_table",list);
+		List<Recipe_Bean> list = service.partSearch(rec_id);
+		m.addAttribute("recipe_table", list);
 		return "recipe/recipe_update";
+		}
+
 	}
 	
 	@RequestMapping(path = "/submitChoose.controller",method = RequestMethod.POST)
@@ -52,6 +63,10 @@ public class Recipe_Controller_update {
 			service.delete(rec_id);
 			return "recipe/delete_success";
 		}
+		if (action.equals("取消")) {
+			return "recipe/recipe_workpage";
+		}
 		return rec_id;
 	}
+	
 }
