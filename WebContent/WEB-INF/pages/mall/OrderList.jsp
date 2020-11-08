@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:if test="${empty login_ok && empty login_guest}">
-	<c:redirect url="/Member_SignUp/Member_Login.jsp" />
-</c:if>
+<%-- <c:if test="${empty login_ok && empty login_guest}"> --%>
+<%-- 	<c:redirect url="/Member_SignUp/Member_Login.jsp" /> --%>
+<%-- </c:if> --%>
 <title>訂單列表</title>
 <style type="text/css">
 #borderA {

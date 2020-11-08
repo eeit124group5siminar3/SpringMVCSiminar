@@ -33,12 +33,10 @@ public class OrderDAO {
 
 	public ProductOrderBean insertOrder(ProductOrderBean ob) {
 		Session session = sessionFactory.getCurrentSession();
-		ProductOrderBean result = session.get(ProductOrderBean.class, ob.getOrderId());
-		if (result == null) {
+		
 			session.save(ob);
 			return ob;
-		}
-		return null;
+		
 	}
 
 	public ProductOrderBean getOrder(int orderNo2) {

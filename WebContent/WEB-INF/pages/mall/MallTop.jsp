@@ -23,7 +23,7 @@
           <td class='menuData'>
             <div class='menu'>
 			  <c:if test="${empty login_ok}">
-				<a href="<c:url value='/Member_SignUp/Member_Login.jsp' />">
+				<a href="<c:url value='login.controller' />">
 				     登入 
 				</a>
               </c:if>
@@ -103,7 +103,7 @@
 		  
 		  <td class='menuData'>
 		  <div class='menu'>
-			<c:if test="${ ! empty LoginOK }">
+			<c:if test="${ ! empty login_ok }">
 			   <a href="<c:url value='/_02_login/logout.jsp' />">
   				登出 
 	           </a>

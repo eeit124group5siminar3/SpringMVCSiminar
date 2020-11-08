@@ -1,50 +1,41 @@
 package tw.group5.mall.order;
 
-import java.io.IOException;
-import java.util.Set;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.group5.mall.model.ProductOrderBean;
-import tw.group5.mall.model.ProductOrderItemBean;
 import tw.group5.mall.service.OrderService;
-import tw.group5.util.HibernateUtil;
 
 
-/**
- * Servlet implementation class OrderDetailServlet
- */
-@WebServlet("/OrderDetailServlet")
-public class OrderDetailServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+
+@Controller
+public class OrderDetailServlet{
+	@Autowired
+	private OrderService orderService;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String orderId = request.getParameter("orderId");
-		int no = Integer.parseInt(orderId.trim());
-		SessionFactory factory = HibernateUtil.getSessionFactory();
-		Session hibernateSession = factory.getCurrentSession();
-		OrderService orderService = new OrderService(hibernateSession);
-
-
+	@GetMapping(value = "/OrderDetailServlet")
+	public String orderDetailServlet(@RequestParam(value = "orderId") int no, Model model){
 		ProductOrderBean ob = orderService.getOrder(no);
-		request.setAttribute("OrderBean", ob);   // 將OrderBean物件暫存到請求物件內
-		RequestDispatcher rd = request.getRequestDispatcher("/mall/ShowOrderDetail.jsp");
-		rd.forward(request, response);
-		return;
-	}
+		model.addAttribute("OrderBean", ob); 
+		return "/mall/ShowOrderDetail";
+		}
+}
+//		String orderId = request.getParameter("orderId");
+//		int no = Integer.parseInt(orderId.trim());
+//		SessionFactory factory = HibernateUtil.getSessionFactory();
+//		Session hibernateSession = factory.getCurrentSession();
+//		OrderService orderService = new OrderService(hibernateSession);
+
+//
+//		ProductOrderBean ob = orderService.getOrder(no);
+//		request.setAttribute("OrderBean", ob);   // 將OrderBean物件暫存到請求物件內
+//		RequestDispatcher rd = request.getRequestDispatcher("/mall/ShowOrderDetail.jsp");
+//		rd.forward(request, response);
+//		return;
+//	}
 
 //	public void displayOrderBean(ProductOrderBean ob) {
 //		System.out.println("ob.getOrderNo()=" + ob.getOrderNo());
@@ -69,4 +60,4 @@ public class OrderDetailServlet extends HttpServlet {
 //		}
 //	}
 
-}
+//}

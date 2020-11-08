@@ -67,7 +67,7 @@
 			<table border='1' width='600'>
 				<tr>
 					<td width='600' align="left">產品名稱：<a
-						href="ProductPreUpdateServlet?ProductId=${aProductBean.productId}&pageNo=${pageNo}">${aProductBean.product}</a>
+						href="ProductPreUpdateServlet?ProductId=${aProductBean.productId}&MaintainPageNo=${MaintainPageNo}">${aProductBean.product}</a>
 
 					</td>
 				</tr>
@@ -76,7 +76,7 @@
 			<td rowspan='3' width='80'><!-- 
                  getImage所對應的Servlet會到資料庫讀取圖片並傳送給前端的瀏覽器
               --> <img height='100' width='80'
-				src='${pageContext.servletContext.contextPath}/RetrieveImageServlet?id=${aProductBean.productId}&type=PRODUCT'></td>
+				src=<c:url value='retrieveImageServlet?id=${aProductBean.productId}&type=PRODUCT' />></td>
 		</tr>
 		
 		<!--   以上為書名資料   -->
@@ -122,28 +122,28 @@
 <div id="bpaging" style="width: 1800px"><!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
 <table border="1" style="margin-right: 0px;">
 	<tr align="center">
-		<td width='80' height='20'><c:if test="${pageNo > 1}">
+		<td width='80' height='20'><c:if test="${MaintainPageNo > 1}">
 			<div id="blfirst"><a
-				href="<c:url value='DisplayMaintainProduct?pageNo=1' />"> <img
+				href="<c:url value='DisplayMaintainProduct?MaintainPageNo=1' />"> <img
 				border='0' alt='第一頁' height='30' width='30'
 				src='./images/first-icon.png' /> </a></div>
 		</c:if></td>
-		<td width='80'><c:if test="${pageNo > 1}">
+		<td width='80'><c:if test="${MaintainPageNo > 1}">
 			<div id="blprev"><a
-				href="<c:url value='DisplayMaintainProduct?pageNo=${pageNo-1}' />">
+				href="<c:url value='DisplayMaintainProduct?MaintainPageNo=${MaintainPageNo-1}' />">
 			<img border='0' alt='前一頁' height='30' width='30'
 				src='./images/prev-icon.png' /></a></div>
 		</c:if></td>
-		<td width='76'>${pageNo} / ${totalPages}</td>
-		<td width='80'><c:if test="${pageNo != totalPages}">
+		<td width='76'>${MaintainPageNo} / ${totalPages}</td>
+		<td width='80'><c:if test="${MaintainPageNo != totalPages}">
 			<div id="blnext"><a
-				href="<c:url value='DisplayMaintainProduct?pageNo=${pageNo+1}' />">
+				href="<c:url value='DisplayMaintainProduct?MaintainPageNo=${MaintainPageNo+1}' />">
 			<img border='0' alt='下一頁' height='30' width='30'
 				src='./images/next-icon.png' /> </a></div>
 		</c:if></td>
-		<td width='80'><c:if test="${pageNo != totalPages}">
+		<td width='80'><c:if test="${MaintainPageNo != totalPages}">
 			<div id="bllast"><a
-				href="<c:url value='DisplayMaintainProduct?pageNo=${totalPages}' />">
+				href="<c:url value='DisplayMaintainProduct?MaintainPageNo=${totalPages}' />">
 			<img border='0' alt='最末頁' height='30' width='30'
 				src='./images/last-icon.png' /> </a></div>
 		</c:if></td>

@@ -8,6 +8,7 @@
 <title>金玉堂網路購物商城</title>
 </head>
 <body style="background:#EBFFEB;">
+<c:remove var="ShoppingCart" scope="session"/>
 <c:set var="funcName" value="END" scope="session"/>
 <jsp:include page="MallTop.jsp" />
  <CENTER> 

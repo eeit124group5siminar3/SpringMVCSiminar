@@ -2,9 +2,6 @@ package tw.group5.mall.productList;
 
 import java.util.Collection;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +19,7 @@ public class RetrievePageProducts {
 //	private HttpServletRequest request;
 	@Autowired
 	private ProductService service;
-	private Integer pageNo = 1;
+//	private Integer pageNo = 1;
 
 	@GetMapping(value = "/RetrievePageProducts", produces = "text/HTML;charset=UTF-8")
 //	@Scope(value = "session")

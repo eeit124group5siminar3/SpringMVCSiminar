@@ -2,10 +2,7 @@ package tw.group5.mall;
 
 import java.util.*;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
-
 import tw.group5.mall.model.OrderItem;
 @Component
 //@SessionScope
@@ -44,7 +41,7 @@ public class ShoppingCart {
 		}
 	}
 	// 刪除某項商品
-	public int deleteBook(int productId) {
+	public int deleteOrder(int productId) {
 		if ( cart.get(productId) != null ) {
 	       cart.remove(productId);  // Map介面的remove()方法
 	       return 1;
@@ -52,11 +49,16 @@ public class ShoppingCart {
 		   return 0;
 		}
 	}
-	public void deleteAllBooks() {
-		Set<Integer> cartSet=cart.keySet();
-		for (Integer cartInteger :cartSet) {
-			cart.remove(cartInteger);
-		}
+	public void deleteAllOrders() {
+//		Set<Integer> cartSet=cart.keySet();
+//		for (Integer cartInteger :cartSet) {
+//			cart.remove(cartInteger);
+//		}
+//		Iterator<Integer> iterator = cartSet.iterator();
+//		while(iterator.hasNext()) {
+//			cart.remove(iterator.next());
+//		}
+		cart.clear();
 	}
 //	@Override
 //	protected void finalize() throws Throwable {

@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -32,10 +33,9 @@ public class ProcessOrderServlet {
 	@Autowired
 	private ServletContext servletContext;
 
-	@PostMapping(value = "/ProcessOrderServlet")
+	@RequestMapping(value = "/ProcessOrderServlet",method = {RequestMethod.GET,RequestMethod.POST})
 	public String processOrderServlet(@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb,
-			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart,
-			@RequestParam(value = "finalDecision", required = false) String finalDecision,
+			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart,		           
 			@RequestParam(value = "ShippingAddress", required = false) String shippingAddress,
 			@RequestParam(value = "tel", required = false) String tel,
 			@RequestParam(value = "BNO", required = false) String bNO,
@@ -48,15 +48,17 @@ public class ProcessOrderServlet {
 		if (cart == null) {
 			return "index";
 		}
-		if (finalDecision.equals("CANCEL")) {
-			model.addAttribute("ShoppingCart", null);
-			return "redirect:/ProcessOrderServlet";
-		}
-		Integer memberId = mb.getMember_no();
+//		if (finalDecision.equals("CANCEL")) {
+//			model.addAttribute("ShoppingCart", null);
+//			return "redirect:/ProcessOrderServlet";
+//		}
+//		Integer memberId = mb.getMember_no();
+		Integer memberId=1;
 		double totalAmount = Math.round(cart.getSubtotal() * 1.05);
 		Date today = new Date();
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		ProductOrderBean ob = (ProductOrderBean) context.getBean("productOrderBean");
+//		ProductOrderBean ob=new ProductOrderBean();
 		ob.setBuyerId(memberId);
 		ob.setBuyerName(invoiceTitle);
 		ob.setAddress(shippingAddress);
@@ -65,32 +67,47 @@ public class ProcessOrderServlet {
 		ob.setTotal(totalAmount);
 		ob.setOrderDate(today);
 		Set<ProductOrderItemBean> items = new HashSet<ProductOrderItemBean>();
+		System.err.println(cart);
 		Map<Integer, OrderItem> carts = cart.getContent();
 		Set<Integer> set = carts.keySet();
+		System.err.println(set);
 		for (Integer k : set) {
 			OrderItem oi = carts.get(k);
 			String description = oi.getProduct() + " " + oi.getContent() + oi.getUnit();
 			ProductOrderItemBean oib = (ProductOrderItemBean) context.getBean("productOrderItemBean");
+//			ProductOrderItemBean oib = new ProductOrderItemBean();
 			oib.setProductId(oi.getProductId());
+			System.err.println(oi.getProductId());
 			oib.setProducterId(oi.getProducterId());
 			oib.setDescription(description);
 			oib.setDiscount(oi.getDiscount());
 			oib.setUnitPrice(oi.getPrice());
 			oib.setAmount(oi.getQty());
 			oib.setOrderId(null);
+			oib.setProductOrderBean(ob);
+			items.add(oib);
 		}
 		ob.setItems(items);
 		try {
 			orderService.persistOrder(ob);
+			cart.deleteAllOrders();
 			return "/mall/ThanksForOrdering";
-		} catch (RuntimeException ex) {
-			String message = ex.getMessage();
-			String shortMsg = "";
-			shortMsg = message.substring(message.indexOf(":") + 1);
-			System.out.println(shortMsg);
-			model.addAttribute("OrderErrorMessage", "處理訂單時發生異常: " + shortMsg + "，請調正訂單內容");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+//			String message = ex.getMessage();
+//			String shortMsg = "";
+//			shortMsg = message.substring(message.indexOf(":") + 1);
+//			System.out.println(shortMsg);
+//			model.addAttribute("OrderErrorMessage", "處理訂單時發生異常: " + shortMsg + "，請調正訂單內容");
 			return "/mall/ProductShowCart";
 		}
+	}
+	
+	@RequestMapping(value = "/DeleteOrderServlet",method = RequestMethod.POST)
+	public String deleteOrderServlet(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart) {
+		cart.deleteAllOrders();
+		return "redirect:/RetrievePageProducts";
+		
 	}
 	
 	@GetMapping(value = "/productShowCart")

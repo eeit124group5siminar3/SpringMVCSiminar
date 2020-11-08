@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 @Component
+@Scope(value = "prototype")
 @Entity
 @Table(name="orderForm")
 public class ProductOrderBean implements Serializable{

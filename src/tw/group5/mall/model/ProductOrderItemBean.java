@@ -17,6 +17,7 @@ import javax.persistence.Transient;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 @Component
+@Scope(value = "prototype")
 @Entity
 @Table(name="orderDetails")
 public class ProductOrderItemBean implements Serializable{

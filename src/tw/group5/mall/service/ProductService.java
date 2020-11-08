@@ -127,4 +127,9 @@ public class ProductService {
 	public Object getTotalPagesWithoutZero(String searchString) {
 		return dao.getTotalPagesWithoutZero(searchString);
 	}
+
+	public void setMaintainPageNo(Integer maintainPageNo) {
+		dao.setMaintainPageNo(maintainPageNo);
+		
+	}
 }

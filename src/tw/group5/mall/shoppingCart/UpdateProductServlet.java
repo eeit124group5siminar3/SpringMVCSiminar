@@ -21,7 +21,7 @@ public class UpdateProductServlet {
 			return "/index";
 		}
 		if (cmd.equalsIgnoreCase("DEL")) {
-			cart.deleteBook(productId);
+			cart.deleteOrder(productId);
 			return "/mall/ProductShowCart";
 		} else if (cmd.equalsIgnoreCase("MOD")) {
 			cart.modifyQty(productId, newQty); // 修改某項商品的數項

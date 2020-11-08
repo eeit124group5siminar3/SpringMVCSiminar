@@ -2,6 +2,11 @@ package tw.group5.mall;
 
 public class UnpaidOrderAmountExceedingException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public UnpaidOrderAmountExceedingException() {
 		super();
 	}

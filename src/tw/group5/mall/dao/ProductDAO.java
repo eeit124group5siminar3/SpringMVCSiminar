@@ -18,6 +18,16 @@ public class ProductDAO {
 //	private static final long serialVersionUID = 1L;
 //	private int productId = 0; // 查詢單筆商品會用到此代號
 	private int pageNo = 0; // 存放目前顯示之頁面的編號
+	private int maintainPageNo=0;
+	
+	public int getMaintainPageNo() {
+		return maintainPageNo;
+	}
+
+	public void setMaintainPageNo(int maintainPageNo) {
+		this.maintainPageNo = maintainPageNo;
+	}
+
 	public final int RECORDS_PER_PAGE = 5;
 	private int recordsPerPage = RECORDS_PER_PAGE; // 預設值：每頁三筆
 	private int totalPages = -1;
@@ -103,7 +113,7 @@ public class ProductDAO {
 
 	public List<ProductBean> getPageProducts(int producterId) {
 		Session session = sessionFactory.getCurrentSession();
-		int startRecordNo = (pageNo - 1) * recordsPerPage;
+		int startRecordNo = (maintainPageNo - 1) * recordsPerPage;
 		String hql = "from ProductBean where stock != 0 and producterId =?0 ORDER BY ProductId";
 		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
 		query.setParameter(0, producterId);

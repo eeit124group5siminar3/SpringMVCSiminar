@@ -2,7 +2,7 @@ package tw.group5.mall.shoppingCart;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.group5.mall.ShoppingCart;
@@ -11,7 +11,7 @@ import tw.group5.mall.ShoppingCart;
 @SessionAttributes(names = { "ShoppingCart" })
 public class CheckoutServlet {
 
-	@PostMapping(value = "/CheckoutServlet")
+	@GetMapping(value = "/CheckoutServlet")
 	public String checkoutServlet(Model model) {
 
 		ShoppingCart cart = (ShoppingCart) model.getAttribute("ShoppingCart");

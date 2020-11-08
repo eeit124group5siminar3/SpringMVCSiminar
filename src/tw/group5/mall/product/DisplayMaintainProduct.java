@@ -1,86 +1,101 @@
-	package tw.group5.mall.product;
+package tw.group5.mall.product;
 
-import java.io.IOException;
 import java.util.Collection;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
-import tw.group5.util.HibernateUtil;
 
-@WebServlet("/DisplayMaintainProduct")
-public class DisplayMaintainProduct extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@Controller
+@SessionAttributes(names= { "MaintainPageNo","login_ok" })
+public class DisplayMaintainProduct {
 	public final int RECORDS_PER_PAGE = 5;
-	int pageNo = 1;
+//	private int pageNo = 1;
+	@Autowired
+	private ProductService service;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		 //先取出session物件
-		HttpSession session = request.getSession(false);
-//		HttpSession session = request.getSession();
-		// 紀錄目前請求的RequestURI,以便使用者登入成功後能夠回到原本的畫面
-		String requestURI = request.getRequestURI();
-		// System.out.println("requestURI=" + requestURI);
-		// 如果session物件不存在
-		if (session == null || session.isNew()) {
-			// 請使用者登入
-			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
-			return;
-		}
-		session.setAttribute("requestURI", requestURI);
-		// 此時session物件存在，讀取session物件內的LoginOK
-		// 以檢查使用者是否登入。
-		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+	@GetMapping(value = "/DisplayMaintainProduct")
+	public String displayMaintainProduct(@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
+		@SessionAttribute(value ="login_ok",required = false )Member_SignUp mb,
+			Model model) {
+//		Member_SignUp mb = (Member_SignUp) model.getAttribute("login_ok");
 		if (mb == null) {
-			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
-			return;
+			return "/index";
 		}
-		int producterId=mb.getMember_no();
-		String pageNoStr = request.getParameter("pageNo");
-		if (pageNoStr == null) {
-			pageNo = 1;
-		} else {
-			try {
-				pageNo = Integer.parseInt(pageNoStr.trim());
-			} catch (NumberFormatException e) {
-				pageNo = 1;
+		Integer producterId = mb.getMember_no();
+		if (maintainPageNo == null) {
+			if (model.getAttribute("MaintainPageNo") != null) {
+				maintainPageNo = (Integer) model.getAttribute("MaintainPageNo");
+			} else {
+				maintainPageNo = 1;
 			}
-		}
-		SessionFactory factory = HibernateUtil.getSessionFactory();
-		Session hibernateSession = factory.getCurrentSession();
-		ProductService service = new ProductService(hibernateSession);
-		//
-		request.setAttribute("baBean", service);
-		//
-		service.setPageNo(pageNo);
+		} 
+		model.addAttribute("baBean", service);
+		service.setMaintainPageNo(maintainPageNo);
 		service.setRecordsPerPage(RECORDS_PER_PAGE);
-		
-//		Collection<ProductBean> coll = service.getPageProducts();
-		session.setAttribute("pageNo", pageNo);
-//		request.setAttribute("totalPages", service.getTotalPages());
-		request.setAttribute("totalPages", service.getTotalPages(producterId));
+		model.addAttribute("totalPages", service.getTotalPages(producterId));
 		Collection<ProductBean> coll = service.getPageProducts(producterId);
-		request.setAttribute("products_DPP", coll);
-		RequestDispatcher rd = request.getRequestDispatcher("mall/ProductMaintainList.jsp");
-		rd.forward(request, response);
-		return;
+		model.addAttribute("MaintainPageNo", maintainPageNo);
+		model.addAttribute("products_DPP", coll);
+		return "/mall/ProductMaintainList";
 	}
 }
+		// 先取出session物件
+//		HttpSession session = request.getSession(false);
+////		HttpSession session = request.getSession();
+//		// 紀錄目前請求的RequestURI,以便使用者登入成功後能夠回到原本的畫面
+//		String requestURI = request.getRequestURI();
+//		// System.out.println("requestURI=" + requestURI);
+//		// 如果session物件不存在
+//		if (session == null || session.isNew()) {
+//			// 請使用者登入
+//			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
+//			return;
+//		}
+//		session.setAttribute("requestURI", requestURI);
+//		// 此時session物件存在，讀取session物件內的LoginOK
+//		// 以檢查使用者是否登入。
+//		Member_SignUp mb = (Member_SignUp) model.getAttribute("login_ok");
+//		if (mb == null) {
+//			response.sendRedirect(response.encodeRedirectURL("./index.jsp"));
+//			return;
+//		}
+//		int producterId = mb.getMember_no();
+//		String pageNoStr = request.getParameter("pageNo");
+//		if (pageNoStr == null) {
+//			pageNo = 1;
+//		} else {
+//			try {
+//				pageNo = Integer.parseInt(pageNoStr.trim());
+//			} catch (NumberFormatException e) {
+//				pageNo = 1;
+//			}
+//		}
+//		SessionFactory factory = HibernateUtil.getSessionFactory();
+//		Session hibernateSession = factory.getCurrentSession();
+//		ProductService service = new ProductService(hibernateSession);
+//		//
+//		request.setAttribute("baBean", service);
+//		//
+//		service.setPageNo(pageNo);
+//		service.setRecordsPerPage(RECORDS_PER_PAGE);
+
+//		Collection<ProductBean> coll = service.getPageProducts();
+//		session.setAttribute("pageNo", pageNo);
+////		request.setAttribute("totalPages", service.getTotalPages());
+//		request.setAttribute("totalPages", service.getTotalPages(producterId));
+//		Collection<ProductBean> coll = service.getPageProducts(producterId);
+//		request.setAttribute("products_DPP", coll);
+//		RequestDispatcher rd = request.getRequestDispatcher("mall/ProductMaintainList.jsp");
+//		rd.forward(request, response);
+//		return;
+//	}
+//}

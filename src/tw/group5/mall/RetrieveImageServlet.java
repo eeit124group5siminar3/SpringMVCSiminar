@@ -4,11 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 
-import javax.activation.MimeType;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
