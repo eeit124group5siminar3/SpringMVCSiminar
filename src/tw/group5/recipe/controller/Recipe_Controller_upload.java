@@ -59,6 +59,8 @@ public class Recipe_Controller_upload {
 			m.addAttribute("ingredients_A", bean.getIngredients_A());
 			m.addAttribute("gram_A", bean.getGram_A());
 			m.addAttribute("FileName", bean.getFileName());
+//			bean.getData().getBytes(0, length);
+			
 //			m.addAttribute("data", bean.getData());
 
 			System.out.println("done");
