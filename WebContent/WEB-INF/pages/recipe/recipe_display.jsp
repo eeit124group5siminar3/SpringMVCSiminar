@@ -68,7 +68,7 @@ table{
 			</tr>
 			<tr>
 				<td>檔名</td>
-				<td></td>
+				<td>${FileName}</td>
 			</tr>
 
 		</table>
@@ -112,6 +112,9 @@ table{
 			<div style="text-align: center;">
 					<label>
 						<input type="submit" name="action" value="送出" />
+					</label>
+					<label>
+						<input type="submit" name="action" value="修改" />
 					</label>
 					<label>
 						<input type="submit" name="action" value="回首頁" />

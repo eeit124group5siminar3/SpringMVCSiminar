@@ -28,13 +28,11 @@ body {
 <jsp:include page="/top.jsp" />
 	<fieldset>
 		<legend>上傳食譜</legend>
-<%-- 		<form:form action='<c:url value="/uploadSubmit.controller"/>' method="post" modelAttribute="details" runat="server">  --%>
-			<form:form action="uploadSubmit.controller" method="post" modelAttribute="details" runat="server" enctype="multipart/form-data">
-		
+			<form:form action="uploadSubmit.controller" method="post" modelAttribute="details" runat="server">
 		
 			<div class="line">
 				<form:label path="name">名稱: </form:label>
-				<form:input path="name"/>
+				<form:input path="name" value="${name}"/>
 
 			</div>
 			<br>
@@ -49,9 +47,9 @@ body {
 			<br>
 			<div id="line">
 				<form:label path="ingredients_A">食材: </form:label> 
-				<form:input path="ingredients_A" /> 份 
+				<form:input path="ingredients_A" value="${ingredients_A}"/> 份 
 				<form:label path="gram_A">份量: </form:label>
-				<form:input path="gram_A" /> g
+				<form:input path="gram_A" value="${gram_A}"/> g
 			</div>
 			<br>
 <!-- 			<div id="line"> -->
@@ -91,29 +89,27 @@ body {
 			<div>
 				<form:label path="desc">介紹: </form:label>
 				<br>
-				<form:textarea cols="40" rows="5" path="desc"></form:textarea>
+				<form:textarea cols="40" rows="5" path="desc" value="${desc}"></form:textarea>
 			</div>
 			<br>
 			<div>
 				<form:label path="method">料理方法: </form:label>
 				<br>
-				<form:textarea cols="40" rows="5" path="method"></form:textarea>
+				<form:textarea cols="40" rows="5" path="method" value="${method}"></form:textarea>
 			</div>
-<!-- 			<br> -->
-<!-- 			<div> -->
+			<br>
+			<div>
 <%-- 				<form:label path="img">照片上傳: </form:label> --%>
 <%-- 				<form:input type="file" path="img" />   --%>
 
 <!-- 				<img id="blah" src="#" alt="your image" /> <br> -->
-<!-- 				<input type='file' id="imgInp" name="FileName" /> -->
-<!--   			<img id="blah" src="#" alt="your image" /> -->
-<!--   			<br> -->
-<!--   			<input type='file' id="imgInp"  name="img" /> -->
+<%-- 				<form:input type='file' id="imgInp" path="FileName" /> --%>
+
 <!-- 			</div> -->
-			<br>
+<!-- 			<br> -->
 			<div style="text-align: center;">
 					<label>
-						<input type="submit" name="action" value="送出"  onclick="doUpload()"/>
+						<input type="submit" name="action" value="送出" />
 					</label>
 					<label>
 						<input type="submit" name="action" value="回首頁" />
@@ -124,34 +120,5 @@ body {
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 	crossorigin="anonymous"></script>
-	<script>
-        function addinput(){
-            // $("#btn").click(function(){
-            //     $(".add").attr('disabled',true);
-            // });
-            var input = $(" <div class='input-group form-inline'>食材: <input type='text' name='ingredients' /> 份 份量: <input type='text' name='gram' /> g</div>'");
-            $(".input-dyna-add").append(input);
-        }
-        
-        function readURL(input) {
-        	  if (input.files && input.files[0]) {
-        	    var reader = new FileReader();
-        	    
-        	    reader.onload = function(e) {
-        	      $('#blah').attr('src', e.target.result);
-        	    }
-        	    
-        	    reader.readAsDataURL(input.files[0]); // convert to base64 string
-        	  }
-        	}
-
-        	$("#imgInp").change(function() {
-        	  readURL(this);
-        	});
-        	
-        	$("#blah").width(300);
-        
-</script>
-
 </body>
 </html>

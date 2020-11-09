@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 //註明為persistent class
 @Entity
@@ -37,8 +38,9 @@ public class Recipe_Bean {
 	private String ingredients_D;
 	private int gram_A;
 	private Integer member_no;
-	private String FileName;
-	private Blob blob;
+	private String img;
+	private Blob imgData;
+	private MultipartFile multipartFile;
 	
 //	private Date up_date;
 //	private InputStream data;
@@ -154,19 +156,31 @@ public class Recipe_Bean {
 	}
 	
 	@Column(name="filename")
-	public String getFileName() {
-		return FileName;
+	public String getImg() {
+		return img;
 	}
-	public void setFileName(String fileName) {
-		FileName = fileName;
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	@Column(name="data")
-	public Blob getBlob() {
-		return blob;
+	public Blob getImgData() {
+		return imgData;
 	}
 
-	public void setBlob(Blob blob) {
-		this.blob = blob;
+	public void setImgData(Blob imgData) {
+		this.imgData = imgData;
 	}
+
+//	@tr
+//	public MultipartFile getMultipartFile() {
+//		return multipartFile;
+//	}
+//
+//	public void setMultipartFile(MultipartFile multipartFile) {
+//		this.multipartFile = multipartFile;
+//	}
+	
+
 }
