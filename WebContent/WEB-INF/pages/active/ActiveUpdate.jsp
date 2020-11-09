@@ -75,12 +75,12 @@ body {
 			</div>
 			<div>
 				<label for="">活動描述:</label> <br>
-				<textarea cols="50" rows="6"  id="actDescri" name="actDescri" value="${Active.actDescri}"></textarea>
+				<input cols="50" rows="6"  id="actDescri" name="actDescri" value="${Active.actDescri}"/>
 			</div>
-			<div>
-				<label for="">活動海報:</label> <br> 
-				<input type="file" id="actImg" name="actImg">
-			</div>
+<!-- 			<div> -->
+<!-- 				<label for="">活動海報:</label> <br>  -->
+<!-- 				<input type="file" id="actImg" name="actImg"> -->
+<!-- 			</div> -->
 			
 			<input name="update" type="submit" value="更新" > 
 			</form>
