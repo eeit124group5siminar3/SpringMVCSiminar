@@ -1,8 +1,10 @@
 package tw.group5.mall.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,17 +16,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 @Entity
 @Table(name = "product")
 public class ProductBean implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Integer productId;
 	private String product;
@@ -42,6 +44,38 @@ public class ProductBean implements Serializable {
 	private Integer category;
 	private String producterName;
 	private CategoryBean categoryBean;
+	private MultipartFile multipartFile;
+
+	@Transient
+	public MultipartFile getMultipartFile() {
+////		Blob coverImage=getCoverImage();
+//		InputStream io=null;
+//		
+//		MultipartFile multipartFile=null;
+//		try {
+//			io=coverImage.getBinaryStream();
+//			multipartFile = new MockMultipartFile(fileName, io);
+//		} catch (IOException | SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+		return multipartFile;
+	}
+
+	public void setMultipartFile(MultipartFile multipartFile) throws SerialException, SQLException, IOException {
+		this.multipartFile = multipartFile;
+//		System.err.println(multipartFile.getBytes().length);
+		if (multipartFile.getBytes().length > 0) {
+			SerialBlob sb = new SerialBlob(multipartFile.getBytes());
+			String fileName = multipartFile.getOriginalFilename();
+//			System.err.println("123");
+//		SerialBlob sb = null;
+//		byte[] b = new byte[ multipartFile.getBytes().length];
+//			sb = new SerialBlob(multipartFile.getBytes());	
+			setFileName(fileName);
+			setCoverImage(sb);
+		}
+	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category")
@@ -57,8 +91,9 @@ public class ProductBean implements Serializable {
 		super();
 	}
 
-	public ProductBean(String product, Integer producterId, Double price, Blob coverImage, String fileName, Integer stock,
-			Date addedDate, Integer shelfTime, Integer content, String unit, String description, Integer category) {
+	public ProductBean(String product, Integer producterId, Double price, Blob coverImage, String fileName,
+			Integer stock, Date addedDate, Integer shelfTime, Integer content, String unit, String description,
+			Integer category) {
 		super();
 		this.product = product;
 		this.producterId = producterId;
@@ -74,9 +109,9 @@ public class ProductBean implements Serializable {
 		this.category = category;
 	}
 
-	public ProductBean(Integer productId, String product, Integer producterId, Double price, Double discount, Blob coverImage,
-			String fileName, Integer stock, Date addedDate, Integer shelfTime, Integer content, String unit, String description,
-			Integer category) {
+	public ProductBean(Integer productId, String product, Integer producterId, Double price, Double discount,
+			Blob coverImage, String fileName, Integer stock, Date addedDate, Integer shelfTime, Integer content,
+			String unit, String description, Integer category) {
 		super();
 		this.producterId = producterId;
 		this.product = product;

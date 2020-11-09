@@ -32,7 +32,7 @@
 			</div>
 			<!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 			<!-- 而且method屬性必須是 "post" -->
-			<form:form id="form1" method="post" action=<c:url value="/ProductInsertServlet" />
+			<form:form id="form1" method="post" action="ProductInsertServlet" 
 				enctype="multipart/form-data" modelAttribute="Insert">
 
 				<table class="table_color" width="940" border="2" align="center"
@@ -91,7 +91,7 @@
 					<tr height='36'>
 						<td width="120" align="center" class="title_font">圖片</td>
 						<td colspan="1"><form:input style="background:#FFFFFF"
-								 type="file" name="uploadFile" path="coverImage" size="25" /><br>
+								 type="file" name="uploadFile" path="multipartFile" size="25" /><br>
 							<font color='red' size='-1'>${ErrMsg.errPicture}</font></td>
 						<td width="120" align="center" class="title_font">類型</td>
 						<td colspan="1">${sessionScope.SelectCategoryTag} <font

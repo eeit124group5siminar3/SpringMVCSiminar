@@ -48,6 +48,7 @@ public class Recipe_Controller_search {
 			if (search==null || search.length()==0) {
 				errors.put("msg","請輸入");
 				return "redirect:/searchPage.controller";
+
 //				return "recipe/recipe_search";
 			}
 		}

@@ -1,11 +1,17 @@
 package tw.group5.recipe.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.dom4j.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.BeanFactoryAnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
-import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
@@ -40,8 +46,10 @@ public class Recipe_Controller_upload {
 			return "Member_SignUp/Member_Login";
 	}
 	
-	@RequestMapping(path="/uploadSubmit.controller" ,method = RequestMethod.POST )
-	public String submitProcess(@ModelAttribute("details")Recipe_Bean bean,@RequestParam String action,Model m) {
+	@RequestMapping(path="/uploadSubmit.controller" ,method = {RequestMethod.POST,RequestMethod.GET} )
+	public String submitProcess(@ModelAttribute("details")Recipe_Bean bean,@RequestParam String action,
+			 HttpServletRequest request,Model m) throws IllegalStateException, IOException {
+	
 		if (action.equals("送出")) {
 			System.out.println("get value");
 			m.addAttribute("name", bean.getName());
@@ -50,11 +58,13 @@ public class Recipe_Controller_upload {
 			m.addAttribute("method", bean.getMethod());
 			m.addAttribute("ingredients_A", bean.getIngredients_A());
 			m.addAttribute("gram_A", bean.getGram_A());
+			m.addAttribute("FileName", bean.getFileName());
+//			bean.getData().getBytes(0, length);
 			
-//			session.setAttribute("recipe_check",bean);
+//			m.addAttribute("data", bean.getData());
+
 			System.out.println("done");
 			return "recipe/recipe_display";
-			
 		}
 		
 		if(action.equals("回首頁")) {
@@ -65,7 +75,6 @@ public class Recipe_Controller_upload {
 	
 	@RequestMapping(path="/uploadConfirm.controller" ,method = RequestMethod.POST)
 	public String saveProcess(@RequestParam String action,SessionStatus status) {
-//		System.out.println(session.getAttribute("recipe_check"));
 		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
 		System.out.println(bean.getName());
 		System.out.println(bean.getIngredients_A());
@@ -76,12 +85,12 @@ public class Recipe_Controller_upload {
 //			status.setComplete();
 			return "recipe/upload_success";
 		}
+		if (action.equals("修改")) {
+			return "recipe/recipe_upload_revise";
+		} 
 		if (action.equals("回首頁")) {
 			return "recipe/recipe_workpage";
 		} 
-		if(status==null) {
-			return "recipe/recipe_workpage";
-		}
 		return action;
 	}
 }
