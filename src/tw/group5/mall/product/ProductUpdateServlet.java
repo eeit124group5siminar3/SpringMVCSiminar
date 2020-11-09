@@ -20,7 +20,7 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 //@MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
 //		* 1024 * 500 * 5)
 @Controller
-@SessionAttributes(names = { "successMsg", "MaintainPageNo" })
+@SessionAttributes(names = { "successMsg", "MaintainPageNo", "bean" })
 public class ProductUpdateServlet {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
@@ -31,12 +31,13 @@ public class ProductUpdateServlet {
 			@RequestParam(value = "categoryId") Integer category,
 			@SessionAttribute(value = "login_ok") Member_SignUp mb,
 			@SessionAttribute(value = "MaintainPageNo") Integer maintainPageNo) {
-
+		System.err.println(bb.hashCode());
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		Map<String, String> successMsgs = new HashMap<String, String>();
 		model.addAttribute("ErrMsg", errorMsgs);
 		model.addAttribute("successMsg", successMsgs);
 		productService.setId(category);
+		bb.setCategoryBean(productService.getCategoryById());
 		productService.updateProduct(bb);
 
 		return "redirect:DisplayMaintainProduct?MaintainPageNo=" + maintainPageNo;

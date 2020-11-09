@@ -42,16 +42,16 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 //@MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024
 //		* 1024 * 500 * 5)
 @Controller
-@SessionAttributes(names = {"successMsg"})
-public class ProductInsertServlet{
+@SessionAttributes(names = { "successMsg", "SelectCategoryTag" })
+public class ProductInsertServlet {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
 	private ProductService productService;
+
 	@PostMapping(value = "/ProductInsertServlet")
-	public String productInsertServlet(Model model,@ModelAttribute(value="Insert") ProductBean insert,
+	public String productInsertServlet(Model model, @ModelAttribute(value = "Insert") ProductBean insert,
 			@RequestParam(value = "categoryId") Integer category,
-			@SessionAttribute(value = "login_ok") Member_SignUp mb)
-			{
+			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		Map<String, String> successMsgs = new HashMap<String, String>();
 		model.addAttribute("ErrMsg", errorMsgs);
@@ -60,17 +60,16 @@ public class ProductInsertServlet{
 		insert.setCategory(category);
 		productService.getCategoryById();
 		insert.setCategoryBean(productService.getCategoryById());
-		Integer producterId=mb.getMember_no();
+		Integer producterId = mb.getMember_no();
 		insert.setProducterId(producterId);
-		productService.saveProduct(insert);	
+		productService.saveProduct(insert);
+		String categoryTag = productService.getSelectTag();
+		model.addAttribute("SelectCategoryTag", categoryTag);
+		successMsgs.put("success", "資料新增成功");
 		return "/mall/ProductInsert";
-			}
+	}
 }
-		
-		
-		
-		
-		
+
 //		request.setCharacterEncoding("UTF-8");
 //		response.setContentType("text/html; charset=UTF-8");
 //		Map<String, String> errorMsgs = new HashMap<String, String>();

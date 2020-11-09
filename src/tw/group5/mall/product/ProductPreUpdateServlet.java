@@ -19,8 +19,9 @@ public class ProductPreUpdateServlet{
 	public String productPreUpdateServlet(@RequestParam(value = "ProductId") Integer productId,Model model){
 		
 		ProductBean bean = productService.getProduct(productId);
+		System.err.println(bean.hashCode());
 		model.addAttribute("bean", bean);	
-		productService.setSelected(bean.getCategory());
+		productService.setSelected(bean.getCategoryBean().getId());
 		productService.setTagName("categoryId");
 		String categoryTag = productService.getSelectTag();
 		model.addAttribute("SelectCategoryTag", categoryTag);

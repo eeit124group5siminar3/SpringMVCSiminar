@@ -26,7 +26,7 @@ public class OrderListServlet {
 			mb = (Member_SignUp) model.getAttribute("login_guest");
 		}
 		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(mb.getMember_no());
-		
+		System.err.println(mb.getMember_no());
 //		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(1);
 		model.addAttribute("memberOrders", memberOrders);
 		return "/mall/OrderList";
