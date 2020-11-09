@@ -1,5 +1,6 @@
 package tw.group5.recipe.recipe_Bean;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 
@@ -9,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -38,31 +42,12 @@ public class Recipe_Bean {
 	private String ingredients_D;
 	private int gram_A;
 	private Integer member_no;
-	private String img;
-	private Blob imgData;
+	private String FileName;
+	private Blob data;
 	private MultipartFile multipartFile;
-	
-//	private Date up_date;
-//	private InputStream data;
-//	private Blob sb;
-//	private FileInputStream fis;
 	
 	public Recipe_Bean() {
 	}
-
-//	public Recipe_Bean(String name, String ingredients_A, String ingredients_B, 
-//			String ingredients_C,String ingredients_D, String desc, String cate
-//			,String method,int gram_A) {
-//		this.name = name;
-//		this.ingredients_A = ingredients_A;
-//		this.ingredients_B = ingredients_B;
-//		this.ingredients_C = ingredients_C;
-//		this.ingredients_D = ingredients_D;
-//		this.desc = desc;
-//		this.cate = cate;
-//		this.method=method;
-//		this.gram_A=gram_A;
-//	}
 
 	@Id @Column(name="recipe_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -156,31 +141,37 @@ public class Recipe_Bean {
 	}
 	
 	@Column(name="filename")
-	public String getImg() {
-		return img;
+	public String getFileName() {
+		return FileName;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setFileName(String FileName) {
+		this.FileName = FileName;
 	}
 
 	@Column(name="data")
-	public Blob getImgData() {
-		return imgData;
+	public Blob getData() {
+		return data;
 	}
 
-	public void setImgData(Blob imgData) {
-		this.imgData = imgData;
+	public void setData(Blob data) {
+		this.data = data;
 	}
 
-//	@tr
-//	public MultipartFile getMultipartFile() {
-//		return multipartFile;
-//	}
-//
-//	public void setMultipartFile(MultipartFile multipartFile) {
-//		this.multipartFile = multipartFile;
-//	}
+	@Transient
+	public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
+
+	public void setMultipartFile(MultipartFile multipartFile) throws SerialException, IOException, SQLException {
+		this.multipartFile = multipartFile;
+		if(multipartFile.getBytes().length>0) {
+			SerialBlob sb=new SerialBlob(multipartFile.getBytes());
+			String fileName=multipartFile.getOriginalFilename();
+			setFileName(fileName);
+			setData(sb);
+		}
+	}
 	
 
 }

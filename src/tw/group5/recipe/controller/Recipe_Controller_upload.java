@@ -48,8 +48,7 @@ public class Recipe_Controller_upload {
 	
 	@RequestMapping(path="/uploadSubmit.controller" ,method = {RequestMethod.POST,RequestMethod.GET} )
 	public String submitProcess(@ModelAttribute("details")Recipe_Bean bean,@RequestParam String action,
-//			@RequestParam(name="img")MultipartFile mFile ,
-			HttpServletRequest request,Model m) throws IllegalStateException, IOException {
+			 HttpServletRequest request,Model m) throws IllegalStateException, IOException {
 	
 		if (action.equals("送出")) {
 			System.out.println("get value");
@@ -59,51 +58,11 @@ public class Recipe_Controller_upload {
 			m.addAttribute("method", bean.getMethod());
 			m.addAttribute("ingredients_A", bean.getIngredients_A());
 			m.addAttribute("gram_A", bean.getGram_A());
-//			System.out.println("-------------------------");
-//			File file=new File(bean.getFileName());
-//			System.out.println(bean.getFileName());
-//			System.out.println(file.getPath());
-			
-			//圖片新增到資料庫
-//			String FileName=mFile.getOriginalFilename();
-//			System.out.println(FileName);
-//			String FileTempDirPath=request.getServletContext().getRealPath("/")+"UploadTempDir\\";
-//			System.out.println("FileTempDirPath: "+FileTempDirPath);
-//
-//			File dirPath=new File(FileTempDirPath);
-//			if(!dirPath.exists()) {
-//				//建立新的路徑資料夾
-//				boolean status = dirPath.mkdir();
-//				System.out.println("status: "+status);
-//			}
-//			
-//			
-//			//新的圖片
-//			String FileSavePath=FileTempDirPath+FileName;
-//			File file=new File(FileSavePath);
-//			//把硬碟中圖片寫入系統資料庫
-//			mFile.transferTo(file);
-//			System.out.println("FileSavePath: "+FileSavePath);
-//
-//			try {
-//				if (FileName != null && FileName.length() != 0) {
-////					m.addAttribute("img", bean.getImg());
-//					System.out.println(bean.getImg());
-//					bean.setImg(FileName);
-//					FileInputStream fis = new FileInputStream(FileSavePath);
-//					byte[] b = new byte[fis.available()];
-//					fis.read();
-//					fis.close();
-//					bean.setImgData(b);
-//				}
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-					
-			
+			m.addAttribute("FileName", bean.getFileName());
+//			m.addAttribute("data", bean.getData());
+
 			System.out.println("done");
 			return "recipe/recipe_display";
-			
 		}
 		
 		if(action.equals("回首頁")) {
@@ -114,7 +73,6 @@ public class Recipe_Controller_upload {
 	
 	@RequestMapping(path="/uploadConfirm.controller" ,method = RequestMethod.POST)
 	public String saveProcess(@RequestParam String action,SessionStatus status) {
-//		System.out.println(session.getAttribute("recipe_check"));
 		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
 		System.out.println(bean.getName());
 		System.out.println(bean.getIngredients_A());
@@ -131,9 +89,6 @@ public class Recipe_Controller_upload {
 		if (action.equals("回首頁")) {
 			return "recipe/recipe_workpage";
 		} 
-//		if(status==null) {
-//			return "recipe/recipe_workpage";
-//		}
 		return action;
 	}
 }

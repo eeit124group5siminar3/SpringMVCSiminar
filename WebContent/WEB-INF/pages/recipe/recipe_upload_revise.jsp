@@ -102,11 +102,11 @@ body {
 <%-- 				<form:label path="img">照片上傳: </form:label> --%>
 <%-- 				<form:input type="file" path="img" />   --%>
 
-<!-- 				<img id="blah" src="#" alt="your image" /> <br> -->
-<%-- 				<form:input type='file' id="imgInp" path="FileName" /> --%>
+				<img id="blah" src="#" alt="your image" /> <br>
+				<form:input type='file' id="imgInp" path="FileName" />
 
-<!-- 			</div> -->
-<!-- 			<br> -->
+			</div>
+			<br>
 			<div style="text-align: center;">
 					<label>
 						<input type="submit" name="action" value="送出" />

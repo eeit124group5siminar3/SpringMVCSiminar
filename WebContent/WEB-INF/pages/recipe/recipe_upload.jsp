@@ -99,17 +99,15 @@ body {
 				<br>
 				<form:textarea cols="40" rows="5" path="method"></form:textarea>
 			</div>
-<!-- 			<br> -->
-<!-- 			<div> -->
+			<br>
+			<div>
 <%-- 				<form:label path="img">照片上傳: </form:label> --%>
 <%-- 				<form:input type="file" path="img" />   --%>
 
-<!-- 				<img id="blah" src="#" alt="your image" /> <br> -->
-<!-- 				<input type='file' id="imgInp" name="FileName" /> -->
-<!--   			<img id="blah" src="#" alt="your image" /> -->
-<!--   			<br> -->
-<!--   			<input type='file' id="imgInp"  name="img" /> -->
-<!-- 			</div> -->
+				<img id="blah" src="#" alt="your image" /> <br>
+				<form:input type='file' id="imgInp" path="multipartFile" />
+
+			</div>
 			<br>
 			<div style="text-align: center;">
 					<label>
