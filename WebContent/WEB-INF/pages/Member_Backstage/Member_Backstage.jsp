@@ -11,26 +11,16 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 %>
 <html>
 <head>
-<head>
 <link rel="stylesheet"
-	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
 	crossorigin="anonymous"></script>
 <title>後臺管理</title>
 <style>
@@ -53,34 +43,78 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	height: 400px;
 	width: 1300px;
 }
+
+#backstage_page{
+    position: absolute;
+    top: 200px;
+    left: 350px;
+    right:50px;
+    text-align: center;
+}
+
+.hyperlink{
+ color: #2828FF;
+}
+
+.hyperlink:hover{
+ color: #004B97;
+ text-decoration:underline;
+ cursor: pointer;
+}
 </style>
 <script>
-window.onload=function(){
-	var up = document.getElementById("up_data");
-	var sel = document.getElementById("sel_evaluation");
-	var page = document.getElementById("backstage_page");
-	up.onclick = function() {
-		// ajax的同步請求
-		// 步驟一: 新建XMLHttpRequest物件
-		var xhr = new XMLHttpRequest();
-		// 步驟二: 經由AJAX提出HTTP請求
-		if (xhr != null) {
-			xhr.onreadystatechange = function(){
-				if (xhr.readyState === 4) {
-					// 伺服器回應成功
-					if (xhr.status === 200) {
-						// 收到伺服器的回應
-						page.innerHTML="555555555555555555555555555555555555555";
-					}
-				}	
+	window.onload = function() {
+		var up = document.getElementById("up_data");
+		var sel = document.getElementById("sel_evaluation");
+		var recipe = document.getElementById("recipe_backstage");
+		// 		var sel = document.getElementById("sel_evaluation");
+		up.onclick = function() {
+			var xmlhttp;
+			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 			}
-			xhr.open('GET', "<c:url value='/memberUpdate.controller' />", true);
-			xhr.send();
-		} else {
-			page.innerHTML = "<h3>您的瀏覽器不支援Ajax</h3>";
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					document.getElementById("backstage_page").innerHTML = xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("POST", "<c:url value='/memberUpdate.controller' />",true);
+			xmlhttp.send();
 		}
+		sel.onclick = function() {
+			var xmlhttp;
+			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					document.getElementById("backstage_page").innerHTML = xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET", "<c:url value='/memberEvaluation.controller' />",true);
+			xmlhttp.send();
+		}
+		recipe.onclick = function() {
+			var xmlhttp;
+			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					document.getElementById("backstage_page").innerHTML = xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET", "<c:url value='/frontPage.controller' />",true);
+			xmlhttp.send();
+		}
+
 	}
-}   
 </script>
 </head>
 <body>
@@ -92,10 +126,11 @@ window.onload=function(){
 		<div id="project">
 			<div style="margin-left: 25px">
 				<button type="button" class="btn btn-info" data-toggle="collapse"
-					data-target="#demo">會員管理</button>
+					data-target="#demo" >會員管理</button>
 				<div id="demo" class="collapse">
-					<li><a id="up_data" href="">資料修改</a></li>
-					<li><a id="sel_evaluation" href="">評價查詢</a></li>
+				<br>
+					<li align="left"><a id="up_data" class="hyperlink">資料修改</a></li>
+					<li align="left"><a id="sel_evaluation" class="hyperlink">評價查詢</a></li>
 				</div>
 			</div>
 			<br> <br>
@@ -103,8 +138,8 @@ window.onload=function(){
 				<button type="button" class="btn btn-info" data-toggle="collapse"
 					data-target="#demo1">商城管理</button>
 				<div id="demo1" class="collapse">
-					<li><a href="">????</a></li>
-					<li><a href="">????</a></li>
+					<li align="left"><a class="hyperlink">????</a></li>
+					<li align="left"><a class="hyperlink">????</a></li>
 				</div>
 			</div>
 			<br> <br>
@@ -112,8 +147,8 @@ window.onload=function(){
 				<button type="button" class="btn btn-info" data-toggle="collapse"
 					data-target="#demo2">市場管理</button>
 				<div id="demo2" class="collapse">
-					<li><a href="">????</a></li>
-					<li><a href="">????</a></li>
+					<li align="left"><a class="hyperlink">????</a></li>
+					<li align="left"><a class="hyperlink">????</a></li>
 				</div>
 			</div>
 			<br> <br>
@@ -121,8 +156,8 @@ window.onload=function(){
 				<button type="button" class="btn btn-info" data-toggle="collapse"
 					data-target="#demo3">食譜管理</button>
 				<div id="demo3" class="collapse">
-					<li><a href="">????</a></li>
-					<li><a href="">????</a></li>
+					<li align="left"><a id="recipe_backstage" class="hyperlink">食譜新增</a></li>
+					<li align="left"><a class="hyperlink">食譜修改</a></li>
 				</div>
 			</div>
 			<br> <br>
@@ -130,8 +165,8 @@ window.onload=function(){
 				<button type="button" class="btn btn-info" data-toggle="collapse"
 					data-target="#demo4">活動管理</button>
 				<div id="demo4" class="collapse">
-					<li><a href="" />????</li>
-					<li><a href="" />????</li>
+					<li align="left"><a class="hyperlink">????</a></li>
+					<li align="left"><a class="hyperlink">????</a></li>
 				</div>
 			</div>
 		</div>
@@ -195,7 +230,7 @@ window.onload=function(){
 				</tr>
 			</table>
 		</div>
-
+		
 
 	</form>
 </body>

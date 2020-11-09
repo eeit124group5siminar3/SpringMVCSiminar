@@ -70,6 +70,19 @@ public class Member_SignUp implements Serializable {
 		this.member_gui_number = member_gui_number;
 		this.e_paper = e_paper;
 	}
+	
+	//會員資料修改
+	public Member_SignUp(String member_permissions, String member_email, String member_id,String member_name,
+			Date member_birthday,String member_gui_number,String e_paper) {
+
+		this.member_permissions = member_permissions;
+		this.member_email = member_email;
+		this.member_id = member_id;
+		this.member_name = member_name;
+		this.member_birthday = member_birthday;
+		this.member_gui_number = member_gui_number;
+		this.e_paper = e_paper;
+	}
 
 	@Id
 	@Column(name="MEMBER_NO")
