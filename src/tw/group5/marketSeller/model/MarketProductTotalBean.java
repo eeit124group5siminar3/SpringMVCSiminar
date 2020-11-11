@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "market_Product_Total")
-@Component("market_Product_Total")
+@Component
+//("market_Product_Total")
 public class MarketProductTotalBean {
 	private int productId;
 	private String email;
@@ -179,7 +180,6 @@ public class MarketProductTotalBean {
 	
 	
 	@OneToOne(fetch = FetchType.LAZY,mappedBy ="marketProductTotalBean", cascade = CascadeType.ALL)
-
 	public MarketProductImgBean getMarketProductImgBean() {
 		return marketProductImgBean;
 	}
