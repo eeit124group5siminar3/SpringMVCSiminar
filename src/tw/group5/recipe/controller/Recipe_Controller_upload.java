@@ -1,17 +1,21 @@
 package tw.group5.recipe.controller;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,6 +37,9 @@ public class Recipe_Controller_upload {
 	
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	ServletContext ctx;
 
 	@RequestMapping(path = "/uploadPage.controller",method=RequestMethod.GET)
 	public String uploadPage(Model m,HttpServletRequest request) {
@@ -58,11 +65,8 @@ public class Recipe_Controller_upload {
 			m.addAttribute("method", bean.getMethod());
 			m.addAttribute("ingredients_A", bean.getIngredients_A());
 			m.addAttribute("gram_A", bean.getGram_A());
-			m.addAttribute("FileName", bean.getFileName());
-//			bean.getData().getBytes(0, length);
+			m.addAttribute("FileName", bean.getFileName());	
 			
-//			m.addAttribute("data", bean.getData());
-
 			System.out.println("done");
 			return "recipe/recipe_display";
 		}

@@ -20,23 +20,29 @@ public class Recipe_Controller_search {
 	
 	@Autowired 
 	private recipe_Service_interface service;
-
+	
+	List<Recipe_Bean> list;
 
 	@RequestMapping(path = "/searchPage.controller",method = RequestMethod.GET)
-	public String searchPage() {
+	public String searchPage(Model m) {
+		List<Recipe_Bean> searchAll=service.listOfJavaBean();
+		m.addAttribute("searchAll", searchAll);
 		return "recipe/recipe_search";
 	}
 	
-	@RequestMapping(path = "/searchSubmit.controller",method = RequestMethod.POST)
-	public String submitProcess(@RequestParam(name = "input")String search,@RequestParam String action,Model m) {
+	@RequestMapping(path = "/searchSubmit.controller",method = {RequestMethod.POST,RequestMethod.GET})
+	public String submitProcess(@RequestParam(name = "input",required = false)String search,
+			@RequestParam(required = false) String action,
+			@RequestParam(name="rec_id",required = false)String rec_id,
+			Model m) {
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		
-		System.out.println("search= "+search);
-		System.out.println("search.length()= "+search.length());
-		if (action.equals("查詢")) {
-			if (search !=null || search.length() !=0) {
-				System.out.println(search);
+
+		if ("查詢".equals(action)) {
+			if (search !=null && search.length() !=0) {
+				System.out.println("search= "+search);
+				System.out.println("search.length()= "+search.length());
 				List<Recipe_Bean> list = service.ListOfSearch(search);
 				for (Recipe_Bean r : list) {
 					System.out.println(r.getRec_id());
@@ -48,11 +54,14 @@ public class Recipe_Controller_search {
 			if (search==null || search.length()==0) {
 				errors.put("msg","請輸入");
 				return "redirect:/searchPage.controller";
-
-//				return "recipe/recipe_search";
 			}
 		}
 		
+		if (rec_id !=null && rec_id.length() !=0) {
+			list=service.partSearch(rec_id);
+			m.addAttribute("List", list);
+			return "recipe/recipe_search_display";
+		}
 		
 		if (action.equals("回首頁")) {
 			return "recipe/recipe_workpage";

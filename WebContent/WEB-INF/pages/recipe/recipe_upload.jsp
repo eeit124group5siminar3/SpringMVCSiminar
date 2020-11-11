@@ -101,9 +101,6 @@ body {
 			</div>
 			<br>
 			<div>
-<%-- 				<form:label path="img">照片上傳: </form:label> --%>
-<%-- 				<form:input type="file" path="img" />   --%>
-
 				<img id="blah" src="#" alt="your image" /> <br>
 				<form:input type='file' id="imgInp" path="multipartFile" />
 
