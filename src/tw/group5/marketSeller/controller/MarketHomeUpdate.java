@@ -69,26 +69,8 @@ public class MarketHomeUpdate {
 		bean1.setUnit(unit);
 		bean1.setMarketProductImgBean(bean2);
 	    bean2.setMarketProductTotalBean(bean1);
-        service.update(bean1);
-		
-		
-		
+        service.update(bean1);		
 		return "marketSeller/MarketS";
 	}
 	
-	
-	@GetMapping("/MarketProduct.getImg")
-	@ResponseBody
-	public ResponseEntity<byte[]> getProductImage(@RequestParam("productId") Integer id) {
-	   HttpHeaders headers = new HttpHeaders();  //HttpHeaders headers 設定檔  HttpHeaders bodys 裡面的內容
-	   headers.setCacheControl(CacheControl.noCache());
-	   headers.setPragma("no-cache");
-	   headers.setExpires(0L);
-	   headers.setContentType(MediaType.IMAGE_JPEG);
-	   MarketProductImgBean bean = service.selectImg(id); 
-	   byte[] image = bean.getProductImg() ;
-	   System.out.println("圖片呢");
-	   return new ResponseEntity<byte[]>(image, HttpStatus.OK);
-	}
-
 }

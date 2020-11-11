@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -31,13 +32,14 @@ public class MarketProductImgBean {
 	private int productId;
 	private String description;
 	private String img_name;
-	private byte[] productImg ;
+	private Blob productImg ;
 	private MarketProductTotalBean marketProductTotalBean;
 	private MultipartFile multipartFile;
     
 	
 	@Transient
 	public MultipartFile getMultipartFile() {
+		
 		return multipartFile;
 	}
 
@@ -46,8 +48,10 @@ public class MarketProductImgBean {
 		
 		if (multipartFile.getBytes().length>0) {
 			String img = multipartFile.getOriginalFilename();
+			SerialBlob sb = new SerialBlob(multipartFile.getBytes());
 			setImg_name(img);
-			setProductImg(multipartFile.getBytes());
+			setProductImg(sb);
+			
 		}
 	}
 
@@ -74,10 +78,10 @@ public class MarketProductImgBean {
 	}
 	
 	@Column(name = "PRODUCT_IMG")
-	public byte[] getProductImg() {
+	public Blob getProductImg() {
 		return productImg;
 	}
-	public void setProductImg(byte[] b) {
+	public void setProductImg(Blob b) {
 		this.productImg = b;
 	}
 	
