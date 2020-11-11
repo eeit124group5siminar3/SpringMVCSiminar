@@ -53,6 +53,8 @@ body {
 </head>
 <body>
 	<jsp:include page="/top.jsp" />
+	<jsp:useBean id="login_ok"
+		class="tw.group5.member_SignUp.model.Member_SignUp" scope="session" />
 	<!-- ----------左邊項目---------- -->
 
 	<div id="project">
@@ -65,7 +67,10 @@ body {
 					<li align="left"><a href="javascript:document.form1.submit();"
 						class="hyperlink">資料修改</a></li>
 				</form>
-				<li align="left"><a href="" class="hyperlink">評價查詢</a></li>
+				<form name="form2" action="memberEvaluation.controller" method="GET">
+					<li align="left"><a href="javascript:document.form2.submit();"
+						class="hyperlink">評價查詢</a></li>
+				</form>
 			</div>
 		</div>
 		<br> <br>
@@ -109,20 +114,93 @@ body {
 
 
 	<div id="backstage_page">
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+		<h2>會員資料</h2>
+		<table cellspacing="2" cellpadding="1" border="1" width="100%">
+			<br>
+			<tr>
+				<td>會員身份</td>
+				<td><c:if test="${login_ok.member_permissions =='0'}">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="customRadioInline1"
+								name="member_permissions" id="member_permissions"
+								class="custom-control-input" value="0" checked="true" disabled>
+							<label class="custom-control-label" for="customRadioInline1">買家</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="customRadioInline2"
+								name="member_permissions" id="member_permissions1"
+								class="custom-control-input" value="1" disabled> <label
+								class="custom-control-label" for="customRadioInline2">買家與賣家</label>
+						</div>
+					</c:if> <c:if test="${login_ok.member_permissions == '1'}">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="customRadioInline1"
+								name="member_permissions" id="member_permissions"
+								class="custom-control-input" value="0" disabled> <label
+								class="custom-control-label" for="customRadioInline1">買家</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="customRadioInline2"
+								name="member_permissions" id="member_permissions1"
+								class="custom-control-input" value="1" checked="true" disabled>
+							<label class="custom-control-label" for="customRadioInline2">買家與賣家</label>
+						</div>
+					</c:if></td>
+			</tr>
+
+			<tr>
+				<td>Email</td>
+				<td><jsp:getProperty name="login_ok" property="member_email" /></td>
+			</tr>
+			<tr>
+				<td>密碼</td>
+				<td><jsp:getProperty name="login_ok" property="member_password" /></td>
+			</tr>
+			<tr>
+				<td>身分證字號</td>
+				<td><jsp:getProperty name="login_ok" property="member_id" /></td>
+			</tr>
+			<tr>
+				<td>姓名</td>
+				<td><jsp:getProperty name="login_ok" property="member_name" /></td>
+			</tr>
+			<tr>
+				<td>生日</td>
+				<td><jsp:getProperty name="login_ok" property="member_birthday" /></td>
+			</tr>
+			<tr>
+				<td>電話</td>
+				<td><jsp:getProperty name="login_ok"
+						property="member_cellphone" /></td>
+			</tr>
+			<tr>
+				<td>地址</td>
+				<td><jsp:getProperty name="login_ok" property="member_address" /></td>
+			</tr>
+			<tr>
+				<td>統一編號</td>
+				<c:if test="${login_ok.member_gui_number == null}">
+					<td></td>
+				</c:if>
+				<c:if test="${login_ok.member_gui_number != null}">
+					<td><jsp:getProperty name="login_ok"
+							property="member_gui_number" /></td>
+				</c:if>
+
+			</tr>
+		</table>
+
+		<div align="center">
+			<c:if test="${login_ok.e_paper =='1'}">
+				<input type="checkbox" name="e_paper" id="e_paper" value="1"
+					checked="true" disabled>
+			</c:if>
+			<c:if test="${login_ok.e_paper =='0'}">
+				<input type="checkbox" name="e_paper" id="e_paper" value="1"
+					disabled>
+			</c:if>
+			<label>訂閱電子報</label>
+		</div>
 	</div>
 </body>
 </html>
