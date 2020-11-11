@@ -24,14 +24,22 @@ fieldset {
 	<jsp:include page="/top.jsp" />	
 	<fieldset>
 		<legend>修改食譜</legend>		
-		<c:forEach  var='BeanToken' items="${recipe_table}">	
+<!-- 	<img src="getImage.controller" align="middle" /> 	 -->
+	
+		<c:forEach  var='BeanToken' items="${recipe_table}">
+<!-- 		<div> -->
+<%-- 			<label for="">圖片: <input type="text" name="name" value="${BeanToken.name}" /></label> --%>
+<!-- 		</div> -->
+<%-- imageURL = "<c:url value='/getImage.controller' />" --%>
+<%-- 	<img src="<c:url value='/getImage.controller' />" align="middle" /> 	 --%>
+
 		<div>
 		<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" />
 			<label for="">名稱: <input type="text" name="name" value="${BeanToken.name}" /></label>
 		</div>
 			<br>
 			<div>
-				<label>種類: </label> <select name="cate">
+				<label>種類: </label> <select name="cate" >
 					<option value="雞肉">雞肉</option>
 					<option value="豬肉">豬肉</option>
 					<option value="牛肉">牛肉</option>

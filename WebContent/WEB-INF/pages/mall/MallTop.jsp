@@ -104,7 +104,7 @@
 		  <td class='menuData'>
 		  <div class='menu'>
 			<c:if test="${ ! empty login_ok }">
-			   <a href="<c:url value='/_02_login/logout.jsp' />">
+			   <a href="<c:url value='removeSession.controller' />">
   				登出 
 	           </a>
 			</c:if>

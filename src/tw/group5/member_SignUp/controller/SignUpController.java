@@ -43,6 +43,10 @@ public class SignUpController {
 			@RequestParam(name = "e_paper",required=false) String e_paper,
 			Model m) {
 
+		Integer member_gg = 0;
+		String  member_lock_acc = "0";
+		
+		
 		if (e_paper == null) {
 			e_paper = "0";
 		}
@@ -64,7 +68,7 @@ public class SignUpController {
 								// 建立Buyer_Object Bean
 								Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
 										member_name, member_birthday, member_cellphone, member_id, member_address,
-										member_gui_number,e_paper);
+										member_gui_number,e_paper,member_gg,member_lock_acc);
 								// 建立getSession(true) 若沒有Session則會建立Session
 								m.addAttribute("reg_buyer",reg_buyer);
 								// 把工作交給Buyer_SignUp_Check.jsp
@@ -73,7 +77,7 @@ public class SignUpController {
 								// 建立Buyer_Object Bean
 								Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
 										member_name, member_birthday, member_cellphone, member_id, member_address,
-										member_gui_number,e_paper);
+										member_gui_number,e_paper,member_gg,member_lock_acc);
 								// 建立getSession(true) 若沒有Session則會建立Session
 								m.addAttribute("reg_buyer",reg_buyer);
 								// 把工作交給Buyer_SignUp_Check.jsp
@@ -101,7 +105,7 @@ public class SignUpController {
 								// 建立Buyer_Object Bean
 								Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
 										member_name, member_birthday, member_cellphone, member_id, member_address,
-										member_gui_number,e_paper);
+										member_gui_number,e_paper,member_gg,member_lock_acc);
 								// 建立getSession(true) 若沒有Session則會建立Session
 								m.addAttribute("reg_buyer",reg_buyer);
 								// 把工作交給Buyer_SignUp_Check.jsp
@@ -110,7 +114,7 @@ public class SignUpController {
 								// 建立Buyer_Object Bean
 								Member_SignUp reg_buyer = new Member_SignUp(member_permissions, member_email, member_password,
 										member_name, member_birthday, member_cellphone, member_id, member_address,
-										member_gui_number,e_paper);
+										member_gui_number,e_paper,member_gg,member_lock_acc);
 								// 建立getSession(true) 若沒有Session則會建立Session
 								m.addAttribute("reg_buyer",reg_buyer);
 								// 把工作交給Buyer_SignUp_Check.jsp
