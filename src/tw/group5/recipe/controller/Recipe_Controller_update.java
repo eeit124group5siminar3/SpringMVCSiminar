@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
@@ -93,50 +94,56 @@ public class Recipe_Controller_update {
 	
 	@GetMapping("/getImage.controller")
 	@ResponseBody
-	public void getImage() {
-		for (Recipe_Bean b : list) {
-		blob = b.getData();
-		FileName = b.getFileName();
-	}
-	}
-//	public ResponseEntity<byte[]> getImage() throws IOException, SQLException {
-//		ResponseEntity<byte[]> re = null;
+//	public void getImage() throws SQLException {
 //		for (Recipe_Bean b : list) {
 //			blob = b.getData();
 //			FileName = b.getFileName();
 //		}
-//		System.out.println("----------------");
-//		System.out.println(blob);
-//
-//		String mimeType = ctx.getMimeType(FileName);
-//		MediaType mediaType = MediaType.valueOf(mimeType);
-//		HttpHeaders headers = new HttpHeaders();
-//		
-////				FileOutputStream fos=new FileOutputStream();
-////				BufferedOutputStream bos=new BufferedOutputStream(fos);
-////				File file=new File(pathname)
-//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//				
-//				InputStream is = blob.getBinaryStream();
-//			
-//			byte[] b = new byte[81920];
-//			int len = 0;
-//			while ((len = is.read()) != -1) {
-//				baos.write(b, 0, len);
-//			}
-//			
-//			// 放入header,告知瀏覽器
-//			headers.setContentType(mediaType);
-////		//避免資料顯示錯誤.noCache()
-//			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-////				byte[] bytes = baos.toByteArray();
-//			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
-//
-//		
-//
-//		return re;
-//
-//	}
+//		Recipe_Bean bean=new Recipe_Bean();
+//		bean.setData(blob);
+//		InputStream is = blob.getBinaryStream();	
+//		is.
+//		}
+	public ResponseEntity<byte[]> getImage() throws IOException, SQLException {
+		ResponseEntity<byte[]> re = null;
+		for (Recipe_Bean b : list) {
+			blob = b.getData();
+			FileName = b.getFileName();
+		}
+		System.out.println("----------------");
+		System.out.println(blob);
+
+		String mimeType = ctx.getMimeType(FileName);
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+		
+//				FileOutputStream fos=new FileOutputStream();
+//				BufferedOutputStream bos=new BufferedOutputStream(fos);
+//				File file=new File(pathname)
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				
+				InputStream is = blob.getBinaryStream();
+				System.out.println(is.available());
+				System.out.println(is.read());
+			
+			byte[] b = new byte[81920];
+			int len = 0;
+			while ((len = is.read()) != -1) {
+				baos.write(b, 0, len);
+			}
+			
+			// 放入header,告知瀏覽器
+			headers.setContentType(mediaType);
+//		//避免資料顯示錯誤.noCache()
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//				byte[] bytes = baos.toByteArray();
+			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+
+		
+
+		return re;
+
+	}
 	
 	
 	

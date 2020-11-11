@@ -32,7 +32,7 @@ fieldset {
 <!-- 		</div> -->
 <%-- imageURL = "<c:url value='/getImage.controller' />" --%>
 	<img height="100" width="80"  
-	src="<c:url value='/getImage.controller' />" align="middle" /> 	
+	src="<c:url value='/getImage.controller' />" /> 	
 
 		<div>
 		<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" />
