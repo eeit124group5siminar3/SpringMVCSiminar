@@ -57,7 +57,7 @@ public class Member_SignUp implements Serializable {
 	// 註冊Bean
 	public Member_SignUp(String member_permissions, String member_email, String member_password, String member_name,
 			Date member_birthday, String member_cellphone, String member_id, String member_address,
-			String member_gui_number,String e_paper) {
+			String member_gui_number,String e_paper,Integer member_gg,String member_lock_acc) {
 
 		this.member_permissions = member_permissions;
 		this.member_email = member_email;
@@ -69,19 +69,24 @@ public class Member_SignUp implements Serializable {
 		this.member_address = member_address;
 		this.member_gui_number = member_gui_number;
 		this.e_paper = e_paper;
+		this.member_gg = member_gg;
+		this.member_lock_acc = member_lock_acc;
 	}
 	
 	//會員資料修改
-	public Member_SignUp(String member_permissions, String member_email, String member_id,String member_name,
-			Date member_birthday,String member_gui_number,String e_paper) {
+	public Member_SignUp(String member_permissions, String member_email,String member_password, String member_id,String member_name,
+			Date member_birthday,String member_gui_number,String e_paper,String member_cellphone,String member_address) {
 
 		this.member_permissions = member_permissions;
 		this.member_email = member_email;
+		this.member_password = member_password;		
 		this.member_id = member_id;
 		this.member_name = member_name;
 		this.member_birthday = member_birthday;
 		this.member_gui_number = member_gui_number;
 		this.e_paper = e_paper;
+		this.member_cellphone = member_cellphone;
+		this.member_address = member_address;
 	}
 
 	@Id

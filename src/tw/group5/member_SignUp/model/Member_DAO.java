@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-
 @Repository("memberDao")
 public class Member_DAO {
 
@@ -15,7 +14,7 @@ public class Member_DAO {
 
 	// 連線DB
 	@Autowired
-	public Member_DAO(@Qualifier("sessionFactory")SessionFactory sessionFactory) {
+	public Member_DAO(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
@@ -107,7 +106,6 @@ public class Member_DAO {
 		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query<?> result = query_email.setParameter(0, member_email);
-		
 
 		// 有資料就做判斷
 		if (result.uniqueResult() != null) {
@@ -122,12 +120,12 @@ public class Member_DAO {
 			// 做資料比對，正確回傳亂數PassWord
 			if (check_id.equals(member_id.toUpperCase()) && check_name.equals(member_name)
 					&& check_cellphone.equals(member_cellphone)) {
-				
+
 				String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 				StringBuffer buffer = new StringBuffer();
 
 				for (int i = 1; i <= 10; i++) {
-					
+
 					char random = chars.charAt((int) (Math.random() * 62));
 					buffer.append(random);
 				}
@@ -151,21 +149,44 @@ public class Member_DAO {
 		}
 		return false;
 	}
-	
-	//忘記密碼，資料包Bean回傳修改密碼
+
+	// 忘記密碼，資料包Bean回傳修改密碼
 	public Member_SignUp reset_bean(String member_email) {
 		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
 		Query<?> result = query_email.setParameter(0, member_email);
-		
+
 		if (result.uniqueResult() != null) {
 			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
 			String email = member_bean.getMember_email();
 			String password = member_bean.getMember_password();
-			Member_SignUp rest_bean = new Member_SignUp(email,password);
+			Member_SignUp rest_bean = new Member_SignUp(email, password);
 			return rest_bean;
 		}
 		return null;
-		
 	}
+
+	// 修改會員資料
+	public boolean updata_member_data(String member_email, String member_permissions, String password,
+			String member_cellphone, String member_address, String e_paper) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
+		Query<?> result = query_email.setParameter(0, member_email);
+
+		if (result.uniqueResult() != null) {
+			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
+			member_bean.setMember_permissions(member_permissions);
+			member_bean.setMember_password(password);
+			member_bean.setMember_cellphone(member_cellphone);
+			member_bean.setMember_address(member_address);
+			member_bean.setE_paper(e_paper);
+			
+			return true;
+		}
+		return false;
+	}
+
+
+
 }
