@@ -20,7 +20,7 @@ fieldset {
 </style>
 </head>
 <body>
-	<form action='<c:url value="/submitChoose.controller"/>' method="post" runat="server">
+	<form action='<c:url value="/submitChoose.controller"/>' method="post" runat="server" enctype="multipart/form-data">
 	<jsp:include page="/top.jsp" />	
 	<fieldset>
 		<legend>修改食譜</legend>		
@@ -31,7 +31,8 @@ fieldset {
 <%-- 			<label for="">圖片: <input type="text" name="name" value="${BeanToken.name}" /></label> --%>
 <!-- 		</div> -->
 <%-- imageURL = "<c:url value='/getImage.controller' />" --%>
-<%-- 	<img src="<c:url value='/getImage.controller' />" align="middle" /> 	 --%>
+	<img height="100" width="80"  
+	src="<c:url value='/getImage.controller' />" /> 	
 
 		<div>
 		<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" />

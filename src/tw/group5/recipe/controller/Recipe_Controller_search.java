@@ -40,9 +40,9 @@ public class Recipe_Controller_search {
 		
 
 		if ("查詢".equals(action)) {
-			if (search !=null && search.length() !=0) {
-				System.out.println("search= "+search);
-				System.out.println("search.length()= "+search.length());
+			if (search !=null && search.length() !=0) {				
+				search='%'+search+'%';
+				System.out.println(search);
 				List<Recipe_Bean> list = service.ListOfSearch(search);
 				for (Recipe_Bean r : list) {
 					System.out.println(r.getRec_id());

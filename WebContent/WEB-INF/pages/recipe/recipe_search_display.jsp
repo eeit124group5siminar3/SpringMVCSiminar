@@ -32,7 +32,7 @@ fieldset {
 				<br>
 				<div>
 					<label>
-						<a href="<c:url value='/RetrievePageProducts?searchString=${BeanToken.ingredients_A}'/>">${BeanToken.ingredients_A}</a>
+						<a href="<c:url value='/RetrievePageProducts?searchString=${BeanToken.ingredients_A}&search=" "'/>">${BeanToken.ingredients_A}</a>
 					</label>
 					<%-- 				<label for="">份量: ${BeanToken.gram_A}  </label> g --%>
 				</div>
