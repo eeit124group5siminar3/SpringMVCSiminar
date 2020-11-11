@@ -26,7 +26,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
 	crossorigin="anonymous"></script>
-	<title>會員資料修改</title>
+<title>會員資料修改</title>
 <style>
 body {
 	background: #EBFFEB;
@@ -70,7 +70,10 @@ body {
 					<li align="left"><a href="javascript:document.form1.submit();"
 						class="hyperlink">資料修改</a></li>
 				</form>
-				<li align="left"><a href="" class="hyperlink">評價查詢</a></li>
+				<form name="form2" action="memberEvaluation.controller" method="GET">
+					<li align="left"><a href="javascript:document.form2.submit();"
+						class="hyperlink">評價查詢</a></li>
+				</form>
 			</div>
 		</div>
 		<br> <br>
