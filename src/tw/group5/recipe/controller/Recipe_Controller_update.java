@@ -16,6 +16,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.input.ReaderInputStream;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -121,17 +122,17 @@ public class Recipe_Controller_update {
 //				BufferedOutputStream bos=new BufferedOutputStream(fos);
 //				File file=new File(pathname)
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				
+//				
 				InputStream is = blob.getBinaryStream();
-				System.out.println(is.available());
-				System.out.println(is.read());
-			
+//				System.out.println(is.available());
+//				System.out.println(is.read());
+//			
 			byte[] b = new byte[81920];
 			int len = 0;
-			while ((len = is.read()) != -1) {
+			while ((len = is.read(b)) != -1) {
 				baos.write(b, 0, len);
 			}
-			
+			is.close();
 			// 放入header,告知瀏覽器
 			headers.setContentType(mediaType);
 //		//避免資料顯示錯誤.noCache()

@@ -46,10 +46,17 @@ body {
 			</div>
 			<br>
 			<div id="line">
-				<form:label path="ingredients_A">食材: </form:label> 
+				<form:label path="ingredients_A">食材A: </form:label> 
 				<form:input path="ingredients_A" value="${ingredients_A}"/> 份 
-				<form:label path="gram_A">份量: </form:label>
+				<form:label path="gram_A">份量A: </form:label>
 				<form:input path="gram_A" value="${gram_A}"/> g
+			</div>
+			<br>
+			<div>
+				<form:label path="ingredients_B">食材B: </form:label> 
+				<form:input path="ingredients_B" value="${ingredients_B}"/> 份 
+				<form:label path="gram_B">份量B: </form:label>
+				<form:input path="gram_B" value="${gram_B}"/> g
 			</div>
 			<br>
 <!-- 			<div id="line"> -->

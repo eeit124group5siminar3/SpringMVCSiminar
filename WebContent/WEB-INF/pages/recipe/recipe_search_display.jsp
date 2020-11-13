@@ -42,6 +42,11 @@ fieldset {
 				</div>
 				<br>
 				<div>
+					<label>食材 : ${BeanToken.ingredients_A}</label> 份
+					<label>份量 : ${BeanToken.gram_A}</label> g
+				</div>
+				<br>
+				<div>
 					<label>料理方法 : ${BeanToken.method}</label>
 				</div>
 				<br>
