@@ -28,7 +28,7 @@ import tw.group5.marketSeller.model.MarketProductTotalBean;
 
 
 @Controller
-@SessionAttributes(names = {"Insert1"})
+@SessionAttributes(names = {"Insert1", "login_ok"})
 public class MarketHome {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
