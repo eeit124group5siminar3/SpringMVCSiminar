@@ -34,7 +34,7 @@ import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
-@SessionAttributes(names={"details"})
+@SessionAttributes(names={"details","login_ok"})
 public class Recipe_Controller_upload {
 	@Autowired
 	private recipe_Service_interface service;
@@ -47,7 +47,8 @@ public class Recipe_Controller_upload {
 
 	@RequestMapping(path = "/uploadPage.controller",method=RequestMethod.GET)
 	public String uploadPage(Model m,HttpServletRequest request) {
-		if (session.getAttribute("mem_no") != null) {
+		System.out.println("AAAAAAAAAAAAAAAA"+session.getAttribute("login_ok"));
+		if (session.getAttribute("login_ok") != null) {
 			Recipe_Bean bean = new Recipe_Bean();
 			bean.setMember_no((Integer) session.getAttribute("mem_no"));
 			System.out.println(bean.getMember_no());
