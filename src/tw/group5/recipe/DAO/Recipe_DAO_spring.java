@@ -69,12 +69,12 @@ public class Recipe_DAO_spring {
 
 	//查詢某資料
 	//Recipe_Servlet_search
-	public List<Recipe_Bean> ListOfSearch(String cate) {
+	public List<Recipe_Bean> ListOfSearch(String name) {
 		Session session =sessionFactory.getCurrentSession();
 //		session.beginTransaction();
-		String hql = "From Recipe_Bean where category =?0 ";
+		String hql = "From Recipe_Bean where recipe_name like:name";
 		Query<Recipe_Bean> query = session.createQuery(hql,Recipe_Bean.class);
-		query.setParameter(0, cate);
+		query.setParameter("name", name);
 		List<Recipe_Bean> list = query.list();
 
 		return list;

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletContext;
@@ -57,12 +58,6 @@ public class Recipe_Controller_upload {
 			return "Member_SignUp/Member_Login";
 	}
 	
-	public String uploadtime(){
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		Date date=new Date();
-		return sdf.format(date);
-		
-	}
 	
 	@RequestMapping(path="/uploadSubmit.controller" ,method = {RequestMethod.POST,RequestMethod.GET} )
 	public String submitProcess(@ModelAttribute("details")Recipe_Bean bean,@RequestParam String action,
@@ -80,11 +75,14 @@ public class Recipe_Controller_upload {
 			m.addAttribute("gram_B", bean.getGram_B());
 			m.addAttribute("FileName", bean.getFileName());
 			
-			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
-			Date date = new Date();
-			String strDate = sdFormat.format(date);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(new Date());
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH) +1;
+			int day = cal.get(Calendar.DAY_OF_MONTH);
+			String date=year + "-" + month + "-" + day;
+			System.out.println("date: "+date);
 			bean.setDate(date);
-			
 			
 			System.out.println("done");
 			return "recipe/recipe_display";

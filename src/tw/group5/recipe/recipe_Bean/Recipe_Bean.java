@@ -47,7 +47,7 @@ public class Recipe_Bean {
 	private String FileName;
 	private Blob data;
 	private MultipartFile multipartFile;
-	private Date date;
+	private String date;
 	
 	public Recipe_Bean() {
 	}
@@ -185,12 +185,12 @@ public class Recipe_Bean {
 		}
 	}
 
-	@Column(name="upload_date")
-	public Date getDate() {
+	@Column(name="upload_date", updatable = false)
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	
