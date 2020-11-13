@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>upload recipe</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <style>
 
 fieldset {
@@ -47,43 +48,20 @@ body {
 				</select>
 			</div>
 			<br>
-			<div id="line">
-				<form:label path="ingredients_A">食材: </form:label> 
+			<div>
+				<form:label path="ingredients_A">食材A: </form:label> 
 				<form:input path="ingredients_A" /> 份 
-				<form:label path="gram_A">份量: </form:label>
+				<form:label path="gram_A">份量A: </form:label>
 				<form:input path="gram_A" /> g
 			</div>
 			<br>
-<!-- 			<div id="line"> -->
-<%-- 				<form:label path="ingredients_B">食材: <form:input type="text" path="ingredients_B" /> --%>
-<!-- 					份 -->
-<%-- 				</form:label>  --%>
-<%-- 				<form:label path="gram_B">份量: <form:input type="text" path="gram_B" /> g --%>
-<%-- 				</form:label> --%>
-<!-- 			</div> -->
-<!-- 			<br> -->
-
-<!-- 			<div id="line"> -->
-<%-- 				<form:label path="ingredients_C">食材: <form:input type="text" path="ingredients_C" /> --%>
-<!-- 					份 -->
-<%-- 				</form:label>  --%>
-<%-- 				<form:label path="gram_C">份量: <form:input type="text" path="gram_C" /> g --%>
-<%-- 				</form:label> --%>
-<!-- 			</div> -->
-<!-- 			<br> -->
-
-<!-- 			<div id="line"> -->
-<%-- 				<form:label path="ingredients_D">食材: <form:input type="text" path="ingredients_D" /> --%>
-<!-- 					份 -->
-<%-- 				</form:label>  --%>
-<%-- 				<form:label path="gram_D">份量: <form:input type="text" path="gram_D" /> g --%>
-<%-- 				</form:label> --%>
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div class="input-dyna-add"></div> -->
-<%-- 			 食材: <form:input  class="add" path="ingredients" disabled /> 份 --%>
-<%--                 	 份量: <form:input  class="add" path="gram"disabled /> g  --%>
-<!--                 <br> -->
+			<div>
+				<form:label path="ingredients_B">食材B: </form:label> 
+				<form:input path="ingredients_B" /> 份 
+				<form:label path="gram_B">份量B: </form:label>
+				<form:input path="gram_B" /> g
+			</div>
+			<br>
 <%-- 			<form:button id="btn" onclick="addinput()" value=>新增</form:button> --%>
 
 <!-- 			<hr> -->
@@ -108,43 +86,68 @@ body {
 			<br>
 			<div style="text-align: center;">
 					<label>
-						<input type="submit" name="action" value="送出"  onclick="doUpload()"/>
+						<input id="send" type="submit" name="action" value="送出"  onclick="doUpload()"/>
 					</label>
 					<label>
 						<input type="submit" name="action" value="回首頁" />
 					</label>
 				</div>
+				<div id="result"></div>
 		</form:form>
 	</fieldset>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-	crossorigin="anonymous"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" -->
+<!-- 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" -->
+<!-- 	crossorigin="anonymous"></script> -->
 	<script>
-        function addinput(){
-            // $("#btn").click(function(){
-            //     $(".add").attr('disabled',true);
-            // });
-            var input = $(" <div class='input-group form-inline'>食材: <input type='text' name='ingredients' /> 份 份量: <input type='text' name='gram' /> g</div>'");
-            $(".input-dyna-add").append(input);
-        }
-        
-        function readURL(input) {
-        	  if (input.files && input.files[0]) {
-        	    var reader = new FileReader();
-        	    
-        	    reader.onload = function(e) {
-        	      $('#blah').attr('src', e.target.result);
-        	    }
-        	    
-        	    reader.readAsDataURL(input.files[0]); // convert to base64 string
-        	  }
-        	}
+// 	$(function(){
+// 		$("#send").onclick(function(){
+// 			$.ajax({
+// 				type:"GET",
+// 				url:"<c:url value='/uploadSubmit.controll' />",
+// 				dataType:"html",
+// 				success:function(data){
+// 					$("#result").html(data);
+// 					},
+// 				error:function(xhr){
+// 					alert(xhr.status);
+// 					}	
+// 				});
+// 			});
+// 		});
 
-        	$("#imgInp").change(function() {
-        	  readURL(this);
-        	});
+
+
+
+
+
+
+
+	
+//         function addinput(){
+//             // $("#btn").click(function(){
+//             //     $(".add").attr('disabled',true);
+//             // });
+//             var input = $(" <div class='input-group form-inline'>食材: <input type='text' name='ingredients' /> 份 份量: <input type='text' name='gram' /> g</div>'");
+//             $(".input-dyna-add").append(input);
+//         }
+        
+//         function readURL(input) {
+//         	  if (input.files && input.files[0]) {
+//         	    var reader = new FileReader();
+        	    
+//         	    reader.onload = function(e) {
+//         	      $('#blah').attr('src', e.target.result);
+//         	    }
+        	    
+//         	    reader.readAsDataURL(input.files[0]); // convert to base64 string
+//         	  }
+//         	}
+
+//         	$("#imgInp").change(function() {
+//         	  readURL(this);
+//         	});
         	
-        	$("#blah").width(300);
+//         	$("#blah").width(300);
         
 </script>
 

@@ -47,12 +47,20 @@ table{
 				<td>${cate}</td>
 			</tr>
 			<tr>
-				<td>食材</td>
+				<td>食材A</td>
 				<td>${ingredients_A}</td>
 			</tr>
 			<tr>
-				<td>份量</td>
+				<td>份量A</td>
 				<td>${gram_A}</td>
+			</tr>
+			<tr>
+				<td>食材B</td>
+				<td>${ingredients_B}</td>
+			</tr>
+			<tr>
+				<td>份量B</td>
+				<td>${gram_B}</td>
 			</tr>
 			<tr>
 				<td>介紹</td>
@@ -63,51 +71,11 @@ table{
 				<td>${method}</td>
 			</tr>
 			<tr>
-				<td>照片</td>
-				<td></td>
-			</tr>
-			<tr>
 				<td>檔名</td>
 				<td>${FileName}</td>
 			</tr>
 
 		</table>
-			<br>
-<!-- 			<div> -->
-<%-- 				<form:label path="${name}">名稱:${name} </form:label> --%>
-<%-- 				<form:input type="hidden" path="${name}" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div> -->
-<%-- 				<form:label path="${cate}">種類:${cate} </form:label> --%>
-<%-- 				<form:input type="hidden" path="${cate}" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div> -->
-<%-- 				<form:label path="${ingredients_A}">食材:${ingredients_A} </form:label> --%>
-<%-- 				<form:input path="${ingredients_A}" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div> -->
-<%-- 				<form:label path="${gram_A}">份量:${gram_A} </form:label> --%>
-<%-- 				<form:input path="${gram_A}" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div> -->
-<%-- 				<form:label path="${desc}">介紹:${desc} </form:label> --%>
-<%-- 				<form:input path="${desc}" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<br> -->
-<!-- 			<div> -->
-<%-- 				<form:label path="${method}">料理方法:${method} </form:label> --%>
-<%-- 				<form:input path="${method}" /> --%>
-
-<!-- 			</div> -->
 			<br>
 			<div style="text-align: center;">
 					<label>

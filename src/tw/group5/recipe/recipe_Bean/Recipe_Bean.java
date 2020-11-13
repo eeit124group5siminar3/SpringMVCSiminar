@@ -3,6 +3,7 @@ package tw.group5.recipe.recipe_Bean;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,10 +42,12 @@ public class Recipe_Bean {
 	private String ingredients_C;
 	private String ingredients_D;
 	private int gram_A;
+	private int gram_B;
 	private Integer member_no;
 	private String FileName;
 	private Blob data;
 	private MultipartFile multipartFile;
+	private Date date;
 	
 	public Recipe_Bean() {
 	}
@@ -130,6 +133,15 @@ public class Recipe_Bean {
 	public void setGram_A(int gram_A) {
 		this.gram_A = gram_A;
 	}
+	
+	@Column(name="gram_B")
+	public int getGram_B() {
+		return gram_B;
+	}
+
+	public void setGram_B(int gram_B) {
+		this.gram_B = gram_B;
+	}
 
 	@Column(name="member_no")
 	public Integer getMember_no() {
@@ -171,6 +183,15 @@ public class Recipe_Bean {
 			setFileName(fileName);
 			setData(sb);
 		}
+	}
+
+	@Column(name="upload_date")
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 

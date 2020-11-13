@@ -24,16 +24,7 @@ fieldset {
 	<jsp:include page="/top.jsp" />	
 	<fieldset>
 		<legend>修改食譜</legend>		
-<!-- 	<img src="getImage.controller" align="middle" /> 	 -->
-	
 		<c:forEach  var='BeanToken' items="${recipe_table}">
-<!-- 		<div> -->
-<%-- 			<label for="">圖片: <input type="text" name="name" value="${BeanToken.name}" /></label> --%>
-<!-- 		</div> -->
-<%-- imageURL = "<c:url value='/getImage.controller' />" --%>
-	<img height="100" width="80"  
-	src="<c:url value='/getImage.controller' />" /> 	
-
 		<div>
 		<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" />
 			<label for="">名稱: <input type="text" name="name" value="${BeanToken.name}" /></label>
@@ -48,37 +39,18 @@ fieldset {
 				</select>
 			</div>		
 			<br>
-			<div id="line">
-				<label>食材: <input type="text" name="ingredients_A" value="${BeanToken.ingredients_A}" /> 份 
+			<div>
+				<label>食材A: <input type="text" name="ingredients_A" value="${BeanToken.ingredients_A}" /> 份 
 				</label> 
-<%-- 				<label for="">份量: <input type="text" name="recipe_table" value="${BeanToken.gram_A}" /> g  --%>
-<!-- 				</label> -->
-			</div>
-			<br>
-			<div id="line">
-				<label>食材: <input type="text" name="ingredients_B" value="${BeanToken.ingredients_B}" />
-					份
- 				</label> 
-<%--				<label>份量: <input type="text" name="gram_B" value="${BeanToken.gram_B}" /> g --%>
-<!-- 				</label> -->
-			</div>
-			<br>
-
-			<div id="line">
-				<label for="">食材: <input type="text" name="ingredients_C" value="${BeanToken.ingredients_C}" />
-					份
+				<label>份量A: <input type="text" name="recipe_table" value="${BeanToken.gram_A}" /> g 
 				</label>
-<%-- 				 <label>份量: <input type="text" name="gram_C" value="${BeanToken.gram_C}" /> g --%>
-<!-- 				</label> -->
 			</div>
 			<br>
-
-			<div id="line">
-				<label>食材: <input type="text" name="ingredients_D" value="${BeanToken.ingredients_D}" />
-					份
-				</label> 
-<%-- 				<label>份量: <input type="text" name="gram_D" value="${BeanToken.gram_D}" /> g --%>
-<!-- 				</label> -->
+			<div>
+				<label>食材B: <input type="text" name="ingredients_B" value="${BeanToken.ingredients_B}" /> 份
+ 				</label> 
+				<label>份量B: <input type="text" name="gram_B" value="${BeanToken.gram_B}" /> g
+				</label>
 			</div>
 			<br>
 			<div class="input-dyna-add"></div>
@@ -99,12 +71,15 @@ fieldset {
 			</div>
 			<br>
 			<div>
-<!-- 				<label>照片上傳: </label><input type="file" name="img" /> -->
-
+			
+			
+<!-- 			<img height="100" width="80"   -->
+<%-- 	src="<c:url value='/getImage.controller'/>" /> 	 --%>
+	<hr>
   			<img id="blah" src="#" alt="your image" />
   			<br>
   			<input type='file' id="imgInp" name="img" />
-
+			
 			</div>
 			</c:forEach>
 			<br>

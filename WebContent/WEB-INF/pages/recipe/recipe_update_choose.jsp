@@ -28,15 +28,22 @@ fieldset {
 		<legend>修改食譜</legend>
 		<h2>已上傳食譜</h2>		
 		<c:forEach  var='BeanToken' items="${user_recipe}">		
+		<li>
 			<div>
 				<label>
 					<a href="<c:url value='/updateProcess.controller?choose=${BeanToken.rec_id}' />">${BeanToken.name}</a> 
 				</label>
 			</div>		
 			<br>
-
+		</li>
+		<li>
+			<div>
+				<label>
+					<ul>${BeanToken.date}</ul> 
+				</label>
+			</div>		
 		</c:forEach>
-		
+		</li>
 			<div style="text-align: center;">
 				<label>
 					<input type="submit" name="action" value="回首頁">

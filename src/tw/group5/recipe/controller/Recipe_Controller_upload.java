@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,9 +51,17 @@ public class Recipe_Controller_upload {
 			bean.setMember_no((Integer) session.getAttribute("mem_no"));
 			System.out.println(bean.getMember_no());
 			m.addAttribute("details", bean);
+			
 			return "recipe/recipe_upload";
 		} else
 			return "Member_SignUp/Member_Login";
+	}
+	
+	public String uploadtime(){
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		Date date=new Date();
+		return sdf.format(date);
+		
 	}
 	
 	@RequestMapping(path="/uploadSubmit.controller" ,method = {RequestMethod.POST,RequestMethod.GET} )
@@ -65,7 +76,15 @@ public class Recipe_Controller_upload {
 			m.addAttribute("method", bean.getMethod());
 			m.addAttribute("ingredients_A", bean.getIngredients_A());
 			m.addAttribute("gram_A", bean.getGram_A());
-			m.addAttribute("FileName", bean.getFileName());	
+			m.addAttribute("ingredients_B", bean.getIngredients_B());
+			m.addAttribute("gram_B", bean.getGram_B());
+			m.addAttribute("FileName", bean.getFileName());
+			
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+			Date date = new Date();
+			String strDate = sdFormat.format(date);
+			bean.setDate(date);
+			
 			
 			System.out.println("done");
 			return "recipe/recipe_display";
