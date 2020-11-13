@@ -51,8 +51,8 @@
                     <td><c:out value="${IBean.quantity}"/></td>      
                 <td>  
 				<img  height='80' width='80'
-			        src="/MarketProduct.getImg<c:out value='${IBean.marketProductImgBean.productImg}'/>">
-			        
+			        src="<c:out value='${IBean.marketProductImgBean.productImg}&type=PRODUCT'/>">
+			       
 			        </td>
 			
 				 

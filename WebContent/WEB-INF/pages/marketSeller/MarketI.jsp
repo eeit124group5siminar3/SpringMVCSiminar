@@ -20,31 +20,32 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
-<form action="<c:url value='/MarketProduct.insert'></c:url>" method="post" enctype="multipart/form-data">
 <jsp:include page="/top.jsp" />
+<form:form action="MarketProduct.insert"  method="post" modelAttribute="Insert1" enctype="multipart/form-data">
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
 <tr>
     <td>商品名稱:</td>
-    <td><input type="text" name="product_name" id="product_name" class='InputClass' size="20" maxlength="10"
-     value="${requestScope.product_name}" size="20" />
+    <td><form:input type="text" name="product_name" id="product_name" class='InputClass'
+     size="20" maxlength="10" path="productName"/>
            <font color='red' size='-1'>
               ${errors.errProduct_name}
            </font>
     </td>
 </tr>
-    <tr height="36" >
-    <td >產品描述(75字以內)</td>
-      <td>         
-         <textarea name="description" cols="80" rows="4" value="${requestScope.description}" ></textarea>
-         <font color='red' size='-1'>
-                ${errors.errDescription}
-            </font>
-      </td>
-    </tr>
+ <tr>
+    <td>單位:</td>
+        <td><form:input type="text" name="unit" id="unit" maxlength="10"
+       path="unit" size="5" />
+           <font color='red' size='-1'>
+              ${errors.errUnit}
+           </font>  
+           
+    </td>
+ </tr>
 <tr>
     <td>商品出產地:</td>
-    <td><input type="text" name="product_area" id="product_area" size="20" maxlength="10"
-       value="${requestScope.product_area}" size="20" />
+    <td><form:input type="text" name="product_area" id="product_area" size="20" maxlength="10"
+          path="productArea"/>
            <font color='red' size='-1'>
               ${errors.errProduct_area}
            </font>
@@ -52,8 +53,8 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </tr>
 <tr>
     <td>價錢:</td>
-    <td><input type="text" name="price" id="price" size="10" maxlength="10"
-       value="${requestScope.price}" size="5" />
+    <td><form:input type="text" name="price" id="price" maxlength="10"
+       path="price" size="5" />
            <font color='red' size='-1'>
               ${errors.errPrice}
            </font>           
@@ -62,44 +63,40 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </tr>
 <tr>
     <td>數量:</td>
-    <td><input type="text" name="quantity" id="quantity" size="10" maxlength="10"
-       value="${requestScope.quantity}" size="5" />
+    <td><form:input type="text" name="quantity" id="quantity" maxlength="10"
+       path="quantity"  size="5" />
            <font color='red' size='-1'>
               ${errors.errQuantity}
            </font>           
            
     </td>
 </tr>
- <tr>
-    <td>單位:</td>
-        <td><input type="text" name="unit" id="unit" size="10" maxlength="10"
-       value="${requestScope.unit}" size="5" />
-           <font color='red' size='-1'>
-              ${errors.errUnit}
-           </font>  
-           
-    </td>
- </tr>
+    <tr height="36" >
+    <td >產品描述(75字以內)</td>
+      <td>         
+         <form:textarea name="description" cols="80" rows="4" path="marketProductImgBean.description"></form:textarea>
+         <font color='red' size='-1'>
+                ${errors.errDescription}
+            </font>
+      </td>
+    </tr>
     <tr height='36'>
         <td >圖片</td>
         <td >
-            <input style="background:#FFFFFF" class='InputClass'  type="file" accept="image/*" name="product_img" id="imgInp" size="25" /><br>
+            <form:input style="background:#FFFFFF" class='InputClass'  type="file" path="marketProductImgBean.multipartFile" accept="image/*" name="product_img" id="imgInp" size="25" /><br>
             <font color='red' size='-1'>${errors.errPicture}</font></td>
-    </tr>
-     <form action="<c:url value='/MarketProduct.insert'></c:url>" method="POST">
+    </tr>  
         <tr height="36" >
       <td height="61" colspan="6" align="center">
-         <input type="submit"  value="新增" />
+         <form:button value="Send">新增</form:button>
       </td>
     </tr>
-     </form>
+   
 </table>
-</form>
+</form:form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<form>
  <img id="blah" src="#" alt="your image" />
-</form>
 <script>
 function readURL(input) {
   if (input.files && input.files[0]) {
