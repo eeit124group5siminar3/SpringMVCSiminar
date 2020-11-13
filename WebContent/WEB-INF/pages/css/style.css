@@ -10128,4 +10128,25 @@ textarea.form-control {
   position:absolute;
 }
 
+.signup-form {
+	width: 1000px;
+	height: 600px;
+	top: 150px;
+	margin: 0px auto;
+}
+
+.signup-form-fieldset {
+	width: 1000px;
+	margin: 10px;
+	padding: 50px;
+	border: 1px double;
+}
+
+.signup-footer-ground {
+	width: 100%;
+	top: 1200px;
+	position: absolute;
+}
+
+
 

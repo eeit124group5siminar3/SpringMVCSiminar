@@ -46,6 +46,7 @@ public class SignUpController {
 		Integer member_gg = 0;
 		String  member_lock_acc = "0";
 		
+		System.out.println("會員"+member_permissions);
 		
 		if (e_paper == null) {
 			e_paper = "0";
