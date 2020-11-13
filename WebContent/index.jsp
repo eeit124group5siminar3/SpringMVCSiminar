@@ -92,7 +92,16 @@
 					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
 					<li class="nav-item"><a href="" class="nav-link">市場</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">食譜</a></li>
+					
+			<li class="nav-item dropdown">
+              <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="<c:url value='uploadPage.controller'/>">上傳食譜</a>
+                <a class="dropdown-item" href="<c:url value='updatePage.controller'/>">修改食譜</a>
+                <a class="dropdown-item" href="<c:url value='searchPage.controller'/>">搜尋料理</a>
+              </div>
+			</li>
+					
 					<li class="nav-item"><c:if test="${empty login_ok}">
 							<a class="nav-link" href="<c:url value='login.controller' />">會員</a>
 						</c:if> <c:if test="${!empty login_ok}">
