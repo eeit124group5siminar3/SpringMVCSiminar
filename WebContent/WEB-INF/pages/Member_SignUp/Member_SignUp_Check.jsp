@@ -74,7 +74,7 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">農郁</a>
+			<a class="navbar-brand" href="index.jsp">農郁</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -92,32 +92,33 @@
 			<fieldset class="border signup-form-fieldset">
 				<legend>註冊資料確認</legend>
 				<c:if test="${reg_buyer.member_permissions =='0'}">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="customRadioInline1"
-								name="member_permissions" id="member_permissions"
-								class="custom-control-input" value="0" checked="true" disabled>
-							<label class="custom-control-label" for="customRadioInline1">買家</label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="customRadioInline2"
-								name="member_permissions" id="member_permissions1"
-								class="custom-control-input" value="1" disabled> <label
-								class="custom-control-label" for="customRadioInline2">買家與賣家</label>
-						</div>
-					</c:if> <c:if test="${reg_buyer.member_permissions == '1'}">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="customRadioInline1"
-								name="member_permissions" id="member_permissions"
-								class="custom-control-input" value="0" disabled> <label
-								class="custom-control-label" for="customRadioInline1">買家</label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="customRadioInline2"
-								name="member_permissions" id="member_permissions1"
-								class="custom-control-input" value="1" checked="true" disabled>
-							<label class="custom-control-label" for="customRadioInline2">買家與賣家</label>
-						</div>
-					</c:if>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline1"
+							name="member_permissions" id="member_permissions"
+							class="custom-control-input" value="0" checked="true" disabled>
+						<label class="custom-control-label" for="customRadioInline1">買家</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline2"
+							name="member_permissions" id="member_permissions1"
+							class="custom-control-input" value="1" disabled> <label
+							class="custom-control-label" for="customRadioInline2">買家與賣家</label>
+					</div>
+				</c:if>
+				<c:if test="${reg_buyer.member_permissions == '1'}">
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline1"
+							name="member_permissions" id="member_permissions"
+							class="custom-control-input" value="0" disabled> <label
+							class="custom-control-label" for="customRadioInline1">買家</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline2"
+							name="member_permissions" id="member_permissions1"
+							class="custom-control-input" value="1" checked="true" disabled>
+						<label class="custom-control-label" for="customRadioInline2">買家與賣家</label>
+					</div>
+				</c:if>
 				<p></p>
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -139,16 +140,23 @@
 						property="member_password" />"
 							disabled>
 					</div>
-
-					<div class="form-group col-md-6">
-						<label for="inputPassword4">銀行代號</label> <input type="text"
-							class="form-control" placeholder=" " disabled>
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputPassword4">銀行帳號</label> <input type="text"
-							class="form-control" placeholder="銀行帳號不含dash (-)" disabled>
-					</div>
-
+					<div class="form-group col-md-6"></div>
+					<c:if test="${reg_buyer.member_permissions == '1'}">
+						<div class="form-group col-md-6">
+							<label for="inputPassword4">銀行代號</label> <input type="text"
+								class="form-control"
+								placeholder="<jsp:getProperty name="reg_buyer"
+						property="member_bank_code" />"
+								disabled>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="inputPassword4">銀行帳號</label> <input type="text"
+								class="form-control"
+								placeholder="<jsp:getProperty name="reg_buyer"
+						property="member_bank_account" />"
+								disabled>
+						</div>
+					</c:if>
 					<div class="form-group col-md-6">
 						<label for="inputPassword4">名稱</label> <input type="text"
 							class="form-control"
@@ -202,8 +210,9 @@
 						</div>
 					</div>
 				</c:if>
-				<input type="submit" name="confirm" class="btn btn-primary" value="確認" /> <input
-				type="button" onclick="history.back()" class="btn btn-primary" value="修改"></input>
+				<input type="submit" name="confirm" class="btn btn-primary"
+					value="確認" /> <input type="button" onclick="history.back()"
+					class="btn btn-primary" value="修改"></input>
 
 			</fieldset>
 		</div>
