@@ -58,8 +58,8 @@ body {
 			<div>
 				<form:label path="ingredients_B">食材B: </form:label> 
 				<form:input path="ingredients_B" /> 份 
-				<form:label path="gram_B">份量B: </form:label>
-				<form:input path="gram_B" /> g
+				<form:label path="gram_B">份量B: </form:label><span> g</span>
+				<form:input path="gram_B" /> 
 			</div>
 			<br>
 <%-- 			<form:button id="btn" onclick="addinput()" value=>新增</form:button> --%>

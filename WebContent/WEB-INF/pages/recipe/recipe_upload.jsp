@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>農郁</title>
+<title>上傳食譜</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,12 +42,7 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <style>
-fieldset {
-	width: 500px;
-	margin: 0px auto;
-	border :8px #FFD382 groove;
-	border-radius: 15px;
-}
+
 </style>
 
 </head>
@@ -117,95 +112,103 @@ fieldset {
 
 	<!-------------------------內容區--------------------------------->
 
-	<form:form class="was-validated" action="uploadSubmit.controller" method="post" modelAttribute="details" runat="server" enctype="multipart/form-data">
-			<fieldset>
-		
-		<form:label path="name">名稱: </form:label>
-		<form:input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" path="name"/>
+	<form:form 	style="width:500px;text-align: center;margin:auto;"  
+	action="uploadSubmit.controller" method="post" modelAttribute="details" runat="server" enctype="multipart/form-data">
+		<fieldset>
 
-
-		<!-- <div class="custom-control custom-checkbox mb-3">
-		  <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
-		  <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
-		  <div class="invalid-feedback">Example invalid feedback text</div>
-		</div> -->
-	  
-	  
-	  
+			<div class="form-group">
+				<form:label for="formGroupExampleInput" path="name">名稱: </form:label> 
+				<form:input
+					type="text" class="form-control" id="formGroupExampleInput"
+					placeholder="" path="name"/>
+			</div>
+<br>
 		<div class="form-group">
-		<form:label path="cate">種類: </form:label>
-		  <select class="custom-select" required name="cate">
-			<option value="">Open this select menu</option>
-			<option value="雞肉">雞肉</option>
-			<option value="豬肉">豬肉</option>
-			<option value="牛肉">牛肉</option>
-			<option value="蔬食">蔬食</option>
-		</select>
-		  <div class="invalid-feedback">請輸入資料</div>
-		</div>
-		
-		
-		<br>
+			<form:label path="cate">種類: </form:label>
+			<select class="form-control" required name="cate">
+				<option value="">Open this select menu</option>
+				<option value="雞肉">雞肉</option>
+				<option value="豬肉">豬肉</option>
+				<option value="牛肉">牛肉</option>
+				<option value="蔬食">蔬食</option>
+			</select>
+			<div class="invalid-feedback">請輸入資料</div>
 
-
-  <div class="form-row">
-    <div class="col">
-      <form:input type="text" class="form-control" placeholder="食材" path="ingredients_A"/>
-    </div>
-    <div class="col">
-      <form:input type="text" class="form-control" placeholder="重量" path="gram_A"/>
-    </div>
-  </div>
-	  
-  <br>
-  <div class="form-row">
-    <div class="col">
-      <form:input type="text" class="form-control" placeholder="食材" path="ingredients_B"/>
-    </div>
-    <div class="col">
-      <form:input type="text" class="form-control" placeholder="重量" path="gram_B"/>
-    </div>
-  </div>
-  
-  		<div class="form-group">
-			<form:label for="exampleFormControlTextarea1" path="desc">介紹: </form:label>
-			<form:textarea class="form-control" id="exampleFormControlTextarea1" rows="3" path="desc"></form:textarea>
 		</div>
-		<div class="form-group">
-			<form:label for="exampleFormControlTextarea1" path="method">料理方法: </form:label>
-			<form:textarea class="form-control" id="exampleFormControlTextarea1" rows="3" path="method"></form:textarea>
-		</div>
-  
-  
-  
-		<div class="custom-file">
-		  <form:input type="file" class="custom-file-input" id="validatedCustomFile" path="multipartFile"/>
-		  <label class="custom-file-label" for="validatedCustomFile" >Choose file...</label>
-		  <div class="invalid-feedback">Example invalid custom file feedback</div>
-		</div>
-
-		
-
 
 
 			<br>
-			<div style="text-align: center;">
-					<label>
-						<input id="send" type="submit" name="action" value="送出"  onclick="doUpload()"/>
-					</label>
-					<label>
-						<input type="submit" name="action" value="回首頁" />
-					</label>
+
+
+			<div class="form-row">
+				<div class="col">
+					<form:label path="ingredients_A">食材: </form:label> 
+					<form:input type="text" class="form-control" placeholder="食材"
+						path="ingredients_A" />
 				</div>
-				
-					</fieldset>
-				
+				<div class="col">
+					<form:label path="gram_A">份量: </form:label>
+					<form:input type="text" class="form-control" placeholder="重量"
+						path="gram_A" /> 
+				</div>
+			</div>
+
+			<br>
+			<div class="form-row">
+				<div class="col">
+					<form:label path="ingredients_B"></form:label> 
+					<form:input type="text" class="form-control" placeholder="食材"
+						path="ingredients_B" /> 
+				</div>
+				<div class="col">
+					<form:label path="gram_B"></form:label>
+					<form:input type="text" class="form-control" placeholder="重量"
+						path="gram_B" /> 
+				</div>
+			</div>
+<br>
+			<div class="form-group">
+				<form:label for="exampleFormControlTextarea1" path="desc">介紹: </form:label>
+				<form:textarea class="form-control" id="exampleFormControlTextarea1"
+					rows="3" path="desc"></form:textarea>
+			</div>
+			<div class="form-group">
+				<form:label for="exampleFormControlTextarea1" path="method">料理方法: </form:label>
+				<form:textarea class="form-control" id="exampleFormControlTextarea1"
+					rows="3" path="method"></form:textarea>
+			</div>
+
+<br>
+
+			<div class="custom-file">
+				<form:input type="file" class="custom-file-input"
+					id="validatedCustomFile" path="multipartFile" />
+				<label class="custom-file-label" for="validatedCustomFile">Choose
+					file</label>
+				<div class="invalid-feedback">請上傳圖片</div>
+			</div>
+
+
+
+			<hr>
+			<div style="text-align: center;">
+				<label> <input id="send" type="submit" name="action"
+					value="送出" onclick="doUpload()" />
+				</label> 
+				<label> <input type="submit" name="action" value="回首頁" />
+				</label>
+			</div>
+
+		</fieldset>
+
 	</form:form>
 
 
 
 
-	
+
+
+
 
 
 

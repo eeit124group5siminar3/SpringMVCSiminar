@@ -39,7 +39,7 @@ public class Recipe_Controller_search {
 		m.addAttribute("errors", errors);
 		
 
-		if ("查詢".equals(action)) {
+		if ("Search".equals(action)) {
 			if (search !=null && search.length() !=0) {				
 				search='%'+search+'%';
 				System.out.println(search);
@@ -63,9 +63,9 @@ public class Recipe_Controller_search {
 			return "recipe/recipe_search_display";
 		}
 		
-		if (action.equals("回首頁")) {
-			return "recipe/recipe_workpage";
-		}
+//		if (action.equals("回首頁")) {
+//			return "recipe/recipe_workpage";
+//		}
 		return action;
 	}
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -40,7 +40,6 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 <body class="goto-here">
 	<div class="py-1 bg-primary">
 		<div class="container">
@@ -94,23 +93,7 @@
 					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
 					<li class="nav-item"><a href="" class="nav-link">市場</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
-					
-					
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item"
-								href="<c:url value='frontPage.controller'/>">食譜</a> 
-							<a class="dropdown-item"
-								href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
-							<a class="dropdown-item"
-								href="<c:url value='updatePage.controller'/>">修改食譜</a> 
-							<a class="dropdown-item"
-								href="<c:url value='searchPage.controller'/>">搜尋料理</a>
-						</div></li>
-						
-						
+					<li class="nav-item"><a href="blog.html" class="nav-link">食譜</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">會員</a></li>
 					<li class="nav-item"><a href="login.html" class="nav-link">登錄</a></li>
 					<li class="nav-item cta cta-colored"><a href="cart.html"
@@ -123,91 +106,12 @@
 	<!-------------------------內容區--------------------------------->
 
 
-<%--     <form action="<c:url value='/function.controller'/>" method="post"> --%>
-<!--     		<c:set var="funcName" value="ORD" scope="session" />   -->
-
-           
 
 
-<!--             <div class="list-group" style="width: 200px;"> -->
-<%--                 <a href="<c:url value='uploadPage.controller'/>" class="list-group-item list-group-item-action list-group-item-warning">上傳食譜</a> --%>
-<%--                 <a href="<c:url value='updatePage.controller'/>" class="list-group-item list-group-item-action list-group-item-info">修改食譜</a> --%>
-<%--                 <a href="<c:url value='searchPage.controller'/>" class="list-group-item list-group-item-action list-group-item-light">搜尋料理</a> --%>
-<!--               </div> -->
-
-<!--  </form> -->
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">Recipe</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">User Blog<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<c:url value='uploadPage.controller'/>">Upload</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<c:url value='updatePage.controller'/>">Update</a>
-      </li>
 
-<!--       <li class="nav-item dropdown"> -->
-<!--         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> -->
-<!--           Dropdown -->
-<!--         </a> -->
-<!--         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
-<!--           <a class="dropdown-item" href="#">Action</a> -->
-<!--           <a class="dropdown-item" href="#">Another action</a> -->
-<!--           <div class="dropdown-divider"></div> -->
-<!--           <a class="dropdown-item" href="#">Something else here</a> -->
-<!--         </div> -->
-<!--       </li> -->
-<!--       <li class="nav-item"> -->
-<!--         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
-<!--       </li> -->
-    </ul>
-    
-    <form class="form-inline my-2 my-lg-0" action='<c:url value="/searchSubmit.controller"/>' method="post">
-      <input class="form-control mr-sm-2" type="search" placeholder="search delicious" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action">Search</button>
-    </form>
-  </div>
-</nav>
-
-<c:forEach var='BeanToken'  items="${searchAll}">
-	
-			<div style="text-align: center;">
-					<div>
-					<label>
-						<a href="<c:url value='/searchSubmit.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
-					</label>
-				</div>
-				<br>
-				<div>
-					<label>食材: ${BeanToken.ingredients_A} </label>
-				</div>
-				<br>
-				<div>
-					<label>食材: ${BeanToken.ingredients_B} </label>
-				</div>
-				<br>
-				<div>
-					<label>介紹 : ${BeanToken.desc}</label>
-				</div>
-				<br>
-				<div>
-					<label>料理方法 : ${BeanToken.method}</label>
-				</div>
-				<br>
-				<hr>
-	</div>
-	</c:forEach>
-	</form>
 
 
 
@@ -334,4 +238,4 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 </body>
-</html></html>
+</html>

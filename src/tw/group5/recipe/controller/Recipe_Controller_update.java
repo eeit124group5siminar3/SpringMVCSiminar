@@ -62,6 +62,7 @@ public class Recipe_Controller_update {
 		if (session.getAttribute("login_ok") != null) {
 			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
 			Integer mem_no=OK.getMember_no();
+			System.out.println(mem_no);
 			Recipe_Bean bean = new Recipe_Bean();
 			bean.setMember_no(mem_no);
 			
