@@ -9,12 +9,12 @@
 <title>農郁</title>
 <script>
 	window.onload = function() {
-		var permissions0 = document.getElementById("member_permissions0");
-		var permissions1 = document.getElementById("member_permissions1");
+		var customRadioInline1 = document.getElementById("customRadioInline1");
+		var customRadioInline2 = document.getElementById("customRadioInline2");
 		var ckeckbank = document.getElementById("ckeckbank");
 		var ckeckbank1 = document.getElementById("ckeckbank1");
 
-		permissions0.onclick = function() {
+		customRadioInline1.onclick = function() {
 			$("#ckeckbank").empty();
 			ckeckbank.classList.remove("form-group");
 			ckeckbank.classList.remove("col-md-6");
@@ -24,7 +24,7 @@
 			
 		}
 
-		permissions1.onclick = function() {
+		customRadioInline2.onclick = function() {
 			ckeckbank.classList.add("form-group");
 			ckeckbank.classList.add("col-md-6");
 			ckeckbank.innerHTML = 
@@ -109,7 +109,7 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">農郁</a>
+			<a class="navbar-brand" href="index.jsp">農郁</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
