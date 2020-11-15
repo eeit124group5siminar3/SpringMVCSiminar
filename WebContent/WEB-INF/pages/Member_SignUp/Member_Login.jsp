@@ -12,6 +12,42 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <html lang="zh">
   <head>
     <title>農郁</title>
+    <script>
+    var hasError = false;
+    var sendData = null;
+    window.onload = function() {
+    	var check_email = document.getElementById("check_email");
+    	var login = document.getElementById("login");
+    	login.onclick = function () {
+    	    
+    		var email = document.getElementById("exampleInputEmail1").value;
+    		if (!email) {
+    			check_email.innerHTML = "帳號或密碼輸入錯誤";
+    			return;
+    		}
+    		var xhr = new XMLHttpRequest();
+    		xhr.open("POST", "<c:url value='/_01/ajax/_02/CheckMemberId' />", true);
+    		xhr.setRequestHeader("Content-Type",
+    				"application/x-www-form-urlencoded");
+    		xhr.send("id=" + idValue);
+    		var message = "";
+    		xhr.onreadystatechange = function () {
+    			// 伺服器請求完成
+    			if (xhr.readyState == 4 && xhr.status == 200) {
+    				var result = JSON.parse(xhr.responseText);
+    				if (result.id.length == 0) {
+    					message = "<font color='green' size='-2'>帳號可用</font>";
+    				} else if (result.id.startsWith("Error")) {
+    					message = "<font color='red' size='-2'>發生錯誤: 代號" + result.id + "</font>";
+    				} else {
+    					message = "<font color='red' size='-2'>帳號重複，請重新輸入帳號</font>";
+    				}
+    				div.innerHTML = message;
+    			}
+    		}
+    	}
+    }
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -59,7 +95,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
     </div>
 
     <div class="container">
-      <a class="navbar-brand" href="index.html">農郁</a>
+      <a class="navbar-brand" href="index.jsp">農郁</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
       </button>
     </div>
@@ -68,6 +104,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
         <div class="login-form" >
             <fieldset class="border login-form-fieldset">
                 <legend>會員登入</legend>
+                <div id="check_email" class="center" style="color:red;text-align:center"></div>
         <div class="form-group">
           <label for="exampleInputEmail1">帳號</label>
           <input type="email" name="email" value="${requestScope.user}${param.email}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="請輸入電子信箱">
@@ -82,7 +119,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
         </div>
         <a class="btn btn-primary" href="goMemberSignUp.controller" style="float: counter">註冊</a>
         <a class="btn btn-primary" href="goMemberSignUp.controller" style="float: counter">忘記密碼</a>
-        <button type="submit" name="login" class="btn btn-primary" style="float: right">提交</button>
+        <button type="submit" name="login" id="login" class="btn btn-primary" style="float: right">提交</button>
         </fieldset>
     </div>
       </form>

@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
@@ -47,11 +48,11 @@ public class Recipe_Controller_upload {
 
 	@RequestMapping(path = "/uploadPage.controller",method=RequestMethod.GET)
 	public String uploadPage(Model m,HttpServletRequest request) {
-		System.out.println("AAAAAAAAAAAAAAAA"+session.getAttribute("login_ok"));
 		if (session.getAttribute("login_ok") != null) {
+			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
+			Integer mem_no=OK.getMember_no();
 			Recipe_Bean bean = new Recipe_Bean();
-			bean.setMember_no((Integer) session.getAttribute("mem_no"));
-			System.out.println(bean.getMember_no());
+			bean.setMember_no(mem_no);
 			m.addAttribute("details", bean);
 			
 			return "recipe/recipe_upload";

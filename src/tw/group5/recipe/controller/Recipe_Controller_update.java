@@ -31,12 +31,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
+@SessionAttributes(names={"login_ok"})
 public class Recipe_Controller_update {
 	
 	@Autowired
@@ -56,10 +59,12 @@ public class Recipe_Controller_update {
 	
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {
-		if (session.getAttribute("mem_no") != null) {
+		if (session.getAttribute("login_ok") != null) {
+			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
+			Integer mem_no=OK.getMember_no();
 			Recipe_Bean bean = new Recipe_Bean();
-			bean.setMember_no((Integer) session.getAttribute("mem_no"));
-			System.out.println(bean.getMember_no());
+			bean.setMember_no(mem_no);
+			
 			List<Recipe_Bean> list = service.listOfJavaBean();
 			List<Recipe_Bean> user_recipe = new ArrayList<Recipe_Bean>();
 			System.out.println("------------------------------------");
@@ -95,16 +100,6 @@ public class Recipe_Controller_update {
 	
 	@GetMapping("/getImage.controller")
 	@ResponseBody
-//	public void getImage() throws SQLException {
-//		for (Recipe_Bean b : list) {
-//			blob = b.getData();
-//			FileName = b.getFileName();
-//		}
-//		Recipe_Bean bean=new Recipe_Bean();
-//		bean.setData(blob);
-//		InputStream is = blob.getBinaryStream();	
-//		is.
-//		}
 	public ResponseEntity<byte[]> getImage() throws IOException, SQLException {
 		ResponseEntity<byte[]> re = null;
 		for (Recipe_Bean b : list) {
@@ -117,16 +112,11 @@ public class Recipe_Controller_update {
 		String mimeType = ctx.getMimeType(FileName);
 		MediaType mediaType = MediaType.valueOf(mimeType);
 		HttpHeaders headers = new HttpHeaders();
-		
-//				FileOutputStream fos=new FileOutputStream();
-//				BufferedOutputStream bos=new BufferedOutputStream(fos);
-//				File file=new File(pathname)
+
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //				
 				InputStream is = blob.getBinaryStream();
-//				System.out.println(is.available());
-//				System.out.println(is.read());
-//			
+		
 			byte[] b = new byte[81920];
 			int len = 0;
 			while ((len = is.read(b)) != -1) {
@@ -135,7 +125,7 @@ public class Recipe_Controller_update {
 			is.close();
 			// 放入header,告知瀏覽器
 			headers.setContentType(mediaType);
-//		//避免資料顯示錯誤.noCache()
+			//避免資料顯示錯誤.noCache()
 			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 //				byte[] bytes = baos.toByteArray();
 			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);

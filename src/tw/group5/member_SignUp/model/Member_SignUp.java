@@ -32,6 +32,8 @@ public class Member_SignUp implements Serializable {
 	private Integer member_gg;
 	private String member_lock_acc;
 	private String e_paper;
+	private String member_bank_code;
+	private String member_bank_account;
 
 	public Member_SignUp() {
 
@@ -57,7 +59,7 @@ public class Member_SignUp implements Serializable {
 	// 註冊Bean
 	public Member_SignUp(String member_permissions, String member_email, String member_password, String member_name,
 			Date member_birthday, String member_cellphone, String member_id, String member_address,
-			String member_gui_number,String e_paper,Integer member_gg,String member_lock_acc) {
+			String member_gui_number,String e_paper,Integer member_gg,String member_lock_acc,String member_bank_code,String member_bank_account) {
 
 		this.member_permissions = member_permissions;
 		this.member_email = member_email;
@@ -71,6 +73,8 @@ public class Member_SignUp implements Serializable {
 		this.e_paper = e_paper;
 		this.member_gg = member_gg;
 		this.member_lock_acc = member_lock_acc;
+		this.member_bank_code = member_bank_code;
+		this.member_bank_account = member_bank_account;
 	}
 	
 	//會員資料修改
@@ -206,5 +210,23 @@ public class Member_SignUp implements Serializable {
 	
 	public void setE_paper(String e_paper) {
 		this.e_paper = e_paper;
+	}
+	
+	@Column(name="MEMBER_BANK_CODE")
+	public String getMember_bank_code() {
+		return member_bank_code;
+	}
+	
+	public void setMember_bank_code(String member_bank_code) {
+		this.member_bank_code = member_bank_code;
+	}
+	
+	@Column(name="MEMBER_BANK_ACCOUNT")
+	public String getMember_bank_account() {
+		return member_bank_account;
+	}
+	
+	public void setMember_bank_account(String member_bank_account) {
+		this.member_bank_account = member_bank_account;
 	}
 }

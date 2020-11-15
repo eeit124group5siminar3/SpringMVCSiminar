@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
 <title>農郁</title>
 <meta charset="utf-8">
@@ -39,9 +39,11 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
 </head>
-<body>
 <body class="goto-here">
+	<jsp:useBean id="reg_buyer"
+		class="tw.group5.member_SignUp.model.Member_SignUp" scope="session" />
 	<div class="py-1 bg-primary">
 		<div class="container">
 			<div
@@ -72,87 +74,162 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">農郁</a>
+			<a class="navbar-brand" href="index.jsp">農郁</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> 列表
 			</button>
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html"
-						class="nav-link">首頁</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">商城</a> <a
-								class="dropdown-item" href="cart.html">購物車</a> <a
-								class="dropdown-item" href="checkout.html">查看訂單</a>
-						</div></li>
-					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
-					<li class="nav-item"><a href="" class="nav-link">市場</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
-					
-					
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item"
-								href="<c:url value='frontPage.controller'/>">食譜</a> 
-							<a class="dropdown-item"
-								href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
-							<a class="dropdown-item"
-								href="<c:url value='updatePage.controller'/>">修改食譜</a> 
-							<a class="dropdown-item"
-								href="<c:url value='searchPage.controller'/>">搜尋料理</a>
-						</div></li>
-						
-						
-					<li class="nav-item"><a href="contact.html" class="nav-link">會員</a></li>
-					<li class="nav-item"><a href="login.html" class="nav-link">登錄</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-				</ul>
-			</div>
+
 		</div>
 	</nav>
 
 	<!-------------------------內容區--------------------------------->
 
+	<form action="checkMemberSignUp.controller" method="post">
+		<div class="signup-form container">
+			<fieldset class="border signup-form-fieldset">
+				<legend>註冊資料確認</legend>
+				<c:if test="${reg_buyer.member_permissions =='0'}">
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline1"
+							name="member_permissions" id="member_permissions"
+							class="custom-control-input" value="0" checked="true" disabled>
+						<label class="custom-control-label" for="customRadioInline1">買家</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline2"
+							name="member_permissions" id="member_permissions1"
+							class="custom-control-input" value="1" disabled> <label
+							class="custom-control-label" for="customRadioInline2">買家與賣家</label>
+					</div>
+				</c:if>
+				<c:if test="${reg_buyer.member_permissions == '1'}">
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline1"
+							name="member_permissions" id="member_permissions"
+							class="custom-control-input" value="0" disabled> <label
+							class="custom-control-label" for="customRadioInline1">買家</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline2"
+							name="member_permissions" id="member_permissions1"
+							class="custom-control-input" value="1" checked="true" disabled>
+						<label class="custom-control-label" for="customRadioInline2">買家與賣家</label>
+					</div>
+				</c:if>
+				<p></p>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputEmail4">帳號</label> <input type="text"
+							class="form-control"
+							placeholder="<jsp:getProperty name="reg_buyer" property="member_email" />"
+							disabled>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputEmail4">身份證字號</label> <input type="text"
+							class="form-control"
+							placeholder="<jsp:getProperty name="reg_buyer" property="member_id" />"
+							disabled>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputPassword4">密碼</label> <input type="text"
+							class="form-control"
+							placeholder="<jsp:getProperty name="reg_buyer"
+						property="member_password" />"
+							disabled>
+					</div>
+					<div class="form-group col-md-6"></div>
+					<c:if test="${reg_buyer.member_permissions == '1'}">
+						<div class="form-group col-md-6">
+							<label for="inputPassword4">銀行代號</label> <input type="text"
+								class="form-control"
+								placeholder="<jsp:getProperty name="reg_buyer"
+						property="member_bank_code" />"
+								disabled>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="inputPassword4">銀行帳號</label> <input type="text"
+								class="form-control"
+								placeholder="<jsp:getProperty name="reg_buyer"
+						property="member_bank_account" />"
+								disabled>
+						</div>
+					</c:if>
+					<div class="form-group col-md-6">
+						<label for="inputPassword4">名稱</label> <input type="text"
+							class="form-control"
+							placeholder="<jsp:getProperty name="reg_buyer" property="member_name" />"
+							disabled>
+						<p></p>
+						<label for="inputPassword4">生日</label> <input type="text"
+							class="form-control"
+							placeholder="<jsp:getProperty name="reg_buyer"
+						property="member_birthday" />"
+							disabled>
+						<p></p>
+						<label for="inputPassword4">連絡電話</label> <input type="text"
+							class="form-control"
+							placeholder="<jsp:getProperty name="reg_buyer"
+						property="member_cellphone" />"
+							disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress">地址</label> <input type="text"
+						class="form-control"
+						placeholder="<jsp:getProperty name="reg_buyer" property="member_address" />"
+						disabled>
+				</div>
 
-    <form action="<c:url value='/function.controller'/>" method="post">
-    		<!-- <c:set var="funcName" value="ORD" scope="session" />   -->
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputEmail4">統一編號</label> <input type="text"
+							class="form-control"
+							placeholder="<jsp:getProperty name="reg_buyer" property="member_gui_number" />"
+							disabled>
+					</div>
+				</div>
 
-           
+				<c:if test="${reg_buyer.e_paper == '1'}">
+					<div class="form-group">
+						<div class="form-check">
+							<input name="e_paper" class="form-check-input" type="checkbox"
+								id="gridCheck" value="1" checked="true" disabled> <label
+								class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${reg_buyer.e_paper == '0'}">
+					<div class="form-group">
+						<div class="form-check">
+							<input name="e_paper" class="form-check-input" type="checkbox"
+								id="gridCheck" value="0" disabled> <label
+								class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
+						</div>
+					</div>
+				</c:if>
+				<input type="submit" name="confirm" class="btn btn-primary"
+					value="確認" /> <input type="button" onclick="history.back()"
+					class="btn btn-primary" value="修改"></input>
+
+			</fieldset>
+		</div>
+	</form>
 
 
-            <div class="list-group" style="width: 200px;">
-                <a href="<c:url value='uploadPage.controller'/>" class="list-group-item list-group-item-action list-group-item-warning">上傳食譜</a>
-                <a href="<c:url value='updatePage.controller'/>" class="list-group-item list-group-item-action list-group-item-info">修改食譜</a>
-                <a href="<c:url value='searchPage.controller'/>" class="list-group-item list-group-item-action list-group-item-light">搜尋料理</a>
-              </div>
 
- </form>
+
+
+
 
 
 	<!------------------------------------------------------------------>
-	<footer class="ftco-footer footer-ground">
+	<footer class="ftco-footer signup-footer-ground">
 		<div class="container">
 			<div class="row">
-				<div class="mouse">
-
-					<!---------------TOP點選回最上層，不需要請註解---------------------->
-					<a href="#" class="mouse-icon">
-						<div class="mouse-wheel">
-							<span class="ion-ios-arrow-up"></span>
-						</div>
-					</a>
-					<!---------------------------------------------------------------->
-
-				</div>
+				<div class="mouse"></div>
 			</div>
 			<div class="row mb-5">
 				<div class="col-md">
@@ -261,4 +338,4 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 </body>
-</html></html>
+</html>
