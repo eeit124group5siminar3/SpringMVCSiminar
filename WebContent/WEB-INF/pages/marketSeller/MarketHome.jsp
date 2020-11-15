@@ -17,7 +17,6 @@
 <jsp:include page="/top.jsp" />
    	 <h1 align="center">商品管理</h1>
      <div align="center">
-     <div>圖片尚未能更新</div>
      <form action="<c:url value='/MarketProduct.goInsertJsp'></c:url>" method=".GET">
         <table  style="border:8px #FFD382 groove;"border="1" cellpadding="5">
             <tr>
@@ -33,12 +32,15 @@
                 <th>商品名稱</th>
                 <th>商品描述</th>
                 <th>商品出產地</th>
-                <th>價格</th>
-                <th>單位</th>
                 <th>數量</th>
+                <th>單位</th>
+                <th>價格</th>
                <th>圖片</th> 
-                <th>修改 刪除</th>
-                
+                <th>修改 </th>
+                <th>上架 下架</th>
+                <th> 刪除</th>
+
+         
             </tr>
             <c:forEach var="IBean" items="${list}">
                 <tr>
@@ -46,22 +48,16 @@
                     <td><c:out value="${IBean.productName}"/></td>
                     <td><c:out value="${IBean.marketProductImgBean.description}"/></td>                    
                     <td><c:out value="${IBean.productArea}"/></td>
-                    <td><c:out value="${IBean.price}"/></td>
-                    <td><c:out value="${IBean.unit}"/></td>
                     <td><c:out value="${IBean.quantity}"/></td>      
+                    <td>1<c:out value="${IBean.unit}"/></td>
+                    <td><c:out value="${IBean.price}"/>元</td>
                 <td>  
 				<img  height='80' width='80'
 			        src=<c:url value='MarketImageServlet?id=${IBean.marketProductImgBean.productId}&type=PRODUCT'/>>
 			       
 			        </td>
-			
-				 
-				<td>
-				<form action="<c:url value='/MarketProduct.delete'></c:url>" method="post">
-				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
-              
-                 <input  type="submit" value="刪除">
-                 </form>
+
+                 <td>
                  	&nbsp;&nbsp;
                   <form action="<c:url value='/MarketProduct.goUpdateJsp'></c:url>" method="get">
                   <input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
@@ -69,6 +65,16 @@
 				 <input type="submit" value="更新"> 
 				  	 </form>
 			     </td>
+			     <td>
+			     <input type="submit" value="下架"> 
+			     </td>
+			     <td>
+				<form action="<c:url value='/MarketProduct.delete'></c:url>" method="post">
+				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
+              
+                 <input  type="submit" value="刪除">
+                 </form>
+                 </td>
                 </tr>
             </c:forEach>
           
