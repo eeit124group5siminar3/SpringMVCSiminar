@@ -72,6 +72,10 @@ body {
               ${errors.errPrice}
            </font> 
 	        </div>
+<!-- 	        <div> -->
+<%-- 	       <form:radiobutton path="marketPutOutBean.putOut"  value="1"/>上架 --%>
+<%--            <form:radiobutton path="marketPutOutBean.putOut"  value="0"/>下架 --%>
+<!-- 	        </div> -->
 	      <div>
 	            原版圖片 
 	      </div>

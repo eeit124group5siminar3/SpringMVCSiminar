@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,7 @@ public class MarketProductTotalBean {
 	private Integer putOut;
 	private Integer quantity;
 	private MarketProductImgBean marketProductImgBean;
-//	private MarketPutOutBean marketPutOutBean;//設計單向
+	private MarketPutOutBean marketPutOutBean;//設計單向
 	
 
 	public MarketProductTotalBean(int productId, String productName, String productArea, String productCatgory,
@@ -165,8 +166,7 @@ public class MarketProductTotalBean {
 	public void setDiscount(String discount) {
 		this.discount = discount;
 	}
-	
-	@Column(name = "PUT_OUT")
+	@Transient
 	public Integer  getPutOut() {
 		return putOut;
 	}
@@ -191,15 +191,17 @@ public class MarketProductTotalBean {
 		this.marketProductImgBean = marketProductImgBean;
 	}
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@PrimaryKeyJoinColumn
-//	public MarketPutOutBean getMarketPutOutBean() {
-//		return marketPutOutBean;
-//	}
-//	
-//	public void setMarketPutOutBean(MarketPutOutBean marketPutOutBean) {
-//		this.marketPutOutBean = marketPutOutBean;
-//	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PUT_OUT")
+//	@JoinColumn(name="PUT_OUT",referencedColumnName = "PUT_OUT")
+	//名稱依樣會抓錯
+	public MarketPutOutBean getMarketPutOutBean() {
+		return marketPutOutBean;
+	}
+	
+	public void setMarketPutOutBean(MarketPutOutBean marketPutOutBean) {
+		this.marketPutOutBean = marketPutOutBean;
+	}
 	
 	
 }

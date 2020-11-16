@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import tw.group5.marketSeller.model.MarketProductBeanService;
 import tw.group5.marketSeller.model.MarketProductImgBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
+import tw.group5.marketSeller.model.MarketPutOutBean;
 
 @Controller
 @SessionAttributes(names = "mBean")
@@ -35,17 +36,20 @@ public class MarketHomeUpdate {
 	public String updateJsp(@RequestParam(name = "productid") int productid, Model m) {
 		MarketProductTotalBean mBean = new MarketProductTotalBean();
 		MarketProductImgBean iBean =new MarketProductImgBean();
+		MarketPutOutBean pBean =new MarketPutOutBean();
 		mBean.setMarketProductImgBean(iBean);
 		iBean.setMarketProductTotalBean(mBean);
+		mBean.setMarketPutOutBean(pBean);
 		mBean = service.select(productid);
 		m.addAttribute("mBean",mBean);
-		System.out.println("10: "+mBean.getMarketProductImgBean().getProductId());
+		System.out.println("狀態   "+mBean.getMarketPutOutBean().getPutOut());		
 		return "marketSeller/MarketU";
 	}
 	
 	
 	@PostMapping(path = "/MarketProductUpdate" )
 	public String update(@ModelAttribute(value = "mBean") MarketProductTotalBean mb){
+		System.out.println("更新狀態   "+mb.getPutOut());
 		service.update(mb);
 		
 		return "marketSeller/MarketS";

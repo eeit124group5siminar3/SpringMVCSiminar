@@ -73,11 +73,9 @@ public class MarketHome {
 	@PostMapping(path = "/MarketProduct.insert")
 	public String insert(Model model, @ModelAttribute(value = "Insert1") MarketProductTotalBean bean1
 			)throws IllegalStateException, IOException{
-		   System.out.println("人");
 		   Map<String, String> errorMsgs = new HashMap<String, String>();
 		   model.addAttribute("Errors",errorMsgs);
-		   System.out.println("來到MarketHome的Controller");
-		   System.err.println(bean1.hashCode());
+		   System.out.println("商品狀態"+bean1.getPutOut());
 //		   System.err.println(bean1.getMarketProductImgBean().hashCode());
 //		   bean1.getMarketProductImgBean().setMarketProductTotalBean(bean1);
 		   service.insert(bean1);
