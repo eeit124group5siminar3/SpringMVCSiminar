@@ -24,7 +24,7 @@ public class MarketPutOutBean {
 	private String status;
 	
     private Set<MarketProductTotalBean> marketProductTotalBean =
-    		                             new HashSet<MarketProductTotalBean>(0);
+    		                            new HashSet<MarketProductTotalBean>(0);
     
 
 	public MarketPutOutBean() {
@@ -37,6 +37,7 @@ public class MarketPutOutBean {
 		return putOut;
 	}
 	public void setPutOut(Integer putOut) {
+		
 		this.putOut = putOut;
 	}
 	

@@ -91,7 +91,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
     <td>  商品狀態 </td>
     
        <td >
-           <form:radiobutton path="marketPutOutBean.putOut"  checked="true" value="1"/>上架
+           <form:radiobutton path="marketPutOutBean.putOut"  value="1"/>上架
            <form:radiobutton path="marketPutOutBean.putOut"  value="0"/>下架
        </td>
     </tr>  
