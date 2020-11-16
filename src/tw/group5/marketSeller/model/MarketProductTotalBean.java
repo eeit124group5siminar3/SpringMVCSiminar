@@ -1,4 +1,4 @@
-package tw.group5.marketSeller.model;
+ package tw.group5.marketSeller.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -15,7 +17,8 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "market_Product_Total")
-@Component("market_Product_Total")
+@Component
+//("market_Product_Total")
 public class MarketProductTotalBean {
 	private int productId;
 	private String email;
@@ -27,10 +30,12 @@ public class MarketProductTotalBean {
 	private Integer report;
 	private String unit;
 	private String discount;
-	private String putOut;
+	private Integer putOut;
 	private Integer quantity;
 	private MarketProductImgBean marketProductImgBean;
+//	private MarketPutOutBean marketPutOutBean;//設計單向
 	
+
 	public MarketProductTotalBean(int productId, String productName, String productArea, String productCatgory,
 			Integer price, String unit, String discount, Integer quantity, MarketProductImgBean marketProductImgBean) {
 		super();
@@ -63,7 +68,7 @@ public class MarketProductTotalBean {
 	
 	public MarketProductTotalBean(int productId, String email, String marketName, String productName,
 			String productArea, String productCatgory, Integer price, Integer report, String unit, String discount,
-			String putOut, Integer quantity, MarketProductImgBean marketProductImgBean) {
+			Integer  putOut, Integer quantity, MarketProductImgBean marketProductImgBean) {
 		super();
 		this.productId = productId;
 		this.email = email;
@@ -162,10 +167,10 @@ public class MarketProductTotalBean {
 	}
 	
 	@Column(name = "PUT_OUT")
-	public String getPutOut() {
+	public Integer  getPutOut() {
 		return putOut;
 	}
-	public void setPutOut(String putOut) {
+	public void setPutOut(Integer  putOut) {
 		this.putOut = putOut;
 	}
 	
@@ -179,13 +184,22 @@ public class MarketProductTotalBean {
 	
 	
 	@OneToOne(fetch = FetchType.LAZY,mappedBy ="marketProductTotalBean", cascade = CascadeType.ALL)
-
 	public MarketProductImgBean getMarketProductImgBean() {
 		return marketProductImgBean;
 	}
 	public void setMarketProductImgBean(MarketProductImgBean marketProductImgBean) {
 		this.marketProductImgBean = marketProductImgBean;
 	}
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+//	public MarketPutOutBean getMarketPutOutBean() {
+//		return marketPutOutBean;
+//	}
+//	
+//	public void setMarketPutOutBean(MarketPutOutBean marketPutOutBean) {
+//		this.marketPutOutBean = marketPutOutBean;
+//	}
 	
 	
 }

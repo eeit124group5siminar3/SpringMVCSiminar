@@ -30,17 +30,22 @@ public class Member_Service {
 	public String reset_password(String member_email, String member_id, String member_name, String member_cellphone) {
 		return memberDao.reset_password(member_email, member_id, member_name, member_cellphone);
 	}
-	
+
 	public Member_SignUp reset_bean(String member_email) {
 		return memberDao.reset_bean(member_email);
 	}
-	
+
 	public boolean updata_member_password(String member_email, String password) {
 		return memberDao.updata_member_password(member_email, password);
 	}
-	
+
 	public boolean login_check(String member_email, String member_password) {
 		return memberDao.login_check(member_email, member_password);
 	}
 
+	public boolean updata_member_data(String member_email, String member_permissions, String password,
+			String member_cellphone, String member_address, String e_paper) {
+		return memberDao.updata_member_data(member_email, member_permissions, password, member_cellphone,
+				member_address, e_paper);
+	}
 }

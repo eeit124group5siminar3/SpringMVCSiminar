@@ -25,21 +25,28 @@ fieldset {
 		<fieldset>
 			<legend>搜尋結果</legend>
 			<c:forEach var='BeanToken' items="${List}">
-				<div class="line">
-					<a href='${BeanToken.name}'></a> <label>名稱 :
+				<div>
+					<label>名稱 :
 						${BeanToken.name}</label>
 				</div>
 				<br>
-				<div id="line">
-					<label>食材: ${BeanToken.ingredients_A} </label>
+				<div>
+					<label>
+						<a href="<c:url value='/RetrievePageProducts?searchString=${BeanToken.ingredients_A}&search=" "'/>">${BeanToken.ingredients_A}</a>
+					</label>
 					<%-- 				<label for="">份量: ${BeanToken.gram_A}  </label> g --%>
 				</div>
 				<br>
-				<div class="line">
+				<div>
 					<label>介紹 : ${BeanToken.desc}</label>
 				</div>
 				<br>
-				<div class="line">
+				<div>
+					<label>食材 : ${BeanToken.ingredients_A}</label> 份
+					<label>份量 : ${BeanToken.gram_A}</label> g
+				</div>
+				<br>
+				<div>
 					<label>料理方法 : ${BeanToken.method}</label>
 				</div>
 				<br>

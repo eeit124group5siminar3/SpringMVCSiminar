@@ -13,8 +13,14 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-body {
-	background: #EBFFEB;
+fieldset {
+	width: 500px;
+	margin: 0px auto;
+	border :8px #FFD382 groove;
+	border-radius: 15px;
+}
+	body {  
+	background:#EBFFEB;
 }
 </style>
 </head>
@@ -38,10 +44,33 @@ body {
 					<input type="submit" name="action" value="回首頁">
 				</label>
 			</div>
+	
+	<hr>
+	<c:forEach var='BeanToken'  items="${searchAll}">
+	
+			<div style="text-align: center;">
+					<div>
+					<label>
+						<a href="<c:url value='/searchSubmit.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
+					</label>
+				</div>
+				<br>
+				<div>
+					<label>食材: ${BeanToken.ingredients_A} </label>
+				</div>
+				<br>
+				<div>
+					<label>介紹 : ${BeanToken.desc}</label>
+				</div>
+				<br>
+				<div>
+					<label>料理方法 : ${BeanToken.method}</label>
+				</div>
+				<br>
+				<hr>
+	</div>
+	</c:forEach>
 	</form>
-
-</body>
-
 <script type="text/javascript">
 	function ch() {
 
@@ -53,4 +82,6 @@ body {
 		}
 	}
 </script>
+</body>
+
 </html>
