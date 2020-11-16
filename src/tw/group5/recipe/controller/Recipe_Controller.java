@@ -1,26 +1,35 @@
 package tw.group5.recipe.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.group5.member_SignUp.model.Member_SignUp;
+import tw.group5.recipe.recipe_Bean.Recipe_Bean;
+import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
 public class Recipe_Controller {
 	
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired 
+	private recipe_Service_interface service;
 
 	@RequestMapping(path = "/frontPage.controller",method =RequestMethod.GET)
-	public String frontPage() {
+	public String frontPage(Model m) {
+		List<Recipe_Bean> searchAll=service.listOfJavaBean();
+		m.addAttribute("searchAll", searchAll);
 			return "recipe/recipe_workpage";
 	}
 	
