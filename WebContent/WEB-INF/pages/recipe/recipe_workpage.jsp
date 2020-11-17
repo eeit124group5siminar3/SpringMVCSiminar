@@ -39,6 +39,38 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+*{
+	box-sizing:border-box;
+}
+
+.wrap{
+	width: 600px;
+	margin: auto;
+	display:flex;
+	align-items:center;
+	padding-top: 10px;
+}
+
+.wrap img{
+	width: 250px;
+	height:200px;
+	vertical-align: middle;
+	margin:20px;
+	
+}
+
+.txt{
+	width: 50%;
+	vertical-align: middle;
+	padding-left: 20px;
+}
+	 
+	 
+</style>
+
+
 </head>
 <body>
 <body class="goto-here">
@@ -173,44 +205,38 @@
     </ul>
     
     <form class="form-inline my-2 my-lg-0" action='<c:url value="/searchSubmit.controller"/>' method="post">
-      <input class="form-control mr-sm-2" type="search" placeholder="search delicious" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action">Search</button>
+      <input class="form-control mr-sm-2" type="text" name="input" placeholder="search delicious" aria-label="Search">
+      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action" value="Search"/>
     </form>
   </div>
 </nav>
 
+<p style="font-size: 60px;text-align: center;">美食推薦</p>
 <c:forEach var='BeanToken'  items="${searchAll}">
-	
-			<div style="text-align: center;">
-					<div>
-					<label>
+		<div class="wrap" style="text-align: center;">
+			<a href="<c:url value='/searchSubmit.controller?rec_id=${BeanToken.rec_id}'/>">
+					<img height="100" width="80"   
+					src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" />
+			</a>
+					
+			<div class="txt">
+					<h2>
 						<a href="<c:url value='/searchSubmit.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
-					</label>
-				</div>
-				<br>
-				<div>
-					<label>食材: ${BeanToken.ingredients_A} </label>
-				</div>
-				<br>
-				<div>
-					<label>食材: ${BeanToken.ingredients_B} </label>
-				</div>
-				<br>
-				<div>
-					<label>介紹 : ${BeanToken.desc}</label>
-				</div>
-				<br>
-				<div>
-					<label>料理方法 : ${BeanToken.method}</label>
-				</div>
-				<br>
-				<hr>
-	</div>
+					</h2>
+					<hr>
+					<p>食材: ${BeanToken.ingredients_A} </p>	
+					<p>食材: ${BeanToken.ingredients_B} </p>
+					<p>介紹 : ${BeanToken.desc}</p>				
+					<p>料理方法 : ${BeanToken.method}</p>
+				
+			</div>
+		</div>
 	</c:forEach>
-	</form>
-
-
-
+	
+	
+	
+	
+<!-- 	</form> -->
 	<!------------------------------------------------------------------>
 	<footer class="ftco-footer footer-ground">
 		<div class="container">
@@ -218,6 +244,7 @@
 				<div class="mouse">
 
 					<!---------------TOP點選回最上層，不需要請註解---------------------->
+					<br>
 					<a href="#" class="mouse-icon">
 						<div class="mouse-wheel">
 							<span class="ion-ios-arrow-up"></span>

@@ -111,9 +111,9 @@ public class Recipe_Controller_upload {
 		if (action.equals("修改")) {
 			return "recipe/recipe_upload_revise";
 		} 
-		if (action.equals("回首頁")) {
-			return "recipe/recipe_workpage";
-		} 
+//		if (action.equals("回首頁")) {
+//			return "recipe/recipe_workpage";
+//		} 
 		return action;
 	}
 }

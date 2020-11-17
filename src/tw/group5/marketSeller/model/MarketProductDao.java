@@ -22,9 +22,9 @@ public class MarketProductDao {
 		return sessionFactory.getCurrentSession();
 	}
 
-	//顯示全部商品
-	public List<MarketProductTotalBean> selectAll() {
-		Query<MarketProductTotalBean> query =getSession().createQuery("From MarketProductTotalBean", MarketProductTotalBean.class);
+	//顯示賣家全部商品
+	public List<MarketProductTotalBean> selectAll( Integer mid) {
+		Query<MarketProductTotalBean> query =getSession().createQuery("From MarketProductTotalBean where memberNo=" + mid, MarketProductTotalBean.class);
 		List<MarketProductTotalBean> list = query.list();
 		return list;
 	}
