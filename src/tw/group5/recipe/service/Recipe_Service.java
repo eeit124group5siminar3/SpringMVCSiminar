@@ -47,6 +47,11 @@ public class Recipe_Service implements recipe_Service_interface {
 	public List<Recipe_Bean> listOfJavaBean(){
 		return rDAO.listOfJavaBean();
 	}
+	
+	@Override
+	public Recipe_Bean getImage(String rec_id) {
+		return rDAO.getImage(rec_id);
+	}
 
 	
 }

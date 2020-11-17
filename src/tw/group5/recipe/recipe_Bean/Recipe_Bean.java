@@ -41,8 +41,8 @@ public class Recipe_Bean {
 	private String ingredients_B;
 	private String ingredients_C;
 	private String ingredients_D;
-	private int gram_A;
-	private int gram_B;
+	private String gram_A;
+	private String gram_B;
 	private Integer member_no;
 	private String FileName;
 	private Blob data;
@@ -126,20 +126,20 @@ public class Recipe_Bean {
 	}
 	
 	@Column(name="gram_A")
-	public int getGram_A() {
+	public String getGram_A() {
 		return gram_A;
 	}
 
-	public void setGram_A(int gram_A) {
+	public void setGram_A(String gram_A) {
 		this.gram_A = gram_A;
 	}
 	
 	@Column(name="gram_B")
-	public int getGram_B() {
+	public String getGram_B() {
 		return gram_B;
 	}
 
-	public void setGram_B(int gram_B) {
+	public void setGram_B(String gram_B) {
 		this.gram_B = gram_B;
 	}
 

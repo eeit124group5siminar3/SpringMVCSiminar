@@ -43,6 +43,11 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 
+.formform{
+	margin:auto;
+	
+	width:600px;
+}
 </style>
 
 </head>
@@ -100,7 +105,25 @@
 					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
 					<li class="nav-item"><a href="" class="nav-link">市場</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">食譜</a></li>
+					
+					
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="<c:url value='frontPage.controller'/>" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item"
+								href="<c:url value='frontPage.controller'/>">食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='updatePage.controller'/>">修改食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='searchPage.controller'/>">搜尋料理</a>
+						</div>
+					</li>
+					
+					
+					
 					<li class="nav-item"><a href="contact.html" class="nav-link">會員</a></li>
 					<li class="nav-item"><a href="login.html" class="nav-link">登錄</a></li>
 					<li class="nav-item cta cta-colored"><a href="cart.html"
@@ -111,20 +134,62 @@
 	</nav>
 
 	<!-------------------------內容區--------------------------------->
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">Recipe</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-	<form:form 	style="width:500px;text-align: center;margin:auto;"  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">User Blog<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value='uploadPage.controller'/>">Upload</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value='updatePage.controller'/>">Update</a>
+      </li>
+
+<!--       <li class="nav-item dropdown"> -->
+<!--         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> -->
+<!--           Dropdown -->
+<!--         </a> -->
+<!--         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+<!--           <a class="dropdown-item" href="#">Action</a> -->
+<!--           <a class="dropdown-item" href="#">Another action</a> -->
+<!--           <div class="dropdown-divider"></div> -->
+<!--           <a class="dropdown-item" href="#">Something else here</a> -->
+<!--         </div> -->
+<!--       </li> -->
+<!--       <li class="nav-item"> -->
+<!--         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+<!--       </li> -->
+    </ul>
+    
+<%--     <form class="form-inline my-2 my-lg-0" action='<c:url value="/searchSubmit.controller"/>' method="post"> --%>
+<!--       <input class="form-control mr-sm-2" type="search" placeholder="search delicious" aria-label="Search"> -->
+<!--       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action">Search</button> -->
+<%--     </form> --%>
+  </div>
+</nav>
+	
+
+	<form:form  class="formform"
 	action="uploadSubmit.controller" method="post" modelAttribute="details" runat="server" enctype="multipart/form-data">
 		<fieldset>
 
 			<div class="form-group">
-				<form:label for="formGroupExampleInput" path="name">名稱: </form:label> 
+				<form:label for="formGroupExampleInput" path="name" style="font-size:20px;">名稱: </form:label> 
 				<form:input
 					type="text" class="form-control" id="formGroupExampleInput"
 					placeholder="" path="name"/>
 			</div>
 <br>
 		<div class="form-group">
-			<form:label path="cate">種類: </form:label>
+			<form:label path="cate" style="font-size:20px;">種類: </form:label>
 			<select class="form-control" required name="cate">
 				<option value="">Open this select menu</option>
 				<option value="雞肉">雞肉</option>
@@ -133,7 +198,6 @@
 				<option value="蔬食">蔬食</option>
 			</select>
 			<div class="invalid-feedback">請輸入資料</div>
-
 		</div>
 
 
@@ -142,13 +206,13 @@
 
 			<div class="form-row">
 				<div class="col">
-					<form:label path="ingredients_A">食材: </form:label> 
+					<form:label path="ingredients_A" style="font-size:20px;">食材: </form:label> 
 					<form:input type="text" class="form-control" placeholder="食材"
 						path="ingredients_A" />
 				</div>
 				<div class="col">
-					<form:label path="gram_A">份量: </form:label>
-					<form:input type="text" class="form-control" placeholder="重量"
+					<form:label path="gram_A" style="font-size:20px;">份量: </form:label>
+					<form:input type="text" class="form-control" placeholder="重量  g"
 						path="gram_A" /> 
 				</div>
 			</div>
@@ -162,41 +226,38 @@
 				</div>
 				<div class="col">
 					<form:label path="gram_B"></form:label>
-					<form:input type="text" class="form-control" placeholder="重量"
-						path="gram_B" /> 
+					<form:input type="text" class="form-control" placeholder="重量  g"
+						path="gram_B" />
 				</div>
 			</div>
 <br>
 			<div class="form-group">
-				<form:label for="exampleFormControlTextarea1" path="desc">介紹: </form:label>
+				<form:label for="exampleFormControlTextarea1" path="desc" style="font-size:20px;">介紹: </form:label>
 				<form:textarea class="form-control" id="exampleFormControlTextarea1"
 					rows="3" path="desc"></form:textarea>
 			</div>
 			<div class="form-group">
-				<form:label for="exampleFormControlTextarea1" path="method">料理方法: </form:label>
+				<form:label for="exampleFormControlTextarea1" path="method" style="font-size:20px;">料理方法: </form:label>
 				<form:textarea class="form-control" id="exampleFormControlTextarea1"
 					rows="3" path="method"></form:textarea>
 			</div>
 
 <br>
-
 			<div class="custom-file">
 				<form:input type="file" class="custom-file-input"
-					id="validatedCustomFile" path="multipartFile" />
-				<label class="custom-file-label" for="validatedCustomFile">Choose
-					file</label>
+					id="validatedCustomFile" path="multipartFile"/>
+				<form:label class="custom-file-label" for="validatedCustomFile" path="multipartFile">Choose
+					file</form:label>
 				<div class="invalid-feedback">請上傳圖片</div>
 			</div>
-
-
 
 			<hr>
 			<div style="text-align: center;">
 				<label> <input id="send" type="submit" name="action"
 					value="送出" onclick="doUpload()" />
 				</label> 
-				<label> <input type="submit" name="action" value="回首頁" />
-				</label>
+<!-- 				<label> <input type="submit" name="action" value="回首頁" /> -->
+<!-- 				</label> -->
 			</div>
 
 		</fieldset>
@@ -229,11 +290,11 @@
 				<div class="mouse">
 
 					<!---------------TOP點選回最上層，不需要請註解---------------------->
-					<a href="#" class="mouse-icon">
-						<div class="mouse-wheel">
-							<span class="ion-ios-arrow-up"></span>
-						</div>
-					</a>
+<!-- 					<a href="#" class="mouse-icon"> -->
+<!-- 						<div class="mouse-wheel"> -->
+<!-- 							<span class="ion-ios-arrow-up"></span> -->
+<!-- 						</div> -->
+<!-- 					</a> -->
 					<!---------------------------------------------------------------->
 
 				</div>
@@ -344,5 +405,6 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	
 </body>
 </html>

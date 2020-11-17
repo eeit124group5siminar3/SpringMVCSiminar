@@ -15,6 +15,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialException;
 
 import org.apache.commons.io.input.ReaderInputStream;
 import org.hibernate.Session;
@@ -55,13 +56,13 @@ public class Recipe_Controller_update {
 	private String FileName;
 	private List<Recipe_Bean> list;
 	private ByteArrayOutputStream baos;
-
+	private Integer  mem_no;
 	
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {
 		if (session.getAttribute("login_ok") != null) {
 			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
-			Integer mem_no=OK.getMember_no();
+			mem_no=OK.getMember_no();
 			System.out.println(mem_no);
 			Recipe_Bean bean = new Recipe_Bean();
 			bean.setMember_no(mem_no);
@@ -84,11 +85,17 @@ public class Recipe_Controller_update {
 	@RequestMapping(path = "/updateProcess.controller",method = {RequestMethod.POST,RequestMethod.GET})
 	public String updateProcess(
 			@RequestParam(name="choose",required = false)String rec_id,
-//			@RequestParam(name="action")String rec_id,
+//			@RequestParam(name="action")
+			String delete_id,
 			@RequestParam(required = false)String action,Recipe_Bean bean,Model m) throws FileNotFoundException, IOException, SQLException {
 		if ("回首頁".equals(action)) {
 			return "recipe/recipe_workpage";
 		} 
+		else if(delete_id!=null) {
+			System.out.println(delete_id);
+			service.delete(delete_id);
+			return "recipe/delete_success";
+		}
 		else {
 			System.out.println(rec_id);
 			list = service.partSearch(rec_id);
@@ -96,8 +103,28 @@ public class Recipe_Controller_update {
 			m.addAttribute("recipe_table", list);
 			return "recipe/recipe_update";
 		}
-
 	}
+	
+	@RequestMapping(path = "/submitChoose.controller",method = RequestMethod.POST)
+	public String submitChoose(@RequestParam String action,@RequestParam MultipartFile multipartFile,
+		Recipe_Bean bean,String rec_id) throws SerialException, IOException, SQLException {
+		bean.setMember_no(mem_no);
+		bean.setMultipartFile(multipartFile);
+		if(action.equals("確認修改")) {
+			service.update(rec_id, bean);
+			return "recipe/update_success";
+		}
+		if(action.equals("刪除")) {
+			service.delete(rec_id);
+			return "recipe/delete_success";
+		}
+		if (action.equals("取消")) {
+			return "recipe/recipe_workpage";
+		}
+		return rec_id;
+	}
+	
+	
 	
 	@GetMapping("/getImage.controller")
 	@ResponseBody
@@ -135,27 +162,6 @@ public class Recipe_Controller_update {
 
 		return re;
 
-	}
-	
-	
-	
-	
-	
-	@RequestMapping(path = "/submitChoose.controller",method = RequestMethod.POST)
-	public String submitChoose(@RequestParam String action,Recipe_Bean bean,String rec_id) {
-		bean.setMember_no(1);
-		if(action.equals("確認修改")) {
-			service.update(rec_id, bean);
-			return "recipe/update_success";
-		}
-		if(action.equals("刪除")) {
-			service.delete(rec_id);
-			return "recipe/delete_success";
-		}
-		if (action.equals("取消")) {
-			return "recipe/recipe_workpage";
-		}
-		return rec_id;
 	}
 	
 }
