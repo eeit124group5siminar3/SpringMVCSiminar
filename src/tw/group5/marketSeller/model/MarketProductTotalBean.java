@@ -191,7 +191,7 @@ public class MarketProductTotalBean {
 		this.marketProductImgBean = marketProductImgBean;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PUT_OUT")
 //	@JoinColumn(name="PUT_OUT",referencedColumnName = "PUT_OUT")
 	//名稱依樣會抓錯
