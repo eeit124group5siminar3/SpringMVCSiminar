@@ -35,9 +35,9 @@
                 <th>數量</th>
                 <th>單位</th>
                 <th>價格</th>
+                <th>商品狀態</th>
                <th>圖片</th> 
                 <th>修改 </th>
-                <th>上架 下架</th>
                 <th> 刪除</th>
 
          
@@ -51,6 +51,7 @@
                     <td><c:out value="${IBean.quantity}"/></td>      
                     <td>1<c:out value="${IBean.unit}"/></td>
                     <td><c:out value="${IBean.price}"/>元</td>
+                    <td><c:out value="${IBean.marketPutOutBean.status}"/></td>
                 <td>  
 				<img  height='80' width='80'
 			        src=<c:url value='MarketImageServlet?id=${IBean.marketProductImgBean.productId}&type=PRODUCT'/>>
@@ -64,9 +65,6 @@
                   
 				 <input type="submit" value="更新"> 
 				  	 </form>
-			     </td>
-			     <td>
-			     <input type="submit" value="下架"> 
 			     </td>
 			     <td>
 				<form action="<c:url value='/MarketProduct.delete'></c:url>" method="post">

@@ -42,13 +42,15 @@ public class BackstageController {
 		String member_address = session.getMember_address();
 		String member_gui_number = session.getMember_gui_number();
 		String e_paper = session.getE_paper();
+		String member_bank_code = session.getMember_bank_code();
+		String member_bank_account = session.getMember_bank_account();
 		
 		if (member_gui_number == null) {
 			member_gui_number = "";
 		}
 		
 		Member_SignUp member_bean = new Member_SignUp(member_permissions, member_email, member_password, member_id,
-				member_name, member_birthday, member_gui_number, e_paper, member_cellphone, member_address);
+				member_name, member_birthday, member_gui_number, e_paper, member_cellphone, member_address,member_bank_code,member_bank_account);
 
 		m.addAttribute("reg_buyer", member_bean);
 		return "/Member_Backstage/Member_Update";
@@ -60,7 +62,10 @@ public class BackstageController {
 			@RequestParam(name = "member_password") String member_password,
 			@RequestParam(name = "member_cellphone") String member_cellphone,
 			@RequestParam(name = "member_address") String member_address,
-			@RequestParam(name = "e_paper", required = false) String e_paper, HttpSession httpsession,
+			@RequestParam(name = "e_paper", required = false) String e_paper,
+			@RequestParam(name = "member_bank_code", required = false) String member_bank_code,
+			@RequestParam(name = "member_bank_account", required = false) String member_bank_account,
+			HttpSession httpsession,
 			SessionStatus sessionStatus, Model m) {
 
 		
@@ -74,7 +79,7 @@ public class BackstageController {
 		String member_email = session.getMember_email();
 
 		member_Service.updata_member_data(member_email, member_permissions, member_password, member_cellphone,
-				member_address, e_paper);
+				member_address, e_paper,member_bank_code,member_bank_account);
 		
 		httpsession.removeAttribute("reg_buyer");
 		httpsession.invalidate();

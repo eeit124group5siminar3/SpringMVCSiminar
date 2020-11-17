@@ -44,8 +44,8 @@ public class Member_Service {
 	}
 
 	public boolean updata_member_data(String member_email, String member_permissions, String password,
-			String member_cellphone, String member_address, String e_paper) {
+			String member_cellphone, String member_address, String e_paper,String member_bank_code, String member_bank_account) {
 		return memberDao.updata_member_data(member_email, member_permissions, password, member_cellphone,
-				member_address, e_paper);
+				member_address, e_paper,member_bank_code,member_bank_account);
 	}
 }
