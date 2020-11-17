@@ -79,7 +79,7 @@ public class Member_SignUp implements Serializable {
 	
 	//會員資料修改
 	public Member_SignUp(String member_permissions, String member_email,String member_password, String member_id,String member_name,
-			Date member_birthday,String member_gui_number,String e_paper,String member_cellphone,String member_address) {
+			Date member_birthday,String member_gui_number,String e_paper,String member_cellphone,String member_address,String member_bank_code,String member_bank_account) {
 
 		this.member_permissions = member_permissions;
 		this.member_email = member_email;
@@ -91,6 +91,9 @@ public class Member_SignUp implements Serializable {
 		this.e_paper = e_paper;
 		this.member_cellphone = member_cellphone;
 		this.member_address = member_address;
+		this.member_bank_code = member_bank_code;
+		this.member_bank_account = member_bank_account;
+		
 	}
 
 	@Id

@@ -11,6 +11,44 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <html lang="zh">
 <head>
 <title>農郁</title>
+<script>
+	window.onload = function() {
+		var customRadioInline1 = document.getElementById("customRadioInline1");
+		var customRadioInline2 = document.getElementById("customRadioInline2");
+		var ckeckbank = document.getElementById("ckeckbank");
+		var ckeckbank1 = document.getElementById("ckeckbank1");
+
+		customRadioInline1.onclick = function() {
+			$("#ckeckbank").empty();
+			ckeckbank.classList.remove("form-group");
+			ckeckbank.classList.remove("col-md-6");
+			$("#ckeckbank1").empty();
+			ckeckbank1.classList.remove("form-group");
+			ckeckbank1.classList.remove("col-md-6");
+
+		}
+
+		customRadioInline2.onclick = function() {
+			ckeckbank.classList.add("form-group");
+			ckeckbank.classList.add("col-md-6");
+			ckeckbank.innerHTML =
+
+			'<label for="inputPassword4">'
+					+ '銀行代號</label>'
+					+ '<input type="text" name="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
+
+			ckeckbank1.classList.add("form-group");
+			ckeckbank1.classList.add("col-md-6");
+			ckeckbank1.innerHTML =
+
+			'<label for="inputPassword4">'
+					+ '銀行帳號</label>'
+					+ '<input type="text" name="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
+
+		}
+
+	}
+</script>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -225,7 +263,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 								name="member_permissions" id="member_permissions1"
 								class="custom-control-input" value="1"> <label
 								class="custom-control-label" for="customRadioInline2">買家與賣家</label>
-						</div>
+						</div><p></p>
 					</c:if>
 					<c:if test="${reg_buyer.member_permissions == '1'}">
 						<div class="custom-control custom-radio custom-control-inline">
@@ -239,7 +277,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 								name="member_permissions" id="member_permissions1"
 								class="custom-control-input" value="1" checked="true"> <label
 								class="custom-control-label" for="customRadioInline2">買家與賣家</label>
-						</div>
+						</div><p></p>
 					</c:if>
 					<div class="form-row">
 						<div class="form-group col-md-6">
@@ -268,8 +306,22 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 								title="密碼長度至少8碼，須包含大寫、小寫英文及數字">
 						</div>
-						<div id="ckeckbank"></div>
-						<div id="ckeckbank1"></div>
+						<c:if test="${reg_buyer.member_permissions == '0'}">
+							<div id="ckeckbank"></div>
+							<div id="ckeckbank1"></div>
+						</c:if>
+						<c:if test="${reg_buyer.member_permissions == '1'}">
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">銀行代號</label> <input type="text"
+									name="member_bank_code" class="form-control"
+									value="${reg_buyer.member_bank_code}">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">銀行帳號</label> <input type="text"
+									name="member_bank_account" class="form-control"
+									value="${reg_buyer.member_bank_account}">
+							</div>
+						</c:if>
 						<div class="form-group col-md-6">
 							<label for="inputPassword4">名稱</label> <input type="text"
 								class="form-control"

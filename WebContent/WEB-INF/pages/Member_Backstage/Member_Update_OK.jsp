@@ -224,7 +224,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 							name="member_permissions" id="member_permissions1"
 							class="custom-control-input" value="1" disabled> <label
 							class="custom-control-label" for="customRadioInline2">買家與賣家</label>
-					</div>
+					</div><p></p>
 				</c:if>
 				<c:if test="${login_ok.member_permissions == '1'}">
 					<div class="custom-control custom-radio custom-control-inline">
@@ -238,7 +238,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 							name="member_permissions" id="member_permissions1"
 							class="custom-control-input" value="1" checked="true" disabled>
 						<label class="custom-control-label" for="customRadioInline2">買家與賣家</label>
-					</div>
+					</div><p></p>
 				</c:if>
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -253,14 +253,31 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 							placeholder="<jsp:getProperty name="login_ok" property="member_id" />"
 							disabled>
 					</div>
-					<div id="ckeckbank"></div>
-					<div id="ckeckbank1"></div>
 					<div class="form-group col-md-6">
 						<label for="inputPassword4">密碼</label> <input type="text"
 							name="member_password" id="member_password" class="form-control"
 							placeholder="<jsp:getProperty name="login_ok" property="member_password" />"
-							disabled> <label for="inputPassword4">名稱</label> <input
-							type="text" class="form-control"
+							disabled>
+						<p></p>
+					</div>
+					<div class="form-group col-md-6"></div>
+					<c:if test="${login_ok.member_permissions == '1'}">
+						<div class="form-group col-md-6">
+							<label for="inputPassword4">銀行代號</label> <input type="text"
+								class="form-control"
+								placeholder="<jsp:getProperty name="login_ok" property="member_bank_code" />"
+								disabled>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="inputPassword4">銀行帳號</label> <input type="text"
+								class="form-control"
+								placeholder="<jsp:getProperty name="login_ok" property="member_bank_account" />"
+								disabled>
+						</div>
+					</c:if>
+					<div class="form-group col-md-6">
+						<label for="inputPassword4">名稱</label> <input type="text"
+							class="form-control"
 							placeholder="<jsp:getProperty name="login_ok" property="member_name" />"
 							disabled>
 						<p></p>
