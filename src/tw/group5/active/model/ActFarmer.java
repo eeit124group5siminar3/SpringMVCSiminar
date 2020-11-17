@@ -6,18 +6,22 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "actFarmer")
 @Component("actFarmer")
-public class ActFarmer implements Serializable{
-	
+public class ActFarmer implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	private String actId;
@@ -30,7 +34,7 @@ public class ActFarmer implements Serializable{
 	private Date actDateEnd;
 	private String actTimeEnd;
 	private Integer numLim;
-	private String sellerId;
+	private Integer sellerId;
 	private Integer price;
 	private String actDescri;
 	private String imgName;
@@ -42,16 +46,16 @@ public class ActFarmer implements Serializable{
 	private String signTimeEnd;
 	private Integer actNum;
 	private String sigStat;
-	
-		
+	private Clock clock;
+
 	public ActFarmer() {
 	}
 
 	public ActFarmer(String actId, String actName, String actType, String actAddr, String tel, Date actDateSta,
-			String actTimeSta, Date actDateEnd, String actTimeEnd, Integer numLim, String sellerId, Integer price,
+			String actTimeSta, Date actDateEnd, String actTimeEnd, Integer numLim, Integer sellerId, Integer price,
 			String actDescri, String imgName, Blob actImg, Integer actLock, Date signDateSta, String signTimeSta,
 			Date signDateEnd, String signTimeEnd, Integer actNum, String sigStat) {
-		
+
 		this.actId = actId;
 		this.actName = actName;
 		this.actType = actType;
@@ -95,7 +99,7 @@ public class ActFarmer implements Serializable{
 	public void setActName(String actName) {
 		this.actName = actName;
 	}
-	
+
 	@Column(name = "actType")
 	public String getActType() {
 		return actType;
@@ -169,11 +173,11 @@ public class ActFarmer implements Serializable{
 	}
 
 	@Column(name = "sellerId")
-	public String getMemberNo() {
+	public Integer getSellerId() {
 		return sellerId;
 	}
 
-	public void setMemberNo(String memberNo) {
+	public void setSellerId(Integer sellerId) {
 		this.sellerId = sellerId;
 	}
 
@@ -275,12 +279,15 @@ public class ActFarmer implements Serializable{
 	public void setSigStat(String sigStat) {
 		this.sigStat = sigStat;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "timeName")
+	public Clock getClock() {
+		return clock;
+	}
+
+	public void setClock(Clock clock) {
+		this.clock = clock;
+	}
 
 }

@@ -18,9 +18,11 @@ public class ActFarmerService {
 	}
 	
 	//排序該廠商的活動列表
-	public List<ActFarmer> getPageActFarmers(String sellerId){
+	public List<ActFarmer> getPageActFarmers(Integer sellerId){
 		return actFarmerDAO.getPageActFarmers(sellerId);
 	}
+	
+	
 	
 	// 查詢單筆資料ByName
 	public List<ActFarmer> selectName(String actName){
@@ -43,8 +45,26 @@ public class ActFarmerService {
 		return actFarmerDAO.updateActFarmer(actFarmer);
 	}
 
+	//計算頁數
+	public void setMaintainPageNo(Integer maintainPageNo) {
+		actFarmerDAO.setMaintainPageNo(maintainPageNo);
+			
+	} 
 	
+	//每頁幾筆
+	public void setRecordsPerPage(int recordsPerPage) {
+		actFarmerDAO.setRecordsPerPage(recordsPerPage);
+	}
 	
+	//總頁數
+	public int getTotalPages() {
+		return actFarmerDAO.getTotalPages();
+	}
+
+	//廠商總頁數
+	public int getTotalPages(Integer sellerId) {
+		return actFarmerDAO.getTotalPages(sellerId);
+	}
 	
 	
 }
