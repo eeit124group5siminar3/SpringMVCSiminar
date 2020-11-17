@@ -18,4 +18,5 @@ public interface recipe_Service_interface {
 
 	List<Recipe_Bean> listOfJavaBean();
 
+	Recipe_Bean getImage(String rec_id);
 }
