@@ -28,10 +28,16 @@ public class LoginController {
 	@Autowired
 	private Member_Service member_Service;
 	
+	@RequestMapping(path = "/index.controller", method = RequestMethod.GET)
+	public String processIndex() {
+		return "index";
+	}	
+	
+	
 	@RequestMapping(path = "/login.controller", method = RequestMethod.GET)
 	public String processLogin() {
 		return "Member_SignUp/Member_Login";
-	}
+	}	
 	
 	
 	//登陸驗證
@@ -95,7 +101,7 @@ public class LoginController {
 		session.invalidate();
 		sessionStatus.setComplete();
 
-		return "redirect:index";
+		return "redirect:index.controller";
 	}
 	
 	
