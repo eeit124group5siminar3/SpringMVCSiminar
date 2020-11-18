@@ -101,10 +101,7 @@ public class MallOrderController {
 
 	}
 
-	@GetMapping(value = "/productShowCart")
-	public String productShowCart() {
-		return "/mall/ProductShowCart";
-	}
+	
 
 	@PostMapping(value = "/UpdateProductServlet")
 	public String updateProductServlet(@RequestParam(value = "cmd", required = false) String cmd,

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import tw.group5.mall.model.CategoryBean;
+
 
 @Repository
 public class ActFarmerDAO {
@@ -16,6 +18,8 @@ public class ActFarmerDAO {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
+
+//=========================取得分頁==========================================
 
 	// 抓分頁
 	public final Integer RECORDS_PER_PAGE = 5;
@@ -34,7 +38,7 @@ public class ActFarmerDAO {
 	}
 	
 	//計算該廠商總共有幾頁
-	public Integer getTotalPages(String sellerId) {
+	public Integer getTotalPages(Integer sellerId) {
 		totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
 		return totalPages;
 	}
@@ -88,7 +92,7 @@ public class ActFarmerDAO {
 	}
 	
 	//計算該廠商擁有的活動頁數
-	public long getRecordCounts(String sellerId) {
+	public long getRecordCounts(Integer sellerId) {
 		//hibernate Session
 		Session session = sessionFactory.getCurrentSession();
 		Integer count = 0; //必須使用long型態
@@ -102,6 +106,9 @@ public class ActFarmerDAO {
 		return count;
 	}
 	
+	
+//=========================CRUD==========================================
+
 	//排序所有活動列表
 	public List<ActFarmer> getPageActFarmers(){
 		Session session = sessionFactory.getCurrentSession();
@@ -115,7 +122,7 @@ public class ActFarmerDAO {
 	}
 	
 	//排序該廠商的活動列表
-	public List<ActFarmer> getPageActFarmers(String sellerId){
+	public List<ActFarmer> getPageActFarmers(Integer sellerId){
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "from ActFarmer sellerId =?0 ORDER BY actId";
@@ -169,4 +176,54 @@ public class ActFarmerDAO {
 		return actFarmer;
 	}
 
+//=========================取得時間==========================================
+	
+	//時間欄位取得
+	private String tagTimeName = "";
+	private int selected = -1;
+
+			
+	public String getTagTimeName() {
+		return tagTimeName;
+	}
+
+	public void setTagTimeName(String tagTimeName) {
+		this.tagTimeName = tagTimeName;
+	}
+	
+	
+	public int getSelected() {
+		return selected;
+	}
+
+	public void setSelected(int selected) {
+		this.selected = selected;
+	}
+
+	//列出所有時間
+	public List<Clock> getClocks(){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from Clock";
+		Query<Clock> query = session.createQuery(hql,Clock.class);
+		List<Clock> list = query.list();
+		return list;
+	}
+	
+	//獲得時間下拉式
+	public String getSelectTag() {
+		String ans = "";
+		List<Clock> ck = getClocks();
+		ans += "<SELECT name='" + getTagTimeName() + "'>";
+		for (Clock cBean : ck) {
+			Integer timeId = cBean.getTimeId();
+			String timeName = cBean.getTimeName();
+			if (timeId == selected) {
+				ans += "<option value='" + timeId + "' selected>" + timeName + "</option>";
+			} else {
+				ans += "<option value='" + timeId + "'>" + timeName + "</option>";
+			}
+		}
+		ans += "</SELECT>";
+		return ans;
+	}
 }

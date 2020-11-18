@@ -42,7 +42,10 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <style>
-
+.formSet {
+	width: 600px;
+	margin: auto;
+}
 </style>
 
 </head>
@@ -100,7 +103,23 @@
 					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
 					<li class="nav-item"><a href="" class="nav-link">市場</a></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">食譜</a></li>
+					
+					
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="<c:url value='frontPage.controller'/>" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item"
+								href="<c:url value='frontPage.controller'/>">食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='updatePage.controller'/>">修改食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='searchPage.controller'/>">搜尋料理</a>
+						</div>
+					</li>					
+					
 					<li class="nav-item"><a href="contact.html" class="nav-link">會員</a></li>
 					<li class="nav-item"><a href="login.html" class="nav-link">登錄</a></li>
 					<li class="nav-item cta cta-colored"><a href="cart.html"
@@ -112,66 +131,151 @@
 
 	<!-------------------------內容區--------------------------------->
 
-	<form action='<c:url value="/submitChoose.controller"/>' method="post" runat="server" enctype="multipart/form-data">
+	<form class="formSet"
+		action='<c:url value="/submitChoose.controller"/>' method="post" runat="server" enctype="multipart/form-data">
 	<fieldset>
-		<legend>修改食譜</legend>		
+		<legend style="color:black;font-size:23px">修改食譜</legend>		
 		<c:forEach  var='BeanToken' items="${recipe_table}">
-		<div>
-		<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" />
-			<label for="">名稱: <input type="text" name="name" value="${BeanToken.name}" /></label>
-		</div>
-			<br>
-			<div>
-				<label>種類: </label> <select name="cate" >
-					<option value="雞肉">雞肉</option>
-					<option value="豬肉">豬肉</option>
-					<option value="牛肉">牛肉</option>
-					<option value="蔬食">蔬食</option>
-				</select>
-			</div>		
-			<br>
-			<div>
-				<label>食材A: <input type="text" name="ingredients_A" value="${BeanToken.ingredients_A}" /> 份 
-				</label> 
-				<label>份量A: <input type="text" name="recipe_table" value="${BeanToken.gram_A}" /> g 
-				</label>
-			</div>
-			<br>
-			<div>
-				<label>食材B: <input type="text" name="ingredients_B" value="${BeanToken.ingredients_B}" /> 份
- 				</label> 
-				<label>份量B: <input type="text" name="gram_B" value="${BeanToken.gram_B}" /> g
-				</label>
-			</div>
-			<br>
-			<div class="input-dyna-add"></div>
-			<!-- 食材: <input type="text" class="add" name="ingredients" disabled/> 份
-                份量: <input type="text" class="add" name="gram" disabled/> g
-                <br> -->
-			<button id="btn" onclick="addinput()">新增</button>
+<!-- 		<div> -->
+<%-- 		<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" /> --%>
+<%-- 			<label for="">名稱: <input type="text" name="name" value="${BeanToken.name}" /></label> --%>
+<!-- 		</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<!-- 				<label>種類: </label> <select name="cate" > -->
+<!-- 					<option value="雞肉">雞肉</option> -->
+<!-- 					<option value="豬肉">豬肉</option> -->
+<!-- 					<option value="牛肉">牛肉</option> -->
+<!-- 					<option value="蔬食">蔬食</option> -->
+<!-- 				</select> -->
+<!-- 			</div>		 -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<label>食材A: <input type="text" name="ingredients_A" value="${BeanToken.ingredients_A}" /> 份  --%>
+<!-- 				</label>  -->
+<%-- 				<label>份量A: <input type="text" name="gram_A" value="${BeanToken.gram_A}" /> g  --%>
+<!-- 				</label> -->
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<label>食材B: <input type="text" name="ingredients_B" value="${BeanToken.ingredients_B}" /> 份 --%>
+<!--  				</label>  -->
+<%-- 				<label>份量B: <input type="text" name="gram_B" value="${BeanToken.gram_B}" /> g --%>
+<!-- 				</label> -->
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div class="input-dyna-add"></div> -->
+<!-- 			<!-- 食材: <input type="text" class="add" name="ingredients" disabled/> 份  --%>
+<!--                 份量: <input type="text" class="add" name="gram" disabled/> g -->
+<!--                 <br> --> 
+<!-- 			<button id="btn" onclick="addinput()">新增</button> -->
 
-			<hr>
-			<div>
-				<label>方法: </label>
-				<textarea cols="40" rows="5" name="method" >${BeanToken.method}</textarea>
-			</div>
-			<br>
-			<div>
-				<label>介紹: </label>
-				<textarea cols="40" rows="5" name="desc" >${BeanToken.desc}</textarea>
-			</div>
-			<br>
-			<div>
+<!-- 			<hr> -->
+<!-- 			<div> -->
+<!-- 				<label>方法: </label> -->
+<%-- 				<textarea cols="40" rows="5" name="method" >${BeanToken.method}</textarea> --%>
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<!-- 				<label>介紹: </label> -->
+<%-- 				<textarea cols="40" rows="5" name="desc" >${BeanToken.desc}</textarea> --%>
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
 			
 			
 <!-- 			<img height="100" width="80"   -->
 <%-- 	src="<c:url value='/getImage.controller'/>" /> 	 --%>
-	<hr>
-  			<img id="blah" src="#" alt="your image" />
-  			<br>
-  			<input type='file' id="imgInp" name="img" />
+<!-- 	<hr> -->
+<!--    			<img id="blah" src="#" alt="your image" /> --> 
+<!--   			<br> --> 
+<!--  			<input type='file' id="imgInp" name="img" /> --> 
 			
+<!-- 			<div class="custom-file"> -->
+<!-- 				<input type="file" class="custom-file-input" -->
+<!-- 					id="validatedCustomFile" name="multipartFile" /> -->
+<!-- 				<label class="custom-file-label" for="validatedCustomFile">Choose -->
+<!-- 					file</label> -->
+<!-- 				<div class="invalid-feedback">請上傳圖片</div> -->
+<!-- 			</div> -->
+<!-- 			</div> -->
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<div class="form-group">
+				<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" />
+				<label for="formGroupExampleInput"  style="font-size:20px;">名稱: </label> 
+				<input
+					type="text" class="form-control" id="formGroupExampleInput"
+					name="name" value="${BeanToken.name}"/>
 			</div>
+			
+<br>
+		<div class="form-group">
+			<label style="font-size:20px;">種類: </label>
+			<select class="form-control" name="cate">
+				<option value="">Open this select menu</option>
+				<option value="雞肉">雞肉</option>
+				<option value="豬肉">豬肉</option>
+				<option value="牛肉">牛肉</option>
+				<option value="蔬食">蔬食</option>
+			</select>
+			<div class="invalid-feedback">請輸入資料</div>
+		</div>
+
+			<br>
+
+
+			<div class="form-row">
+				<div class="col">
+					<label style="font-size:20px;">食材: </label> 
+					<input type="text" class="form-control" name="ingredients_A" value="${BeanToken.ingredients_A}"/>
+				</div>
+				<div class="col">
+					<label style="font-size:20px;">份量: </label>
+					<input type="text" class="form-control" name="gram_A" value="${BeanToken.gram_A}"/>
+				</div>
+			</div>
+
+			<br>
+			<div class="form-row">
+				<div class="col">
+					<label></label> 
+					<input type="text" class="form-control" name="ingredients_B" value="${BeanToken.ingredients_B}"/> 
+				</div>
+				<div class="col">
+					<label></label>
+					<input type="text" class="form-control" name="gram_B" value="${BeanToken.gram_B}"/>
+				</div>
+			</div>
+<br>
+			<div class="form-group">
+				<label for="exampleFormControlTextarea1" style="font-size:20px;">介紹: </label>
+				<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc" >${BeanToken.desc}</textarea>
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlTextarea1" style="font-size:20px;">料理方法: </label>
+				<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="method" >${BeanToken.method}</textarea>
+			</div>
+			<br>
+			<div  style="text-align:center; ">
+			<img width="65%"  
+					src="<c:url value='/getImage.controller'/>" /> 	
+			</div>
+			<br>
+			<div class="custom-file">
+				<input type="file" class="custom-file-input"
+					id="validatedCustomFile" name="multipartFile" />
+				<label class="custom-file-label" for="validatedCustomFile">Choose file</label>
+				<div class="invalid-feedback">請上傳圖片</div>
+			</div>
+			<hr>
 			</c:forEach>
 			<br>
 			<div style="text-align: center;">
