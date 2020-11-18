@@ -30,7 +30,7 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
 @SessionAttributes(names = { "login_ok", "login_guest", "ShoppingCart" })
-public class MallOrderController {
+public class MallOrderController2 {
 	
 	@Autowired
 	private OrderService orderService;

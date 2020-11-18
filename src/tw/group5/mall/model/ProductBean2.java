@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Component
 @Entity
 @Table(name = "product")
-public class ProductBean implements Serializable {
+public class ProductBean2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer productId;
@@ -89,11 +89,11 @@ public class ProductBean implements Serializable {
 		this.categoryBean = categoryBean;
 	}
 
-	public ProductBean() {
+	public ProductBean2() {
 		super();
 	}
 
-	public ProductBean(String product, Integer producterId, Double price, Blob coverImage, String fileName,
+	public ProductBean2(String product, Integer producterId, Double price, Blob coverImage, String fileName,
 			Integer stock, Date addedDate, Integer shelfTime, Integer content, String unit, String description,
 			Integer category) {
 		super();
@@ -111,7 +111,7 @@ public class ProductBean implements Serializable {
 		this.category = category;
 	}
 
-	public ProductBean(Integer productId, String product, Integer producterId, Double price, Double discount,
+	public ProductBean2(Integer productId, String product, Integer producterId, Double price, Double discount,
 			Blob coverImage, String fileName, Integer stock, Date addedDate, Integer shelfTime, Integer content,
 			String unit, String description, Integer category) {
 		super();

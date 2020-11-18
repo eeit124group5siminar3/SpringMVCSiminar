@@ -122,11 +122,11 @@ public class ProductService {
 		return dao.getPageProductsWithoutZero(searchString);
 	}
 
-	public Object getTotalPagesWithoutZero() {
+	public int getTotalPagesWithoutZero() {
 		return dao.getTotalPagesWithoutZero();
 	}
 
-	public Object getTotalPagesWithoutZero(String searchString) {
+	public int getTotalPagesWithoutZero(String searchString) {
 		return dao.getTotalPagesWithoutZero(searchString);
 	}
 
