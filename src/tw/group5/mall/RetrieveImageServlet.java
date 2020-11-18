@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.group5.mall.model.ProductBean;
+import tw.group5.mall.model.ProductImageBean;
 import tw.group5.mall.service.ProductService;
 
 @Controller
@@ -40,7 +40,7 @@ public class RetrieveImageServlet {
 		Blob blob = null;
 		switch (type.toUpperCase()) {
 		case "PRODUCT":
-			ProductBean bean1 = productService.getProduct(id);
+			ProductImageBean bean1 = productService.getProductImage(id);
 			if (bean1 != null) {
 				blob = bean1.getCoverImage();
 				if (blob != null) {

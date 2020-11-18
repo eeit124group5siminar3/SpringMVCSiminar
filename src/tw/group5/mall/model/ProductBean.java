@@ -48,86 +48,8 @@ public class ProductBean implements Serializable {
 	private CategoryBean categoryBean;
 	private MultipartFile multipartFile;
 
-	@Transient
-	public MultipartFile getMultipartFile() {
-////		Blob coverImage=getCoverImage();
-//		InputStream io=null;
-//		
-//		MultipartFile multipartFile=null;
-//		try {
-//			io=coverImage.getBinaryStream();
-//			multipartFile = new MockMultipartFile(fileName, io);
-//		} catch (IOException | SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
-		return multipartFile;
-	}
-
-	public void setMultipartFile(MultipartFile multipartFile) throws SerialException, SQLException, IOException {
-		this.multipartFile = multipartFile;
-//		System.err.println(multipartFile.getBytes().length);
-		if (multipartFile.getBytes().length > 0) {
-			SerialBlob sb = new SerialBlob(multipartFile.getBytes());
-			String fileName = multipartFile.getOriginalFilename();
-//			System.err.println("123");
-//		SerialBlob sb = null;
-//		byte[] b = new byte[ multipartFile.getBytes().length];
-//			sb = new SerialBlob(multipartFile.getBytes());	
-			setFileName(fileName);
-			setCoverImage(sb);
-		}
-	}
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category")
-	public CategoryBean getCategoryBean() {
-		return categoryBean;
-	}
-
-	public void setCategoryBean(CategoryBean categoryBean) {
-		this.categoryBean = categoryBean;
-	}
-
 	public ProductBean() {
 		super();
-	}
-
-	public ProductBean(String product, Integer producterId, Double price, Blob coverImage, String fileName,
-			Integer stock, Date addedDate, Integer shelfTime, Integer content, String unit, String description,
-			Integer category) {
-		super();
-		this.product = product;
-		this.producterId = producterId;
-		this.price = price;
-		this.coverImage = coverImage;
-		this.fileName = fileName;
-		this.stock = stock;
-		this.addedDate = addedDate;
-		this.shelfTime = shelfTime;
-		this.content = content;
-		this.unit = unit;
-		this.description = description;
-		this.category = category;
-	}
-
-	public ProductBean(Integer productId, String product, Integer producterId, Double price, Double discount,
-			Blob coverImage, String fileName, Integer stock, Date addedDate, Integer shelfTime, Integer content,
-			String unit, String description, Integer category) {
-		super();
-		this.producterId = producterId;
-		this.product = product;
-		this.producterId = producterId;
-		this.price = price;
-		this.coverImage = coverImage;
-		this.fileName = fileName;
-		this.stock = stock;
-		this.addedDate = addedDate;
-		this.shelfTime = shelfTime;
-		this.content = content;
-		this.unit = unit;
-		this.description = description;
-		this.category = category;
 	}
 
 	@Id
@@ -141,18 +63,6 @@ public class ProductBean implements Serializable {
 		this.productId = productId;
 	}
 
-//	@GenericGenerator(name="generator",strategy="foreign",parameters=@Parameter(name="property",value="productCategory"))
-//	@GeneratedValue(generator = "generator")
-//	@Column(name = "CATEGORY" )
-	@Transient
-	public Integer getCategory() {
-		return category;
-	}
-
-	public void setCategory(Integer category) {
-		this.category = category;
-	}
-
 	@Column(name = "PRODUCT")
 	public String getProduct() {
 		return product;
@@ -162,7 +72,6 @@ public class ProductBean implements Serializable {
 		this.product = product;
 	}
 
-//	@Column(name = "PRODUCTERID")
 	@Column(name = "PRODUCTERID", updatable = false)
 	public Integer getProducterId() {
 		return producterId;
@@ -189,6 +98,7 @@ public class ProductBean implements Serializable {
 	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
+
 	@JsonIgnore
 	@Column(name = "COVERIMAGE")
 	public Blob getCoverImage() {
@@ -263,6 +173,15 @@ public class ProductBean implements Serializable {
 	}
 
 	@Transient
+	public Integer getCategory() {
+		return category;
+	}
+
+	public void setCategory(Integer category) {
+		this.category = category;
+	}
+
+	@Transient
 	public String getProducterName() {
 		return producterName;
 	}
@@ -271,4 +190,30 @@ public class ProductBean implements Serializable {
 		this.producterName = producterName;
 	}
 
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category")
+	public CategoryBean getCategoryBean() {
+		return categoryBean;
+	}
+
+	public void setCategoryBean(CategoryBean categoryBean) {
+		this.categoryBean = categoryBean;
+	}
+
+	@JsonIgnore
+	@Transient
+	public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
+
+	public void setMultipartFile(MultipartFile multipartFile) throws SerialException, SQLException, IOException {
+		this.multipartFile = multipartFile;
+		if (multipartFile.getBytes().length > 0) {
+			SerialBlob sb = new SerialBlob(multipartFile.getBytes());
+			String fileName = multipartFile.getOriginalFilename();
+			setFileName(fileName);
+			setCoverImage(sb);
+		}
+	}
 }

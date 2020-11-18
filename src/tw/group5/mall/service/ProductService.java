@@ -3,28 +3,23 @@ package tw.group5.mall.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.mall.dao.ProductDAO;
 import tw.group5.mall.model.CategoryBean;
 import tw.group5.mall.model.ProductBean;
+import tw.group5.mall.model.ProductImageBean;
 
 @Service
 @Transactional
-//@Scope(value = "session")
+
 public class ProductService {
 
-//	private  Session session;
+
 	@Autowired
 	private ProductDAO dao;
 
-//	public ProductService(Session session) {
-//		this.dao = new ProductDAO(session);
-//	}
-
-//	@Transactional(rollbackFor = {Exception.class})
 	public int getTotalPages() {
 		return dao.getTotalPages();
 	}
@@ -94,12 +89,12 @@ public class ProductService {
 		return dao.getSelectTag();
 	}
 
-	public int getId() {
-		return dao.getId();
+	public int getCategoryId() {
+		return dao.getCategoryId();
 	}
 
-	public void setId(int id) {
-		dao.setId(id);
+	public void setCategoryId(Integer categoryId) {
+		dao.setCategoryId(categoryId);
 	}
 
 	public String getTagName() {
@@ -118,21 +113,20 @@ public class ProductService {
 		return dao.getPageProductsWithoutZero();
 	}
 
-	public List<ProductBean> getPageProductsWithoutZero(String searchString) {
-		return dao.getPageProductsWithoutZero(searchString);
-	}
-
 	public int getTotalPagesWithoutZero() {
 		return dao.getTotalPagesWithoutZero();
 	}
 
-	public int getTotalPagesWithoutZero(String searchString) {
-		return dao.getTotalPagesWithoutZero(searchString);
-	}
-
 	public void setMaintainPageNo(Integer maintainPageNo) {
 		dao.setMaintainPageNo(maintainPageNo);
-		
+	}
+
+	public void setSearchString(String searchString) {
+		dao.setSearchString(searchString);
+	}
+
+	public ProductImageBean getProductImage(int productId) {
+		return dao.getProductImage(productId);
 	}
 
 

@@ -89,14 +89,21 @@
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var content = "<div class='row mt-5'><div class='col text-center'><div class='block-27'><ul>";
 				var totalPages = xhr.responseText;
-				content += "<li><a href='#mall_products'>&lt;&lt;</a></li><li><a href='#mall_products'>&lt;</a></li>";
+				if (pageNo == 1) {
+					content += "<li><span>&lt;&lt;</span></li><li><span>&lt;</span></li>";
+				} else {
+					content += "<li><a href='#product_top'onclick='page("
+							+ 1
+							+ ")'>&lt;&lt;</a></li><li><a href='#product_top'onclick='page("
+							+ (pageNo - 1) + ")'>&lt;</a></li>";
+				}
 				if (totalPages <= 5) {
 					for (var i = 1; i <= totalPages; i++) {
 						if (pageNo == i) {
 							content += "<li class='active'><span>" + i
 									+ "</span></li>"
 						} else {
-							content += "<li><a href='#mall_products' onclick='page("
+							content += "<li><a href='#product_top' onclick='page("
 									+ i + ")'>" + i + "</a></li>"
 						}
 					}
@@ -106,7 +113,7 @@
 							content += "<li class='active'><span>" + i
 									+ "</span></li>"
 						} else {
-							content += "<li><a href='#mall_products onclick='page("
+							content += "<li><a href='#product_top' onclick='page("
 									+ i + ")'>" + i + "</a></li>"
 						}
 					}
@@ -116,12 +123,19 @@
 							content += "<li class='active'><span>" + i
 									+ "</span></li>"
 						} else {
-							content += "<li><a href='#mall_products onclick='page("
+							content += "<li><a href='#product_top' onclick='page("
 									+ i + ")'>" + i + "</a></li>"
 						}
 					}
 				}
-				content += "<li><a href='#mall_products'>&gt;</a></li><li><a href='#mall_products'>&gt;&gt;</a></li>";
+				if (pageNo == totalPages) {
+					content += "<li><span>&gt;</span></li><li><span>&gt;&gt;</span></li>";
+				} else {
+					content += "<li><a href='#product_top'onclick='page("
+							+ (pageNo + 1)
+							+ ")'>&gt;</a></li><li><a href='#product_top'onclick='page("
+							+ totalPages + ")'>&gt;&gt;</a></li>";
+				}
 			}
 			productList(pageNo);
 			content += "</ul></div></div></div>";
@@ -131,28 +145,54 @@
 	}
 
 	function searchProduct() {
-		// 		var searchString=document.getElementById("searchString").value;
 		var searchString = document.forms[0].elements[0].value;
 		console.log(searchString);
 		var xhr = new XMLHttpRequest();
 		if (searchString == null || searchString == "") {
 			var url = "<c:url value='/RetrieveSearch/' />"
-		console.log(searchString);
+			console.log(searchString);
 		} else {
 			var url = "<c:url value='/RetrieveSearch/" + searchString + "' />"
 		}
-		xhr.open("GET", url, true);
+		xhr.open("GET", url, false);
 		xhr.send();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-			}
-		}
-		document.forms[0].elements[0].value = searchString;
 		page(1);
 	}
 
+	function productCategory(categoryId) {
+		var categoryList = document.getElementById("product-category");
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/RetrieveCategory/"+categoryId+"' />",
+				true);
+		xhr.send();
+		content = ""
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var categoryBean = JSON.parse(xhr.responseText);
+				categoryBean.unshift({id: 0, name: "全部"});
+				for (var i = 0; i < categoryBean.length; i++) {
+					if (i == categoryId) {
+						content += "<li class='active'><span>"
+							+ categoryBean[i].name
+							+ "</span></li>";
+					} else {
+						content += "<li><a href='#product_top' onclick='productCategory("
+								+ i
+								+ ")'>"
+								+ categoryBean[i].name
+								+ "</a></li>";
+					}
+				}
+			}
+			categoryList.innerHTML = content;
+			console.log(categoryList);
+		}
+	}
+
 	window.onload = function() {
+		productCategory(0);
 		page(1);
+
 	}
 </script>
 </head>
@@ -244,7 +284,7 @@
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_1.jpg');">
+		style="background-image: url('images/bg_1.jpg');" id="product_top">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
@@ -262,18 +302,18 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-10 mb-5 text-center">
-					<ul class="product-category">
-						<li><a href="#" class="active">All</a></li>
-						<li><a href="#">Vegetables</a></li>
-						<li><a href="#">Fruits</a></li>
-						<li><a href="#">Juice</a></li>
-						<li><a href="#">Dried</a></li>
+					<ul class="product-category" id="product-category">
+						<!-- 						<li><a href="#" class="active">All</a></li> -->
+						<!-- 						<li><a href="#">Vegetables</a></li> -->
+						<!-- 						<li><a href="#">Fruits</a></li> -->
+						<!-- 						<li><a href="#">Juice</a></li> -->
+						<!-- 						<li><a href="#">Dried</a></li> -->
 					</ul>
 					<form class="product-category" action="javascript:void(0)"
 						method="GET">
 						<input type="search" name="searchString" id="searchString"
 							value=${searchString}>
-						<button name="search" style="border-radius: 5px;"
+						<button name="searchButton" style="border-radius: 5px;"
 							onclick="searchProduct()">查詢</button>
 					</form>
 				</div>

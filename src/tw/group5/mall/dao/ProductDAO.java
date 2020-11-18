@@ -8,20 +8,35 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import tw.group5.mall.model.CategoryBean;
 import tw.group5.mall.model.ProductBean;
+import tw.group5.mall.model.ProductImageBean;
 
 @Repository
-//@Scope(value = "session")
+
 public class ProductDAO {
-//	private Session session;
-//	private static final long serialVersionUID = 1L;
-//	private int productId = 0; // 查詢單筆商品會用到此代號
-	private int pageNo = 0; // 存放目前顯示之頁面的編號
-	private int maintainPageNo=0;
-	
+	@Autowired
+	@Qualifier("sessionFactory")
+	private SessionFactory sessionFactory;
+	private int pageNo = 0;
+	private int maintainPageNo = 0;
+	private int recordsPerPage = 12;
+	private int totalPages = -1;
+	private int totalPagesWithoutZero = -1;
+	private String tagName = "";
+	private int selected = -1;
+	private Integer categoryId;
+	private String searchString;
+
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
 	public int getMaintainPageNo() {
 		return maintainPageNo;
 	}
@@ -30,23 +45,13 @@ public class ProductDAO {
 		this.maintainPageNo = maintainPageNo;
 	}
 
-	public final int RECORDS_PER_PAGE = 12;
-	private int recordsPerPage = RECORDS_PER_PAGE; 
-	private int totalPages = -1;
-	private int totalPagesWithoutZero = -1;
-	private String tagName = "";
-	private int selected = -1;
-	private int id = 0;
-//	DataSource ds = null;
-	@Autowired @Qualifier("sessionFactory")
-	private SessionFactory sessionFactory;
+	public int getRecordsPerPage() {
+		return recordsPerPage;
+	}
 
-//
-//	public ProductDAO(Session session) {
-//		this.session = session;
-//	}
-
-	// 計算販售的商品總共有幾頁
+	public void setRecordsPerPage(int recordsPerPage) {
+		this.recordsPerPage = recordsPerPage;
+	}
 
 	public int getTotalPages() {
 		// 注意下一列敘述的每一個型態轉換
@@ -58,92 +63,111 @@ public class ProductDAO {
 	public int getTotalPages(int producterId) {
 		// 注意下一列敘述的每一個型態轉換
 		totalPages = (int) (Math.ceil(getRecordCounts(producterId) / (double) recordsPerPage));
-
 		return totalPages;
 	}
 
 	public int getTotalPagesWithoutZero() {
 		// 注意下一列敘述的每一個型態轉換
 		totalPagesWithoutZero = (int) (Math.ceil(getRecordCountsWithoutZero() / (double) recordsPerPage));
-
 		return totalPagesWithoutZero;
 	}
 
-	public int getTotalPagesWithoutZero(String searchString) {
-		// 注意下一列敘述的每一個型態轉換
-		totalPagesWithoutZero = (int) (Math.ceil(getRecordCountsWithoutZero(searchString) / (double) recordsPerPage));
-
-		return totalPagesWithoutZero;
+	public String getTagName() {
+		return tagName;
 	}
 
-	// 查詢某一頁的商品(書籍)資料，執行本方法前，一定要先設定實例變數pageNo的初值
+	public void setTagName(String tagName) {
+		this.tagName = tagName;
+	}
 
+	public int getSelected() {
+		return selected;
+	}
+
+	public void setSelected(int selected) {
+		this.selected = selected;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getSearchString() {
+		return searchString;
+	}
+
+	public void setSearchString(String searchString) {
+		this.searchString = searchString;
+	}
+
+// 查詢一頁面的產品
 	public List<ProductBean> getPageProducts() {
 		Session session = sessionFactory.getCurrentSession();
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "from ProductBean ORDER BY ProductId";
-		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
+		Query<ProductBean> query = session.createQuery(hql, ProductBean.class);
 		query.setFirstResult(startRecordNo);
 		query.setMaxResults(recordsPerPage);
 		List<ProductBean> list = query.list();
 		return list;
 	}
 
+// 查詢一頁面的產品(不包含庫存為0)
 	public List<ProductBean> getPageProductsWithoutZero() {
 		Session session = sessionFactory.getCurrentSession();
-		int startRecordNo = (pageNo - 1) * recordsPerPage ;
-		String hql = "from ProductBean where stock != 0 ORDER BY ProductId";
-		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
-		query.setFirstResult(startRecordNo);
-		query.setMaxResults(recordsPerPage);
-		List<ProductBean> list = query.list();
-		return list;
-	}
-
-	public List<ProductBean> getPageProductsWithoutZero(String searchString) {
-		Session session = sessionFactory.getCurrentSession();
-		String hql = "from ProductBean where stock != 0 and  product like ?0 ORDER BY productId";
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
-
-		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
-		query.setParameter(0, "%" + searchString + "%");
+		String hql = "from ProductBean where stock != 0";
+		Query<ProductBean> query = null;
+		if (searchString == null || searchString.length() == 0) {
+			hql += " ORDER BY ProductId";
+			query = session.createQuery(hql, ProductBean.class);
+		} else {
+			hql += " and  product like ?0  ORDER BY ProductId";
+			query = session.createQuery(hql, ProductBean.class);
+			query.setParameter(0, "%" + searchString + "%");
+		}
 		query.setFirstResult(startRecordNo);
 		query.setMaxResults(recordsPerPage);
 		List<ProductBean> list = query.list();
 		return list;
 	}
 
+//查詢某一生產者出售的產品
 	public List<ProductBean> getPageProducts(int producterId) {
 		Session session = sessionFactory.getCurrentSession();
 		int startRecordNo = (maintainPageNo - 1) * recordsPerPage;
 		String hql = "from ProductBean where stock != 0 and producterId =?0 ORDER BY ProductId";
-		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
+		Query<ProductBean> query = session.createQuery(hql, ProductBean.class);
 		query.setParameter(0, producterId);
 		query.setFirstResult(startRecordNo);
 		query.setMaxResults(recordsPerPage);
 		List<ProductBean> list = query.list();
 		return list;
-		
+
 	}
 
+// 查詢資料庫商品數
 	public long getRecordCounts() {
 		Session session = sessionFactory.getCurrentSession();
 		int count = 0; // 必須使用 long 型態
 		String hql = "select count( * ) from ProductBean";
-
-		Query<Long> query = session.createQuery(hql,java.lang.Long.class);
+		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
 		count = (int) longNumber;
 		return count;
 	}
 
+// 查詢資料庫某一生產者上架的商品數
 	public long getRecordCounts(int producterId) {
 		Session session = sessionFactory.getCurrentSession();
 		int count = 0; // 必須使用 long 型態
 		String hql = "select count( * ) from ProductBean where producterId=?0";
-
-		Query<Long> query = session.createQuery(hql,java.lang.Long.class);
+		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
 		query.setParameter(0, producterId);
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
@@ -151,48 +175,45 @@ public class ProductDAO {
 		return count;
 	}
 
+//查詢庫存量不為0的商品數
 	public long getRecordCountsWithoutZero() {
 		Session session = sessionFactory.getCurrentSession();
 		int count = 0; // 必須使用 long 型態
 		String hql = "select count( * ) from ProductBean where stock != 0";
-
-		Query<Long> query = session.createQuery(hql,java.lang.Long.class);
+		Query<Long> query = null;
+		if (searchString == null || searchString.length() == 0) {
+			query = session.createQuery(hql, java.lang.Long.class);
+		} else {
+			hql += " and  product like ?0";
+			query = session.createQuery(hql, java.lang.Long.class);
+			query.setParameter(0, "%" + searchString + "%");
+		}
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
 		count = (int) longNumber;
 		return count;
 	}
 
-	public long getRecordCountsWithoutZero(String searchString) {
-		Session session = sessionFactory.getCurrentSession();
-		int count = 0; // 必須使用 long 型態
-		String hql = "select count( * ) from ProductBean where stock != 0 and  product like ?0";
-		Query<Long> query = session.createQuery(hql,java.lang.Long.class);
-		query.setParameter(0, "%" + searchString + "%");
-		Object objectNumber = query.uniqueResult();
-		long longNumber = (long) objectNumber;
-		count = (int) longNumber;
-		return count;
-	}
-
+//依照ID查詢類別
 	public CategoryBean getCategoryById() {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from CategoryBean where id =?0";
-		Query<CategoryBean> query = session.createQuery(hql,CategoryBean.class);
-		query.setParameter(0, id);
+		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
+		query.setParameter(0, categoryId);
 		CategoryBean cb = query.uniqueResult();
 		return cb;
 	}
 
+//查詢全部類別
 	public List<CategoryBean> getCategory() {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from CategoryBean";
-		Query<CategoryBean> query = session.createQuery(hql,CategoryBean.class);
-
+		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
 		List<CategoryBean> list = query.list();
 		return list;
 	}
 
+// 獲得類別下拉式選單的JSP語法字串
 	public String getSelectTag() {
 		String ans = "";
 		List<CategoryBean> cb = getCategory();
@@ -210,33 +231,15 @@ public class ProductDAO {
 		return ans;
 	}
 
-
-
-
-
+// 修改商品資料
 	public ProductBean updateProduct(ProductBean bean) {
-//			ProductBean result=session.get(ProductBean.class, bean.getProductId());
-//			if(result!=null) {
-//				result.setProducterName(bean.getProducterName());
-//				result.setPrice(bean.getPrice());
-//				result.setShelfTime(bean.getShelfTime());
-//				result.setStock(bean.getStock());
-//				result.setContent(bean.getContent());
-//				result.setUnit(bean.getUnit());
-//				result.setDiscount(bean.getDiscount());
-//				result.setCategory(bean.getCategory());
-//				result.setCoverImage(bean.getCoverImage());
-//				result.setDescription(bean.getDescription());
-//			}
+
 		Session session = sessionFactory.getCurrentSession();
-			session.update(bean);
-//			session.getTransaction().commit();
-			return bean;
+		session.update(bean);
+		return bean;
 	}
 
-	
-
-	// 依ProductID來刪除單筆記錄
+// 刪除商品資料
 	public ProductBean deleteProduct(int no) {
 		Session session = sessionFactory.getCurrentSession();
 		ProductBean result = session.get(ProductBean.class, no);
@@ -247,63 +250,27 @@ public class ProductDAO {
 		return null;
 	}
 
-	// 新增一筆記錄---
-
+// 新增商品資料
 	public ProductBean saveProduct(ProductBean bean) {
 		Session session = sessionFactory.getCurrentSession();
-		
-			java.util.Date now=new java.util.Date();
-			Date date=new Date(now.getTime());
-			bean.setAddedDate(date);
-			session.save(bean);
-			return bean;
-		
+		java.util.Date now = new java.util.Date();
+		Date date = new Date(now.getTime());
+		bean.setAddedDate(date);
+		session.save(bean);
+		return bean;
 	}
 
-	public int getSelected() {
-		return selected;
-	}
-
-	public void setSelected(int selected) {
-		this.selected = selected;
-	}
-
-	public String getTagName() {
-		return tagName;
-	}
-
-	public void setTagName(String tagName) {
-		this.tagName = tagName;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getPageNo() {
-		return pageNo;
-	}
-
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
-	}
-
-	public int getRecordsPerPage() {
-		return recordsPerPage;
-	}
-
-	public void setRecordsPerPage(int recordsPerPage) {
-		this.recordsPerPage = recordsPerPage;
-	}
-
+// 查詢某一商品資料
 	public ProductBean getProduct(int productId) {
 		Session session = sessionFactory.getCurrentSession();
-		ProductBean bean=session.get(ProductBean.class,productId);
+		ProductBean bean = session.get(ProductBean.class, productId);
 		return bean;
-
+	}
+	
+// 查詢某一商品的圖片
+	public ProductImageBean getProductImage(int productId) {
+		Session session = sessionFactory.getCurrentSession();
+		ProductImageBean bean = session.get(ProductImageBean.class, productId);
+		return bean;
 	}
 }
