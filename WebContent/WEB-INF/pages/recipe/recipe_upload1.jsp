@@ -105,10 +105,11 @@ body {
 // 				type:"GET",
 // 				url:"<c:url value='/uploadSubmit.controll' />",
 // 				dataType:"html",
+
 // 				success:function(data){
 // 					$("#result").html(data);
 // 					},
-// 				error:function(xhr){
+// 				error:function(){
 // 					alert(xhr.status);
 // 					}	
 // 				});

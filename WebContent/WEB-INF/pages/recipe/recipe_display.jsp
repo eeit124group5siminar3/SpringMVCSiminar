@@ -45,7 +45,6 @@
 	margin: auto;
 }
 </style>
-
 </head>
 <body class="goto-here">
 	<div class="py-1 bg-primary">
@@ -169,11 +168,9 @@
   </div>
 </nav>
 	
-	
-	
-	
-
-<form class="formform" action="uploadConfirm.controller" method="post" >
+<div id="uploadSuccess" >	
+<!-- javascript:void(0); <c:url value='/uploadConfirm.controller'/>-->
+<form class="formform" action="javascript:void(0);"  method="post" >
 	<fieldset>
 		<legend style="color:black;font-size:23px">再次確認</legend>
 			<div class="form-group">
@@ -234,10 +231,10 @@
 			<hr>
 			<div style="text-align: center;">
 					<label>
-						<input type="submit" name="action" value="送出" />
+						<input id="send" type="submit" name="action" value="送出" />
 					</label>
 					<label>
-						<input type="submit" name="action" value="修改" />
+						<input id="revise" type="submit" name="action" value="修改" />
 					</label>
 <!-- 					<label> -->
 <!-- 						<input type="submit" name="action" value="回首頁" /> -->
@@ -248,6 +245,8 @@
 
 
 
+
+</div>
 
 
 
@@ -372,9 +371,48 @@
 	<script src="js/jquery.animateNumber.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script type="text/javascript">
+	window.onload = function(){
+		var succ=document.getElementById("uploadSuccess");
+		var btn=document.getElementById("send");
+		btn.onclick=function(){
+			var xhr = new XMLHttpRequest();
+	 		if(xhr!=null){
+	 			xhr.onreadystatechange=function(){	
+				if(xhr.readyState === 4 && xhr.status === 200){
+						succ.innerHTML=xhr.responseText;
+					}		
+				}
+				xhr.open('GET',"<c:url value='/uploadConfirm.controller'/>",true);
+				xhr.send();
+	 			}else{
+	 			display.innerHTML="<h3>您的瀏覽器不支援Ajax</h3>";
+	 		}				
+// 			succ.innerHTML=123;
+		}
+
+		
+			var revise=document.getElementById("revise");
+			revise.onclick=function(){
+			var xhr = new XMLHttpRequest();
+	 		if(xhr!=null){
+	 			xhr.onreadystatechange=function(){	
+				if(xhr.readyState === 4 && xhr.status === 200){
+						succ.innerHTML=xhr.responseText;
+					}		
+				}
+				xhr.open('GET',"<c:url value='/reviseConfirm.controller'/>",true);
+				xhr.send();
+	 			}else{
+	 			display.innerHTML="<h3>您的瀏覽器不支援Ajax</h3>";
+	 		}				
+// 				succ.innerHTML=123;
+		}
+	}
+	</script>
+	
 </body>
 </html>

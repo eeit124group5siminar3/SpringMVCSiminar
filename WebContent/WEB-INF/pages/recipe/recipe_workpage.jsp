@@ -204,14 +204,17 @@
 <!--       </li> -->
     </ul>
     
-    <form class="form-inline my-2 my-lg-0" action='<c:url value="/searchSubmit.controller"/>' method="post">
-      <input class="form-control mr-sm-2" type="text" name="input" placeholder="search delicious" aria-label="Search">
-      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action" value="Search"/>
+    <form class="form-inline my-2 my-lg-0" id="search" action="javascript:void(0);" method="post">
+      <input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="search delicious" aria-label="Search"/>
+      <input class="btn btn-outline-success my-2 my-sm-0" id="send" type="submit" name="action" value="Search"/>
     </form>
   </div>
 </nav>
 
 <p style="font-size: 60px;text-align: center;">美食推薦</p>
+
+<div id="searchSuccess"> !!!!!!!!!!搜尋成功!!!!!!!!!
+
 <c:forEach var='BeanToken'  items="${searchAll}">
 		<div class="wrap" style="text-align: center;">
 			<a href="<c:url value='/searchSubmit.controller?rec_id=${BeanToken.rec_id}'/>">
@@ -229,11 +232,11 @@
 					<p>介紹 : ${BeanToken.desc}</p>				
 					<p>料理方法 : ${BeanToken.method}</p>
 				
-			</div>
 		</div>
-	</c:forEach>
+	</div>
+</c:forEach>
 	
-	
+</div>
 	
 	
 <!-- 	</form> -->
@@ -342,7 +345,7 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
-
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -360,5 +363,37 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		 				
+		console.log(searchInput)
+		var searchSuccess=$("#searchSuccess");
+// 		var params=$('#search').serialize(); //把id为login的form表单里的参数自动封装为参数传递
+		$("#send").click(function(){
+		var searchInput=$('#searchInput').val();
+        console.log('-------------------------'+searchInput);
+			$.ajax({
+				type:"GET",
+				url:"./searchSubmit.controller",
+// 				dataType:"json",
+		        data:{
+			        	"input":searchInput}, 						 
+// 					'input='+searchInput,
+ 				beforeSend: function(XMLHttpRequest) {
+            		console.log(XMLHttpRequest);
+        			},
+				success:function(data){
+					$("#searchSuccess").html(data);
+// 					$('#searchSuccess').append()
+					alert("successsssssssss");
+					},
+				error:function(){
+
+					}	
+				});
+			});
+		});
+	</script>
+	
 </body>
-</html></html>
+</html>
