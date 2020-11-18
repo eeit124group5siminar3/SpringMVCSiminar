@@ -217,7 +217,6 @@ public class ProductDAO {
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
 		count = (int) longNumber;
-		System.err.println(count);
 		return count;
 	}
 
