@@ -22,7 +22,7 @@
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item"
 							href="<c:url value='/mall_shop' />">商城</a> <a
-							class="dropdown-item" href="cart.html">購物車</a> <a
+							class="dropdown-item" href="<c:url value='/mall_shoppingcart' />">購物車</a> <a
 							class="dropdown-item" href="checkout.html">查看訂單</a>
 					</div></li>
 				<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->

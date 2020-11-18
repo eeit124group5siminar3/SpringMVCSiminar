@@ -13,4 +13,8 @@ public class PageTo {
 	public String shopPage() {
 		return "/mall/mall_shop";
 	}
+	@GetMapping(value = "/mall_shoppingcart")
+	public String shoppingcartPage() {
+		return "/mall/mall_shoppingcart";
+	}
 }
