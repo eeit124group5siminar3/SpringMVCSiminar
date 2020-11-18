@@ -95,7 +95,7 @@ public class LoginController {
 		session.invalidate();
 		sessionStatus.setComplete();
 
-		return "index";
+		return "redirect:index";
 	}
 	
 	
