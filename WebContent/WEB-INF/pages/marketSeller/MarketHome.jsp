@@ -33,7 +33,7 @@
                 <th>商品描述</th>
                 <th>商品出產地</th>
                 <th>數量</th>
-                <th>單位</th>
+<!--                 <th>單位</th> -->
                 <th>價格</th>
                 <th>商品狀態</th>
                <th>圖片</th> 
@@ -49,7 +49,7 @@
                     <td><c:out value="${IBean.marketProductImgBean.description}"/></td>                    
                     <td><c:out value="${IBean.productArea}"/></td>
                     <td><c:out value="${IBean.quantity}"/></td>      
-                    <td>1<c:out value="${IBean.unit}"/></td>
+<%--                     <td>1<c:out value="${IBean.unit}"/></td> --%>
                     <td><c:out value="${IBean.price}"/>元</td>
                     <td><c:out value="${IBean.marketPutOutBean.status}"/></td>
                 <td>  
