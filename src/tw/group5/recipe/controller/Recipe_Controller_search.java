@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,16 +32,19 @@ public class Recipe_Controller_search {
 		return "recipe/recipe_search";
 	}
 	
-	@RequestMapping(path = "/searchSubmit.controller",method = {RequestMethod.POST,RequestMethod.GET})
-	public String submitProcess(@RequestParam(name = "input",required = false)String search,
-			@RequestParam(required = false) String action,
+	
+	@GetMapping(value="/searchSubmit.controller" ,produces = "text/plain;charset=UTF-8")
+//	@RequestMapping(path = "/searchSubmit.controller",method = {RequestMethod.POST,RequestMethod.GET})
+	public @ResponseBody List<Recipe_Bean> submitProcess(
+			@RequestParam(name = "input",required = false)String search,
+//			@RequestParam(required = false) String action,
 			@RequestParam(name="rec_id",required = false)String rec_id,
 			Model m) {
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		
 
-		if ("Search".equals(action)) {
+//		if ("Search".equals(action)) {
 			if (search !=null && search.length() !=0) {				
 				search='%'+search+'%';
 				System.out.println(search);
@@ -47,25 +52,26 @@ public class Recipe_Controller_search {
 				for (Recipe_Bean r : list) {
 					System.out.println(r.getRec_id());
 					m.addAttribute("List", list);
-
-					return "recipe/recipe_search_display";
+//					return "成功!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 				}
+					return list;
 			} 
-			if (search==null || search.length()==0) {
-				errors.put("msg","請輸入");
-				return "redirect:/searchPage.controller";
-			}
-		}
+				
+//		if (search==null || search.length()==0) {
+//			errors.put("msg","請輸入");
+//			return "redirect:/searchPage.controller";
+//		}
+//		}
 		
-		if (rec_id !=null && rec_id.length() !=0) {
-			list=service.partSearch(rec_id);
-			m.addAttribute("List", list);
-			return "recipe/recipe_search_display";
-		}
+//		if (rec_id !=null && rec_id.length() !=0) {
+//			list=service.partSearch(rec_id);
+//			m.addAttribute("List", list);
+//			return "recipe/recipe_search_display";
+//		}
 		
 //		if (action.equals("回首頁")) {
 //			return "recipe/recipe_workpage";
 //		}
-		return action;
+		return "成功!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 	}
 }
