@@ -100,6 +100,7 @@ public class Recipe_DAO_spring {
 	public boolean delete(String rec_id) {
 		Session session =sessionFactory.getCurrentSession();
 //		session.beginTransaction();
+		System.out.println(1);
 		System.out.println(rec_id);
 		Recipe_Bean result = session.get(Recipe_Bean.class, rec_id);
 		System.out.println(rec_id);
@@ -110,6 +111,14 @@ public class Recipe_DAO_spring {
 		}
 			return false;
 		}
+	
+	
+	public Recipe_Bean getImage(String rec_id) {
+		Session session=sessionFactory.getCurrentSession();
+		Recipe_Bean bean=session.get(Recipe_Bean.class, rec_id);
+		return bean;
+		
+	}
 		
 	}
 

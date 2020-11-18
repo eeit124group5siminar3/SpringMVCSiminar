@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>更新商品</title>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+
 <style>
 fieldset {
 	width: 500px;
@@ -72,6 +74,11 @@ body {
               ${errors.errPrice}
            </font> 
 	        </div>
+	        <div>
+	       <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="1" />上架
+           <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="0" />下架
+	        </div>
+
 	      <div>
 	            原版圖片 
 	      </div>
@@ -116,10 +123,9 @@ function readURL(input) {
     reader.readAsDataURL(input.files[0]); // convert to base64 string
   }
 }
-
 $("#imgInp").change(function() {
-  readURL(this);
-});
+	  readURL(this);
+	});	
 </script>
 	
 </body>

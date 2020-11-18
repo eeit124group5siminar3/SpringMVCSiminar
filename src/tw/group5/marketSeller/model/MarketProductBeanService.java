@@ -14,9 +14,9 @@ public class MarketProductBeanService implements IMarketProductBeanService {
 
 
 	@Override
-	public List<MarketProductTotalBean> selectAll() {
+	public List<MarketProductTotalBean> selectAll(Integer mid) {
 		
-		return mDao.selectAll();
+		return mDao.selectAll(mid);
 	}
 	
 	@Override

@@ -168,7 +168,7 @@ public class Member_DAO {
 
 	// 修改會員資料
 	public boolean updata_member_data(String member_email, String member_permissions, String password,
-			String member_cellphone, String member_address, String e_paper) {
+			String member_cellphone, String member_address, String e_paper,String member_bank_code,String member_bank_account) {
 
 		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
@@ -181,6 +181,8 @@ public class Member_DAO {
 			member_bean.setMember_cellphone(member_cellphone);
 			member_bean.setMember_address(member_address);
 			member_bean.setE_paper(e_paper);
+			member_bean.setMember_bank_code(member_bank_code);
+			member_bean.setMember_bank_account(member_bank_account);
 			
 			return true;
 		}

@@ -1,46 +1,55 @@
 package tw.group5.marketSeller.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import tw.group5.marketSeller.model.MarketProductBeanService;
 import tw.group5.marketSeller.model.MarketProductImgBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
+import tw.group5.member_SignUp.model.Member_SignUp;
 
 
 @Controller
-@SessionAttributes(names = {"Insert1", "login_ok"})
+@SessionAttributes(names = {"Insert1", "login_ok","mBean"})
 public class MarketHome {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
 	private MarketProductBeanService service;
 	@Autowired
-	private HttpServletRequest request;
+	private HttpSession session;
+	
 
 	// 顯示全部
 	@RequestMapping(path = "/MarketProduct.selectAll", method = RequestMethod.GET)
-	public String selectAll(Model m) {
+	public String selectAll(@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model m) {
 		
-		List<MarketProductTotalBean> list = service.selectAll();
+	if (mb == null) {
+		return "/index";
+	}
+	
+	Integer producterId = mb.getMember_no();
+		
+		List<MarketProductTotalBean> list = service.selectAll(producterId);
 		m.addAttribute("list", list);
 		return "marketSeller/MarketHome";
 	}
@@ -71,18 +80,38 @@ public class MarketHome {
 	
 	//新增
 	@PostMapping(path = "/MarketProduct.insert")
-	public String insert(Model model, @ModelAttribute(value = "Insert1") MarketProductTotalBean bean1
+	public String insert(Model model, @ModelAttribute(value = "Insert1") MarketProductTotalBean bean1,
+			@SessionAttribute(value = "login_ok") Member_SignUp mb
 			)throws IllegalStateException, IOException{
-		   System.out.println("人");
 		   Map<String, String> errorMsgs = new HashMap<String, String>();
 		   model.addAttribute("Errors",errorMsgs);
-		   System.out.println("來到MarketHome的Controller");
-		   System.err.println(bean1.hashCode());
+		   Integer mNo = mb.getMember_no();
+		   bean1.setMemberNo(mNo);
+		   System.out.println("賣家狀態   =="+mNo);
 //		   System.err.println(bean1.getMarketProductImgBean().hashCode());
 //		   bean1.getMarketProductImgBean().setMarketProductTotalBean(bean1);
 		   service.insert(bean1);
 		return "marketSeller/MarketS";
 		}
+	
+	
+	// 跳轉到修改jsp
+	@GetMapping(path = "/MarketProduct.goUpdateJsp")
+	public String updateJsp(@RequestParam(name = "productid") int productid, Model m) {
+
+		MarketProductTotalBean mBean = service.select(productid);
+		m.addAttribute("mBean",mBean);
+
+		return "marketSeller/MarketU";
+	}
+	//更新商品
+	@PostMapping(path = "/MarketProductUpdate",produces = "multipart/data-form")
+	public String update(@ModelAttribute(value = "mBean") MarketProductTotalBean mb ){
+
+		service.update(mb);
+		
+		return "marketSeller/MarketS";
+	}
 
 
 	} 

@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+
+import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Entity
 @Table(name = "market_Product_Total")
@@ -22,7 +24,6 @@ import org.springframework.stereotype.Component;
 public class MarketProductTotalBean {
 	private int productId;
 	private String email;
-	private String marketName;
 	private String productName;
 	private String productArea;
 	private String productCatgory;
@@ -32,9 +33,10 @@ public class MarketProductTotalBean {
 	private String discount;
 	private Integer putOut;
 	private Integer quantity;
-	private MarketProductImgBean marketProductImgBean;
-//	private MarketPutOutBean marketPutOutBean;//設計單向
+	private Integer memberNo;
 	
+	private MarketProductImgBean marketProductImgBean;
+	private MarketPutOutBean marketPutOutBean;//設計單向
 
 	public MarketProductTotalBean(int productId, String productName, String productArea, String productCatgory,
 			Integer price, String unit, String discount, Integer quantity, MarketProductImgBean marketProductImgBean) {
@@ -66,13 +68,12 @@ public class MarketProductTotalBean {
 	
 
 	
-	public MarketProductTotalBean(int productId, String email, String marketName, String productName,
+	public MarketProductTotalBean(int productId, String email, String productName,
 			String productArea, String productCatgory, Integer price, Integer report, String unit, String discount,
 			Integer  putOut, Integer quantity, MarketProductImgBean marketProductImgBean) {
 		super();
 		this.productId = productId;
 		this.email = email;
-		this.marketName = marketName;
 		this.productName = productName;
 		this.productArea = productArea;
 		this.productCatgory = productCatgory;
@@ -101,15 +102,7 @@ public class MarketProductTotalBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@Column(name = "MARKET_NAME")
-	public String getMarketName() {
-		return marketName;
-	}
-	public void setMarketName(String marketName) {
-		this.marketName = marketName;
-	}
-	
+
 	@Column(name = "PRODUCT_NAME")
 	public String getProductName() {
 		return productName;
@@ -165,8 +158,7 @@ public class MarketProductTotalBean {
 	public void setDiscount(String discount) {
 		this.discount = discount;
 	}
-	
-	@Column(name = "PUT_OUT")
+	@Transient
 	public Integer  getPutOut() {
 		return putOut;
 	}
@@ -191,15 +183,28 @@ public class MarketProductTotalBean {
 		this.marketProductImgBean = marketProductImgBean;
 	}
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@PrimaryKeyJoinColumn
-//	public MarketPutOutBean getMarketPutOutBean() {
-//		return marketPutOutBean;
-//	}
-//	
-//	public void setMarketPutOutBean(MarketPutOutBean marketPutOutBean) {
-//		this.marketPutOutBean = marketPutOutBean;
-//	}
+	@Column(name = "MEMBER_NO")
+	public Integer getMemberNo() {
+		return memberNo;
+	}
+	
+	public void setMemberNo(Integer memberNo) {
+		this.memberNo = memberNo;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "PUT_OUT")
+//	@JoinColumn(name="PUT_OUT",referencedColumnName = "PUT_OUT")
+	//名稱依樣會抓錯
+	public MarketPutOutBean getMarketPutOutBean() {
+		return marketPutOutBean;
+	}
+	
+	public void setMarketPutOutBean(MarketPutOutBean marketPutOutBean) {
+		this.marketPutOutBean = marketPutOutBean;
+	}
 	
 	
+	
+
 }

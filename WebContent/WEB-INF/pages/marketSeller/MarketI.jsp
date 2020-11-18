@@ -85,6 +85,15 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
         <td >
             <form:input style="background:#FFFFFF" class='InputClass'  type="file" path="marketProductImgBean.multipartFile" accept="image/*" name="product_img" id="imgInp" size="25" /><br>
             <font color='red' size='-1'>${errors.errPicture}</font></td>
+    </tr>
+    <tr>
+   
+    <td>  商品狀態 </td>
+    
+       <td >
+           <form:radiobutton path="marketPutOutBean.putOut"  value="1"/>上架
+           <form:radiobutton path="marketPutOutBean.putOut"  value="0"/>下架
+       </td>
     </tr>  
         <tr height="36" >
       <td height="61" colspan="6" align="center">
