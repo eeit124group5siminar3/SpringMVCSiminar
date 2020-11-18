@@ -21,7 +21,7 @@
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item"
-							href="<c:url value='/RetrievePageProducts' />">商城</a> <a
+							href="<c:url value='/mall_shop' />">商城</a> <a
 							class="dropdown-item" href="cart.html">購物車</a> <a
 							class="dropdown-item" href="checkout.html">查看訂單</a>
 					</div></li>
