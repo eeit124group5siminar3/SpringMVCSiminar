@@ -8726,14 +8726,14 @@ h1, h2, h3, h4, h5,
   display: inline-block;
   font-weight: 400;
   font-size: 16px; }
-  .product-category li a,input {
+  .product-category li a,input,.product-category li.active{
     color: #82ae46;
     padding: 5px 20px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     border-radius: 5px; }
-    .product-category li a.active ,button{
+    .product-category li.active ,.product-category button{
       background: #82ae46;
       color: #fff; }
 

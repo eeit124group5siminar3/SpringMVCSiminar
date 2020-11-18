@@ -122,13 +122,26 @@ public class ProductDAO {
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "from ProductBean where stock != 0";
 		Query<ProductBean> query = null;
-		if (searchString == null || searchString.length() == 0) {
-			hql += " ORDER BY ProductId";
-			query = session.createQuery(hql, ProductBean.class);
+		if (searchString == null) {
+			if (categoryId == null) {
+				hql += " ORDER BY ProductId";
+				query = session.createQuery(hql, ProductBean.class);
+			} else {
+				hql += " and category = ?0 ORDER BY ProductId";
+				query = session.createQuery(hql, ProductBean.class);
+				query.setParameter(0, categoryId);
+			}
 		} else {
-			hql += " and  product like ?0  ORDER BY ProductId";
-			query = session.createQuery(hql, ProductBean.class);
-			query.setParameter(0, "%" + searchString + "%");
+			if (categoryId == null) {
+				hql += " and product like ?0 ORDER BY ProductId";
+				query = session.createQuery(hql, ProductBean.class);
+				query.setParameter(0, "%" + searchString + "%");
+			} else {
+				hql += " and product like ?0 and  category = ?1 ORDER BY ProductId";
+				query = session.createQuery(hql, ProductBean.class);
+				query.setParameter(0, "%" + searchString + "%");
+				query.setParameter(1, categoryId);
+			}
 		}
 		query.setFirstResult(startRecordNo);
 		query.setMaxResults(recordsPerPage);
@@ -181,16 +194,30 @@ public class ProductDAO {
 		int count = 0; // 必須使用 long 型態
 		String hql = "select count( * ) from ProductBean where stock != 0";
 		Query<Long> query = null;
-		if (searchString == null || searchString.length() == 0) {
-			query = session.createQuery(hql, java.lang.Long.class);
+		if (searchString == null) {
+			if (categoryId == null) {
+				query = session.createQuery(hql, java.lang.Long.class);
+			} else {
+				hql += " and category = ?0";
+				query = session.createQuery(hql, java.lang.Long.class);
+				query.setParameter(0, categoryId);
+			}
 		} else {
-			hql += " and  product like ?0";
-			query = session.createQuery(hql, java.lang.Long.class);
-			query.setParameter(0, "%" + searchString + "%");
+			if (categoryId == null) {
+				hql += " and product like ?0";
+				query = session.createQuery(hql, java.lang.Long.class);
+				query.setParameter(0, "%" + searchString + "%");
+			} else {
+				hql += " and product like ?0 and  category = ?1";
+				query = session.createQuery(hql, java.lang.Long.class);
+				query.setParameter(0, "%" + searchString + "%");
+				query.setParameter(1, categoryId);
+			}
 		}
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
 		count = (int) longNumber;
+		System.err.println(count);
 		return count;
 	}
 
@@ -266,7 +293,7 @@ public class ProductDAO {
 		ProductBean bean = session.get(ProductBean.class, productId);
 		return bean;
 	}
-	
+
 // 查詢某一商品的圖片
 	public ProductImageBean getProductImage(int productId) {
 		Session session = sessionFactory.getCurrentSession();
