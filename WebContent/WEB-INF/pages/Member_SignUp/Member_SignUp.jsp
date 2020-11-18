@@ -141,27 +141,25 @@
 				</div>
 				<p></p>
 				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="inputEmail4">帳號</label> <input type="email"
+					<div class="form-group col-md-6" style="text-align:center">
+						<label style="float:left" for="inputEmail4">帳號</label><span style="color:red"><small>Email重覆，請重新輸入</small></span> <input type="email"
 							name="member_email" class="form-control" placeholder="請填入Email"
 							required>
-							<div class="center"><label style="color:red;height:10px">Email重覆，請重新輸入</label></div>
+							
 					</div>
-					<div class="form-group col-md-6">
-						<label for="inputEmail4">身份證字號</label> <input type="text"
+					<div class="form-group col-md-6" style="text-align:center">
+						<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color:red"><small>身份證字號輸入錯誤，請重新輸入</small></span><input type="text"
 							name="member_id" class="form-control" placeholder="請填入身份證字號"
 							pattern="^[A-Za-z]\d{9}$" title="身分證格式錯誤" required>
-							<a style="color:red;height:10px">aaaaaa</a>
 					</div>
-					<div class="form-group col-md-6">
-						<label for="inputPassword4">密碼</label> <input type="password"
+					<div class="form-group col-md-6" style="text-align:center">
+						<label for="inputPassword4" style="float:left">密碼</label> <span style="color:red"><small>二次密碼輸入錯誤，請重新輸入</small></span><input type="password"
 							name="member_password" class="form-control" placeholder="請填入密碼"
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 							title="密碼長度至少8碼，須包含大寫、小寫英文及數字" required>
-							<a style="color:red;height:10px">aaaaaa</a>
 					</div>
-					<div class="form-group col-md-6">
-						<label for="inputPassword4">密碼</label> <input type="password"
+					<div class="form-group col-md-6" style="text-align:center">
+						<label for="inputPassword4" style="float:left">密碼</label> <input type="password"
 							name="member_password1" class="form-control"
 							placeholder="請再次填入密碼"
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
@@ -169,38 +167,33 @@
 					</div>
 					<div id="ckeckbank"></div>
 					<div id="ckeckbank1"></div>
-					<div class="form-group col-md-6">
-						<label for="inputPassword4">名稱</label> <input type="text"
+					<div class="form-group col-md-6" style="text-align:center">
+						<label for="inputPassword4" style="float:left">名稱</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
 							name="member_name" class="form-control" placeholder="請填入姓名或商家名稱"
 							pattern="^[\u4e00-\u9fa5]{0,}$" title="只接受中文字" required>
-							<a style="color:red;height:10px">aaaaaa</a>
 						<p></p>
-						<label for="inputPassword4">生日</label> <input type="date"
+						<label for="inputPassword4" style="float:left">生日</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="date"
 							name="member_birthday" class="form-control"
-							onkeydown="return false" pattern="\d{4}\-?\d{2}\-?\d{2}" required>
-						<a style="color:red;height:10px">aaaaaa</a>
-						<label for="inputPassword4">連絡電話</label> <input type="text"
+							onkeydown="return false" pattern="\d{4}\-?\d{2}\-?\d{2}" required><p></p>
+						<label for="inputPassword4" style="float:left">連絡電話</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
 							name="member_cellphone" class="form-control"
 							placeholder="請填入手機或住家電話，可用-或( )分隔"
 							pattern="(\d{2,3}-?|\(\d{2,3}\))\d{3,4}-?\d{4}|09\d{2}(\d{6}|-\d{3}-\d{3})
 "
 							title="格式錯誤" required>
-							<a style="color:red;height:10px">aaaaaa</a>
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="inputAddress">地址</label> <input type="text"
+				<div class="form-group" style="text-align:center">
+					<label for="inputAddress" style="float:left">地址</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
 						name="member_address" class="form-control" placeholder="請填入聯絡地址"
 						pattern="^[\u4e00-\u9fa5\d]{0,}$" title="格式錯誤，不能填入英文" required>
-						<a style="color:red;height:10px">aaaaaa</a>
 				</div>
 
 				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="inputEmail4">統一編號</label> <input type="text"
+					<div class="form-group col-md-6" style="text-align:center">
+						<label for="inputEmail4" style="float:left">統一編號</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
 							name="member_gui_number" class="form-control" placeholder="選填"
 							pattern="\d{8}" title="需輸入8位數字">
-							<a style="color:red;height:10px">aaaaaa</a>
 					</div>
 				</div>
 
