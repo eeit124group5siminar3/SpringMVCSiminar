@@ -9,8 +9,8 @@ public class PageTo {
 	public String productShowCart() {
 		return "/mall/ProductShowCart";
 	}
-	@GetMapping(value = "/shop")
+	@GetMapping(value = "/mall_shop")
 	public String shopPage() {
-		return "/mall/shop";
+		return "/mall/mall_shop";
 	}
 }
