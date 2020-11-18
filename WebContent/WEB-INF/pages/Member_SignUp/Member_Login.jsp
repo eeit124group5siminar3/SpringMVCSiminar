@@ -61,7 +61,6 @@ $("#login").click(function(){
 			remember:$("#exampleCheck1").val()
 		 	},
 		type:"POST", 
-		dataType:"json", 
 		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 	success:function(data){
 		if(data){
@@ -113,7 +112,7 @@ $("#login").click(function(){
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
 				<div id="check_email" class="center"
-					style="color: red; text-align: center"></div>
+					style="color: red; text-align: center;height:20px"></div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">帳號</label> <input type="email"
 						name="email" value="${requestScope.user}${param.email}"
