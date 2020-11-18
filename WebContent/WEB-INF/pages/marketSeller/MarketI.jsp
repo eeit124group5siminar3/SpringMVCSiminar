@@ -23,7 +23,8 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <jsp:include page="/top.jsp" />
 <form:form action="MarketProduct.insert"  method="post" modelAttribute="Insert1" enctype="multipart/form-data">
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
-<tr>
+
+    <tr>
     <td>商品名稱:</td>
     <td><form:input type="text" name="product_name" id="product_name" class='InputClass'
      size="20" maxlength="10" path="productName"/>
@@ -91,7 +92,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
     <td>  商品狀態 </td>
     
        <td >
-           <form:radiobutton path="marketPutOutBean.putOut"  value="1"/>上架
+           <form:radiobutton path="marketPutOutBean.putOut" checked="true" value="1"/>上架
            <form:radiobutton path="marketPutOutBean.putOut"  value="0"/>下架
        </td>
     </tr>  
@@ -105,7 +106,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </form:form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
- <img id="blah" src="#" alt="your image" />
+ <img height='120' width='96'  id="blah" src="#" alt="your image" />
 <script>
 function readURL(input) {
   if (input.files && input.files[0]) {
