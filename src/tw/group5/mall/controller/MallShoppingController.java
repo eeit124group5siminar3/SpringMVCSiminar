@@ -40,14 +40,14 @@ public class MallShoppingController {
 		List<ProductBean> list = null;
 //		HttpSession session = request.getSession(false);
 		String searchString = (String) request.getAttribute("searchString");
-		if (pageNo == null) {
-			if (model.getAttribute("pageNo") != null) {
-				pageNo = (Integer) model.getAttribute("pageNo");
-			} else {
-				pageNo = 1;
-			}
-		}
-		service.setPageNo(pageNo);
+//		if (pageNo == null) {
+//			if (model.getAttribute("pageNo") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			} else {
+//				pageNo = 1;
+//			}
+//		}
+//		service.setPageNo(pageNo);
 //		if (searchString == null || searchString.length() == 0) {
 			list = service.getPageProductsWithoutZero();
 //		} else {
@@ -61,21 +61,22 @@ public class MallShoppingController {
 	@GetMapping(value = "/RetrievePage/{pageNo}", produces = { "text/html;charset=UTF-8" })
 	public @ResponseBody String productPage(
 			@PathVariable(value = "pageNo", required = false) Integer pageNo, Model model, HttpServletRequest request) {
-		int totalPages = 1;
+//		int totalPages = 1;
 //		HttpSession session = request.getSession(false);
 //		String searchString = (String) request.getAttribute("searchString");	
 //		if (searchString == null || searchString.length() == 0) {
-			totalPages = service.getTotalPagesWithoutZero();
+			Integer totalPages = service.getTotalPagesWithoutZero();
 //		} else {
 //			totalPages = service.getTotalPagesWithoutZero(searchString);
 //		}
-		if (pageNo == null) {
-			if (model.getAttribute("pageNo") != null) {
-				pageNo = (Integer) model.getAttribute("pageNo");
-			} else {
-				pageNo = 1;
-			}
-		}
+//		if (pageNo == null) {
+//			if (model.getAttribute("pageNo") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			} else {
+//				pageNo = 1;
+//			}
+//		}
+			service.setPageNo(pageNo);
 		model.addAttribute("pageNo", pageNo);
 		return String.valueOf(totalPages);
 	}
@@ -87,10 +88,11 @@ public class MallShoppingController {
 //		HttpSession session = request.getSession(false);
 		if (searchString == null || searchString.length() == 0) {
 			model.addAttribute("searchString", null);
+			service.setSearchString(null);
 		} else {
 			model.addAttribute("searchString", searchString);
+			service.setSearchString(searchString);
 		}
-		service.setSearchString(searchString);
 		request.setAttribute("searchString", searchString);
 	}
 
@@ -103,6 +105,7 @@ public class MallShoppingController {
 			categoryId=null;
 		}
 		service.setCategoryId(categoryId);
+		System.err.println(categoryId);
 		return list;
 	}
 
