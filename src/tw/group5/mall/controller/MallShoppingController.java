@@ -31,6 +31,7 @@ public class MallShoppingController {
 
 	@Autowired
 	private ProductService service;
+
 //取得頁面商品
 	@GetMapping(value = { "/RetrievePageProducts", "/RetrievePageProducts/{pageNo}" }, produces = {
 			"application/json" })
@@ -40,16 +41,16 @@ public class MallShoppingController {
 		List<ProductBean> list = null;
 //		HttpSession session = request.getSession(false);
 		String searchString = (String) request.getAttribute("searchString");
-//		if (pageNo == null) {
-//			if (model.getAttribute("pageNo") != null) {
-//				pageNo = (Integer) model.getAttribute("pageNo");
-//			} else {
-//				pageNo = 1;
-//			}
-//		}
+		if (pageNo == null) {
+			if (model.getAttribute("pageNo") != null) {
+				pageNo = (Integer) model.getAttribute("pageNo");
+			} else {
+				pageNo = 1;
+			}
+		}
 //		service.setPageNo(pageNo);
 //		if (searchString == null || searchString.length() == 0) {
-			list = service.getPageProductsWithoutZero();
+		list = service.getPageProductsWithoutZero();
 //		} else {
 //			list = service.getPageProductsWithoutZero(searchString);
 //		}
@@ -57,15 +58,16 @@ public class MallShoppingController {
 		model.addAttribute("pageNo", pageNo);
 		return list;
 	}
+
 //取得所有頁面數
 	@GetMapping(value = "/RetrievePage/{pageNo}", produces = { "text/html;charset=UTF-8" })
-	public @ResponseBody String productPage(
-			@PathVariable(value = "pageNo", required = false) Integer pageNo, Model model, HttpServletRequest request) {
+	public @ResponseBody String productPage(@PathVariable(value = "pageNo", required = false) Integer pageNo,
+			Model model, HttpServletRequest request) {
 //		int totalPages = 1;
 //		HttpSession session = request.getSession(false);
 //		String searchString = (String) request.getAttribute("searchString");	
 //		if (searchString == null || searchString.length() == 0) {
-			Integer totalPages = service.getTotalPagesWithoutZero();
+		Integer totalPages = service.getTotalPagesWithoutZero();
 //		} else {
 //			totalPages = service.getTotalPagesWithoutZero(searchString);
 //		}
@@ -76,15 +78,16 @@ public class MallShoppingController {
 //				pageNo = 1;
 //			}
 //		}
-			service.setPageNo(pageNo);
+		service.setPageNo(pageNo);
 		model.addAttribute("pageNo", pageNo);
 		return String.valueOf(totalPages);
 	}
+
 //設定查詢字串
 	@GetMapping(value = { "/RetrieveSearch/{searchString}", "/RetrieveSearch" })
 	@ResponseBody
-	public void searchProduct(@PathVariable(value = "searchString", required = false) String searchString,
-			Model model, HttpServletRequest request) {
+	public void searchProduct(@PathVariable(value = "searchString", required = false) String searchString, Model model,
+			HttpServletRequest request) {
 //		HttpSession session = request.getSession(false);
 		if (searchString == null || searchString.length() == 0) {
 			model.addAttribute("searchString", null);
@@ -99,13 +102,12 @@ public class MallShoppingController {
 // 設定查詢種類
 	@GetMapping(value = "/RetrieveCategory/{categoryId}")
 	@ResponseBody
-	public List<CategoryBean> categoryList(@PathVariable(value = "categoryId") Integer categoryId){
-		List<CategoryBean> list=service.getCategory();
+	public List<CategoryBean> categoryList(@PathVariable(value = "categoryId") Integer categoryId) {
+		List<CategoryBean> list = service.getCategory();
 		if (categoryId == 0) {
-			categoryId=null;
+			categoryId = null;
 		}
 		service.setCategoryId(categoryId);
-		System.err.println(categoryId);
 		return list;
 	}
 
