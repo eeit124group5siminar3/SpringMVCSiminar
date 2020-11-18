@@ -30,8 +30,8 @@ public class ProductDAO {
 		this.maintainPageNo = maintainPageNo;
 	}
 
-	public final int RECORDS_PER_PAGE = 5;
-	private int recordsPerPage = RECORDS_PER_PAGE; // 預設值：每頁三筆
+	public final int RECORDS_PER_PAGE = 12;
+	private int recordsPerPage = RECORDS_PER_PAGE; 
 	private int totalPages = -1;
 	private int totalPagesWithoutZero = -1;
 	private String tagName = "";
@@ -84,7 +84,7 @@ public class ProductDAO {
 		String hql = "from ProductBean ORDER BY ProductId";
 		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
 		query.setFirstResult(startRecordNo);
-		query.setMaxResults(5);
+		query.setMaxResults(recordsPerPage);
 		List<ProductBean> list = query.list();
 		return list;
 	}
@@ -95,7 +95,7 @@ public class ProductDAO {
 		String hql = "from ProductBean where stock != 0 ORDER BY ProductId";
 		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
 		query.setFirstResult(startRecordNo);
-		query.setMaxResults(5);
+		query.setMaxResults(recordsPerPage);
 		List<ProductBean> list = query.list();
 		return list;
 	}
@@ -108,7 +108,7 @@ public class ProductDAO {
 		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
 		query.setParameter(0, "%" + searchString + "%");
 		query.setFirstResult(startRecordNo);
-		query.setMaxResults(5);
+		query.setMaxResults(recordsPerPage);
 		List<ProductBean> list = query.list();
 		return list;
 	}
@@ -120,7 +120,7 @@ public class ProductDAO {
 		Query<ProductBean> query = session.createQuery(hql,ProductBean.class);
 		query.setParameter(0, producterId);
 		query.setFirstResult(startRecordNo);
-		query.setMaxResults(5);
+		query.setMaxResults(recordsPerPage);
 		List<ProductBean> list = query.list();
 		return list;
 		

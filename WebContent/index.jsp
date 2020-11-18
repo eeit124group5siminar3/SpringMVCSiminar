@@ -85,7 +85,7 @@
 						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">商城</a> <a
+							<a class="dropdown-item" href="<c:url value='/shop' />">商城</a> <a
 								class="dropdown-item" href="cart.html">購物車</a> <a
 								class="dropdown-item" href="checkout.html">查看訂單</a>
 						</div></li>
@@ -102,8 +102,13 @@
 								href="<c:url value='        '/>">購物車</a>
 						</div></li>
 						
-					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
-
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="<c:url value='        '/>">一日農夫</a>
+							<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
+						</div></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>

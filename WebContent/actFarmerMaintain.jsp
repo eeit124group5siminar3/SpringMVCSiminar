@@ -181,7 +181,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo2">市場管理</button>
 			<div id="demo2" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
+				<li align="left"><a href="actFarmerMaintain.jsp" class="hyperlink">????</a></li>
 				<li align="left"><a href="" class="hyperlink">????</a></li>
 			</div>
 		</div>
@@ -199,15 +199,96 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo4">活動管理</button>
 			<div id="demo4" class="collapse">
-				<li align="left"><a href="actFarmerMaintain.jsp" class="hyperlink">一日農夫</a></li>
+				<li align="left"><a href="" class="hyperlink">一日農夫</a></li>
 				<li align="left"><a href="" class="hyperlink">農農市集</a></li>
 			</div>
 		</div>
 	</div>
 
 	<div align="center" id="backstage_page">
-<!-- --------會員管理 內容區--------- -->
+<!-- --------一日農夫管理 內容區--------- -->
 
+	<h1 align="center">活動管理-一日農夫</h1>
+	<table align="center" style="border: 8px gray groove;" border="1" >
+<!-- 		<h2>活動列表</h2> -->
+			<tr>			
+				<td style="border: 0px" align="right" colspan="10">
+					<form action="" method="post">
+						<input name="apply" type="submit" value="申請">
+					</form>
+				</td>
+				<td style="border: 0px" align="right" colspan="2">	
+					<form action="" method="get">
+						<input name="selectAll" type="submit" value="查詢全部">
+					</form>
+				</td>			
+			</tr>
+			<tr>
+				<th>活動編號</th>
+				<th>活動名稱</th>
+				<th>活動類型</th>				
+				<th>活動日期/時間</th>
+				<th>人數上限</th>
+				<th>價格</th>
+				<th>報名日期/時間</th>
+				<th>報名人數</th>	
+				<th>報名狀態</th>			
+				<th colspan="3">Action</th>
+			</tr>
+			<c:forEach var="actFarmer" items="${collFarmer}">
+					<tr>
+						<td><c:out value="${actFarmer.actId}" /></td>
+						<td><c:out value="${actFarmer.actName}" /></td>
+						<td><c:out value="${actFarmer.actType}" /></td>						
+						<td><c:out value="${actFarmer.actDateSta}" />&nbsp;
+							<c:out value="${actFarmer.actTimeSta}" />
+							到
+							<c:out value="${actFarmer.actDateEnd}" />&nbsp;
+							<c:out value="${actFarmer.actTimeEnd}" />							
+						</td>
+						<td><c:out value="${actFarmer.numLim}" /></td>
+						<td><c:out value="${actFarmer.price}" /></td>
+						<td><c:out value="${actFarmer.signDateSta}" />
+							<c:out value="${actFarmer.signTimeSta}" />
+							到
+							<c:out value="${actFarmer.signDateEnd}" />
+							<c:out value="${actFarmer.signTimeEnd}" />							
+						</td>
+						<td><c:out value="${actFarmer.actNum}" /></td>
+						<td><c:out value="${actFarmer.sigStat}" /></td>						
+						<td>
+							<form action="<c:url value='/'/>" method="post">
+								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
+								<input name="look" type="submit" value="檢視">
+							</form>
+						</td>
+						<td>
+							<form action="<c:url value='/'/>" method="post">
+								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
+								<input name="update" type="submit" value="修改">
+							</form> 
+						</td>
+						<td>
+							<form action="<c:url value='/'/>" method="post">
+								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
+								<input name="delete" type="submit" value="刪除">								
+							</form>	
+						</td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td style="border: 0px" colspan="6"></td>
+
+					<td style="border: 0px" colspan="6">
+						<form action="<c:url value='/activeSelectone.controller'/>" method="get">
+							<label for="">活動名稱:</label>
+							<input type="text" id="selectname" name="selectname">
+							&nbsp;
+							<input name="selectone" type="submit" value="查詢單筆">
+						</form>
+					</td>
+				</tr>
+			</table>
 
 
 

@@ -27,7 +27,7 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
 @SessionAttributes(value = { "searchString", "pageNo", "login_ok", "login_guest", "ShoppingCart" })
-public class MallShoppingController {
+public class MallShoppingController2 {
 
 	@Autowired
 	private ServletContext servletContext;
