@@ -12,6 +12,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <html lang="zh">
 <head>
 <title>農郁</title>
+
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,6 +46,34 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+<script>
+$(function(){
+$("#login").click(function(){
+	$.ajax({
+		url:"checkLogin.controller",
+		data:{
+			email:$("#exampleInputEmail1").val(),
+			password:$("#exampleInputPassword1").val(),
+			remember:$("#exampleCheck1").val()
+		 	},
+		type:"POST", 
+		dataType:"json", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	success:function(data){
+		if(data){
+			window.location.href = "index.controller";
+		}else{
+			$("#check_email").html("帳號或密碼錯誤，請重新輸入");
+		}
+	}
+    })  
+})
+})
+</script>
 <body class="goto-here body-hegiht">
 	<div class="py-1 bg-primary">
 		<div class="container">
@@ -79,7 +108,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			aria-expanded="false" aria-label="Toggle navigation"></button>
 	</div>
 
-	<form action="checkLogin.controller" method="post">
+	<form method="post">
 		<div class="login-form">
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
@@ -108,7 +137,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<a class="btn btn-primary" href="goMemberSignUp.controller"
 					style="float: counter">註冊</a> <a class="btn btn-primary"
 					href="forgotResetPwd.controller" style="float: counter">忘記密碼</a>
-				<button type="submit" name="login" id="login"
+				<button type="button" name="login" id="login"
 					class="btn btn-primary" style="float: right">提交</button>
 			</fieldset>
 		</div>

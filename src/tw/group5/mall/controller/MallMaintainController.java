@@ -69,14 +69,14 @@ public class MallMaintainController {
 		Map<String, String> successMsgs = new HashMap<String, String>();
 		model.addAttribute("ErrMsg", errorMsgs);
 		model.addAttribute("successMsg", successMsgs);
-		service.setId(category);
+		service.setCategoryId(category);
 		insert.setCategory(category);
 		service.getCategoryById();
 		insert.setCategoryBean(service.getCategoryById());
 		Integer producterId = mb.getMember_no();
 		insert.setProducterId(producterId);
 		service.saveProduct(insert);
-		service.setId(1);
+		service.setCategoryId(1);
 		String categoryTag = service.getSelectTag();
 		model.addAttribute("SelectCategoryTag", categoryTag);
 		successMsgs.put("success", "資料新增成功");
@@ -117,7 +117,7 @@ public class MallMaintainController {
 		Map<String, String> successMsgs = new HashMap<String, String>();
 		model.addAttribute("ErrMsg", errorMsgs);
 		model.addAttribute("successMsg", successMsgs);
-		service.setId(category);
+		service.setCategoryId(category);
 		bb.setCategoryBean(service.getCategoryById());
 		service.updateProduct(bb);
 

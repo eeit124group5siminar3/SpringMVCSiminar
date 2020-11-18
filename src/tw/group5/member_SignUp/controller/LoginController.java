@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,15 +29,22 @@ public class LoginController {
 	@Autowired
 	private Member_Service member_Service;
 	
+	@RequestMapping(path = "/index.controller", method = RequestMethod.GET)
+	public String processIndex() {
+		return "index";
+	}	
+	
+	
 	@RequestMapping(path = "/login.controller", method = RequestMethod.GET)
 	public String processLogin() {
 		return "Member_SignUp/Member_Login";
-	}
+	}	
 	
 	
 	//登陸驗證
 	@RequestMapping(path = "/checkLogin.controller",method = RequestMethod.POST)
-	public String processCheckLogin(HttpServletRequest request, HttpServletResponse response,Model m) {
+	@ResponseBody
+	public boolean processCheckLogin(HttpServletRequest request, HttpServletResponse response,Model m) {
 		
 		Cookie cookieUser = null;
 		Cookie cookiePassword = null;
@@ -82,9 +90,9 @@ public class LoginController {
 			
 			m.addAttribute("login_ok", login_bean);
 
-			return "Member_SignUp/Member_Login_OK";
+			return true;
 		}
-		 return "帳號或密碼輸入錯誤";
+		 return false;
 	}	
 	
 	//登出
@@ -95,7 +103,7 @@ public class LoginController {
 		session.invalidate();
 		sessionStatus.setComplete();
 
-		return "index";
+		return "redirect:index.controller";
 	}
 	
 	

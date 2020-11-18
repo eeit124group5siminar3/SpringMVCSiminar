@@ -32,16 +32,16 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
            </font>
     </td>
 </tr>
- <tr>
-    <td>單位:</td>
-        <td><form:input type="text" name="unit" id="unit" maxlength="10"
-       path="unit" size="5" />
-           <font color='red' size='-1'>
-              ${errors.errUnit}
-           </font>  
+<!--  <tr> -->
+<!--     <td>單位:</td> -->
+<%--         <td><form:input type="text" name="unit" id="unit" maxlength="10" --%>
+<%--        path="unit" size="5" /> --%>
+<!--            <font color='red' size='-1'> -->
+<%--               ${errors.errUnit} --%>
+<!--            </font>   -->
            
-    </td>
- </tr>
+<!--     </td> -->
+<!--  </tr> -->
 <tr>
     <td>商品出產地:</td>
     <td><form:input type="text" name="product_area" id="product_area" size="20" maxlength="10"

@@ -199,8 +199,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo4">活動管理</button>
 			<div id="demo4" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
+				<li align="left"><a href="actFarmerMaintain.jsp" class="hyperlink">一日農夫</a></li>
+				<li align="left"><a href="" class="hyperlink">農農市集</a></li>
 			</div>
 		</div>
 	</div>

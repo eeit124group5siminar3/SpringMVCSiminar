@@ -1,3 +1,4 @@
+package tw.group5.mall.product_X;
 //package tw.group5.mall.product;
 //
 //import org.springframework.stereotype.Controller;
