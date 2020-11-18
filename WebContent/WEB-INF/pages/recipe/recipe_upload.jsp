@@ -49,8 +49,31 @@
 	width:600px;
 }
 </style>
+<!--------------------- AJAX ------------------------>
+<script type="text/javascript">
+window.onload = function(){
+	var btn=document.getElementById("send");
+	var display = document.getElementById("TestDisplay");
 
+	btn.onclick = function() {
+		var xhr = new XMLHttpRequest();
+		if (xhr != null) {
+		xhr.onreadystatechange=function(){	
+				if(xhr.readyState==4 && xhr.status==200){
+					display.innerHTML=xhr.responseText;
+					}
+			}
+	xhr.open('GET',"<c:url value='/uploadSubmit.controller'/>",true);
+	xhr.send();
+	}else{
+			display.innerHTML="<h3>您的瀏覽器不支援Ajax</h3>";
+		}
+
+}
+</script>
 </head>
+
+
 <body>
 <body class="goto-here">
 	<div class="py-1 bg-primary">
@@ -253,11 +276,11 @@
 
 			<hr>
 			<div style="text-align: center;">
-				<label> <input id="send" type="submit" name="action"
+				<input id="send" type="submit" name="action"
 					value="送出" onclick="doUpload()" />
 				</label> 
 <!-- 				<label> <input type="submit" name="action" value="回首頁" /> -->
-<!-- 				</label> -->
+
 			</div>
 
 		</fieldset>
@@ -265,7 +288,7 @@
 	</form:form>
 
 
-
+	<div id="TestDisplay" align="center">上傳確認畫面,顯示在這</div>
 
 
 

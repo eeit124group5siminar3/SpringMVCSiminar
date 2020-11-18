@@ -23,12 +23,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
@@ -96,24 +99,33 @@ public class Recipe_Controller_upload {
 		return action;
 	}
 	
-	@RequestMapping(path="/uploadConfirm.controller" ,method = RequestMethod.POST)
-	public String saveProcess(@RequestParam String action,SessionStatus status) {
+	@GetMapping(value="/uploadConfirm.controller" ,produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String saveProcess(
+//			@RequestParam String action,SessionStatus status
+			) {
 		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
 		System.out.println(bean.getName());
 		System.out.println(bean.getIngredients_A());
 		
-		if (action.equals("送出")) {
+//		if (action.equals("送出")) {
 			service.insert(bean);
 //			session.removeAttribute("details");
 //			status.setComplete();
-			return "recipe/upload_success";
-		}
-		if (action.equals("修改")) {
-			return "recipe/recipe_upload_revise";
-		} 
+			return "<font color='red'>更新成功 </font>";
+//		}
+//		if (action.equals("修改")) {
+//			return "recipe/recipe_upload_revise";
+//		} 
 //		if (action.equals("回首頁")) {
 //			return "recipe/recipe_workpage";
 //		} 
-		return action;
+//		return action;
+	}
+	
+	@GetMapping(value="/reviseConfirm.controller" ,produces = "text/plain;charset=UTF-8")
+	public @ResponseBody String reviseProcess() {
+		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
+		return null;
+	
 	}
 }
