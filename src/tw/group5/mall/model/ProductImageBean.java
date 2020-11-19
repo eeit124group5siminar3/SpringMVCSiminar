@@ -54,4 +54,5 @@ public class ProductImageBean implements Serializable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
 }

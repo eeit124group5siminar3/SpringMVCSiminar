@@ -66,85 +66,79 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">農郁</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> 列表
-			</button>
+<!-- 	<nav -->
+<!-- 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" -->
+<!-- 		id="ftco-navbar"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<a class="navbar-brand" href="index.html">農郁</a> -->
+<!-- 			<button class="navbar-toggler" type="button" data-toggle="collapse" -->
+<!-- 				data-target="#ftco-nav" aria-controls="ftco-nav" -->
+<!-- 				aria-expanded="false" aria-label="Toggle navigation"> -->
+<!-- 				<span class="oi oi-menu"></span> 列表 -->
+<!-- 			</button> -->
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html"
-						class="nav-link">首頁</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="<c:url value='/shop' />">商城</a> <a
-								class="dropdown-item" href="cart.html">購物車</a> <a
-								class="dropdown-item" href="checkout.html">查看訂單</a>
-						</div></li>
-					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
-						<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item"
-								href="<c:url value='        '/>">市場</a> <a
-								class="dropdown-item"
-								href="<c:url value='/MarketProduct.selectAll'/>">商品管理</a> <a
-								class="dropdown-item"
-								href="<c:url value='        '/>">購物車</a>
-						</div></li>	
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="<c:url value='allActFarmer.do'/>">一日農夫</a>
-							<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
-						</div></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item"
-								href="<c:url value='uploadPage.controller'/>">上傳食譜</a> <a
-								class="dropdown-item"
-								href="<c:url value='updatePage.controller'/>">修改食譜</a> <a
-								class="dropdown-item"
-								href="<c:url value='searchPage.controller'/>">搜尋料理</a>
-						</div></li>
+<!-- 			<div class="collapse navbar-collapse" id="ftco-nav"> -->
+<!-- 				<ul class="navbar-nav ml-auto"> -->
+<!-- 					<li class="nav-item active"><a href="index.html" -->
+<!-- 						class="nav-link">首頁</a></li> -->
+<!-- 					<li class="nav-item dropdown"><a -->
+<!-- 						class="nav-link dropdown-tgogle" href="#" id="dropdown04" -->
+<!-- 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a> -->
+<!-- 						<div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+<%-- 							<a class="dropdown-item" href="<c:url value='/shop' />">商城</a> <a --%>
+<!-- 								class="dropdown-item" href="cart.html">購物車</a> <a -->
+<!-- 								class="dropdown-item" href="checkout.html">查看訂單</a> -->
+<!-- 						</div></li> -->
+<!-- 					<li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
+<!-- 						<li class="nav-item dropdown"><a -->
+<!-- 						class="nav-link dropdown-tgogle" href="#" id="dropdown04" -->
+<!-- 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a> -->
+<!-- 						<div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+<!-- 							<a class="dropdown-item" -->
+<%-- 								href="<c:url value='        '/>">市場</a> <a --%>
+<!-- 								class="dropdown-item" -->
+<%-- 								href="<c:url value='/MarketProduct.selectAll'/>">商品管理</a> <a --%>
+<!-- 								class="dropdown-item" -->
+<%-- 								href="<c:url value='        '/>">購物車</a> --%>
+<!-- 						</div></li>	 -->
+<!-- 					<li class="nav-item dropdown"><a -->
+<!-- 						class="nav-link dropdown-tgogle" href="#" id="dropdown04" -->
+<!-- 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a> -->
+<!-- 						<div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+<%-- 							<a class="dropdown-item" href="<c:url value='allActFarmer.do'/>">一日農夫</a> --%>
+<%-- 							<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a> --%>
+<!-- 						</div></li> -->
+<!-- 					<li class="nav-item dropdown"><a -->
+<!-- 						class="nav-link dropdown-tgogle" href="#" id="dropdown04" -->
+<!-- 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a> -->
+<!-- 						<div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+<!-- 							<a class="dropdown-item" -->
+<%-- 								href="<c:url value='uploadPage.controller'/>">上傳食譜</a> <a --%>
+<!-- 								class="dropdown-item" -->
+<%-- 								href="<c:url value='updatePage.controller'/>">修改食譜</a> <a --%>
+<!-- 								class="dropdown-item" -->
+<%-- 								href="<c:url value='searchPage.controller'/>">搜尋料理</a> --%>
+<!-- 						</div></li> -->
 
-					<li class="nav-item"><c:if test="${empty login_ok}">
-							<a class="nav-link" href="<c:url value='login.controller' />">會員</a>
-						</c:if> <c:if test="${!empty login_ok}">
-							<a class="nav-link" href="<c:url value='backstage.controller' />">會員</a>
-						</c:if></li>
-					<li class="nav-item"><c:if test="${empty login_ok}">
-							<a class="nav-link" href="<c:url value='login.controller' />">登錄</a>
-						</c:if>
-					<c:if test="${ ! empty login_ok }">
-						<a class="nav-link" href="<c:url value='removeSession.controller' />"> 登出 </a>
-					</c:if></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-=======
+<%-- 					<li class="nav-item"><c:if test="${empty login_ok}"> --%>
+<%-- 							<a class="nav-link" href="<c:url value='login.controller' />">會員</a> --%>
+<%-- 						</c:if> <c:if test="${!empty login_ok}"> --%>
+<%-- 							<a class="nav-link" href="<c:url value='backstage.controller' />">會員</a> --%>
+<%-- 						</c:if></li> --%>
+<%-- 					<li class="nav-item"><c:if test="${empty login_ok}"> --%>
+<%-- 							<a class="nav-link" href="<c:url value='login.controller' />">登錄</a> --%>
+<%-- 						</c:if> --%>
+<%-- 					<c:if test="${ ! empty login_ok }"> --%>
+<%-- 						<a class="nav-link" href="<c:url value='removeSession.controller' />"> 登出 </a> --%>
+<%-- 					</c:if></li> --%>
+<!-- 					<li class="nav-item cta cta-colored"><a href="cart.html" -->
+<!-- 						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</nav> -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
->>>>>>> 5f04724c09429c85e7885be24e4841977b42de42
-=======
-	<jsp:include page="/WEB-INF/pages/header.jsp" />
->>>>>>> 66188d5f95ffb683b2df774ad03b3217a3a483b0
+	
 	<!-- END nav -->
 
 	<section id="home-section" class="hero">
