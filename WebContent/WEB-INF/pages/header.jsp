@@ -21,11 +21,12 @@
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item"
-							href="<c:url value='/RetrievePageProducts' />">商城</a> <a
-							class="dropdown-item" href="cart.html">購物車</a> <a
+							href="<c:url value='/mall_shop' />">商城</a> <a
+							class="dropdown-item" href="<c:url value='/mall_shoppingcart' />">購物車</a> <a
 							class="dropdown-item" href="checkout.html">查看訂單</a>
 					</div></li>
 				<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
+<<<<<<< HEAD
 				<li class="nav-item"><a href="" class="nav-link">市場</a></li>
 				<li class="nav-item dropdown"><a
 						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
@@ -34,6 +35,20 @@
 							<a class="dropdown-item" href="<c:url value='allActFarmer.do'/>">一日農夫</a>
 							<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
 						</div></li>
+=======
+										<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item"
+								href="<c:url value='        '/>">市場</a> <a
+								class="dropdown-item"
+								href="<c:url value='/MarketProduct.selectAll'/>">商品管理</a> <a
+								class="dropdown-item"
+								href="<c:url value='        '/>">購物車</a>
+						</div></li>
+				<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
+>>>>>>> 66188d5f95ffb683b2df774ad03b3217a3a483b0
 
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"

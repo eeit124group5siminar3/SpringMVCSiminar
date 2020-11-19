@@ -67,6 +67,7 @@
 		</div>
 	</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
@@ -141,6 +142,9 @@
 =======
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 >>>>>>> 5f04724c09429c85e7885be24e4841977b42de42
+=======
+	<jsp:include page="/WEB-INF/pages/header.jsp" />
+>>>>>>> 66188d5f95ffb683b2df774ad03b3217a3a483b0
 	<!-- END nav -->
 
 	<section id="home-section" class="hero">
