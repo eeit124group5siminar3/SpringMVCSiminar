@@ -292,14 +292,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 
 
-
-
-
-
-
-
-
-
 <!-- -------------------------------- -->
 	</div>
 	<footer class="ftco-footer backstage-footer-ground">

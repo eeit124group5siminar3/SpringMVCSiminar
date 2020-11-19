@@ -52,13 +52,13 @@ public class MarketProductDao {
 	}
 	//新增
 	public MarketProductTotalBean insert(MarketProductTotalBean bean) {
-		MarketProductTotalBean result =getSession().get(MarketProductTotalBean.class,bean.getProductId());
+//		MarketProductTotalBean result =getSession().get(MarketProductTotalBean.class,bean.getProductId());
 		
-		if (result==null) {
+//		if (result==null) {
 			getSession().save(bean);
 			return bean;
-		}
-		return null;
+//		}
+//		return null;
 	}
 	
 	//更新

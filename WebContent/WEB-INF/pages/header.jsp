@@ -27,7 +27,13 @@
 					</div></li>
 				<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
 				<li class="nav-item"><a href="" class="nav-link">市場</a></li>
-				<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
+				<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="<c:url value='allActFarmer.do'/>">一日農夫</a>
+							<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
+						</div></li>
 
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
