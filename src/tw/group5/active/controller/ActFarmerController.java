@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.metamodel.model.domain.internal.AbstractIdentifiableType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,6 +88,19 @@ public class ActFarmerController {
 		return "/active/actFarmerMaintain";
 	}
 	
+//	public String getActFarmerById(@ModelAttribute(value = "afBean") AbstractIdentifiableType , Model model,
+//			@SessionAttribute(value = "login_ok")Member_SignUp mb		
+//			) {
+//		//放判斷式的錯誤訊息
+//		Map<String, String> errorMsgs = new HashMap<String, String>();
+//		//放判斷式的成功訊息
+//		Map<String, String> successMsgs =  new HashMap<String, String>();
+//		model.addAttribute("ErrMsg", errorMsgs);
+//		model.addAttribute("successMsg", successMsgs);
+//		actFarmerService.getActFarmer(actId);
+//		
+//	}
+	
 	//申請活動準備(建立空的物件)
 	@GetMapping(path = "/actFarmerPreInsert.do")
 	public String actFarmerPreInsert(Model model) {
@@ -123,6 +137,7 @@ public class ActFarmerController {
 	
 		ActFarmer afBean = actFarmerService.getActFarmer(actId);
 		model.addAttribute("afBean", afBean);
+		System.out.println(afBean.getActId());
 		return "/active/actFarmerUpdate";
 	}
 	

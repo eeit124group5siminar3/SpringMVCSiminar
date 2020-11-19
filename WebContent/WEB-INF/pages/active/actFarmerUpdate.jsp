@@ -11,10 +11,10 @@
 // document.getElementById("sigStat").value="<c:out value='${afBean.sigStat}'/>"; 
 </script> 
 <meta charset="UTF-8">
-<title>一日農夫活動申請</title>
+<title>一日農夫活動修改</title>
 </head>
 <body>
-<h1 align="center">一日農夫申請活動</h1>
+<h1 align="center">一日農夫活動修改</h1>
 <form:form action="actFarmerUpdate.do" modelAttribute="afBean" method="POST" enctype="multipart/form-data">
 <table align="center">
 	<tr>
@@ -67,11 +67,14 @@
 		<td><form:label path="actDescri">活動描述:</form:label></td>
 <%-- 		<td><form:input path="actDescri" type="text" required="required"/></td> --%>
 		<td><form:textarea cols="50" rows="6" path="actDescri"></form:textarea></td>
+
 	</tr>
 	<tr>
-		<td><form:label path="actImg">活動海報:</form:label></td>
-		<td><form:input path="multipartFile" type="file" class="InputClass" id="imgInp" accept="image/*"/></td>
-		<td><img height='120' width='96' id="blah" src="#" alt="your image" /></td>
+		<td><form:label path="actImg">活動海報:</form:label></td>				
+		<td><img height='120' width='96' src="<c:url value='ActImageController?id=${afBean.actId}&type=ACTFARMER'/>"/>		
+		<td><form:input path="multipartFile" type="file" class="InputClass" id="imgInp" accept="image/*"/>
+			<img height='120' width='96' id="blah" src="#" alt="New image" />
+		</td>
 	</tr>
 	<tr>
 		<td><form:label path="signDateSta">報名開始日期:</form:label></td>
@@ -99,6 +102,8 @@
 
 </table>
 </form:form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <script>
 function readURL(input){
 	if(input.files && input.files[0]){
@@ -113,6 +118,8 @@ function readURL(input){
 $("#imgInp").change(function(){
 		readURL(this);
 	});
+
+
 
 </script>
 </body>

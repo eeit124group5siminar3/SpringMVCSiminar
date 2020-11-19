@@ -257,7 +257,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						<td><c:out value="${actFarmer.actNum}" /></td>
 						<td><c:out value="${actFarmer.sigStat}" /></td>						
 						<td>
-							<form action="<c:url value='/'/>" method="post">
+							<form action="<c:url value='/actFarmerPreUpdate.do'/>" method="post">
 								<input type="hidden" id="actId" name="actId" value="${actFarmer.actId}">
 								<input name="look" type="submit" value="檢視">
 							</form>

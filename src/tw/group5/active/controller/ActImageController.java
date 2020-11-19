@@ -31,11 +31,11 @@ public class ActImageController {
 	
 	@GetMapping(value = "/ActImageController")
 	@ResponseBody
-	public ResponseEntity<byte[]> retrieveImage(@RequestParam Integer actId, @RequestParam String type) throws Exception{
+	public ResponseEntity<byte[]> retrieveImage(@RequestParam(value = "id") Integer actId, @RequestParam String type) throws Exception{
 		HttpHeaders headers = new HttpHeaders();
 		headers.setCacheControl(CacheControl.noCache());
 		headers.setPragma("no-cache");
-		headers.setContentType(MediaType.ALL);
+		headers.setContentType(MediaType.IMAGE_JPEG);
 		InputStream is = null;
 		String fileName = null;
 		Blob blob = null;
