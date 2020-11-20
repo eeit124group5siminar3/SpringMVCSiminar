@@ -310,6 +310,9 @@
 			});
 
 		});
+// 		$(document).ready(function(){
+// 			$.ajax({url:"jQueryTest",data:{num1:1,num2:2,num3:3},success:function(data,status){console.log(data);}});
+// 			});
 	</script>
 
 </body>
