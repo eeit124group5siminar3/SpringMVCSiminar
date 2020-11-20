@@ -1,6 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<div class="py-1 bg-primary">
+		<div class="container">
+			<div
+				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+				<div class="col-lg-12 d-block">
+					<div class="row d-flex">
+						<div class="col-md pr-4 d-flex topper align-items-center">
+							<div
+								class="icon mr-2 d-flex justify-content-center align-items-center">
+								<span class="icon-phone2"></span>
+							</div>
+							<span class="text">+ 1235 2355 98</span>
+						</div>
+						<div class="col-md pr-4 d-flex topper align-items-center">
+							<div
+								class="icon mr-2 d-flex justify-content-center align-items-center">
+								<span class="icon-paper-plane"></span>
+							</div>
+							<span class="text">youremail@email.com</span>
+						</div>
+						<div
+							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+							<span class="text">3-5 Business days delivery &amp; Free
+								Returns</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <nav
 	class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 	id="ftco-navbar">
@@ -20,14 +50,14 @@
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<a class="dropdown-item"
-							href="<c:url value='/mall_shop' />">商城</a> <a
-							class="dropdown-item" href="<c:url value='/mall_shoppingcart' />">購物車</a> <a
-							class="dropdown-item" href="checkout.html">查看訂單</a>
+						<a class="dropdown-item" href="<c:url value='/mall_shop' />">商城</a> 
+						<a class="dropdown-item" href="<c:url value='/mall_shoppingcart' />">購物車</a> 
+						<a class="dropdown-item" href="checkout.html">查看訂單</a>
 					</div></li>
 				<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
-										<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+				
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item"
@@ -37,7 +67,13 @@
 								class="dropdown-item"
 								href="<c:url value='        '/>">購物車</a>
 						</div></li>
-				<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown04">
+						<a class="dropdown-item" href="<c:url value='/allActFarmer.do'/>">一日農夫</a>
+						<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
+					</div>
+				</li>
 
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"

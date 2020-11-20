@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -145,4 +146,9 @@ public class MallShoppingController {
 		cart.addToCart(productId, oi);
 		return "redirect:/RetrievePageProducts?pageNo=" + pageNo;
 	}
+//	@RequestMapping(value = "/jQueryTest")
+//	@ResponseBody
+//	public Integer getInteger (@RequestParam(value = "num1")Integer num1,@RequestParam(value = "num2")Integer num2,@RequestParam(value = "num3")Integer num3) {
+//		return num1+num2+num3;
+//	}
 }

@@ -23,8 +23,8 @@ public class MarketPutOutBean {
 	private Integer putOut;
 	private String status;
 	
-    private Set<MarketProductTotalBean> marketProductTotalBean =
-    		                            new HashSet<MarketProductTotalBean>(0);
+//    private Set<MarketProductTotalBean> marketProductTotalBean =
+//    		                            new HashSet<MarketProductTotalBean>(0);
     
 
 	public MarketPutOutBean() {
