@@ -40,7 +40,14 @@
 <title>一日農夫活動申請</title>
 </head>
 
+<script type="text/javascript">
+function backHome(){
+	document.act.action="allActFarmer.do";
 
+    document.act.submit();
+	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
+}
+</script>
 
 <body>
 
@@ -77,7 +84,7 @@
 <jsp:include page="../header.jsp" />
 <div>
 <h1 align="center">一日農夫申請活動</h1>
-<form:form action="actFarmerInsert.do" modelAttribute="farmerinsert" method="POST" enctype="multipart/form-data">
+<form:form action="actFarmerInsert.do" modelAttribute="farmerinsert" method="POST" enctype="multipart/form-data" name="act">
 <table align="center">
 	<tr>
 <%-- 		<td><form:label path="actId" type="hidden">活動編號</form:label></td> --%>
@@ -156,7 +163,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><form:button value="Send" >送出</form:button></td>	
-		<td colspan="2" align="center"><a href="index.jsp"><button>回首頁</button></a></td>					
+		<td><form:button value="back" onclick="backHome()">回首頁</form:button></td>		
 	</tr>
 
 </table>
@@ -193,5 +200,25 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+function readURL(input){
+	if(input.files && input.files[0]){
+		var reader = new FileReader();
+
+		reader.onload = function(e){
+			$('#blah').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+$("#imgInp").change(function(){
+		readURL(this);
+	});
+
+
+
+</script>
 </body>
 </html>

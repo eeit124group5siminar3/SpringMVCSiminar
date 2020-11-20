@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1 align="center">一日農夫活動修改</h1>
-<form:form action="actFarmerUpdate.do" modelAttribute="afBean" method="POST" enctype="multipart/form-data">
+<form:form action="actFarmerUpdate.do" modelAttribute="afBean" method="POST" enctype="multipart/form-data" name="act">
 <table align="center">
 	<tr>
 		<td><form:label path="actId" type="hidden">活動編號</form:label></td>
@@ -96,8 +96,10 @@
 			<form:radiobutton path="sigStat" value="已截止" id="sigStat"/>已截止			
 		</td>
 	</tr>
+	
 	<tr>
-		<td colspan="4" align="center"><form:button value="Send" >送出</form:button></td>		
+		<td colspan="4" align="center"><form:button value="Send" >送出</form:button></td>	
+		<td><form:button value="back" onclick="backHome()">回首頁</form:button></td>			
 	</tr>
 
 </table>
@@ -118,7 +120,11 @@ function readURL(input){
 $("#imgInp").change(function(){
 		readURL(this);
 	});
-
+	
+function backHome(){
+	document.act.action="allActFarmer.do";
+    document.act.submit();
+}
 
 
 </script>
