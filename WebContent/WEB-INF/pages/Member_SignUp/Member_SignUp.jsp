@@ -7,43 +7,6 @@
 <html lang="zh">
 <head>
 <title>農郁</title>
-<script>
-	window.onload = function() {
-		var customRadioInline1 = document.getElementById("customRadioInline1");
-		var customRadioInline2 = document.getElementById("customRadioInline2");
-		var ckeckbank = document.getElementById("ckeckbank");
-		var ckeckbank1 = document.getElementById("ckeckbank1");
-
-		customRadioInline1.onclick = function() {
-			$("#ckeckbank").empty();
-			ckeckbank.classList.remove("form-group");
-			ckeckbank.classList.remove("col-md-6");
-			$("#ckeckbank1").empty();
-			ckeckbank1.classList.remove("form-group");
-			ckeckbank1.classList.remove("col-md-6");
-			
-		}
-
-		customRadioInline2.onclick = function() {
-			ckeckbank.classList.add("form-group");
-			ckeckbank.classList.add("col-md-6");
-			ckeckbank.innerHTML = 
-
-			'<label for="inputPassword4">'+'銀行代號</label>'+
-			'<input type="text" name="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
-
-			ckeckbank1.classList.add("form-group");
-			ckeckbank1.classList.add("col-md-6");
-			ckeckbank1.innerHTML =
-
-			'<label for="inputPassword4">'+
-			'銀行帳號</label>'+
-			'<input type="text" name="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
-
-		}
-		
-	}
-</script>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -79,6 +42,106 @@
 
 </head>
 <body class="goto-here">
+<script>
+	window.onload = function() {
+		var customRadioInline1 = document.getElementById("customRadioInline1");
+		var customRadioInline2 = document.getElementById("customRadioInline2");
+		var ckeckbank = document.getElementById("ckeckbank");
+		var ckeckbank1 = document.getElementById("ckeckbank1");
+
+		customRadioInline1.onclick = function() {
+			$("#ckeckbank").empty();
+			ckeckbank.classList.remove("form-group");
+			ckeckbank.classList.remove("col-md-6");
+			$("#ckeckbank1").empty();
+			ckeckbank1.classList.remove("form-group");
+			ckeckbank1.classList.remove("col-md-6");
+			
+		}
+
+		customRadioInline2.onclick = function() {
+			ckeckbank.classList.add("form-group");
+			ckeckbank.classList.add("col-md-6");
+			ckeckbank.innerHTML = 
+
+			'<label for="inputPassword4">'+'銀行代號'+'</label>'+
+			'<span style="color:red">'+
+			'<small id="span_bank_code">'+
+			'</small>'+
+			'</span>'+
+			'<input type="text" name="member_bank_code" id="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
+
+			ckeckbank1.classList.add("form-group");
+			ckeckbank1.classList.add("col-md-6");
+			ckeckbank1.innerHTML =
+
+			'<label for="inputPassword4">'+'銀行帳號'+'</label>'+
+			'<span style="color:red">'+
+			'<small id="span_bank_account">'+
+			'</small>'+
+			'</span>'+
+			'<input type="text" name="member_bank_account" id="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
+
+		}
+		
+	}
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+ <script>
+$(function(){
+$("#signup_form").on("submit",function(ev){
+	$("#span_email").html("");
+	$("#span_id").html("");
+	$("#span_password").html("");
+	$("#span_birthday").html("");
+	$.ajax({
+		url:"memberSignUp.controller",
+		data:{
+			member_permissions:$("#customRadioInline1").prop('checked'),
+			member_email:$("#member_email").val(),
+			member_password:$("#member_password").val(),
+			member_password1:$("#member_password1").val(),
+			member_name:$("#member_name").val(),
+			member_birthday:$("#member_birthday").val(),
+			member_cellphone:$("#member_cellphone").val(),
+			member_id:$("#member_id").val(),
+			member_address:$("#member_address").val(),
+			member_gui_number:$("#member_gui_number").val(),
+			e_paper:$("#gridCheck").prop('checked'),
+			member_bank_code:$("#member_bank_code").val(),
+			member_bank_account:$("#member_bank_account").val()
+		 	},
+		type:"POST", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+		 
+	success:function(data){
+		if(data[5] == "1"){
+			window.location.href = "goCheckMemberSignUp.controller";
+		}if(data[0] == "2"){
+			$("#span_email").html("Email已被註冊，請重新輸入");
+		}if(data[1] == "3"){
+			$("#span_id").html("身份證字號已被註冊，請重新輸入");
+		}if(data[2] == "12"){
+			$("#span_id").html("格式錯誤，請重新輸入");
+		}if(data[4] == "4"){
+			$("#span_password").html("兩次密碼不符合，請重新輸入");
+		}if(data[6] == "5"){
+			$("#span_password").html("格式錯誤，請重新輸入");
+		}if(data[3] == "6"){
+			$("#span_birthday").html("格式錯誤，請重新輸入");
+		}
+		
+
+	}
+    }) 
+    ev.preventDefault(); 
+})
+})
+</script>
+<c:forEach  items="${data}" var="item"></c:forEach>
 	<div class="py-1 bg-primary">
 		<div class="container">
 			<div
@@ -122,7 +185,7 @@
 
 	<!-------------------------內容區--------------------------------->
 
-	<form action="memberSignUp.controller" method="post">
+	<form method="post" id="signup_form">
 		<div class="signup-form container">
 			<fieldset class="border signup-form-fieldset">
 				<legend>會員註冊</legend>
@@ -142,74 +205,63 @@
 				<p></p>
 				<div class="form-row">
 					<div class="form-group col-md-6" style="text-align:center">
-						<label style="float:left" for="inputEmail4">帳號</label><span style="color:red"><small>Email重覆，請重新輸入</small></span> <input type="email"
-							name="member_email" class="form-control" placeholder="請填入Email"
+						<label style="float:left" for="inputEmail4">帳號</label><span style="color:red"><small id="span_email"></small></span> <input type="email"
+							name="member_email" id="member_email" class="form-control" placeholder="請填入Email"
 							required>
-<<<<<<< HEAD
-							<div class="center"><label style="color:red;height:10px">Email重覆，請重新輸入</label></div>
-=======
-							
->>>>>>> 66188d5f95ffb683b2df774ad03b3217a3a483b0
 					</div>
+					
 					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color:red"><small>身份證字號輸入錯誤，請重新輸入</small></span><input type="text"
-							name="member_id" class="form-control" placeholder="請填入身份證字號"
+						<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color:red"><small id="span_id"></small></span><input type="text"
+							name="member_id" id="member_id" class="form-control" placeholder="請填入身份證字號"
 							pattern="^[A-Za-z]\d{9}$" title="身分證格式錯誤" required>
-							<a style="color:red;height:10px">aaaaaa</a>
 					</div>
+					
 					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputPassword4" style="float:left">密碼</label> <span style="color:red"><small>二次密碼輸入錯誤，請重新輸入</small></span><input type="password"
-							name="member_password" class="form-control" placeholder="請填入密碼"
+						<label for="inputPassword4" style="float:left">密碼</label> <span style="color:red"><small id="span_password"></small></span><input type="password"
+							name="member_password" id="member_password" class="form-control" placeholder="請填入密碼"
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 							title="密碼長度至少8碼，須包含大寫、小寫英文及數字" required>
-							<a style="color:red;height:10px">aaaaaa</a>
 					</div>
+					
 					<div class="form-group col-md-6" style="text-align:center">
 						<label for="inputPassword4" style="float:left">密碼</label> <input type="password"
-							name="member_password1" class="form-control"
+							name="member_password1" id="member_password1" class="form-control"
 							placeholder="請再次填入密碼"
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 							title="密碼長度至少8碼，須包含大寫、小寫英文及數字" required>
 					</div>
+					
 					<div id="ckeckbank"></div>
 					<div id="ckeckbank1"></div>
+					
 					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputPassword4" style="float:left">名稱</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
-							name="member_name" class="form-control" placeholder="請填入姓名或商家名稱"
+						<label for="inputPassword4" style="float:left">名稱</label> <span style="color:red"><small id="span_name"></small></span> <input type="text"
+							name="member_name" id="member_name" class="form-control" placeholder="請填入姓名或商家名稱"
 							pattern="^[\u4e00-\u9fa5]{0,}$" title="只接受中文字" required>
-							<a style="color:red;height:10px">aaaaaa</a>
 						<p></p>
-						<label for="inputPassword4" style="float:left">生日</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="date"
-							name="member_birthday" class="form-control"
-<<<<<<< HEAD
+						
+						<label for="inputPassword4" style="float:left">生日</label> <span style="color:red"><small id="span_birthday"></small></span> <input type="date"
+							name="member_birthday" id="member_birthday" class="form-control"
 							onkeydown="return false" pattern="\d{4}\-?\d{2}\-?\d{2}" required>
-						<a style="color:red;height:10px">aaaaaa</a>
-						<label for="inputPassword4">連絡電話</label> <input type="text"
-=======
-							onkeydown="return false" pattern="\d{4}\-?\d{2}\-?\d{2}" required><p></p>
-						<label for="inputPassword4" style="float:left">連絡電話</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
->>>>>>> 66188d5f95ffb683b2df774ad03b3217a3a483b0
-							name="member_cellphone" class="form-control"
-							placeholder="請填入手機或住家電話，可用-或( )分隔"
-							pattern="(\d{2,3}-?|\(\d{2,3}\))\d{3,4}-?\d{4}|09\d{2}(\d{6}|-\d{3}-\d{3})
-"
-							title="格式錯誤" required>
-							<a style="color:red;height:10px">aaaaaa</a>
+						<p></p>
+		
+						<label for="inputPassword4" style="float:left">連絡電話</label> <span style="color:red"><small id="span_cellphone"></small></span> <input type="text"
+							name="member_cellphone" id="member_cellphone" class="form-control" required>
+						
+
 					</div>
 				</div>
 				<div class="form-group" style="text-align:center">
-					<label for="inputAddress" style="float:left">地址</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
-						name="member_address" class="form-control" placeholder="請填入聯絡地址"
+					<label for="inputAddress" style="float:left">地址</label><input type="text"
+						name="member_address" id="member_address" class="form-control" placeholder="請填入聯絡地址"
 						pattern="^[\u4e00-\u9fa5\d]{0,}$" title="格式錯誤，不能填入英文" required>
-						<a style="color:red;height:10px">aaaaaa</a>
 				</div>
 
 				<div class="form-row">
 					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputEmail4" style="float:left">統一編號</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
-							name="member_gui_number" class="form-control" placeholder="選填"
+						<label for="inputEmail4" style="float:left">統一編號</label><input type="text"
+							name="member_gui_number" id="member_gui_number" class="form-control" placeholder="選填"
 							pattern="\d{8}" title="需輸入8位數字">
-							<a style="color:red;height:10px">aaaaaa</a>
 					</div>
 				</div>
 
@@ -220,7 +272,7 @@
 							class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary">提交</button>
+				<button type="submit" id="signup" class="btn btn-primary">提交</button>
 			</fieldset>
 		</div>
 	</form>
