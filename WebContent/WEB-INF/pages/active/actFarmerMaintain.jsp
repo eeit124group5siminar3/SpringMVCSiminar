@@ -426,7 +426,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
             console.log(data);
             //let data = JSON.parse(data);
             let content = "";
-//             content = `
+//             content = 
 //                 <td>\${data.actId}</td>
 // 				<td>\${data.actName}</td>
 // 				<td>\${data.actType}</td>						
@@ -434,7 +434,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 // 				<td>檢視</td>
 // 				<td>修改</td>
 // 				<td>刪除</td>`;
-				content = "<td>"+data.timeId+"</td><td>"+data.timeName+"</td>";
+// 				content = "<td>"+data.timeId+"</td><td>"+data.timeName+"</td>";
+				content = `<td>\${data.timeId}</td><td>\+${data.timeName}</td>`;
+				
 			$("#test_id").html(content);
             
        }
