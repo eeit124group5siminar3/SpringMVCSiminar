@@ -19,6 +19,8 @@ import javax.persistence.Transient;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name = "actFarmer")
 @Component("actFarmer")
+@DynamicInsert@DynamicUpdate
 public class ActFarmer implements Serializable {
 
 	private static final long serialVersionUID = 1L;

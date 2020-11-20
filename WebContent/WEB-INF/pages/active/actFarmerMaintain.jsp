@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
-	response.setContentType("text/html;charset=UTF-8");
+response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1 no-cache不能存快取
 response.setHeader("Pragma", "no-cache"); // HTTP 1.0
 response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
@@ -257,7 +257,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						<td><c:out value="${actFarmer.actNum}" /></td>
 						<td><c:out value="${actFarmer.sigStat}" /></td>						
 						<td>
-							<form action="<c:url value='/actFarmerPreUpdate.do'/>" method="post">
+							<form action="<c:url value='/actFarmerPreRead.do'/>" method="get">
 								<input type="hidden" id="actId" name="actId" value="${actFarmer.actId}">
 								<input name="look" type="submit" value="檢視">
 							</form>
@@ -276,6 +276,19 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						</td>
 					</tr>
 				</c:forEach>
+				
+<!-- 				ajax -->
+					<tr id="test_id">
+						<td></td>
+						<td></td>
+						<td></td>						
+									
+						<td>檢視</td>
+						<td>修改</td>
+						<td>刪除</td>
+					</tr>
+<!-- 				ajax -->
+				
 				<tr>
 					<td style="border: 0px" colspan="6"></td>
 
@@ -404,5 +417,28 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	
+	<script type="text/javascript">
+	$.post({
+        url:"${pageContext.request.contextPath}/test",
+        data:{'param1':"param value"},
+        success:function (data) {
+            console.log(data);
+            //let data = JSON.parse(data);
+            let content = "";
+//             content = `
+//                 <td>\${data.actId}</td>
+// 				<td>\${data.actName}</td>
+// 				<td>\${data.actType}</td>						
+							
+// 				<td>檢視</td>
+// 				<td>修改</td>
+// 				<td>刪除</td>`;
+				content = "<td>"+data.timeId+"</td><td>"+data.timeName+"</td>";
+			$("#test_id").html(content);
+            
+       }
+   });
+	</script>
 </body>
 </html>
