@@ -1,8 +1,10 @@
 package tw.group5.active.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "actFarmer")
@@ -24,7 +30,7 @@ public class ActFarmer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String actId;
+	private Integer actId;
 	private String actName;
 	private String actType;
 	private String actAddr;
@@ -46,12 +52,14 @@ public class ActFarmer implements Serializable {
 	private String signTimeEnd;
 	private Integer actNum;
 	private String sigStat;
-	private Clock clock;
+	private MultipartFile multipartFile;
+
+//	private Clock clock;
 
 	public ActFarmer() {
 	}
 
-	public ActFarmer(String actId, String actName, String actType, String actAddr, String tel, Date actDateSta,
+	public ActFarmer(Integer actId, String actName, String actType, String actAddr, String tel, Date actDateSta,
 			String actTimeSta, Date actDateEnd, String actTimeEnd, Integer numLim, Integer sellerId, Integer price,
 			String actDescri, String imgName, Blob actImg, Integer actLock, Date signDateSta, String signTimeSta,
 			Date signDateEnd, String signTimeEnd, Integer actNum, String sigStat) {
@@ -80,14 +88,41 @@ public class ActFarmer implements Serializable {
 		this.sigStat = sigStat;
 	}
 
+	public ActFarmer(Integer actId, String actName, String actType, String actAddr, String tel, Date actDateSta,
+			String actTimeSta, Date actDateEnd, String actTimeEnd, Integer numLim, Integer sellerId, Integer price,
+			String actDescri, String imgName, Blob actImg, Date signDateSta, String signTimeSta,
+			Date signDateEnd, String signTimeEnd, Integer actNum, String sigStat) {
+
+		this.actId = actId;
+		this.actName = actName;
+		this.actType = actType;
+		this.actAddr = actAddr;
+		this.tel = tel;
+		this.actDateSta = actDateSta;
+		this.actTimeSta = actTimeSta;
+		this.actDateEnd = actDateEnd;
+		this.actTimeEnd = actTimeEnd;
+		this.numLim = numLim;
+		this.sellerId = sellerId;
+		this.price = price;
+		this.actDescri = actDescri;
+		this.imgName = imgName;
+		this.actImg = actImg;
+		this.signDateSta = signDateSta;
+		this.signTimeSta = signTimeSta;
+		this.signDateEnd = signDateEnd;
+		this.signTimeEnd = signTimeEnd;
+		this.sigStat = sigStat;
+	}
+	
 	@Id
 	@Column(name = "actId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public String getActId() {
+	public Integer getActId() {
 		return actId;
 	}
 
-	public void setActId(String actId) {
+	public void setActId(Integer actId) {
 		this.actId = actId;
 	}
 
@@ -163,7 +198,7 @@ public class ActFarmer implements Serializable {
 		this.actTimeEnd = actTimeEnd;
 	}
 
-	@Column(name = "getNumLim")
+	@Column(name = "numLim")
 	public Integer getNumLim() {
 		return numLim;
 	}
@@ -217,6 +252,7 @@ public class ActFarmer implements Serializable {
 		this.actImg = actImg;
 	}
 
+	@Transient
 	@Column(name = "actLock")
 	public Integer getActLock() {
 		return actLock;
@@ -262,6 +298,7 @@ public class ActFarmer implements Serializable {
 		this.signTimeEnd = signTimeEnd;
 	}
 
+	@Transient
 	@Column(name = "actNum")
 	public Integer getActNum() {
 		return actNum;
@@ -279,15 +316,30 @@ public class ActFarmer implements Serializable {
 	public void setSigStat(String sigStat) {
 		this.sigStat = sigStat;
 	}
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "timeName")
-	public Clock getClock() {
-		return clock;
+	
+	@Transient
+	public MultipartFile getMultipartFile() {		
+		return multipartFile;
 	}
 
-	public void setClock(Clock clock) {
-		this.clock = clock;
+	public void setMultipartFile(MultipartFile multipartFile)throws SerialException, SQLException, IOException {
+		this.multipartFile = multipartFile;
+		
+		if (multipartFile.getBytes().length>0) {
+			String imgName = multipartFile.getOriginalFilename();
+			SerialBlob sb = new SerialBlob(multipartFile.getBytes());
+			setImgName(imgName);
+			setActImg(sb);			
+		}
 	}
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "timeName")
+//	public Clock getClock() {
+//		return clock;
+//	}
+//
+//	public void setClock(Clock clock) {
+//		this.clock = clock;
+//	}
 
 }

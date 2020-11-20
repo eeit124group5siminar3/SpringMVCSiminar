@@ -2,47 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 
 <!DOCTYPE html>
 <html lang="zh">
 <head>
 <title>農郁</title>
 <script>
-	window.onload = function() {
-		var customRadioInline1 = document.getElementById("customRadioInline1");
-		var customRadioInline2 = document.getElementById("customRadioInline2");
-		var ckeckbank = document.getElementById("ckeckbank");
-		var ckeckbank1 = document.getElementById("ckeckbank1");
 
-		customRadioInline1.onclick = function() {
-			$("#ckeckbank").empty();
-			ckeckbank.classList.remove("form-group");
-			ckeckbank.classList.remove("col-md-6");
-			$("#ckeckbank1").empty();
-			ckeckbank1.classList.remove("form-group");
-			ckeckbank1.classList.remove("col-md-6");
-			
-		}
-
-		customRadioInline2.onclick = function() {
-			ckeckbank.classList.add("form-group");
-			ckeckbank.classList.add("col-md-6");
-			ckeckbank.innerHTML = 
-
-			'<label for="inputPassword4">'+'銀行代號</label>'+
-			'<input type="text" name="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
-
-			ckeckbank1.classList.add("form-group");
-			ckeckbank1.classList.add("col-md-6");
-			ckeckbank1.innerHTML =
-
-			'<label for="inputPassword4">'+
-			'銀行帳號</label>'+
-			'<input type="text" name="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
-
-		}
-		
-	}
 </script>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -122,116 +89,93 @@
 
 	<!-------------------------內容區--------------------------------->
 
-	<form action="memberSignUp.controller" method="post">
-		<div class="signup-form container">
-			<fieldset class="border signup-form-fieldset">
-				<legend>會員註冊</legend>
-				<div id="member_permissions0"
-					class="custom-control custom-radio custom-control-inline">
-					<input type="radio" id="customRadioInline1"
-						name="member_permissions" class="custom-control-input" value="0"
-						checked="true"> <label class="custom-control-label"
-						for="customRadioInline1">買家</label>
-				</div>
-				<div id="member_permissions1"
-					class="custom-control custom-radio custom-control-inline">
-					<input type="radio" id="customRadioInline2"
-						name="member_permissions" class="custom-control-input" value="1">
-					<label class="custom-control-label" for="customRadioInline2">買家與賣家</label>
-				</div>
-				<p></p>
-				<div class="form-row">
-					<div class="form-group col-md-6" style="text-align:center">
-						<label style="float:left" for="inputEmail4">帳號</label><span style="color:red"><small>Email重覆，請重新輸入</small></span> <input type="email"
-							name="member_email" class="form-control" placeholder="請填入Email"
-							required>
-<<<<<<< HEAD
-							<div class="center"><label style="color:red;height:10px">Email重覆，請重新輸入</label></div>
-=======
-							
->>>>>>> 66188d5f95ffb683b2df774ad03b3217a3a483b0
-					</div>
-					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color:red"><small>身份證字號輸入錯誤，請重新輸入</small></span><input type="text"
-							name="member_id" class="form-control" placeholder="請填入身份證字號"
-							pattern="^[A-Za-z]\d{9}$" title="身分證格式錯誤" required>
-							<a style="color:red;height:10px">aaaaaa</a>
-					</div>
-					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputPassword4" style="float:left">密碼</label> <span style="color:red"><small>二次密碼輸入錯誤，請重新輸入</small></span><input type="password"
-							name="member_password" class="form-control" placeholder="請填入密碼"
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-							title="密碼長度至少8碼，須包含大寫、小寫英文及數字" required>
-							<a style="color:red;height:10px">aaaaaa</a>
-					</div>
-					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputPassword4" style="float:left">密碼</label> <input type="password"
-							name="member_password1" class="form-control"
-							placeholder="請再次填入密碼"
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-							title="密碼長度至少8碼，須包含大寫、小寫英文及數字" required>
-					</div>
-					<div id="ckeckbank"></div>
-					<div id="ckeckbank1"></div>
-					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputPassword4" style="float:left">名稱</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
-							name="member_name" class="form-control" placeholder="請填入姓名或商家名稱"
-							pattern="^[\u4e00-\u9fa5]{0,}$" title="只接受中文字" required>
-							<a style="color:red;height:10px">aaaaaa</a>
-						<p></p>
-						<label for="inputPassword4" style="float:left">生日</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="date"
-							name="member_birthday" class="form-control"
-<<<<<<< HEAD
-							onkeydown="return false" pattern="\d{4}\-?\d{2}\-?\d{2}" required>
-						<a style="color:red;height:10px">aaaaaa</a>
-						<label for="inputPassword4">連絡電話</label> <input type="text"
-=======
-							onkeydown="return false" pattern="\d{4}\-?\d{2}\-?\d{2}" required><p></p>
-						<label for="inputPassword4" style="float:left">連絡電話</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
->>>>>>> 66188d5f95ffb683b2df774ad03b3217a3a483b0
-							name="member_cellphone" class="form-control"
-							placeholder="請填入手機或住家電話，可用-或( )分隔"
-							pattern="(\d{2,3}-?|\(\d{2,3}\))\d{3,4}-?\d{4}|09\d{2}(\d{6}|-\d{3}-\d{3})
-"
-							title="格式錯誤" required>
-							<a style="color:red;height:10px">aaaaaa</a>
-					</div>
-				</div>
-				<div class="form-group" style="text-align:center">
-					<label for="inputAddress" style="float:left">地址</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
-						name="member_address" class="form-control" placeholder="請填入聯絡地址"
-						pattern="^[\u4e00-\u9fa5\d]{0,}$" title="格式錯誤，不能填入英文" required>
-						<a style="color:red;height:10px">aaaaaa</a>
-				</div>
-
-				<div class="form-row">
-					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputEmail4" style="float:left">統一編號</label> <span style="color:red"><small>格式錯誤，請重新輸入</small></span> <input type="text"
-							name="member_gui_number" class="form-control" placeholder="選填"
-							pattern="\d{8}" title="需輸入8位數字">
-							<a style="color:red;height:10px">aaaaaa</a>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="form-check">
-						<input name="e_paper" class="form-check-input" type="checkbox"
-							id="gridCheck" value="1" checked="true"> <label
-							class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
-					</div>
-				</div>
-				<button type="submit" class="btn btn-primary">提交</button>
-			</fieldset>
-		</div>
-	</form>
-
-
-
-
-
-
-
-
+<h1>一日農夫申請活動</h1>
+<form:form action="actFarmerInsert" modelAttribute="farmerinsert" method="POST" enctype="multipart/form-data">
+<table class="signup-form container">
+	<tr>
+<%-- 		<td><form:label path="actId" type="hidden">活動編號</form:label></td> --%>
+		<td><form:input path="actId" type="hidden"></form:input></td>
+	</tr>
+	<tr>
+		<td><form:label path="actName">活動名稱</form:label></td>
+		<td><form:input path="actName" type="text"/></td>
+	</tr>
+	<tr>
+		<td><form:label path="actType">活動類型:</form:label></td>
+		<td><form:select path="actType" type="text">		
+				<form:option value="體驗類">體驗類</form:option>
+				<form:option value="採收類">採收類</form:option>
+				<form:option value="文藝類">文藝類</form:option>
+				<form:option value="綜合類">綜合類</form:option>			
+			</form:select>	
+		</td>
+	</tr>
+	<tr>
+		<td><form:label path="actAddr">活動地址:</form:label></td>
+		<td><form:input path="actAddr" type="text"/></td>
+	</tr>
+	<tr>
+		<td><form:label path="tel">連絡電話:</form:label></td>
+		<td><form:input path="tel" type="text"/></td>
+	</tr>
+	<tr>
+		<td><form:label path="actDateSta">活動開始日期:</form:label></td>
+		<td><form:input path="actDateSta" type="date"/></td>
+		<td><form:label path="actTimeSta">活動開始時間:</form:label></td>
+		<td><form:input path="actTimeSta"  type="time"></form:input></td>
+	</tr>
+	<tr>
+		<td><form:label path="actDateEnd">活動結束日期:</form:label></td>
+		<td><form:input path="actDateEnd" type="date"/></td>
+		<td><form:label path="actTimeEnd">活動結束時間:</form:label></td>
+		<td><form:input path="actTimeEnd" type="time"></form:input></td>
+	</tr>
+	<tr>
+		<td><form:label path="numLim">活動人數上限:</form:label></td>
+		<td><form:input path="numLim" type="text"/></td>
+	</tr>
+	<tr>
+		<td><form:label path="price">活動費用:</form:label></td>
+		<td><form:input path="price" type="text"/></td>
+	</tr>
+	<tr>
+		<td><form:label path="actDescri">活動描述:</form:label></td>
+<%-- 		<td><form:input path="actDescri" type="text" required="required"/></td> --%>
+		<td><form:textarea cols="50" rows="6" path="actDescri"></form:textarea></td>
+	</tr>
+	<tr>
+		<td><form:label path="actImg">活動海報:</form:label></td>
+		<td><form:input path="multipartFile" type="file" required="required"/></td>
+	</tr>
+	<tr>
+		<td><form:label path="signDateSta">報名開始日期:</form:label></td>
+		<td><form:input path="signDateSta" type="date"/></td>
+		<td><form:label path="signTimeSta">報名開始時間:</form:label></td>
+		<td><form:input path="signTimeSta" type="time"></form:input></td>
+	</tr>
+	<tr>
+		<td><form:label path="signDateEnd">報名結束日期:</form:label></td>
+		<td><form:input path="signDateEnd" type="date"/></td>
+		<td><form:label path="signTimeEnd">報名結束時間:</form:label></td>
+		<td><form:input path="signTimeEnd"  type="time"></form:input></td>
+	</tr>
+	<tr>
+		<td><form:label path="sigStat">報名狀態:</form:label></td>
+		<td>
+			<form:radiobutton path="sigStat" value="未開放"/>未開放
+			<form:radiobutton path="sigStat" value="開放中"/>開放中
+			<form:radiobutton path="sigStat" value="已截止"/>已截止			
+		</td>
+	</tr>
+	<tr>
+		<td><form:button value="Send">送出</form:button></td>
+		<td><form:button value="back">回首頁</form:button></td>
+	</tr>
+</table>
+</form:form>
+	
+	
+	
 	<!------------------------------------------------------------------>
 	<footer class="ftco-footer signup-footer-ground">
 		<div class="container">

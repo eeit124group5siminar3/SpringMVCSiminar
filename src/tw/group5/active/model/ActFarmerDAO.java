@@ -121,11 +121,11 @@ public class ActFarmerDAO {
 		return list;
 	}
 	
-	//排序該廠商的活動列表
+	//排序該廠商的活動列表+分頁
 	public List<ActFarmer> getPageActFarmers(Integer sellerId){
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ActFarmer sellerId =?0 ORDER BY actId";
+		String hql = "from ActFarmer where sellerId =?0 ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(0, sellerId);
 		query.setFirstResult(startRecordNo);
@@ -133,6 +133,17 @@ public class ActFarmerDAO {
 		List<ActFarmer> list = query.list();
 		return list;
 	}
+	
+	//查詢該廠商的所有列表
+	public List<ActFarmer> getActFarmers(Integer sellerId){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActFarmer where sellerId =?0 ORDER BY actId";
+		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
+		query.setParameter(0, sellerId);
+		List<ActFarmer> list = query.list();
+		return list;
+	}
+	
 	
 	// 查詢單筆資料ByName
 	public List<ActFarmer> selectName(String actName){
@@ -145,16 +156,23 @@ public class ActFarmerDAO {
 		
 	}
 	
+	//獲得單筆資料ById
+	public ActFarmer getActFarmer(Integer actId) {
+		Session session = sessionFactory.getCurrentSession();
+		ActFarmer actFarmer = session.get(ActFarmer.class, actId);
+		return actFarmer;
+	}
+	
 	//新增一日農夫資料
 	public ActFarmer insertActFarmer(ActFarmer actFarmer) {
 		Session session = sessionFactory.getCurrentSession();
-		ActFarmer result = session.get(ActFarmer.class, actFarmer.getActId());
+//		ActFarmer result = session.get(ActFarmer.class, actFarmer.getActName());
 		
-		if(result == null) {
+//		if(result == null) {
 			session.save(actFarmer);
 			return actFarmer;
-		}
-		return null;
+//		}
+//		return null;
 	}
 	
 	//刪除
@@ -213,7 +231,7 @@ public class ActFarmerDAO {
 	public String getSelectTag() {
 		String ans = "";
 		List<Clock> ck = getClocks();
-		ans += "<SELECT name='" + getTagTimeName() + "'>";
+		ans += "<SELECT timeName='" + getTagTimeName() + "'>";
 		for (Clock cBean : ck) {
 			Integer timeId = cBean.getTimeId();
 			String timeName = cBean.getTimeName();
