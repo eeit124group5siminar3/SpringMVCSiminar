@@ -50,40 +50,13 @@ function backHome(){
 </script>
 
 <body>
+<!-- --------Header------------------------------------- -->
+	<jsp:include page="/WEB-INF/pages/header.jsp" />
+<!-- --------管理左邊bar-------------------------------- -->
+	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
 
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">+ 1235 2355 98</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">youremail@email.com</span>
-						</div>
-						<div
-							class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-							<span class="text">3-5 Business days delivery &amp; Free
-								Returns</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-<jsp:include page="../header.jsp" />
 <div>
-<h1 align="center">一日農夫申請活動</h1>
+<h3 align="center">一日農夫申請活動</h3>
 <form:form action="actFarmerInsert.do" modelAttribute="farmerinsert" method="POST" enctype="multipart/form-data" name="act">
 <table align="center">
 	<tr>
@@ -135,7 +108,7 @@ function backHome(){
 	<tr>
 		<td><form:label path="actDescri">活動描述:</form:label></td>
 <%-- 		<td><form:input path="actDescri" type="text" required="required"/></td> --%>
-		<td><form:textarea cols="50" rows="6" path="actDescri" id="actDescri"></form:textarea></td>
+		<td colspan="2"><form:textarea cols="50" rows="6" path="actDescri" id="actDescri"></form:textarea></td>
 	</tr>
 	<tr>
 		<td><form:label path="actImg">活動海報:</form:label></td>
@@ -163,7 +136,7 @@ function backHome(){
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><form:button value="Send" >送出</form:button></td>	
-		<td><form:button value="back" onclick="backHome()">回首頁</form:button></td>		
+		<td><form:button value="back" onclick="backHome()">回管理頁面</form:button></td>		
 	</tr>
 
 </table>
@@ -174,13 +147,13 @@ function backHome(){
 <br>
 </div>
 <jsp:include page="../footer.jsp" />
-	<div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
-	</div>
+<!-- 	<div id="ftco-loader" class="show fullscreen"> -->
+<!-- 		<svg class="circular" width="48px" height="48px"> -->
+<%-- 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" --%>
+<%-- 				stroke-width="4" stroke="#eeeeee" /> --%>
+<%-- 			<circle class="path" cx="24" cy="24" r="22" fill="none" --%>
+<%-- 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg> --%>
+<!-- 	</div> -->
 
 
 	<script src="js/jquery.min.js"></script>

@@ -5,15 +5,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script language="javascript"> 
-//直接等於值 
-// document.getElementById("actType").value="<c:out value='${afBean.actType}'/>"; 
-// document.getElementById("sigStat").value="<c:out value='${afBean.sigStat}'/>"; 
-</script> 
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
+
 <title>一日農夫活動檢視</title>
 </head>
 <body>
+<!-- --------Header------------------------------------- -->
+	<jsp:include page="/WEB-INF/pages/header.jsp" />
+	
+<!-- --------管理左邊bar-------------------------------- -->
+	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
+
+<!-- --------內容-------------------------------- -->
+
 <h1 align="center">一日農夫活動檢視</h1>
 <form:form action="actFarmerPreUpdate.do" modelAttribute="afBean" method="GET" enctype="multipart/form-data" name="act">
 <table align="center">
@@ -88,12 +123,39 @@
 		<input type="hidden" id="actId" name="actId" value="${afBean.actId}"/>
 		<form:button value="edit" >修改</form:button>
 		</td>
-		<td><form:button value="back" onclick="backHome()">回首頁</form:button></td>		
+		<td><form:button value="back" onclick="backHome()">回管理頁面</form:button></td>		
 	</tr>
 
 </table>
 </form:form>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<!-- --------內容-------------------------------- -->
+<!-- --------footer------------------------------------- -->
+
+	<footer class="ftco-footer backstage-footer-ground">
+	<jsp:include page="/WEB-INF/pages/footer.jsp" />
+	</footer>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/aos.js"></script>
+	<script src="js/jquery.animateNumber.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/scrollax.min.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="js/google-map.js"></script>
+	<script src="js/main.js"></script>
+	
+	<script type="text/javascript"></script>
 
 <script>
 function readURL(input){
