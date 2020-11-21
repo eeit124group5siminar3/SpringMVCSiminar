@@ -150,20 +150,19 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				</c:forEach>
 				
 <!-- 				ajax -->
-					<tr id="test_id">
-						<td></td>
-						<td></td>
-						<td></td>						
+<!-- 					<tr id="test_id"> -->
+<!-- 						<td></td> -->
+<!-- 						<td></td> -->
+<!-- 						<td></td>						 -->
 									
-						<td>檢視</td>
-						<td>修改</td>
-						<td>刪除</td>
-					</tr>
+<!-- 						<td>檢視</td> -->
+<!-- 						<td>修改</td> -->
+<!-- 						<td>刪除</td> -->
+<!-- 					</tr> -->
 <!-- 				ajax -->
 				
 				<tr>
 					<td style="border: 0px" colspan="6"></td>
-
 					<td style="border: 0px" colspan="6">
 						<form action="<c:url value='/'/>" method="get">
 							<label for="">活動名稱:</label>
@@ -174,7 +173,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 					</td>
 				
 			</table>
-			<div></div>
+
 	</div>
 
 <!-- -------------------------------- -->
