@@ -1,9 +1,14 @@
 package tw.group5.mall.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.html.HTML;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +21,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+
 
 import tw.group5.mall.ShoppingCart;
-import tw.group5.mall.model.CategoryBean;
+import tw.group5.mall.model.CategoryClass;
 import tw.group5.mall.model.OrderItem;
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.service.ProductService;
@@ -103,13 +111,14 @@ public class MallShoppingController {
 // 設定查詢種類
 	@GetMapping(value = "/RetrieveCategory/{categoryId}")
 	@ResponseBody
-	public List<CategoryBean> categoryList(@PathVariable(value = "categoryId") Integer categoryId) {
-		List<CategoryBean> list = service.getCategory();
+	public Map<Integer, String> categoryList(@PathVariable(value = "categoryId") Integer categoryId) {
+//		List<CategoryBean> list = service.getCategory();
+		Map<Integer, String> map=CategoryClass.CATEGORY_MAP;
 		if (categoryId == 0) {
 			categoryId = null;
 		}
 		service.setCategoryId(categoryId);
-		return list;
+		return map;
 	}
 
 	@PostMapping(value = "/BuyProductServlet")
@@ -146,6 +155,36 @@ public class MallShoppingController {
 		cart.addToCart(productId, oi);
 		return "redirect:/RetrievePageProducts?pageNo=" + pageNo;
 	}
+	
+	@PostMapping(value = "/CartContent")
+//	@ResponseBody
+	public ModelAndView getCartContent() {
+		ShoppingCart cart =new ShoppingCart();
+		OrderItem oi = new OrderItem();
+		oi.setProductId(1);
+		oi.setProduct("1");
+		oi.setContent(1);
+		oi.setUnit("1");
+		oi.setQty(1);
+		oi.setProducterId(1);
+		oi.setPrice(20.0);
+		oi.setDiscount(0.8);
+		oi.setProducterName("123");
+		cart.addToCart(1, oi);
+		System.err.println(cart.getContent());
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("/mall/shoppingcartContent");
+		mav.addObject("ShoppingCart", cart);
+		mav.setStatus(HttpStatus.OK);
+		
+//		System.err.println(mav.toString());
+//		System.err.println(mav.toString());
+//		System.err.println(mav.getModel());
+//		System.err.println(mav.getStatus());
+//		System.err.println(mav.getView());
+		return mav;
+	}
+	
 //	@RequestMapping(value = "/jQueryTest")
 //	@ResponseBody
 //	public Integer getInteger (@RequestParam(value = "num1")Integer num1,@RequestParam(value = "num2")Integer num2,@RequestParam(value = "num3")Integer num3) {

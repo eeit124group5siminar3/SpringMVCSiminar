@@ -15,7 +15,6 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
-import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Entity
 @Table(name = "market_Product_Total")
@@ -35,6 +34,7 @@ public class MarketProductTotalBean {
 	private Integer quantity;
 	private Integer memberNo;
 	
+	private MarketMallBean marketMallBean;
 	private MarketProductImgBean marketProductImgBean;
 	private MarketPutOutBean marketPutOutBean;//設計單向
 
@@ -174,6 +174,14 @@ public class MarketProductTotalBean {
 		this.quantity = quantity;
 	}
 	
+	@Transient
+	public Integer getMemberNo() {
+		return memberNo;
+	}
+	
+	public void setMemberNo(Integer memberNo) {
+		this.memberNo = memberNo;
+	}
 	
 	@OneToOne(fetch = FetchType.LAZY,mappedBy ="marketProductTotalBean", cascade = CascadeType.ALL)
 	public MarketProductImgBean getMarketProductImgBean() {
@@ -183,14 +191,6 @@ public class MarketProductTotalBean {
 		this.marketProductImgBean = marketProductImgBean;
 	}
 	
-	@Column(name = "MEMBER_NO")
-	public Integer getMemberNo() {
-		return memberNo;
-	}
-	
-	public void setMemberNo(Integer memberNo) {
-		this.memberNo = memberNo;
-	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PUT_OUT")
@@ -202,6 +202,16 @@ public class MarketProductTotalBean {
 	
 	public void setMarketPutOutBean(MarketPutOutBean marketPutOutBean) {
 		this.marketPutOutBean = marketPutOutBean;
+	}
+    
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "MEMBER_NO")
+	public MarketMallBean getMarketMallBean() {
+		return marketMallBean;
+	}
+
+	public void setMarketMallBean(MarketMallBean marketMallBean) {
+		this.marketMallBean = marketMallBean;
 	}
 	
 	

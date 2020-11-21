@@ -2,14 +2,13 @@ package tw.group5.mall.dao;
 
 import java.sql.Date;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import tw.group5.mall.model.CategoryBean;
+import tw.group5.mall.model.CategoryClass;
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.model.ProductImageBean;
 
@@ -221,36 +220,39 @@ public class ProductDAO {
 	}
 
 //依照ID查詢類別
-	public CategoryBean getCategoryById() {
-		Session session = sessionFactory.getCurrentSession();
-		String hql = "from CategoryBean where id =?0";
-		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
-		query.setParameter(0, categoryId);
-		CategoryBean cb = query.uniqueResult();
-		return cb;
-	}
+//	public CategoryBean getCategoryById() {
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from CategoryBean where id =?0";
+//		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
+//		query.setParameter(0, categoryId);
+//		CategoryBean cb = query.uniqueResult();
+//		return cb;
+//	}
 
 //查詢全部類別
-	public List<CategoryBean> getCategory() {
-		Session session = sessionFactory.getCurrentSession();
-		String hql = "from CategoryBean";
-		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
-		List<CategoryBean> list = query.list();
-		return list;
-	}
+//	public List<CategoryBean> getCategory() {
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from CategoryBean";
+//		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
+//		List<CategoryBean> list = query.list();
+//		return list;
+//	}
 
 // 獲得類別下拉式選單的JSP語法字串
 	public String getSelectTag() {
 		String ans = "";
-		List<CategoryBean> cb = getCategory();
+//		Map<Integer, String> 
+//		List<CategoryBean> cb = getCategory();
 		ans += "<SELECT name='" + getTagName() + "'>";
-		for (CategoryBean bean : cb) {
-			int id = bean.getId();
-			String name = bean.getName();
-			if (id == selected) {
-				ans += "<option value='" + id + "' selected>" + name + "</option>";
+//		for (CategoryBean bean : cb) {
+		for (int i=1;i<=CategoryClass.CATEGORY_MAP.size();i++) {
+//			int id = bean.getId();
+//			String name = bean.getName();
+			String name = CategoryClass.getCategory(i);
+			if (i == selected) {
+				ans += "<option value='" + i + "' selected>" + name + "</option>";
 			} else {
-				ans += "<option value='" + id + "'>" + name + "</option>";
+				ans += "<option value='" + i + "'>" + name + "</option>";
 			}
 		}
 		ans += "</SELECT>";

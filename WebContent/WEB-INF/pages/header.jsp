@@ -70,8 +70,10 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<a class="dropdown-item" href="<c:url value='/allActFarmer.do'/>">一日農夫</a>
+						<a class="dropdown-item" href="<c:url value=''/>">一日農夫</a>
+						<a class="dropdown-item" href="<c:url value='/allActFarmer.do'/>">一日農夫管理頁面</a>
 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
+						<a class="dropdown-item" href="<c:url value='        '/>">農農市集管理頁面</a>
 					</div>
 				</li>
 
@@ -114,7 +116,7 @@
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<!-- <script -->
+<!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>

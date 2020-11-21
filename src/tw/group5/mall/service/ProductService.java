@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.mall.dao.ProductDAO;
-import tw.group5.mall.model.CategoryBean;
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.model.ProductImageBean;
 
@@ -73,17 +72,17 @@ public class ProductService {
 		return dao.saveProduct(bean);
 	}
 
-	public List<CategoryBean> getCategory() {
-		return dao.getCategory();
-	}
+//	public List<CategoryBean> getCategory() {
+//		return dao.getCategory();
+//	}
 
 	public void setSelected(int category) {
 		dao.setSelected(category);
 	}
 
-	public CategoryBean getCategoryById() {
-		return dao.getCategoryById();
-	}
+//	public CategoryBean getCategoryById() {
+//		return dao.getCategoryById();
+//	}
 
 	public String getSelectTag() {
 		return dao.getSelectTag();
