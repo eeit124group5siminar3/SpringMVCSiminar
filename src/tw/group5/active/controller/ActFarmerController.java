@@ -54,6 +54,14 @@ public class ActFarmerController {
 	@Autowired
 	ServletContext ctx;
 	
+	//查詢所有活動-一日農夫
+	@RequestMapping(value = "")
+	public String getAllactFarmer(Model model) {
+		Collection<ActFarmer> collFarmers = actFarmerService.getPageActFarmers();
+		model.addAttribute("collFarmers", collFarmers);
+		return "";
+	}
+	
 	//廠商活動管理頁面-一日農夫
 	@RequestMapping(value = "allActFarmer.do")
 	public String allActFarmer(
