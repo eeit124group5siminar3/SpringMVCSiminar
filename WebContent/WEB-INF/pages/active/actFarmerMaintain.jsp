@@ -74,7 +74,7 @@
 <title>一日農夫活動申請</title>
 </head>
 
-<body>
+<body class="goto-here">
 	-
 	<!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
@@ -192,7 +192,7 @@
 					<!-- 					</tr> -->
 					<!-- 				ajax -->
 			</table>
-
+</div>
 			<!-- --------footer------------------------------------- -->
 			<footer class="ftco-footer backstage-footer-ground">
 				<jsp:include page="/WEB-INF/pages/footer.jsp" />
@@ -200,11 +200,10 @@
 
 			<div id="ftco-loader" class="show fullscreen">
 				<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-						stroke-width="4" stroke="#eeeeee" /> 
- 			<circle class="path" cx="24" cy="24" r="22" fill="none"
-						stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> 
+ 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
  				</svg>
+ 				</div>
 <script type="text/javascript">
 	$.post({
         url:"${pageContext.request.contextPath}/test",

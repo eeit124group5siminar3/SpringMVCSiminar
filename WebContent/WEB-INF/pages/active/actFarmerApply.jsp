@@ -43,6 +43,8 @@
 	width: 100%;
 	top: 800px;
 	position: absolute;
+	box-sizing: border-box;
+	
 }
 
 #project_backstage {
@@ -60,8 +62,9 @@
 	top: 150px;
 	left: 250px;
 	right: 50px;
-	text-align: center;
+	text-align: center;	
 }
+
 </style>
 <script type="text/javascript">
 
@@ -75,7 +78,7 @@ function backHome(){
 <title>一日農夫活動申請</title>
 </head>
 
-<body>
+<body class="goto-here">
 <!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 <!-- --------管理左邊bar-------------------------------- -->
@@ -172,7 +175,7 @@ function backHome(){
 
 <!-- --------------footer----------------------------------------------------------- -->
 
-<footer class="ftco-footer backstage-footer-ground">
+<footer class="ftco-footer backstage-footer-ground" >
 		<jsp:include page="/WEB-INF/pages/footer.jsp" />
 	</footer>
 

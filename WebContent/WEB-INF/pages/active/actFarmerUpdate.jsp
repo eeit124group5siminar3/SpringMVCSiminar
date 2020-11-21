@@ -35,6 +35,34 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 
+<style>
+.backstage-footer-ground {
+	width: 100%;
+ 	top: 800px; 
+	position: absolute;
+	box-sizing: border-box;
+	
+}
+
+#project_backstage {
+	width: 150px;
+	position: absolute;
+	font-weight: bold;
+	top: 150px;
+	left: 15px;
+	color: white;
+	display: block;
+}
+
+#backstage_page {
+	position: absolute;
+	top: 150px;
+	left: 250px;
+	right: 50px;
+	text-align: center;
+}
+</style>
+
 <script>
 function backHome(){
 	document.act.action="allActFarmer.do";
@@ -43,9 +71,9 @@ function backHome(){
 </script>
 
 <title>一日農夫活動修改</title>
-</head>
-<body>
 
+</head>
+<body class="goto-here">
 <!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 <!-- --------管理左邊bar-------------------------------- -->
@@ -145,9 +173,6 @@ function backHome(){
 </table>
 </form:form>
 </div>
-<br>
-<br>
-<br>
 
 <!-- --------------footer----------------------------------------------------------- -->
 
@@ -155,12 +180,12 @@ function backHome(){
 <%-- 		<jsp:include page="/WEB-INF/pages/footer.jsp" /> --%>
 <!-- 	</footer> -->
 	
-<!-- 	<div id="ftco-loader" class="show fullscreen"> -->
-<!-- 		<svg class="circular" width="48px" height="48px"> -->
-<%-- 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />  --%>
-<%--  			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /> --%>
-<!--  		</svg>  -->
-<!-- 	</div> -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> 
+ 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+ 		</svg> 
+	</div>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
