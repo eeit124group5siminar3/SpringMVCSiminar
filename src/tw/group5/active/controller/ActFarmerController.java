@@ -207,6 +207,10 @@ public class ActFarmerController {
 		return "redirect:/allActFarmer.do";
 	}
 	
+//	public ActFarmer getAllAct(@RequestParam("actFarmer")String s1) {
+//		Map<String, String> map = new HashMap<>();
+//		map.put("actId", get);
+//	}
 	
 	@RequestMapping("/test")
 	@ResponseBody

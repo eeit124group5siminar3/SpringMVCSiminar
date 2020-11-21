@@ -39,31 +39,6 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 
-<style>
-.backstage-footer-ground {
-	width: 100%;
-	top: 800px;
-	position: absolute;
-}
-
-#project_backstage {
-	width: 150px;
-	position: absolute;
-	font-weight: bold;
-	top: 150px;
-	left: 15px;
-	color: white;
-	display: block;
-}
-
-#backstage_page {
-	position: absolute;
-	top: 150px;
-	left: 250px;
-	right: 50px;
-	text-align: center;
-}
-
 </head>
 <body class="goto-here">
 
