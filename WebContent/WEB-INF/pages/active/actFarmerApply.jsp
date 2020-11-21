@@ -39,9 +39,14 @@
 <link rel="stylesheet" href="css/style.css">
 <title>一日農夫活動申請</title>
 </head>
+<script type="text/javascript">
+function backHome(){
+	document.act.action="allActFarmer.do";
 
-
-
+    document.act.submit();
+	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
+}
+</script>
 <body>
 <!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
@@ -134,12 +139,15 @@
 
 </table>
 </form:form>
-<br>
-<br>
-<br>
-<br>
+
 </div>
-<jsp:include page="../footer.jsp" />
+
+<!-- --------------footer----------------------------------------------------------- -->
+
+<footer class="ftco-footer backstage-footer-ground">
+	<jsp:include page="../footer.jsp" />
+</footer>
+
 <!-- 	<div id="ftco-loader" class="show fullscreen"> -->
 <!-- 		<svg class="circular" width="48px" height="48px"> -->
 <%-- 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" --%>
@@ -166,5 +174,25 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+function readURL(input){
+	if(input.files && input.files[0]){
+		var reader = new FileReader();
+
+		reader.onload = function(e){
+			$('#blah').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+$("#imgInp").change(function(){
+		readURL(this);
+	});
+
+
+
+</script>
 </body>
 </html>

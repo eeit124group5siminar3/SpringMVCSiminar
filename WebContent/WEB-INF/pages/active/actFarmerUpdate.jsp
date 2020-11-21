@@ -138,7 +138,9 @@
 </table>
 </form:form>
 
-<jsp:include page="../footer.jsp" />
+	<footer class="ftco-footer backstage-footer-ground">
+		<jsp:include page="/WEB-INF/pages/footer.jsp" />
+	</footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -156,7 +158,10 @@ function readURL(input){
 $("#imgInp").change(function(){
 		readURL(this);
 	});
-
+function backHome(){
+	document.act.action="allActFarmer.do";
+    document.act.submit();
+}
 
 
 </script>
