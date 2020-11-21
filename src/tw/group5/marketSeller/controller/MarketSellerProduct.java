@@ -22,16 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
-import tw.group5.marketSeller.model.MarketProductBeanService;
 import tw.group5.marketSeller.model.MarketProductImgBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
+import tw.group5.marketSeller.service.MarketProductBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 
 @Controller
 @SessionAttributes(names = {"Insert1", "login_ok","mBean"})
-public class MarketHome {
+public class MarketSellerProduct {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
 	private MarketProductBeanService service;
@@ -85,11 +84,6 @@ public class MarketHome {
 			)throws IllegalStateException, IOException{
 		   Map<String, String> errorMsgs = new HashMap<String, String>();
 		   model.addAttribute("Errors",errorMsgs);
-		   Integer mNo = mb.getMember_no();
-		   bean1.setMemberNo(mNo);
-		   System.out.println("賣家狀態   =="+mNo);
-//		   System.err.println(bean1.getMarketProductImgBean().hashCode());
-//		   bean1.getMarketProductImgBean().setMarketProductTotalBean(bean1);
 		   service.insert(bean1);
 		return "marketSeller/MarketS";
 		}

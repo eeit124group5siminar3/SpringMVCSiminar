@@ -65,7 +65,9 @@
 								class="dropdown-item"
 								href="<c:url value='/MarketProduct.selectAll'/>">商品管理</a> <a
 								class="dropdown-item"
-								href="<c:url value='        '/>">購物車</a>
+								href="<c:url value='        '/>">商家資料管理</a><a
+								class="dropdown-item"
+								href="<c:url value='/MarketMall.goInsertJsp'/>">商家申請</a>
 						</div></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
