@@ -50,86 +50,73 @@
 <!-- --------內容-------------------------------- -->
 
 <h1 align="center">一日農夫活動檢視</h1>
-<form:form action="actFarmerUpdate.do" modelAttribute="afBean" method="POST" enctype="multipart/form-data">
+<form:form action="actFarmerPreUpdate.do" modelAttribute="afBean" method="GET" enctype="multipart/form-data" name="act">
 <table align="center">
 	<tr>
-		<td><form:label path="actId" type="hidden">活動編號</form:label></td>
-		<td><form:label path="actId" ></form:label></td>
+		<td><form:label path="actId" type="hidden">活動編號:</form:label></td>
+		<td><form:label path="actId" >${afBean.actId}</form:label></td>
 	</tr>
 	<tr>
-		<td><form:label path="actName">活動名稱</form:label></td>
-		<td><form:input path="actName" type="text"/></td>
+		<td><form:label path="actName">活動名稱:</form:label></td>
+		<td><form:label path="actName">${afBean.actName}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="actType">活動類型:</form:label></td>
-		<td><form:select path="actType" type="text">		
-				<form:option value="體驗類">體驗類</form:option>
-				<form:option value="採收類">採收類</form:option>
-				<form:option value="文藝類">文藝類</form:option>
-				<form:option value="綜合類">綜合類</form:option>			
-			</form:select>	
-		</td>
+		<td><form:label path="actType">${afBean.actType}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="actAddr">活動地址:</form:label></td>
-		<td><form:input path="actAddr" type="text"/></td>
+		<td><form:label path="actAddr">${afBean.actAddr}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="tel">連絡電話:</form:label></td>
-		<td><form:input path="tel" type="text"/></td>
+		<td><form:label path="tel">${afBean.tel}</form:label></td>		
 	</tr>
 	<tr>
 		<td><form:label path="actDateSta">活動開始日期:</form:label></td>
-		<td><form:input path="actDateSta" type="date" /></td>
+		<td><form:label path="actDateSta">${afBean.actDateSta}</form:label></td>
 		<td><form:label path="actTimeSta">活動開始時間:</form:label></td>
-		<td><form:input path="actTimeSta"  type="time"></form:input></td>
+		<td><form:label path="actTimeSta">${afBean.actTimeSta}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="actDateEnd">活動結束日期:</form:label></td>
-		<td><form:input path="actDateEnd" type="date" /></td>
+		<td><form:label path="actDateEnd">${afBean.actDateEnd}</form:label></td>
 		<td><form:label path="actTimeEnd">活動結束時間:</form:label></td>
-		<td><form:input path="actTimeEnd" type="time" ></form:input></td>
+		<td><form:label path="actTimeEnd">${afBean.actTimeEnd}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="numLim">活動人數上限:</form:label></td>
-		<td><form:input path="numLim" type="text"/></td>
+		<td><form:label path="numLim">${afBean.numLim}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="price">活動費用:</form:label></td>
-		<td><form:input path="price" type="text" /></td>
+		<td><form:label path="price">${afBean.price}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="actDescri">活動描述:</form:label></td>
 <%-- 		<td><form:input path="actDescri" type="text" required="required"/></td> --%>
-		<td><form:textarea cols="50" rows="6" path="actDescri"></form:textarea></td>
+		<td><form:label path="actDescri">${afBean.actDescri}</form:label></td>
 
 	</tr>
 	<tr>
 		<td><form:label path="actImg">活動海報:</form:label></td>				
 		<td><img height='120' width='96' src="<c:url value='ActImageController?id=${afBean.actId}&type=ACTFARMER'/>"/>		
-		<td><form:input path="multipartFile" type="file" class="InputClass" id="imgInp" accept="image/*"/>
-			<img height='120' width='96' id="blah" src="#" alt="New image" />
-		</td>
 	</tr>
 	<tr>
 		<td><form:label path="signDateSta">報名開始日期:</form:label></td>
-		<td><form:input path="signDateSta" type="date" /></td>
+		<td><form:label path="signDateSta">${afBean.signDateSta}</form:label></td>
 		<td><form:label path="signTimeSta">報名開始時間:</form:label></td>
-		<td><form:input path="signTimeSta" type="time" ></form:input></td>
+		<td><form:label path="signTimeSta">${afBean.signTimeSta}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="signDateEnd">報名結束日期:</form:label></td>
-		<td><form:input path="signDateEnd" type="date" /></td>
+		<td><form:label path="signDateEnd">${afBean.signDateEnd}</form:label></td>
 		<td><form:label path="signTimeEnd">報名結束時間:</form:label></td>
-		<td><form:input path="signTimeEnd" type="time"></form:input></td>
+		<td><form:label path="signTimeEnd">${afBean.signTimeEnd}</form:label></td>
 	</tr>
 	<tr>
 		<td><form:label path="sigStat">報名狀態:</form:label></td>
-		<td>
-			<form:radiobutton path="sigStat" value="未開放" id="sigStat"/>未開放
-			<form:radiobutton path="sigStat" value="開放中" id="sigStat"/>開放中
-			<form:radiobutton path="sigStat" value="已截止" id="sigStat"/>已截止			
-		</td>
+		<td><form:label path="sigStat">${afBean.sigStat}</form:label></td>
 	</tr>
 	<tr>
 		<td colspan="3" align="center">	
@@ -188,7 +175,6 @@ function backHome(){
 	document.act.action="allActFarmer.do";
     document.act.submit();
 }
-
 
 </script>
 </body>

@@ -43,6 +43,10 @@
 function backHome(){
 	document.act.action="allActFarmer.do";
 
+<script type="text/javascript">
+function backHome(){
+	document.act.action="allActFarmer.do";
+
     document.act.submit();
 	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
 }

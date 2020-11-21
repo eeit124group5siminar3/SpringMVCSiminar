@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ㄈ<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
-	response.setContentType("text/html;charset=UTF-8");
+response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1 no-cache不能存快取
 response.setHeader("Pragma", "no-cache"); // HTTP 1.0
 response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
@@ -68,16 +68,17 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	text-align: center;
 }
 </style>
-
-
 </head>
 <body class="goto-here">
+
 <!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
+	
 <!-- --------管理左邊bar-------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
 
-<!-- --------一日農夫管理 內容區--------- -->
+<!-- --------一日農夫管理 內容區------------------------ -->
+<div align="center" id="backstage_page">
 
 <div>
 	<h1 align="center">活動管理-一日農夫</h1>
@@ -90,7 +91,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 					</form>
 				</td>
 				<td style="border: 0px" align="right" colspan="2">	
-					<form action="<c:url value='/allActFarmer.do'/>" method="get">
+					<form action="<c:url value='/maintainAct-Farmer.do'/>" method="get">
 						<input name="selectAll" type="submit" value="查詢全部">
 					</form>
 				</td>			
@@ -129,7 +130,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						<td><c:out value="${actFarmer.actNum}" /></td>
 						<td><c:out value="${actFarmer.sigStat}" /></td>						
 						<td>
-							<form action="<c:url value='/actFarmerPreUpdate.do'/>" method="post">
+							<form action="<c:url value='/actFarmerPreRead.do'/>" method="get">
 								<input type="hidden" id="actId" name="actId" value="${actFarmer.actId}">
 								<input name="look" type="submit" value="檢視">
 							</form>
@@ -148,9 +149,21 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						</td>
 					</tr>
 				</c:forEach>
+				
+<!-- 				ajax -->
+<!-- 					<tr id="test_id"> -->
+<!-- 						<td></td> -->
+<!-- 						<td></td> -->
+<!-- 						<td></td>						 -->
+									
+<!-- 						<td>檢視</td> -->
+<!-- 						<td>修改</td> -->
+<!-- 						<td>刪除</td> -->
+<!-- 					</tr> -->
+<!-- 				ajax -->
+				
 				<tr>
 					<td style="border: 0px" colspan="6"></td>
-
 					<td style="border: 0px" colspan="6">
 						<form action="<c:url value='/'/>" method="get">
 							<label for="">活動名稱:</label>
@@ -174,20 +187,16 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <!-- 				ajax -->
 								
 			</table>
-	</div>
-	
-<!-- --------------footer----------------------------------------------------------- -->
 
-<footer class="ftco-footer backstage-footer-ground">
-	<jsp:include page="../footer.jsp" />
-</footer>
-
-	<div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px"> 
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> 
- 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
- 		</svg> 
 	</div>
+
+<!-- -------------------------------- -->
+
+<!-- --------footer------------------------------------- -->
+
+	<footer class="ftco-footer backstage-footer-ground">
+	<jsp:include page="/WEB-INF/pages/footer.jsp" />
+	</footer>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -232,6 +241,5 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
        }
    });
 	</script>
-
 </body>
 </html>
