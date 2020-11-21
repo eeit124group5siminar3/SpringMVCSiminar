@@ -59,33 +59,6 @@
 }
 </style>
 </head>
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-	crossorigin="anonymous"></script>
-<script>
-$(function(){
-	$("#form_submit").on("submit",function(ev){
-	$("#check_password").html("");
-	$.ajax({
-		url:"resetPwd.controller",
-		data:{
-			member_password:$("#member_password1").val(),
-			member_password1:$("#member_password2").val()
-		 	},
-		type:"POST", 
-		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-	success:function(data){
-		if(data){
-			window.location.href = "index.controller";
-		}else{
-			$("#check_password").html("二次密碼不符合，請重新輸入");
-		}
-	}
-    })  
-    ev.preventDefault();
-})
-})
-</script>
 <body class="goto-here">
 	<jsp:useBean id="reg_buyer"
 		class="tw.group5.member_SignUp.model.Member_SignUp" scope="session" />
@@ -132,12 +105,10 @@ $(function(){
 
 	<!-------------------------內容區--------------------------------->
 
-	<form method="post" id="form_submit">
+	<form action="resetPwd.controller" method="post">
 		<div class="forgotResetPwd-form container">
 			<fieldset class="border forgotResetPwd-form-fieldset">
 				<legend>設定新密碼</legend>
-				<div id="check_password" class="center"
-					style="color: red; text-align: center;height:20px"></div>
 				<div class="form-group">
 					<input type="text" class="form-control"
 						placeholder="<jsp:getProperty name="reg_buyer"
@@ -151,16 +122,16 @@ $(function(){
 						disabled>
 					<p></p>
 					<label for="inputPassword4">設定新密碼</label> <input type="password"
-						name="member_password" id="member_password1" class="form-control"
+						name="member_password" class="form-control"
 						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 						title="密碼長度至少8碼，須包含大寫、小寫英文及數字" placeholder="請填入新的密碼" required>
 					<p></p>
 					<label for="inputPassword4">設定新密碼</label> <input type="password"
-						name="member_password1" id="member_password2" class="form-control"
+						name="member_password1" class="form-control"
 						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 						title="密碼長度至少8碼，須包含大寫、小寫英文及數字" placeholder="請再填入一次新的密碼" required>
 				</div>
-				<button type="submit" id="submit" class="btn btn-primary">提交</button>
+				<button type="submit" class="btn btn-primary">提交</button>
 			</fieldset>
 		</div>
 	</form>

@@ -59,35 +59,6 @@
 }
 </style>
 </head>
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-	crossorigin="anonymous"></script>
-<script>
-$(function(){
-	$("#form_submit").on("submit",function(ev){
-	$("#check_restPwd").html("");
-	$.ajax({
-		url:"forgotPwd.controller",
-		data:{
-			member_email:$("#member_email").val(),
-			member_id:$("#member_id").val(),
-			member_name:$("#member_name").val(),
-			member_cellphone:$("#member_cellphone").val()
-		 	},
-		type:"POST", 
-		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-	success:function(data){
-		if(data){
-			window.location.href = "goResetPwd.controller";
-		}else{
-			$("#check_restPwd").html("資料不正確，請重新輸入");
-		}
-	}
-    })  
-    ev.preventDefault();
-})
-})
-</script>
 <body class="goto-here">
 	<div class="py-1 bg-primary">
 		<div class="container">
@@ -132,31 +103,28 @@ $(function(){
 
 	<!-------------------------內容區--------------------------------->
 
-	<form method="post" id="form_submit">
+	<form action="forgotPwd.controller" method="post">
 		<div class="forgotResetPwd-form container">
 			<fieldset class="border forgotResetPwd-form-fieldset">
 				<legend>忘記密碼</legend>
-				<div id="check_restPwd" class="center"
-					style="color: red; text-align: center; height: 20px"></div>
+
 				<div class="form-group">
 					<label for="inputPassword4">Email</label> <input type="text"
-						name="member_email" id="member_email" class="form-control"
-						placeholder="請填入註冊時的Email" required>
+						name="member_email" class="form-control"
+						placeholder="請填入註冊時的Email">
 					<p></p>
 					<label for="inputPassword4">身份證字號</label> <input type="text"
-						name="member_id" id="member_id" class="form-control"
-						placeholder="請填入註冊時的身份證字號" required>
+						name="member_id" class="form-control" placeholder="請填入註冊時的身份證字號">
 					<p></p>
 					<label for="inputPassword4">姓名</label> <input type="text"
-						name="member_name" id="member_name" class="form-control"
-						placeholder="請填入註冊時的姓名或名稱" required>
+						name="member_name" class="form-control" placeholder="請填入註冊時的姓名或名稱">
 					<p></p>
 					<label for="inputPassword4">電話</label> <input type="text"
-						name="member_cellphone" id="member_cellphone" class="form-control"
-						placeholder="請填入註冊時的電話" required>
+						name="member_cellphone" class="form-control"
+						placeholder="請填入註冊時的電話">
 				</div>
 
-				<button type="submit" id="submit" class="btn btn-primary">提交</button>
+				<button type="submit" class="btn btn-primary">提交</button>
 
 			</fieldset>
 		</div>

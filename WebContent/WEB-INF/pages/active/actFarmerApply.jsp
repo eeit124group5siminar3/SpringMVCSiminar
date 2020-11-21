@@ -40,14 +40,7 @@
 <title>一日農夫活動申請</title>
 </head>
 
-<script type="text/javascript">
-function backHome(){
-	document.act.action="allActFarmer.do";
 
-    document.act.submit();
-	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
-}
-</script>
 
 <body>
 <!-- --------Header------------------------------------- -->
@@ -173,25 +166,5 @@ function backHome(){
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-<script>
-function readURL(input){
-	if(input.files && input.files[0]){
-		var reader = new FileReader();
-
-		reader.onload = function(e){
-			$('#blah').attr('src', e.target.result);
-		}
-		reader.readAsDataURL(input.files[0]);
-	}
-}
-$("#imgInp").change(function(){
-		readURL(this);
-	});
-
-
-
-</script>
 </body>
 </html>

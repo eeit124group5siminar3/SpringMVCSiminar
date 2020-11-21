@@ -1,9 +1,6 @@
 package tw.group5.active.controller;
 
 
-import java.io.ByteArrayOutputStream;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,30 +8,21 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.hibernate.metamodel.model.domain.internal.AbstractIdentifiableType;
-import org.hibernate.sql.ordering.antlr.GeneratedOrderByFragmentParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActFarmerService;
-import tw.group5.active.model.Clock;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
@@ -54,33 +42,19 @@ public class ActFarmerController {
 	@Autowired
 	ServletContext ctx;
 	
-	//查詢所有活動-一日農夫
-	@RequestMapping(value = "")
-	public String getAllactFarmer(Model model) {
-		Collection<ActFarmer> collFarmers = actFarmerService.getPageActFarmers();
-		model.addAttribute("collFarmers", collFarmers);
-		return "";
-	}
-	
 	//廠商活動管理頁面-一日農夫
-	@RequestMapping(value = "allActFarmer.do")
+	@GetMapping(value = "allActFarmer.do")
 	public String allActFarmer(
 			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
 			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model model
 			) {
-		try {
 		if (mb == null) {
 			return "/index";
 		}
-		Integer sellerId = mb.getMember_no();
+		Integer sellerId = mb.getMember_no();			
 		Collection<ActFarmer> collFarmer = actFarmerService.getActFarmers(sellerId);
 		model.addAttribute("collFarmer", collFarmer);
 		return "/active/actFarmerMaintain";
-		}catch (Exception e) {
-			e.printStackTrace();
-			// TODO: handle exception
-		}
-		return "/index";
 	}
 		
 	
@@ -114,7 +88,18 @@ public class ActFarmerController {
 		return "/active/actFarmerMaintain";
 	}
 	
-	
+//	public String getActFarmerById(@ModelAttribute(value = "afBean") AbstractIdentifiableType , Model model,
+//			@SessionAttribute(value = "login_ok")Member_SignUp mb		
+//			) {
+//		//放判斷式的錯誤訊息
+//		Map<String, String> errorMsgs = new HashMap<String, String>();
+//		//放判斷式的成功訊息
+//		Map<String, String> successMsgs =  new HashMap<String, String>();
+//		model.addAttribute("ErrMsg", errorMsgs);
+//		model.addAttribute("successMsg", successMsgs);
+//		actFarmerService.getActFarmer(actId);
+//		
+//	}
 	
 	//申請活動準備(建立空的物件)
 	@GetMapping(path = "/actFarmerPreInsert.do")
@@ -145,16 +130,6 @@ public class ActFarmerController {
 		return "redirect:/allActFarmer.do";
 		
 	}
-	//檢視活動準備(找到該筆物件)
-	@GetMapping(path="/actFarmerPreRead.do")
-	public String actFarmerPreRead(@RequestParam(value = "actId") Integer actId, Model model) {
-		ActFarmer afBean = actFarmerService.getActFarmer(actId);
-		System.out.println(afBean.getActImg());
-		model.addAttribute("afBean", afBean);
-		return "/active/actFarmerRead";
-	}
-	
-	//返回場
 	
 	//修改活動準備(找到該筆物件)
 	@GetMapping(value = "/actFarmerPreUpdate.do")
@@ -177,25 +152,7 @@ public class ActFarmerController {
 		Map<String, String> successMsgs =  new HashMap<String, String>();
 		model.addAttribute("ErrMsg", errorMsgs);
 		model.addAttribute("successMsg", successMsgs);
-		Integer sellerId = mb.getMember_no();
-		actFarmer.setSellerId(sellerId);
-		
-		if(actFarmer.getActImg() == null) {
-			ActFarmer originActFarmer = actFarmerService.getActFarmer(actFarmer.getActId());
-			Blob tempBlob = originActFarmer.getActImg();
-			
-			try {				
-				SerialBlob sb = new SerialBlob(tempBlob);
-				originActFarmer.setActImg(null);
-				
-				actFarmer.setActImg(sb);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		actFarmerService.updateActFarmer(actFarmer);	
-		
+		actFarmerService.updateActFarmer(actFarmer);
 		return "redirect:/allActFarmer.do";
 	}
 	
@@ -205,26 +162,5 @@ public class ActFarmerController {
 		Integer id =Integer.valueOf(actId);
 		actFarmerService.deletActFarmer(id);
 		return "redirect:/allActFarmer.do";
-	}
-	
-	
-	@RequestMapping("/test")
-	@ResponseBody
-	public Clock test1(@RequestParam("param1")String s1) throws JsonProcessingException {
-		System.out.println(s1);
-		
-		Map<String, String> map = new HashMap<>();
-		map.put("actId", "1");
-		map.put("actName", "2");
-		map.put("actType", "3");
-		
-		ObjectMapper mapper = new ObjectMapper();
-		String str = mapper.writeValueAsString(map);
-		
-		Clock clock = new Clock();
-		clock.setTimeId(5566);
-		clock.setTimeName("clock test中文");
-		
-		return clock;
 	}
 }

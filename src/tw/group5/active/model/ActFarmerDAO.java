@@ -190,7 +190,7 @@ public class ActFarmerDAO {
 	//更新
 	public ActFarmer updateActFarmer(ActFarmer actFarmer) {
 		Session session = sessionFactory.getCurrentSession();
-		session.merge(actFarmer);
+		session.update(actFarmer);
 		return actFarmer;
 	}
 
