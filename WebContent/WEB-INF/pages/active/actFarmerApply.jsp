@@ -37,20 +37,44 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
-<title>一日農夫活動申請</title>
-</head>
+
+<style>
+.backstage-footer-ground {
+	width: 100%;
+	top: 800px;
+	position: absolute;
+}
+
+#project_backstage {
+	width: 150px;
+	position: absolute;
+	font-weight: bold;
+	top: 150px;
+	left: 15px;
+	color: white;
+	display: block;
+}
+
+#backstage_page {
+	position: absolute;
+	top: 150px;
+	left: 250px;
+	right: 50px;
+	text-align: center;
+}
+</style>
 <script type="text/javascript">
+
 function backHome(){
 	document.act.action="allActFarmer.do";
-
-<script type="text/javascript">
-function backHome(){
-	document.act.action="allActFarmer.do";
-
     document.act.submit();
 	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
 }
 </script>
+
+<title>一日農夫活動申請</title>
+</head>
+
 <body>
 <!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
@@ -149,16 +173,15 @@ function backHome(){
 <!-- --------------footer----------------------------------------------------------- -->
 
 <footer class="ftco-footer backstage-footer-ground">
-	<jsp:include page="../footer.jsp" />
-</footer>
+		<jsp:include page="/WEB-INF/pages/footer.jsp" />
+	</footer>
 
-<!-- 	<div id="ftco-loader" class="show fullscreen"> -->
-<!-- 		<svg class="circular" width="48px" height="48px"> -->
-<%-- 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" --%>
-<%-- 				stroke-width="4" stroke="#eeeeee" /> --%>
-<%-- 			<circle class="path" cx="24" cy="24" r="22" fill="none" --%>
-<%-- 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg> --%>
-<!-- 	</div> -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> 
+ 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+ 		</svg> 
+	</div>
 
 
 	<script src="js/jquery.min.js"></script>
@@ -195,8 +218,8 @@ $("#imgInp").change(function(){
 		readURL(this);
 	});
 
-
-
 </script>
+
+	
 </body>
 </html>
