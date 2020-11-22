@@ -1,0 +1,22 @@
+@charset "UTF-8";
+td.image-prod {
+  display: block;
+  width: 100%;
+
+  position: relative;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0; }
+
+td.image-prod div.img span.status {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 2px 10px;
+      color: #fff;
+      font-weight: 300;
+      background: 	#EA0000;
+      font-size: 12px; }

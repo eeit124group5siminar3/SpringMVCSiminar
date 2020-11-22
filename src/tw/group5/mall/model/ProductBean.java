@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+//新增、修改
 @Component
 @Entity
 @Table(name = "product")
@@ -45,7 +45,7 @@ public class ProductBean implements Serializable {
 	private String description;
 	private Integer category;
 	private String producterName;
-	private CategoryBean categoryBean;
+//	private CategoryBean categoryBean;
 	private MultipartFile multipartFile;
 
 	public ProductBean() {
@@ -172,13 +172,19 @@ public class ProductBean implements Serializable {
 		this.description = description;
 	}
 
-	@Transient
+//	@Transient
+	@Column(name = "CATEGORY")
 	public Integer getCategory() {
 		return category;
 	}
 
 	public void setCategory(Integer category) {
 		this.category = category;
+	}
+	
+	@Transient
+	public String getCategoryName() {
+		return CategoryClass.getCategory(category);
 	}
 
 	@Transient
@@ -190,16 +196,16 @@ public class ProductBean implements Serializable {
 		this.producterName = producterName;
 	}
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category")
-	public CategoryBean getCategoryBean() {
-		return categoryBean;
-	}
-
-	public void setCategoryBean(CategoryBean categoryBean) {
-		this.categoryBean = categoryBean;
-	}
+//	@JsonIgnore
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "category")
+//	public CategoryBean getCategoryBean() {
+//		return categoryBean;
+//	}
+//
+//	public void setCategoryBean(CategoryBean categoryBean) {
+//		this.categoryBean = categoryBean;
+//	}
 
 	@JsonIgnore
 	@Transient

@@ -69,7 +69,7 @@ public class ShoppingCart {
 		return cart.size();
 	}
 	//計算購物車內所有商品的合計金額(每項商品的單價*數量的總和)
-	public double getSubtotal(){
+	public double getTotal(){
 		double subTotal = 0 ;
 		Set<Integer> set = cart.keySet();
 		for(int n : set){
@@ -77,6 +77,17 @@ public class ShoppingCart {
 			double discount = cart.get(n).getDiscount();
 			int    qty      = cart.get(n).getQty();
 			subTotal +=  price * discount * qty;
+		}
+		return subTotal;
+	}
+	
+	public double getSubtotal(){
+		double subTotal = 0 ;
+		Set<Integer> set = cart.keySet();
+		for(int n : set){
+			double price    = cart.get(n).getPrice();
+			int    qty      = cart.get(n).getQty();
+			subTotal +=  price *  qty;
 		}
 		return subTotal;
 	}
