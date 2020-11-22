@@ -37,12 +37,48 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+.backstage-footer-ground {
+	width: 100%;
+	top: 800px;
+	position: absolute;
+	box-sizing: border-box;
+	
+}
+
+#project_backstage {
+	width: 150px;
+	position: absolute;
+	font-weight: bold;
+	top: 150px;
+	left: 15px;
+	color: white;
+	display: block;
+}
+
+#backstage_page {
+	position: absolute;
+	top: 150px;
+	left: 250px;
+	right: 50px;
+	text-align: center;	
+}
+
+</style>
+<script type="text/javascript">
+
+function backHome(){
+	document.act.action="allActFarmer.do";
+    document.act.submit();
+	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
+}
+</script>
+
 <title>一日農夫活動申請</title>
 </head>
 
-
-
-<body>
+<body class="goto-here">
 <!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 <!-- --------管理左邊bar-------------------------------- -->
@@ -134,19 +170,21 @@
 
 </table>
 </form:form>
-<br>
-<br>
-<br>
-<br>
+
 </div>
-<jsp:include page="../footer.jsp" />
-<!-- 	<div id="ftco-loader" class="show fullscreen"> -->
-<!-- 		<svg class="circular" width="48px" height="48px"> -->
-<%-- 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" --%>
-<%-- 				stroke-width="4" stroke="#eeeeee" /> --%>
-<%-- 			<circle class="path" cx="24" cy="24" r="22" fill="none" --%>
-<%-- 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg> --%>
-<!-- 	</div> -->
+
+<!-- --------------footer----------------------------------------------------------- -->
+
+<footer class="ftco-footer backstage-footer-ground" >
+		<jsp:include page="/WEB-INF/pages/footer.jsp" />
+	</footer>
+
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> 
+ 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+ 		</svg> 
+	</div>
 
 
 	<script src="js/jquery.min.js"></script>
@@ -166,5 +204,25 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+function readURL(input){
+	if(input.files && input.files[0]){
+		var reader = new FileReader();
+
+		reader.onload = function(e){
+			$('#blah').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+$("#imgInp").change(function(){
+		readURL(this);
+	});
+
+</script>
+
+	
 </body>
 </html>

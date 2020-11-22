@@ -14,4 +14,6 @@ public interface IMarketSellBeanService {
     // 新增
 	MarketMallBean insert(MarketMallBean bean);
 
+	MarketMallBean selectid(Integer mid);
+
 }

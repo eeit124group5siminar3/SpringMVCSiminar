@@ -3,12 +3,7 @@
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<% 
-response.setContentType("text/html;charset=UTF-8");
-response.setHeader("Cache-Control","no-cache"); // HTTP 1.1
-response.setHeader("Pragma","no-cache"); // HTTP 1.0
-response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
-%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,20 +15,29 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
-<jsp:include page="/top.jsp" />
-<form:form action=""  method="post" modelAttribute="Insert" enctype="multipart/form-data">
+<jsp:include page="../header.jsp" />
+
+<form:form action="MarketMall.Insert"  method="post" modelAttribute="Insert" enctype="multipart/form-data">
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
 
     <tr>
     <td>店家名稱:</td>
     <td><form:input type="text" name="mallName" id="mallName" class='InputClass'
-     size="20" maxlength="10" path="mallName"/>
+     size="20" maxlength="10" value="" path="mallName"/>
            <font color='red' size='-1'>
               ${errors.errMallName}
            </font>
     </td>
 </tr>
-
+    <tr height="36" >
+    <td >地址</td>
+      <td>         
+         <form:input  name="address"  path="address"></form:input> 
+         <font color='red' size='-1'>
+                ${errors.errDescription}
+            </font>
+      </td>
+    </tr>
 
     <tr height="36" >
     <td >店家描述</td>
@@ -52,7 +56,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
     </tr>
         <tr height="36" >
       <td height="61" colspan="6" align="center">
-         <form:button value="Send">修改</form:button>
+         <form:button value="Send">註冊</form:button>
       </td>
     </tr>
    

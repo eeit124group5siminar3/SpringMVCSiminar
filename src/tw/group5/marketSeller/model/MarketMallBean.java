@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -41,6 +42,7 @@ public class MarketMallBean {
 	private String  address;
 	private String mallDescription;
 	private MultipartFile multipartFile;
+	private Integer mallStatus;
     private Set<MarketProductTotalBean> marketProductTotalBean =
             new HashSet<MarketProductTotalBean>(0);
 	
@@ -111,6 +113,16 @@ public class MarketMallBean {
 	public void setImgName(String imgName) {
 		this.imgName = imgName;
 	}
+	
+	@Column(name = "MALL_STATUS")
+	public Integer getMallStatus() {
+		return mallStatus;
+	}
+
+	public void setMallStatus(Integer mallStatus) {
+		this.mallStatus = mallStatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "marketMallBean", cascade = CascadeType.ALL)
 	public Set<MarketProductTotalBean> getMarketProductTotalBean() {
 		return marketProductTotalBean;
@@ -118,6 +130,7 @@ public class MarketMallBean {
 	public void setMarketProductTotalBean(Set<MarketProductTotalBean> marketProductTotalBean) {
 		this.marketProductTotalBean = marketProductTotalBean;
 	}
+
 	
 
 }

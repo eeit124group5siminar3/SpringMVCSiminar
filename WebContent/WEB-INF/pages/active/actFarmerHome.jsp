@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>農郁</title>
+<title>農郁-活動</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,253 +35,56 @@
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
+
+	
+	<jsp:include page="../header.jsp" />
+ 	
+	<!-- END nav -->
+
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('images/bg_1.jpg');" id="product_top">
 		<div class="container">
 			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">0800-092-000</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">service@nonre.com</span>
-						</div>
-					</div>
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
+					</p>
+					<h1 class="mb-0 bread">Products</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
+	<section class="ftco-section">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp">農郁</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#ftco-nav" aria-controls="ftco-nav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> 列表
-			</button>
-
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html"
-						class="nav-link">首頁</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="shop.html">商城</a> <a
-								class="dropdown-item" href="cart.html">購物車</a> <a
-								class="dropdown-item" href="checkout.html">查看訂單</a>
-						</div></li>
-					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
-					<li class="nav-item"><a href="" class="nav-link">市場</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
-					<li class="nav-item"><a href="blog.html" class="nav-link">食譜</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">會員</a></li>
-					<li class="nav-item"><a href="login.html" class="nav-link">登錄</a></li>
-					<li class="nav-item cta cta-colored"><a href="cart.html"
-						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<!-------------------------內容區--------------------------------->
-	<h1 align="center">活動管理-一日農夫</h1>
-	<table>
-		<h2>活動列表</h2>
-			<tr>			
-				<td style="border: 0px" align="right" colspan="10">
-					<form action="" method="post">
-						<input name="apply" type="submit" value="申請">
+			<div class="row justify-content-center">
+				<div class="col-md-10 mb-5 text-center">
+					<ul class="product-category" id="product-category"></ul>
+					<form class="product-category" action="javascript:void(0)"
+						method="GET">
+						<input type="search" name="searchString" id="searchString"
+							value=${searchString}>
+						<button name="searchButton" style="border-radius: 5px;"
+							onclick="searchProduct()">查詢</button>
 					</form>
-				</td>
-				<td style="border: 0px" align="right" colspan="2">	
-					<form action="" method="get">
-						<input name="selectAll" type="submit" value="查詢全部">
-					</form>
-				</td>			
-			</tr>
-			<tr>
-				<th>活動編號</th>
-				<th>活動名稱</th>
-				<th>活動類型</th>				
-				<th>活動日期/時間</th>
-				<th>人數上限</th>
-				<th>價格</th>
-				<th>報名日期/時間</th>
-				<th>報名人數</th>	
-				<th>報名狀態</th>			
-				<th colspan="3">Action</th>
-			</tr>
-			<c:forEach var="actFarmer" items="${collFarmer}">
-					<tr>
-						<td><c:out value="${actFarmer.actId}" /></td>
-						<td><c:out value="${actFarmer.actName}" /></td>
-						<td><c:out value="${actFarmer.actType}" /></td>						
-						<td><c:out value="${actFarmer.actDateSta}" />&nbsp;
-							<c:out value="${actFarmer.actTimeSta}" />
-							到
-							<c:out value="${actFarmer.actDateEnd}" />&nbsp;
-							<c:out value="${actFarmer.actTimeEnd}" />							
-						</td>
-						<td><c:out value="${actFarmer.numLim}" /></td>
-						<td><c:out value="${actFarmer.price}" /></td>
-						<td><c:out value="${actFarmer.signDateSta}" />
-							<c:out value="${actFarmer.signTimeSta}" />
-							到
-							<c:out value="${actFarmer.signDateEnd}" />
-							<c:out value="${actFarmer.signTimeEnd}" />							
-						</td>
-						<td><c:out value="${actFarmer.actNum}" /></td>
-						<td><c:out value="${actFarmer.sigStat}" /></td>						
-						<td>
-							<form action="<c:url value='/'/>" method="post">
-								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
-								<input name="look" type="submit" value="檢視">
-							</form>
-						</td>
-						<td>
-							<form action="<c:url value='/'/>" method="post">
-								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
-								<input name="update" type="submit" value="修改">
-							</form> 
-						</td>
-						<td>
-							<form action="<c:url value='/'/>" method="post">
-								<input type="hidden" id="actId" name="actId" value="${Active.actId}">
-								<input name="delete" type="submit" value="刪除">								
-							</form>	
-						</td>
-					</tr>
-				</c:forEach>
-				<tr>
-					<td style="border: 0px" colspan="5"></td>
-
-					<td style="border: 0px" colspan="5">
-						<form action="<c:url value='/activeSelectone.controller'/>" method="get">
-							<label for="">活動名稱:</label>
-							<input type="text" id="selectname" name="selectname">
-							&nbsp;&nbsp;&nbsp; 
-							<input name="selectone" type="submit" value="查詢單筆">
-						</form>
-					</td>
-				</tr>
-			</table>
-
-	<!------------------------------------------------------------------>
-	<footer class="ftco-footer footer-ground">
-		<div class="container">
-			<div class="row">
-				<div class="mouse">
-
-					<!---------------TOP點選回最上層，不需要請註解---------------------->
-					<a href="#" class="mouse-icon">
-						<div class="mouse-wheel">
-							<span class="ion-ios-arrow-up"></span>
-						</div>
-					</a>
-					<!---------------------------------------------------------------->
-
 				</div>
 			</div>
-			<div class="row mb-5">
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">農郁</h2>
-						<p>最適合您的電商平台</p>
-						<ul
-							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-instagram"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4 ml-md-5">
-						<!-- <h2 class="ftco-heading-2">Menu</h2> -->
-						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">商城</a></li>
-							<li><a href="#" class="py-2 d-block">關於我</a></li>
-							<!-- <li><a href="#" class="py-2 d-block">Journal</a></li> -->
-							<li><a href="#" class="py-2 d-block">聯絡我們</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="ftco-footer-widget mb-4">
-						<!-- <h2 class="ftco-heading-2">其他問題</h2> -->
-						<div class="d-flex">
-							<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-								<li><a href="#" class="py-2 d-block">運送訊息</a></li>
-								<li><a href="#" class="py-2 d-block">退換貨</a></li>
-								<li><a href="#" class="py-2 d-block">條款及細則</a></li>
-								<li><a href="#" class="py-2 d-block">隱私政策</a></li>
-							</ul>
-							<ul class="list-unstyled">
-								<li><a href="#" class="py-2 d-block">常見問題</a></li>
-								<!-- <li><a href="#" class="py-2 d-block">Contact</a></li> -->
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<!-- <h2 class="ftco-heading-2">Have a Questions?</h2> -->
-						<div class="block-23 mb-3">
-							<ul>
-								<li><span class="icon icon-map-marker"></span><span
-									class="text">320 桃園市中壢區中大路300號</span></li>
-								<li><a href="#"><span class="icon icon-phone"></span><span
-										class="text">0800-092-000</span></a></li>
-								<li><a href="#"><span class="icon icon-envelope"></span><span
-										class="text">service@nonre.com</span></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-
-					<p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>
-							document.write(new Date().getFullYear());
-						</script>
-						All rights reserved | This template is made with <i
-							class="icon-heart color-danger" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>.
-						Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
-				</div>
-			</div>
+			<div class="row  ftco-animate" id="mall_products"></div>
 		</div>
-	</footer>
+		<div id="mall_pages"></div>
+	</section>
 
+	
+	<jsp:include page="../footer.jsp" />
+
+	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
@@ -308,5 +111,167 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+<script>
+	function productList(pageNo) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/RetrievePageProducts' />", true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var aProductBean = JSON.parse(xhr.responseText);
+				var content = "";
+				for (var i = 0; i < aProductBean.length; i++) {
+					content += "<div class='col-md-6 col-lg-3'>"
+							+ "<div class='product'><a href='#mall_products' class='img-prod'><img class='img-fluid' src=<c:url value='retrieveImageServlet?id="
+							+ aProductBean[i].productId
+							+ "&type=PRODUCT' /> alt='Colorlib Template'>";
+					if (aProductBean[i].discount != 1) {
+						content += "<span class='status'>"
+								+ (1 - aProductBean[i].discount) * 100
+								+ "%</span>";
+					}
+					content += "<div class='overlay'></div> </a><div class='text py-3 pb-4 px-3 text-center'><h3><a href='#'>"
+							+ aProductBean[i].product
+							+ "</a></h3><div class='d-flex'><div class='pricing'>";
+					if (aProductBean[i].discount != 1) {
+						content += "<p class='price'><span class='mr-2 price-dc'>"
+								+ aProductBean[i].price
+								+ "元</span><span class='price-sale'>"
+								+ aProductBean[i].price
+								* aProductBean[i].discount + "元</span></p>";
+					} else {
+						content += "<span>" + aProductBean[i].price
+								+ "元</span>";
+					}
+					content += "</div></div><div class='bottom-area d-flex px-3'><div class='m-auto d-flex'>"
+							+ "<a href='#mall_products' class='add-to-cart d-flex justify-content-center align-items-center text-center'><span><i class='ion-ios-menu'></i></span></a>"
+							+ "<a href='#mall_products' class='buy-now d-flex justify-content-center align-items-center mx-1'><span><i class='ion-ios-cart'></i></span></a>"
+							+ "<a href='#mall_products' class='heart d-flex justify-content-center align-items-center '><span><i class='ion-ios-heart'></i></span></a>"
+							+ "</div></div></div></div></div>"
+				}
+				let divs = document.getElementById("mall_products");
+				divs.innerHTML = content;
+			}
+		}
+	}
+
+	function page(pageNo) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/RetrievePage/"+pageNo+"' />", true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var content = "<div class='row mt-5'><div class='col text-center'><div class='block-27'><ul>";
+				var totalPages = xhr.responseText;
+				if (pageNo == 1) {
+					content += "<li><span>&lt;&lt;</span></li><li><span>&lt;</span></li>";
+				} else {
+					content += "<li><a href='#product_top'onclick='page("
+							+ 1
+							+ ")'>&lt;&lt;</a></li><li><a href='#product_top'onclick='page("
+							+ (pageNo - 1) + ")'>&lt;</a></li>";
+				}
+				if (totalPages <= 5) {
+					for (var i = 1; i <= totalPages; i++) {
+						if (pageNo == i) {
+							content += "<li class='active'><span>" + i
+									+ "</span></li>"
+						} else {
+							content += "<li><a href='#product_top' onclick='page("
+									+ i + ")'>" + i + "</a></li>"
+						}
+					}
+				} else if (pageNo > (totalPages - 3)) {
+					for (var i = totalPages - 4; i <= totalPages; i++) {
+						if (pageNo == i) {
+							content += "<li class='active'><span>" + i
+									+ "</span></li>"
+						} else {
+							content += "<li><a href='#product_top' onclick='page("
+									+ i + ")'>" + i + "</a></li>"
+						}
+					}
+				} else {
+					for (var i = pageNo - 2; i <= pageNo + 2; i++) {
+						if (pageNo == i) {
+							content += "<li class='active'><span>" + i
+									+ "</span></li>"
+						} else {
+							content += "<li><a href='#product_top' onclick='page("
+									+ i + ")'>" + i + "</a></li>"
+						}
+					}
+				}
+				if (pageNo == totalPages) {
+					content += "<li><span>&gt;</span></li><li><span>&gt;&gt;</span></li>";
+				} else {
+					content += "<li><a href='#product_top'onclick='page("
+							+ (pageNo + 1)
+							+ ")'>&gt;</a></li><li><a href='#product_top'onclick='page("
+							+ totalPages + ")'>&gt;&gt;</a></li>";
+				}
+			}
+			productList(pageNo);
+			content += "</ul></div></div></div>";
+			let divs = document.getElementById("mall_pages");
+			divs.innerHTML = content;
+			console.log(totalPages);
+		}
+	}
+
+	function searchProduct() {
+		var searchString = document.forms[0].elements[0].value;
+		console.log(searchString);
+		var xhr = new XMLHttpRequest();
+		if (searchString == null || searchString == "") {
+			var url = "<c:url value='/RetrieveSearch/' />"
+			console.log(searchString);
+		} else {
+			var url = "<c:url value='/RetrieveSearch/" + searchString + "' />"
+		}
+		xhr.open("GET", url, false);
+		xhr.send();
+		page(1);
+	}
+
+	function productCategory(categoryId) {
+		var categoryList = document.getElementById("product-category");
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='/RetrieveCategory/"+categoryId+"' />",
+				true);
+		xhr.send();
+		content = ""
+		xhr.onreadystatechange = function() {
+			page(1);
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var categoryBean = JSON.parse(xhr.responseText);
+				categoryBean.unshift({
+					id : 0,
+					name : "全部"
+				});
+				for (var i = 0; i < categoryBean.length; i++) {
+					if (i == categoryId) {
+						content += "<li class='active'><span>" 
+								+ categoryBean[i].name + "</span></li>";
+					} else {
+						content += "<li><a href='#product_top' onclick='productCategory("
+								+ i
+								+ ")'>"
+								+ categoryBean[i].name
+								+ "</a></li>";
+					}
+				}
+			}
+			categoryList.innerHTML = content;
+		}
+		
+	}
+
+	window.onload =function() {
+		productCategory(0);
+		page(1);
+	}
+
+</script>
 </body>
 </html>

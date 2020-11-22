@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+//抓取產品的圖片
 @Component
 @Entity
 @Table(name = "product")

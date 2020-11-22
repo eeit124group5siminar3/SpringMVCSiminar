@@ -38,6 +38,14 @@ public class MarketSellerDao implements IMarketSellBeanService {
 		getSession().update(bean);
 	    return bean;
 	}
+	//
+	@Override
+	public MarketMallBean selectid(Integer mid) {
+		
+		return getSession().get(MarketMallBean.class, mid);
+//	    return bean;
+	}
+	
 	
 	//新增
 	@Override

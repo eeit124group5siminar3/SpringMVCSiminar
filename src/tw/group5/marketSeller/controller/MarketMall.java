@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -29,11 +30,22 @@ public class MarketMall {
 			)throws IllegalStateException, IOException{
 		
 		if (mb == null) {
-			return "/index";
+			return "Member_SignUp/Member_Login";
 		}
 		
 		MarketMallBean insertBean =new MarketMallBean();
         model.addAttribute("Insert",insertBean);
 		return "marketSeller/MarketMallInsert";
 		}
+	@PostMapping(path = "/MarketMall.Insert")
+	public String insert(Model model,@ModelAttribute(value = "Insert") MarketMallBean bean,
+			@SessionAttribute(value = "login_ok") Member_SignUp mb
+			)throws IllegalStateException, IOException{
+		    Integer mNo =mb.getMember_no();
+		    Integer status=1;
+		    bean.setMemberNo(mNo);
+		    bean.setMallStatus(status);
+		    service.insert(bean);
+		return "marketSeller/MarketMallSuccess";
+	}
 }

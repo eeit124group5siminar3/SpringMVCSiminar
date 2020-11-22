@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import tw.group5.marketSeller.model.MarketMallBean;
 import tw.group5.marketSeller.model.MarketProductImgBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
 import tw.group5.marketSeller.service.MarketProductBeanService;
+import tw.group5.marketSeller.service.MarketSellBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 
@@ -33,7 +35,11 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 public class MarketSellerProduct {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
-	private MarketProductBeanService service;
+	private MarketProductBeanService productService;
+	
+	@Autowired
+	private MarketSellBeanService sellService;
+	
 	@Autowired
 	private HttpSession session;
 	
@@ -43,68 +49,77 @@ public class MarketSellerProduct {
 	public String selectAll(@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model m) {
 		
 	if (mb == null) {
-		return "/index";
+		return "Member_SignUp/Member_Login";
 	}
 	
 	Integer producterId = mb.getMember_no();
 		
-		List<MarketProductTotalBean> list = service.selectAll(producterId);
+		List<MarketProductTotalBean> list = productService.selectAll(producterId);
 		m.addAttribute("list", list);
-		return "marketSeller/MarketHome";
+		return "marketSeller/MarketProductHome";
 	}
 
 	// 刪除單筆商品
 	@RequestMapping(path = "/MarketProduct.delete", method = RequestMethod.POST)
 	public String delete(@RequestParam(name = "productid") String productid, Model m) {
 		int id = Integer.valueOf(productid);
-		service.delete(id);
+		productService.delete(id);
 
-		return "marketSeller/MarketS";
+		return "marketSeller/MarketProductSuccess";
 
 	}
 
 	// 跳轉到新增jsp 
 	@GetMapping(path = "/MarketProduct.goInsertJsp" )
-	public String insertJsp(Model model) {
+	public String insertJsp(Model model,
+			@SessionAttribute(value = "login_ok") Member_SignUp mb
+			)throws IllegalStateException, IOException{
+		
         MarketProductTotalBean insert =new MarketProductTotalBean();
         MarketProductImgBean imgBean=new MarketProductImgBean();
-        insert.setMarketProductImgBean(imgBean);
+        
+        insert.setMarketProductImgBean(imgBean);     
         imgBean.setMarketProductTotalBean(insert);
-        System.out.println("跳過去囉");
-        System.err.println(insert.hashCode());
-        System.err.println(insert.getMarketProductImgBean());
+        
+		   Integer mNo =mb.getMember_no(); 
+		   System.out.println("Mno :"+ mNo );
+		   MarketMallBean mBean=sellService.selectid(mNo);
+		   insert.setMarketMallBean(mBean);
         model.addAttribute("Insert1",insert);
-		return "marketSeller/MarketI";
+		return "marketSeller/MarketProductInsert";
 	}
 	
 	//新增
 	@PostMapping(path = "/MarketProduct.insert")
 	public String insert(Model model, @ModelAttribute(value = "Insert1") MarketProductTotalBean bean1,
+			
 			@SessionAttribute(value = "login_ok") Member_SignUp mb
 			)throws IllegalStateException, IOException{
 		   Map<String, String> errorMsgs = new HashMap<String, String>();
 		   model.addAttribute("Errors",errorMsgs);
-		   service.insert(bean1);
-		return "marketSeller/MarketS";
+		   System.out.println("我要新增 拜託");
+		   
+		   productService.insert(bean1);
+		return "marketSeller/MarketProductSuccess";
 		}
 	
 	
-	// 跳轉到修改jsp
+	// 跳轉到更新jsp
 	@GetMapping(path = "/MarketProduct.goUpdateJsp")
 	public String updateJsp(@RequestParam(name = "productid") int productid, Model m) {
 
-		MarketProductTotalBean mBean = service.select(productid);
+		MarketProductTotalBean mBean = productService.select(productid);
 		m.addAttribute("mBean",mBean);
 
-		return "marketSeller/MarketU";
+		return "marketSeller/MarketProductUpdate";
 	}
 	//更新商品
 	@PostMapping(path = "/MarketProductUpdate",produces = "multipart/data-form")
 	public String update(@ModelAttribute(value = "mBean") MarketProductTotalBean mb ){
 
-		service.update(mb);
+		productService.update(mb);
 		
-		return "marketSeller/MarketS";
+		return "marketSeller/MarketProductSuccess";
 	}
 
 

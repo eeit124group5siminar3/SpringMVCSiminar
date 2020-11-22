@@ -175,6 +175,7 @@ public class MarketProductTotalBean {
 	}
 	
 	@Transient
+	@Column(name = "MEMBER_NO")
 	public Integer getMemberNo() {
 		return memberNo;
 	}
@@ -194,8 +195,6 @@ public class MarketProductTotalBean {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PUT_OUT")
-//	@JoinColumn(name="PUT_OUT",referencedColumnName = "PUT_OUT")
-	//名稱依樣會抓錯
 	public MarketPutOutBean getMarketPutOutBean() {
 		return marketPutOutBean;
 	}

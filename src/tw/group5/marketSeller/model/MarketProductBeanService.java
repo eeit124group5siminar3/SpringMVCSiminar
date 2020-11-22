@@ -1,13 +1,9 @@
-package tw.group5.marketSeller.service;
+package tw.group5.marketSeller.model;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import tw.group5.marketSeller.dao.MarketProductDao;
-import tw.group5.marketSeller.model.MarketProductImgBean;
-import tw.group5.marketSeller.model.MarketProductTotalBean;
 
 
 @Service
