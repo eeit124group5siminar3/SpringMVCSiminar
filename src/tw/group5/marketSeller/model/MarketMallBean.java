@@ -1,7 +1,9 @@
 package tw.group5.marketSeller.model;
 
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Clob;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,15 +15,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Entity
@@ -30,13 +36,36 @@ import org.springframework.stereotype.Component;
 public class MarketMallBean {
 	
 	private Integer memberNo;
-	private Blob mall_img;
+	private String mallName;
+	private Blob mallImg;
+	private String imgName;
 	private String  address;
-	private Clob mallDescription;
+	private String mallDescription;
+	private MultipartFile multipartFile;
+	private Integer mallStatus;
     private Set<MarketProductTotalBean> marketProductTotalBean =
             new HashSet<MarketProductTotalBean>(0);
 	
+	@Transient
+	public MultipartFile getMultipartFile() {
+		
+		return multipartFile;
+	}
     
+	public void setMultipartFile(MultipartFile multipartFile)throws SerialException, SQLException, IOException {
+		this.multipartFile = multipartFile;
+		
+		if (multipartFile.getBytes().length>0) {
+			String img = multipartFile.getOriginalFilename();
+			SerialBlob sb = new SerialBlob(multipartFile.getBytes());
+			setImgName(img);
+			setMallImg(sb);
+			
+		}
+	}
+	public MarketMallBean() {
+		
+	}
 
 	@Id @Column(name = "MEMBER_NO")
 	public Integer getMemberNo() {
@@ -46,14 +75,21 @@ public class MarketMallBean {
 		this.memberNo = memberNo;
 	}
 	
-	@Column(name = "MALL_IMG")
-	public Blob getMall_img() {
-		return mall_img;
+	@Column(name = "MALL_NAME")
+	public String getMallName() {
+		return mallName;
 	}
-	public void setMall_img(Blob mall_img) {
-		this.mall_img = mall_img;
+	public void setMallName(String mallName) {
+		this.mallName = mallName;
 	}
 	
+	@Column(name = "MALL_IMG")
+	public Blob getMallImg() {
+		return mallImg;
+	}
+	public void setMallImg(Blob mallImg) {
+		this.mallImg = mallImg;
+	}
 	@Column(name = "ADDRESS")
 	public String getAddress() {
 		return address;
@@ -63,12 +99,30 @@ public class MarketMallBean {
 	}
 	
 	@Column(name = "MALL_DESCRIPTION")
-	public Clob getMallDescription() {
+	public String getMallDescription() {
 		return mallDescription;
 	}
-	public void setMallDescription(Clob mallDescription) {
+	public void setMallDescription(String mallDescription) {
 		this.mallDescription = mallDescription;
 	}
+	
+	@Column(name = "IMG_NAME")
+	public String getImgName() {
+		return imgName;
+	}
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+	
+	@Column(name = "MALL_STATUS")
+	public Integer getMallStatus() {
+		return mallStatus;
+	}
+
+	public void setMallStatus(Integer mallStatus) {
+		this.mallStatus = mallStatus;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "marketMallBean", cascade = CascadeType.ALL)
 	public Set<MarketProductTotalBean> getMarketProductTotalBean() {
 		return marketProductTotalBean;
@@ -76,6 +130,7 @@ public class MarketMallBean {
 	public void setMarketProductTotalBean(Set<MarketProductTotalBean> marketProductTotalBean) {
 		this.marketProductTotalBean = marketProductTotalBean;
 	}
+
 	
 
 }

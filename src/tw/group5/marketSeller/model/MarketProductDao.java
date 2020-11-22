@@ -24,7 +24,7 @@ public class MarketProductDao {
 
 	//顯示賣家全部商品
 	public List<MarketProductTotalBean> selectAll( Integer mid) {
-		Query<MarketProductTotalBean> query =getSession().createQuery("From MarketProductTotalBean where memberNo=" + mid, MarketProductTotalBean.class);
+		Query<MarketProductTotalBean> query =getSession().createQuery("From MarketProductTotalBean where MEMBER_NO=" + mid, MarketProductTotalBean.class);
 		List<MarketProductTotalBean> list = query.list();
 		return list;
 	}

@@ -24,6 +24,11 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <form:form action="MarketProduct.insert"  method="post" modelAttribute="Insert1" enctype="multipart/form-data">
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
 
+<!--     <tr> -->
+<%--     <td><form:label path="marketMallBean.memberNo">測試:</form:label></td> --%>
+<%--     <td><form:label path="marketMallBean.memberNo" value=""></form:label></td> --%>
+<!--     </tr> -->
+
     <tr>
     <td>商品名稱:</td>
     <td><form:input type="text" name="product_name" id="product_name" class='InputClass'
