@@ -5,7 +5,10 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
+
+import tw.group5.mall.model.ProductImageBean;
 
 @Service
 public class ActFarmerService {
@@ -77,7 +80,19 @@ public class ActFarmerService {
 		return actFarmerDAO.getTotalPages(sellerId);
 	}
 	
+	//獲得頁數
+	public Integer getPageNo() {
+		return actFarmerDAO.getPageNo();
+	}
 	
+	public void setPageNo(Integer pageNo) {
+		actFarmerDAO.setPageNo(pageNo);
+	}
+	
+	public void setSearchString(String searchString) {
+		actFarmerDAO.setSearchString(searchString);
+	}
+
 	
 	//獲得時間
 	public String getTagTimeName() {

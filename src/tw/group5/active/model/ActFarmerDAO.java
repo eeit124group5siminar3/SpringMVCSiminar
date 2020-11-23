@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import tw.group5.mall.model.CategoryBean;
 
 
 @Repository
@@ -28,6 +27,8 @@ public class ActFarmerDAO {
 	private Integer maintainPageNo = 0;
 	private Integer recordsPerPage = RECORDS_PER_PAGE; // 每頁抓RECORDS_PER_PAGE
 	private Integer totalPages = -1;
+	private String searchString;
+
 	
 	private Integer actId = 0;
 	
@@ -74,6 +75,15 @@ public class ActFarmerDAO {
 
 	public void setActId(Integer actId) {
 		this.actId = actId;
+	}
+	
+	
+	public String getSearchString() {
+		return searchString;
+	}
+
+	public void setSearchString(String searchString) {
+		this.searchString = searchString;
 	}
 
 	//計算所有活動的頁數
@@ -127,9 +137,9 @@ public class ActFarmerDAO {
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "from ActFarmer where sellerId =?0 ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
-		query.setParameter(0, sellerId);
+//		query.setParameter(0, sellerId);
 		query.setFirstResult(startRecordNo);
-		query.setMaxResults(5);
+		query.setMaxResults(recordsPerPage);
 		List<ActFarmer> list = query.list();
 		return list;
 	}

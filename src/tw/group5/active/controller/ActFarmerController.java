@@ -1,28 +1,27 @@
 package tw.group5.active.controller;
 
 
-import java.io.ByteArrayOutputStream;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 
-import org.hibernate.metamodel.model.domain.internal.AbstractIdentifiableType;
-import org.hibernate.sql.ordering.antlr.GeneratedOrderByFragmentParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -206,12 +205,31 @@ public class ActFarmerController {
 		actFarmerService.deletActFarmer(id);
 		return "redirect:/allActFarmer.do";
 	}
+
 	
-//	public ActFarmer getAllAct(@RequestParam("actFarmer")String s1) {
-//		Map<String, String> map = new HashMap<>();
-//		map.put("actId", get);
-//	}
+	//取得活動列表
+	public @ResponseBody List<ActFarmer> actFarmerList(
+			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, Model model,
+			HttpServletRequest rq){
+		List<ActFarmer> list = null;
+		String searchString = (String) rq.getAttribute("searchString");
+		if(pageNo == null) {
+			if(model.getAttribute("pageNO") != null) {
+				pageNo = (Integer) model.getAttribute("pageNo");
+			}else {
+				pageNo = 1;
+			}
+		}
+		list = actFarmerService.getPageActFarmers();
+		rq.setAttribute("searchString", searchString);
+		model.addAttribute("pageNo", pageNo);
+		return list;
+	}
+		
+
 	
+	
+//測試ajax
 	@RequestMapping("/test")
 	@ResponseBody
 	public Clock test1(@RequestParam("param1")String s1) throws JsonProcessingException {
