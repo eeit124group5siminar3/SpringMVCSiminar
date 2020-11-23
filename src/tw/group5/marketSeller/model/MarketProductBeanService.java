@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tw.group5.marketSeller.dao.MarketProductDao;
+
 
 @Service
 public class MarketProductBeanService implements IMarketProductBeanService {

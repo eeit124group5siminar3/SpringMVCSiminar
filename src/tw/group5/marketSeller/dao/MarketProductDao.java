@@ -1,4 +1,4 @@
-package tw.group5.marketSeller.model;
+package tw.group5.marketSeller.dao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -7,6 +7,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import tw.group5.marketSeller.model.MarketProductImgBean;
+import tw.group5.marketSeller.model.MarketProductTotalBean;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
