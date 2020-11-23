@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.DAO.Recipe_DAO_spring;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
+import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
 @Service
 public class Recipe_Service implements recipe_Service_interface {
@@ -28,12 +30,12 @@ public class Recipe_Service implements recipe_Service_interface {
 	}
 	
 	@Override
-	public List<Recipe_Bean> ListOfSearch(String cate) {
+	public List<Recipe_Bean_noImage> ListOfSearch(String cate) {
 		return rDAO.ListOfSearch(cate);
 	}
 	
 	@Override
-	public List<Recipe_Bean> partSearch(String rec_id){
+	public List<Recipe_Bean_noImage> partSearch(String rec_id){
 		return rDAO.partSearch(rec_id);
 		
 	}
@@ -52,6 +54,10 @@ public class Recipe_Service implements recipe_Service_interface {
 	public Recipe_Bean getImage(String rec_id) {
 		return rDAO.getImage(rec_id);
 	}
-
+	
+	@Override
+	public List<ProductBean> getProducts(String searchString) {
+		return rDAO.getProducts(searchString);
+	}
 	
 }

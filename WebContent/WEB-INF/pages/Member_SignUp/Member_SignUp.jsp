@@ -64,7 +64,10 @@
 			ckeckbank.classList.add("col-md-6");
 			ckeckbank.innerHTML = 
 
-			'<label for="inputPassword4">'+'銀行代號'+'</label>'+
+			'<label for="inputPassword4">'+'銀行代號'+
+			'<a style="color:red">'+'*'+
+			'</a>'+
+			'</label>'+
 			'<span style="color:red">'+
 			'<small id="span_bank_code">'+
 			'</small>'+
@@ -76,6 +79,9 @@
 			ckeckbank1.innerHTML =
 
 			'<label for="inputPassword4">'+'銀行帳號'+'</label>'+
+			'<a style="color:red">'+
+			'*'+
+			'</a>'+
 			'<span style="color:red">'+
 			'<small id="span_bank_account">'+
 			'</small>'+
@@ -205,26 +211,26 @@ $("#signup_form").on("submit",function(ev){
 				<p></p>
 				<div class="form-row">
 					<div class="form-group col-md-6" style="text-align:center">
-						<label style="float:left" for="inputEmail4">帳號</label><span style="color:red"><small id="span_email"></small></span> <input type="email"
+						<label style="float:left" for="inputEmail4">帳號<a style="color:red">*</a></label><span style="color:red"><small id="span_email"></small></span> <input type="email"
 							name="member_email" id="member_email" class="form-control" placeholder="請填入Email"
 							required>
 					</div>
 					
 					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color:red"><small id="span_id"></small></span><input type="text"
+						<label for="inputEmail4" style="float:left">身份證字號<a style="color:red">*</a></label> <span style="color:red"><small id="span_id"></small></span><input type="text"
 							name="member_id" id="member_id" class="form-control" placeholder="請填入身份證字號"
 							pattern="^[A-Za-z]\d{9}$" title="身分證格式錯誤" required>
 					</div>
 					
 					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputPassword4" style="float:left">密碼</label> <span style="color:red"><small id="span_password"></small></span><input type="password"
+						<label for="inputPassword4" style="float:left">密碼<a style="color:red">*</a></label> <span style="color:red"><small id="span_password"></small></span><input type="password"
 							name="member_password" id="member_password" class="form-control" placeholder="請填入密碼"
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 							title="密碼長度至少8碼，須包含大寫、小寫英文及數字" required>
 					</div>
 					
 					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputPassword4" style="float:left">密碼</label> <input type="password"
+						<label for="inputPassword4" style="float:left">密碼<a style="color:red">*</a></label> <input type="password"
 							name="member_password1" id="member_password1" class="form-control"
 							placeholder="請再次填入密碼"
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
@@ -235,24 +241,24 @@ $("#signup_form").on("submit",function(ev){
 					<div id="ckeckbank1"></div>
 					
 					<div class="form-group col-md-6" style="text-align:center">
-						<label for="inputPassword4" style="float:left">名稱</label> <span style="color:red"><small id="span_name"></small></span> <input type="text"
+						<label for="inputPassword4" style="float:left">名稱<a style="color:red">*</a></label> <span style="color:red"><small id="span_name"></small></span> <input type="text"
 							name="member_name" id="member_name" class="form-control" placeholder="請填入姓名或商家名稱"
 							pattern="^[\u4e00-\u9fa5]{0,}$" title="只接受中文字" required>
 						<p></p>
 						
-						<label for="inputPassword4" style="float:left">生日</label> <span style="color:red"><small id="span_birthday"></small></span> <input type="date"
+						<label for="inputPassword4" style="float:left">生日<a style="color:red">*</a></label> <span style="color:red"><small id="span_birthday"></small></span> <input type="date"
 							name="member_birthday" id="member_birthday" class="form-control"
 							onkeydown="return false" pattern="\d{4}\-?\d{2}\-?\d{2}" required>
 						<p></p>
 		
-						<label for="inputPassword4" style="float:left">連絡電話</label> <span style="color:red"><small id="span_cellphone"></small></span> <input type="text"
+						<label for="inputPassword4" style="float:left">連絡電話<a style="color:red">*</a></label> <span style="color:red"><small id="span_cellphone"></small></span> <input type="text"
 							name="member_cellphone" id="member_cellphone" class="form-control" required>
 						
 
 					</div>
 				</div>
 				<div class="form-group" style="text-align:center">
-					<label for="inputAddress" style="float:left">地址</label><input type="text"
+					<label for="inputAddress" style="float:left">地址<a style="color:red">*</a></label><input type="text"
 						name="member_address" id="member_address" class="form-control" placeholder="請填入聯絡地址"
 						pattern="^[\u4e00-\u9fa5\d]{0,}$" title="格式錯誤，不能填入英文" required>
 				</div>
