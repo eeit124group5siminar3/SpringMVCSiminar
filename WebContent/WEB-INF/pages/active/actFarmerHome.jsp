@@ -129,7 +129,7 @@
 <script type="text/javascript">
 window.onload = function(){
 $.get({
-		url:"${pageContext.request.contextPath}/actFarmerList.do"
+		url:"${pageContext.request.contextPath}/actFarmerList.do",
 		success:function(data){
 			console.log(data);
 			let content="";
