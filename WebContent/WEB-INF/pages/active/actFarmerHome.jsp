@@ -68,7 +68,7 @@
 					<ul class="act-type" id="product-category"></ul>
 					<form class="product-category" action="?????????" method="GET">
 						<input type="search" name="searchString" id="searchString"
-							value=${searchString}/>
+							value=${searchString}>
 						<button name="searchButton" style="border-radius: 5px;" onclick="????">查詢</button>
 					</form>
 				</div>
@@ -90,9 +90,10 @@
 		        </div>
 		  </div>
 	</div>
+
 	</section>		
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
-<div ></div>
+
 	
 	<jsp:include page="../footer.jsp" />
 
@@ -128,7 +129,7 @@
 <script type="text/javascript">
 window.onload = function(){
 $.get({
-		url:"${pageContext.request.contextPath}/actFarmerList.do",
+		url:"${pageContext.request.contextPath}/actFarmerList.do"
 		success:function(data){
 			console.log(data);
 			let content="";
@@ -142,10 +143,7 @@ $.get({
 				                  <div><a href="#">\${data[i].actDateSta}~\${data[i].actDateEnd}</a></div>
 							</div>
 							 <h3 class="heading"><a href="#">\${data[i].actName}</a></h3>
-				             	<p>活動地址:  \${data[i].actAddr}</p>
-				             	<p>活動電話:  \${data[i].tel}</p>
-				             	<p>活動地址:  \da${data[i].actDateSta}~\${data[i].actDateEnd}</p>
-				             	
+				             	<p>活動地址:  \${data[i].actAddr}<br>活動電話:  \${data[i].tel}</p>
 				                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>
 				        </div>
 				</div></div>`;

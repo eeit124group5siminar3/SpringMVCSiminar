@@ -86,7 +86,7 @@ public class ActFarmerController {
 		
 	
 	//廠商活動管理頁面(分頁)-一日農夫
-	@GetMapping(value = "maintainActFarmer.do")
+	@RequestMapping(value = "maintainActFarmer.do")
 	public String maintainActFarmer(
 			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
 			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model model) {
@@ -115,7 +115,7 @@ public class ActFarmerController {
 	}
 	
 	//名字找活動
-	@RequestMapping(path = "/SelectNameSeller.do", method = RequestMethod.GET)
+	@RequestMapping(path = "/SelectNameSeller.do")
 	public String ProcessSelectName(@RequestParam("selectname") String actName, 
 			@SessionAttribute(value = "login_ok")Member_SignUp mb, Model m) {
 		Integer sellerId = mb.getMember_no();
@@ -154,10 +154,9 @@ public class ActFarmerController {
 		
 	}
 	//檢視活動準備(找到該筆物件)
-	@GetMapping(path="/actFarmerPreRead.do")
+	@RequestMapping(path="/actFarmerPreRead.do")
 	public String actFarmerPreRead(@RequestParam(value = "actId") Integer actId, Model model) {
 		ActFarmer afBean = actFarmerService.getActFarmer(actId);
-		System.out.println(afBean.getActImg());
 		model.addAttribute("afBean", afBean);
 		return "/active/actFarmerRead";
 	}

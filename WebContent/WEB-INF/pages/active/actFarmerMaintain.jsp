@@ -33,7 +33,6 @@
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
@@ -189,19 +188,20 @@
 			<div id="blfirst"><a
 				href="<c:url value='maintainActFarmer.do?MaintainPageNo=1' />"> 
 				<img border='0' alt='第一頁' height='30' width='30'
-				src='../images/first-icon.png' /> </a></div>
+				src='./images/first-icon.png' /> </a></div>
 		</c:if></td>
 		<td width='80'><c:if test="${MaintainPageNo > 1}">
 			<div id="blprev"><a
 				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${MaintainPageNo-1}' />">
 			<img border='0' alt='前一頁' height='30' width='30'
-				src='../images/prev-icon.png' /></a></div>
+				src='./images/prev-icon.png' /></a></div>
 		</c:if></td>
 		<td width='76'>${MaintainPageNo} / ${totalPages}</td>
 		<td width='80'><c:if test="${MaintainPageNo != totalPages}">
 			<div id="blnext"><a
 				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${MaintainPageNo+1}' />">
-			< /> </a></div>
+			<img border='0' alt='最末頁' height='30' width='30'
+				src='./images/next-icon.png'/> </a></div>
 		</c:if></td>
 		<td width='80'><c:if test="${MaintainPageNo != totalPages}">
 			<div id="bllast"><a

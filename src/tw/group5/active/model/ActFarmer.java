@@ -8,12 +8,9 @@ import java.sql.SQLException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.sql.rowset.serial.SerialBlob;
@@ -21,10 +18,10 @@ import javax.sql.rowset.serial.SerialException;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.ManyToAny;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -40,8 +37,10 @@ public class ActFarmer implements Serializable {
 	private String actType;
 	private String actAddr;
 	private String tel;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date actDateSta;
 	private String actTimeSta;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date actDateEnd;
 	private String actTimeEnd;
 	private Integer numLim;
@@ -52,8 +51,10 @@ public class ActFarmer implements Serializable {
 	@JsonIgnore
 	private Blob actImg;
 	private Integer actLock;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date signDateSta;
 	private String signTimeSta;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date signDateEnd;
 	private String signTimeEnd;
 	private Integer actNum;
