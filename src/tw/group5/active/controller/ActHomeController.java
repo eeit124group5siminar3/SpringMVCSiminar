@@ -50,7 +50,7 @@ public class ActHomeController {
 	
 	
 	//取得所有頁面數
-	@GetMapping(value = "/actFarmerPage.do", produces = {"text/html;charset=UTF-8" })
+	@GetMapping(value = "/actFarmerPage.do/{pageNo}", produces = {"text/html;charset=UTF-8" })
 	@ResponseBody
 	public String actPage(@PathVariable(value = "pageNo", required = false) Integer pageNo,
 			Model model, HttpServletRequest rq) {
@@ -59,5 +59,7 @@ public class ActHomeController {
 		model.addAttribute("pageNo", pageNo);
 		return String.valueOf(totalPages);
 	}
+	
+	
 
 }

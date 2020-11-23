@@ -25,6 +25,8 @@ import org.hibernate.annotations.ManyToAny;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "actFarmer")
 @Component("actFarmer")
@@ -47,6 +49,7 @@ public class ActFarmer implements Serializable {
 	private Integer price;
 	private String actDescri;
 	private String imgName;
+	@JsonIgnore
 	private Blob actImg;
 	private Integer actLock;
 	private Date signDateSta;
@@ -325,6 +328,7 @@ public class ActFarmer implements Serializable {
 		return multipartFile;
 	}
 
+	
 	public void setMultipartFile(MultipartFile multipartFile)throws SerialException, SQLException, IOException {
 		this.multipartFile = multipartFile;
 		

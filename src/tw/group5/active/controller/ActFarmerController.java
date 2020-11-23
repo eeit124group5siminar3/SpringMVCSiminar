@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -33,11 +34,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActFarmerService;
+import tw.group5.active.model.Active;
 import tw.group5.active.model.Clock;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(names = {"MaintainPageNo", "login_ok"})
+@SessionAttributes(names = {"MaintainPageNo", "login_ok","actFarmer"})
 public class ActFarmerController {
 	public final int RECORDS_PER_PAGE = 5;
 	
@@ -53,13 +55,13 @@ public class ActFarmerController {
 	@Autowired
 	ServletContext ctx;
 	
-	//查詢所有活動-一日農夫
-	@RequestMapping(value = "")
-	public String getAllactFarmer(Model model) {
-		Collection<ActFarmer> collFarmers = actFarmerService.getPageActFarmers();
-		model.addAttribute("collFarmers", collFarmers);
-		return "";
-	}
+//	//查詢所有活動-一日農夫
+//	@RequestMapping(value = "")
+//	public String getAllactFarmer(Model model) {
+//		Collection<ActFarmer> collFarmers = actFarmerService.getPageActFarmers();
+//		model.addAttribute("collFarmers", collFarmers);
+//		return "";
+//	}
 	
 	//廠商活動管理頁面-一日農夫
 	@RequestMapping(value = "allActFarmer.do")
@@ -83,8 +85,6 @@ public class ActFarmerController {
 	}
 		
 	
-	
-	
 	//廠商活動管理頁面(分頁)-一日農夫
 	@GetMapping(value = "maintainActFarmer.do")
 	public String maintainActFarmer(
@@ -105,6 +105,7 @@ public class ActFarmerController {
 		}
 		model.addAttribute("actFarmer", actFarmerService);
 		actFarmerService.setMaintainPageNo(maintainPageNo);
+		System.out.println("測試測試"+maintainPageNo);
 		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
 		model.addAttribute("totalPages", actFarmerService.getTotalPages(sellerId));
 		Collection<ActFarmer> collFarmer = actFarmerService.getPageActFarmers(sellerId);
@@ -113,7 +114,15 @@ public class ActFarmerController {
 		return "/active/actFarmerMaintain";
 	}
 	
-	
+	//名字找活動
+	@RequestMapping(path = "/SelectNameSeller.do", method = RequestMethod.GET)
+	public String ProcessSelectName(@RequestParam("selectname") String actName, 
+			@SessionAttribute(value = "login_ok")Member_SignUp mb, Model m) {
+		Integer sellerId = mb.getMember_no();
+		Collection<ActFarmer> collFarmer = actFarmerService.selectNameSeller(actName,sellerId);
+		m.addAttribute("collFarmer", collFarmer);
+		return "active/ActiveHome";
+	}
 	
 	//申請活動準備(建立空的物件)
 	@GetMapping(path = "/actFarmerPreInsert.do")
@@ -153,7 +162,6 @@ public class ActFarmerController {
 		return "/active/actFarmerRead";
 	}
 	
-	//返回場
 	
 	//修改活動準備(找到該筆物件)
 	@GetMapping(value = "/actFarmerPreUpdate.do")
@@ -208,23 +216,23 @@ public class ActFarmerController {
 
 	
 	//取得活動列表
-	public @ResponseBody List<ActFarmer> actFarmerList(
-			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, Model model,
-			HttpServletRequest rq){
-		List<ActFarmer> list = null;
-		String searchString = (String) rq.getAttribute("searchString");
-		if(pageNo == null) {
-			if(model.getAttribute("pageNO") != null) {
-				pageNo = (Integer) model.getAttribute("pageNo");
-			}else {
-				pageNo = 1;
-			}
-		}
-		list = actFarmerService.getPageActFarmers();
-		rq.setAttribute("searchString", searchString);
-		model.addAttribute("pageNo", pageNo);
-		return list;
-	}
+//	public @ResponseBody List<ActFarmer> actFarmerList(
+//			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, Model model,
+//			HttpServletRequest rq){
+//		List<ActFarmer> list = null;
+//		String searchString = (String) rq.getAttribute("searchString");
+//		if(pageNo == null) {
+//			if(model.getAttribute("pageNO") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			}else {
+//				pageNo = 1;
+//			}
+//		}
+//		list = actFarmerService.getPageActFarmers();
+//		rq.setAttribute("searchString", searchString);
+//		model.addAttribute("pageNo", pageNo);
+//		return list;
+//	}
 		
 
 	

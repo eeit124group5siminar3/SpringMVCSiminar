@@ -13,7 +13,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="/top.jsp" />
+	<jsp:include page="../header.jsp" />
 	<form action="workpage.controller" method="post">
 		<div style="text-align: center;">
 			<h2>修改成功</h2>

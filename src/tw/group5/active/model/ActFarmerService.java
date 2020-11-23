@@ -34,9 +34,13 @@ public class ActFarmerService {
 	
 	// 查詢單筆資料ByName
 	public List<ActFarmer> selectName(String actName){
-		return actFarmerDAO.selectName(actName);
-		
+		return actFarmerDAO.selectName(actName);	
 	}
+	
+	//查詢單筆資料ByName seller
+	public List<ActFarmer> selectNameSeller(String actName,Integer sellerId){
+		return actFarmerDAO.selectName(actName);	
+	} 
 	
 	//查詢單筆資料ById
 	public ActFarmer getActFarmer(Integer actId) {
