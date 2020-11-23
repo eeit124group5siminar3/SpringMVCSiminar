@@ -1,39 +1,19 @@
 package tw.group5.recipe.recipe_Bean;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.*;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //註明為persistent class
 @Entity
 @Table(name="recipe")
 @Component
-//Spring宣告
-//@Scope(value = "singleton")  預設
-//value = singleton 每次使用getBean()時,取得相同ID的物件,
-//會在ApplicationContext建立時產生,不希望自動產生 ,加上@Lazy(value = true)
-//prototype 代表ApplicationContext建立後不會主動產生,每次getBean()時,建立新物件,不會主動destory
-//request   代表request與bean結合,在同	request與同getBean(),取得相同id的物件
-//session   與request相同
-public class Recipe_Bean {
+public class Recipe_Bean_noImage {
 	private String rec_id;
 	private String name;
 	private String desc;
@@ -46,12 +26,9 @@ public class Recipe_Bean {
 	private String gram_A;
 	private String gram_B;
 	private Integer member_no;
-	private String FileName;
-	private Blob data;
-	private MultipartFile multipartFile;
 	private String date;
 	
-	public Recipe_Bean() {
+	public Recipe_Bean_noImage() {
 	}
 
 	@Id @Column(name="recipe_id")
@@ -153,43 +130,8 @@ public class Recipe_Bean {
 	public void setMember_no(Integer member_no) {
 		this.member_no = member_no;
 	}
-	
-	@Column(name="filename")
-	@JsonIgnore
-	public String getFileName() {
-		return FileName;
-	}
-
-	public void setFileName(String FileName) {
-		this.FileName = FileName;
-	}
-
-	@Column(name="data")
-	public Blob getData() {
-		return data;
-	}
-
-	public void setData(Blob data) {
-		this.data = data;
-	}
-
-	@Transient
-	public MultipartFile getMultipartFile() {
-		return multipartFile;
-	}
-
-	public void setMultipartFile(MultipartFile multipartFile) throws SerialException, IOException, SQLException {
-		this.multipartFile = multipartFile;
-		if(multipartFile.getBytes().length>0) {
-			SerialBlob sb=new SerialBlob(multipartFile.getBytes());
-			String fileName=multipartFile.getOriginalFilename();
-			setFileName(fileName);
-			setData(sb);
-		}
-	}
 
 	@Column(name="upload_date", updatable = false)
-	@JsonIgnore
 	public String getDate() {
 		return date;
 	}

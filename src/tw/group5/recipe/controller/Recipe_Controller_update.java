@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -28,15 +29,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import oracle.net.aso.m;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
+import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
@@ -57,6 +62,7 @@ public class Recipe_Controller_update {
 	private List<Recipe_Bean> list;
 	private ByteArrayOutputStream baos;
 	private Integer  mem_no;
+	private Recipe_Bean bean;
 	
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {
@@ -64,7 +70,7 @@ public class Recipe_Controller_update {
 			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
 			mem_no=OK.getMember_no();
 			System.out.println(mem_no);
-			Recipe_Bean bean = new Recipe_Bean();
+			bean = new Recipe_Bean();
 			bean.setMember_no(mem_no);
 			
 			List<Recipe_Bean> list = service.listOfJavaBean();
@@ -88,22 +94,59 @@ public class Recipe_Controller_update {
 //			@RequestParam(name="action")
 			String delete_id,
 			@RequestParam(required = false)String action,Recipe_Bean bean,Model m) throws FileNotFoundException, IOException, SQLException {
+		
 		if ("回首頁".equals(action)) {
 			return "recipe/recipe_workpage";
 		} 
-		else if(delete_id!=null) {
-			System.out.println(delete_id);
-			service.delete(delete_id);
-			return "recipe/delete_success";
-		}
 		else {
 			System.out.println(rec_id);
-			list = service.partSearch(rec_id);
+			List<Recipe_Bean_noImage> list = service.partSearch(rec_id);
 			
 			m.addAttribute("recipe_table", list);
 			return "recipe/recipe_update";
 		}
 	}
+	
+	@GetMapping(value="/deleteConfirm")
+	public  ModelAndView deleteConfirm(@RequestParam(name="rec_id")String rec_id,Model m) {
+		service.delete(rec_id);
+		Integer mem_no=bean.getMember_no();
+		System.out.println("mem_no: "+mem_no);
+		List<Recipe_Bean> list=service.listOfJavaBean();
+		List<Recipe_Bean> user_recipe=new ArrayList<Recipe_Bean>();
+		System.out.println("111111111111111111111111111111");
+
+		for(Recipe_Bean r:list) {
+			if(r.getMember_no()==(mem_no)) {
+				user_recipe.add(r);
+				System.out.println("succccccccccccccccccccccess");
+
+			}
+		}
+		m.addAttribute("user_recipe", user_recipe);	
+		return new ModelAndView("recipe/recipe_update_choose","user_recipe", user_recipe) ;
+	}
+	
+	
+	@PostMapping(value="/updateConfirm",produces = "application/json;charset=UTF-8")
+	public String updateConfirm(@RequestParam(name="rec_id")String rec_id,Model m) {
+		service.delete(rec_id);
+		Integer mem_no=bean.getMember_no();
+		System.out.println(mem_no);
+		List<Recipe_Bean> list=service.listOfJavaBean();
+		List<Recipe_Bean> user_recipe=new ArrayList<Recipe_Bean>();
+		for(Recipe_Bean r:list) {
+			if(r.getMember_no().equals(mem_no)) {
+				user_recipe.add(r);
+			}
+		}
+		System.out.println(2);
+		m.addAttribute("user_recipe", user_recipe);
+		return "recipe/recipe_update_choose";
+	}
+	
+	
+	
 	
 	@RequestMapping(path = "/submitChoose.controller",method = RequestMethod.POST)
 	public String submitChoose(@RequestParam String action,@RequestParam MultipartFile multipartFile,
