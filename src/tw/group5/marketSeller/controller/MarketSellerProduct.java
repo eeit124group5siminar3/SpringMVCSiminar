@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.group5.marketSeller.model.MarketMallBean;
+import tw.group5.marketSeller.model.MarketProductBeanService;
 import tw.group5.marketSeller.model.MarketProductImgBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
-import tw.group5.marketSeller.service.MarketProductBeanService;
 import tw.group5.marketSeller.service.MarketSellBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
@@ -35,7 +35,7 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 public class MarketSellerProduct {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
-	private MarketProductBeanService productService;
+	private MarketProductBeanService service;
 	
 	@Autowired
 	private MarketSellBeanService sellService;

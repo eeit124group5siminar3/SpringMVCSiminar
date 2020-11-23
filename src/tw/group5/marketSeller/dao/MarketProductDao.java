@@ -1,4 +1,4 @@
-package tw.group5.marketSeller.model;
+package tw.group5.marketSeller.dao;
 
 import java.sql.SQLException;
 import java.util.List;
