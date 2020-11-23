@@ -41,8 +41,8 @@ public class MarketMallBean {
 	private String imgName;
 	private String  address;
 	private String mallDescription;
-	private MultipartFile multipartFile;
 	private Integer mallStatus;
+	private MultipartFile multipartFile;
     private Set<MarketProductTotalBean> marketProductTotalBean =
             new HashSet<MarketProductTotalBean>(0);
 	
