@@ -35,13 +35,12 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 public class MarketSellerProduct {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
-	private MarketProductBeanService service;
+	private MarketProductBeanService productService;
 	
 	@Autowired
 	private MarketSellBeanService sellService;
 	
-	@Autowired
-	private HttpSession session;
+
 	
 
 	// 顯示全部
