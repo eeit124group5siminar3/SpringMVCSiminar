@@ -11,44 +11,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <html lang="zh">
 <head>
 <title>農郁</title>
-<script>
-	window.onload = function() {
-		var customRadioInline1 = document.getElementById("customRadioInline1");
-		var customRadioInline2 = document.getElementById("customRadioInline2");
-		var ckeckbank = document.getElementById("ckeckbank");
-		var ckeckbank1 = document.getElementById("ckeckbank1");
-
-		customRadioInline1.onclick = function() {
-			$("#ckeckbank").empty();
-			ckeckbank.classList.remove("form-group");
-			ckeckbank.classList.remove("col-md-6");
-			$("#ckeckbank1").empty();
-			ckeckbank1.classList.remove("form-group");
-			ckeckbank1.classList.remove("col-md-6");
-
-		}
-
-		customRadioInline2.onclick = function() {
-			ckeckbank.classList.add("form-group");
-			ckeckbank.classList.add("col-md-6");
-			ckeckbank.innerHTML =
-
-			'<label for="inputPassword4">'
-					+ '銀行代號</label>'
-					+ '<input type="text" name="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
-
-			ckeckbank1.classList.add("form-group");
-			ckeckbank1.classList.add("col-md-6");
-			ckeckbank1.innerHTML =
-
-			'<label for="inputPassword4">'
-					+ '銀行帳號</label>'
-					+ '<input type="text" name="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
-
-		}
-
-	}
-</script>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -106,6 +68,78 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 }
 </style>
 </head>
+<script>
+	window.onload = function() {
+		var customRadioInline1 = document.getElementById("customRadioInline1");
+		var customRadioInline2 = document.getElementById("customRadioInline2");
+		var ckeckbank = document.getElementById("ckeckbank");
+		var ckeckbank1 = document.getElementById("ckeckbank1");
+
+		customRadioInline1.onclick = function() {
+			$("#ckeckbank").empty();
+			ckeckbank.classList.remove("form-group");
+			ckeckbank.classList.remove("col-md-6");
+			$("#ckeckbank1").empty();
+			ckeckbank1.classList.remove("form-group");
+			ckeckbank1.classList.remove("col-md-6");
+
+		}
+
+		customRadioInline2.onclick = function() {
+			ckeckbank.classList.add("form-group");
+			ckeckbank.classList.add("col-md-6");
+			ckeckbank.innerHTML =
+
+			'<label for="inputPassword4">'
+					+ '銀行代號</label>'
+					+ '<input type="text" name="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
+
+			ckeckbank1.classList.add("form-group");
+			ckeckbank1.classList.add("col-md-6");
+			ckeckbank1.innerHTML =
+
+			'<label for="inputPassword4">'
+					+ '銀行帳號</label>'
+					+ '<input type="text" name="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
+
+		}
+
+	}
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+<script>
+$(function(){
+	$("#updata_form").on("submit",function(ev){
+	$("#check_password").html("");
+	$.ajax({
+		url:"memberBackstageUpDate.controller",
+		data:{
+			member_permissions:$("#customRadioInline1").prop('checked'),
+			member_password:$("#member_password").val(),
+			member_password1:$("#member_password1").val(),
+			member_cellphone:$("#member_cellphone").val(),
+			member_address:$("#member_address").val(),
+			e_paper:$("#gridCheck").prop('checked'),
+			member_bank_code:$("#member_bank_code").val(),
+			member_bank_account:$("#member_bank_account").val()
+		 	},
+		type:"POST", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	success:function(data){
+		if(data){
+			window.location.href = "updataOk.controller";
+		}else{
+			$("#check_password").html("二次密碼不符合，請重新輸入");
+		}
+	}
+    })  
+    ev.preventDefault();
+})
+})
+</script>
 <body class="goto-here">
 	<jsp:useBean id="reg_buyer"
 		class="tw.group5.member_SignUp.model.Member_SignUp" scope="session" />
@@ -247,10 +281,12 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 	<div id="backstage_page">
 		<!-- --------會員管理 內容區--------- -->
-		<form action="memberBackstageUpDate.controller" method="post">
+		<form id="updata_form" method="post">
 			<div class="signup-form container">
 				<fieldset class="border signup-form-fieldset">
 					<legend>會員資料修改</legend>
+					<div id="check_password" class="center"
+					style="color: red; text-align: center;height:20px"></div>
 					<c:if test="${reg_buyer.member_permissions =='0'}">
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="customRadioInline1"
@@ -372,7 +408,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 							<label class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary">提交</button>
+					<button type="submit" id="submit" class="btn btn-primary">提交</button>
 					<button type="reset" class="btn btn-primary">重置</button>
 				</fieldset>
 			</div>

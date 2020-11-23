@@ -2,6 +2,7 @@ package tw.group5.member_backstage.controller;
 
 import java.sql.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -28,9 +30,15 @@ public class BackstageController {
 		return "Member_Backstage/Member_Backstage";
 	}
 
+	@RequestMapping(path = "/updataOk.controller", method = RequestMethod.GET)
+	public String MemberBackstageUpdataOk() {
+		return "Member_Backstage/Member_Update_OK";
+	}
+	
 	@RequestMapping(path = "/memberUpdate.controller", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public String MemberUpdate(Model m) {
+	public String MemberUpdate(Model m,HttpServletRequest request) {
 		Member_SignUp session = (Member_SignUp) m.getAttribute("login_ok");
+//		Member_SignUp session = (Member_SignUp )request.getSession(true).getAttribute("login_ok");
 
 		String member_permissions = session.getMember_permissions();
 		String member_email = session.getMember_email();
@@ -44,51 +52,65 @@ public class BackstageController {
 		String e_paper = session.getE_paper();
 		String member_bank_code = session.getMember_bank_code();
 		String member_bank_account = session.getMember_bank_account();
-		
+
 		if (member_gui_number == null) {
 			member_gui_number = "";
 		}
-		
-		Member_SignUp member_bean = new Member_SignUp(member_permissions, member_email, member_password, member_id,
-				member_name, member_birthday, member_gui_number, e_paper, member_cellphone, member_address,member_bank_code,member_bank_account);
 
+		Member_SignUp member_bean = new Member_SignUp(member_permissions, member_email, member_password, member_id,
+				member_name, member_birthday, member_gui_number, e_paper, member_cellphone, member_address,
+				member_bank_code, member_bank_account);
+
+//		request.getSession(true).setAttribute("reg_buyer",member_bean);
 		m.addAttribute("reg_buyer", member_bean);
 		return "/Member_Backstage/Member_Update";
 	}
 
 	// 會員修改資料
 	@RequestMapping(path = "/memberBackstageUpDate.controller", method = RequestMethod.POST)
-	public String MemberBackstageUpDate(@RequestParam(name = "member_permissions") String member_permissions,
+	@ResponseBody
+	public boolean MemberBackstageUpDate(@RequestParam(name = "member_permissions") boolean boolean_member_permissions,
 			@RequestParam(name = "member_password") String member_password,
+			@RequestParam(name = "member_password1") String member_password1,
 			@RequestParam(name = "member_cellphone") String member_cellphone,
 			@RequestParam(name = "member_address") String member_address,
-			@RequestParam(name = "e_paper", required = false) String e_paper,
+			@RequestParam(name = "e_paper", required = false) boolean boolean_e_paper,
 			@RequestParam(name = "member_bank_code", required = false) String member_bank_code,
 			@RequestParam(name = "member_bank_account", required = false) String member_bank_account,
-			HttpSession httpsession,
-			SessionStatus sessionStatus, Model m) {
+			HttpSession httpsession, SessionStatus sessionStatus, Model m,HttpServletRequest request) {
 
+		String member_permissions = null;
+		String e_paper = null;
 		
-		
-		if (e_paper == null) {
+		if (boolean_e_paper) {
+			e_paper = "1";
+		}
+		if (!boolean_e_paper) {
 			e_paper = "0";
 		}
+		if (boolean_member_permissions) {
+			member_permissions = "0";
+		}
+		if (!boolean_member_permissions) {
+			member_permissions = "1";
+		}
+		if (member_password.equals(member_password1)) {
 
-		Member_SignUp session = (Member_SignUp) m.getAttribute("login_ok");
+			Member_SignUp session = (Member_SignUp) m.getAttribute("login_ok");
 
-		String member_email = session.getMember_email();
+			String member_email = session.getMember_email();
 
-		member_Service.updata_member_data(member_email, member_permissions, member_password, member_cellphone,
-				member_address, e_paper,member_bank_code,member_bank_account);
-		
-		httpsession.removeAttribute("reg_buyer");
-		httpsession.invalidate();
-		
-		Member_SignUp login_bean = member_Service.login_bean(member_email);
-		
-		m.addAttribute("login_ok", login_bean);
+			member_Service.updata_member_data(member_email, member_permissions, member_password, member_cellphone,
+					member_address, e_paper, member_bank_code, member_bank_account);
+			
 
-		return "/Member_Backstage/Member_Update_OK";
+			Member_SignUp login_bean = member_Service.login_bean(member_email);
+
+			m.addAttribute("login_ok", login_bean);
+
+			return true;
+		}
+		return false;
 	}
 
 	@RequestMapping(path = "/memberEvaluation.controller", method = RequestMethod.GET)

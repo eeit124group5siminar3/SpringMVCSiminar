@@ -38,6 +38,7 @@ public class OpenSessionInViewFilter implements Filter {
 			throws IOException, ServletException {
 		
 		Session session = sessionFactory.getCurrentSession();
+		
 		try {
 			session.beginTransaction();
 			System.out.println("Transaction begin.");
