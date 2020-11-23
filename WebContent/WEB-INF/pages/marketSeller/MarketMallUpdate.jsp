@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>更新商品</title>
+<title>店家資訊</title>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
 
@@ -25,13 +25,14 @@ body {
 </style>
 </head>
 <body>
-<h1 align="center">商品管理</h1>
+<h1 align="center">店家資訊</h1>
 		<fieldset>
 		<form:form id="form2" name="form2" method="post"
-				action="MarketMallUpdate" enctype="multipart/form-data"
-				modelAttribute="">
+				action="MarketMall.update" enctype="multipart/form-data"
+				modelAttribute="mallBean">
 	
 			<div>
+				<form:input type="hidden" id="memberNo" name="memberNo" path="memberNo" />
 				<form:label path="mallName">店家名稱:</form:label>
 				<form:input type="text" id="mallName" name="mallName" path="mallName" />
 			 <font color='red' size='-1'>
@@ -47,65 +48,34 @@ body {
 			</div>
 			<div>
 				<form:label path="mallDescription">店家描述:</form:label> 
-				<form:textarea name="mallDescription" cols="80" rows="4" path="mallDescription"></form:textarea>
+				<form:textarea name="mallDescription" cols="80" rows="15" path="mallDescription"></form:textarea>
 			</div>
-			
-		    <div>
-				<form:label path="unit">單位:</form:label> 
-				<form:input type="text" id="unit" name="unit" path="unit"/>
-			</div>
-           <font color='red' size='-1'>
-              ${errors.errUnit}
-           </font> 
-		
-			 <div>
-				<form:label path="quantity">數量:</form:label> 
-				<form:input type="text" id="quantity" name="quantity" path="quantity"/>
-           <font color='red' size='-1'>
-              ${errors.errQuantity}
-           </font>  
-				
-			</div>
-			
-			<div>
-				<form:label path="price">價格:</form:label> 
-				<form:input type="text" id="price" name="price"  path="price"/>
-            <font color='red' size='-1'>
-              ${errors.errPrice}
-           </font> 
-	        </div>
-	        <div>
-	       <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="1" />上架
-           <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="0" />下架
-	        </div>
-
 	      <div>
-	            原版圖片 
+	            原版封面 
 	      </div>
 		<div>
-		<img height='120' width='96'
-		src=<c:url value='MarketImageServlet?id=${mBean.marketProductImgBean.productId}&type=PRODUCT' /> /> 
+		<img height='240' width='360'
+		src=<c:url value='MarketImageServlet?id=${mallBean.memberNo}&type=MALLIMG' /> /> 
 		</div>
 		<hr>
 		<div> 
-		<form:label path="marketProductImgBean.multipartFile" >圖片:</form:label> <br> 
+		<form:label path="multipartFile">圖片:</form:label> <br> 
 		<form:input  style="background: #FFFFFF"
 		 class='InputClass' 
-		  type="file" id="imgInp" 
-		  name="product"
-		   path="marketProductImgBean.multipartFile" 
+		  type="file" id="imgInp" 	  
+		   path="multipartFile" 
 		    accept="image/*" 
 		   size="25"/> 
 		</div> 
 		<div> 
-		 <img height='120' width='96' id="blah" src="#" alt="your image" />
+		 <img height='240' width='360' id="blah" src="#" alt="your image" />
 		 更新後
 		</div>
 
 			<form:button value="Send" >更新</form:button>
 			</form:form>
-			<form action="<c:url value='/MarketProduct.selectAll'></c:url>" method="get">
-			<input  type="submit" value="活動首頁">
+			<form action="<c:url value='/'></c:url>" >
+			<input  type="submit" value="回首頁">
 			</form>
 		</fieldset>
 		
