@@ -22,8 +22,8 @@
 
     <tr>
     <td>店家名稱:</td>
-    <td><form:input type="text" name="mallName" id="mallName" class='InputClass'
-     size="20" maxlength="10" value="" path="mallName"/>
+    <td><form:input   type="text" name="mallName" id="mallName" class='InputClass'
+     size="35" maxlength="10" value="" path="mallName"/>
            <font color='red' size='-1'>
               ${errors.errMallName}
            </font>
@@ -32,7 +32,7 @@
     <tr height="36" >
     <td >地址</td>
       <td>         
-         <form:input  name="address"  path="address"></form:input> 
+         <form:input size="35" name="address"  path="address"></form:input> 
          <font color='red' size='-1'>
                 ${errors.errDescription}
             </font>
