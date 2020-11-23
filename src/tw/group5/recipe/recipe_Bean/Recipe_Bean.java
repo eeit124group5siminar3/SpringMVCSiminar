@@ -20,8 +20,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 //註明為persistent class
 @Entity
 @Table(name="recipe")
@@ -155,7 +153,6 @@ public class Recipe_Bean {
 	}
 	
 	@Column(name="filename")
-	@JsonIgnore
 	public String getFileName() {
 		return FileName;
 	}
@@ -189,7 +186,6 @@ public class Recipe_Bean {
 	}
 
 	@Column(name="upload_date", updatable = false)
-	@JsonIgnore
 	public String getDate() {
 		return date;
 	}

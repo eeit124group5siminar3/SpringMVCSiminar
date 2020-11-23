@@ -111,7 +111,7 @@ public class Recipe_Controller_upload {
 			service.insert(bean);
 //			session.removeAttribute("details");
 //			status.setComplete();
-			return "<div align='center'><font size='30px' color='red'>上傳成功 </font></div>";
+			return "<font color='red'>更新成功 </font>";
 //		}
 //		if (action.equals("修改")) {
 //			return "recipe/recipe_upload_revise";
@@ -123,9 +123,9 @@ public class Recipe_Controller_upload {
 	}
 	
 	@GetMapping(value="/reviseConfirm.controller" ,produces = "text/plain;charset=UTF-8")
-	public  String reviseProcess() {
-//		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
-		return "recipe/recipe_upload_revise";
+	public @ResponseBody String reviseProcess() {
+		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
+		return null;
 	
 	}
 }

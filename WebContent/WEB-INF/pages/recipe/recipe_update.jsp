@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>修改食譜</title>
+<title>上傳食譜</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -77,18 +77,139 @@
 		</div>
 	</div>
 
-		<jsp:include page="../header.jsp" />
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">農郁</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> 列表
+			</button>
 
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a href="index.html"
+						class="nav-link">首頁</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="shop.html">商城</a> <a
+								class="dropdown-item" href="cart.html">購物車</a> <a
+								class="dropdown-item" href="checkout.html">查看訂單</a>
+						</div></li>
+					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
+					<li class="nav-item"><a href="" class="nav-link">市場</a></li>
+					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
+					
+					
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="<c:url value='frontPage.controller'/>" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item"
+								href="<c:url value='frontPage.controller'/>">食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='updatePage.controller'/>">修改食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='searchPage.controller'/>">搜尋料理</a>
+						</div>
+					</li>					
+					
+					<li class="nav-item"><a href="contact.html" class="nav-link">會員</a></li>
+					<li class="nav-item"><a href="login.html" class="nav-link">登錄</a></li>
+					<li class="nav-item cta cta-colored"><a href="cart.html"
+						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
 	<!-------------------------內容區--------------------------------->
-<div id="deleteSuccess">
+
 	<form class="formSet"
-		action="javascript:void(0);" method="post" runat="server" enctype="multipart/form-data">
+		action='<c:url value="/submitChoose.controller"/>' method="post" runat="server" enctype="multipart/form-data">
 	<fieldset>
 		<legend style="color:black;font-size:23px">修改食譜</legend>		
 		<c:forEach  var='BeanToken' items="${recipe_table}">
+<!-- 		<div> -->
+<%-- 		<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" /> --%>
+<%-- 			<label for="">名稱: <input type="text" name="name" value="${BeanToken.name}" /></label> --%>
+<!-- 		</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<!-- 				<label>種類: </label> <select name="cate" > -->
+<!-- 					<option value="雞肉">雞肉</option> -->
+<!-- 					<option value="豬肉">豬肉</option> -->
+<!-- 					<option value="牛肉">牛肉</option> -->
+<!-- 					<option value="蔬食">蔬食</option> -->
+<!-- 				</select> -->
+<!-- 			</div>		 -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<label>食材A: <input type="text" name="ingredients_A" value="${BeanToken.ingredients_A}" /> 份  --%>
+<!-- 				</label>  -->
+<%-- 				<label>份量A: <input type="text" name="gram_A" value="${BeanToken.gram_A}" /> g  --%>
+<!-- 				</label> -->
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<%-- 				<label>食材B: <input type="text" name="ingredients_B" value="${BeanToken.ingredients_B}" /> 份 --%>
+<!--  				</label>  -->
+<%-- 				<label>份量B: <input type="text" name="gram_B" value="${BeanToken.gram_B}" /> g --%>
+<!-- 				</label> -->
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div class="input-dyna-add"></div> -->
+<!-- 			<!-- 食材: <input type="text" class="add" name="ingredients" disabled/> 份  --%>
+<!--                 份量: <input type="text" class="add" name="gram" disabled/> g -->
+<!--                 <br> --> 
+<!-- 			<button id="btn" onclick="addinput()">新增</button> -->
+
+<!-- 			<hr> -->
+<!-- 			<div> -->
+<!-- 				<label>方法: </label> -->
+<%-- 				<textarea cols="40" rows="5" name="method" >${BeanToken.method}</textarea> --%>
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+<!-- 				<label>介紹: </label> -->
+<%-- 				<textarea cols="40" rows="5" name="desc" >${BeanToken.desc}</textarea> --%>
+<!-- 			</div> -->
+<!-- 			<br> -->
+<!-- 			<div> -->
+			
+			
+<!-- 			<img height="100" width="80"   -->
+<%-- 	src="<c:url value='/getImage.controller'/>" /> 	 --%>
+<!-- 	<hr> -->
+<!--    			<img id="blah" src="#" alt="your image" /> --> 
+<!--   			<br> --> 
+<!--  			<input type='file' id="imgInp" name="img" /> --> 
+			
+<!-- 			<div class="custom-file"> -->
+<!-- 				<input type="file" class="custom-file-input" -->
+<!-- 					id="validatedCustomFile" name="multipartFile" /> -->
+<!-- 				<label class="custom-file-label" for="validatedCustomFile">Choose -->
+<!-- 					file</label> -->
+<!-- 				<div class="invalid-feedback">請上傳圖片</div> -->
+<!-- 			</div> -->
+<!-- 			</div> -->
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<div class="form-group">
-				<input type="hidden" id="delete_id" name="rec_id" value="${BeanToken.rec_id}" />
+				<input type="hidden" name="rec_id" value="${BeanToken.rec_id}" />
 				<label for="formGroupExampleInput"  style="font-size:20px;">名稱: </label> 
 				<input
 					type="text" class="form-control" id="formGroupExampleInput"
@@ -143,11 +264,9 @@
 				<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="method" >${BeanToken.method}</textarea>
 			</div>
 			<br>
-			<div  align="center">
-			
-			<br>
-				<img  height="250" width="70%"  
-				src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>">
+			<div  style="text-align:center; ">
+			<img width="65%"  
+					src="<c:url value='/getImage.controller'/>" /> 	
 			</div>
 			<br>
 			<div class="custom-file">
@@ -165,28 +284,49 @@
 					<input type="submit" name="action" value="確認修改">
 				</label> 
 				<label> 
-					<input type="submit" id="send" name="action" value="刪除">
+					<input type="submit" name="action" value="刪除">
 				</label>
 				<label> 
-					<input type ="reset" onclick="javascript:location.href='<c:url value='/updatePage.controller'/>'" value="取消">
+					<input type="submit" name="action" value="取消">
 				</label>
 			</div>
 
 		</fieldset>
 		</form>
-</div>
+
+
+
+
+
+
+
+
+
+
+	  
+
+
+
+
+
+
+
 <br>
 
 	<!------------------------------------------------------------------>
-	<footer class="ftco-footer ftco-section">
+	<footer class="ftco-footer footer-ground">
 		<div class="container">
 			<div class="row">
 				<div class="mouse">
-<!-- 					<a href="#" class="mouse-icon"> -->
-<!-- 						<div class="mouse-wheel"> -->
-<!-- 							<span class="ion-ios-arrow-up"></span> -->
-<!-- 						</div> -->
-<!-- 					</a> -->
+
+					<!---------------TOP點選回最上層，不需要請註解---------------------->
+					<a href="#" class="mouse-icon">
+						<div class="mouse-wheel">
+							<span class="ion-ios-arrow-up"></span>
+						</div>
+					</a>
+					<!---------------------------------------------------------------->
+
 				</div>
 			</div>
 			<div class="row mb-5">
@@ -255,9 +395,9 @@
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
-<!-- 						<script> -->
-// 							document.write(new Date().getFullYear());
-<!-- 						</script> -->
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
 						All rights reserved | This template is made with <i
 							class="icon-heart color-danger" aria-hidden="true"></i> by <a
 							href="https://colorlib.com" target="_blank">Colorlib</a>.
@@ -268,6 +408,16 @@
 			</div>
 		</div>
 	</footer>
+
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+	</div>
+
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -285,31 +435,5 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-	
- 	<script type="text/javascript"> 
-		$(function(){		
-			var delete_id=$("#delete_id").val();
-			console.log('delete_id'+delete_id);
-			$("#send").click(function(){
-				$.ajax({
-					type:"GET",
-	 				dataType:"html",
-					url:"./deleteConfirm",
-					data:{
-						"rec_id":delete_id
-						},
-					success:function(data){
-						console.log(data);
-						alert('刪除成功');
-						$("#deleteSuccess").html(data);
-
-						},
-					error:function(){
-						}	
-					});
-				});
-			})
- 	</script>  
-	 						   
 </body>
 </html>

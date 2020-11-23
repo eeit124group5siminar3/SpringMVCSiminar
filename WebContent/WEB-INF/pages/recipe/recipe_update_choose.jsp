@@ -81,6 +81,7 @@
 </style>
 
 </head>
+<body>
 <body class="goto-here">
 	<div class="py-1 bg-primary">
 		<div class="container">
@@ -108,7 +109,59 @@
 		</div>
 	</div>
 
-		<jsp:include page="../header.jsp" />
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">農郁</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> 列表
+			</button>
+
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a href="index.html"
+						class="nav-link">首頁</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="shop.html">商城</a> <a
+								class="dropdown-item" href="cart.html">購物車</a> <a
+								class="dropdown-item" href="checkout.html">查看訂單</a>
+						</div></li>
+					<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
+					<li class="nav-item"><a href="" class="nav-link">市場</a></li>
+					<li class="nav-item"><a href="about.html" class="nav-link">活動</a></li>
+					
+					
+										<li class="nav-item dropdown"><a
+						class="nav-link dropdown-tgogle" href="<c:url value='frontPage.controller'/>" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item"
+								href="<c:url value='frontPage.controller'/>">食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='updatePage.controller'/>">修改食譜</a> 
+							<a class="dropdown-item"
+								href="<c:url value='searchPage.controller'/>">搜尋料理</a>
+						</div>
+					</li>
+					
+					
+					
+					<li class="nav-item"><a href="contact.html" class="nav-link">會員</a></li>
+					<li class="nav-item"><a href="login.html" class="nav-link">登錄</a></li>
+					<li class="nav-item cta cta-colored"><a href="cart.html"
+						class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
 	<!-------------------------內容區--------------------------------->
 	
@@ -156,9 +209,9 @@
 	<fieldset class="border signup-form-fieldset">
 		<legend style="color:black;font-size:23px;">已上傳食譜</legend>		
 			
-	<c:forEach  var='BeanToken' items="${user_recipe}">	
-	<form class="formSet" action="javascript:void(0);" method="post"> 	
-		<input type="hidden" id="delete_id" name="delete_id" value="${BeanToken.rec_id}" />	
+		<c:forEach  var='BeanToken' items="${user_recipe}">	
+	<form class="formSet" action='<c:url value="/updateProcess.controller"/>' method="post"> 	
+		<input type="hidden" name="delete_id" value="${BeanToken.rec_id}" />	
 		<div class="wrap">
 
 				<div class="wrap1">
@@ -168,11 +221,12 @@
 					   ${BeanToken.name}</a> 
 				</div>
 				
+				
 					<div class="txt">上傳日期 : 
 						${BeanToken.date}
 					</div>
 					<div class="deleteRecipe">						
-						<input type="submit" id="send" name=delete value="刪除" />
+						<input type="submit" name="delete" value="刪除" />
 					</div>
 				
 				<br>
@@ -195,15 +249,19 @@
 <br>
 
 	<!------------------------------------------------------------------>
-	<footer class="ftco-footer ftco-section">
+	<footer class="ftco-footer footer-ground">
 		<div class="container">
 			<div class="row">
 				<div class="mouse">
+
+					<!---------------TOP點選回最上層，不需要請註解---------------------->
 <!-- 					<a href="#" class="mouse-icon"> -->
 <!-- 						<div class="mouse-wheel"> -->
 <!-- 							<span class="ion-ios-arrow-up"></span> -->
 <!-- 						</div> -->
 <!-- 					</a> -->
+					<!---------------------------------------------------------------->
+
 				</div>
 			</div>
 			<div class="row mb-5">
@@ -272,9 +330,9 @@
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
-<!-- 						<script> -->
-<!--  							document.write(new Date().getFullYear()); -->
-<!--  						</script>  -->
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
 						All rights reserved | This template is made with <i
 							class="icon-heart color-danger" aria-hidden="true"></i> by <a
 							href="https://colorlib.com" target="_blank">Colorlib</a>.
@@ -285,6 +343,16 @@
 			</div>
 		</div>
 	</footer>
+
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+	</div>
+
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -302,29 +370,6 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-
- 	<script type="text/javascript"> 
-		$(function(){		
-			var delete_id=$("#delete_id").val();
-			console.log('delete_id'+delete_id);
-			$("#send").click(function(){
-				$.ajax({
-					type:"POST",
-					url:"./deleteConfirm",
-					data:{
-						"rec_id":delete_id
-						},
-					success:function(data){
-						console.log('data: '+data.length);
-						alert('刪除成功');
-						$("#").html(data);
-						
-						},
-					error:function(){
-						}	
-					});
-				});
-			});
- 	</script>  
+	
 </body>
 </html>

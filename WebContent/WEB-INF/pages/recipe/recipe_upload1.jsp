@@ -101,7 +101,7 @@ body {
 	<script>
 // 	$(function(){
 // 		$("#send").onclick(function(){
-//  			$.ajax({
+// 			$.ajax({
 // 				type:"GET",
 // 				url:"<c:url value='/uploadSubmit.controll' />",
 // 				dataType:"html",
