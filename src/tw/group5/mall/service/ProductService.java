@@ -124,6 +124,10 @@ public class ProductService {
 	public void setSearchString(String searchString) {
 		dao.setSearchString(searchString);
 	}
+	
+	public String getSearchString() {
+		return dao.getSearchString();
+	}
 
 	public ProductImageBean getProductImage(int productId) {
 		return dao.getProductImage(productId);
