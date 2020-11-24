@@ -185,12 +185,9 @@ $.get({
 			}
 		}
 		$('#getpagelist').html(content);
-	}
-})
-
-
-		
+	})
 }
+
 
 </script>
 </body>
