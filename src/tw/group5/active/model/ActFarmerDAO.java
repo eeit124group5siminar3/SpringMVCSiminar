@@ -86,7 +86,7 @@ public class ActFarmerDAO {
 		this.searchString = searchString;
 	}
 
-	//計算所有活動的頁數
+	//計算所有活動的筆數
 	public long getRecordCounts() {
 		//hibernate Session
 		Session session = sessionFactory.getCurrentSession();

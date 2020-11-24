@@ -60,6 +60,16 @@ public class ActHomeController {
 		return String.valueOf(totalPages);
 	}
 	
-	
-
+	//分頁列表
+	@GetMapping(value = "/actFarmerPageList.do/{pageNo}", produces = {"text/html;charset=UTF-8" })
+	@ResponseBody
+	public String actPageList(@PathVariable(value = "pageNo", required = false) Integer pageNo,
+			Model model, HttpServletRequest rq) {
+		Integer starPage = 1;
+		Integer endPag = 1;
+		Integer totalPages =actFarmerService.getTotalPages();
+		actFarmerService.setPageNo(pageNo);
+		model.addAttribute("pageNo", pageNo);
+		return String.valueOf(totalPages);
+	}
 }
