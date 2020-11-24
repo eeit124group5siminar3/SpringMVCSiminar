@@ -103,6 +103,11 @@
 				<li class="nav-item cta cta-colored"><a href="cart.html"
 					class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 			</ul>
+			<c:if test="${!empty login_ok}">
+			<ul class="navbar-nav">
+				<li class="nav-item cta cta-colored"><a class="nav-link">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNo.${login_ok.member_no}&nbsp&nbsp${login_ok.member_name}&nbsp您好！ </a></li>
+			</ul>
+			</c:if>
 		</div>
 	</div>
 </nav>
