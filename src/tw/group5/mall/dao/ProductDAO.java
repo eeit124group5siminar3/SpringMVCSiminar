@@ -2,6 +2,7 @@ package tw.group5.mall.dao;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,14 +21,14 @@ public class ProductDAO {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
-	private int pageNo = 0;
+	private int pageNo = 1;
 	private int maintainPageNo = 0;
 	private int recordsPerPage = 12;
 	private int totalPages = -1;
 	private int totalPagesWithoutZero = -1;
 	private String tagName = "";
 	private int selected = -1;
-	private Integer categoryId=0;
+	private Integer categoryId;
 	private String searchString;
 
 	public int getPageNo() {
@@ -246,7 +247,7 @@ public class ProductDAO {
 //		List<CategoryBean> cb = getCategory();
 		ans += "<SELECT name='" + getTagName() + "'>";
 //		for (CategoryBean bean : cb) {
-		for (int i = 1; i <= CategoryClass.CATEGORY_MAP.size(); i++) {
+		for (int i = 1; i <= (CategoryClass.CATEGORY_MAP.size()-1); i++) {
 			String name = CategoryClass.getCategory(i);
 //			int id = bean.getId();
 //			String name = bean.getName();

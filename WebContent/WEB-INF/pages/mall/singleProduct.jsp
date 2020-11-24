@@ -77,8 +77,7 @@
 				</div>
 				<p>
 					<a href="cart.html" class="btn btn-black py-3 px-5">加入購物車</a> <a
-						href="${history.back()}" class="btn btn-black py-3 px-5"
-						onclick="goback()">返回 </a>
+					href="#" onclick="goback()" class="btn btn-black py-3 px-5">返回 </a>
 				</p>
 			</div>
 		</div>
@@ -120,10 +119,18 @@
 		    });   
 		});
 
-// 		function goback(){
-// 			history.back();
-// 			productCategory(${categoryId});
-// 			page(${pageNo});
-// 			}
-// 		mav.addObject("searchString
+		function goback(){
+			$.ajax({
+				url : "MallContent",
+				type : "POST",
+				data : {"categoryId":`${categoryId}`,"pageNo":`${pageNo}`,"searchString":`${searchString}`},
+				datatype : "html",
+				success : function(data, status) {
+					$("#mainContent").html(data);
+				},
+				error : function(data, status) {
+					$("#mainContent").html(data);
+				}
+			});
+			}
 	</script>

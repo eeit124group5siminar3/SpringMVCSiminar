@@ -28,7 +28,7 @@ public class RetrieveImageServlet {
 
 	@GetMapping(value = "/retrieveImageServlet")
 	@ResponseBody
-	public ResponseEntity<byte[]> retrieveImage(@RequestParam int id, @RequestParam String type) throws Exception {
+	public ResponseEntity<byte[]> retrieveImage(@RequestParam Integer id, @RequestParam String type) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setCacheControl(CacheControl.noCache());
 		headers.setPragma("no-cache");

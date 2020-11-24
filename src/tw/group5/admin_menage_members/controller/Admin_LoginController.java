@@ -1,4 +1,4 @@
-package tw.group5.member_SignUp.controller;
+package tw.group5.admin_menage_members.controller;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -8,59 +8,52 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-
-import tw.group5.member_SignUp.model.Member_Service;
-import tw.group5.member_SignUp.model.Member_SignUp;
-
-
+import tw.group5.admin.model.Employee;
+import tw.group5.admin.model.Employee_Service;
 
 @Controller
-@SessionAttributes(names = "login_ok")
-public class LoginController {
+@SessionAttributes(names = "admin_login_ok")
+public class Admin_LoginController {
 
-	
 	@Autowired
-	private Member_Service member_Service;
+	private Employee_Service meployee_service;
 	
-	@RequestMapping(path = "/index.controller", method = RequestMethod.GET)
+	
+	@RequestMapping(path = "/adminIndex.controller", method = RequestMethod.GET)
 	public String processIndex() {
-		return "index";
+		return "admin_index";
 	}	
 	
+	@RequestMapping(path = "/adminBackstage.controller", method = RequestMethod.GET)
+	public String processGoBackstage() {
+		return "Admin/Admin_Backstage";
+	}
 	
-	@RequestMapping(path = "/login.controller", method = RequestMethod.GET)
-	public String processLogin() {
-		return "Member_SignUp/Member_Login";
-	}	
-	
-	
-	//登陸驗證
-	@RequestMapping(path = "/checkLogin.controller",method = RequestMethod.POST)
+	@RequestMapping(path = "/adminCheckLogin.controller",method = RequestMethod.POST)
 	@ResponseBody
-	public boolean processCheckLogin(HttpServletRequest request, HttpServletResponse response,Model m) {
+	public boolean processAdminCheckLogin(HttpServletRequest request, HttpServletResponse response,Model m) {
 		
 		Cookie cookieUser = null;
 		Cookie cookiePassword = null;
 		Cookie cookieRemember = null;
 		
 		String rm = request.getParameter("remember");
-		String email = request.getParameter("email").trim();
+		String account = request.getParameter("account").trim();
 		String password = request.getParameter("password").trim();
-		System.out.println("忘記我"+rm);
 		
-		boolean login = member_Service.login_check(email, password);
-		Member_SignUp login_bean = member_Service.login_bean(email);
+		boolean login = meployee_service.login_check(account, password);
+		
+		Employee login_bean = meployee_service.login_bean(account);
 		
 		if (login) {
 			if (rm != null) {
-				cookieUser = new Cookie("user", email);
+				cookieUser = new Cookie("user", account);
 				cookieUser.setMaxAge(60 * 60 * 24 * 7);
 				cookieUser.setPath(request.getContextPath());
 				
@@ -72,7 +65,7 @@ public class LoginController {
 				cookieRemember.setMaxAge(7 * 24 * 60 * 60);
 				cookieRemember.setPath(request.getContextPath());
 			} else {
-				cookieUser = new Cookie("user", email);
+				cookieUser = new Cookie("user", account);
 				cookieUser.setMaxAge(0);
 				cookieUser.setPath(request.getContextPath());
 				
@@ -89,7 +82,7 @@ public class LoginController {
 			response.addCookie(cookiePassword);			
 			response.addCookie(cookieRemember);
 			
-			m.addAttribute("login_ok", login_bean);
+			m.addAttribute("admin_login_ok", login_bean);
 
 			return true;
 		}
@@ -97,22 +90,15 @@ public class LoginController {
 	}	
 	
 	//登出
-	@RequestMapping(path = "/removeSession.controller", method = RequestMethod.GET)
+	@RequestMapping(path = "/adminRemoveSession.controller", method = RequestMethod.GET)
 	public String processRemoveSession(HttpSession session,SessionStatus sessionStatus) {
 
-		session.removeAttribute("login_ok");
+		session.removeAttribute("admin_login_ok");
 		session.invalidate();
 		sessionStatus.setComplete();
 
-		return "redirect:index.controller";
+		return "redirect:adminIndex.controller";
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }
