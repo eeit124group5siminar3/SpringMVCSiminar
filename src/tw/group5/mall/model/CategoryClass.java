@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CategoryClass {
+	private static final String CATEGORY_0 = "全部";
 	private static final String CATEGORY_1 = "葉菜類";
 	private static final String CATEGORY_2 = "根莖類";
 	private static final String CATEGORY_3 = "瓜果類";
@@ -12,7 +13,8 @@ public class CategoryClass {
 	public static final Map<Integer, String> CATEGORY_MAP = getCategoryListMap();
 
 	private static Map<Integer, String> getCategoryListMap() {
-		Map<Integer, String> categoryListMap = new HashMap<Integer, String>();
+		Map<Integer, String> categoryListMap = new HashMap<Integer, String>();		
+		categoryListMap.put(0, CATEGORY_0);
 		categoryListMap.put(1, CATEGORY_1);
 		categoryListMap.put(2, CATEGORY_2);
 		categoryListMap.put(3, CATEGORY_3);

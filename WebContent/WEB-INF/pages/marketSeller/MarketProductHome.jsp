@@ -7,14 +7,38 @@
 <meta charset="UTF-8">
 <title>活動首頁</title>
 
-<style>
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	rel="stylesheet">
 
-</style>
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+<jsp:include page="../header.jsp"/>
 <c:set var="funcName" value="CHE" scope="session" />
-<jsp:include page="/top.jsp" />
    	 <h1 align="center">商品管理</h1>
      <div align="center">
      <form action="<c:url value='/MarketProduct.goInsertJsp'></c:url>" method=".GET">
@@ -59,7 +83,6 @@
 			        </td>
 
                  <td>
-                 	&nbsp;&nbsp;
                   <form action="<c:url value='/MarketProduct.goUpdateJsp'></c:url>" method="get">
                   <input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
                   
@@ -78,6 +101,6 @@
           
         </table>
     </div>  
-
+<jsp:include page="/WEB-INF/pages/footer.jsp" />
 </body>
 </html>
