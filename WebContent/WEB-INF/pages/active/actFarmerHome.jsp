@@ -43,7 +43,7 @@
 <body class="goto-here">
 	
 	<jsp:include page="../header.jsp" />
- 
+ ${login_ok.member_no}
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
 <!-- 	上面圖片 -->
 	<div class="hero-wrap hero-bread" style="background-image: url('images/about.jpg');">
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			<div class="row  ftco-animate" id="mall_products"></div>
-		</div>
+		</div>		
 <!-- 活動列表 -->
 	 <div class="container ftco-animate" id="actfarmerlist">
 		 <div class="blog-entry align-self-stretch d-md-flex">
@@ -92,8 +92,8 @@
 		  </div>
 	</div>
 	<div class="row mt-5">
-          <div class="col text-center" >
-            <div class="block-27" id="">
+          <div class="col text-center" id="getpagelist">
+            <div class="block-27">
               <ul>
                 <li><a href="#">&lt;</a></li>
                 <li class="active"><span>1</span></li>
@@ -166,21 +166,29 @@ $.get({
 				        </div>
 				</div></div>`;
 			}
-			// 
 			$('#actfarmerlist').html(content);
 		}
 		})
 $.get({
 	url:"${pageContext.request.contextPath}/actFarmerPageList.do?pageNo=",
-	data:pageNo,
+	data:"pageNo,totalPages",
 	success:function(){
-		for(var i = 0)
-		if(page==1){
-		
-			
+		for(var i = 0; i<totalPages; i++){
+			content=
+				`<div class="block-27">
+              		<ul>
+                		<li><a href="#">&lt;</a></li>
+                		<li class="active"><span>i</span></li>
+                		<li><a href="#">&gt;</a></li>
+              		</ul>
+            	</div>`
 			}
 		}
+		$('#getpagelist').html(content);
+	}
 })
+
+
 		
 }
 
