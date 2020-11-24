@@ -84,6 +84,8 @@
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
+					<a class="dropdown-item"
+							href="<c:url value='frontPage.controller'/>">食譜</a>
 						<a class="dropdown-item"
 							href="<c:url value='uploadPage.controller'/>">上傳食譜</a> <a
 							class="dropdown-item"
