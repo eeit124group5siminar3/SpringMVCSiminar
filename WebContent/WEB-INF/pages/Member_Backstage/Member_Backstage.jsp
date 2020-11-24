@@ -194,8 +194,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo2">市場管理</button>
 			<div id="demo2" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
+				<li align="left"><a href="MarketMall.GoUpdate" class="hyperlink">商家資訊</a></li>
+				<li align="left"><a href="MarketProduct.selectAll" class="hyperlink">商品管理</a></li>
 			</div>
 		</div>
 		<br> <br>

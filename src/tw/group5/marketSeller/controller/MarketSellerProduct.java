@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.group5.marketSeller.model.MarketMallBean;
-import tw.group5.marketSeller.model.MarketProductBeanService;
 import tw.group5.marketSeller.model.MarketProductImgBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
+import tw.group5.marketSeller.service.MarketProductBeanService;
 import tw.group5.marketSeller.service.MarketSellBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
@@ -43,16 +43,20 @@ public class MarketSellerProduct {
 
 	
 
-	// 顯示全部
+	// 顯示全部 商品管理的controller
 	@RequestMapping(path = "/MarketProduct.selectAll", method = RequestMethod.GET)
 	public String selectAll(@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model m) {
 		
 	if (mb == null) {
 		return "Member_SignUp/Member_Login";
 	}
-	
 	Integer producterId = mb.getMember_no();
-		
+	
+	MarketMallBean bean =sellService.selectid(producterId);
+	if (bean ==null) {
+		return "redirect:MarketMall.goInsertJsp";
+	}
+	
 		List<MarketProductTotalBean> list = productService.selectAll(producterId);
 		m.addAttribute("list", list);
 		return "marketSeller/MarketProductHome";
