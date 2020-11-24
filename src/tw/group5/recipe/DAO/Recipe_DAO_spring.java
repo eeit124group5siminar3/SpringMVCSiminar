@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
+import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
 import java.util.List;
 
@@ -17,7 +19,6 @@ public class Recipe_DAO_spring {
 	@Autowired @Qualifier("sessionFactory")
 //	@Autowired(required=false) 找不到時可設為null
 	private SessionFactory sessionFactory;
-	private java.util.List<Recipe_Bean> list;
 	
 
 //	public Recipe_DAO_spring() {
@@ -54,7 +55,7 @@ public class Recipe_DAO_spring {
 //			session.getTransaction().commit();
 		return bean;
 	}
-
+	
 	//取得資料庫所有資料
 	public List<Recipe_Bean> listOfJavaBean() {
 		Session session =sessionFactory.getCurrentSession();
@@ -69,13 +70,13 @@ public class Recipe_DAO_spring {
 
 	//查詢某資料
 	//Recipe_Servlet_search
-	public List<Recipe_Bean> ListOfSearch(String name) {
+	public List<Recipe_Bean_noImage> ListOfSearch(String name) {
 		Session session =sessionFactory.getCurrentSession();
 //		session.beginTransaction();
-		String hql = "From Recipe_Bean where recipe_name like:name";
-		Query<Recipe_Bean> query = session.createQuery(hql,Recipe_Bean.class);
+		String hql = "From Recipe_Bean_noImage where recipe_name like:name";
+		Query<Recipe_Bean_noImage> query = session.createQuery(hql,Recipe_Bean_noImage.class);
 		query.setParameter("name", name);
-		List<Recipe_Bean> list = query.list();
+		List<Recipe_Bean_noImage> list = query.list();
 
 		return list;
 
@@ -83,14 +84,14 @@ public class Recipe_DAO_spring {
 	
 	//Recipe_Servlet_update
 	//查詢使用者擁有食譜中,其中一筆資料
-	public List<Recipe_Bean> partSearch(String rec_id){
+	public List<Recipe_Bean_noImage> partSearch(String rec_id){
 		Session session =sessionFactory.getCurrentSession();
 //		session.beginTransaction();
-		String hql="From Recipe_Bean where recipe_id=?0";
-		Query<Recipe_Bean> query=session.createQuery(hql,Recipe_Bean.class);
+		String hql="From Recipe_Bean_noImage where recipe_id=?0";
+		Query<Recipe_Bean_noImage> query=session.createQuery(hql,Recipe_Bean_noImage.class);
 		query.setParameter(0, rec_id);
 		
-		List<Recipe_Bean> list=query.list();
+		List<Recipe_Bean_noImage> list=query.list();
 //		session.getTransaction().commit();
 		return list;
 		
@@ -119,6 +120,22 @@ public class Recipe_DAO_spring {
 		return bean;
 		
 	}
+	
+	
+	public List<ProductBean> getProducts(String searchString) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ProductBean where stock != 0";
+		Query<ProductBean> query = null;
+
+		hql += " and product like ?0 ORDER BY ProductId";
+		query = session.createQuery(hql, ProductBean.class);
+		query.setParameter(0, "%" + searchString + "%");
+	
+		List<ProductBean> list = query.list();
+		return list;
+	}
+
+	
 		
 	}
 

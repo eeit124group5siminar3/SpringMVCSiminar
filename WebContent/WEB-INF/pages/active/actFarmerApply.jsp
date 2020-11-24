@@ -69,7 +69,7 @@
 <script type="text/javascript">
 
 function backHome(){
-	document.act.action="allActFarmer.do";
+	document.act.action="maintainActFarmer.do";
     document.act.submit();
 	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
 }

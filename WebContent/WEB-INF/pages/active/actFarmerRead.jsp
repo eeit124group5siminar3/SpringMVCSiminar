@@ -302,7 +302,7 @@ $("#imgInp").change(function(){
 		readURL(this);
 	});
 function backHome(){
-	document.act.action="allActFarmer.do";
+	document.act.action="maintainActFarmer.do";
     document.act.submit();
 }
 

@@ -2,7 +2,9 @@ package tw.group5.recipe.service;
 
 import java.util.List;
 
+import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
+import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
 public interface recipe_Service_interface {
 
@@ -10,13 +12,15 @@ public interface recipe_Service_interface {
 
 	Recipe_Bean update(String rec_id, Recipe_Bean bean);
 
-	List<Recipe_Bean> ListOfSearch(String cate);
+	List<Recipe_Bean_noImage> ListOfSearch(String cate);
 
-	List<Recipe_Bean> partSearch(String rec_id);
+	List<Recipe_Bean_noImage> partSearch(String rec_id);
 
 	boolean delete(String rec_id);
 
 	List<Recipe_Bean> listOfJavaBean();
 
 	Recipe_Bean getImage(String rec_id);
+	
+	List<ProductBean> getProducts(String searchString);
 }

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.service.ProductService;
 
 @Controller
-@SessionAttributes(value = { "pageNo", "login_ok", "login_guest", "ShoppingCart" })
+@SessionAttributes(value = { "login_ok", "login_guest", "ShoppingCart" })
 public class MallShoppingController {
 
 	@Autowired
@@ -42,11 +44,13 @@ public class MallShoppingController {
 	@GetMapping(value = { "/RetrievePageProducts", "/RetrievePageProducts/{pageNo}" }, produces = {
 			"application/json" })
 	public @ResponseBody List<ProductBean> productList(
-			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, Model model,
+//			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, 
+			Model model,
 			HttpServletRequest request) {
 		List<ProductBean> list = null;
 //		HttpSession session = request.getSession(false);
 		String searchString = (String) request.getAttribute("searchString");
+		Integer pageNo=(Integer) request.getAttribute("pageNo");
 		if (pageNo == null) {
 			if (model.getAttribute("pageNo") != null) {
 				pageNo = (Integer) model.getAttribute("pageNo");
@@ -85,7 +89,8 @@ public class MallShoppingController {
 //			}
 //		}
 		service.setPageNo(pageNo);
-		model.addAttribute("pageNo", pageNo);
+		request.getSession(false).setAttribute("pageNo", pageNo);
+//		model.addAttribute("pageNo", pageNo);
 		return String.valueOf(totalPages);
 	}
 
@@ -94,12 +99,12 @@ public class MallShoppingController {
 	@ResponseBody
 	public void searchProduct(@PathVariable(value = "searchString", required = false) String searchString, Model model,
 			HttpServletRequest request) {
-//		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(false);
 		if (searchString == null || searchString.length() == 0) {
-			model.addAttribute("searchString", null);
+			session.setAttribute("searchString", null);
 			service.setSearchString(null);
 		} else {
-			model.addAttribute("searchString", searchString);
+			session.setAttribute("searchString", searchString);
 			service.setSearchString(searchString);
 		}
 		request.setAttribute("searchString", searchString);
@@ -108,52 +113,42 @@ public class MallShoppingController {
 // 設定查詢種類
 	@GetMapping(value = "/RetrieveCategory/{categoryId}")
 	@ResponseBody
-	public Map<Integer, String> categoryList(@PathVariable(value = "categoryId") Integer categoryId) {
-//		List<CategoryBean> list = service.getCategory();
+	public Map<Integer, String> categoryList(@PathVariable(value = "categoryId") Integer categoryId,HttpServletRequest request) {
 		Map<Integer, String> map=CategoryClass.CATEGORY_MAP;
 		if (categoryId == 0) {
 			categoryId = null;
 		}
+		request.getSession(false).setAttribute("categoryId", categoryId);
 		service.setCategoryId(categoryId);
 		return map;
-//		return list;
-	}
-
-	@PostMapping(value = "/BuyProductServlet")
-	public String buyProduct(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart,
-			@RequestParam(value = "product") String product, @RequestParam(value = "productId") Integer productId,
-			@RequestParam(value = "producterId") Integer producterId,
-			@RequestParam(value = "producterName", required = false) String producterName,
-			@RequestParam(value = "content") Integer content, @RequestParam(value = "unit") String unit,
-			@RequestParam(value = "qty") Integer qty, @RequestParam(value = "price") Double price,
-			@RequestParam(value = "discount") Double discount, @RequestParam(value = "pageNo") Integer pageNo,
-			Model model) {
-		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-		if (cart == null) {
-			cart = (ShoppingCart) context.getBean("shoppingCart");
-			model.addAttribute("ShoppingCart", cart);
-		}
-		if (pageNo == null) {
-			if (model.getAttribute("pageNo") != null) {
-				pageNo = (Integer) model.getAttribute("pageNo");
-			} else {
-				pageNo = 1;
-			}
-		}
-		OrderItem oi = (OrderItem) context.getBean("orderItem");
-		oi.setProductId(productId);
-		oi.setProduct(product);
-		oi.setContent(content);
-		oi.setUnit(unit);
-		oi.setQty(qty);
-		oi.setProducterId(producterId);
-		oi.setPrice(price);
-		oi.setDiscount(discount);
-		oi.setProducterName(producterName);
-		cart.addToCart(productId, oi);
-		return "redirect:/RetrievePageProducts?pageNo=" + pageNo;
 	}
 	
+// 顯示單筆商品資料
+	@PostMapping(value = "/SingleProduct")
+	public ModelAndView showSingleProduct(@RequestParam(value = "productId") Integer productId) {
+		ProductBean selectedProduct=service.getProduct(productId);
+		OrderItem oi=new OrderItem();
+		oi.setProductId(productId);
+		oi.setProduct(selectedProduct.getProduct());
+		oi.setContent(selectedProduct.getContent());
+		oi.setUnit(selectedProduct.getUnit());
+		oi.setProducterId(selectedProduct.getProducterId());
+		oi.setPrice(selectedProduct.getPrice());
+		oi.setDiscount(selectedProduct.getDiscount());
+		oi.setProducterName(selectedProduct.getProducterName());
+		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("/mall/singleProduct");
+		mav.addObject("selectedProduct", selectedProduct);
+		mav.addObject("oi", oi);
+//		mav.addObject("categoryId", service.getCategoryId());
+//		mav.addObject("pageNo", service.getPageNo());
+//		mav.addObject("searchString", service.getSearchString());
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+
+// 購物車內容
 	@PostMapping(value = "/CartContent")
 //	@ResponseBody
 	public ModelAndView getCartContent() {
@@ -182,9 +177,44 @@ public class MallShoppingController {
 //		System.err.println(mav.getView());
 		return mav;
 	}
+}
 //	@RequestMapping(value = "/jQueryTest")
 //	@ResponseBody
 //	public Integer getInteger (@RequestParam(value = "num1")Integer num1,@RequestParam(value = "num2")Integer num2,@RequestParam(value = "num3")Integer num3) {
 //		return num1+num2+num3;
 //	}
-}
+
+//	@PostMapping(value = "/BuyProductServlet")
+//	public String buyProduct(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart,
+//			@RequestParam(value = "product") String product, @RequestParam(value = "productId") Integer productId,
+//			@RequestParam(value = "producterId") Integer producterId,
+//			@RequestParam(value = "producterName", required = false) String producterName,
+//			@RequestParam(value = "content") Integer content, @RequestParam(value = "unit") String unit,
+//			@RequestParam(value = "qty") Integer qty, @RequestParam(value = "price") Double price,
+//			@RequestParam(value = "discount") Double discount, @RequestParam(value = "pageNo") Integer pageNo,
+//			Model model) {
+//		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+//		if (cart == null) {
+//			cart = (ShoppingCart) context.getBean("shoppingCart");
+//			model.addAttribute("ShoppingCart", cart);
+//		}
+//		if (pageNo == null) {
+//			if (model.getAttribute("pageNo") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			} else {
+//				pageNo = 1;
+//			}
+//		}
+//		OrderItem oi = (OrderItem) context.getBean("orderItem");
+//		oi.setProductId(productId);
+//		oi.setProduct(product);
+//		oi.setContent(content);
+//		oi.setUnit(unit);
+//		oi.setQty(qty);
+//		oi.setProducterId(producterId);
+//		oi.setPrice(price);
+//		oi.setDiscount(discount);
+//		oi.setProducterName(producterName);
+//		cart.addToCart(productId, oi);
+//		return "redirect:/RetrievePageProducts?pageNo=" + pageNo;
+//	}

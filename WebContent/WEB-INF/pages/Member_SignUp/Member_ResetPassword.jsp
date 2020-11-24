@@ -150,12 +150,12 @@ $(function(){
 						property="member_password" />"
 						disabled>
 					<p></p>
-					<label for="inputPassword4">設定新密碼</label> <input type="password"
+					<label for="inputPassword4">設定新密碼<a style="color:red">*</a></label> <input type="password"
 						name="member_password" id="member_password1" class="form-control"
 						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 						title="密碼長度至少8碼，須包含大寫、小寫英文及數字" placeholder="請填入新的密碼" required>
 					<p></p>
-					<label for="inputPassword4">設定新密碼</label> <input type="password"
+					<label for="inputPassword4">設定新密碼<a style="color:red">*</a></label> <input type="password"
 						name="member_password1" id="member_password2" class="form-control"
 						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
 						title="密碼長度至少8碼，須包含大寫、小寫英文及數字" placeholder="請再填入一次新的密碼" required>

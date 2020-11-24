@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.sun.jdi.connect.spi.Connection;
+
 @Repository("memberDao")
 public class Member_DAO {
 
@@ -183,7 +185,7 @@ public class Member_DAO {
 			member_bean.setE_paper(e_paper);
 			member_bean.setMember_bank_code(member_bank_code);
 			member_bean.setMember_bank_account(member_bank_account);
-			
+
 			return true;
 		}
 		return false;

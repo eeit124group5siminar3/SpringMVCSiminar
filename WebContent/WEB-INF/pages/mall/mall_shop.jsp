@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
-
+<link rel="stylesheet" href="css/mall.css">
 </head>
 <body class="goto-here">
 
@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<section class="ftco-section">
+	<section class="ftco-section" id="singleProduct">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-10 mb-5 text-center">
@@ -69,9 +69,9 @@
 					<form class="product-category" action="javascript:void(0)"
 						method="GET">
 						<input type="search" name="searchString" id="searchString"
-							value=${searchString}>
+							value="${searchString}" />
 						<button name="searchButton" style="border-radius: 5px;"
-							onclick="searchProduct()">查詢</button>
+							onclick="searchProduct(0)">查詢</button>
 					</form>
 				</div>
 			</div>
@@ -79,7 +79,6 @@
 		</div>
 		<div id="mall_pages"></div>
 	</section>
-
 
 	<jsp:include page="../footer.jsp" />
 
@@ -145,7 +144,9 @@
 									+ "元</span>";
 						}
 						content += "</div></div><div class='bottom-area d-flex px-3'><div class='m-auto d-flex'>"
-								+ "<a href='#mall_products' class='add-to-cart d-flex justify-content-center align-items-center text-center'><span><i class='ion-ios-menu'></i></span></a>"
+								+ "<a href='#mall_products' class='add-to-cart d-flex justify-content-center align-items-center text-center' onclick='singleProduct("
+								+ aProductBean[i].productId
+								+ ")' data-whatever='@getbootstrap'><span><i class='ion-ios-menu'></i></span></a>"
 								+ "<a href='#mall_products' class='buy-now d-flex justify-content-center align-items-center mx-1'><span><i class='ion-ios-cart'></i></span></a>"
 								+ "<a href='#mall_products' class='heart d-flex justify-content-center align-items-center '><span><i class='ion-ios-heart'></i></span></a>"
 								+ "</div></div></div></div></div>"
@@ -219,22 +220,24 @@
 			}
 		}
 
-		function searchProduct() {
+		function searchProduct(backWord) {
 			var searchString = document.forms[0].elements[0].value;
-			console.log(searchString);
-			var xhr = new XMLHttpRequest();
-			if (searchString == null || searchString == "") {
+			var xhr = new XMLHttpRequest();			
+			if (searchString == null || searchString == "") {	
 				var url = "<c:url value='/RetrieveSearch/' />"
-				console.log(searchString);
 			} else {
 				var url = "<c:url value='/RetrieveSearch/" + searchString + "' />"
-			}
+			if(backWord==0){
+				page(1);
+					}else
+						page(${pageNo});
+						}
 			xhr.open("GET", url, false);
 			xhr.send();
-			page(1);
+// 			page(1);
 		}
 
-		function productCategory(categoryId) {
+		function productCategory(categoryId,backWord) {
 			var categoryList = document.getElementById("product-category");
 			var xhr = new XMLHttpRequest();
 			xhr.open("GET",
@@ -242,7 +245,11 @@
 			xhr.send();
 			content = ""
 			xhr.onreadystatechange = function() {
-				page(1);
+				if(backWord==0){
+					page(1);
+						}else{
+							page(${pageNo});
+							}
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var categoryBean = JSON.parse(xhr.responseText);
 					categoryBean[0] = "全部";
@@ -252,7 +259,7 @@
 									+ categoryBean[i] + "</span></li>";
 						} else {
 							content += "<li><a href='#product_top' onclick='productCategory("
-									+ i + ")'>" + categoryBean[i] + "</a></li>";
+									+ i + ",0)'>" + categoryBean[i] + "</a></li>";
 						}
 					}
 				}
@@ -260,9 +267,42 @@
 			}
 		}
 
+		function singleProduct(productId) {
+			$.ajax({
+				url : "SingleProduct",
+				type : "POST",
+				data : {"productId":productId},
+				datatype : "html",
+				success : function(data, status) {
+					$("#singleProduct").html(data);
+				},
+				error : function(data, status) {
+					$("#singleProduct").html(data);
+					console.log(data);
+				}
+			});
+		}
+
 		window.onload = function() {
-			productCategory(0);
-			page(1);
+			if(${categoryId==null}){
+				if(${searchString==null}){
+			searchProduct(0);
+			productCategory(0,0);
+					}else{
+						productCategory(0,0);
+						searchProduct(1);
+						}
+			}
+			else{
+				if(${searchString==null}){
+					searchProduct(0);
+					productCategory(`${categoryId}`,1);
+				}else{
+					productCategory(`${categoryId}`,1);
+					searchProduct(1);
+					}
+				};
+			
 		}
 	</script>
 </body>

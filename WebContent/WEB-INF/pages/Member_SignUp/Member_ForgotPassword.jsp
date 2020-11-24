@@ -119,7 +119,7 @@ $(function(){
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">農郁</a>
+			<a class="navbar-brand" href="index.jsp">農郁</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -139,19 +139,19 @@ $(function(){
 				<div id="check_restPwd" class="center"
 					style="color: red; text-align: center; height: 20px"></div>
 				<div class="form-group">
-					<label for="inputPassword4">Email</label> <input type="text"
+					<label for="inputPassword4">Email<a style="color:red">*</a></label> <input type="text"
 						name="member_email" id="member_email" class="form-control"
 						placeholder="請填入註冊時的Email" required>
 					<p></p>
-					<label for="inputPassword4">身份證字號</label> <input type="text"
+					<label for="inputPassword4">身份證字號<a style="color:red">*</a></label> <input type="text"
 						name="member_id" id="member_id" class="form-control"
 						placeholder="請填入註冊時的身份證字號" required>
 					<p></p>
-					<label for="inputPassword4">姓名</label> <input type="text"
+					<label for="inputPassword4">姓名<a style="color:red">*</a></label> <input type="text"
 						name="member_name" id="member_name" class="form-control"
 						placeholder="請填入註冊時的姓名或名稱" required>
 					<p></p>
-					<label for="inputPassword4">電話</label> <input type="text"
+					<label for="inputPassword4">電話<a style="color:red">*</a></label> <input type="text"
 						name="member_cellphone" id="member_cellphone" class="form-control"
 						placeholder="請填入註冊時的電話" required>
 				</div>
