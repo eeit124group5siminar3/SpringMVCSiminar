@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import tw.group5.mall.model.CategoryBean;
 
 
 @Repository
@@ -24,10 +23,12 @@ public class ActFarmerDAO {
 	// 抓分頁
 	public final Integer RECORDS_PER_PAGE = 5;
 	
-	private Integer pageNo = 0;// 存放目前顯示之頁面的編號
+	private Integer pageNo = 1;// 存放目前顯示之頁面的編號
 	private Integer maintainPageNo = 0;
 	private Integer recordsPerPage = RECORDS_PER_PAGE; // 每頁抓RECORDS_PER_PAGE
 	private Integer totalPages = -1;
+	private String searchString;
+
 	
 	private Integer actId = 0;
 	
@@ -75,6 +76,15 @@ public class ActFarmerDAO {
 	public void setActId(Integer actId) {
 		this.actId = actId;
 	}
+	
+	
+	public String getSearchString() {
+		return searchString;
+	}
+
+	public void setSearchString(String searchString) {
+		this.searchString = searchString;
+	}
 
 	//計算所有活動的頁數
 	public long getRecordCounts() {
@@ -91,13 +101,12 @@ public class ActFarmerDAO {
 		return count;
 	}
 	
-	//計算該廠商擁有的活動頁數
+	//計算該廠商擁有的活動總筆數
 	public long getRecordCounts(Integer sellerId) {
 		//hibernate Session
 		Session session = sessionFactory.getCurrentSession();
 		Integer count = 0; //必須使用long型態
 		String hql = "select count(*) from ActFarmer where sellerId=?0";
-		
 		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
 		query.setParameter(0, sellerId);
 		Object objectNumber = query.uniqueResult();
@@ -109,9 +118,13 @@ public class ActFarmerDAO {
 	
 //=========================CRUD==========================================
 
-	//排序所有活動列表
+	//查詢一頁面活動
 	public List<ActFarmer> getPageActFarmers(){
 		Session session = sessionFactory.getCurrentSession();
+//		if (pageNo==0) {
+//			pageNo=2;
+//		}
+		
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "from ActFarmer ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
@@ -121,15 +134,15 @@ public class ActFarmerDAO {
 		return list;
 	}
 	
-	//排序該廠商的活動列表+分頁
+	//查詢某一廠商某頁面活動
 	public List<ActFarmer> getPageActFarmers(Integer sellerId){
 		Session session = sessionFactory.getCurrentSession();
-		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
+		Integer startRecordNo = (maintainPageNo - 1) * recordsPerPage;
 		String hql = "from ActFarmer where sellerId =?0 ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(0, sellerId);
 		query.setFirstResult(startRecordNo);
-		query.setMaxResults(5);
+		query.setMaxResults(recordsPerPage);
 		List<ActFarmer> list = query.list();
 		return list;
 	}
@@ -145,12 +158,25 @@ public class ActFarmerDAO {
 	}
 	
 	
+	
 	// 查詢單筆資料ByName
 	public List<ActFarmer> selectName(String actName){
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ActFarmer where actName like?1";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(1, "%"+actName+"%");
+		List<ActFarmer> list = query.getResultList();
+		return list;
+		
+	}
+	
+	// 查詢單筆資料ByName
+	public List<ActFarmer> selectNameSeller(String actName,Integer sellerId){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActFarmer where actName like?1 && sellerId =?2";
+		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
+		query.setParameter(1, "%"+actName+"%");
+		query.setParameter(2, sellerId);
 		List<ActFarmer> list = query.getResultList();
 		return list;
 		

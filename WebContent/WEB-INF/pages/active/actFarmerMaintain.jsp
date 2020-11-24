@@ -33,7 +33,6 @@
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
@@ -65,7 +64,7 @@
 </style>
 <script type="text/javascript">
 	function backHome() {
-		document.act.action = "allActFarmer.do";
+		document.act.action = "maintainActFarmer.do";
 		document.act.submit();
 		//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
 	}
@@ -97,7 +96,7 @@
 						</form>
 					</td>
 					<td style="border: 0px" align="right" colspan="2">
-						<form action="<c:url value='/maintainAct-Farmer.do'/>"
+						<form action="<c:url value='/maintainActFarmer.do'/>"
 							method="get">
 							<input name="selectAll" type="submit" value="查詢全部">
 						</form>
@@ -172,26 +171,48 @@
 				<tr>
 					<td style="border: 0px" colspan="6"></td>
 					<td style="border: 0px" colspan="6">
-						<form action="<c:url value='/'/>" method="get">
+						<form action="<c:url value='/SelectNameSeller.do'/>" method="get">
 							<label for="">活動名稱:</label> <input type="text" id="selectname"
 								name="selectname"> &nbsp; <input name="selectone"
 								type="submit" value="查詢單筆">
 						</form>
 					</td>
-
-
-					<!-- 				ajax -->
-					<!-- 					<tr id="test_id"> -->
-					<!-- 						<td></td> -->
-					<!-- 						<td></td> -->
-					<!-- 						<td></td>						 -->
-
-					<!-- 						<td>檢視</td> -->
-					<!-- 						<td>修改</td> -->
-					<!-- 						<td>刪除</td> -->
-					<!-- 					</tr> -->
-					<!-- 				ajax -->
 			</table>
+	</div>
+	<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
+	<form>
+	<div id="bpaging" style="width: 1800px">
+	<table border="1" style="margin-right: 0px;">
+	<tr align="center">
+		<td width='80' height='20'><c:if test="${MaintainPageNo > 1}">
+			<div id="blfirst"><a
+				href="<c:url value='maintainActFarmer.do?MaintainPageNo=1' />"> 
+				<img border='0' alt='第一頁' height='30' width='30'
+				src='./images/first-icon.png' /> </a></div>
+		</c:if></td>
+		<td width='80'><c:if test="${MaintainPageNo > 1}">
+			<div id="blprev"><a
+				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${MaintainPageNo-1}' />">
+			<img border='0' alt='前一頁' height='30' width='30'
+				src='./images/prev-icon.png' /></a></div>
+		</c:if></td>
+		<td width='76'>${MaintainPageNo} / ${totalPages}</td>
+		<td width='80'><c:if test="${MaintainPageNo != totalPages}">
+			<div id="blnext"><a
+				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${MaintainPageNo+1}' />">
+			<img border='0' alt='最末頁' height='30' width='30'
+				src='./images/next-icon.png'/> </a></div>
+		</c:if></td>
+		<td width='80'><c:if test="${MaintainPageNo != totalPages}">
+			<div id="bllast"><a
+				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${totalPages}' />">
+			<img border='0' alt='最末頁' height='30' width='30'
+				src='./images/last-icon.png' /> </a></div>
+		</c:if></td>
+	</tr>
+</table>
+</div>
+</form>
 </div>
 			<!-- --------footer------------------------------------- -->
 			<footer class="ftco-footer backstage-footer-ground">
@@ -221,7 +242,7 @@
 // 				<td>修改</td>
 // 				<td>刪除</td>`;
 // 				content = "<td>"+data.timeId+"</td><td>"+data.timeName+"</td>";
-				content = `<td>\${data.timeId}</td><td>\+${data.timeName}</td>`;
+				content = `<td>\${data.timeId}</td><td>\${data.timeName}</td>`;
 				
 			$("#test_id").html(content);
             

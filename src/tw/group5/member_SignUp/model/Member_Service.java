@@ -2,7 +2,6 @@ package tw.group5.member_SignUp.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("memberService")
 //@Transactional //每個方法內的Session使用舊的Session

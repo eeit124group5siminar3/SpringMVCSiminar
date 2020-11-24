@@ -1,29 +1,29 @@
 package tw.group5.active.controller;
 
 
-import java.io.ByteArrayOutputStream;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 
-import org.hibernate.metamodel.model.domain.internal.AbstractIdentifiableType;
-import org.hibernate.sql.ordering.antlr.GeneratedOrderByFragmentParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -34,11 +34,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActFarmerService;
+import tw.group5.active.model.Active;
 import tw.group5.active.model.Clock;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(names = {"MaintainPageNo", "login_ok"})
+@SessionAttributes(names = {"MaintainPageNo", "login_ok","actFarmer"})
 public class ActFarmerController {
 	public final int RECORDS_PER_PAGE = 5;
 	
@@ -54,13 +55,13 @@ public class ActFarmerController {
 	@Autowired
 	ServletContext ctx;
 	
-	//查詢所有活動-一日農夫
-	@RequestMapping(value = "")
-	public String getAllactFarmer(Model model) {
-		Collection<ActFarmer> collFarmers = actFarmerService.getPageActFarmers();
-		model.addAttribute("collFarmers", collFarmers);
-		return "";
-	}
+//	//查詢所有活動-一日農夫
+//	@RequestMapping(value = "")
+//	public String getAllactFarmer(Model model) {
+//		Collection<ActFarmer> collFarmers = actFarmerService.getPageActFarmers();
+//		model.addAttribute("collFarmers", collFarmers);
+//		return "";
+//	}
 	
 	//廠商活動管理頁面-一日農夫
 	@RequestMapping(value = "allActFarmer.do")
@@ -84,10 +85,8 @@ public class ActFarmerController {
 	}
 		
 	
-	
-	
 	//廠商活動管理頁面(分頁)-一日農夫
-	@GetMapping(value = "maintainActFarmer.do")
+	@RequestMapping(value = "maintainActFarmer.do")
 	public String maintainActFarmer(
 			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
 			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model model) {
@@ -106,6 +105,7 @@ public class ActFarmerController {
 		}
 		model.addAttribute("actFarmer", actFarmerService);
 		actFarmerService.setMaintainPageNo(maintainPageNo);
+		System.out.println("測試測試"+maintainPageNo);
 		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
 		model.addAttribute("totalPages", actFarmerService.getTotalPages(sellerId));
 		Collection<ActFarmer> collFarmer = actFarmerService.getPageActFarmers(sellerId);
@@ -114,7 +114,15 @@ public class ActFarmerController {
 		return "/active/actFarmerMaintain";
 	}
 	
-	
+	//名字找活動
+	@RequestMapping(path = "/SelectNameSeller.do")
+	public String ProcessSelectName(@RequestParam("selectname") String actName, 
+			@SessionAttribute(value = "login_ok")Member_SignUp mb, Model m) {
+		Integer sellerId = mb.getMember_no();
+		Collection<ActFarmer> collFarmer = actFarmerService.selectNameSeller(actName,sellerId);
+		m.addAttribute("collFarmer", collFarmer);
+		return "active/ActiveHome";
+	}
 	
 	//申請活動準備(建立空的物件)
 	@GetMapping(path = "/actFarmerPreInsert.do")
@@ -146,15 +154,13 @@ public class ActFarmerController {
 		
 	}
 	//檢視活動準備(找到該筆物件)
-	@GetMapping(path="/actFarmerPreRead.do")
+	@RequestMapping(path="/actFarmerPreRead.do")
 	public String actFarmerPreRead(@RequestParam(value = "actId") Integer actId, Model model) {
 		ActFarmer afBean = actFarmerService.getActFarmer(actId);
-		System.out.println(afBean.getActImg());
 		model.addAttribute("afBean", afBean);
 		return "/active/actFarmerRead";
 	}
 	
-	//返回場
 	
 	//修改活動準備(找到該筆物件)
 	@GetMapping(value = "/actFarmerPreUpdate.do")
@@ -206,12 +212,31 @@ public class ActFarmerController {
 		actFarmerService.deletActFarmer(id);
 		return "redirect:/allActFarmer.do";
 	}
+
 	
-//	public ActFarmer getAllAct(@RequestParam("actFarmer")String s1) {
-//		Map<String, String> map = new HashMap<>();
-//		map.put("actId", get);
+	//取得活動列表
+//	public @ResponseBody List<ActFarmer> actFarmerList(
+//			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, Model model,
+//			HttpServletRequest rq){
+//		List<ActFarmer> list = null;
+//		String searchString = (String) rq.getAttribute("searchString");
+//		if(pageNo == null) {
+//			if(model.getAttribute("pageNO") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			}else {
+//				pageNo = 1;
+//			}
+//		}
+//		list = actFarmerService.getPageActFarmers();
+//		rq.setAttribute("searchString", searchString);
+//		model.addAttribute("pageNo", pageNo);
+//		return list;
 //	}
+		
+
 	
+	
+//測試ajax
 	@RequestMapping("/test")
 	@ResponseBody
 	public Clock test1(@RequestParam("param1")String s1) throws JsonProcessingException {

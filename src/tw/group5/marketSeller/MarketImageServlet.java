@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.group5.marketSeller.model.MarketMallBean;
 import tw.group5.marketSeller.model.MarketProductBeanService;
 import tw.group5.marketSeller.model.MarketProductImgBean;
+import tw.group5.marketSeller.service.MarketSellBeanService;
 
 
 @Controller
@@ -28,6 +30,8 @@ public class MarketImageServlet {
 	private ServletContext servletContext;
 	@Autowired
 	private MarketProductBeanService service;
+	@Autowired
+	private MarketSellBeanService mallService;
 	
 	@GetMapping(value = "/MarketImageServlet")
 	@ResponseBody
@@ -51,6 +55,17 @@ public class MarketImageServlet {
 					is = blob.getBinaryStream();
 				}
 				fileName = bean1.getImg_name();
+			}
+			break;
+			
+		case "MALLIMG":
+			MarketMallBean bean = mallService.selectid(id);
+			if(bean !=null) {
+				blob =bean.getMallImg();
+				if (blob != null) {
+					is =blob.getBinaryStream();
+				}
+				fileName = bean.getImgName();
 			}
 			break;
 		}
