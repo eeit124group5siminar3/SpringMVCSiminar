@@ -101,7 +101,7 @@
 						<a class="nav-link" href="<c:url value='login.controller' />">登錄</a>
 					</c:if></li>
 				<li class="nav-item cta cta-colored"><a href="cart.html"
-					class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
 			</ul>
 		</div>
 	</div>
