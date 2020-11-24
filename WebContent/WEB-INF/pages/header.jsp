@@ -44,8 +44,8 @@
 
 		<div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a href="index.html"
-					class="nav-link">首頁</a></li>
+				<li class="nav-item active"><a href="/"
+					class="nav-link" >首頁</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
@@ -61,14 +61,25 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item"
-								href="<c:url value='        '/>">市場</a> <a
-								class="dropdown-item"
-								href="<c:url value='/MarketProduct.selectAll'/>">商品管理</a> <a
-								class="dropdown-item"
-								href="<c:url value='/MarketMall.GoUpdate'/>">店家資料介面</a>
-								<a
-								class="dropdown-item"
-								href="<c:url value='/MarketMall.goInsertJsp'/>">店家申請</a>
+								href="<c:url value='        '/>">市場</a>
+								<c:if test="${login_ok.member_permissions == '1'}">							
+														
+								<a class="dropdown-item"
+								href="<c:url value='/MarketProduct.selectAll'/>">商品管理</a>						
+								
+								</c:if>
+								<c:if test="${login_ok.member_permissions == '1'}">	
+														
+								<a class="dropdown-item"
+								href="<c:url value='/MarketMall.GoUpdate'/>">店家資料介面</a>								
+								
+								</c:if>
+								<c:if test="${login_ok.member_permissions == '1'}">							
+														
+								<a class="dropdown-item"
+								href="<c:url value='/MarketMall.goInsertJsp'/>">店家申請</a>								
+								
+								</c:if>
 						</div></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
