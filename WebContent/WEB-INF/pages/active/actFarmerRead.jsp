@@ -217,9 +217,8 @@
 	</tr>
 	<tr>
 		<td><form:label path="actImg">活動海報:</form:label></td>				
-		<td><img height='120' width='96' src="<c:url value='ActImageController?id=${afBean.actId}&type=ACTFARMER'/>"/>		
-			<form:input path="multipartFile" type="file" class="InputClass" id="imgInp" accept="image/*"/>
-			<img height='120' width='96' id="blah" src="#" alt="New image" />
+		<td><img height='120' width='96' src="<c:url value='ActImageController?id=${afBean.actId}&type=ACTFARMER'/>"/>
+			<form:label path="imgName">${afBean.imgName}</form:label>		
 		</td>
 	</tr>
 	<tr>
@@ -259,7 +258,7 @@
 <!-- --------footer------------------------------------- -->
 
 <!-- 	<footer class="ftco-footer backstage-footer-ground"> -->
-<%-- 		<jsp:include page="/WEB-INF/pages/footer.jsp" /> --%>
+		<jsp:include page="/WEB-INF/pages/footer.jsp" />
 <!-- 	</footer> -->
 	
 		<div id="ftco-loader" class="show fullscreen">
