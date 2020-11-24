@@ -65,7 +65,7 @@
 
 <script>
 function backHome(){
-	document.act.action="allActFarmer.do";
+	document.act.action="maintainActFarmer.do";
     document.act.submit();
 }
 </script>
@@ -166,7 +166,7 @@ function backHome(){
 	<tr>
 		<td colspan="2" align="center">
 			<form:button value="Send" >送出</form:button>
-			<form:button value="back" onclick="backHome()">回管理頁面</form:button>
+			<form:button value="back" onclick="backHome()" >回管理頁面</form:button>
 		</td>			
 	</tr>
 
