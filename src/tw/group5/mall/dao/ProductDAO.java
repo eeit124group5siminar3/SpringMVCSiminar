@@ -27,7 +27,7 @@ public class ProductDAO {
 	private int totalPagesWithoutZero = -1;
 	private String tagName = "";
 	private int selected = -1;
-	private Integer categoryId;
+	private Integer categoryId=0;
 	private String searchString;
 
 	public int getPageNo() {
