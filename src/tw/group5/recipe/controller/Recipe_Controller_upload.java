@@ -99,32 +99,34 @@ public class Recipe_Controller_upload {
 		return action;
 	}
 	
-	@GetMapping(value="/uploadConfirm.controller" ,produces = "text/plain;charset=UTF-8")
-	public @ResponseBody String saveProcess(
-//			@RequestParam String action,SessionStatus status
+	@PostMapping(value="/uploadConfirm.controller" ,produces = "text/plain;charset=UTF-8")
+	public String saveProcess(
+			@RequestParam String action
+//			,SessionStatus status
 			) {
 		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
 		System.out.println(bean.getName());
-		System.out.println(bean.getIngredients_A());
-		
-//		if (action.equals("送出")) {
+//		System.out.println(bean.getIngredients_A());
+//		
+		if (action.equals("送出")) {
 			service.insert(bean);
-//			session.removeAttribute("details");
-//			status.setComplete();
-			return "<div align='center'><font size='30px' color='red'>上傳成功 </font></div>";
-//		}
-//		if (action.equals("修改")) {
+////			session.removeAttribute("details");
+////			status.setComplete();
+			return "redirect:/frontPage.controller";
+		}
+		if (action.equals("修改")) {
+			return "redirect:/reviseConfirm.controller";
 //			return "recipe/recipe_upload_revise";
-//		} 
-//		if (action.equals("回首頁")) {
-//			return "recipe/recipe_workpage";
-//		} 
-//		return action;
+		} 
+////		if (action.equals("回首頁")) {
+////			return "recipe/recipe_workpage";
+////		} 
+		return action;
 	}
 	
 	@GetMapping(value="/reviseConfirm.controller" ,produces = "text/plain;charset=UTF-8")
 	public  String reviseProcess() {
-//		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
+		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
 		return "recipe/recipe_upload_revise";
 	
 	}

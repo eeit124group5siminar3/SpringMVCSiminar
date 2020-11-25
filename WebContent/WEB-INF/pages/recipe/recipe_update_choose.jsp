@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>上傳食譜</title>
+<title>修改食譜</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -82,31 +82,8 @@
 
 </head>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">0800-092-000</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">service@nonre.com</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="deleteSuccess">
+
 
 		<jsp:include page="../header.jsp" />
 
@@ -121,7 +98,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">User Blog<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<c:url value='blogPage.controller'/>">User Blog<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value='uploadPage.controller'/>">Upload</a>
@@ -152,34 +129,38 @@
 <%--     </form> --%>
   </div>
 </nav>
+
+
+
 	<div align="center" >
 	<fieldset class="border signup-form-fieldset">
 		<legend style="color:black;font-size:23px;">已上傳食譜</legend>		
 			
-	<c:forEach  var='BeanToken' items="${user_recipe}">	
+<c:forEach  var='BeanToken' items="${user_recipe}">	
 	<form class="formSet" action="javascript:void(0);" method="post"> 	
-		<input type="hidden" id="delete_id" name="delete_id" value="${BeanToken.rec_id}" />	
 		<div class="wrap">
 
 				<div class="wrap1">
 					<a href="<c:url value='/updateProcess.controller?choose=${BeanToken.rec_id}' />"
 					   class="list-group-item list-group-item-action list-group-item-warning" 
 					   style="width: 200px;" class="wrapLink">
-					   ${BeanToken.name}</a> 
+					   ${BeanToken.name}</a>
 				</div>
 				
 					<div class="txt">上傳日期 : 
 						${BeanToken.date}
 					</div>
-					<div class="deleteRecipe">						
-						<input type="submit" id="send" name=delete value="刪除" />
+					<div class="deleteRecipe">	
+<%-- 					<input type="hidden" id="delete_id" name="delete_id" value="${BeanToken.rec_id}" />						 --%>
+						<input class="btn btn-outline-danger" id="send" type="submit" onclick="fun(${BeanToken.rec_id})" name="delete" value="刪除" />
+
 					</div>
 				
 				<br>
 		</div>
 		<br>
 	</form>
-		</c:forEach>
+</c:forEach>
 	</fieldset>
 	</div>
 <!-- 			<div style="text-align: center;"> -->
@@ -285,6 +266,8 @@
 			</div>
 		</div>
 	</footer>
+</div>
+	
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -302,29 +285,48 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+ 	
+ 	 	<script type="text/javascript"> 
+// 		$(function(){		
+// // 			var data=$("#delete_id").serializeArray();
+// 			$("#send").click(function(){
+// 				var delete_id=$("#delete_id").val();
+// 				console.log('delete_id: '+delete_id);
+// 				$.ajax({
+// 					type:"GET",
+// 	 				dataType:"html",
+// 					url:"./deleteConfirm",
+// 					data:{
+// 						"rec_id":delete_id
+// 						},
+// 					success:function(data){
+// 						console.log(data);
+// 						alert('刪除成功');
+// 						$("#deleteSuccess").html(data);
 
- 	<script type="text/javascript"> 
-		$(function(){		
-			var delete_id=$("#delete_id").val();
-			console.log('delete_id'+delete_id);
-			$("#send").click(function(){
-				$.ajax({
-					type:"POST",
-					url:"./deleteConfirm",
-					data:{
-						"rec_id":delete_id
-						},
-					success:function(data){
-						console.log('data: '+data.length);
-						alert('刪除成功');
-						$("#").html(data);
-						
-						},
-					error:function(){
-						}	
-					});
-				});
-			});
+// 						},
+// 					error:function(){
+// 						}	
+// 					});
+// 				});
+// 			});
+
+		function fun(rec_id){
+			var deleteSuccess=document.getElementById("deleteSuccess");
+			var xhr = new XMLHttpRequest();	
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState === 4) {
+					// 伺服器回應成功
+					if (xhr.status === 200) {
+						// 收到伺服器的回應
+						deleteSuccess.innerHTML= xhr.responseText;
+					}
+				}	
+			}
+			var url = "<c:url value='/deleteConfirm?rec_id=" + rec_id + "' />"
+			xhr.open("GET",url,true);
+			xhr.send();
+			}
  	</script>  
 </body>
 </html>

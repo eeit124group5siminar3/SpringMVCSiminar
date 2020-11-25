@@ -134,6 +134,10 @@ public class Recipe_Controller {
 	}
 	
 	
+	@GetMapping(value = "/blogPage.controller",produces ="text/plain;charset=UTF-8" )
+	public String blogPage() {
+		return "recipe/recipe_blog";
+	}
 	
 	
 }
