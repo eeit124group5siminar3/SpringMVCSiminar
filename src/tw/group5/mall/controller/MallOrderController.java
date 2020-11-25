@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.servlet.ModelAndView;
 
 import tw.group5.mall.ShoppingCart;
 import tw.group5.mall.model.OrderItem;
@@ -93,16 +95,35 @@ public class MallOrderController {
 			return "/mall/ProductShowCart";
 		}
 	}
-
-	@RequestMapping(value = "/DeleteOrderServlet", method = RequestMethod.POST)
-	public String deleteOrderServlet(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart) {
-		cart.deleteAllOrders();
-		return "redirect:/RetrievePageProducts";
-
-	}
-
 	
-
+// 刪除購物車內物件
+	@PostMapping(value = "/DeleteOrder")
+	public ModelAndView deleteOrderItem(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart,
+			@RequestParam(value = "productId") Integer productId) {
+		cart.deleteOrder(productId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/shoppingcartContent");
+		mav.addObject("ShoppingCart", cart);
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+	
+// 修改購買商品數量
+	@PostMapping(value = "/ChangeQty")
+	public ModelAndView changeItemQty(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart,
+			@RequestParam(value = "productId") Integer productId,
+			@RequestParam(value = "qty", required = false) Integer qty
+			) {
+		if(qty!=null) {
+		cart.modifyQty(productId, qty);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/shoppingcartContent");
+		mav.addObject("ShoppingCart", cart);
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+	
 	@PostMapping(value = "/UpdateProductServlet")
 	public String updateProductServlet(@RequestParam(value = "cmd", required = false) String cmd,
 			@RequestParam(value = "ProductId", required = false) Integer productId,
@@ -123,13 +144,21 @@ public class MallOrderController {
 
 	@GetMapping(value = "/CheckoutServlet")
 	public String checkoutServlet(Model model) {
-
 		ShoppingCart cart = (ShoppingCart) model.getAttribute("ShoppingCart");
 		if (cart == null) {
 			return "/index";
 		}
-
 		return "/mall/OrderConfirm";
+	}
+	
+// 結帳畫面內容
+	@PostMapping(value = "/CheckoutContent")
+	public ModelAndView showCheckoutContent(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/checkoutContent");
+		mav.addObject("ShoppingCart", cart);
+		mav.setStatus(HttpStatus.OK);
+		return mav;
 	}
 
 	@GetMapping("/AbortServlet")

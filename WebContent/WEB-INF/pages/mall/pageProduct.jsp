@@ -60,10 +60,10 @@
 						</div>
 						<div class='bottom-area d-flex px-3'>
 							<div class='m-auto d-flex'>
-								<a href='#mall_products'
+								<a href='#mall_products' title="加入購物車"
 									class='add-to-cart d-flex justify-content-center align-items-center text-center'
-									onclick='add_To_Cart(${item.productId})'><span><i
-										class='ion-ios-menu'></i></span></a>" <a href='#mall_products'
+									onclick='add_To_Cart(${item.productId},${item.stock},${ShoppingCart.content[item.productId].qty})'><span><i
+										class='ion-ios-menu'></i></span></a>" <a href='#mall_products' title="來去結帳"
 									class='buy-now d-flex justify-content-center align-items-center mx-1'><span><i
 										class='ion-ios-cart'></i></span></a> <a href='#mall_products'
 									class='heart d-flex justify-content-center align-items-center '><span><i
@@ -161,72 +161,10 @@
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="js/google-map.js"></script>
+<!-- <script -->
+<!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+<!-- <script src="js/google-map.js"></script> -->
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-// function productCategory(categoryId){
-// 	$.ajax({
-// 		url : "MallContent",
-// 		type : "POST",
-// 		data : {"categoryId":categoryId,"pageNo":1},
-// 		datatype : "html",
-// 		success : function(data, status) {
-// 			$("#mainContent").html(data);
-// 		},
-// 		error : function(data, status) {
-// 			$("#mainContent").html(data);
-// 		}
-// 	});
-// }
-
-// function searchProduct(){
-// 	var searchString=$(".searchString").val();
-// 	console.log(searchString);
-// 	var searchString = document.forms[0].elements[0].value;
-// 	$.ajax({
-// 		url : "MallContent",
-// 		type : "POST",
-// 		data : {"searchString":searchString,"pageNo":1},
-// 		datatype : "html",
-// 		success : function(data, status) {
-// 			$("#mainContent").html(data);
-// 		},
-// 		error : function(data, status) {
-// 			$("#mainContent").html(data);
-// 		}
-// 	});
-// }
-
-// function page(pageNo){
-// 	$.ajax({
-// 		url : "MallContent",
-// 		type : "POST",
-// 		data : {"pageNo":pageNo},
-// 		datatype : "html",
-// 		success : function(data, status) {
-// 			$("#mainContent").html(data);
-// 		},
-// 		error : function(data, status) {
-// 			$("#mainContent").html(data);
-// 		}
-// 	});
-// }
-
-// function singleProduct(productId) {
-// 	$.ajax({
-// 		url : "SingleProduct",
-// 		type : "POST",
-// 		data : {"productId":productId},
-// 		datatype : "html",
-// 		success : function(data, status) {
-// 			$("#mainContent").html(data);
-// 		},
-// 		error : function(data, status) {
-// 			$("#mainContent").html(data);
-// 		}
-// 	});
-// }
 </script>

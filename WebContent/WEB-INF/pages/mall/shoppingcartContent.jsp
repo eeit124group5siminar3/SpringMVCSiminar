@@ -22,7 +22,7 @@
 							items="${ShoppingCart.content}">
 							<tr class="text-center">
 								<td class="product-remove"><a href="#"><span
-										class="ion-ios-close"></span></a></td>
+										class="ion-ios-close" onclick="reduceItem(${anEntry.value.productId})"></span></a></td>
 
 								<td class="image-prod"><div class="img"
 										style="background-image: url(<c:url value='retrieveImageServlet?id=${anEntry.value.productId}&type=PRODUCT' />);">
@@ -40,9 +40,9 @@
 
 								<td class="quantity">
 									<div class="input-group mb-3">
-										<input type="text" name="quantity"
-											class="quantity form-control input-number" value="${anEntry.value.qty}" min="1"
-											max="100">
+										<input type="text" name="quantity" id="quantity"
+											class="quantity form-control input-number" value="${anEntry.value.qty}" onblur="changeQty(${anEntry.value.productId},${anEntry.value.stock})"min="1"
+											max="${anEntry.value.stock}">
 									</div>
 								</td>
 
@@ -74,7 +74,7 @@
 			</p>
 		</div>
 		<p>
-			<a href="checkout.html" class="btn btn-primary py-3 px-4">去結帳</a>
+			<a href="<c:url value='/mall_checkout' />" class="btn btn-primary py-3 px-4">去結帳</a>
 		</p>
 	</div>
 </div>
@@ -94,6 +94,46 @@
 <script src="js/scrollax.min.js"></script>
 <!-- <script -->
 <!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-<script src="js/google-map.js"></script>
+<!-- <script src="js/google-map.js"></script> -->
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
+<script>
+function changeQty(productId,stock){
+	var qty = $("#quantity").val();
+	if(qty>stock){
+		alert("購買超過庫存量");
+		}else
+	$.ajax({
+		url : "ChangeQty",
+		type : "POST",
+		data : {
+			"productId" : productId,
+			"qty":qty
+		},
+		datatype : "html",
+		success : function(data, status) {
+			$("#cartContent").html(data);
+		},
+		error : function(data, status) {
+			$("#cartContent").html(data);
+		}
+	}
+	);
+}
+// function reduceItem(productId){
+// 	$.ajax({
+// 		url : "DeleteOrder",
+// 		type : "POST",
+// 		data : {
+// 			"productId" : productId
+// 		},
+// 		datatype : "html",
+// 		success : function(data, status) {
+// 			$("#cartContent").html(data);
+// 		},
+// 		error : function(data, status) {
+// 			$("#cartContent").html(data);
+// 		}
+// 	});	
+// }
+</script>
