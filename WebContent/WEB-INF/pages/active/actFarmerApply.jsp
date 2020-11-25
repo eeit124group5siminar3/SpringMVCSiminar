@@ -175,9 +175,9 @@ function backHome(){
 
 <!-- --------------footer----------------------------------------------------------- -->
 
-<footer class="ftco-footer backstage-footer-ground" >
+	
 		<jsp:include page="/WEB-INF/pages/footer.jsp" />
-	</footer>
+	
 
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">

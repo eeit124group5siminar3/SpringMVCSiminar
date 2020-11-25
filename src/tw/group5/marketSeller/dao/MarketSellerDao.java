@@ -29,8 +29,11 @@ public class MarketSellerDao implements IMarketSellBeanService {
 	@Override
 	public List<MarketMallBean> selectmall(Integer mid){
 		Query<MarketMallBean> query =getSession().createQuery("From MarketMallBean where memberNo=" + mid, MarketMallBean.class);
-		List<MarketMallBean> list =query.list();
-		return list;
+		if (query != null) {
+			List<MarketMallBean> list =query.list();
+			return list;			
+		}
+		return null;
 	}
 	//更新賣家店家資訊
 	@Override
@@ -38,13 +41,21 @@ public class MarketSellerDao implements IMarketSellBeanService {
 		getSession().update(bean);
 	    return bean;
 	}
-	//
+	//賣家店家資訊id
 	@Override
 	public MarketMallBean selectid(Integer mid) {
-		
-		return getSession().get(MarketMallBean.class, mid);
+		MarketMallBean result =getSession().get(MarketMallBean.class, mid);
+        System.out.println("我來了");		
+		System.err.println("你要是空的:"+ result);
+		if (result != null) {
+			return result;
+		}
+		return null;
 //	    return bean;
 	}
+	
+	
+	
 	
 	
 	//新增

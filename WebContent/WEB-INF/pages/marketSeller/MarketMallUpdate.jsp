@@ -23,15 +23,57 @@ body {
 }
 
 </style>
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
+<!-- 蔬菜圖 -->
+    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span></p>
+            <h1 class="mb-0 bread">Checkout</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 蔬菜圖 -->
 <h1 align="center">店家資訊</h1>
-		<fieldset>
+		
 		<form:form id="form2" name="form2" method="post"
 				action="MarketMall.update" enctype="multipart/form-data"
+				align="center"
 				modelAttribute="mallBean">
-	
-			<div>
+			
+			   <div>
 				<form:input type="hidden" id="memberNo" name="memberNo" path="memberNo" />
 				<form:label path="mallName">店家名稱:</form:label>
 				<form:input type="text" id="mallName" name="mallName" path="mallName" />
@@ -39,13 +81,13 @@ body {
               ${errors.errMallName}
            </font>
 			</div>
-			<div>
+			  <div>
 				<form:label path="address">地址</form:label> 
 				<form:input type="text" id="address" name="address" path="address" />
 		      <font color='red' size='-1'>
                 ${errors.errAddress}
-            </font>
-			</div>
+              </font>
+			  </div>
 			<div>
 				<form:label path="mallDescription">店家描述:</form:label> 
 				<form:textarea name="mallDescription" cols="80" rows="15" path="mallDescription"></form:textarea>
@@ -77,7 +119,7 @@ body {
 			<form action="<c:url value='/'></c:url>" >
 			<input  type="submit" value="回首頁">
 			</form>
-		</fieldset>
+		
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		 
@@ -95,8 +137,9 @@ function readURL(input) {
 }
 $("#imgInp").change(function() {
 	  readURL(this);
-	});	
+	});
+		
 </script>
-	
+<jsp:include page="/WEB-INF/pages/footer.jsp" />
 </body>
 </html>

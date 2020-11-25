@@ -1,9 +1,11 @@
 package tw.group5.mall.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -41,94 +43,55 @@ public class MallShoppingController {
 	private ProductService service;
 
 //取得頁面商品
-	@GetMapping(value = { "/RetrievePageProducts", "/RetrievePageProducts/{pageNo}" }, produces = {
-			"application/json" })
-	public @ResponseBody List<ProductBean> productList(
-//			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, 
-			Model model,
-			HttpServletRequest request) {
-		List<ProductBean> list = null;
-//		HttpSession session = request.getSession(false);
-		String searchString = (String) request.getAttribute("searchString");
-		Integer pageNo=(Integer) request.getAttribute("pageNo");
-		if (pageNo == null) {
-			if (model.getAttribute("pageNo") != null) {
-				pageNo = (Integer) model.getAttribute("pageNo");
-			} else {
-				pageNo = 1;
-			}
-		}
-//		service.setPageNo(pageNo);
-//		if (searchString == null || searchString.length() == 0) {
-		list = service.getPageProductsWithoutZero();
-//		} else {
-//			list = service.getPageProductsWithoutZero(searchString);
-//		}
-		request.setAttribute("searchString", searchString);
-		model.addAttribute("pageNo", pageNo);
-		return list;
-	}
-
-//取得所有頁面數
-	@GetMapping(value = "/RetrievePage/{pageNo}", produces = { "text/html;charset=UTF-8" })
-	public @ResponseBody String productPage(@PathVariable(value = "pageNo", required = false) Integer pageNo,
-			Model model, HttpServletRequest request) {
-//		int totalPages = 1;
-//		HttpSession session = request.getSession(false);
-//		String searchString = (String) request.getAttribute("searchString");	
-//		if (searchString == null || searchString.length() == 0) {
-		Integer totalPages = service.getTotalPagesWithoutZero();
-//		} else {
-//			totalPages = service.getTotalPagesWithoutZero(searchString);
-//		}
-//		if (pageNo == null) {
-//			if (model.getAttribute("pageNo") != null) {
-//				pageNo = (Integer) model.getAttribute("pageNo");
-//			} else {
-//				pageNo = 1;
-//			}
-//		}
-		service.setPageNo(pageNo);
-		request.getSession(false).setAttribute("pageNo", pageNo);
-//		model.addAttribute("pageNo", pageNo);
-		return String.valueOf(totalPages);
-	}
-
-//設定查詢字串
-	@GetMapping(value = { "/RetrieveSearch/{searchString}", "/RetrieveSearch" })
-	@ResponseBody
-	public void searchProduct(@PathVariable(value = "searchString", required = false) String searchString, Model model,
-			HttpServletRequest request) {
+	@PostMapping(value = "/MallContent")
+	public ModelAndView showMallContent(HttpServletRequest request,
+			@RequestParam(value = "pageNo", required = false) Integer pageNoP,
+			@RequestParam(value = "searchString", required = false) String searchStringP,
+			@RequestParam(value = "categoryId", required = false) Integer categoryIdP) {
 		HttpSession session = request.getSession(false);
-		if (searchString == null || searchString.length() == 0) {
-			session.setAttribute("searchString", null);
-			service.setSearchString(null);
-		} else {
+		Integer pageNo = (Integer) session.getAttribute("pageNo");
+		if (pageNoP != null) {
+			pageNo = pageNoP;
+			session.setAttribute("pageNo", pageNo);
+			service.setPageNo(pageNo);
+		}
+		String searchString = (String) session.getAttribute("searchString");
+		if (searchStringP != null) {
+			searchString = searchStringP;
 			session.setAttribute("searchString", searchString);
 			service.setSearchString(searchString);
 		}
-		request.setAttribute("searchString", searchString);
+		Integer categoryId = (Integer) session.getAttribute("categoryId");
+		if (categoryIdP != null) {
+			categoryId = categoryIdP;
+			if (categoryId == 0) {
+				session.setAttribute("categoryId", categoryId);
+				categoryId = null;
+				service.setCategoryId(categoryId);
+			} else {
+				session.setAttribute("categoryId", categoryId);
+				service.setCategoryId(categoryId);
+			}
+		}
+		int totalPages = service.getTotalPagesWithoutZero();
+		List<ProductBean> list = service.getPageProductsWithoutZero();
+		Map<Integer, String> map = CategoryClass.CATEGORY_MAP;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/pageProduct");
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("products_DPP", list);
+		mav.addObject("categoryBean", map);
+		return mav;
 	}
 
-// 設定查詢種類
-	@GetMapping(value = "/RetrieveCategory/{categoryId}")
-	@ResponseBody
-	public Map<Integer, String> categoryList(@PathVariable(value = "categoryId") Integer categoryId,HttpServletRequest request) {
-		Map<Integer, String> map=CategoryClass.CATEGORY_MAP;
-		if (categoryId == 0) {
-			categoryId = null;
-		}
-		request.getSession(false).setAttribute("categoryId", categoryId);
-		service.setCategoryId(categoryId);
-		return map;
-	}
-	
-// 顯示單筆商品資料
+// 顯示單筆商品資料及加入購物車
 	@PostMapping(value = "/SingleProduct")
-	public ModelAndView showSingleProduct(@RequestParam(value = "productId") Integer productId) {
-		ProductBean selectedProduct=service.getProduct(productId);
-		OrderItem oi=new OrderItem();
-		oi.setProductId(productId);
+	public ModelAndView showSingleProduct(@RequestParam(value = "productId", required = false) Integer productId,
+			@RequestParam(value = "qty", required = false) Integer qty,
+			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
+		ProductBean selectedProduct = service.getProduct(productId);
+		OrderItem oi = new OrderItem();
+		oi.setProductId(selectedProduct.getProductId());
 		oi.setProduct(selectedProduct.getProduct());
 		oi.setContent(selectedProduct.getContent());
 		oi.setUnit(selectedProduct.getUnit());
@@ -136,45 +99,64 @@ public class MallShoppingController {
 		oi.setPrice(selectedProduct.getPrice());
 		oi.setDiscount(selectedProduct.getDiscount());
 		oi.setProducterName(selectedProduct.getProducterName());
-		
-		ModelAndView mav=new ModelAndView();
+		oi.setQty(0);
+		if (qty != null) {
+			if (cart == null) {
+				cart = new ShoppingCart();
+				model.addAttribute("ShoppingCart", cart);
+			}
+			oi.setQty(qty);
+			cart.addToCart(productId, oi);
+			oi = cart.getContent().get(productId);
+		}
+		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/singleProduct");
 		mav.addObject("selectedProduct", selectedProduct);
 		mav.addObject("oi", oi);
-//		mav.addObject("categoryId", service.getCategoryId());
-//		mav.addObject("pageNo", service.getPageNo());
-//		mav.addObject("searchString", service.getSearchString());
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+
+// 直接加入購物車
+	@PostMapping(value = "/AddToCart")
+	public ModelAndView addToCart(@RequestParam(value = "productId") Integer productId,
+			@RequestParam(value = "qty") Integer qty,
+			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
+		ProductBean selectedProduct = service.getProduct(productId);
+		OrderItem oi = new OrderItem();
+		oi.setProductId(selectedProduct.getProductId());
+		oi.setProduct(selectedProduct.getProduct());
+		oi.setContent(selectedProduct.getContent());
+		oi.setUnit(selectedProduct.getUnit());
+		oi.setProducterId(selectedProduct.getProducterId());
+		oi.setPrice(selectedProduct.getPrice());
+		oi.setDiscount(selectedProduct.getDiscount());
+		oi.setProducterName(selectedProduct.getProducterName());
+		oi.setQty(0);
+		if (cart == null) {
+			cart = new ShoppingCart();
+			model.addAttribute("ShoppingCart", cart);
+		}
+			oi.setQty(qty);
+			cart.addToCart(productId, oi);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/shoppingcartContent");
+
 		mav.setStatus(HttpStatus.OK);
 		return mav;
 	}
 
 // 購物車內容
 	@PostMapping(value = "/CartContent")
-//	@ResponseBody
-	public ModelAndView getCartContent() {
-		ShoppingCart cart =new ShoppingCart();
-		OrderItem oi = new OrderItem();
-		oi.setProductId(1);
-		oi.setProduct("1");
-		oi.setContent(1);
-		oi.setUnit("1");
-		oi.setQty(1);
-		oi.setProducterId(1);
-		oi.setPrice(20.0);
-		oi.setDiscount(0.8);
-		oi.setProducterName("123");
-		cart.addToCart(1, oi);
-		System.err.println(cart.getContent());
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("/mall/shoppingcartContent");
+	public ModelAndView showCartContent(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart,
+			Model model) {
+		if (cart == null) {
+			cart = new ShoppingCart();
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/mall_shoppingcart");
 		mav.addObject("ShoppingCart", cart);
 		mav.setStatus(HttpStatus.OK);
-		
-//		System.err.println(mav.toString());
-//		System.err.println(mav.toString());
-//		System.err.println(mav.getModel());
-//		System.err.println(mav.getStatus());
-//		System.err.println(mav.getView());
 		return mav;
 	}
 }
@@ -217,4 +199,85 @@ public class MallShoppingController {
 //		oi.setProducterName(producterName);
 //		cart.addToCart(productId, oi);
 //		return "redirect:/RetrievePageProducts?pageNo=" + pageNo;
+//	}
+//	@GetMapping(value = { "/RetrievePageProducts", "/RetrievePageProducts/{pageNo}" }, produces = {
+//			"application/json" })
+//	public @ResponseBody List<ProductBean> productList(
+////			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, 
+//			Model model,
+//			HttpServletRequest request) {
+//		List<ProductBean> list = null;
+////		HttpSession session = request.getSession(false);
+//		String searchString = (String) request.getAttribute("searchString");
+//		Integer pageNo=(Integer) request.getAttribute("pageNo");
+//		if (pageNo == null) {
+//			if (model.getAttribute("pageNo") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			} else {
+//				pageNo = 1;
+//			}
+//		}
+////		service.setPageNo(pageNo);
+////		if (searchString == null || searchString.length() == 0) {
+//		list = service.getPageProductsWithoutZero();
+////		} else {
+////			list = service.getPageProductsWithoutZero(searchString);
+////		}
+//		request.setAttribute("searchString", searchString);
+//		model.addAttribute("pageNo", pageNo);
+//		return list;
+//	}
+
+//取得所有頁面數
+//	@GetMapping(value = "/RetrievePage/{pageNo}", produces = { "text/html;charset=UTF-8" })
+//	public @ResponseBody String productPage(@PathVariable(value = "pageNo", required = false) Integer pageNo,
+//			Model model, HttpServletRequest request) {
+////		int totalPages = 1;
+////		HttpSession session = request.getSession(false);
+////		String searchString = (String) request.getAttribute("searchString");	
+////		if (searchString == null || searchString.length() == 0) {
+//		Integer totalPages = service.getTotalPagesWithoutZero();
+////		} else {
+////			totalPages = service.getTotalPagesWithoutZero(searchString);
+////		}
+////		if (pageNo == null) {
+////			if (model.getAttribute("pageNo") != null) {
+////				pageNo = (Integer) model.getAttribute("pageNo");
+////			} else {
+////				pageNo = 1;
+////			}
+////		}
+//		service.setPageNo(pageNo);
+//		request.getSession(false).setAttribute("pageNo", pageNo);
+////		model.addAttribute("pageNo", pageNo);
+//		return String.valueOf(totalPages);
+//	}
+
+//設定查詢字串
+//	@GetMapping(value = { "/RetrieveSearch/{searchString}", "/RetrieveSearch" })
+//	@ResponseBody
+//	public void searchProduct(@PathVariable(value = "searchString", required = false) String searchString, Model model,
+//			HttpServletRequest request) {
+//		HttpSession session = request.getSession(false);
+//		if (searchString == null || searchString.length() == 0) {
+//			session.setAttribute("searchString", null);
+//			service.setSearchString(null);
+//		} else {
+//			session.setAttribute("searchString", searchString);
+//			service.setSearchString(searchString);
+//		}
+//		request.setAttribute("searchString", searchString);
+//	}
+
+// 設定查詢種類
+//	@GetMapping(value = "/RetrieveCategory/{categoryId}")
+//	@ResponseBody
+//	public Map<Integer, String> categoryList(@PathVariable(value = "categoryId") Integer categoryId,HttpServletRequest request) {
+//		Map<Integer, String> map=CategoryClass.CATEGORY_MAP;
+//		if (categoryId == 0) {
+//			categoryId = null;
+//		}
+//		request.getSession(false).setAttribute("categoryId", categoryId);
+//		service.setCategoryId(categoryId);
+//		return map;
 //	}

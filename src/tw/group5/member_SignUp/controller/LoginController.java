@@ -53,6 +53,7 @@ public class LoginController {
 		String rm = request.getParameter("remember");
 		String email = request.getParameter("email").trim();
 		String password = request.getParameter("password").trim();
+		System.out.println("忘記我"+rm);
 		
 		boolean login = member_Service.login_check(email, password);
 		Member_SignUp login_bean = member_Service.login_bean(email);
