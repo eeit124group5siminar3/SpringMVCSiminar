@@ -50,35 +50,7 @@
 }
 </style>
 </head>
-
-
-<body>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">0800-092-000</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">service@nonre.com</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<jsp:include page="../header.jsp" />
 
 
@@ -93,7 +65,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">User Blog<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<c:url value='blogPage.controller'/>">User Blog<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value='uploadPage.controller'/>">Upload</a>
@@ -203,7 +175,7 @@
 
 			<hr>
 			<div style="text-align: center;">
-				<input id="send" type="submit" name="action"
+				<input id="send" type="submit" name="action"  class="btn btn-outline-success"
 					value="送出" onclick="doUpload()" />
 				</label> 
 <!-- 				<label> <input type="submit" name="action" value="回首頁" /> -->

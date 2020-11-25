@@ -47,31 +47,8 @@
 </style>
 </head>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">0800-092-000</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">service@nonre.com</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="uploadSuccess" >	
+
 	<jsp:include page="../header.jsp" />
 	
 
@@ -86,7 +63,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">User Blog<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<c:url value='blogPage.controller'/>">User Blog<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value='uploadPage.controller'/>">Upload</a>
@@ -118,9 +95,8 @@
   </div>
 </nav>
 	
-<div id="uploadSuccess" >	
 <!-- javascript:void(0); <c:url value='/uploadConfirm.controller'/>-->
-<form class="formform" action="javascript:void(0);"  method="post" >
+<form class="formform" action="<c:url value='/uploadConfirm.controller'/>"  method="post" >
 	<fieldset>
 		<legend style="color:black;font-size:23px">再次確認</legend>
 			<div class="form-group">
@@ -179,20 +155,21 @@
 					placeholder="${FileName}" disabled/>
 			</div>
 			<hr>
+		</fieldset>
 			<div style="text-align: center;">
+			
 					<label>
-						<input id="send" type="submit" name="action" value="送出" />
+						<input  class="btn btn-outline-success" id="send" type="submit" name="action" value="送出" />
 					</label>
+					
 					<label>
-						<input id="revise" type="submit" name="action" value="修改" />
+						<input class="btn btn-outline-secondary" id="revise" type="submit" name="action" value="修改" />
 					</label>
 <!-- 					<label> -->
 <!-- 						<input type="submit" name="action" value="回首頁" /> -->
 <!-- 					</label> -->
 				</div>
-	</fieldset>
-	</form>
-</div>
+</form>
 
 	<!------------------------------------------------------------------>
 		<footer class="ftco-footer ftco-section">
@@ -285,6 +262,8 @@
 			</div>
 		</div>
 	</footer>
+	</div>
+	
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -303,8 +282,8 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 
-	<script type="text/javascript">
-	window.onload = function(){
+  <!--	<script type="text/javascript">  
+   		window.onload = function(){
 		var succ=document.getElementById("uploadSuccess");
 		var btn=document.getElementById("send");
 		btn.onclick=function(){
@@ -312,11 +291,12 @@
 	 		if(xhr!=null){
 	 			xhr.onreadystatechange=function(){	
 				if(xhr.readyState === 4 && xhr.status === 200){
-// 						succ.innerHTML=xhr.responseText;
 						alert('上傳成功');
+						succ.innerHTML=xhr.responseText;
+						
 					}		
 				}
-				xhr.open('GET',"<c:url value='/uploadConfirm.controller'/>",true);
+				xhr.open('POST',"<c:url value='/uploadConfirm.controller'/>",true);
 				xhr.send();
 	 			}else{
 	 			display.innerHTML="<h3>您的瀏覽器不支援Ajax</h3>";
@@ -324,7 +304,6 @@
 // 			succ.innerHTML=123;
 		}
 
-		
 			var revise=document.getElementById("revise");
 			revise.onclick=function(){
 			var xhr = new XMLHttpRequest();
@@ -334,15 +313,24 @@
 						succ.innerHTML=xhr.responseText;
 					}		
 				}
-				xhr.open('GET',"<c:url value='/reviseConfirm.controller'/>",true);
+				xhr.open('POST',"<c:url value='/reviseConfirm.controller'/>",true);
 				xhr.send();
 	 			}else{
 	 			display.innerHTML="<h3>您的瀏覽器不支援Ajax</h3>";
 	 		}				
 // 				succ.innerHTML=123;
 		}
-	}
-	</script>
+  	</script>  -->
+ 	
+  	 	<script type="text/javascript"> 
+		$(function(){
+			$("#send").click(function(){
+				alert('上傳成功');
+
+				});
+			});
+		
+  	</script> 
 	
 </body>
 </html>
