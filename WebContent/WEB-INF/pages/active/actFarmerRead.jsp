@@ -244,10 +244,10 @@
 	
 	<tr>
 		<td colspan="3" align="center">	
-		<input type="hidden" id="actId" name="actId" value="${afBean.actId}"/>
-		<form:button value="edit" >修改</form:button>
-		</td>
-		<td><form:button value="back" onclick="backHome()">回管理頁面</form:button></td>		
+			<input type="hidden" id="actId" name="actId" value="${afBean.actId}"/>
+			<form:button class="btn btn-primary py-2 px-3" value="edit" >修改</form:button>&emsp;
+			<form:button class="btn btn-primary py-2 px-3" value="back" onclick="backHome()">回管理頁面</form:button>
+		</td>		
 	</tr>
 
 </table>
