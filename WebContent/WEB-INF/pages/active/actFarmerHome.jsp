@@ -43,7 +43,7 @@
 <body class="goto-here">
 	
 	<jsp:include page="../header.jsp" />
- ${login_ok.member_no}
+
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
 <!-- 	上面圖片 -->
 	<div class="hero-wrap hero-bread" style="background-image: url('images/about.jpg');">
@@ -71,10 +71,9 @@
 					</form>
 				</div>
 			</div>
-			<div class="row  ftco-animate" id="mall_products"></div>
 		</div>		
 <!-- 活動列表 -->
-	 <div class="container ftco-animate" id="actfarmerlist">
+	 <div class="container ftco-animate col-lg-8" id="actfarmerlist">
 		 <div class="blog-entry align-self-stretch d-md-flex">
 			<a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');"></a>
 				<div class="text d-block pl-md-4">
@@ -156,12 +155,12 @@ $.get({
 				<a href="blog-single.html" class="block-20" style="background-image: url('<c:url value='ActImageController?id=\${data[i].actId}&type=ACTFARMER'/>');"></a>
 					<div class="text d-block pl-md-4">
 							<div class="meta mb-3">
-				                  <div><a href="#">活動日期</a></div>
-				                  <div><a href="#">\${data[i].actDateSta}~\${data[i].actDateEnd}</a></div>
+				                  <div><a href="#">\${data[i].actType}</a></div>
 							</div>
 							 <h3 class="heading"><a href="#">\${data[i].actName}</a></h3>
-				             	<p>活動地址:  \${data[i].actAddr}<br>活動電話:  \${data[i].tel}</p>
-				                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">了解更多</a>
+				             	<p>活動地址:  \${data[i].actAddr}<br>活動電話: \${data[i].tel}<br>
+				             	活動日期: \${data[i].actDateSta}~\${data[i].actDateEnd}</p>
+				                <p><a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">了解更多</a>
 				                <a href="blog-single.html" class="btn btn-primary py-2 px-3">我要報名</a></p>
 				        </div>
 				</div></div>`;
@@ -169,23 +168,23 @@ $.get({
 			$('#actfarmerlist').html(content);
 		}
 		})
-$.get({
-	url:"${pageContext.request.contextPath}/actFarmerPageList.do?pageNo=",
-	data:"pageNo,totalPages",
-	success:function(){
-		for(var i = 0; i<totalPages; i++){
-			content=
-				`<div class="block-27">
-              		<ul>
-                		<li><a href="#">&lt;</a></li>
-                		<li class="active"><span>i</span></li>
-                		<li><a href="#">&gt;</a></li>
-              		</ul>
-            	</div>`
-			}
-		}
-		$('#getpagelist').html(content);
-	})
+// $.get({
+// 	url:"${pageContext.request.contextPath}/actFarmerPageList.do?pageNo=ageNo",
+// 	data:"pageNo,totalPages",
+// 	success:function(){
+// 		for(var i = 0; i<totalPages; i++){
+// 			content=
+// 				`<div class="block-27">
+//               		<ul>
+//                 		<li><a href="#">&lt;</a></li>
+//                 		<li class="active"><span>i</span></li>
+//                 		<li><a href="#">&gt;</a></li>
+//               		</ul>
+//             	</div>`
+// 			}
+// 		}
+// 		$('#getpagelist').html(content);
+// 	})
 }
 
 

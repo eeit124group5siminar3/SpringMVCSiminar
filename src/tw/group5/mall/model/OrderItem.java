@@ -15,6 +15,7 @@ public class OrderItem {
 	private Integer productId = 0;
 	private Double price = 0.0;
 	private Double discount = 1.0;
+	private Integer stock;
 
 	public OrderItem() {
 		super();
@@ -105,5 +106,14 @@ public class OrderItem {
 	public void setProducterName(String producterName) {
 		this.producterName = producterName;
 	}
+	
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
 
 }

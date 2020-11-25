@@ -17,22 +17,15 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
 	rel="stylesheet">
-
 <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="css/animate.css">
-
 <link rel="stylesheet" href="css/owl.carousel.min.css">
 <link rel="stylesheet" href="css/owl.theme.default.min.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
-
 <link rel="stylesheet" href="css/aos.css">
-
 <link rel="stylesheet" href="css/ionicons.min.css">
-
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
@@ -47,7 +40,6 @@
 </style>
 </head>
 <body class="goto-here">
-
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->
 
@@ -97,12 +89,12 @@
 	<script src="js/scrollax.min.js"></script>
 	<!-- 	<script -->
 	<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-	<script src="js/google-map.js"></script>
+	<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
 	<jsp:include page="../js/mall.jsp" />
 	<script>
 		$(document).ready(function() {
-			var cartcontent = document.getElementById("cartContent");
+// 			var cartcontent = document.getElementById("cartContent");
 			$.ajax({
 				url : "CartContent",
 				type : "POST",
@@ -117,6 +109,5 @@
 			});
 		});
 	</script>
-
 </body>
 </html>

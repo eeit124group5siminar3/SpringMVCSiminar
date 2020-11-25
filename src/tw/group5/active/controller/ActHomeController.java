@@ -1,6 +1,7 @@
 package tw.group5.active.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -11,12 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActFarmerService;
+import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
 @SessionAttributes(value = {"pageNo", "login_ok"})
@@ -27,6 +31,8 @@ public class ActHomeController {
 	
 	@Autowired
 	private ActFarmerService actFarmerService;
+
+//===================================一日農夫===================================
 	
 	//取得活動列表	
 	@GetMapping(value = "/actFarmerList.do", produces = {"application/json" })
@@ -86,4 +92,12 @@ public class ActHomeController {
 		model.addAttribute("totalPages", totalPages);
 		return list;
 	}
+	
+	//顯示單一活動的資訊
+	@RequestMapping(path = "/getSingleAct.do", produces = {"text/html;charset=UTF-8" })
+	public String getSingleAct(@RequestParam("id") Integer actId, Model m) {	
+		ActFarmer collFarmer = actFarmerService.getActFarmer(actId);
+		m.addAttribute("collFarmer", collFarmer);
+		return "active/actFarmerSingle";
+	} 
 }
