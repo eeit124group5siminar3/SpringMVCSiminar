@@ -21,8 +21,8 @@
 						<c:forEach varStatus="stVar" var="anEntry"
 							items="${ShoppingCart.content}">
 							<tr class="text-center">
-								<td class="product-remove"><a href="#"><span
-										class="ion-ios-close" onclick="reduceItem(${anEntry.value.productId})"></span></a></td>
+								<td class="product-remove"><a href="#" onclick="reduceItem(${anEntry.value.productId})"><span
+										class="ion-ios-close"></span></a></td>
 
 								<td class="image-prod"><div class="img"
 										style="background-image: url(<c:url value='retrieveImageServlet?id=${anEntry.value.productId}&type=PRODUCT' />);">
@@ -75,6 +75,7 @@
 		</div>
 		<p>
 			<a href="<c:url value='/mall_checkout' />" class="btn btn-primary py-3 px-4">去結帳</a>
+			<a href="<c:url value='/mall_shop' />" class="btn btn-primary py-3 px-4">回商城</a>
 		</p>
 	</div>
 </div>
