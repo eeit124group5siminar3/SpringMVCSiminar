@@ -30,7 +30,8 @@
 		<c:forEach var="item" items="${products_DPP}">
 			<div class='col-md-6 col-lg-3'>
 				<div class='product'>
-					<a href='#mall_products' class='img-prod'> <img
+					<a href='#mall_products' class='img-prod'
+						onclick='singleProduct(${item.productId})'> <img
 						class='img-fluid'
 						src=<c:url value='retrieveImageServlet?id=${item.productId}&type=PRODUCT' />
 						alt='Colorlib Template'> <c:if test="${item.discount != 1}">
@@ -61,7 +62,7 @@
 							<div class='m-auto d-flex'>
 								<a href='#mall_products'
 									class='add-to-cart d-flex justify-content-center align-items-center text-center'
-									onclick='singleProduct(${item.productId})'><span><i
+									onclick='add_To_Cart(${item.productId})'><span><i
 										class='ion-ios-menu'></i></span></a>" <a href='#mall_products'
 									class='buy-now d-flex justify-content-center align-items-center mx-1'><span><i
 										class='ion-ios-cart'></i></span></a> <a href='#mall_products'
@@ -148,83 +149,84 @@
 	</div>
 </div>
 <script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/jquery.waypoints.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
-	<script src="js/jquery.animateNumber.min.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="js/google-map.js"></script>
-	<script src="js/main.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="js/google-map.js"></script>
+<script src="js/main.js"></script>
+<jsp:include page="../js/mall.jsp" />
 <script>
-function productCategory(categoryId){
-	$.ajax({
-		url : "MallContent",
-		type : "POST",
-		data : {"categoryId":categoryId,"pageNo":1},
-		datatype : "html",
-		success : function(data, status) {
-			$("#mainContent").html(data);
-		},
-		error : function(data, status) {
-			$("#mainContent").html(data);
-		}
-	});
-}
+// function productCategory(categoryId){
+// 	$.ajax({
+// 		url : "MallContent",
+// 		type : "POST",
+// 		data : {"categoryId":categoryId,"pageNo":1},
+// 		datatype : "html",
+// 		success : function(data, status) {
+// 			$("#mainContent").html(data);
+// 		},
+// 		error : function(data, status) {
+// 			$("#mainContent").html(data);
+// 		}
+// 	});
+// }
 
-function searchProduct(){
-	var searchString=$(".searchString").val();
-	console.log(searchString);
-	var searchString = document.forms[0].elements[0].value;
-	$.ajax({
-		url : "MallContent",
-		type : "POST",
-		data : {"searchString":searchString,"pageNo":1},
-		datatype : "html",
-		success : function(data, status) {
-			$("#mainContent").html(data);
-		},
-		error : function(data, status) {
-			$("#mainContent").html(data);
-		}
-	});
-}
+// function searchProduct(){
+// 	var searchString=$(".searchString").val();
+// 	console.log(searchString);
+// 	var searchString = document.forms[0].elements[0].value;
+// 	$.ajax({
+// 		url : "MallContent",
+// 		type : "POST",
+// 		data : {"searchString":searchString,"pageNo":1},
+// 		datatype : "html",
+// 		success : function(data, status) {
+// 			$("#mainContent").html(data);
+// 		},
+// 		error : function(data, status) {
+// 			$("#mainContent").html(data);
+// 		}
+// 	});
+// }
 
-function page(pageNo){
-	$.ajax({
-		url : "MallContent",
-		type : "POST",
-		data : {"pageNo":pageNo},
-		datatype : "html",
-		success : function(data, status) {
-			$("#mainContent").html(data);
-		},
-		error : function(data, status) {
-			$("#mainContent").html(data);
-		}
-	});
-}
+// function page(pageNo){
+// 	$.ajax({
+// 		url : "MallContent",
+// 		type : "POST",
+// 		data : {"pageNo":pageNo},
+// 		datatype : "html",
+// 		success : function(data, status) {
+// 			$("#mainContent").html(data);
+// 		},
+// 		error : function(data, status) {
+// 			$("#mainContent").html(data);
+// 		}
+// 	});
+// }
 
-function singleProduct(productId) {
-	$.ajax({
-		url : "SingleProduct",
-		type : "POST",
-		data : {"productId":productId},
-		datatype : "html",
-		success : function(data, status) {
-			$("#mainContent").html(data);
-		},
-		error : function(data, status) {
-			$("#mainContent").html(data);
-		}
-	});
-}
+// function singleProduct(productId) {
+// 	$.ajax({
+// 		url : "SingleProduct",
+// 		type : "POST",
+// 		data : {"productId":productId},
+// 		datatype : "html",
+// 		success : function(data, status) {
+// 			$("#mainContent").html(data);
+// 		},
+// 		error : function(data, status) {
+// 			$("#mainContent").html(data);
+// 		}
+// 	});
+// }
 </script>

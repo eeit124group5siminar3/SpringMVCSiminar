@@ -2,14 +2,37 @@
     pageEncoding="UTF-8"%>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<% 
-response.setContentType("text/html;charset=UTF-8");
-response.setHeader("Cache-Control","no-cache"); // HTTP 1.1
-response.setHeader("Pragma","no-cache"); // HTTP 1.0
-response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
-%>
+<!DOCTYPE html>
+
 <html>
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>商品管理</title>
@@ -20,7 +43,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
-<jsp:include page="/top.jsp" />
+<jsp:include page="../header.jsp"/>
 <form:form action="MarketProduct.insert"  method="post" modelAttribute="Insert1" enctype="multipart/form-data">
 <table  cellspacing="2" cellpadding="1" border="1" width="100%">
 
@@ -131,5 +154,6 @@ $("#imgInp").change(function() {
 </script>
 <p>&nbsp;</p>
 <c:remove var="ErrMsg" scope='session'/>
+<jsp:include page="/WEB-INF/pages/footer.jsp" />
 </body>
 </html>

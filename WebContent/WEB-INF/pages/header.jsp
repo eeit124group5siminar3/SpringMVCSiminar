@@ -35,7 +35,7 @@
 	class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 	id="ftco-navbar">
 	<div class="container">
-		<a class="navbar-brand" href="<c:url value='/index' />">農郁</a>
+		<a class="navbar-brand" href="index.html">農郁</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#ftco-nav" aria-controls="ftco-nav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -44,8 +44,8 @@
 
 		<div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a href="<c:url value='/index' />"
-					class="nav-link">首頁</a></li>
+				<li class="nav-item active"><a href="/"
+					class="nav-link" >首頁</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
@@ -61,20 +61,31 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item"
-								href="<c:url value='        '/>">市場</a> <a
-								class="dropdown-item"
-								href="<c:url value='/MarketProduct.selectAll'/>">商品管理</a> <a
-								class="dropdown-item"
-								href="<c:url value='/MarketMall.GoUpdate'/>">店家資料介面</a>
-								<a
-								class="dropdown-item"
-								href="<c:url value='/MarketMall.goInsertJsp'/>">店家申請</a>
+								href="<c:url value='        '/>">市場</a>
+								<c:if test="${login_ok.member_permissions == '1'}">							
+														
+								<a class="dropdown-item"
+								href="<c:url value='/MarketProduct.selectAll'/>">商品管理</a>						
+								
+								</c:if>
+								<c:if test="${login_ok.member_permissions == '1'}">	
+														
+								<a class="dropdown-item"
+								href="<c:url value='/MarketMall.GoUpdate'/>">店家資料介面</a>								
+								
+								</c:if>
+								<c:if test="${login_ok.member_permissions == '1'}">							
+														
+								<a class="dropdown-item"
+								href="<c:url value='/MarketMall.goInsertJsp'/>">店家申請</a>								
+								
+								</c:if>
 						</div></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<a class="dropdown-item" href="<c:url value='actFarmerHome'/>">一日農夫</a>
-						<a class="dropdown-item" href="<c:url value='maintainActFarmer.do?MaintainPageNo=1'/>">一日農夫管理頁面</a>
+						<a class="dropdown-item" href="<c:url value=''/>">一日農夫</a>
+						<a class="dropdown-item" href="<c:url value='/allActFarmer.do'/>">一日農夫管理頁面</a>
 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集管理頁面</a>
 					</div>
@@ -100,7 +111,7 @@
 				<li class="nav-item"><c:if test="${empty login_ok}">
 						<a class="nav-link" href="<c:url value='login.controller' />">登錄</a>
 					</c:if></li>
-				<li class="nav-item cta cta-colored"><a href="cart.html"
+				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />"
 					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
 			</ul>
 		</div>
@@ -119,7 +130,7 @@
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<!-- <script -->
+<!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>

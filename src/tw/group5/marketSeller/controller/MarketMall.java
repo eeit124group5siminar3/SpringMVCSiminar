@@ -28,8 +28,8 @@ public class MarketMall {
 	@GetMapping(path = "/MarketMall.goInsertJsp" )
 	public String goInsert(Model model,@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb
 			)throws IllegalStateException, IOException{
-		
-		if (mb == null) {
+
+		if (mb == null ) {
 			return "Member_SignUp/Member_Login";
 		}
 		String name =mb.getMember_name();
@@ -44,13 +44,14 @@ public class MarketMall {
 	//註冊成為市場賣家
 	@PostMapping(path = "/MarketMall.Insert")
 	public String insert(Model model,@ModelAttribute(value = "Insert") MarketMallBean bean,
-			@SessionAttribute(value = "login_ok") Member_SignUp mb
+			@SessionAttribute(value = "login_ok") Member_SignUp mb,Model m
 			)throws IllegalStateException, IOException{
 		    Integer mNo =mb.getMember_no();
 		    Integer status=1;
 		    bean.setMemberNo(mNo);
 		    bean.setMallStatus(status);
 		    service.insert(bean);
+		    
 		return "marketSeller/MarketMallSuccess";
 	}
 	//修改商家資料(跳頁面)
@@ -61,6 +62,7 @@ public class MarketMall {
 		if (mb == null) {
 			return "Member_SignUp/Member_Login";
 		}
+
 		Integer mNo =mb.getMember_no();
 		MarketMallBean bean =service.selectid(mNo);
 		model.addAttribute("mallBean", bean);

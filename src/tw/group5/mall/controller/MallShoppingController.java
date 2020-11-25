@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -83,12 +84,14 @@ public class MallShoppingController {
 		return mav;
 	}
 
-// 顯示單筆商品資料
+// 顯示單筆商品資料及加入購物車
 	@PostMapping(value = "/SingleProduct")
-	public ModelAndView showSingleProduct(@RequestParam(value = "productId") Integer productId) {
+	public ModelAndView showSingleProduct(@RequestParam(value = "productId", required = false) Integer productId,
+			@RequestParam(value = "qty", required = false) Integer qty,
+			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		ProductBean selectedProduct = service.getProduct(productId);
 		OrderItem oi = new OrderItem();
-		oi.setProductId(productId);
+		oi.setProductId(selectedProduct.getProductId());
 		oi.setProduct(selectedProduct.getProduct());
 		oi.setContent(selectedProduct.getContent());
 		oi.setUnit(selectedProduct.getUnit());
@@ -96,7 +99,16 @@ public class MallShoppingController {
 		oi.setPrice(selectedProduct.getPrice());
 		oi.setDiscount(selectedProduct.getDiscount());
 		oi.setProducterName(selectedProduct.getProducterName());
-
+		oi.setQty(0);
+		if (qty != null) {
+			if (cart == null) {
+				cart = new ShoppingCart();
+				model.addAttribute("ShoppingCart", cart);
+			}
+			oi.setQty(qty);
+			cart.addToCart(productId, oi);
+			oi = cart.getContent().get(productId);
+		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/singleProduct");
 		mav.addObject("selectedProduct", selectedProduct);
@@ -105,32 +117,46 @@ public class MallShoppingController {
 		return mav;
 	}
 
-// 購物車內容
-	@PostMapping(value = "/CartContent")
-//	@ResponseBody
-	public ModelAndView showCartContent() {
-		ShoppingCart cart = new ShoppingCart();
+// 直接加入購物車
+	@PostMapping(value = "/AddToCart")
+	public ModelAndView addToCart(@RequestParam(value = "productId") Integer productId,
+			@RequestParam(value = "qty") Integer qty,
+			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
+		ProductBean selectedProduct = service.getProduct(productId);
 		OrderItem oi = new OrderItem();
-		oi.setProductId(1);
-		oi.setProduct("1");
-		oi.setContent(1);
-		oi.setUnit("1");
-		oi.setQty(1);
-		oi.setProducterId(1);
-		oi.setPrice(20.0);
-		oi.setDiscount(0.8);
-		oi.setProducterName("123");
-		cart.addToCart(1, oi);
+		oi.setProductId(selectedProduct.getProductId());
+		oi.setProduct(selectedProduct.getProduct());
+		oi.setContent(selectedProduct.getContent());
+		oi.setUnit(selectedProduct.getUnit());
+		oi.setProducterId(selectedProduct.getProducterId());
+		oi.setPrice(selectedProduct.getPrice());
+		oi.setDiscount(selectedProduct.getDiscount());
+		oi.setProducterName(selectedProduct.getProducterName());
+		oi.setQty(0);
+		if (cart == null) {
+			cart = new ShoppingCart();
+			model.addAttribute("ShoppingCart", cart);
+		}
+			oi.setQty(qty);
+			cart.addToCart(productId, oi);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/shoppingcartContent");
+
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+
+// 購物車內容
+	@PostMapping(value = "/CartContent")
+	public ModelAndView showCartContent(@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart,
+			Model model) {
+		if (cart == null) {
+			cart = new ShoppingCart();
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/mall_shoppingcart");
 		mav.addObject("ShoppingCart", cart);
 		mav.setStatus(HttpStatus.OK);
-
-//		System.err.println(mav.toString());
-//		System.err.println(mav.toString());
-//		System.err.println(mav.getModel());
-//		System.err.println(mav.getStatus());
-//		System.err.println(mav.getView());
 		return mav;
 	}
 }
