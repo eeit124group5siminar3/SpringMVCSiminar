@@ -158,7 +158,7 @@
 
 <!-- </table> -->
 <%-- </form:form> --%>
-
+<section class="ftco-section ftco-degree-bg">
 <div>	
 <h3 align="center">一日農夫活動修改</h3>
 <form:form action="actFarmerPreUpdate.do" modelAttribute="afBean" method="GET" enctype="multipart/form-data" name="act">
@@ -253,7 +253,7 @@
 </table>
 </form:form>
 </div>
-
+<section class="ftco-section ftco-degree-bg">
 
 <!-- --------footer------------------------------------- -->
 

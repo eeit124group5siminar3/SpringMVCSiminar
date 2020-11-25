@@ -121,9 +121,6 @@ public class ActFarmerDAO {
 	//查詢一頁面活動
 	public List<ActFarmer> getPageActFarmers(){
 		Session session = sessionFactory.getCurrentSession();
-//		if (pageNo==0) {
-//			pageNo=2;
-//		}
 		
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
 		String hql = "from ActFarmer ORDER BY actId";
@@ -157,6 +154,9 @@ public class ActFarmerDAO {
 		return list;
 	}
 	
+	//模糊查詢該廠商Bhy
+	
+	
 	
 	
 	// 查詢單筆資料ByName
@@ -166,8 +166,7 @@ public class ActFarmerDAO {
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(1, "%"+actName+"%");
 		List<ActFarmer> list = query.getResultList();
-		return list;
-		
+		return list;		
 	}
 	
 	// 查詢單筆資料ByName
