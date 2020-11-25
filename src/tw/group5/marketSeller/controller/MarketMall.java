@@ -38,6 +38,7 @@ public class MarketMall {
 		insertBean.setMallName(name);
 		insertBean.setAddress(addres);
         model.addAttribute("Insert",insertBean);
+        
 		return "marketSeller/MarketMallInsert";
 		}
 	
@@ -51,25 +52,32 @@ public class MarketMall {
 		    bean.setMemberNo(mNo);
 		    bean.setMallStatus(status);
 		    service.insert(bean);
-		    
+		    model.addAttribute("mallok1",bean);
 		return "marketSeller/MarketMallSuccess";
 	}
-	//修改商家資料(跳頁面)
+	//修改商家資料(跳頁面) 商家管理的controller
 	@GetMapping(path = "/MarketMall.GoUpdate")
-	public String goUpdate(Model model,@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb
+	public String goUpdate(Model model,@SessionAttribute(value = "login_ok") Member_SignUp mb
 			)throws IllegalStateException, IOException{
 		
 		if (mb == null) {
 			return "Member_SignUp/Member_Login";
 		}
+		
 
 		Integer mNo =mb.getMember_no();
 		MarketMallBean bean =service.selectid(mNo);
+		
+		if (bean ==null) {
+			return "redirect:MarketMall.goInsertJsp";
+		}
 		model.addAttribute("mallBean", bean);
 		
 		return "marketSeller/MarketMallUpdate";
 		
 	}
+	
+	//更新資料
 	@PostMapping(path = "/MarketMall.update",produces = "multipart/data-form")
 	public String update(@ModelAttribute(value = "mallBean") MarketMallBean mallBean) {
 		

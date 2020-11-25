@@ -43,25 +43,23 @@
 <body class="goto-here">
 	
 	<jsp:include page="../header.jsp" />
- 
+ ${login_ok.member_no}
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
 <!-- 	上面圖片 -->
-	<div class= "hero- hero-bread" style="background-image: url('images/about.jpg');" id="act_top">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Actives</span>
-					</p>
-					<h1 class="mb-0 bread">Actives</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+	<div class="hero-wrap hero-bread" style="background-image: url('images/about.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Active</span></p>
+            <h1 class="mb-0 bread">Active</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
 <!-- 	搜尋bar -->
-	<section class="ftco-section">
+	<section class="ftco-section ftco-degree-bg">
 		<div class="container" >
 			<div class="row justify-content-center">
 				<div class="col-md-10 mb-5 text-center">
@@ -74,7 +72,7 @@
 				</div>
 			</div>
 			<div class="row  ftco-animate" id="mall_products"></div>
-		</div>
+		</div>		
 <!-- 活動列表 -->
 	 <div class="container ftco-animate" id="actfarmerlist">
 		 <div class="blog-entry align-self-stretch d-md-flex">
@@ -86,12 +84,31 @@
 					</div>
 					 <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
 		             	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-		                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>
+		                <p>
+		                	<a href="blog-single.html" class="btn btn-primary py-2 px-3">了解更多</a>
+		                	<a href="blog-single.html" class="btn btn-primary py-2 px-3">我要報名</a>
+		                </p>		                
 		        </div>
 		  </div>
 	</div>
-
+	<div class="row mt-5">
+          <div class="col text-center" id="getpagelist">
+            <div class="block-27">
+              <ul>
+                <li><a href="#">&lt;</a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&gt;</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
 	</section>		
+	
+	
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
 
 	
@@ -144,16 +161,33 @@ $.get({
 							</div>
 							 <h3 class="heading"><a href="#">\${data[i].actName}</a></h3>
 				             	<p>活動地址:  \${data[i].actAddr}<br>活動電話:  \${data[i].tel}</p>
-				                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>
+				                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">了解更多</a>
+				                <a href="blog-single.html" class="btn btn-primary py-2 px-3">我要報名</a></p>
 				        </div>
 				</div></div>`;
 			}
-			// 
 			$('#actfarmerlist').html(content);
 		}
 		})
-		
+$.get({
+	url:"${pageContext.request.contextPath}/actFarmerPageList.do?pageNo=",
+	data:"pageNo,totalPages",
+	success:function(){
+		for(var i = 0; i<totalPages; i++){
+			content=
+				`<div class="block-27">
+              		<ul>
+                		<li><a href="#">&lt;</a></li>
+                		<li class="active"><span>i</span></li>
+                		<li><a href="#">&gt;</a></li>
+              		</ul>
+            	</div>`
+			}
+		}
+		$('#getpagelist').html(content);
+	})
 }
+
 
 </script>
 </body>
