@@ -44,7 +44,7 @@
 
 		<div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a href="/"
+				<li class="nav-item active"><a href="<c:url value='/index' />"
 					class="nav-link" >首頁</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
@@ -66,8 +66,8 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<a class="dropdown-item" href="<c:url value=''/>">一日農夫</a>
-						<a class="dropdown-item" href="<c:url value='/allActFarmer.do'/>">一日農夫管理頁面</a>
+						<a class="dropdown-item" href="<c:url value='/actFarmerHome'/>">一日農夫</a>
+						<a class="dropdown-item" href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>">一日農夫管理頁面</a>
 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集管理頁面</a>
 					</div>

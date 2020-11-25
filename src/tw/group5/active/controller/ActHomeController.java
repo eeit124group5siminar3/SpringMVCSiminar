@@ -1,5 +1,6 @@
 package tw.group5.active.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -63,13 +64,26 @@ public class ActHomeController {
 	//分頁列表
 	@GetMapping(value = "/actFarmerPageList.do/{pageNo}", produces = {"text/html;charset=UTF-8" })
 	@ResponseBody
-	public String actPageList(@PathVariable(value = "pageNo", required = false) Integer pageNo,
+	public ArrayList<Integer> actPageList(@PathVariable(value = "pageNo", required = false) Integer pageNo,
 			Model model, HttpServletRequest rq) {
 		Integer starPage = 1;
-		Integer endPag = 1;
-		Integer totalPages =actFarmerService.getTotalPages();
+//		Integer endPage = 5;
 		actFarmerService.setPageNo(pageNo);
+		Integer totalPages =actFarmerService.getTotalPages();
+//		if(pageNo <= 3) {
+//			starPage=1;
+//			endPage=5;
+//		}
+//		if(pageNo>3) {
+//			starPage = pageNo-2;
+//			endPage= pageNo;
+//		}
+		ArrayList<Integer> list=new ArrayList<Integer>();
+		for(int i = starPage; i<=totalPages; i++) {
+			list.add(i);
+		}
 		model.addAttribute("pageNo", pageNo);
-		return String.valueOf(totalPages);
+		model.addAttribute("totalPages", totalPages);
+		return list;
 	}
 }
