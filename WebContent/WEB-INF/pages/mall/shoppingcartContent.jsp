@@ -25,7 +25,7 @@
 										class="ion-ios-close"></span></a></td>
 
 								<td class="image-prod"><div class="img"
-										style="background-image: url(images/product-3.jpg);">
+										style="background-image: url(<c:url value='retrieveImageServlet?id=${anEntry.value.productId}&type=PRODUCT' />);">
 										<c:if test="${anEntry.value.discount!=1}">
 										<span class='status'>-${Math.round((1 - anEntry.value.discount) * 100)}%</span>
 										</c:if>
@@ -96,3 +96,4 @@
 <!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
+<jsp:include page="../js/mall.jsp" />
