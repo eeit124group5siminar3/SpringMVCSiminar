@@ -49,41 +49,57 @@
 </style>
 
 </head>
-<body>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">0800-092-000</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">service@nonre.com</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+<div id="deleteSuccess">
 		<jsp:include page="../header.jsp" />
 
 
 	<!-------------------------內容區--------------------------------->
-<div id="deleteSuccess">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">Recipe</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="<c:url value='blogPage.controller'/>">User Blog<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value='uploadPage.controller'/>">Upload</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value='updatePage.controller'/>">Update</a>
+      </li>
+
+<!--       <li class="nav-item dropdown"> -->
+<!--         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> -->
+<!--           Dropdown -->
+<!--         </a> -->
+<!--         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+<!--           <a class="dropdown-item" href="#">Action</a> -->
+<!--           <a class="dropdown-item" href="#">Another action</a> -->
+<!--           <div class="dropdown-divider"></div> -->
+<!--           <a class="dropdown-item" href="#">Something else here</a> -->
+<!--         </div> -->
+<!--       </li> -->
+<!--       <li class="nav-item"> -->
+<!--         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+<!--       </li> -->
+    </ul>
+    
+<%--     <form class="form-inline my-2 my-lg-0" action='<c:url value="/searchSubmit.controller"/>' method="post"> --%>
+<!--       <input class="form-control mr-sm-2" type="search" placeholder="search delicious" aria-label="Search"> -->
+<!--       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action">Search</button> -->
+<%--     </form> --%>
+  </div>
+</nav>
+
+
+
 	<form class="formSet"
-		action="javascript:void(0);" method="post" runat="server" enctype="multipart/form-data">
+		action="<c:url value='/submitChoose.controller'/>" method="post" runat="server" enctype="multipart/form-data">
 	<fieldset>
 		<legend style="color:black;font-size:23px">修改食譜</legend>		
 		<c:forEach  var='BeanToken' items="${recipe_table}">
@@ -97,7 +113,7 @@
 			
 <br>
 		<div class="form-group">
-			<label style="font-size:20px;">種類: </label>
+			<label style="font-size:20px;">種類:   ${BeanToken.cate}</label>
 			<select class="form-control" name="cate">
 				<option value="">Open this select menu</option>
 				<option value="雞肉">雞肉</option>
@@ -162,19 +178,18 @@
 			<div style="text-align: center;">
 
 				<label> 
-					<input type="submit" name="action" value="確認修改">
+					<input class="btn btn-outline-success" type="submit" id="send" name="action" value="確認修改">
 				</label> 
 				<label> 
-					<input type="submit" id="send" name="action" value="刪除">
+					<input class="btn btn-outline-danger" type="submit" id="delete" name="action" value="刪除">
 				</label>
 				<label> 
-					<input type ="reset" onclick="javascript:location.href='<c:url value='/updatePage.controller'/>'" value="取消">
+					<input class="btn btn-outline-secondary" type ="reset" onclick="javascript:location.href='<c:url value='/updatePage.controller'/>'" value="取消">
 				</label>
 			</div>
 
 		</fieldset>
 		</form>
-</div>
 <br>
 
 	<!------------------------------------------------------------------>
@@ -268,6 +283,8 @@
 			</div>
 		</div>
 	</footer>
+	</div>
+	
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
@@ -285,31 +302,26 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
- 	<script type="text/javascript"> 
-		$(function(){		
-			var delete_id=$("#delete_id").val();
-			console.log('delete_id'+delete_id);
-			$("#send").click(function(){
-				$.ajax({
-					type:"GET",
-	 				dataType:"html",
-					url:"./deleteConfirm",
-					data:{
-						"rec_id":delete_id
-						},
-					success:function(data){
-						console.log(data);
-						alert('刪除成功');
-						$("#deleteSuccess").html(data);
+	
+ 	
+ 	<script type="text/javascript">
+		$(function(){
+			$("#delete").click(function(){
+				alert('刪除成功');
 
-						},
-					error:function(){
-						}	
-					});
 				});
-			})
- 	</script>  
+			});
+		
+		$(function(){
+			$("#send").click(function(){
+				alert('修改成功');
+
+				});
+			});
+		
+ 	</script>
 	 						   
 </body>
 </html>
