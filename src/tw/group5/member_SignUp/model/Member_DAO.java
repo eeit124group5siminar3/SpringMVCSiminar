@@ -192,9 +192,14 @@ public class Member_DAO {
 	}
 	
 	//Admin會員搜尋
-	public List<Member_SignUp> Select_Member() {
+	public List<Member_SignUp> Select_Member(Integer page) {
 		Session session = sessionFactory.getCurrentSession();
+		
+		Integer pageNo = (page-1) * 10;
+		
 		Query<Member_SignUp> query = session.createQuery("From Member_SignUp", Member_SignUp.class);
+		query.setFirstResult(pageNo);
+		query.setMaxResults(10);
 		List<Member_SignUp> list = query.list();
 		
 		return list;
