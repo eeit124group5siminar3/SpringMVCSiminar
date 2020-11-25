@@ -1,15 +1,22 @@
 package tw.group5.active.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActFarmerService;
@@ -25,6 +33,8 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 @Controller
 @SessionAttributes(value = {"pageNo", "login_ok"})
 public class ActHomeController {
+	
+	public final int RECORDS_PER_PAGE = 5;
 	
 	@Autowired
 	private ServletContext stx;
@@ -35,10 +45,10 @@ public class ActHomeController {
 //===================================一日農夫===================================
 	
 	//取得活動列表	
-	@GetMapping(value = "/actFarmerList.do", produces = {"application/json" })
+	@GetMapping(value = "/actFarmerList.do/{pageNo}")
 	@ResponseBody
-	public List<ActFarmer> actFarmerList(
-			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, Model model,
+	public Map<String, Object> actFarmerList(
+			@PathVariable(name = "pageNo", required = false) Integer pageNo, Model model,
 			HttpServletRequest rq){
 		List<ActFarmer> list = null;
 		String searchString = (String) rq.getAttribute("searchString");
@@ -49,10 +59,16 @@ public class ActHomeController {
 				pageNo = 1;
 			}
 		}
+		actFarmerService.setPageNo(pageNo);
+		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
 		list = actFarmerService.getPageActFarmers();
-		rq.setAttribute("searchString", searchString);
-		model.addAttribute("pageNo", pageNo);
-		return list;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", list);
+		map.put("totalPages", actFarmerService.getTotalPages());
+		map.put("pageNo", pageNo);
+		
+		return map;
 	}
 	
 	
@@ -67,31 +83,6 @@ public class ActHomeController {
 		return String.valueOf(totalPages);
 	}
 	
-	//分頁列表
-	@GetMapping(value = "/actFarmerPageList.do/{pageNo}", produces = {"text/html;charset=UTF-8" })
-	@ResponseBody
-	public ArrayList<Integer> actPageList(@PathVariable(value = "pageNo", required = false) Integer pageNo,
-			Model model, HttpServletRequest rq) {
-		Integer starPage = 1;
-//		Integer endPage = 5;
-		actFarmerService.setPageNo(pageNo);
-		Integer totalPages =actFarmerService.getTotalPages();
-//		if(pageNo <= 3) {
-//			starPage=1;
-//			endPage=5;
-//		}
-//		if(pageNo>3) {
-//			starPage = pageNo-2;
-//			endPage= pageNo;
-//		}
-		ArrayList<Integer> list=new ArrayList<Integer>();
-		for(int i = starPage; i<=totalPages; i++) {
-			list.add(i);
-		}
-		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("totalPages", totalPages);
-		return list;
-	}
 	
 	//顯示單一活動的資訊
 	@RequestMapping(path = "/getSingleAct.do", produces = {"text/html;charset=UTF-8" })
