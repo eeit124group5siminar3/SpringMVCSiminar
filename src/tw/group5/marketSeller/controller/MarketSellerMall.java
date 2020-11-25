@@ -19,7 +19,7 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
 @SessionAttributes(names = {"newMall","login_ok","mallBean"})
-public class MarketMall {
+public class MarketSellerMall {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	@Autowired
 	private MarketSellBeanService service;
