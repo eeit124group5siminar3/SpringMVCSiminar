@@ -11,9 +11,13 @@ public class ShoppingCart {
 	private Map<Integer, OrderItem> cart = new LinkedHashMap< >();
 	public ShoppingCart() {
 	}
+
+// 獲得購買商品內容
 	public Map<Integer, OrderItem>  getContent() { // ${ShoppingCart.content}
 		return cart;
 	}
+
+// 加入購物車
 	public void addToCart(int productId, OrderItem  oi) {
 		if (oi.getQty() <= 0 ) {
 			return;
@@ -30,6 +34,7 @@ public class ShoppingCart {
 		}
 	}
 
+// 修改數量
 	public boolean modifyQty(int productId, int  newQty) {
 		if ( cart.get(productId) != null ) {
 		   OrderItem  oi = cart.get(productId);
@@ -40,7 +45,8 @@ public class ShoppingCart {
 		   return false;
 		}
 	}
-	// 刪除某項商品
+	
+// 刪除某項商品
 	public int deleteOrder(int productId) {
 		if ( cart.get(productId) != null ) {
 	       cart.remove(productId);  // Map介面的remove()方法
@@ -49,26 +55,18 @@ public class ShoppingCart {
 		   return 0;
 		}
 	}
+	
+// 清空購物車
 	public void deleteAllOrders() {
-//		Set<Integer> cartSet=cart.keySet();
-//		for (Integer cartInteger :cartSet) {
-//			cart.remove(cartInteger);
-//		}
-//		Iterator<Integer> iterator = cartSet.iterator();
-//		while(iterator.hasNext()) {
-//			cart.remove(iterator.next());
-//		}
 		cart.clear();
 	}
-//	@Override
-//	protected void finalize() throws Throwable {
-//	
-//		super.finalize();
-//	}
+	
+// 獲得購物車內商品種類數量
 	public int getItemNumber(){   // ShoppingCart.itemNumber
 		return cart.size();
 	}
-	//計算購物車內所有商品的合計金額(每項商品的單價*數量的總和)
+	
+//計算購物車內所有商品的小計(每項商品的單價*數量的總和)
 	public double getTotal(){
 		double subTotal = 0 ;
 		Set<Integer> set = cart.keySet();
@@ -80,7 +78,8 @@ public class ShoppingCart {
 		}
 		return subTotal;
 	}
-	
+
+//計算購物車內所有商品的合計金額(每項商品的單價*折扣*數量的總和)
 	public double getSubtotal(){
 		double subTotal = 0 ;
 		Set<Integer> set = cart.keySet();

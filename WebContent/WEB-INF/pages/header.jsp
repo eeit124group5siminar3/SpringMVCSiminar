@@ -93,7 +93,7 @@
 				<li class="nav-item"><c:if test="${empty login_ok}">
 						<a class="nav-link" href="<c:url value='login.controller' />">登錄</a>
 					</c:if></li>
-				<li class="nav-item cta cta-colored"><a href="cart.html"
+				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />"
 					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
 			</ul>
 			<c:if test="${!empty login_ok}">
@@ -117,7 +117,7 @@
 <script src="js/jquery.animateNumber.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/scrollax.min.js"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="js/google-map.js"></script>
+<!-- <script -->
+<!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+<!-- <script src="js/google-map.js"></script> -->
 <script src="js/main.js"></script>

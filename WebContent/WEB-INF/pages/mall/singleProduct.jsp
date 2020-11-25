@@ -33,51 +33,50 @@
 							style="color: #bbb;">Sold</span></a>
 					</p>
 				</div>
-				<p class="price">
-					<span>${selectedProduct.price}元</span>
-				</p>
+				<c:choose>
+					<c:when test="${selectedProduct.discount!=1}">
+						<p class='price'>
+							<span style="color: red">特價${selectedProduct.price * selectedProduct.discount}元</span>
+						</p>
+					</c:when>
+					<c:otherwise>
+						<p class="price">
+							<span>${selectedProduct.price}元</span>
+						</p>
+					</c:otherwise>
+				</c:choose>
+				<p>上架日期:${selectedProduct.addedDate}</p>
+				<p>保質期:${selectedProduct.shelfTime}</p>
+				<p>${selectedProduct.content}${selectedProduct.unit}</p>
 				<p>${selectedProduct.description}</p>
 				<div class="row mt-4">
 					<div class="col-md-6">
 						<div class="form-group d-flex">
-							<div class="select-wrap">
-								<div class="icon">
-									<span class="ion-ios-arrow-down"></span>
-								</div>
-								<select name="" id="" class="form-control">
-									<option value="">Small</option>
-									<option value="">Medium</option>
-									<option value="">Large</option>
-									<option value="">Extra Large</option>
-								</select>
-							</div>
+							<div class="select-wrap"></div>
 						</div>
 					</div>
 					<div class="w-100"></div>
 					<div class="input-group col-md-6 d-flex mb-3">
-						<span class="input-group-btn mr-2">
-							<button type="button" class="quantity-left-minus btn"
-								data-type="minus" data-field="">
-								<i class="ion-ios-remove"></i>
-							</button>
-						</span> <input type="text" id="quantity" name="quantity"
-							class="form-control input-number" value="1" min="1"
-							max="${selectedProduct.stock-oi.qty}"> <span
-							class="input-group-btn ml-2">
-							<button type="button" class="quantity-right-plus btn"
-								data-type="plus" data-field="">
-								<i class="ion-ios-add"></i>
-							</button>
-						</span>
+						<span class="input-group-btn mr-2"> </span> <input type="number"
+							id="quantity" name="quantity" class="form-control input-number"
+							value="1" min="1" max="${selectedProduct.stock-oi.qty}">
+						<span class="input-group-btn ml-2"> </span>
 					</div>
 					<div class="w-100"></div>
 					<div class="col-md-12">
-						<p style="color: #000;">${selectedProduct.content}${selectedProduct.unit}</p>
+						<p style="color: #000;">庫存:${selectedProduct.stock-oi.qty}</p>
 					</div>
 				</div>
 				<p>
-					<a href="cart.html" class="btn btn-black py-3 px-5">加入購物車</a> <a
-					href="#" onclick="goback()" class="btn btn-black py-3 px-5">返回 </a>
+				<c:choose>
+					<c:when test="${selectedProduct.stock<=oi.qty}">
+					<a href="#" onclick="notEnough()" class="btn btn-black py-3 px-5">加入購物車</a>
+					</c:when>
+					<c:otherwise>
+					<a href="#" onclick="addToCart(${selectedProduct.stock-oi.qty})" class="btn btn-black py-3 px-5">加入購物車</a> 					
+					</c:otherwise>
+				</c:choose>
+					<a href="#" onclick="goback()" class="btn btn-black py-3 px-5">返回</a>
 				</p>
 			</div>
 		</div>
@@ -99,38 +98,8 @@
 <script src="js/scrollax.min.js"></script>
 <!-- <script -->
 <!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-<script src="js/google-map.js"></script>
+<!-- <script src="js/google-map.js"></script> -->
 <script src="js/main.js"></script>
+<jsp:include page="../js/mall.jsp" />
 <script>
-		$(document).ready(function(){
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-		        e.preventDefault();
-		        var quantity = parseInt($('#quantity').val());
-		            $('#quantity').val(quantity + 1);
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        e.preventDefault();
-		        var quantity = parseInt($('#quantity').val());
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });   
-		});
-
-		function goback(){
-			$.ajax({
-				url : "MallContent",
-				type : "POST",
-				data : {"categoryId":`${categoryId}`,"pageNo":`${pageNo}`,"searchString":`${searchString}`},
-				datatype : "html",
-				success : function(data, status) {
-					$("#mainContent").html(data);
-				},
-				error : function(data, status) {
-					$("#mainContent").html(data);
-				}
-			});
-			}
-	</script>
+</script>
