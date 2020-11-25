@@ -45,79 +45,51 @@
 	box-sizing:border-box;
 }
 
-.wrap{
-	width: 600px;
-	margin: auto;
-	display:flex;
-	align-items:center;
-	padding-top: 10px;
-}
+/* .wrap{ */
+/* 	width: 600px; */
+/* 	margin: auto; */
+/* 	display:flex; */
+/* 	align-items:center; */
+/* 	padding-top: 10px; */
+/* } */
 
-.wrap img{
-	width: 250px;
-	height:200px;
-	vertical-align: middle;
-	margin:20px;
+/* .wrap img{ */
+/* 	width: 250px; */
+/* 	height:200px; */
+/* 	vertical-align: middle; */
+/* 	margin:20px; */
 	
-}
+/* } */
+/* .wrap h3{ */
+/* 	width: 250px; */
+/* 	height:200px; */
+/* 	vertical-align: middle; */
+/* 	margin:20px; */
+	
+/* } */
 
-.txt{
-	width: 50%;
-	vertical-align: middle;
-	padding-left: 20px;
-}
+/* .txt{ */
+/* 	width: 50%; */
+/* 	vertical-align: middle; */
+/* 	padding-left: 20px; */
+/* } */
 	 
 	 
+	 
+
+
+
 </style>
 
 
 </head>
 <body>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">0800-092-000</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">service@nonre.com</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 		<jsp:include page="../header.jsp" />
 
 	<!-------------------------內容區--------------------------------->
-
-
-<%--     <form action="<c:url value='/function.controller'/>" method="post"> --%>
-<!--     		<c:set var="funcName" value="ORD" scope="session" />   -->
-
-           
-
-
-<!--             <div class="list-group" style="width: 200px;"> -->
-<%--                 <a href="<c:url value='uploadPage.controller'/>" class="list-group-item list-group-item-action list-group-item-warning">上傳食譜</a> --%>
-<%--                 <a href="<c:url value='updatePage.controller'/>" class="list-group-item list-group-item-action list-group-item-info">修改食譜</a> --%>
-<%--                 <a href="<c:url value='searchPage.controller'/>" class="list-group-item list-group-item-action list-group-item-light">搜尋料理</a> --%>
-<!--               </div> -->
-
-<!--  </form> -->
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -129,7 +101,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">User Blog<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<c:url value='blogPage.controller'/>">User Blog<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value='uploadPage.controller'/>">Upload</a>
@@ -156,49 +128,133 @@
     
     <form class="form-inline my-2 my-lg-0" id="search" action="javascript:void(0);" method="post">
       <input class="form-control mr-sm-2" type="text" id="searchInput" name="searchInput" placeholder="search delicious" aria-label="Search"/>
-      <input class="btn btn-outline-success my-2 my-sm-0" id="send" type="submit" name="action" value="Search"/>
+      <input class="btn btn-outline-success my-2 my-sm-0"　 onblur="ch()" id="send" type="submit" name="action" value="Search"/>
     </form>
   </div>
 </nav>
 
 <p style="font-size: 60px;text-align: center;">美食推薦</p>
 
-<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-10 mb-5 text-center">
-					<ul class="product-category" id="product-category"></ul>
-						<input type="hidden" name="searchString"
-							value=${searchString}>
-				</div>
-			</div>
-			<div class="row  ftco-animate" id="mall_products"></div>
-		</div>
-		<div id="mall_pages"></div>
+<!-- <div class="container"> -->
+<!-- 			<div class="row justify-content-center"> -->
+<!-- 				<div class="col-md-10 mb-5 text-center"> -->
+<!-- 					<ul class="product-category" id="product-category"></ul> -->
+<!-- 						<input type="hidden" name="searchString" -->
+<!-- 							value=${searchString}> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="row  ftco-animate" id="mall_products"></div> -->
+<!-- 		</div> -->
+<!-- 		<div id="mall_pages"></div> -->
 
-<div id="searchSuccess">
 
-<c:forEach var='BeanToken'  items="${searchAll}">
-		<div class="wrap" style="text-align: center;">
-			<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">
-					<img height="100" width="80"   
-					src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" />
-			</a>
+<%-- <c:forEach var='BeanToken'  items="${searchAll}"> --%>
+<!-- 		<div class="wrap" style="text-align: center;"> -->
+<%-- 			<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>"> --%>
+<!-- 					<img height="100" width="80"    -->
+<%-- 					src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" /> --%>
+<!-- 			</a> -->
 					
-			<div class="txt">
-					<h2>
-						<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
-					</h2>
-					<hr>
-					<p>食材: ${BeanToken.ingredients_A} </p>	
-					<p>食材: ${BeanToken.ingredients_B} </p>
-					<p>介紹 : ${BeanToken.desc}</p>				
-					<p>料理方法 : ${BeanToken.method}</p>
+<!-- 			<div class="txt"> -->
+<!-- 					<h2> -->
+<%-- 						<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a> --%>
+<!-- 					</h2> -->
+<!-- 					<hr> -->
+<%-- 					<p>食材: ${BeanToken.ingredients_A} </p>	 --%>
+<%-- 					<p>食材: ${BeanToken.ingredients_B} </p> --%>
+<%-- 					<p>介紹 : ${BeanToken.desc}</p>				 --%>
+<%-- 					<p>料理方法 : ${BeanToken.method}</p> --%>
 				
-		</div>
-	</div>
-</c:forEach>
+<!-- 		</div> -->
+<!-- 	</div> -->
+
+
+<!-- --------------------------------------------------------------------- -->
+
+
+      <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center">
+    			<div class="col-md-10 mb-5 text-center">
+    				<ul class="product-category">
+    					<li><a href="#" class="active">All</a></li>
+    					<li><a href="#">Vegetables</a></li>
+    					<li><a href="#">Fruits</a></li>
+    					<li><a href="#">Juice</a></li>
+    					<li><a href="#">Dried</a></li>
+    				</ul>
+    			</div>
+    		</div>
+    		
+    		<div id="searchSuccess">
+    		
+    		<div class="row">
+    		<c:forEach var='BeanToken'  items="${searchAll}">
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">								
+    						<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>" class="img-prod"><img class="img-fluid" src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" alt="">
+    						</a>	
+    						
+    					<div class="text py-3 pb-4 px-3 text-center">
+    							<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
+    						
+
+
+
+
+<!--     						<div class="d-flex"> -->
+<!--     							<div class="pricing"> -->
+<!-- 		    						<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p> -->
+<!-- 		    					</div> -->
+<!-- 	    					</div> -->
+	    					<div style="float: right;">
+<!-- 	    						<div class="m-auto d-flex"> -->
+<!-- 	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center"> -->
+<!-- 	    								<span><i class="ion-ios-menu"></i></span> -->
+<!-- 	    							</a> -->
+<!-- 	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1"> -->
+<!-- 	    								<span><i class="ion-ios-cart"></i></span> -->
+<!-- 	    							</a> -->
+	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
+	    								<span><i class="ion-ios-heart"></i></span>
+	    							</a>
+<!--     							</div> -->
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		
+    		
+    		</c:forEach>
+    		</div>
+    		<div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                <li><a href="#">&lt;</a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&gt;</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    	</div>
+    	</div>
+    	
+    </section>
+
+
+<!-- --------------------------------------------------------------------- -->
+
+
+
+
+<%-- </c:forEach> --%>
 	
-</div>
 	
 	
 <!-- 	</form> -->
@@ -240,19 +296,65 @@
                          var ls = data[i];   
                          var ingredients_A=ls.ingredients_A;
 
-                          	searchProduct(ingredients_A);
+//                           	searchProduct(ingredients_A);
                          html +=
 //                          "<div align='center'><p><a href='<c:url value='/RetrieveSearch/?searchString="+ingredients_A+"&search="+str+"'/>'>"+ls.ingredients_A+"</a></p>"
 //                          "<div align='center'><p><a href='<c:url value='/RetrievePageProducts?searchString="+ingredients_A+"&search="+str+"'/>'>"+ls.ingredients_A+"</a></p>"
-                      "<div align='center'><p><a href='<c:url value='/searchProducts?search="+ingredients_A+"'/>'>"+ls.ingredients_A+"</a></p>"
+//                       "<div align='center'><p><a href='<c:url value='/searchProducts?search="+ingredients_A+"'/>'>"+ls.ingredients_A+"</a></p>"
 //                       "<div align='center'><p><a href='#' onclick='getProductDetail("+ingredients_A+")'>"+ls.ingredients_A+"</a></p>"
                          
-                         +"<p><a href='<c:url value='/searchSubmit.controller?rec_id="+ls.rec_id+"'/>'>"+ls.name+"</a></p>"
-                         +"<p>"+ls.ingredients_A+"</p>"
 //                          +"<button name='searchButton' style='border-radius: 5px;'onclick='searchProduct()'>"+查詢+"</button>"
-                         +"<p>"+ls.ingredients_B+"</p>"
-                         +"<p>"+ls.cate+"</p>"
-                         +"<p>"+ls.method+"</p></div><hr>";         
+
+//                          "<p><a href='<c:url value='/searchSubmit.controller?rec_id="+ls.rec_id+"'/>'>"+ls.name+"</a></p>"
+//                          +"<p>"+ls.ingredients_A+"</p>"
+//                          +"<p>"+ls.ingredients_B+"</p>"
+//                          +"<p>"+ls.cate+"</p>"
+//                          +"<p>"+ls.method+"</p></div><hr>";         
+
+
+
+
+//                      	`<div class="row">
+//                      	`<div class="col-md-6 col-lg-3 ftco-animate"> 
+//         				`<div class="product">				
+//         						<a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="img-prod">
+//         						<img class="img-fluid" src="<c:url value='/getALLImage.controller?rec_id=\${ls.rec_id}'/>" alt="">
+//         						</a>	
+        						
+//         					<div class="text py-3 pb-4 px-3 text-center">                                     
+//         							<a href="<c:url value='/searchSubmit.controller?rec_id=\${ls.rec_id}'/>">\${ls.rec_id}</a>  
+//         							<h3 style="border:3px solid red;">\${ls.rec_id}</h3>  				
+//     	    					<div style="float: right;">
+
+//     	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
+//     	    								<span><i class="ion-ios-heart"></i></span>
+//     	    							</a>
+//         						</div>
+//         					</div> 
+//         				</div>`;
+//         			</div>`;
+//         			</div>`;
+
+
+
+
+		           ` <div class="blog-entry align-self-stretch d-md-flex">
+		              <a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="block-20" 
+			              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${ls.rec_id}'/>');">
+		              </a>
+		              <div class="text d-block pl-md-4">
+
+		                <h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+		                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="btn btn-primary py-2 px-3">Read more</a></p>
+		              </div>
+		            </div>
+		          </div>`;
+
+
+
+
+                         
                 		console.log('ls.ingredients_A: '+ls.ingredients_A);
 //                 		searchProduct(ls.ingredients_A);
                     	}
@@ -431,6 +533,16 @@
 	
 	</script>
 
-		
+		<script type="text/javascript">
+	function ch() {
+
+		let search = document.getElementById("send").value;
+		let inputLen = search.length;
+		let spid = document.getElementById("sp");
+		if (search == "") {
+			spid.innerHTML = "請輸入";
+		}
+	}
+</script>
 </body>
 </html>

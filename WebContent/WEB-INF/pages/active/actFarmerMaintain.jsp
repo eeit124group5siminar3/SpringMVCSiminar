@@ -96,8 +96,7 @@
 						</form>
 					</td>
 					<td style="border: 0px" align="right" colspan="2">
-						<form action="<c:url value='/maintainActFarmer.do'/>"
-							method="get">
+						<form action="<c:url value='/maintainActFarmer.do'/>" method="get">
 							<input name="selectAll" type="submit" value="查詢全部">
 						</form>
 					</td>

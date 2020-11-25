@@ -40,10 +40,7 @@
 <link rel="stylesheet" href="css/mall.css">
 </head>
 <body class="goto-here">
-
-
 	<jsp:include page="../header.jsp" />
-
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
@@ -105,10 +102,11 @@
 	<script src="js/jquery.animateNumber.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="js/google-map.js"></script>
+<!-- 	<script -->
+<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
+	<jsp:include page="../js/mall.jsp" />
 
 	<script>
 // 		function productList(pageNo) {
@@ -222,7 +220,7 @@
 
 // 		function searchProduct(backWord) {
 // 			
-		var searchString = document.forms[0].elements[0].value;
+// 		var searchString = document.forms[0].elements[0].value;
 		// 			var xhr = new XMLHttpRequest();			
 		// 			if (searchString == null || searchString == "") {	
 		// 				var url = "<c:url value='/RetrieveSearch/' />"

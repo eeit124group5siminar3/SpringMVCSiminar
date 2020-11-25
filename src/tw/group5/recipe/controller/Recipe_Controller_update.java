@@ -88,27 +88,26 @@ public class Recipe_Controller_update {
 			return "Member_SignUp/Member_Login";
 	}
 	
+	//update_choose
 	@RequestMapping(path = "/updateProcess.controller",method = {RequestMethod.POST,RequestMethod.GET})
 	public String updateProcess(
-			@RequestParam(name="choose",required = false)String rec_id,
-//			@RequestParam(name="action")
-			String delete_id,
-			@RequestParam(required = false)String action,Recipe_Bean bean,Model m) throws FileNotFoundException, IOException, SQLException {
+			@RequestParam(name="choose",required = false)String rec_id,Model m) throws FileNotFoundException, IOException, SQLException {
 		
-		if ("回首頁".equals(action)) {
-			return "recipe/recipe_workpage";
-		} 
-		else {
+		if (rec_id!=null) {
 			System.out.println(rec_id);
 			List<Recipe_Bean_noImage> list = service.partSearch(rec_id);
 			
 			m.addAttribute("recipe_table", list);
 			return "recipe/recipe_update";
-		}
+		
+		}else
+			return "redirect:/updatePage.controller";
 	}
 	
+	
+	//update_choose ajax
 	@GetMapping(value="/deleteConfirm")
-	public  ModelAndView deleteConfirm(@RequestParam(name="rec_id")String rec_id,Model m) {
+	public  String deleteConfirm(@RequestParam(name="rec_id")String rec_id,Model m) {
 		service.delete(rec_id);
 		Integer mem_no=bean.getMember_no();
 		System.out.println("mem_no: "+mem_no);
@@ -124,30 +123,15 @@ public class Recipe_Controller_update {
 			}
 		}
 		m.addAttribute("user_recipe", user_recipe);	
-		return new ModelAndView("recipe/recipe_update_choose","user_recipe", user_recipe) ;
-	}
-	
-	
-	@PostMapping(value="/updateConfirm",produces = "application/json;charset=UTF-8")
-	public String updateConfirm(@RequestParam(name="rec_id")String rec_id,Model m) {
-		service.delete(rec_id);
-		Integer mem_no=bean.getMember_no();
-		System.out.println(mem_no);
-		List<Recipe_Bean> list=service.listOfJavaBean();
-		List<Recipe_Bean> user_recipe=new ArrayList<Recipe_Bean>();
-		for(Recipe_Bean r:list) {
-			if(r.getMember_no().equals(mem_no)) {
-				user_recipe.add(r);
-			}
-		}
-		System.out.println(2);
-		m.addAttribute("user_recipe", user_recipe);
-		return "recipe/recipe_update_choose";
+//		return new ModelAndView("recipe/recipe_update_choose") ;
+		return "redirect:/updatePage.controller";
+
 	}
 	
 	
 	
 	
+	//update
 	@RequestMapping(path = "/submitChoose.controller",method = RequestMethod.POST)
 	public String submitChoose(@RequestParam String action,@RequestParam MultipartFile multipartFile,
 		Recipe_Bean bean,String rec_id) throws SerialException, IOException, SQLException {
@@ -155,20 +139,18 @@ public class Recipe_Controller_update {
 		bean.setMultipartFile(multipartFile);
 		if(action.equals("確認修改")) {
 			service.update(rec_id, bean);
-			return "recipe/update_success";
+			return "redirect:/updatePage.controller";
 		}
 		if(action.equals("刪除")) {
 			service.delete(rec_id);
-			return "recipe/delete_success";
+			return "redirect:/updatePage.controller";
 		}
-		if (action.equals("取消")) {
-			return "recipe/recipe_workpage";
-		}
+
 		return rec_id;
 	}
 	
 	
-	
+	//getImage
 	@GetMapping("/getImage.controller")
 	@ResponseBody
 	public ResponseEntity<byte[]> getImage() throws IOException, SQLException {
