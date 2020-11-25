@@ -52,7 +52,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
   crossorigin="anonymous"></script>
 <script>
 $(function(){
-$("#login").click(function(){
+$("#form_submit").on("submit",function(ev){
 	$.ajax({
 		url:"checkLogin.controller",
 		data:{
@@ -70,6 +70,7 @@ $("#login").click(function(){
 		}
 	}
     })  
+    ev.preventDefault(); 
 })
 })
 </script>
@@ -107,7 +108,7 @@ $("#login").click(function(){
 			aria-expanded="false" aria-label="Toggle navigation"></button>
 	</div>
 
-	<form method="post">
+	<form id="form_submit" method="post">
 		<div class="login-form">
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
@@ -136,7 +137,7 @@ $("#login").click(function(){
 				<a class="btn btn-primary" href="goMemberSignUp.controller"
 					style="float: counter">註冊</a> <a class="btn btn-primary"
 					href="forgotResetPwd.controller" style="float: counter">忘記密碼</a>
-				<button type="button" name="login" id="login"
+				<button type="submit" name="login" id="login"
 					class="btn btn-primary" style="float: right">提交</button>
 			</fieldset>
 		</div>
