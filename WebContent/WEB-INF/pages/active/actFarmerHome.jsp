@@ -73,38 +73,16 @@
 			</div>
 		</div>		
 <!-- 活動列表 -->
-	 <div class="container ftco-animate col-lg-8" id="actfarmerlist">
-		 <div class="blog-entry align-self-stretch d-md-flex">
-			<a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');"></a>
-				<div class="text d-block pl-md-4">
-					<div class="meta mb-3">
-		                  <div><a href="#">July 20, 2019</a></div>
-		                  <div><a href="#">Admin</a></div>
-					</div>
-					 <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-		             	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-		                <p>
-		                	<a href="blog-single.html" class="btn btn-primary py-2 px-3">了解更多</a>
-		                	<a href="blog-single.html" class="btn btn-primary py-2 px-3">我要報名</a>
-		                </p>		                
-		        </div>
-		  </div>
-	</div>
-	<div class="row mt-5">
-          <div class="col text-center" id="getpagelist">
-            <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
+	 <div class="container ftco-animate col-md-8 mb-5" id="actfarmerlist"></div>
+
+<!-- 活動分頁 -->
+<form>
+	<div class="container col-md-8 mb-5">
+          <div class="container col-md-12 text-center">
+            <div class="block-27"><ul id="page_id"></ul></div>
           </div>
         </div>
+       </form>
 	</section>		
 	
 	
@@ -143,48 +121,84 @@
 	
 <!-- ------------------------script的 ----------------------------------------------------------------- -->	
 <script type="text/javascript">
-window.onload = function(){
-$.get({
-		url:"${pageContext.request.contextPath}/actFarmerList.do",
-		success:function(data){
-			console.log(data);
-			let content="";
-			for(var i = 0; i<data.length; i++){
-			content+=
-			`<div class="col-md-12 d-flex"><div class="blog-entry align-self-stretch d-md-flex">
-				<a href="blog-single.html" class="block-20" style="background-image: url('<c:url value='ActImageController?id=\${data[i].actId}&type=ACTFARMER'/>');"></a>
-					<div class="text d-block pl-md-4">
-							<div class="meta mb-3">
-				                  <div><a href="#">\${data[i].actType}</a></div>
-							</div>
-							 <h3 class="heading"><a href="#">\${data[i].actName}</a></h3>
-				             	<p>活動地址:  \${data[i].actAddr}<br>活動電話: \${data[i].tel}<br>
-				             	活動日期: \${data[i].actDateSta}~\${data[i].actDateEnd}</p>
-				                <p><a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">了解更多</a>
-				                <a href="blog-single.html" class="btn btn-primary py-2 px-3">我要報名</a></p>
-				        </div>
-				</div></div>`;
-			}
-			$('#actfarmerlist').html(content);
+var currentPage = 1;
+var totalPages;
+function list(){
+	$.get({
+	url:"${pageContext.request.contextPath}/actFarmerList.do/"+currentPage,
+	success:function(response){
+		console.log(response);
+		let data = response.data;
+		let content="";
+		for(var i = 0; i<data.length; i++){
+		content+=
+		`<div class="col-md-12 d-flex"><div class="blog-entry align-self-stretch d-md-flex">
+			<a href="blog-single.html" class="block-20" style="background-image: url('<c:url value='ActImageController?id=\${data[i].actId}&type=ACTFARMER'/>');"></a>
+				<div class="text d-block pl-md-4">
+						<div class="meta mb-3">
+			                 <div><a href="#">\${data[i].actType}</a></div>
+						</div>
+						 <h3 class="heading"><a href="#">\${data[i].actName}</a></h3>
+			             	<p>活動地址:  \${data[i].actAddr}<br>活動電話: \${data[i].tel}<br>
+			             	活動日期: \${data[i].actDateSta}~\${data[i].actDateEnd}</p>
+			                <p><a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">了解更多</a>
+		                <a href="blog-single.html" class="btn btn-primary py-2 px-3">我要報名</a></p>
+			        </div>
+			</div></div>`;
 		}
-		})
-// $.get({
-// 	url:"${pageContext.request.contextPath}/actFarmerPageList.do?pageNo=ageNo",
-// 	data:"pageNo,totalPages",
-// 	success:function(){
-// 		for(var i = 0; i<totalPages; i++){
-// 			content=
-// 				`<div class="block-27">
-//               		<ul>
-//                 		<li><a href="#">&lt;</a></li>
-//                 		<li class="active"><span>i</span></li>
-//                 		<li><a href="#">&gt;</a></li>
-//               		</ul>
-//             	</div>`
-// 			}
-// 		}
-// 		$('#getpagelist').html(content);
-// 	})
+		$('#actfarmerlist').html(content);
+		
+		currentPage = response.pageNo;
+		totalPages=response.totalPages;
+		content = `
+        <li>
+			<div id="blfirst"><a href="javascript:pagechange('first')"> 
+			<img border='0' alt='第一頁' height='30' width='30' src='./images/first-icon.png' /> </a></div>
+		
+		</li>
+        <li>
+			<div id="blprev"><a href="javascript:pagechange('pre')">
+			<img border='0' alt='前一頁' height='30' width='30' src='./images/prev-icon.png' /></a></div>
+		</li>
+		<li>\${currentPage} / \${totalPages}</li>
+		<li>
+			<div id="blnext"><a href="javascript:pagechange('next')">
+			<img border='0' alt='下一頁' height='30' width='30' src='./images/next-icon.png'/> </a></div>
+		</li>
+		<li>
+			<div id="bllast"><a href="javascript:pagechange('last')">
+			<img border='0' alt='最末頁' height='30' width='30' src='./images/last-icon.png' /> </a></div>
+		</li>`;
+		$('#page_id').html(content);
+	}
+})
+}
+window.onload = list();
+function pagechange(value){	
+	if(value=='first'){
+		currentPage=1;
+		list();
+	}else if(value =='pre'){
+		if(currentPage>1){
+			currentPage--;
+			list();
+		}else{
+			currentPage=1;
+			list();
+		}		
+	}
+	else if(value =='next'){
+		if(currentPage<totalPages){
+			currentPage++;
+			list();
+		}else{
+			currentPage=totalPages;
+			list();
+		}	
+	}else{
+		currentPage=totalPages;
+		list();
+	}
 }
 
 

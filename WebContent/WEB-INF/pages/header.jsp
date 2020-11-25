@@ -61,7 +61,7 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item"
-								href="<c:url value='        '/>">市場</a>
+								href="<c:url value='GoMarketHome'/>">市場</a>
 						</div></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>

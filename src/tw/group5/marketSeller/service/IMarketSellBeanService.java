@@ -16,4 +16,8 @@ public interface IMarketSellBeanService {
 
 	MarketMallBean selectid(Integer mid);
 
+	List<MarketMallBean> selectAllmall(Integer page, Integer showData);
+
+	int sellerPages();
+
 }
