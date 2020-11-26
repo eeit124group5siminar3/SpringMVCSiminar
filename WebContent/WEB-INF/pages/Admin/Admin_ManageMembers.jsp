@@ -27,8 +27,6 @@
 	<script>
 $(document).ready(function(){
 var currentPage = 1;
-// window.onload = datalist();
-// function datalist(){
 	$.get({
 		url:"${pageContext.request.contextPath}/manageMembersData.controller/"+currentPage,
 		success:function(data){
@@ -38,6 +36,7 @@ var currentPage = 1;
 		for(var i=0 ; i<data1.length ; i++){
 			content+=
 				`
+				<tr>
 				<td>\${data1[i].member_permissions}</td>
 				<td>\${data1[i].member_no}</td>
 				<td>\${data1[i].member_name}</td>
@@ -66,9 +65,23 @@ var currentPage = 1;
 						value="\${data1[i].member_no}"> <input name="delete"
 						type="submit" value="刪除">
 				</form>
-				</td>`;
+				</td>
+				</tr>`;
 		}
-		$('#member_tr').html(content);
+		$('#member_tr').html(
+				`
+				<tr>
+				<th>買賣家</th>
+				<th style="width: 100px;">會員編號</th>
+				<th style="width: 100px;">會員名稱</th>
+				<th style="width: 130px;">會員電話</th>
+				<th style="width: 350px;">會員地址</th>
+				<th style="width: 150px;">註冊時間</th>
+				<th>檢舉次數</th>
+				<th>停權狀態</th>
+				<th colspan="3"></th>
+				</tr>`+content);
+		
 	}
     });  
 // }
@@ -144,31 +157,17 @@ var currentPage = 1;
 
 		<table class="table1" style="border: 1px black; text-align: center;"
 			border="1">
-			<tr>
-				<td style="border: 0px" align="right">
-					<form action="<c:url value='#'/>" method="get">
-						<input name="apply" type="submit" value="新增">
-					</form>
-				</td>
-				<td style="border: 0px; text-align: right" colspan="12">
-					<form action="<c:url value='#'/>" method="get">
+			<tr style="border: 0px" colspan="11">
+				<td>
+					<button class="float-left" type="button" name="apply">新增</button>
+					<form class="float-right" action="<c:url value='#'/>" method="get">
 						<label for="">會員編號:</label> <input type="text" id="selectname"
 							name="selectname"> &nbsp; <input name="selectone"
 							type="submit" value="查詢">
 					</form>
 				</td>
 			</tr>
-			<tr>
-				<th>買賣家</th>
-				<th style="width: 100px;">會員編號</th>
-				<th style="width: 100px;">會員名稱</th>
-				<th style="width: 130px;">會員電話</th>
-				<th style="width: 350px;">會員地址</th>
-				<th style="width: 150px;">註冊時間</th>
-				<th>檢舉次數</th>
-				<th>停權狀態</th>
-				<th colspan="3"></th>
-			</tr>
+
 			<tr id="member_tr"></tr>
 			<tr>
 				<td style="border: 0px; text-align: center;" colspan="12">
@@ -188,7 +187,6 @@ var currentPage = 1;
 				</td>
 			</tr>
 		</table>
-
 	</div>
 
 
