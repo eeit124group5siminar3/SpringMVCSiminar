@@ -1,4 +1,4 @@
-package tw.group5.active.model;
+package tw.group5.active.dao;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ import org.springframework.aop.interceptor.SimpleTraceInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import tw.group5.active.model.Active;
 
 @Repository("activeDAO")
 public class ActiveDAO {

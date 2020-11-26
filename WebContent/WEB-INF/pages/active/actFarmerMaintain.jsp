@@ -92,7 +92,7 @@
 				<tr>
 					<td style="border: 0px" align="right" colspan="10">
 						<form action="<c:url value='/actFarmerPreInsert.do'/>"
-							method="get">
+								method="get">
 							<input name="apply" type="submit" value="申請">
 						</form>
 					</td>

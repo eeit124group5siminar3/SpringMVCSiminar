@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import tw.group5.active.model.ActFarmer;
-import tw.group5.active.model.ActFarmerService;
+import tw.group5.active.service.ActFarmerService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
