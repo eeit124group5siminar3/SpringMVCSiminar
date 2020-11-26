@@ -71,6 +71,9 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.listOfBookmark(mem_no);
 	}
 	
-
+	@Override
+	public boolean deleteBookmark(String rec_id) {
+		return rDAO.deleteBookmark(rec_id);
+	}
 
 }

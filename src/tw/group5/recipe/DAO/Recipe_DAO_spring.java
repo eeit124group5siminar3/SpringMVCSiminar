@@ -103,10 +103,7 @@ public class Recipe_DAO_spring {
 	public boolean delete(String rec_id) {
 		Session session = sessionFactory.getCurrentSession();
 //		session.beginTransaction();
-		System.out.println(1);
-		System.out.println(rec_id);
 		Recipe_Bean result = session.get(Recipe_Bean.class, rec_id);
-		System.out.println(rec_id);
 		if (result != null) {
 			session.delete(result);
 //			session.getTransaction().commit();
@@ -163,5 +160,21 @@ public class Recipe_DAO_spring {
 		List<Bookmark_Bean> list = query.list();
 		return list;
 	}
+	
+	//delete bookmark
+	public List<Bookmark_Bean> deleteBookmark(String rec_id,Integer mem_no) {
+		Session session = sessionFactory.getCurrentSession();
+		Bookmark_Bean result=session.get(Bookmark_Bean.class,rec_id);
+		if(result!=null) {
+			session.delete(rec_id);
+			String hql="From Bookmark_Bean where member_no=:mem_no order by member_no";
+			Query<Bookmark_Bean> query=session.createQuery(hql);
+			query.setParameter("mem_no", mem_no);
+			List<Bookmark_Bean> list=query.list();
+			return list;
+		}
+		return null ;
+	}
+
 
 }

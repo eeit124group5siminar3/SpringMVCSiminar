@@ -48,9 +48,9 @@
 
 	 
 	 
-/* .heart:hover{ */
-/* 	 color:red; */
-/* }	  */
+ .heart:hover{ 
+ 	 color:gray; 
+ }	  
 
 
 
@@ -60,6 +60,7 @@
 </head>
 <body>
 <body class="goto-here">
+<div id="deleteSuccess">
 
 
 		<jsp:include page="../header.jsp" />
@@ -131,11 +132,11 @@
 
 
 
-	    					<div style="float: right;">
+	    					<div style="float: right;" class="deleteRecipe">
 
-	    							<a href="<c:url value='/bookmark?rec_id=${BeanToken.rec_id}'/>" class="heart d-flex justify-content-center align-items-center " id="heart" >
-	    								<span><i class="ion-ios-heart" style="color: red;"></i></span>
-	    							</a>
+	    							<span class="heart d-flex justify-content-center align-items-center "  >
+	    								<span><i class="ion-ios-heart" style="color: red" id="heart" onclick="fun(${BeanToken.rec_id})"></i></span>
+	    							</span>
     						</div>
     					</div>
     				</div>
@@ -166,89 +167,26 @@
 
 	<!------------------------------------------------------------------>
 	<jsp:include page="../footer.jsp" />
+</div>
 
 	<script type="text/javascript">
-	$(function(){
-		 				
-		console.log(searchInput)
-		var searchSuccess=$("#searchSuccess");
-// 		var params=$('#search').serialize(); //把id为login的form表单里的参数自动封装为参数传递
-		$("#send").click(function(){
-		var searchInput=$('#searchInput').val();
-        console.log('-------------------------'+searchInput);
-			$.ajax({
-				type:"GET",
-				url:"./searchSubmit.controller",
-// 				dataType:"json",
-				contentType: "application/json; charset=utf-8",
-// 				async : true,
-		        data:{
-			        	"input":searchInput}, 						 
-// 					'input='+searchInput,
- 				beforeSend: function(XMLHttpRequest) {
-            		console.log(XMLHttpRequest);
-        			},
-				success:function(data){
-					$("#searchSuccess").html(data);
-// 					alert("successsssssssss");
-       				console.log(data.length);
-//            	     $.each(data,function(i,list){
-//            	      alert(list[0]);
-//            	     });
-						
-       			    var html = "";
-       			    var str=" ";
-                    for(var i=0;i<data.length;i++){    //遍歷data數組
-                         var ls = data[i];   
-                         var ingredients_A=ls.ingredients_A;
+	function fun(rec_id){
+		var deleteSuccess=document.getElementById("deleteSuccess");
+		var xhr = new XMLHttpRequest();	
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState === 4) {
+				// 伺服器回應成功
+				if (xhr.status === 200) {
+					// 收到伺服器的回應
+					deleteSuccess.innerHTML= xhr.responseText;
+				}
+			}	
+		}
+		var url = "<c:url value='/myRecipe?rec_id=" + rec_id + "' />"
+		xhr.open("GET",url,true);
+		xhr.send();
+		}
 
-//                           	searchProduct(ingredients_A);
-//                          html +=
-//                          "<div align='center'><p><a href='<c:url value='/RetrieveSearch/?searchString="+ingredients_A+"&search="+str+"'/>'>"+ls.ingredients_A+"</a></p>"
-//                          "<div align='center'><p><a href='<c:url value='/RetrievePageProducts?searchString="+ingredients_A+"&search="+str+"'/>'>"+ls.ingredients_A+"</a></p>"
-//                       "<div align='center'><p><a href='<c:url value='/searchProducts?search="+ingredients_A+"'/>'>"+ls.ingredients_A+"</a></p>"
-//                       "<div align='center'><p><a href='#' onclick='getProductDetail("+ingredients_A+")'>"+ls.ingredients_A+"</a></p>"
-                         
-//                          +"<button name='searchButton' style='border-radius: 5px;'onclick='searchProduct()'>"+查詢+"</button>"
-
-//                          "<p><a href='<c:url value='/searchSubmit.controller?rec_id="+ls.rec_id+"'/>'>"+ls.name+"</a></p>"
-//                          +"<p>"+ls.ingredients_A+"</p>"
-//                          +"<p>"+ls.ingredients_B+"</p>"
-//                          +"<p>"+ls.cate+"</p>"
-//                          +"<p>"+ls.method+"</p></div><hr>";         
-
-
-
-
-		           ` <div class="blog-entry align-self-stretch d-md-flex">  
-		              <a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="block-20" 
-			              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${ls.rec_id}'/>');">
-		              </a>
-		              <div class="text d-block pl-md-4">
-
-		                <h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-		                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="btn btn-primary py-2 px-3">Read more</a></p>
-		              </div>
-		            </div>
-		          </div>`;
-
- 
-
-
-                         
-                		console.log('ls.ingredients_A: '+ls.ingredients_A);
-//                 		searchProduct(ls.ingredients_A);
-                    	}
-                  		//在html頁面id=test的標籤顯示html内容
-                  		console.log(html);
-                        $("#searchSuccess").html(html); 
-						},
-				error:function(){
-					}	
-				});
-			});
-			});
 
 </script>
 </body>

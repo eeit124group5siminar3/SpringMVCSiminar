@@ -145,7 +145,7 @@ public class Recipe_Controller {
 		return "recipe/recipe_blog";
 	}
 	
-	
+	//bookmark
 	@GetMapping(value="/bookmark",produces ="text/plain;charset=UTF-8")
 	public String bookmark(@RequestParam(name="rec_id",required = false)String rec_id) {
 		if (session.getAttribute("login_ok") != null) {
@@ -164,6 +164,7 @@ public class Recipe_Controller {
 		return "redirect:/frontPage.controller";
 	}
 	
+	// search bookmark
 	@GetMapping(value="myRecipe")
 	public String myRecipe(Model m) {
 		List<Recipe_Bean> searchLove=new ArrayList<Recipe_Bean>();
@@ -180,11 +181,20 @@ public class Recipe_Controller {
 				}
 			}
 			m.addAttribute("searchLove",searchLove);
+			return "recipe/recipe_bookmark";
 		}else {
 			return "redirect:/login.controller";
 		}
-		return "recipe/recipe_bookmark";
 	}
+	
+	
+	//delete bookmark
+//	@GetMapping(value = "/removeMyRecipe")
+//	public String removeMyRecipe(String rec_id) {
+//		service.deleteBookmark(rec_id);
+//		service.listOfBookmark(mem_no)
+//		return rec_id;
+//	}
 	
 }
 
