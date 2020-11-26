@@ -204,9 +204,11 @@ public class Member_DAO {
 		Integer pageNo = (intpage-1) * 10;
 		
 		Query<Member_SignUp> query = session.createQuery("From Member_SignUp", Member_SignUp.class);
+
 		query.setFirstResult(pageNo);
 		query.setMaxResults(10);
 		List<Member_SignUp> list = query.list();
+		
 		
 		return list;
 	}

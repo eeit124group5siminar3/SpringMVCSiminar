@@ -1,5 +1,7 @@
 package tw.group5.admin_menage_members.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,17 +35,11 @@ public class Admin_ManageMembersController {
 	public Map<String, Object> processManageMembers(
 			@PathVariable(name = "pageNo") String pageNo) {
 		
-		System.out.println("yoyoyoyoyoyoyoyoyoyo");
-		System.err.println(pageNo);
-
 		List<Member_SignUp> member_data = member_Service.select_member(pageNo);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("data", member_data);
-		
-		
-		
 		
 		return map;
 	}

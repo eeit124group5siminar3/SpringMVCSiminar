@@ -1,6 +1,8 @@
 package tw.group5.member_SignUp.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="Member_SignUp")
@@ -23,6 +27,7 @@ public class Member_SignUp implements Serializable {
 	private String member_email;
 	private String member_password;
 	private String member_name;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date member_birthday;
 	private String member_id;
 	private String member_cellphone;
@@ -34,6 +39,7 @@ public class Member_SignUp implements Serializable {
 	private String e_paper;
 	private String member_bank_code;
 	private String member_bank_account;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date member_signup_date;
 	
 
@@ -137,7 +143,9 @@ public class Member_SignUp implements Serializable {
 	}
 
 	@Column(name="MEMBER_BIRTHDAY")
-	public Date getMember_birthday() {
+	public Date getMember_birthday() throws ParseException {
+//		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+//		Date aaaDate = sdFormat.parse(sdFormat.format(member_birthday));
 		return member_birthday;
 	}
 
