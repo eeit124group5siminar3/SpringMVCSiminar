@@ -1,5 +1,7 @@
 package tw.group5.member_SignUp.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,9 @@ public class Member_Service {
 			String member_cellphone, String member_address, String e_paper,String member_bank_code, String member_bank_account) {
 		return memberDao.updata_member_data(member_email, member_permissions, password, member_cellphone,
 				member_address, e_paper,member_bank_code,member_bank_account);
+	}
+	public List<Member_SignUp> select_member(Integer pageNo) {
+		return memberDao.Select_Member(pageNo);
+		
 	}
 }

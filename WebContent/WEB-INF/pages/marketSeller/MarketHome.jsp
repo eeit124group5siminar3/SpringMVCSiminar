@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-<title>農郁-商城購物車</title>
+<title>農郁-市場</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,52 +18,56 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
 	rel="stylesheet">
+
 <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="css/animate.css">
+
 <link rel="stylesheet" href="css/owl.carousel.min.css">
 <link rel="stylesheet" href="css/owl.theme.default.min.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
+
 <link rel="stylesheet" href="css/aos.css">
+
 <link rel="stylesheet" href="css/ionicons.min.css">
+
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mall.css">
-<style>
-.col-lg-4 {
-	-webkit-box-flex: 0;
-	-ms-flex: 0 0 100%;
-	flex: 0 0 100%;
-	max-width: 100%;
-}
-</style>
 </head>
 <body class="goto-here">
+
+
 	<jsp:include page="../header.jsp" />
+
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_1.jpg');">
+		style="background-image: url('images/bg_1.jpg');" id="product_top">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span>
+						<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
 					</p>
-					<h1 class="mb-0 bread">我的購物車</h1>
+					<h1 class="mb-0 bread">農郁市集</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<section class="ftco-section ftco-cart" id="cartContent"></section>
+	<section class="ftco-section" id="mainContent">
 
+
+
+	</section>
 
 	<jsp:include page="../footer.jsp" />
-
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
@@ -87,24 +92,23 @@
 	<script src="js/jquery.animateNumber.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/scrollax.min.js"></script>
-	<!-- 	<script -->
-	<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-	<!-- 	<script src="js/google-map.js"></script> -->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-	<jsp:include page="../js/mall.jsp" />
-	<script>
+  <script>
 		$(document).ready(function() {
-// 			var cartcontent = document.getElementById("cartContent");
+			// 			var cartcontent=document.getElementById("cartContent");
 			$.ajax({
-				url : "CartContent",
+				url : "SellerContent",
 				type : "POST",
+				data : {"pageNo":1},
 				datatype : "html",
 				success : function(data, status) {
-					$("#cartContent").html(data);
+					$("#mainContent").html(data);
 				},
 				error : function(data, status) {
-					$("#cartContent").html(data);
-					console.log(data);
+					$("#mainContent").html(data);
 				}
 			});
 		});

@@ -1,13 +1,13 @@
 package tw.group5.member_SignUp.model;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-
-import com.sun.jdi.connect.spi.Connection;
 
 @Repository("memberDao")
 public class Member_DAO {
@@ -190,7 +190,20 @@ public class Member_DAO {
 		}
 		return false;
 	}
-
+	
+	//Admin會員搜尋
+	public List<Member_SignUp> Select_Member(Integer page) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		Integer pageNo = (page-1) * 10;
+		
+		Query<Member_SignUp> query = session.createQuery("From Member_SignUp", Member_SignUp.class);
+		query.setFirstResult(pageNo);
+		query.setMaxResults(10);
+		List<Member_SignUp> list = query.list();
+		
+		return list;
+	}
 
 
 }

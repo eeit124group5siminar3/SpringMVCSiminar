@@ -69,10 +69,11 @@ public class ActImageController {
 		byte[] buffer = new byte[81920];
 		int len = 0;
 		while ((len = inStream.read(buffer)) != -1) {
-			outStream.write(buffer, 0, len);
+		outStream.write(buffer, 0, len);
 		}
 		inStream.close();
 		return outStream.toByteArray();
+		
 	}
 
 }
