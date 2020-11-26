@@ -37,7 +37,7 @@ var currentPage = 1;
 		content="";
 		for(var i=0 ; i<data1.length ; i++){
 			content+=
-				`<tr>
+				`
 				<td>\${data1[i].member_permissions}</td>
 				<td>\${data1[i].member_no}</td>
 				<td>\${data1[i].member_name}</td>
@@ -66,8 +66,7 @@ var currentPage = 1;
 						value="\${data1[i].member_no}"> <input name="delete"
 						type="submit" value="刪除">
 				</form>
-				</td>
-				</tr>`;
+				</td>`;
 		}
 		$('#member_tr').html(content);
 	}
@@ -170,7 +169,7 @@ var currentPage = 1;
 				<th>停權狀態</th>
 				<th colspan="3"></th>
 			</tr>
-			<div id="member_tr"></div>
+			<tr id="member_tr"></tr>
 			<tr>
 				<td style="border: 0px; text-align: center;" colspan="12">
 					<nav aria-label="Page navigation example">
