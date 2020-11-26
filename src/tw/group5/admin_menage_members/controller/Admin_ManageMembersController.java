@@ -35,13 +35,10 @@ public class Admin_ManageMembersController {
 		
 		System.out.println("yoyoyoyoyoyoyoyoyoyo");
 		System.err.println(pageNo);
-//		Member_Service member_Service = new Member_Service();
+
 		List<Member_SignUp> member_data = member_Service.select_member(pageNo);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		Member_SignUp member_SignUp = member_data.get(1);
-		System.out.println("資料是+++"+member_SignUp);
 		
 		map.put("data", member_data);
 		
