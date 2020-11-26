@@ -72,31 +72,7 @@
 
 </head>
 <body class="goto-here">
-	<div class="py-1 bg-primary">
-		<div class="container">
-			<div
-				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
-				<div class="col-lg-12 d-block">
-					<div class="row d-flex">
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-phone2"></span>
-							</div>
-							<span class="text">0800-092-000</span>
-						</div>
-						<div class="col-md pr-4 d-flex topper align-items-center">
-							<div
-								class="icon mr-2 d-flex justify-content-center align-items-center">
-								<span class="icon-paper-plane"></span>
-							</div>
-							<span class="text">service@nonre.com</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 		<jsp:include page="../header.jsp" />
 
 
@@ -120,7 +96,7 @@
 						<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
 					</h2>
 					<hr>
-					<p>食材: ${BeanToken.ingredients_A} </p>	
+					<a href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>"><p>食材: ${BeanToken.ingredients_A} </p></a>	
 					<p>食材: ${BeanToken.ingredients_B} </p>
 					<p>介紹 : ${BeanToken.desc}</p>				
 					<p>料理方法 : ${BeanToken.method}</p>
@@ -248,5 +224,25 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		// 			var cartcontent=document.getElementById("cartContent");
+		$.ajax({
+			url : "MallContent",
+			type : "GET",
+			data : {"categoryId":0,"pageNo":1},
+			datatype : "html",
+			success : function(data, status) {
+				$("#mainContent").html(data);
+			},
+			error : function(data, status) {
+				$("#mainContent").html(data);
+			}
+		});
+	});
+
+	</script>
 </body>
 </html>

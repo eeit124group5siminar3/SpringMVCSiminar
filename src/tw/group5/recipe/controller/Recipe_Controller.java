@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -20,13 +21,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import oracle.net.aso.m;
 import tw.group5.member_SignUp.model.Member_SignUp;
+import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
+import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
@@ -139,6 +145,56 @@ public class Recipe_Controller {
 		return "recipe/recipe_blog";
 	}
 	
+	//bookmark
+	@GetMapping(value="/bookmark",produces ="text/plain;charset=UTF-8")
+	public String bookmark(@RequestParam(name="rec_id",required = false)String rec_id) {
+		if (session.getAttribute("login_ok") != null) {
+			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
+			Integer mem_no=OK.getMember_no();
+			Bookmark_Bean bean = new Bookmark_Bean();
+			bean.setMember_no(mem_no);
+			System.out.println(mem_no);
+			bean.setRec_id(rec_id);
+			System.out.println(rec_id);
+			service.bookmark(bean);
+		}
+		 else if (session.getAttribute("login_ok") == null) {
+				return "redirect:/login.controller";
+			}
+		return "redirect:/frontPage.controller";
+	}
+	
+	// search bookmark
+	@GetMapping(value="myRecipe")
+	public String myRecipe(Model m) {
+		List<Recipe_Bean> searchLove=new ArrayList<Recipe_Bean>();
+		if (session.getAttribute("login_ok") != null) {
+			Member_SignUp mbean = (Member_SignUp) session.getAttribute("login_ok");
+			Integer mem_no = mbean.getMember_no();	
+			List<Recipe_Bean> searchAll=service.listOfJavaBean();
+			List<Bookmark_Bean> bookmark=service.listOfBookmark(mem_no);
+			for(Bookmark_Bean b:bookmark) {
+				for(Recipe_Bean all:searchAll) {
+					if(b.getRec_id().equals(all.getRec_id())) {
+						searchLove.add(all);
+					}
+				}
+			}
+			m.addAttribute("searchLove",searchLove);
+			return "recipe/recipe_bookmark";
+		}else {
+			return "redirect:/login.controller";
+		}
+	}
+	
+	
+	//delete bookmark
+//	@GetMapping(value = "/removeMyRecipe")
+//	public String removeMyRecipe(String rec_id) {
+//		service.deleteBookmark(rec_id);
+//		service.listOfBookmark(mem_no)
+//		return rec_id;
+//	}
 	
 }
 
