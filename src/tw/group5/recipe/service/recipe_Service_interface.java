@@ -28,4 +28,6 @@ public interface recipe_Service_interface {
 	Bookmark_Bean bookmark(Bookmark_Bean bean);
 
 	List<Bookmark_Bean> listOfBookmark(Integer mem_no);
+
+	boolean deleteBookmark(String rec_id);
 }
