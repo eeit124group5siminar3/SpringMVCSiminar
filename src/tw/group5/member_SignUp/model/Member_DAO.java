@@ -1,5 +1,6 @@
 package tw.group5.member_SignUp.model;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -29,6 +30,10 @@ public class Member_DAO {
 
 		// 若無資料回傳null
 		if (result.uniqueResult() == null) {
+			
+			Date now_date = new Date();
+			member_data.setMember_signup_date(now_date);
+			
 			session.save(member_data);
 			System.out.println("會員資料註冊成功");
 			return true;
@@ -192,10 +197,11 @@ public class Member_DAO {
 	}
 	
 	//Admin會員搜尋
-	public List<Member_SignUp> Select_Member(Integer page) {
+	public List<Member_SignUp> Select_Member(String page) {
 		Session session = sessionFactory.getCurrentSession();
 		
-		Integer pageNo = (page-1) * 10;
+		int intpage = Integer.valueOf(page);
+		Integer pageNo = (intpage-1) * 10;
 		
 		Query<Member_SignUp> query = session.createQuery("From Member_SignUp", Member_SignUp.class);
 		query.setFirstResult(pageNo);

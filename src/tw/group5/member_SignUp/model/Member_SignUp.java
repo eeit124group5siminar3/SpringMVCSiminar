@@ -1,7 +1,7 @@
 package tw.group5.member_SignUp.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +34,8 @@ public class Member_SignUp implements Serializable {
 	private String e_paper;
 	private String member_bank_code;
 	private String member_bank_account;
+	private Date member_signup_date;
+	
 
 	public Member_SignUp() {
 
@@ -231,5 +233,14 @@ public class Member_SignUp implements Serializable {
 	
 	public void setMember_bank_account(String member_bank_account) {
 		this.member_bank_account = member_bank_account;
+	}
+	
+	@Column(name="MEMBER_SIGNUP_DATE")
+	public Date getMember_signup_date() {
+		return member_signup_date;
+	}
+	
+	public void setMember_signup_date(Date member_signup_date) {
+		this.member_signup_date = member_signup_date;
 	}
 }
