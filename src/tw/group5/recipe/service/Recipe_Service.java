@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.DAO.Recipe_DAO_spring;
+import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
@@ -60,4 +61,16 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.getProducts(searchString);
 	}
 	
+	@Override
+	public Bookmark_Bean bookmark(Bookmark_Bean bean){
+		return rDAO.bookmark(bean);
+	}
+	
+	@Override
+	public List<Bookmark_Bean> listOfBookmark(Integer mem_no){
+		return rDAO.listOfBookmark(mem_no);
+	}
+	
+
+
 }
