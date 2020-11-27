@@ -113,12 +113,10 @@ public class Recipe_Controller_update {
 		System.out.println("mem_no: "+mem_no);
 		List<Recipe_Bean> list=service.listOfJavaBean();
 		List<Recipe_Bean> user_recipe=new ArrayList<Recipe_Bean>();
-		System.out.println("111111111111111111111111111111");
 
 		for(Recipe_Bean r:list) {
 			if(r.getMember_no()==(mem_no)) {
 				user_recipe.add(r);
-				System.out.println("succccccccccccccccccccccess");
 
 			}
 		}

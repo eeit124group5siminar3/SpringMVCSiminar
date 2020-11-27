@@ -126,7 +126,7 @@ var totalPages;
 function list(){
 	$.get({
 	url:"${pageContext.request.contextPath}/actFarmerList.do/"+currentPage,
-	success:function(response){
+	success:function(response){ 
 		console.log(response);
 		let data = response.data;
 		let content="";

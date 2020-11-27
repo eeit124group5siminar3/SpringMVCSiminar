@@ -97,21 +97,7 @@ public class Recipe_Controller_search {
 		return rec_id;
 	}
 	
-	@GetMapping(value = "/searchProducts",produces = "application/json;charset=UTF-8")
-	public String searchProduct(@RequestParam(value = "searchString", required = false) String searchString, Model model,
-			HttpServletRequest request) {
-//		HttpSession session = request.getSession(false);
-//		if (searchString == null || searchString.length() == 0) {
-//			model.addAttribute("searchString", null);
-//			service.setSearchString(null);
-//		} else {
-//			model.addAttribute("searchString", searchString);
-//			service.setSearchString(searchString);
-//		}
-//		request.setAttribute("searchString", searchString);
-		List<ProductBean> list=service.getProducts(searchString);
-		return "mall/shop";
-	}
+
 	
 	
 	

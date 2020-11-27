@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.group5.active.model.ActFarmer;
-import tw.group5.active.model.ActFarmerService;
+import tw.group5.active.service.ActFarmerService;
 
 @Controller
 public class ActImageController {

@@ -14,13 +14,79 @@
 <style>
 .table1 {
 	position: absolute;
-	top: 30%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 </style>
 </head>
 <body>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+		crossorigin="anonymous"></script>
+	<script>
+$(document).ready(function(){
+var currentPage = 1;
+	$.get({
+		url:"${pageContext.request.contextPath}/manageMembersData.controller/"+currentPage,
+		success:function(data){
+		console.log(data);
+		let data1 = data.data;
+		content="";
+		for(var i=0 ; i<data1.length ; i++){
+			content+=
+				`
+				<tr>
+				<td>\${data1[i].member_permissions}</td>
+				<td>\${data1[i].member_no}</td>
+				<td>\${data1[i].member_name}</td>
+				<td>\${data1[i].member_cellphone}</td>
+				<td>\${data1[i].member_address}</td>
+				<td>\${data1[i].member_signup_date}</td>
+				<td>\${data1[i].member_gg}</td>
+				<td>\${data1[i].member_lock_acc}</td>
+				<td>
+					<form action="#" method="get">
+						<input type="hidden" id="actId" name="actId"
+						value="\${data1[i].member_no}"> <input name="look"
+						type="submit" value="檢視">
+					</form>
+				</td>
+				<td>
+					<form action="#" method="get">
+						<input type="hidden" id="actId" name="actId"
+						value="\${data1[i].member_no}"> <input name="update"
+						type="submit" value="修改">
+					</form>
+				</td>
+				<td>
+					<form action="#" method="post">
+						<input type="hidden" id="actId" name="actId"
+						value="\${data1[i].member_no}"> <input name="delete"
+						type="submit" value="刪除">
+				</form>
+				</td>
+				</tr>`;
+		}
+		$('#member_tr').html(
+				`
+				<tr>
+				<th>買賣家</th>
+				<th style="width: 100px;">會員編號</th>
+				<th style="width: 100px;">會員名稱</th>
+				<th style="width: 130px;">會員電話</th>
+				<th style="width: 350px;">會員地址</th>
+				<th style="width: 150px;">註冊時間</th>
+				<th>檢舉次數</th>
+				<th>停權狀態</th>
+				<th colspan="3"></th>
+				</tr>`+content);
+		
+	}
+    });  
+// }
+})
+</script>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
@@ -34,7 +100,9 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="<c:url value='adminBackstage.controller' />" class="nav-link">回首頁</a></li>
+					<li class="nav-item active"><a
+						href="<c:url value='adminBackstage.controller' />"
+						class="nav-link">回首頁</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">平台管理</a>
@@ -89,72 +157,35 @@
 
 		<table class="table1" style="border: 1px black; text-align: center;"
 			border="1">
-			<tr>
-				<td style="border: 0px" align="right">
-					<form action="<c:url value='#'/>" method="get">
-						<input name="apply" type="submit" value="新增">
-					</form>
-				</td>
-				<td style="border: 0px; text-align: right" colspan="12">
-					<form action="<c:url value='#'/>" method="get">
+			<tr style="border: 0px" colspan="11">
+				<td>
+					<button class="float-left" type="button" name="apply">新增</button>
+					<form class="float-right" action="<c:url value='#'/>" method="get">
 						<label for="">會員編號:</label> <input type="text" id="selectname"
 							name="selectname"> &nbsp; <input name="selectone"
 							type="submit" value="查詢">
 					</form>
 				</td>
 			</tr>
+
+			<tr id="member_tr"></tr>
 			<tr>
-				<th>買賣家</th>
-				<th style="width: 100px;">會員編號</th>
-				<th style="width: 100px;">會員名稱</th>
-				<th style="width: 130px;">會員電話</th>
-				<th style="width: 350px;">會員地址</th>
-				<th style="width: 150px;">註冊時間</th>
-				<th>檢舉次數</th>
-				<th>停權狀態</th>
-				<th colspan="4"></th>
+				<td style="border: 0px; text-align: center;" colspan="12">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</ul>
+					</nav>
+				</td>
 			</tr>
-			<c:forEach var="actFarmer" items="${collFarmer}">
-				<tr>
-					<td><c:out value="${actFarmer.actId}" /></td>
-					<td><c:out value="${actFarmer.actName}" /></td>
-					<td><c:out value="${actFarmer.actType}" /></td>
-					<td><c:out value="${actFarmer.actDateSta}" />&nbsp; <c:out
-							value="${actFarmer.actTimeSta}" /> 到 <c:out
-							value="${actFarmer.actDateEnd}" />&nbsp; <c:out
-							value="${actFarmer.actTimeEnd}" /></td>
-					<td><c:out value="${actFarmer.numLim}" /></td>
-					<td><c:out value="${actFarmer.price}" /></td>
-					<td><c:out value="${actFarmer.signDateSta}" /> <c:out
-							value="${actFarmer.signTimeSta}" /> 到 <c:out
-							value="${actFarmer.signDateEnd}" /> <c:out
-							value="${actFarmer.signTimeEnd}" /></td>
-					<td><c:out value="${actFarmer.actNum}" /></td>
-					<td><c:out value="${actFarmer.sigStat}" /></td>
-					<td>
-						<form action="<c:url value='/actFarmerPreRead.do'/>" method="get">
-							<input type="hidden" id="actId" name="actId"
-								value="${actFarmer.actId}"> <input name="look"
-								type="submit" value="檢視">
-						</form>
-					</td>
-					<td>
-						<form action="<c:url value='/actFarmerPreUpdate.do'/>"
-							method="get">
-							<input type="hidden" id="actId" name="actId"
-								value="${actFarmer.actId}"> <input name="update"
-								type="submit" value="修改">
-						</form>
-					</td>
-					<td>
-						<form action="<c:url value='/actFarmerDelete.do'/>" method="post">
-							<input type="hidden" id="actId" name="actId"
-								value="${actFarmer.actId}"> <input name="delete"
-								type="submit" value="刪除">
-						</form>
-					</td>
-				</tr>
-			</c:forEach>
 		</table>
 	</div>
 

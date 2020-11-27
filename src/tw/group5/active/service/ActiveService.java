@@ -1,9 +1,12 @@
-package tw.group5.active.model;
+package tw.group5.active.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import tw.group5.active.dao.ActiveDAO;
+import tw.group5.active.model.Active;
 
 @Service("activeService")
 public class ActiveService {

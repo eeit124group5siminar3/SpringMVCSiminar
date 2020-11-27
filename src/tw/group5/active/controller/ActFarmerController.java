@@ -33,9 +33,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.group5.active.model.ActFarmer;
-import tw.group5.active.model.ActFarmerService;
 import tw.group5.active.model.Active;
 import tw.group5.active.model.Clock;
+import tw.group5.active.service.ActFarmerService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
