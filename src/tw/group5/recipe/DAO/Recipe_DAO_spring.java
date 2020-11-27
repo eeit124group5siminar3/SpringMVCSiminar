@@ -13,14 +13,11 @@ import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class Recipe_DAO_spring {
-	// 取得Session
 	@Autowired
 	@Qualifier("sessionFactory")
-//	@Autowired(required=false) 找不到時可設為null
 	private SessionFactory sessionFactory;
 
 //	public Recipe_DAO_spring() {
@@ -176,5 +173,68 @@ public class Recipe_DAO_spring {
 		return null ;
 	}
 
+	
+	
+	
+	//-------------------取得分頁------------------------
+	
+	public final Integer RECORDS_PER_PAGE=5;
+	
+	private Integer pageNo=-1;
+	private Integer maintainPageNo=0;
+	//每頁顯示幾筆資料
+	private Integer recordsPerPage=RECORDS_PER_PAGE; 
+	private Integer totalPages=-1;
+	private Integer totalPageWithSearch=-1;
+	private String searchString;
+	
+	//計算總共幾頁
+	public Integer getTotalPages() {
+		totalPages=(int) Math.ceil(getRecordCounts()/(double)recordsPerPage);
+		return totalPages;
+	}
+	
+	//計算Search的總page
+	public Integer getTotalPageWithSearch() {
+		totalPageWithSearch=(int) Math.ceil(getRecordCounts()/(double)recordsPerPage);
+		return totalPageWithSearch;
+	}
+	
 
+	
+	
+	public Integer getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(Integer pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public Integer getMaintainPageNo() {
+		return maintainPageNo;
+	}
+
+	public void setMaintainPageNo(Integer maintainPageNo) {
+		this.maintainPageNo = maintainPageNo;
+	}
+
+//	public String getSearchString() {
+//		return searchString;
+//	}
+//
+//	public void setSearchString(String searchString) {
+//		this.searchString = searchString;
+//	}
+
+	//total
+	public long getRecordCounts() {
+		Session session=sessionFactory.getCurrentSession();
+		String hql="select count(*) from Recipe_Bean";
+		Query<Long> query = session.createQuery(hql);
+		Object getNumber=query.uniqueResult();
+		long longNumber = (long) getNumber;
+		Integer count=(int) longNumber;
+		return count;
+	}
 }

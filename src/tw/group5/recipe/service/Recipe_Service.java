@@ -70,10 +70,17 @@ public class Recipe_Service implements recipe_Service_interface {
 	public List<Bookmark_Bean> listOfBookmark(Integer mem_no){
 		return rDAO.listOfBookmark(mem_no);
 	}
-	
+
 	@Override
-	public boolean deleteBookmark(String rec_id) {
-		return rDAO.deleteBookmark(rec_id);
+	public List<Bookmark_Bean> deleteBookmark(String rec_id, Integer mem_no) {
+		return rDAO.deleteBookmark(rec_id, mem_no);
 	}
+
+	@Override
+	public long getRecordCounts() {
+		return rDAO.getRecordCounts();
+		
+	}
+	
 
 }

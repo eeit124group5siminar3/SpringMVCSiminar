@@ -29,5 +29,8 @@ public interface recipe_Service_interface {
 
 	List<Bookmark_Bean> listOfBookmark(Integer mem_no);
 
-	boolean deleteBookmark(String rec_id);
+	List<Bookmark_Bean> deleteBookmark(String rec_id,Integer mem_no);
+
+	long getRecordCounts();
+
 }
