@@ -19,6 +19,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.stereotype.Component;
 
 import javassist.Loader.Simple;
+import jdk.jfr.internal.PrivateAccess;
 
 @Entity
 @Table(name = "actOrd")
@@ -58,14 +59,7 @@ public class ActOrd {
 
 	@Id
 	@Column(name = "actOrdId")
-	public String getActOrdId() {
-		
-		SimpleDateFormat sDateFormat = new SimpleDateFormat();
-		Date date = new Date();
-		String strDate = sDateFormat.format(date);
-		System.out.println(strDate);
-		
-				
+	public String getActOrdId() {	
 		return actOrdId;
 	}
 
