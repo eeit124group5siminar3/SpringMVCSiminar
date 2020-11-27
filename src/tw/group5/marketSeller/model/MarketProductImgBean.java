@@ -24,6 +24,8 @@ import org.hibernate.annotations.Parameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "market_Product_Img")
 @Component

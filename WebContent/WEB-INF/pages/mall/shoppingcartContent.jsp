@@ -6,6 +6,8 @@
 	<div class="row">
 		<div class="col-md-12 ftco-animate">
 			<div class="cart-list">
+<%-- 				<a href="#" onclick="reduceItem(${anEntry.value.productId})"><span --%>
+<!-- 					class="ion-ios-close"></span></a> -->
 				<table class="table">
 					<thead class="thead-primary">
 						<tr class="text-center">
@@ -21,13 +23,14 @@
 						<c:forEach varStatus="stVar" var="anEntry"
 							items="${ShoppingCart.content}">
 							<tr class="text-center">
-								<td class="product-remove"><a href="#" onclick="reduceItem(${anEntry.value.productId})"><span
+								<td class="product-remove"><a href="#"
+									onclick="reduceItem(${anEntry.value.productId})"><span
 										class="ion-ios-close"></span></a></td>
 
 								<td class="image-prod"><div class="img"
 										style="background-image: url(<c:url value='retrieveImageServlet?id=${anEntry.value.productId}&type=PRODUCT' />);">
 										<c:if test="${anEntry.value.discount!=1}">
-										<span class='status'>-${Math.round((1 - anEntry.value.discount) * 100)}%</span>
+											<span class='status'>-${Math.round((1 - anEntry.value.discount) * 100)}%</span>
 										</c:if>
 									</div></td>
 
@@ -40,9 +43,11 @@
 
 								<td class="quantity">
 									<div class="input-group mb-3">
-										<input type="text" name="quantity" id="quantity"
-											class="quantity form-control input-number" value="${anEntry.value.qty}" onblur="changeQty(${anEntry.value.productId},${anEntry.value.stock})"min="1"
-											max="${anEntry.value.stock}">
+										<input type="text" name="quantity"
+											class="quantity form-control input-number"
+											value="${anEntry.value.qty}"
+											onblur="changeQty(event,${anEntry.value.productId},${anEntry.value.stock},${anEntry.value.qty})"
+											min="1" max="${anEntry.value.stock}">
 									</div>
 								</td>
 
@@ -62,9 +67,9 @@
 			<p class="d-flex">
 				<span>小計</span> <span>${ShoppingCart.subtotal}</span>
 			</p>
-<!-- 			<p class="d-flex"> -->
-<!-- 				<span>運費</span> <span>$0.00</span> -->
-<!-- 			</p> -->
+			<!-- 			<p class="d-flex"> -->
+			<!-- 				<span>運費</span> <span>$0.00</span> -->
+			<!-- 			</p> -->
 			<p class="d-flex">
 				<span>折扣</span> <span>${ShoppingCart.total-ShoppingCart.subtotal}</span>
 			</p>
@@ -74,8 +79,10 @@
 			</p>
 		</div>
 		<p>
-			<a href="<c:url value='/mall_checkout' />" class="btn btn-primary py-3 px-4">去結帳</a>
-			<a href="<c:url value='/mall_shop' />" class="btn btn-primary py-3 px-4">回商城</a>
+			<a href="<c:url value='/Mall_checkout' />"
+				class="btn btn-primary py-3 px-4">去結帳</a> <a
+				href="<c:url value='/mall_shop' />"
+				class="btn btn-primary py-3 px-4">回商城</a>
 		</p>
 	</div>
 </div>
@@ -99,28 +106,8 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-function changeQty(productId,stock){
-	var qty = $("#quantity").val();
-	if(qty>stock){
-		alert("購買超過庫存量");
-		}else
-	$.ajax({
-		url : "ChangeQty",
-		type : "POST",
-		data : {
-			"productId" : productId,
-			"qty":qty
-		},
-		datatype : "html",
-		success : function(data, status) {
-			$("#cartContent").html(data);
-		},
-		error : function(data, status) {
-			$("#cartContent").html(data);
-		}
-	}
-	);
-}
+
+
 // function reduceItem(productId){
 // 	$.ajax({
 // 		url : "DeleteOrder",

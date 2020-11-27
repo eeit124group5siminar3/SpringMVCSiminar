@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-<title>農郁-市場</title>
+<title>農郁-商城訂單</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,10 +40,7 @@
 <link rel="stylesheet" href="css/mall.css">
 </head>
 <body class="goto-here">
-
-
 	<jsp:include page="../header.jsp" />
-
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
@@ -55,16 +52,13 @@
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
 					</p>
-					<h1 class="mb-0 bread">農郁市集</h1>
+					<h1 class="mb-0 bread">商城訂單</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<section class="ftco-section" id="mainContent">
-
-
-
+	<section class="ftco-section" id="orderContent">
 	</section>
 
 	<jsp:include page="../footer.jsp" />
@@ -92,24 +86,28 @@
 	<script src="js/jquery.animateNumber.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/scrollax.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <!-- 	<script -->
 <!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
-  <script>
+	<jsp:include page="../js/mall.jsp" />
+
+	<script>
 		$(document).ready(function() {
-			// 			var cartcontent=document.getElementById("cartContent");
+			var pageNo=1;
+			if(${order_pageNo!=null}){
+				pageNo=`${order_pageNo}`;				
+					}
 			$.ajax({
-				url : "SellerContent",
+				url : "OrderContent",
 				type : "POST",
-				data : {"marketPageNo":1},
+				data : {"order_pageNo":pageNo},
 				datatype : "html",
 				success : function(data, status) {
-					$("#mainContent").html(data);
+					$("#orderContent").html(data);
 				},
 				error : function(data, status) {
-					$("#mainContent").html(data);
+					$("#orderContent").html(data);
 				}
 			});
 		});

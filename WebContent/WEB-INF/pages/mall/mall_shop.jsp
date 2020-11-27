@@ -59,22 +59,22 @@
 	</div>
 
 	<section class="ftco-section" id="mainContent">
-<!-- 		<div class="container"> -->
-<!-- 			<div class="row justify-content-center"> -->
-<!-- 				<div class="col-md-10 mb-5 text-center"> -->
-<!-- 					<ul class="product-category" id="product-category"></ul> -->
-<!-- 					<form class="product-category" action="javascript:void(0)" -->
-<!-- 						method="GET"> -->
-<!-- 						<input type="search" name="searchString" id="searchString" -->
-<%-- 							value="${searchString}" /> --%>
-<!-- 						<button name="searchButton" style="border-radius: 5px;" -->
-<!-- 							onclick="searchProduct(0)">查詢</button> -->
-<!-- 					</form> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="row  ftco-animate" id="mall_products"></div> -->
-<!-- 		</div> -->
-<!-- 		<div id="mall_pages"></div> -->
+		<!-- 		<div class="container"> -->
+		<!-- 			<div class="row justify-content-center"> -->
+		<!-- 				<div class="col-md-10 mb-5 text-center"> -->
+		<!-- 					<ul class="product-category" id="product-category"></ul> -->
+		<!-- 					<form class="product-category" action="javascript:void(0)" -->
+		<!-- 						method="GET"> -->
+		<!-- 						<input type="search" name="searchString" id="searchString" -->
+		<%-- 							value="${searchString}" /> --%>
+		<!-- 						<button name="searchButton" style="border-radius: 5px;" -->
+		<!-- 							onclick="searchProduct(0)">查詢</button> -->
+		<!-- 					</form> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 			<div class="row  ftco-animate" id="mall_products"></div> -->
+		<!-- 		</div> -->
+		<!-- 		<div id="mall_pages"></div> -->
 	</section>
 
 	<jsp:include page="../footer.jsp" />
@@ -102,9 +102,9 @@
 	<script src="js/jquery.animateNumber.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/scrollax.min.js"></script>
-<!-- 	<script -->
-<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-<!-- 	<script src="js/google-map.js"></script> -->
+	<!-- 	<script -->
+	<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+	<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
 	<jsp:include page="../js/mall.jsp" />
 
@@ -304,11 +304,19 @@
 		// 		}
 
 		$(document).ready(function() {
-			// 			var cartcontent=document.getElementById("cartContent");
+			var	categoryId=0;
+			if(${mall_categoryId!=null}){
+				categoryId=`${mall_categoryId}`;				
+					}
+			var pageNo=1;
+			if(${mall_pageNo!=null}){
+				pageNo=`${mall_pageNo}`;				
+					}
+			
 			$.ajax({
 				url : "MallContent",
 				type : "POST",
-				data : {"categoryId":0,"pageNo":1},
+				data : {"mall_categoryId":categoryId,"mall_pageNo":pageNo},
 				datatype : "html",
 				success : function(data, status) {
 					$("#mainContent").html(data);

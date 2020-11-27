@@ -57,54 +57,55 @@ public class Recipe_Controller {
 		List<Recipe_Bean> searchAll=service.listOfJavaBean();
 		m.addAttribute("searchAll", searchAll);
 			return "recipe/recipe_workpage";
+//			return "recipe/test";
 	}
 	
 	
-	@RequestMapping(path = "/workpage.controller",method = RequestMethod.POST)
-	public String workpage(@RequestParam(name="back",required = false)String back) {
-		if(back!=null) {
-			return "recipe/recipe_workpage";
-		}
-		return back;
-	}
+//	@RequestMapping(path = "/workpage.controller",method = RequestMethod.POST)
+//	public String workpage(@RequestParam(name="back",required = false)String back) {
+//		if(back!=null) {
+//			return "recipe/recipe_workpage";
+//		}
+//		return back;
+//	}
 	
 	
-	@RequestMapping(path = "/function.controller",method = RequestMethod.POST)
-	public String funChoose(@RequestParam String action) {
-		if (action.equals("上傳食譜")) {
-			if (session.getAttribute("login_ok") != null) {
-				Member_SignUp mbean = (Member_SignUp) session.getAttribute("login_ok");
-				Integer mem_no = mbean.getMember_no();
-				session.setAttribute("mem_no", mem_no);
-				if (mbean.getMember_email() != null && mbean.getMember_password() != null) {
-					System.out.println(session.getAttribute("mem_no"));
-					return "redirect:/uploadPage.controller";
-				}
-			} else if (session.getAttribute("login_ok") == null) {
-				return "redirect:/login.controller";
-			}
-
-		}
-		
-		
-		if (action.equals("修改食譜")) {
-			if (session.getAttribute("login_ok") != null) {
-				Member_SignUp mbean = (Member_SignUp) session.getAttribute("login_ok");
-				Integer mem_no = mbean.getMember_no();
-				session.setAttribute("mem_no", mem_no);
-				if (mbean.getMember_email() != null && mbean.getMember_password() != null) {
-					System.out.println(session.getAttribute("mem_no"));
-					return "redirect:/updatePage.controller";
-				}
-			} else if (session.getAttribute("login_ok") == null) {
-				return "redirect:/login.controller";
-			}
-		}
-		if ("搜尋料理".equals(action)) {
-			return "redirect:/searchPage.controller";
-		}
-		return "recipe/recipe_workpage";
-	}
+//	@RequestMapping(path = "/function.controller",method = RequestMethod.POST)
+//	public String funChoose(@RequestParam String action) {
+//		if (action.equals("上傳食譜")) {
+//			if (session.getAttribute("login_ok") != null) {
+//				Member_SignUp mbean = (Member_SignUp) session.getAttribute("login_ok");
+//				Integer mem_no = mbean.getMember_no();
+//				session.setAttribute("mem_no", mem_no);
+//				if (mbean.getMember_email() != null && mbean.getMember_password() != null) {
+//					System.out.println(session.getAttribute("mem_no"));
+//					return "redirect:/uploadPage.controller";
+//				}
+//			} else if (session.getAttribute("login_ok") == null) {
+//				return "redirect:/login.controller";
+//			}
+//
+//		}
+//		
+//		
+//		if (action.equals("修改食譜")) {
+//			if (session.getAttribute("login_ok") != null) {
+//				Member_SignUp mbean = (Member_SignUp) session.getAttribute("login_ok");
+//				Integer mem_no = mbean.getMember_no();
+//				session.setAttribute("mem_no", mem_no);
+//				if (mbean.getMember_email() != null && mbean.getMember_password() != null) {
+//					System.out.println(session.getAttribute("mem_no"));
+//					return "redirect:/updatePage.controller";
+//				}
+//			} else if (session.getAttribute("login_ok") == null) {
+//				return "redirect:/login.controller";
+//			}
+//		}
+//		if ("搜尋料理".equals(action)) {
+//			return "redirect:/searchPage.controller";
+//		}
+//		return "recipe/recipe_workpage";
+//	}
 	
 	@GetMapping("/getALLImage.controller")
 	@ResponseBody
@@ -195,6 +196,14 @@ public class Recipe_Controller {
 //		service.listOfBookmark(mem_no)
 //		return rec_id;
 //	}
+	
+	
+	@GetMapping(value="/tesstt")
+	public long test() {
+		long count=service.getRecordCounts();
+		System.out.println(count);
+		return count;
+	}
 	
 }
 
