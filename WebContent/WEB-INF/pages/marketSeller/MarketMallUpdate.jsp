@@ -66,28 +66,39 @@ body {
       </div>
     </div>
     <!-- 蔬菜圖 -->
-<h1 align="center">店家資訊</h1>
-		
 		<form:form id="form2" name="form2" method="post"
 				action="MarketMall.update" enctype="multipart/form-data"
 				align="center"
 				modelAttribute="mallBean">
-			
-			   <div>
-				<form:input type="hidden" id="memberNo" name="memberNo" path="memberNo" />
-				<form:label path="mallName">店家名稱:</form:label>
-				<form:input type="text" id="mallName" name="mallName" path="mallName" />
-			 <font color='red' size='-1'>
-              ${errors.errMallName}
-           </font>
-			</div>
-			  <div>
+<section class="ftco-section">				
+ <div class="container">
+    <div class="row justify-content-center">
+     <div class="col-xl-7 ftco-animate">
+		<h3 class="mb-4 billing-heading">店家資料</h3>
+		  <div class="row align-items-end">
+		     
+	          <div class="col-md-6">
+	             <div class="form-group">
+	                <form:input type="hidden" id="memberNo" name="memberNo" path="memberNo" />
+				    <form:label path="mallName">店家名稱:</form:label>
+				    <form:input type="text" id="mallName" name="mallName" path="mallName" />
+                     <font color='red' size='-1'>
+                          ${errors.errMallName}
+                     </font>
+	              </div>
+	          </div>
+	         <div class="w-100"></div>
+             <div class="col-md-6">
+              <div class="form-group">
 				<form:label path="address">地址</form:label> 
-				<form:input type="text" id="address" name="address" path="address" />
-		      <font color='red' size='-1'>
-                ${errors.errAddress}
-              </font>
-			  </div>
+				<form:input  type="text" id="address" name="address" path="address" />
+		          <font color='red' size='-1'>
+                   ${errors.errAddress}
+                  </font>
+                 
+              </div>
+             </div>
+		  
 			<div>
 				<form:label path="mallDescription">店家描述:</form:label> 
 				<form:textarea name="mallDescription" cols="80" rows="15" path="mallDescription"></form:textarea>
@@ -115,11 +126,15 @@ body {
 		</div>
 
 			<form:button value="Send" >更新</form:button>
+	 </div>		
+   </div>	
+  </div>	
+ </div>	
+</section> <!-- .section -->	
 			</form:form>
 			<form action="<c:url value='/'></c:url>" >
 			<input  type="submit" value="回首頁">
 			</form>
-		
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		 

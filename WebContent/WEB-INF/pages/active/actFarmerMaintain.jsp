@@ -82,16 +82,17 @@
 	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
 
 	<!-- --------一日農夫管理 內容區------------------------ -->
+<section class="ftco-section ftco-degree-bg">
 	<div align="center" id="backstage_page">
 
 		<div>
 			<h1 align="center">活動管理-一日農夫</h1>
-			<table align="center" style="border: 8px gray groove;" border="1">
+			<table align="center" style="border: 8px gray groove;" border="1"; >
 				<!-- 		<h2>活動列表</h2> -->
 				<tr>
 					<td style="border: 0px" align="right" colspan="10">
 						<form action="<c:url value='/actFarmerPreInsert.do'/>"
-							method="get">
+								method="get">
 							<input name="apply" type="submit" value="申請">
 						</form>
 					</td>
@@ -173,14 +174,14 @@
 						<form action="<c:url value='/SelectNameSeller.do'/>" method="get">
 							<label for="">活動名稱:</label> <input type="text" id="selectname"
 								name="selectname"> &nbsp; <input name="selectone"
-								type="submit" value="查詢單筆">
+								type="submit" value="查詢">
 						</form>
 					</td>
 			</table>
 	</div>
 	<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
 	<form>
-	<div id="bpaging" style="width: 1800px">
+	<div id="bpaging">
 	<table border="1" style="margin-right: 0px;">
 	<tr align="center">
 		<td width='80' height='20'><c:if test="${MaintainPageNo > 1}">
@@ -213,6 +214,7 @@
 </div>
 </form>
 </div>
+<section class="ftco-section ftco-degree-bg">
 			<!-- --------footer------------------------------------- -->
 			<footer class="ftco-footer backstage-footer-ground">
 				<jsp:include page="/WEB-INF/pages/footer.jsp" />

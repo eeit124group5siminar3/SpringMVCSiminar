@@ -366,8 +366,7 @@ $(function(){
 							<p></p>
 							<label for="inputPassword4">生日</label> <input type="text"
 								class="form-control"
-								placeholder="<jsp:getProperty name="reg_buyer"
-							property="member_birthday" />"
+								placeholder="${reg_buyer.member_birthday.toString().substring(0,10)}"
 								disabled>
 							<p></p>
 							<label for="inputPassword4">連絡電話</label> <input type="text"

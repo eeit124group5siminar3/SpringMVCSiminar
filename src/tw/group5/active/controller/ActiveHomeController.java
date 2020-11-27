@@ -34,7 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import oracle.security.o3logon.a;
 import tw.group5.active.model.Active;
-import tw.group5.active.model.ActiveService;
+import tw.group5.active.service.ActiveService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller

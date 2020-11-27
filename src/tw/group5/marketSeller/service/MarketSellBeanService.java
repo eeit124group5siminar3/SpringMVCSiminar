@@ -35,6 +35,18 @@ public class MarketSellBeanService implements IMarketSellBeanService {
 		// TODO Auto-generated method stub
 		return sDao.selectid(mid);
 	}
+
+	@Override
+	public List<MarketMallBean> selectAllmall(Integer page, Integer showData) {
+		// TODO Auto-generated method stub
+		return sDao.selectAllmall(page, showData);
+	}
+
+	@Override
+	public int sellerPages() {
+		// TODO Auto-generated method stub
+		return sDao.sellerPages();
+	}
 	
 	
 
