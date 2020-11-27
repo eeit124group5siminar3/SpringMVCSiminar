@@ -92,9 +92,10 @@
 	<script src="js/jquery.animateNumber.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="js/google-map.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- 	<script -->
+<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
   <script>
 		$(document).ready(function() {
@@ -102,7 +103,7 @@
 			$.ajax({
 				url : "SellerContent",
 				type : "POST",
-				data : {"pageNo":1},
+				data : {"marketPageNo":1},
 				datatype : "html",
 				success : function(data, status) {
 					$("#mainContent").html(data);

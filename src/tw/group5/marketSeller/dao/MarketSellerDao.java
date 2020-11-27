@@ -45,8 +45,6 @@ public class MarketSellerDao implements IMarketSellBeanService {
 	@Override
 	public MarketMallBean selectid(Integer mid) {
 		MarketMallBean result =getSession().get(MarketMallBean.class, mid);
-        System.out.println("我來了");		
-		System.err.println("你要是空的:"+ result);
 		if (result != null) {
 			return result;
 		}
@@ -73,7 +71,7 @@ public class MarketSellerDao implements IMarketSellBeanService {
 			page = 1;
 		}
 		if (showData == null) {
-			showData = 5;
+			showData = 2;
 		}
 		int startPosition =(page-1)*showData; //每頁從第幾筆開始
 		Query<MarketMallBean> query =getSession().createQuery("From MarketMallBean", MarketMallBean.class);
@@ -88,7 +86,6 @@ public class MarketSellerDao implements IMarketSellBeanService {
 	@Override
 	public int sellerPages() {
 		 Query query =getSession().createQuery("select count(*) From MarketMallBean");
-		 System.out.println("我應該要是數字"+query);
 		 long result = (long) query.uniqueResult();
 		 return(int)result;
 	}

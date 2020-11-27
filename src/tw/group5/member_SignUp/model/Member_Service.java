@@ -49,8 +49,12 @@ public class Member_Service {
 		return memberDao.updata_member_data(member_email, member_permissions, password, member_cellphone,
 				member_address, e_paper,member_bank_code,member_bank_account);
 	}
+	
 	public List<Member_SignUp> select_member(String pageNo) {
 		return memberDao.Select_Member(pageNo);
-		
+	}
+	
+	public Member_SignUp select_member_no(String member_no) {
+		return memberDao.Select_Member_no(member_no);
 	}
 }

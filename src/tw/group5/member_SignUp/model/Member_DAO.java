@@ -196,7 +196,7 @@ public class Member_DAO {
 		return false;
 	}
 	
-	//Admin會員搜尋
+	//Admin會員搜尋全部資料
 	public List<Member_SignUp> Select_Member(String page) {
 		Session session = sessionFactory.getCurrentSession();
 		
@@ -209,9 +209,23 @@ public class Member_DAO {
 		query.setMaxResults(10);
 		List<Member_SignUp> list = query.list();
 		
-		
 		return list;
 	}
-
+	
+	//Admin會員搜尋部分資料
+	public Member_SignUp Select_Member_no(String member_no) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		Query<Member_SignUp> query_member_no = session.createQuery("From Member_SignUp Where Member_no=?0",Member_SignUp.class);
+		Query<Member_SignUp> result = query_member_no.setParameter(0, member_no);
+		
+		if (result.uniqueResult() != null) {
+			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
+			return member_bean;
+		}
+		return null;		
+	}
+	
+	
 
 }
