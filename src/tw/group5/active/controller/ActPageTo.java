@@ -19,6 +19,12 @@ public class ActPageTo {
 		return "/active/actFarmerHome";
 	}
 	
+	//活動報名頁面
+	@RequestMapping(value = "/actSignFormPage")
+	public String actSignFormPage() {
+		return "active/actSignForm";
+	}
+	
 	
 
 

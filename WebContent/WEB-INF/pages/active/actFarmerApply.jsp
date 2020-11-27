@@ -174,9 +174,8 @@ function backHome(){
 </div>
 </section>
 <!-- --------------footer----------------------------------------------------------- -->
-
 	
-		<jsp:include page="/WEB-INF/pages/footer.jsp" />
+	<jsp:include page="/WEB-INF/pages/footer.jsp" />
 	
 
 	<div id="ftco-loader" class="show fullscreen">

@@ -74,7 +74,6 @@
 </head>
 
 <body class="goto-here">
-	-
 	<!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
@@ -91,8 +90,7 @@
 				<!-- 		<h2>活動列表</h2> -->
 				<tr>
 					<td style="border: 0px" align="right" colspan="10">
-						<form action="<c:url value='/actFarmerPreInsert.do'/>"
-								method="get">
+						<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get">
 							<input name="apply" type="submit" value="申請">
 						</form>
 					</td>
@@ -214,7 +212,7 @@
 </div>
 </form>
 </div>
-<section class="ftco-section ftco-degree-bg">
+</section>
 			<!-- --------footer------------------------------------- -->
 			<footer class="ftco-footer backstage-footer-ground">
 				<jsp:include page="/WEB-INF/pages/footer.jsp" />
