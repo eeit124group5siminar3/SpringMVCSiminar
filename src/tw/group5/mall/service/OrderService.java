@@ -60,4 +60,12 @@ public class OrderService {
 	public List<ProductOrderBean> getMemberOrders(int memberId) {
 		return odao.getMemberOrders(memberId);
 	}
+
+	public void setPageNo(Integer pageNo) {
+		odao.setPageNo(pageNo);
+	}
+
+	public int getTotalPages(Integer buyerId) {
+		return odao.getTotalPages(buyerId);
+	}
 }

@@ -53,6 +53,7 @@ public class DBService_for_Oracle {
 			+"BNO VARCHAR2(20 BYTE)," 
 			+"TOTAL NUMBER(20,2)," 
 			+"ORDERDATE DATE"
+			+"SHIPPINGTIME NUMBER(20)"
 			+ " )";
 	
 	private static final String CREATE_OrderDetails_Oracle = "Create Table ORDERDETAILS ("
