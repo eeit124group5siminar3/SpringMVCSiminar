@@ -45,8 +45,6 @@ public class MarketSellerDao implements IMarketSellBeanService {
 	@Override
 	public MarketMallBean selectid(Integer mid) {
 		MarketMallBean result =getSession().get(MarketMallBean.class, mid);
-        System.out.println("我來了");		
-		System.err.println("你要是空的:"+ result);
 		if (result != null) {
 			return result;
 		}

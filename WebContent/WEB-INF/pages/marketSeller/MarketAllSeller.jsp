@@ -51,11 +51,68 @@
 		<div class='col text-center'>
 			<div class='block-27'>
 				<ul>
-				
-                 <c:forEach var="item"  begin="1" end="${totalPages}" >
-                 <a href="SellerContent?pageNo=${item}">${item}</a>
-                 </c:forEach>
-                 
+					<c:choose>
+						<c:when test="${marketPageNo <= 1}">
+							<li><span>&lt;&lt;</span></li>
+							<li><span>&lt;</span></li>
+						</c:when>
+						<c:otherwise>
+							<li><a onclick='mPage(1)'>&lt;&lt;</a></li>
+							<li><a onclick='mPage(${marketPageNo - 1})'>&lt;</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+				     <c:choose>
+						<c:when test="${totalPages <= 5}">
+							<c:forEach begin="1" end="${totalPages}" step="1" var="i">
+								<c:choose>
+									<c:when test="${marketPageNo == i}">
+										<li class='active'><span>${i}</span></li>
+									</c:when>
+									<c:otherwise>
+										<li><a onclick='mPage(${i})'>${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:when>
+						<c:when test="${marketPageNo > (totalPages - 3)}">
+							<c:forEach begin="${totalPages - 4}" end="${totalPages}" step="1"
+								var="i">
+								<c:choose>
+									<c:when test="${marketPageNo == i}">
+										<li class='active'><span>${i}</span></li>
+									</c:when>
+									<c:otherwise>
+										<li><a onclick='mPage(${i})'>${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<c:forEach begin="${marketPageNo - 2}" end="${marketPageNo + 2}" step="1"
+								var="i">
+								<c:choose>
+									<c:when test="${marketPageNo == i}">
+										<li class='active'><span>${i}</span></li>
+									</c:when>
+									<c:otherwise>
+										<li><a onclick='mPage(${i})'>${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					
+                 	<c:choose>
+						<c:when test="${marketPageNo >= totalPages}">
+							<li><span>&gt;</span></li>
+							<li><span>&gt;&gt;</span></li>
+						</c:when>
+						<c:otherwise>
+							<li><a onclick='mPage(${marketPageNo + 1})'>&gt;</a></li>
+							<li><a onclick='mPage(${totalPages})'>&gt;&gt;</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</div>
@@ -81,6 +138,24 @@
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
-<jsp:include page="../js/mall.jsp" />
+<jsp:include page="../js/Market.jsp" />
 <script>
+function mPage(marketPageNo) {
+		console.log("我要進來囉");
+	$.ajax({
+		url : "SellerContent",
+		type : "POST",
+		data : {
+			"marketPageNo" : marketPageNo
+		},
+		datatype : "html",
+		success : function(data, status) {
+			$("#mainContent").html(data);
+		},
+		error : function(data, status) {
+			$("#mainContent").html(data);
+		}
+	});
+}
+
 </script>

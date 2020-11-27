@@ -34,24 +34,28 @@ public class MarketHome {
 	@PostMapping(value = "/SellerContent")
 	@ResponseBody
 	public ModelAndView showAllSeller(HttpServletRequest request,
-			@RequestParam(value = "pageNo", required = false) Integer pageNoP,
+			@RequestParam(value = "marketPageNo", required = false) Integer pageNoP,
 			@RequestParam(value = "searchString", required = false) String searchStringP
 			){
-		System.out.println("我來囉!");
 		HttpSession session = request.getSession(false);
-		Integer pageNo = (Integer) session.getAttribute("pageNo");
+		System.out.println("還沒 :"+pageNoP);
+		Integer pageNo = (Integer) session.getAttribute("marketPageNo");
+		System.out.println("抓session.getAttribute :"+pageNo);
 		int totalPages =sellerService.sellerPages();//總比數
 		if (pageNoP != null) {
 			pageNo=pageNoP;
 			session.setAttribute("marketPageNo", pageNo);
+			System.out.println("下面");
+			System.out.println("抓pageNo=pageNoP :"+pageNo);
 		}
 		List<MarketMallBean> list = sellerService.selectAllmall(pageNo,null);
 		int totalPage =(int) Math.ceil(totalPages*1.0 /2);//總頁數
+		System.out.println("總頁數 : "+totalPage);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/marketSeller/MarketAllSeller");
 		mav.addObject("sellerAll",list);
 		mav.addObject("totalPages",totalPage);
-		mav.addObject("pageNo",pageNo);
+		mav.addObject("marketPageNo",pageNo);
 		return mav;
 		
 	}
