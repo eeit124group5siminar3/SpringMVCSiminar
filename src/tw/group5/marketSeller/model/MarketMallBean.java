@@ -29,6 +29,8 @@ import org.hibernate.annotations.Parameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "market_Seller_Mall")
@@ -45,7 +47,7 @@ public class MarketMallBean {
 	private MultipartFile multipartFile;
     private Set<MarketProductTotalBean> marketProductTotalBean =
             new HashSet<MarketProductTotalBean>(0);
-	
+    
 	@Transient
 	public MultipartFile getMultipartFile() {
 		

@@ -37,19 +37,21 @@ public class MarketHome {
 			@RequestParam(value = "pageNo", required = false) Integer pageNoP,
 			@RequestParam(value = "searchString", required = false) String searchStringP
 			){
+		System.out.println("我來囉!");
 		HttpSession session = request.getSession(false);
 		Integer pageNo = (Integer) session.getAttribute("pageNo");
-		int totalPages =sellerService.sellerPages();
+		int totalPages =sellerService.sellerPages();//總比數
 		if (pageNoP != null) {
 			pageNo=pageNoP;
-			session.setAttribute("pageNo", pageNo);
+			session.setAttribute("marketPageNo", pageNo);
 		}
 		List<MarketMallBean> list = sellerService.selectAllmall(pageNo,null);
-		int totalPage =(int) Math.ceil(totalPages*1.0 /5);
+		int totalPage =(int) Math.ceil(totalPages*1.0 /2);//總頁數
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/marketSeller/MarketHome");
-		mav.addObject("seller_all",list);
-		mav.addObject("totalPage",totalPage);
+		mav.setViewName("/marketSeller/MarketAllSeller");
+		mav.addObject("sellerAll",list);
+		mav.addObject("totalPages",totalPage);
+		mav.addObject("pageNo",pageNo);
 		return mav;
 		
 	}
