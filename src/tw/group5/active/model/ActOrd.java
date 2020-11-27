@@ -18,8 +18,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.stereotype.Component;
 
-import javassist.Loader.Simple;
-import jdk.jfr.internal.PrivateAccess;
 
 @Entity
 @Table(name = "actOrd")
