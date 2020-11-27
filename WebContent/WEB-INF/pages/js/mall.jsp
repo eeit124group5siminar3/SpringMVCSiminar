@@ -2,14 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
+// 返回頁面
 	function goback() {
 		$.ajax({
 			url : "MallContent",
 			type : "POST",
 			data : {
-				"categoryId" : `${categoryId}`,
-				"pageNo" : `${pageNo}`,
-				"searchString" : `${searchString}`
+				"mall_categoryId" : `${mall_categoryId}`,
+				"mall_pageNo" : `${mall_pageNo}`,
+				"mall_searchString" : `${mall_searchString}`
 			},
 			datatype : "html",
 			success : function(data, status) {
@@ -20,14 +21,14 @@
 			}
 		});
 	}
-
+// 設定種類
 	function productCategory(categoryId) {
 		$.ajax({
 			url : "MallContent",
 			type : "POST",
 			data : {
-				"categoryId" : categoryId,
-				"pageNo" : 1
+				"mall_categoryId" : categoryId,
+				"mall_pageNo" : 1
 			},
 			datatype : "html",
 			success : function(data, status) {
@@ -38,16 +39,15 @@
 			}
 		});
 	}
-
-	function searchProduct() {
-		var searchString = $(".searchString").val();
+// 模糊查詢
+	function searchProduct() {	
 		var searchString = document.forms[0].elements[0].value;
 		$.ajax({
 			url : "MallContent",
 			type : "POST",
 			data : {
-				"searchString" : searchString,
-				"pageNo" : 1
+				"mall_searchString" : searchString,
+				"mall_pageNo" : 1
 			},
 			datatype : "html",
 			success : function(data, status) {
@@ -58,13 +58,13 @@
 			}
 		});
 	}
-
+// 商城頁面
 	function page(pageNo) {
 		$.ajax({
 			url : "MallContent",
 			type : "POST",
 			data : {
-				"pageNo" : pageNo
+				"mall_pageNo" : pageNo
 			},
 			datatype : "html",
 			success : function(data, status) {
@@ -92,7 +92,7 @@
 			}
 		});
 	}
-
+// 加入購物車
 	function addToCart(stock) {
 		var qty = $("#quantity").val();
 		if (stock<qty) {
@@ -114,10 +114,10 @@
 		});
 		}
 	}
-
+// 在購物車中加1
 	function add_To_Cart(productId,stock,qty) {
 		if (stock<=qty) {
-			alert("購買超過庫存量");
+			alert("購買超過庫存量 : "+stock);
 		} else {
 			var form = $('<form></form>');
 			var action = '<c:url value="/AddToCart" />';
@@ -135,7 +135,7 @@
 			form.submit();
 		}
 	}
-
+// 取消商品訂購
 	function reduceItem(productId){
 		$.ajax({
 			url : "DeleteOrder",
@@ -152,8 +152,46 @@
 			}
 		});
 	}
-	
+// 庫存不足	
 	function notEnough() {
 		alert("庫存量不足");
 	}
+// 改變購買數量
+	function changeQty(event,productId,stock,bQty){
+		var qty = event.path[0].value;
+		if(qty>stock){
+			event.path[0].value=bQty
+			alert("購買超過庫存量 : "+stock);
+			}else
+		$.ajax({
+			url : "ChangeQty",
+			type : "POST",
+			data : {
+				"productId" : productId,
+				"qty":qty
+			},
+			datatype : "html",
+			success : function(data, status) {
+				$("#cartContent").html(data);
+			},
+			error : function(data, status) {
+				$("#cartContent").html(data);
+			}
+		});
+	}
+// 訂單頁面
+// 	function orderpage(pageNo) {
+// 		$.ajax({
+// 			url : "OrderContent",
+// 			type : "POST",
+// 			data : {"order_pageNo":pageNo},
+// 			datatype : "html",
+// 			success : function(data, status) {
+// 				$("#orderContent").html(data);
+// 			},
+// 			error : function(data, status) {
+// 				$("#orderContent").html(data);
+// 			}
+// 		});
+// 	}
 </script>

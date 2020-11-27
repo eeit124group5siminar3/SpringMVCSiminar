@@ -18,8 +18,13 @@ public class PageTo {
 		return "/mall/mall_shoppingcart";
 	}
 	
-	@GetMapping(value = "/mall_checkout")
-	public String checkOut() {
-		return "/mall/mall_checkout";
+	@GetMapping(value = "/mall_order")
+	public String orderPage() {
+		return "/mall/mall_order";
 	}
+	
+//	@GetMapping(value = "/mall_checkout")
+//	public String checkOut() {
+//		return "/mall/mall_checkout";
+//	}
 }

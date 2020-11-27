@@ -29,49 +29,10 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label for="country">收件地址</label> <input type="text"
-								class="form-control" placeholder="">
-							<!-- 							<div class="select-wrap"> -->
-							<!-- 								<div class="icon"> -->
-							<!-- 									<span class="ion-ios-arrow-down"></span> -->
-							<!-- 								</div> -->
-							<!-- 								<select name="" id="" class="form-control"> -->
-							<!-- 									<option value="">France</option> -->
-							<!-- 									<option value="">Italy</option> -->
-							<!-- 									<option value="">Philippines</option> -->
-							<!-- 									<option value="">South Korea</option> -->
-							<!-- 									<option value="">Hongkong</option> -->
-							<!-- 									<option value="">Japan</option> -->
-							<!-- 								</select> -->
-							<!-- 							</div> -->
+								class="form-control" placeholder="">			
 						</div>
 					</div>
 					<div class="w-100"></div>
-					<!-- 					<div class="col-md-6"> -->
-					<!-- 						<div class="form-group"> -->
-					<!-- 							<label for="streetaddress">Street Address</label> <input -->
-					<!-- 								type="text" class="form-control" -->
-					<!-- 								placeholder="House number and street name"> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
-					<!-- 					<div class="col-md-6"> -->
-					<!-- 						<div class="form-group"> -->
-					<!-- 							<input type="text" class="form-control" -->
-					<!-- 								placeholder="Appartment, suite, unit etc: (optional)"> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
-					<!-- 					<div class="w-100"></div> -->
-					<!-- 					<div class="col-md-6"> -->
-					<!-- 						<div class="form-group"> -->
-					<!-- 							<label for="towncity">Town / City</label> <input type="text" -->
-					<!-- 								class="form-control" placeholder=""> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
-					<!-- 					<div class="col-md-6"> -->
-					<!-- 						<div class="form-group"> -->
-					<!-- 							<label for="postcodezip">Postcode / ZIP *</label> <input -->
-					<!-- 								type="text" class="form-control" placeholder=""> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
 					<div class="w-100"></div>
 
 					<div class="col-md-6">
@@ -96,16 +57,6 @@
 								class="form-control" placeholder="">
 						</div>
 					</div>
-					<!-- 					<div class="w-100"></div> -->
-					<!-- 					<div class="col-md-12"> -->
-					<!-- 						<div class="form-group mt-4"> -->
-					<!-- 							<div class="radio"> -->
-					<!-- 								<label class="mr-3"><input type="radio" name="optradio"> -->
-					<!-- 									Create an Account? </label> <label><input type="radio" -->
-					<!-- 									name="optradio"> Ship to different address</label> -->
-					<!-- 							</div> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
 				</div>
 			</form>
 			<!-- END -->
@@ -133,46 +84,6 @@
 						</p>
 					</div>
 				</div>
-				<!-- 				<div class="col-md-12"> -->
-				<!-- 					<div class="cart-detail p-3 p-md-4"> -->
-				<!-- 						<h3 class="billing-heading mb-4">Payment Method</h3> -->
-				<!-- 						<div class="form-group"> -->
-				<!-- 							<div class="col-md-12"> -->
-				<!-- 								<div class="radio"> -->
-				<!-- 									<label><input type="radio" name="optradio" class="mr-2"> -->
-				<!-- 										Direct Bank Tranfer</label> -->
-				<!-- 								</div> -->
-				<!-- 							</div> -->
-				<!-- 						</div> -->
-				<!-- 						<div class="form-group"> -->
-				<!-- 							<div class="col-md-12"> -->
-				<!-- 								<div class="radio"> -->
-				<!-- 									<label><input type="radio" name="optradio" class="mr-2"> -->
-				<!-- 										Check Payment</label> -->
-				<!-- 								</div> -->
-				<!-- 							</div> -->
-				<!-- 						</div> -->
-				<!-- 						<div class="form-group"> -->
-				<!-- 							<div class="col-md-12"> -->
-				<!-- 								<div class="radio"> -->
-				<!-- 									<label><input type="radio" name="optradio" class="mr-2"> -->
-				<!-- 										Paypal</label> -->
-				<!-- 								</div> -->
-				<!-- 							</div> -->
-				<!-- 						</div> -->
-				<!-- 						<div class="form-group"> -->
-				<!-- 							<div class="col-md-12"> -->
-				<!-- 								<div class="checkbox"> -->
-				<!-- 									<label><input type="checkbox" value="" class="mr-2"> -->
-				<!-- 										I have read and accept the terms and conditions</label> -->
-				<!-- 								</div> -->
-				<!-- 							</div> -->
-				<!-- 						</div> -->
-				<!-- 						<p> -->
-				<!-- 							<a href="#" class="btn btn-primary py-3 px-4">Place an order</a> -->
-				<!-- 						</p> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
 			</div>
 		</div>
 		<!-- .col-md-8 -->
