@@ -34,31 +34,31 @@ public class MallShoppingController {
 //取得頁面商品
 	@PostMapping(value = "/MallContent")
 	public ModelAndView showMallContent(HttpServletRequest request,
-			@RequestParam(value = "pageNo", required = false) Integer pageNoP,
-			@RequestParam(value = "searchString", required = false) String searchStringP,
-			@RequestParam(value = "categoryId", required = false) Integer categoryIdP) {
+			@RequestParam(value = "mall_pageNo", required = false) Integer pageNoP,
+			@RequestParam(value = "mall_searchString", required = false) String searchStringP,
+			@RequestParam(value = "mall_categoryId", required = false) Integer categoryIdP) {
 		HttpSession session = request.getSession(false);
-		Integer pageNo = (Integer) session.getAttribute("pageNo");
+		Integer pageNo = (Integer) session.getAttribute("mall_pageNo");
 		if (pageNoP != null) {
 			pageNo = pageNoP;
-			session.setAttribute("pageNo", pageNo);
+			session.setAttribute("mall_pageNo", pageNo);
 			service.setPageNo(pageNo);
 		}
-		String searchString = (String) session.getAttribute("searchString");
+		String searchString = (String) session.getAttribute("mall_searchString");
 		if (searchStringP != null) {
 			searchString = searchStringP;
-			session.setAttribute("searchString", searchString);
+			session.setAttribute("mall_searchString", searchString);
 			service.setSearchString(searchString);
 		}
-		Integer categoryId = (Integer) session.getAttribute("categoryId");
+		Integer categoryId = (Integer) session.getAttribute("mall_categoryId");
 		if (categoryIdP != null) {
 			categoryId = categoryIdP;
 			if (categoryId == 0) {
-				session.setAttribute("categoryId", categoryId);
+				session.setAttribute("mall_categoryId", categoryId);
 				categoryId = null;
 				service.setCategoryId(categoryId);
 			} else {
-				session.setAttribute("categoryId", categoryId);
+				session.setAttribute("mall_categoryId", categoryId);
 				service.setCategoryId(categoryId);
 			}
 		}
@@ -67,7 +67,7 @@ public class MallShoppingController {
 		Map<Integer, String> map = CategoryClass.CATEGORY_MAP;
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/pageProduct");
-		mav.addObject("totalPages", totalPages);
+		mav.addObject("mall_totalPages", totalPages);
 		mav.addObject("products_DPP", list);
 		mav.addObject("categoryBean", map);
 		return mav;

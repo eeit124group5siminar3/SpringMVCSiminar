@@ -7,7 +7,7 @@
 			<ul class="product-category" id="product-category">
 				<c:forEach var="anEntry" items="${categoryBean}">
 					<c:choose>
-						<c:when test="${anEntry.key == categoryId}">
+						<c:when test="${anEntry.key == mall_categoryId}">
 							<li class='active'><span>${anEntry.value}</span></li>
 						</c:when>
 						<c:otherwise>
@@ -20,7 +20,7 @@
 			<form class="product-category" action="javascript:void(0)"
 				method="GET">
 				<input type="search" name="searchString" id="searchString"
-					value="${searchString}" />
+					value="${mall_searchString}" />
 				<button name="searchButton" style="border-radius: 5px;"
 					onclick="searchProduct()">查詢</button>
 			</form>
@@ -60,11 +60,13 @@
 						</div>
 						<div class='bottom-area d-flex px-3'>
 							<div class='m-auto d-flex'>
-								<a href='#mall_products' title="加入購物車"
+								<a href='#mall_products' title="產品內容"
 									class='add-to-cart d-flex justify-content-center align-items-center text-center'
+									onclick='singleProduct(${item.productId})'><span><i
+										class='ion-ios-menu'></i></span></a>" <a href='#mall_products'
+									title="加入購物車"
+									class='buy-now d-flex justify-content-center align-items-center mx-1'
 									onclick='add_To_Cart(${item.productId},${item.stock},${ShoppingCart.content[item.productId].qty})'><span><i
-										class='ion-ios-menu'></i></span></a>" <a href='#mall_products' title="來去結帳"
-									class='buy-now d-flex justify-content-center align-items-center mx-1'><span><i
 										class='ion-ios-cart'></i></span></a> <a href='#mall_products'
 									class='heart d-flex justify-content-center align-items-center '><span><i
 										class='ion-ios-heart'></i></span></a>
@@ -82,34 +84,21 @@
 			<div class='block-27'>
 				<ul>
 					<c:choose>
-						<c:when test="${pageNo <= 1}">
+						<c:when test="${mall_pageNo <= 1}">
 							<li><span>&lt;&lt;</span></li>
 							<li><span>&lt;</span></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href='#product_top' onclick='page(1)'>&lt;&lt;</a></li>
-							<li><a href='#product_top' onclick='page(${pageNo - 1})'>&lt;</a></li>
+							<li><a href='#product_top' onclick='page(${mall_pageNo - 1})'>&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${totalPages <= 5}">
-							<c:forEach begin="1" end="${totalPages}" step="1" var="i">
+						<c:when test="${mall_totalPages <= 5}">
+							<c:forEach begin="1" end="${mall_totalPages}" step="1" var="i">
 								<c:choose>
-									<c:when test="${pageNo == i}">
-										<li class='active'><span>${i}</span></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-						</c:when>
-						<c:when test="${pageNo > (totalPages - 3)}">
-							<c:forEach begin="${totalPages - 4}" end="${totalPages}" step="1"
-								var="i">
-								<c:choose>
-									<c:when test="${pageNo == i}">
+									<c:when test="${mall_pageNo == i}">
 										<li class='active'><span>${i}</span></li>
 									</c:when>
 									<c:otherwise>
@@ -119,28 +108,57 @@
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<c:forEach begin="${pageNo - 2}" end="${pageNo + 2}" step="1"
-								var="i">
-								<c:choose>
-									<c:when test="${pageNo == i}">
-										<li class='active'><span>${i}</span></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${mall_pageNo <4 }">
+									<c:forEach begin="1" end="5" step="1" var="i">
+										<c:choose>
+											<c:when test="${mall_pageNo == i}">
+												<li class='active'><span>${i}</span></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:when test="${mall_pageNo > (mall_totalPages - 3)}">
+									<c:forEach begin="${mall_totalPages - 4}" end="${mall_totalPages}"
+										step="1" var="i">
+										<c:choose>
+											<c:when test="${mall_pageNo == i}">
+												<li class='active'><span>${i}</span></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<c:forEach begin="${mall_pageNo - 2}" end="${mall_pageNo + 2}" step="1"
+										var="i">
+										<c:choose>
+											<c:when test="${mall_pageNo == i}">
+												<li class='active'><span>${i}</span></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${pageNo >= totalPages}">
+						<c:when test="${mall_pageNo >= mall_totalPages}">
 							<li><span>&gt;</span></li>
 							<li><span>&gt;&gt;</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href='#product_top' onclick='page(${pageNo + 1})'>&gt;</a></li>
-							<li><a href='#product_top' onclick='page(${totalPages})'>&gt;&gt;</a></li>
+							<li><a href='#product_top' onclick='page(${mall_pageNo + 1})'>&gt;</a></li>
+							<li><a href='#product_top' onclick='page(${mall_totalPages})'>&gt;&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

@@ -82,7 +82,7 @@ public class MarketSellerDao implements IMarketSellBeanService {
 			return list;			
 
 	}
-	// 總共頁數
+	// 總共幾筆資料
 	@Override
 	public int sellerPages() {
 		 Query query =getSession().createQuery("select count(*) From MarketMallBean");

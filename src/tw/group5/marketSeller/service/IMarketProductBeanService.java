@@ -12,5 +12,6 @@ public interface IMarketProductBeanService {
 	public  MarketProductTotalBean update(MarketProductTotalBean bean);
 	public MarketProductTotalBean select(int productId);
 	public MarketProductImgBean selectImg(int productId);
+	public List<MarketProductTotalBean> selectBuyerAll(Integer mid);
    
 }

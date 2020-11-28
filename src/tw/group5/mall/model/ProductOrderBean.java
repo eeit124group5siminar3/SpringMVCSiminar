@@ -34,35 +34,10 @@ public class ProductOrderBean implements Serializable{
 	private String bNo;
 	private Double total;
 	private	Date orderDate;
+	private Integer shippingTime;
 	private Set<ProductOrderItemBean> items = new LinkedHashSet<>();
-	public ProductOrderBean(Integer buyerId, String buyerName, String address, String tel, String bNo, Double total,
-			Date orderDate,Set<ProductOrderItemBean> items) {
-		super();
-		this.buyerId = buyerId;
-		this.buyerName = buyerName;
-		this.address = address;
-		this.tel = tel;
-		this.bNo = bNo;
-		this.total = total;
-		this.orderDate = orderDate;
-		this.items=items;
-	}
 	public ProductOrderBean() {
 		super();
-	}
-	public ProductOrderBean(Integer orderId, Integer buyerId, String buyerName, String address, String tel, String bNo,
-			Double total, Date orderDate,Set<ProductOrderItemBean> items) {
-		super();
-		this.orderId = orderId;
-		this.buyerId = buyerId;
-		this.buyerName = buyerName;
-		this.address = address;
-		this.tel = tel;
-		this.bNo = bNo;
-		this.total = total;
-		this.orderDate = orderDate;
-		
-		this.items=items;
 	}
 	@Id @Column(name="ORDERID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -100,6 +75,7 @@ public class ProductOrderBean implements Serializable{
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+	
 	@Column(name="BNO")
 	public String getBNo() {
 		return bNo;
@@ -121,6 +97,14 @@ public class ProductOrderBean implements Serializable{
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
+	
+	@Column(name="SHIPPINGTIME")
+	public Integer getShippingTime() {
+		return shippingTime;
+	}
+	public void setShippingTime(Integer shippingTime) {
+		this.shippingTime = shippingTime;
+	}
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productOrderBean", cascade = CascadeType.ALL)
 	public Set<ProductOrderItemBean> getItems() {
 		return items;
@@ -131,3 +115,30 @@ public class ProductOrderBean implements Serializable{
 	}
 	
 }
+
+//	public ProductOrderBean(Integer orderId, Integer buyerId, String buyerName, String address, String tel, String bNo,
+//			Double total, Date orderDate,Set<ProductOrderItemBean> items) {
+//		super();
+//		this.orderId = orderId;
+//		this.buyerId = buyerId;
+//		this.buyerName = buyerName;
+//		this.address = address;
+//		this.tel = tel;
+//		this.bNo = bNo;
+//		this.total = total;
+//		this.orderDate = orderDate;
+//		
+//		this.items=items;
+//	}
+//	public ProductOrderBean(Integer buyerId, String buyerName, String address, String tel, String bNo, Double total,
+//			Date orderDate,Set<ProductOrderItemBean> items) {
+//		super();
+//		this.buyerId = buyerId;
+//		this.buyerName = buyerName;
+//		this.address = address;
+//		this.tel = tel;
+//		this.bNo = bNo;
+//		this.total = total;
+//		this.orderDate = orderDate;
+//		this.items=items;
+//	}
