@@ -61,6 +61,8 @@ public class Admin_ManageMembersController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
+		System.out.println("會員編號是："+member_no);
+		
 		if (member_no != "") {
 			
 			Member_SignUp member_data = member_Service.select_member_no(member_no);
@@ -164,7 +166,6 @@ public class Admin_ManageMembersController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-			System.out.println("會員ＩＤ："+member_no);
 			Member_SignUp member_data = member_Service.select_member_no(member_no);
 			
 				map.put("viewdata", member_data);
