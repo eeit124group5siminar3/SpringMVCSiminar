@@ -18,7 +18,7 @@
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
 
-	<!-- 會員新增買賣家 -->
+	<!-- 會員新增買賣家選項 -->
 	<script>
 	window.onload = function() {
 		var customRadioInline1 = document.getElementById("customRadioInline1");
@@ -93,8 +93,8 @@ $(function(){
 							<div class="form-row">
 							<div class="form-group col-md-6">
 							<label for="inputEmail4" style="float:left">會員編號</label> <input type="text"
-								class="form-control"
-								placeholder="\${viewdata.member_no}" disabled>
+								class="form-control" id="update_member_no"
+								value="\${viewdata.member_no}" disabled>
 								</div>
 								<div class="form-group col-md-6">
 								<label for="inputEmail4" style="float:left">註冊日期</label> <input type="text"
@@ -102,7 +102,9 @@ $(function(){
 									placeholder="\${viewdata.member_signup_date}" disabled>
 									</div>
 								<div class="form-group col-md-6">
-									<label for="inputEmail4" style="float:left">買賣家</label> <input type="text"
+									<label for="inputEmail4" style="float:left">買賣家</label> <span style="color: red"><small
+									id="span_premissions"></small></span>
+									<input type="text"
 										class="form-control"
 										placeholder="\${viewdata.member_permissions}" disabled>
 										<input type="text"
@@ -110,7 +112,9 @@ $(function(){
 											id="update_member_permissions">
 								</div>
 								<div class="form-group col-md-6">
-									<label for="inputEmail4" style="float:left">身份證字號</label> <input type="text"
+									<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color: red"><small
+									id="span_id"></small></span>
+									<input type="text"
 										class="form-control"
 										placeholder="\${viewdata.member_id}" disabled>
 										<input type="text"
@@ -118,7 +122,9 @@ $(function(){
 											id="update_member_id">
 								</div>
 								<div class="form-group col-md-6">
-								<label for="inputEmail4" style="float:left">帳號</label> <input type="text"
+								<label for="inputEmail4" style="float:left">帳號</label> <span style="color: red"><small
+								id="span_email"></small></span>
+								<input type="text"
 									class="form-control"
 									placeholder="\${viewdata.member_email}" disabled>
 									<input type="text"
@@ -150,14 +156,17 @@ $(function(){
 												id="update_member_bank_account">
 									</div>
 								<div class="form-group col-md-6">
-									<label for="inputPassword4" style="float:left">名稱</label> <input type="text"
+									<label for="inputPassword4" style="float:left">名稱</label> <span style="color: red"><small
+									id="span_name"></small></span>
+									<input type="text"
 										class="form-control"
 										placeholder="\${viewdata.member_name}" disabled>
 										<input type="text"
 											class="form-control"
 											id="update_member_name">
 									<p></p>
-									<label for="inputPassword4" style="float:left">生日</label> 
+									<label for="inputPassword4" style="float:left">生日</label> <span style="color: red"><small
+									id="span_birthday"></small></span>
 									<input type="text"
 										class="form-control"
 										placeholder="\${viewdata.member_birthday}" disabled>
@@ -165,7 +174,9 @@ $(function(){
 										class="form-control"
 										id="update_member_birthday">
 									<p></p>
-									<label for="inputPassword4" style="float:left">連絡電話</label> <input type="text"
+									<label for="inputPassword4" style="float:left">連絡電話</label> <span style="color: red"><small
+									id="span_cellphone"></small></span>
+									<input type="text"
 										class="form-control"
 										placeholder="\${viewdata.member_cellphone}" disabled>
 										<input type="text"
@@ -196,16 +207,29 @@ $(function(){
 								
 								</div>
 								<div class="form-group col-md-6">
-								<label for="inputEmail4" style="float:left">檢舉次數</label> <input type="text"
+								<label for="inputEmail4" style="float:left">檢舉次數</label> <span style="color: red"><small
+								id="span_gg"></small></span>
+								<input type="text"
 									class="form-control"
 									placeholder="\${viewdata.member_gg}" disabled>
 									<input type="text"
 										class="form-control"
 										id="update_member_gg">
+									<p></p>
+									<label for="inputEmail4" style="float:left">電子報</label> <span style="color: red"><small
+									id="span_e_paper"></small></span>
+									<input type="text"
+										class="form-control"
+										placeholder="\${viewdata.e_paper}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_e_paper">
 									</div>
 									<div class="form-group col-md-6">
 									
-									<label for="inputEmail4" style="float:left">停權狀態</label> <input type="text"
+									<label for="inputEmail4" style="float:left">停權狀態</label> <span style="color: red"><small
+									id="span_lock_acc"></small></span>
+									<input type="text"
 										class="form-control"
 										placeholder="\${viewdata.member_lock_acc}" disabled>
 										<input type="text"
@@ -215,7 +239,7 @@ $(function(){
 							</div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-						        <button type="button" class="btn btn-primary">修改</button>
+						        <button type="submit" class="btn btn-primary">修改</button>
 						      </div>
 					</div>
 				</form>`
@@ -227,7 +251,65 @@ $(function(){
 })
 </script>
 
+<!-- 檢視內修改 -->
+<script>
+$(function(){
+	$("#view_form").on("submit",function(ev){
+		$("#span_email").html("");
+		$("#span_id").html("");
+		$("#span_password").html("");
+		$("#span_birthday").html("");
+		$.ajax({
+			url:"#",
+			data:{
+				member_no:$("#update_member_no").val(),
+				member_permissions:$("#update_member_permissions").val(),
+				member_email:$("#update_member_email").val(),
+				member_password:$("#update_member_password").val(),
+				member_name:$("#update_member_name").val(),
+				member_birthday:$("#update_member_birthday").val(),
+				member_cellphone:$("#update_member_cellphone").val(),
+				member_id:$("#update_member_id").val(),
+				member_address:$("#update_member_address").val(),
+				member_gui_number:$("#update_member_gui_number").val(),
+				e_paper:$("#update_e_paper").val(),
+				member_bank_code:$("#update_member_bank_code").val(),
+				member_bank_account:$("#update_member_bank_account").val(),
+				member_gg:$("#update_member_gg").val(),
+				member_lock_acc:$("#update_member_lock_acc").val()
+			 	},
+			type:"POST", 
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			 
+		success:function(data){
+			if(data[5] == "1"){
+				window.location.href = "goManageMembers.controller";
+			}if(data[0] == "2"){
+				$("#span_email").html("Email已被註冊");
+			}if(data[1] == "3"){
+				$("#span_id").html("身份證字號已被註冊");
+			}if(data[2] == "12"){
+				$("#span_id").html("格式錯誤");
+			}if(data[6] == "5"){
+				$("#span_password").html("格式錯誤");
+			}if(data[3] == "6"){
+				$("#span_birthday").html("格式錯誤");
+			}if(data[7] == "7"){
+				$("#span_premissions").html("格式錯誤，0為買家  1為賣家");
+			}if(data[8] == "8"){
+				$("#span_gg").html("格式錯誤，4次以上請更改停權");
+			}if(data[9] == "9"){
+				$("#span_lock_acc").html("格式錯誤，0為正常  1為停權");
+			}if(data[10] == "10"){
+				$("#span_e_paper").html("格式錯誤，0為不訂閱  1為訂閱");
+			}
+		}
+	    }) 
+	    ev.preventDefault(); 
+	})
+	})
 
+</script>
 
 	<!-- 畫面顯示所有會員資料 -->
 	<script>
