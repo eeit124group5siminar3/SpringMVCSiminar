@@ -1,17 +1,14 @@
 package tw.group5.active.controller;
 
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
@@ -23,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -33,7 +29,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.group5.active.model.ActFarmer;
-import tw.group5.active.model.Active;
 import tw.group5.active.model.Clock;
 import tw.group5.active.service.ActFarmerService;
 import tw.group5.member_SignUp.model.Member_SignUp;
