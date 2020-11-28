@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import tw.group5.marketSeller.model.MarketMallBean;
+import tw.group5.marketSeller.model.MarketProductTotalBean;
+import tw.group5.marketSeller.service.MarketProductBeanService;
 import tw.group5.marketSeller.service.MarketSellBeanService;
+import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
 @SessionAttributes(value = {"login_ok"} )
@@ -24,13 +28,21 @@ public class MarketHome {
 	
 	@Autowired
 	private MarketSellBeanService sellerService;
+
+	@Autowired
+	private MarketProductBeanService productService;
 	
 	@GetMapping(value = "/GoMarketHome")
-	public String goMarketHome() {
+	public String goMarketHome(
+			@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb
+			) {
+		if (mb == null ) {
+			return "Member_SignUp/Member_Login";
+		}
 		return "marketSeller/MarketHome";
 	}
 	
-	//取得頁面賣家
+	//取得所有賣家頁面
 	@PostMapping(value = "/SellerContent")
 	@ResponseBody
 	public ModelAndView showAllSeller(HttpServletRequest request,
@@ -38,25 +50,31 @@ public class MarketHome {
 			@RequestParam(value = "searchString", required = false) String searchStringP
 			){
 		HttpSession session = request.getSession(false);
-		System.out.println("還沒 :"+pageNoP);
 		Integer pageNo = (Integer) session.getAttribute("marketPageNo");
-		System.out.println("抓session.getAttribute :"+pageNo);
 		int totalPages =sellerService.sellerPages();//總比數
 		if (pageNoP != null) {
 			pageNo=pageNoP;
 			session.setAttribute("marketPageNo", pageNo);
-			System.out.println("下面");
-			System.out.println("抓pageNo=pageNoP :"+pageNo);
 		}
 		List<MarketMallBean> list = sellerService.selectAllmall(pageNo,null);
 		int totalPage =(int) Math.ceil(totalPages*1.0 /2);//總頁數
-		System.out.println("總頁數 : "+totalPage);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/marketSeller/MarketAllSeller");
 		mav.addObject("sellerAll",list);
 		mav.addObject("totalPages",totalPage);
 		mav.addObject("marketPageNo",pageNo);
-		return mav;
-		
+		return mav;		
+	}
+	//取得賣家商品
+	@PostMapping(value = "/ProductContent")
+	@ResponseBody
+	public ModelAndView sellerProduct(
+			@RequestParam(value = "memberNo", required = false) Integer memberNo
+			) {
+           List<MarketProductTotalBean> list = productService.selectBuyerAll(memberNo);
+           ModelAndView mav =new ModelAndView();
+           mav.setViewName("/marketSeller/MarketMallProduct");
+           mav.addObject("totalProducts",list);
+		   return mav;
 	}
 }

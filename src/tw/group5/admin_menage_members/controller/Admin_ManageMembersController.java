@@ -153,8 +153,25 @@ public class Admin_ManageMembersController {
 
 			member_Service.insert_member_sing_up(member_data);
 		}
-		System.out.println("儲存喔");
 		return check;	
+	}
+	
+	
+	@RequestMapping(value = "/viewSelectManageMembersData.controller", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> processViewSelectManageMembers(
+			@RequestParam(name = "member_no") String member_no){
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+			System.out.println("會員ＩＤ："+member_no);
+			Member_SignUp member_data = member_Service.select_member_no(member_no);
+			
+				map.put("viewdata", member_data);
+				return map;
+			
+		
+
 	}
 	
 	

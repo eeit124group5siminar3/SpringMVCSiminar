@@ -33,4 +33,10 @@ public interface recipe_Service_interface {
 
 	long getRecordCounts();
 
+	List<Recipe_Bean_noImage> searchAllRecipe(Integer page, Integer showData);
+
+	Integer getTotalPages();
+
+	void setPageNo(Integer pageNo);
+
 }
