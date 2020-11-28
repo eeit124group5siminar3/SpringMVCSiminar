@@ -232,9 +232,26 @@ public class Recipe_DAO_spring {
 		Session session=sessionFactory.getCurrentSession();
 		String hql="select count(*) from Recipe_Bean";
 		Query<Long> query = session.createQuery(hql);
-		Object getNumber=query.uniqueResult();
-		long longNumber = (long) getNumber;
-		Integer count=(int) longNumber;
-		return count;
+		long count=(long) query.uniqueResult();
+//		long longNumber = (long) getNumber;
+//		Integer count=(int) longNumber;
+		return (int) count;
+	}
+	
+	public List<Recipe_Bean_noImage> searchAllRecipe(Integer page,Integer showData){
+		if(page==null) {
+			page=1;
+		}
+		if(showData==null) {
+			showData=2;
+		}
+		Session session=sessionFactory.getCurrentSession();
+		Integer startPosition=(page-1)*showData; 
+		Query<Recipe_Bean_noImage> query=session.createQuery("from Recipe_Bean_noImage",Recipe_Bean_noImage.class);
+		List<Recipe_Bean_noImage> list=query.setFirstResult(startPosition)
+				.setMaxResults(showData)
+				.setReadOnly(true)
+				.getResultList();
+		return list;
 	}
 }

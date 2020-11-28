@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -198,11 +201,32 @@ public class Recipe_Controller {
 //	}
 	
 	
-	@GetMapping(value="/tesstt")
-	public long test() {
+	
+	@GetMapping(value="/getPageInfo/{pageNo}")
+	@ResponseBody
+	public Map<String, Object> getPageInfo(@PathVariable(name="pageNo",required = false)Integer pageNo,Model m) {
 		long count=service.getRecordCounts();
 		System.out.println(count);
-		return count;
+		Integer page=(Integer) session.getAttribute("workpageNo");
+		System.out.println("抓session 中的 page: "+page);
+		if(pageNo!=null) {
+			page=pageNo;
+			session.setAttribute("workpageNo", page);
+		}
+		List<Recipe_Bean_noImage> searchAllRecipe=service.searchAllRecipe(pageNo, 10);
+		int totalPage=service.getTotalPages();
+//		ModelAndView mav=new ModelAndView();
+//		mav.setViewName("/recipe/recipe_workpage");
+//		mav.addObject("selectAllRecipe",selectAllRecipe);
+		service.setPageNo(pageNo);
+		Map<String , Object> map=new HashMap<String, Object>();
+		map.put("searchAllRecipe", searchAllRecipe);
+		map.put("totalPage",totalPage);
+		map.put("pageNo",pageNo);
+		return map;
+		
+		
+		
 	}
 	
 }
