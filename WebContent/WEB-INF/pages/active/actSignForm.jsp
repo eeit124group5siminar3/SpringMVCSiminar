@@ -59,30 +59,50 @@
 						<form:form action="#" class="billing-form">
 							<h3 class="mb-4 billing-heading">活動報名</h3>
 							<form:input type="text" path="memNo"/>
-	          	<div class="row align-items-end">
-	          		<div class="col-md-6">
+	          <div class="row align-items-end">
+	          	<div class="col-md-6">
 	                <div class="form-group">
 	                	<form:label path="memName">會員姓名</form:label>
-	                  <form:input type="text" class="form-control" placeholder="會員姓名" path="memName"/>
+	                  	<form:input type="text" class="form-control" placeholder="會員姓名" path="memName"/>
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
 	                	<form:label path="memTel">會員電話</form:label>
-	                  <form:input type="text" class="form-control" placeholder="會員電話" path="memTel"/>
+	                  	<form:input type="text" class="form-control" placeholder="會員電話" path="memTel"/>
+	                </div>
+                </div>
+		         <div class="w-100"></div>
+		         <div class="col-md-12">
+		            <div class="form-group">
+	                	<form:label path="memEmail">會員信箱</form:label>
+	                  	<form:input type="text" class="form-control" placeholder="會員信箱" path="memEmail"/>
+	                </div>
+		         </div>
+               	 <div class="w-100"></div>
+               	 <div class="col-md-6">
+	                <div class="form-group">
+	                	<form:label path="actName">活動名稱</form:label>
+	                  	<form:input type="text" class="form-control" placeholder="活動名稱"  path="actName" readOnly="true"/>
+	                </div>
+	              </div>
+	             <div class="col-md-6">
+	                <div class="form-group">
+	                	<form:label path="memTel">活動時間</form:label>
+	                  	<form:input type="text" class="form-control" placeholder="會員電話" path="memTel" readOnly="true"/>
 	                </div>
                 </div>
 		         <div class="w-100"></div>
 		            <div class="col-md-12">
 		            	<div class="form-group">
-	                	<form:label path="actAddr">Street Address</form:label>
-	                  <form:input type="text" class="form-control" placeholder="活動地址" path="actAddr"/>
-	                </div>
+	                	<form:label path="actAddr">活動地址</form:label>
+	                 	 <form:input type="text" class="form-control" placeholder="活動地址" path="actAddr"/>
+	                	</div>
 		            </div>
                 <div class="w-100"></div>
 		            <div class="col-md-6">
 		            	<div class="form-group">
-		            		<label path="ordActNum">報名人數</label>
+		            		<form:label path="ordActNum">報名人數</form:label>
 		            		<div class="select-wrap">
 		                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 		                  <form:select class="form-control" path="ordActNum">
@@ -115,19 +135,7 @@
 	                </div>
 		            </div>
 		            <div class="w-100"></div>
-		            <div class="col-md-6">
-	                <div class="form-group">
-	                	<form:label for="phone" path="">Phone</form:label>
-	                  <form:input type="text" class="form-control" placeholder="" path=""/>
-	                </div>
-	              </div>
-	              <div class="col-md-6">
-	                <div class="form-group">
-	                	<form:label for="emailaddress" path="">Email Address</form:label>
-	                  <input type="text" class="form-control" placeholder="" path=""/>
-	                </div>
-                </div>
-                <div class="w-100"></div>
+
 
 	            </div>
 	          </form:form><!-- END -->

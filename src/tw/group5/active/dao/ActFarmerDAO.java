@@ -46,7 +46,7 @@ public class ActFarmerDAO {
 	
 	//計算該廠商總共有幾頁
 	public Integer getTotalPages(Integer sellerId) {
-		totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
+		totalPages = (int) (Math.ceil(getRecordCounts(sellerId) / (double) recordsPerPage));
 		return totalPages;
 	}
 	
