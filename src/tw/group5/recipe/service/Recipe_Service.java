@@ -82,5 +82,19 @@ public class Recipe_Service implements recipe_Service_interface {
 		
 	}
 	
-
+	@Override
+	public List<Recipe_Bean_noImage> searchAllRecipe(Integer page,Integer showData){
+		return rDAO.searchAllRecipe(page, showData);
+	}
+	
+	
+	@Override
+	public Integer getTotalPages() {
+		return rDAO.getTotalPages();
+	}
+	
+	@Override
+	public void setPageNo(Integer pageNo) {
+		rDAO.setPageNo(pageNo);
+	}
 }
