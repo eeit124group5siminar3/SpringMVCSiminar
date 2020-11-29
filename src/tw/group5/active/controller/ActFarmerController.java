@@ -138,7 +138,7 @@ public class ActFarmerController {
 		afInsert.setSellerId(sellerId);
 		actFarmerService.insertActFarmer(afInsert);
 		successMsgs.put("sucess", "資料新增成功");
-		return "redirect:/allActFarmer.do";
+		return "redirect:/maintainActFarmer.do";
 		
 	}
 	//檢視活動準備(找到該筆物件)
@@ -190,7 +190,7 @@ public class ActFarmerController {
 		}
 		actFarmerService.updateActFarmer(actFarmer);	
 		
-		return "redirect:/allActFarmer.do";
+		return "redirect:/maintainActFarmer.do";
 	}
 	
 	//刪除活動
@@ -198,7 +198,7 @@ public class ActFarmerController {
 	public String actFarmerDelete(@RequestParam(value = "actId")Integer actId,Model model) {
 		Integer id =Integer.valueOf(actId);
 		actFarmerService.deletActFarmer(id);
-		return "redirect:/allActFarmer.do";
+		return "redirect:/maintainActFarmer.do";
 	}
 
 	
