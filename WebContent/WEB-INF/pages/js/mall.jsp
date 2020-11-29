@@ -75,7 +75,7 @@
 			}
 		});
 	}
-
+// 單一商品頁面
 	function singleProduct(productId) {
 		$.ajax({
 			url : "SingleProduct",
@@ -179,19 +179,49 @@
 			}
 		});
 	}
-// 訂單頁面
-// 	function orderpage(pageNo) {
-// 		$.ajax({
-// 			url : "OrderContent",
-// 			type : "POST",
-// 			data : {"order_pageNo":pageNo},
-// 			datatype : "html",
-// 			success : function(data, status) {
-// 				$("#orderContent").html(data);
-// 			},
-// 			error : function(data, status) {
-// 				$("#orderContent").html(data);
-// 			}
-// 		});
-// 	}
+//  訂單頁面
+function orderPage(pageNo) {
+	$.ajax({
+		url : "OrderContent",
+		type : "POST",
+		data : {"order_pageNo":pageNo},
+		datatype : "html",
+		success : function(data, status) {
+			$("#orderContent").html(data);
+		},
+		error : function(data, status) {
+			$("#orderContent").html(data);
+		}
+	});
+}
+//  訂單詳細資料
+function orderDetail(orderId) {
+	$.ajax({
+		url : "OrderDetail",
+		type : "POST",
+		data : {"orderId":orderId},
+		datatype : "html",
+		success : function(data, status) {
+			$("#orderContent").html(data);
+		},
+		error : function(data, status) {
+			$("#orderContent").html(data);
+		}
+	});
+}
+// 管理頁面
+function managementPage(pageNo) {
+	$.ajax({
+		url : "ManagementContent",
+		type : "POST",
+		data : {"management_pageNo":pageNo},
+		datatype : "html",
+		success : function(data, status) {
+			$("#managementContent").html(data);
+		},
+		error : function(data, status) {
+			$("#managementContent").html(data);
+		}
+	});
+}
 </script>
