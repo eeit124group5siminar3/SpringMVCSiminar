@@ -17,6 +17,9 @@ import javax.persistence.Table;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 @Scope(value = "prototype")
 @Entity
@@ -105,7 +108,7 @@ public class ProductOrderBean implements Serializable{
 	public void setShippingTime(Integer shippingTime) {
 		this.shippingTime = shippingTime;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productOrderBean", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "productOrderBean", cascade = CascadeType.ALL)
 	public Set<ProductOrderItemBean> getItems() {
 		return items;
 	}
@@ -113,7 +116,6 @@ public class ProductOrderBean implements Serializable{
 	public void setItems(Set<ProductOrderItemBean> items) {
 		this.items = items;
 	}
-	
 }
 
 //	public ProductOrderBean(Integer orderId, Integer buyerId, String buyerName, String address, String tel, String bNo,
