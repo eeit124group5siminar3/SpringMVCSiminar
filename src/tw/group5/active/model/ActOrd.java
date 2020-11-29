@@ -1,6 +1,7 @@
 package tw.group5.active.model;
 
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,6 +9,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -35,14 +38,17 @@ public class ActOrd {
 	private Integer ordActNum;
 	private Double totalPrice;
 	private Integer ordState;
+	private Timestamp ordTime;
 
 	private ActFarmer actFarmer;
 
 	public ActOrd() {
 	}
 
+
 	public ActOrd(String actOrdId, Integer memNo, String memName, String memTel, String memEmail, Integer actId,
-			Integer ordActNum, Double totalPrice, Integer ordState, ActFarmer actFarmer) {
+			Integer ordActNum, Double totalPrice, Integer ordState, Timestamp ordTime, ActFarmer actFarmer) {
+		super();
 		this.actOrdId = actOrdId;
 		this.memNo = memNo;
 		this.memName = memName;
@@ -52,11 +58,15 @@ public class ActOrd {
 		this.ordActNum = ordActNum;
 		this.totalPrice = totalPrice;
 		this.ordState = ordState;
+		this.ordTime = ordTime;
 		this.actFarmer = actFarmer;
 	}
 
+
+
 	@Id
 	@Column(name = "actOrdId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public String getActOrdId() {	
 		return actOrdId;
 	}
@@ -137,6 +147,17 @@ public class ActOrd {
 	public void setOrdState(Integer ordState) {
 		this.ordState = ordState;
 	}
+	
+	@Column(name = "ordTime")
+	public Timestamp getOrdTime() {
+		return ordTime;
+	}
+
+
+	public void setOrdTime(Timestamp ordTime) {
+		this.ordTime = ordTime;
+	}
+
 
 	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="actId")

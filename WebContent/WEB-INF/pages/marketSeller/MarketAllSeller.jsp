@@ -32,11 +32,11 @@
 					</p>
 		                
 		                <h3 class="heading">
-		                <a href="#">${item.mallName}</a>
+		                <a >${item.mallName}</a>
 		                </h3>
-		                <a href="#">${item.mallDescription}</a><br>
+		                <a >${item.mallDescription}</a><br>
 		                <p>地址 : ${item.address} </p>
-		                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">來去逛逛</a></p>
+		                <p><a href="#" onclick='goShopping(${item.memberNo})' class="btn btn-primary py-2 px-3">來去逛逛</a></p>
 		              </div>
 		            </div>
 		          </div>
@@ -57,8 +57,8 @@
 							<li><span>&lt;</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a onclick='mPage(1)'>&lt;&lt;</a></li>
-							<li><a onclick='mPage(${marketPageNo - 1})'>&lt;</a></li>
+							<li><a href="#"  onclick='mPage(1)'>&lt;&lt;</a></li>
+							<li><a href="#"  onclick='mPage(${marketPageNo - 1})'>&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
 					
@@ -70,7 +70,7 @@
 										<li class='active'><span>${i}</span></li>
 									</c:when>
 									<c:otherwise>
-										<li><a onclick='mPage(${i})'>${i}</a></li>
+										<li><a  href="#"  onclick='mPage(${i})'>${i}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -80,10 +80,10 @@
 								var="i">
 								<c:choose>
 									<c:when test="${marketPageNo == i}">
-										<li class='active'><span>${i}</span></li>
+										<li href="#"  class='active'><span>${i}</span></li>
 									</c:when>
 									<c:otherwise>
-										<li><a onclick='mPage(${i})'>${i}</a></li>
+										<li><a href="#"  onclick='mPage(${i})'>${i}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -109,8 +109,8 @@
 							<li><span>&gt;&gt;</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a onclick='mPage(${marketPageNo + 1})'>&gt;</a></li>
-							<li><a onclick='mPage(${totalPages})'>&gt;&gt;</a></li>
+							<li><a href="#"  onclick='mPage(${marketPageNo + 1})'>&gt;</a></li>
+							<li><a href="#"  onclick='mPage(${totalPages})'>&gt;&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -140,22 +140,22 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/Market.jsp" />
 <script>
-function mPage(marketPageNo) {
-		console.log("我要進來囉");
-	$.ajax({
-		url : "SellerContent",
-		type : "POST",
-		data : {
-			"marketPageNo" : marketPageNo
-		},
-		datatype : "html",
-		success : function(data, status) {
-			$("#mainContent").html(data);
-		},
-		error : function(data, status) {
-			$("#mainContent").html(data);
-		}
-	});
+function goShopping(memberNo) {
+	console.log("我要進來囉");
+$.ajax({
+	url : "ProductContent",
+	type : "POST",
+	data : {
+		"memberNo" : memberNo
+	},
+	datatype : "html",
+	success : function(data, status) {
+		$("#mainContent").html(data);
+	},
+	error : function(data, status) {
+		$("#mainContent").html(data);
+	}
+});
 }
-
 </script>
+

@@ -47,6 +47,11 @@ public class MarketProductBeanService implements IMarketProductBeanService {
 	public MarketProductImgBean selectImg(int productId) {
 		return mDao.selectImg(productId);
 	}
+
+	@Override
+	public List<MarketProductTotalBean> selectBuyerAll(Integer mid) {	
+		return mDao.selectBuyerAll(mid);
+	}
 	
 	
 }
