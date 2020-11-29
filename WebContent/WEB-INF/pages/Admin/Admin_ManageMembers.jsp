@@ -71,8 +71,8 @@
 	}
 </script>
 
-<!-- 檢視會員詳細資料 -->
-<script>
+	<!-- 檢視會員詳細資料 -->
+	<script>
 $(function(){
 	$("#member_tr").on("click","#view_content",function(){
 	$.ajax({
@@ -105,102 +105,102 @@ $(function(){
 									<label for="inputEmail4" style="float:left">買賣家</label> <span style="color: red"><small
 									id="span_premissions"></small></span>
 									<input type="text"
-										class="form-control"
-										placeholder="\${viewdata.member_permissions}" disabled>
+										class="form-control" id="update_member_permissions1"
+										value="\${viewdata.member_permissions}" disabled>
 										<input type="text"
 											class="form-control"
-											id="update_member_permissions">
+											id="update_member_permissions2">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color: red"><small
 									id="span_id"></small></span>
 									<input type="text"
-										class="form-control"
-										placeholder="\${viewdata.member_id}" disabled>
+										class="form-control" id="update_member_id1"
+										value="\${viewdata.member_id}" disabled>
 										<input type="text"
 											class="form-control"
-											id="update_member_id">
+											id="update_member_id2">
 								</div>
 								<div class="form-group col-md-6">
 								<label for="inputEmail4" style="float:left">帳號</label> <span style="color: red"><small
 								id="span_email"></small></span>
 								<input type="text"
-									class="form-control"
-									placeholder="\${viewdata.member_email}" disabled>
+									class="form-control" id="update_member_email1"
+									value="\${viewdata.member_email}" disabled>
 									<input type="text"
 										class="form-control"
-										id="update_member_email">
+										id="update_member_email2">
 							</div>
 								<div class="form-group col-md-6">
 									<label for="inputPassword4" style="float:left">密碼</label> <input type="text"
-										class="form-control"
-										placeholder="\${viewdata.member_password}" disabled>
+										class="form-control" id="update_member_password1"
+										value="\${viewdata.member_password}" disabled>
 										<input type="text"
 											class="form-control"
-											id="update_member_password">
+											id="update_member_password2">
 								</div>
 									<div class="form-group col-md-6">
 										<label for="inputPassword4" style="float:left">銀行代號</label> <input type="text"
-											class="form-control"
-											placeholder="\${viewdata.member_bank_code}" disabled>
+											class="form-control" id="update_member_bank_code1"
+											value="\${viewdata.member_bank_code}" disabled>
 											<input type="text"
 												class="form-control"
-												id="update_member_bank_code">
+												id="update_member_bank_code2">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="inputPassword4" style="float:left">銀行帳號</label> <input type="text"
-											class="form-control"
-											placeholder="\${viewdata.member_bank_account}" disabled>
+											class="form-control" id="update_member_bank_account1"
+											value="\${viewdata.member_bank_account}" disabled>
 											<input type="text"
 												class="form-control"
-												id="update_member_bank_account">
+												id="update_member_bank_account2">
 									</div>
 								<div class="form-group col-md-6">
 									<label for="inputPassword4" style="float:left">名稱</label> <span style="color: red"><small
 									id="span_name"></small></span>
 									<input type="text"
-										class="form-control"
-										placeholder="\${viewdata.member_name}" disabled>
+										class="form-control" id="update_member_name1"
+										value="\${viewdata.member_name}" disabled>
 										<input type="text"
 											class="form-control"
-											id="update_member_name">
+											id="update_member_name2">
 									<p></p>
 									<label for="inputPassword4" style="float:left">生日</label> <span style="color: red"><small
 									id="span_birthday"></small></span>
 									<input type="text"
-										class="form-control"
-										placeholder="\${viewdata.member_birthday}" disabled>
+										class="form-control" id="update_member_birthday1"
+										value="\${viewdata.member_birthday}" disabled>
 									<input type="date"
 										class="form-control"
-										id="update_member_birthday">
+										id="update_member_birthday2">
 									<p></p>
 									<label for="inputPassword4" style="float:left">連絡電話</label> <span style="color: red"><small
 									id="span_cellphone"></small></span>
 									<input type="text"
-										class="form-control"
-										placeholder="\${viewdata.member_cellphone}" disabled>
+										class="form-control" id="update_member_cellphone1"
+										value="\${viewdata.member_cellphone}" disabled>
 										<input type="text"
 											class="form-control"
-											id="update_member_cellphone">
+											id="update_member_cellphone2">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputAddress" style="float:left">地址</label> <input type="text"
-									class="form-control"
-									placeholder="\${viewdata.member_address}" disabled>
+									class="form-control" id="update_member_address1"
+									value="\${viewdata.member_address}" disabled>
 									<input type="text"
 										class="form-control"
-										id="update_member_address">
+										id="update_member_address2">
 							</div>
 
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputEmail4" style="float:left">統一編號</label> <input type="text"
-										class="form-control"
-										placeholder="\${viewdata.member_gui_number}" disabled>
+										class="form-control" id="update_member_gui_number1"
+										value="\${viewdata.member_gui_number}" disabled>
 										<input type="text"
 											class="form-control"
-											id="update_member_gui_number">
+											id="update_member_gui_number2">
 										
 								</div>
 								<div class="form-group col-md-6">
@@ -210,36 +210,36 @@ $(function(){
 								<label for="inputEmail4" style="float:left">檢舉次數</label> <span style="color: red"><small
 								id="span_gg"></small></span>
 								<input type="text"
-									class="form-control"
-									placeholder="\${viewdata.member_gg}" disabled>
+									class="form-control" id="update_member_gg1"
+									value="\${viewdata.member_gg}" disabled>
 									<input type="text"
 										class="form-control"
-										id="update_member_gg">
+										id="update_member_gg2">
 									<p></p>
 									<label for="inputEmail4" style="float:left">電子報</label> <span style="color: red"><small
 									id="span_e_paper"></small></span>
 									<input type="text"
-										class="form-control"
-										placeholder="\${viewdata.e_paper}" disabled>
+										class="form-control" id="update_e_paper1"
+										value="\${viewdata.e_paper}" disabled>
 										<input type="text"
 											class="form-control"
-											id="update_e_paper">
+											id="update_e_paper2">
 									</div>
 									<div class="form-group col-md-6">
 									
 									<label for="inputEmail4" style="float:left">停權狀態</label> <span style="color: red"><small
 									id="span_lock_acc"></small></span>
 									<input type="text"
-										class="form-control"
-										placeholder="\${viewdata.member_lock_acc}" disabled>
+										class="form-control" id="update_member_lock_acc1"
+										value="\${viewdata.member_lock_acc}" disabled>
 										<input type="text"
 											class="form-control"
-											id="update_member_lock_acc">
+											id="update_member_lock_acc2">
 								</div>
 							</div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-						        <button type="submit" class="btn btn-primary">修改</button>
+						        <button type="button" id="update_button" class="btn btn-primary">修改</button>
 						      </div>
 					</div>
 				</form>`
@@ -251,32 +251,46 @@ $(function(){
 })
 </script>
 
-<!-- 檢視內修改 -->
-<script>
+	<!-- 檢視內修改 -->
+	<script>
 $(function(){
-	$("#view_form").on("submit",function(ev){
+	$("#member_tr").on("click","#update_button",function(){
 		$("#span_email").html("");
 		$("#span_id").html("");
 		$("#span_password").html("");
 		$("#span_birthday").html("");
 		$.ajax({
-			url:"#",
+			url:"adminMemberUpdate.controller",
 			data:{
 				member_no:$("#update_member_no").val(),
-				member_permissions:$("#update_member_permissions").val(),
-				member_email:$("#update_member_email").val(),
-				member_password:$("#update_member_password").val(),
-				member_name:$("#update_member_name").val(),
-				member_birthday:$("#update_member_birthday").val(),
-				member_cellphone:$("#update_member_cellphone").val(),
-				member_id:$("#update_member_id").val(),
-				member_address:$("#update_member_address").val(),
-				member_gui_number:$("#update_member_gui_number").val(),
-				e_paper:$("#update_e_paper").val(),
-				member_bank_code:$("#update_member_bank_code").val(),
-				member_bank_account:$("#update_member_bank_account").val(),
-				member_gg:$("#update_member_gg").val(),
-				member_lock_acc:$("#update_member_lock_acc").val()
+				member_permissions1:$("#update_member_permissions1").val(),
+				member_email1:$("#update_member_email1").val(),
+				member_password1:$("#update_member_password1").val(),
+				member_name1:$("#update_member_name1").val(),
+				member_birthday1:$("#update_member_birthday1").val(),
+				member_cellphone1:$("#update_member_cellphone1").val(),
+				member_id1:$("#update_member_id1").val(),
+				member_address1:$("#update_member_address1").val(),
+				member_gui_number1:$("#update_member_gui_number1").val(),
+				e_paper1:$("#update_e_paper1").val(),
+				member_bank_code1:$("#update_member_bank_code1").val(),
+				member_bank_account1:$("#update_member_bank_account1").val(),
+				member_gg1:$("#update_member_gg1").val(),
+				member_lock_acc1:$("#update_member_lock_acc1").val(),
+				member_permissions2:$("#update_member_permissions2").val(),
+				member_email2:$("#update_member_email2").val(),
+				member_password2:$("#update_member_password2").val(),
+				member_name2:$("#update_member_name2").val(),
+				member_birthday2:$("#update_member_birthday2").val(),
+				member_cellphone2:$("#update_member_cellphone2").val(),
+				member_id2:$("#update_member_id2").val(),
+				member_address2:$("#update_member_address2").val(),
+				member_gui_number2:$("#update_member_gui_number2").val(),
+				e_paper2:$("#update_e_paper2").val(),
+				member_bank_code2:$("#update_member_bank_code2").val(),
+				member_bank_account2:$("#update_member_bank_account2").val(),
+				member_gg2:$("#update_member_gg2").val(),
+				member_lock_acc2:$("#update_member_lock_acc2").val()
 			 	},
 			type:"POST", 
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -304,9 +318,8 @@ $(function(){
 				$("#span_e_paper").html("格式錯誤，0為不訂閱  1為訂閱");
 			}
 		}
-	    }) 
-	    ev.preventDefault(); 
-	})
+	    });
+	});
 	})
 
 </script>
