@@ -23,6 +23,10 @@ public class PageTo {
 		return "/mall/mall_order";
 	}
 	
+	@GetMapping(value = "/mall_management")
+	public String managementPage() {
+		return "/mall/mall_management";
+	}
 //	@GetMapping(value = "/mall_checkout")
 //	public String checkOut() {
 //		return "/mall/mall_checkout";

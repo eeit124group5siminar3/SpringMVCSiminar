@@ -1,4 +1,4 @@
-package tw.group5.active.model;
+package tw.group5.active.service;
 
 import java.util.List;
 
@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
 
+import tw.group5.active.dao.ActFarmerDAO;
+import tw.group5.active.model.ActFarmer;
+import tw.group5.active.model.Clock;
 import tw.group5.mall.model.ProductImageBean;
 
 @Service

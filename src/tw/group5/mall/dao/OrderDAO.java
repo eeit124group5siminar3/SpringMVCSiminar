@@ -30,12 +30,6 @@ public class OrderDAO {
 	private int recordsPerPage = 5;
 	private int totalPages = -1;
 
-	public ProductOrderBean insertOrder(ProductOrderBean ob) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(ob);
-		return ob;
-	}
-
 	public int getPageNo() {
 		return pageNo;
 	}
@@ -56,6 +50,13 @@ public class OrderDAO {
 		// 注意下一列敘述的每一個型態轉換
 		totalPages = (int) (Math.ceil(getRecordCounts(buyerId) / (double) recordsPerPage));
 		return totalPages;
+	}
+	
+// 新增訂單
+	public ProductOrderBean insertOrder(ProductOrderBean ob) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(ob);
+		return ob;
 	}
 
 // 查詢資料庫某一消費者的訂單數
@@ -125,6 +126,7 @@ public class OrderDAO {
 		return subtotal;
 	}
 
+// 修改商品庫存
 	public ProductBean updateProductStock(ProductOrderItemBean oib) {
 		Session session = sessionFactory.getCurrentSession();
 		ProductBean bean = (ProductBean) session.get(ProductBean.class, oib.getProductId());
@@ -133,7 +135,7 @@ public class OrderDAO {
 			System.out.println(stock);
 			if (stock < oib.getAmount()) {
 				throw new ProductStockException(
-						"庫存數量不足: BookId: " + oib.getProductId() + ", 在庫量: " + stock + ", 訂購量: " + oib.getAmount());
+						"庫存數量不足: ProductId: " + oib.getProductId() + ", 在庫量: " + stock + ", 訂購量: " + oib.getAmount());
 			} else {
 				bean.setStock(stock - oib.getAmount());
 			}

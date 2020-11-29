@@ -11,16 +11,304 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
-<style>
-.table1 {
-	position: absolute;
-	top: 30%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-</style>
+
 </head>
 <body>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+		crossorigin="anonymous"></script>
+
+	<!-- 會員新增買賣家 -->
+	<script>
+	window.onload = function() {
+		var customRadioInline1 = document.getElementById("customRadioInline1");
+		var customRadioInline2 = document.getElementById("customRadioInline2");
+		var ckeckbank = document.getElementById("ckeckbank");
+		var ckeckbank1 = document.getElementById("ckeckbank1");
+
+		customRadioInline1.onclick = function() {
+			$("#ckeckbank").empty();
+			ckeckbank.classList.remove("form-group");
+			ckeckbank.classList.remove("col-md-6");
+			$("#ckeckbank1").empty();
+			ckeckbank1.classList.remove("form-group");
+			ckeckbank1.classList.remove("col-md-6");
+			
+		}
+
+		customRadioInline2.onclick = function() {
+			ckeckbank.classList.add("form-group");
+			ckeckbank.classList.add("col-md-6");
+			ckeckbank.innerHTML = 
+
+			'<label for="inputPassword4" style="float:left">'+'銀行代號'+
+			'<a style="color:red">'+'*'+
+			'</a>'+
+			'</label>'+
+			'<span style="color:red">'+
+			'<small id="span_bank_code">'+
+			'</small>'+
+			'</span>'+
+			'<input type="text" name="member_bank_code" id="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
+
+			ckeckbank1.classList.add("form-group");
+			ckeckbank1.classList.add("col-md-6");
+			ckeckbank1.innerHTML =
+
+			'<label for="inputPassword4" style="float:left">'+'銀行帳號'+
+			'<a style="color:red">'+
+			'*'+
+			'</a>'+
+			'</label>'+
+			'<span style="color:red">'+
+			'<small id="span_bank_account">'+
+			'</small>'+
+			'</span>'+
+			'<input type="text" name="member_bank_account" id="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
+
+		}
+		
+	}
+</script>
+
+	<!-- 畫面顯示所有會員資料 -->
+	<script>
+$(document).ready(function(){
+var currentPage = 1;
+	$.get({
+		url:"${pageContext.request.contextPath}/manageMembersData.controller/"+currentPage,
+		success:function(data){
+		console.log(data);
+		let data1 = data.data;
+		content="";
+		for(var i=0 ; i<data1.length ; i++){
+			content+=
+				`
+				<tr>
+				<td>\${data1[i].member_permissions}</td>
+				<td>\${data1[i].member_no}</td>
+				<td>\${data1[i].member_name}</td>
+				<td>\${data1[i].member_cellphone}</td>
+				<td>\${data1[i].member_address}</td>
+				<td>\${data1[i].member_signup_date}</td>
+				<td>\${data1[i].member_gg}</td>
+				<td>\${data1[i].member_lock_acc}</td>
+				<td>
+					<form action="#" method="get">
+						<input type="hidden" id="actId" name="actId"
+						value="\${data1[i].member_no}"> <input name="look"
+						type="submit" value="檢視">
+					</form>
+				</td>
+				<td>
+					<form action="#" method="get">
+						<input type="hidden" id="actId" name="actId"
+						value="\${data1[i].member_no}"> <input name="update"
+						type="submit" value="修改">
+					</form>
+				</td>
+				<td>
+					<form action="#" method="post">
+						<input type="hidden" id="actId" name="actId"
+						value="\${data1[i].member_no}"> <input name="delete"
+						type="submit" value="刪除">
+				</form>
+				</td>
+				</tr>`;
+		}
+		$('#member_tr').html(
+				`
+				<tr>
+				<th>買賣家</th>
+				<th style="width: 100px;">會員編號</th>
+				<th style="width: 130px;">會員名稱</th>
+				<th style="width: 130px;">會員電話</th>
+				<th style="width: 350px;">會員地址</th>
+				<th style="width: 150px;">註冊時間</th>
+				<th>檢舉次數</th>
+				<th>停權狀態</th>
+				<th colspan="3"></th>
+				</tr>`+content);
+		
+	}
+    });  
+})
+</script>
+
+	<!-- 查詢會員資料 -->
+	<script>
+$(function(){
+$("#select_member_no").on("submit",function(ev){
+	$("#select_error").html("");
+	$.ajax({
+		url:"selectManageMembersData.controller",
+		data:{
+			select_member_no:$("#selectno").val()
+		 	},
+		type:"POST", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+		 
+	success:function(data){
+			let data1 = data.data;
+			let data2 = data.totaldata;			
+			let data3 = data.error;
+		if(data1){
+			content="";
+				content+=
+					`
+					<tr>
+					<td>\${data1.member_permissions}</td>
+					<td>\${data1.member_no}</td>
+					<td>\${data1.member_name}</td>
+					<td>\${data1.member_cellphone}</td>
+					<td>\${data1.member_address}</td>
+					<td>\${data1.member_signup_date}</td>
+					<td>\${data1.member_gg}</td>
+					<td>\${data1.member_lock_acc}</td>
+					<td>
+						<form action="#" method="get">
+							<input type="hidden" id="actId" name="actId"
+							value="\${data1.member_no}"> <input name="look"
+							type="submit" value="檢視">
+						</form>
+					</td>
+					<td>
+						<form action="#" method="get">
+							<input type="hidden" id="actId" name="actId"
+							value="\${data1.member_no}"> <input name="update"
+							type="submit" value="修改">
+						</form>
+					</td>
+					<td>
+						<form action="#" method="post">
+							<input type="hidden" id="actId" name="actId"
+							value="\${data1.member_no}"> <input name="delete"
+							type="submit" value="刪除">
+					</form>
+					</td>
+					</tr>`;
+			$('#member_tr').html(
+					`
+					<tr>
+					<th>買賣家</th>
+					<th style="width: 100px;">會員編號</th>
+					<th style="width: 130px;">會員名稱</th>
+					<th style="width: 130px;">會員電話</th>
+					<th style="width: 350px;">會員地址</th>
+					<th style="width: 150px;">註冊時間</th>
+					<th>檢舉次數</th>
+					<th>停權狀態</th>
+					<th colspan="3"></th>
+					</tr>`+content);
+		}else if(data2){
+			content="";
+			for(var i=0 ; i<data2.length ; i++){
+				content+=
+					`
+					<tr>
+					<td>\${data2[i].member_permissions}</td>
+					<td>\${data2[i].member_no}</td>
+					<td>\${data2[i].member_name}</td>
+					<td>\${data2[i].member_cellphone}</td>
+					<td>\${data2[i].member_address}</td>
+					<td>\${data2[i].member_signup_date}</td>
+					<td>\${data2[i].member_gg}</td>
+					<td>\${data2[i].member_lock_acc}</td>
+					<td>
+						<form action="#" method="get">
+							<input type="hidden" id="actId" name="actId"
+							value="\${data2[i].member_no}"> <input name="look"
+							type="submit" value="檢視">
+						</form>
+					</td>
+					<td>
+						<form action="#" method="get">
+							<input type="hidden" id="actId" name="actId"
+							value="\${data2[i].member_no}"> <input name="update"
+							type="submit" value="修改">
+						</form>
+					</td>
+					<td>
+						<form action="#" method="post">
+							<input type="hidden" id="actId" name="actId"
+							value="\${data2[i].member_no}"> <input name="delete"
+							type="submit" value="刪除">
+					</form>
+					</td>
+					</tr>`;
+			}
+			$('#member_tr').html(
+					`
+					<tr>
+					<th>買賣家</th>
+					<th style="width: 100px;">會員編號</th>
+					<th style="width: 130px;">會員名稱</th>
+					<th style="width: 130px;">會員電話</th>
+					<th style="width: 350px;">會員地址</th>
+					<th style="width: 150px;">註冊時間</th>
+					<th>檢舉次數</th>
+					<th>停權狀態</th>
+					<th colspan="3"></th>
+					</tr>`+content);
+		}else{
+			$("#select_error").html("查無資料，請重新輸入");
+		}
+	}
+    }) 
+    ev.preventDefault(); 
+})
+})
+</script>
+	<!-- 會員新增 -->
+	<script>
+$(function(){
+$("#signup_form").on("submit",function(ev){
+	$("#span_email").html("");
+	$("#span_id").html("");
+	$("#span_password").html("");
+	$("#span_birthday").html("");
+	$.ajax({
+		url:"adminMemberSignUp.controller",
+		data:{
+			member_permissions:$("#customRadioInline1").prop('checked'),
+			member_email:$("#member_email").val(),
+			member_password:$("#member_password").val(),
+			member_password1:$("#member_password1").val(),
+			member_name:$("#member_name").val(),
+			member_birthday:$("#member_birthday").val(),
+			member_cellphone:$("#member_cellphone").val(),
+			member_id:$("#member_id").val(),
+			member_address:$("#member_address").val(),
+			member_gui_number:$("#member_gui_number").val(),
+			e_paper:$("#gridCheck").prop('checked'),
+			member_bank_code:$("#member_bank_code").val(),
+			member_bank_account:$("#member_bank_account").val()
+		 	},
+		type:"POST", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+		 
+	success:function(data){
+		if(data[5] == "1"){
+			window.location.href = "goManageMembers.controller";
+		}if(data[0] == "2"){
+			$("#span_email").html("Email已被註冊");
+		}if(data[1] == "3"){
+			$("#span_id").html("身份證字號已被註冊");
+		}if(data[2] == "12"){
+			$("#span_id").html("格式錯誤");
+		}if(data[4] == "4"){
+			$("#span_password").html("兩次密碼不符合");
+		}if(data[6] == "5"){
+			$("#span_password").html("格式錯誤");
+		}if(data[3] == "6"){
+			$("#span_birthday").html("格式錯誤");
+		}
+	}
+    }) 
+    ev.preventDefault(); 
+})
+})
+</script>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
@@ -34,7 +322,9 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="<c:url value='adminBackstage.controller' />" class="nav-link">回首頁</a></li>
+					<li class="nav-item active"><a
+						href="<c:url value='adminBackstage.controller' />"
+						class="nav-link">回首頁</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">平台管理</a>
@@ -86,75 +376,176 @@
 	<br>
 	<br>
 	<div class="member_table">
-
-		<table class="table1" style="border: 1px black; text-align: center;"
+		<div id="select_error" align="center" style="color: red; height: 20px"></div>
+		<br>
+		<table align="center" style="border: 1px black; text-align: center;"
 			border="1">
-			<tr>
-				<td style="border: 0px" align="right">
-					<form action="<c:url value='#'/>" method="get">
-						<input name="apply" type="submit" value="新增">
-					</form>
-				</td>
-				<td style="border: 0px; text-align: right" colspan="12">
-					<form action="<c:url value='#'/>" method="get">
-						<label for="">會員編號:</label> <input type="text" id="selectname"
-							name="selectname"> &nbsp; <input name="selectone"
-							type="submit" value="查詢">
+			<tr style="border: 0px" colspan="11">
+				<td>
+					<button class="float-left" id="insert_button" type="button"
+						name="apply" data-toggle="modal" data-target="#exampleModal">新增</button>
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">會員新增</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form method="post" id="signup_form">
+									<div class="modal-body">
+										<!-- ------------------------新增------------------------- -->
+										<div class="signup-form container">
+											<div id="member_permissions0"
+												class="custom-control custom-radio custom-control-inline">
+												<input type="radio" id="customRadioInline1"
+													name="member_permissions" class="custom-control-input"
+													value="0" checked="true"> <label
+													class="custom-control-label" for="customRadioInline1">買家</label>
+											</div>
+											<div id="member_permissions1"
+												class="custom-control custom-radio custom-control-inline">
+												<input type="radio" id="customRadioInline2"
+													name="member_permissions" class="custom-control-input"
+													value="1"> <label class="custom-control-label"
+													for="customRadioInline2">買家與賣家</label>
+											</div>
+											<p></p>
+											<div class="form-row">
+												<div class="form-group col-md-6" style="text-align: center">
+													<label style="float: left" for="inputEmail4">帳號<a
+														style="color: red">*</a></label><span style="color: red"><small
+														id="span_email"></small></span> <input type="email"
+														name="member_email" id="member_email" class="form-control"
+														placeholder="請填入Email" required>
+												</div>
+
+												<div class="form-group col-md-6" style="text-align: center">
+													<label for="inputEmail4" style="float: left">身份證字號<a
+														style="color: red">*</a></label> <span style="color: red"><small
+														id="span_id"></small></span><input type="text" name="member_id"
+														id="member_id" class="form-control" placeholder="請填入身份證字號"
+														pattern="^[A-Za-z]\d{9}$" title="身分證格式錯誤" required>
+												</div>
+
+												<div class="form-group col-md-6" style="text-align: center">
+													<label for="inputPassword4" style="float: left">密碼<a
+														style="color: red">*</a></label> <span style="color: red"><small
+														id="span_password"></small></span><input type="password"
+														name="member_password" id="member_password"
+														class="form-control" placeholder="請填入密碼"
+														pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+														title="密碼長度至少8碼，須包含大寫、小寫英文及數字" required>
+												</div>
+
+												<div class="form-group col-md-6" style="text-align: center">
+													<label for="inputPassword4" style="float: left">密碼<a
+														style="color: red">*</a></label> <input type="password"
+														name="member_password1" id="member_password1"
+														class="form-control" placeholder="請再次填入密碼"
+														pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+														title="密碼長度至少8碼，須包含大寫、小寫英文及數字" required>
+												</div>
+
+												<div id="ckeckbank"></div>
+												<div id="ckeckbank1"></div>
+
+												<div class="form-group col-md-6" style="text-align: center">
+													<label for="inputPassword4" style="float: left">名稱<a
+														style="color: red">*</a></label> <span style="color: red"><small
+														id="span_name"></small></span> <input type="text"
+														name="member_name" id="member_name" class="form-control"
+														placeholder="請填入姓名或商家名稱" pattern="^[\u4e00-\u9fa5]{0,}$"
+														title="只接受中文字" required>
+													<p></p>
+
+													<label for="inputPassword4" style="float: left">生日<a
+														style="color: red">*</a></label> <span style="color: red"><small
+														id="span_birthday"></small></span> <input type="date"
+														name="member_birthday" id="member_birthday"
+														class="form-control" onkeydown="return false"
+														pattern="\d{4}\-?\d{2}\-?\d{2}" required>
+													<p></p>
+
+													<label for="inputPassword4" style="float: left">連絡電話<a
+														style="color: red">*</a></label> <span style="color: red"><small
+														id="span_cellphone"></small></span> <input type="text"
+														name="member_cellphone" id="member_cellphone"
+														class="form-control" required>
+
+
+												</div>
+											</div>
+											<div class="form-group" style="text-align: center">
+												<label for="inputAddress" style="float: left">地址<a
+													style="color: red">*</a></label><input type="text"
+													name="member_address" id="member_address"
+													class="form-control" placeholder="請填入聯絡地址"
+													pattern="^[\u4e00-\u9fa5\d]{0,}$" title="格式錯誤，不能填入英文"
+													required>
+											</div>
+
+											<div class="form-row">
+												<div class="form-group col-md-6" style="text-align: center">
+													<label for="inputEmail4" style="float: left">統一編號</label><input
+														type="text" name="member_gui_number"
+														id="member_gui_number" class="form-control"
+														placeholder="選填" pattern="\d{8}" title="需輸入8位數字">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<div class="form-check">
+													<input name="e_paper" class="form-check-input"
+														type="checkbox" id="gridCheck" value="1" checked="true">
+													<label class="form-check-label" for="gridCheck">
+														訂閱電子報 </label>
+												</div>
+											</div>
+										</div>
+										<!-- ------------------------新增------------------------- -->
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">關閉</button>
+										<button type="submit" id="signup" class="btn btn-primary">儲存</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<form id="select_member_no" class="float-right" method="get">
+						<label for="">會員編號:</label> <input type="text" id="selectno"
+							name="selectno"> &nbsp;
+						<button name="selectone" type="submit">查詢</button>
 					</form>
 				</td>
 			</tr>
+
+			<tr id="member_tr"></tr>
 			<tr>
-				<th>買賣家</th>
-				<th style="width: 100px;">會員編號</th>
-				<th style="width: 100px;">會員名稱</th>
-				<th style="width: 130px;">會員電話</th>
-				<th style="width: 350px;">會員地址</th>
-				<th style="width: 150px;">註冊時間</th>
-				<th>檢舉次數</th>
-				<th>停權狀態</th>
-				<th colspan="4"></th>
+				<td style="border: 0px; text-align: center;" colspan="12">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</ul>
+					</nav>
+				</td>
 			</tr>
-			<c:forEach var="actFarmer" items="${collFarmer}">
-				<tr>
-					<td><c:out value="${actFarmer.actId}" /></td>
-					<td><c:out value="${actFarmer.actName}" /></td>
-					<td><c:out value="${actFarmer.actType}" /></td>
-					<td><c:out value="${actFarmer.actDateSta}" />&nbsp; <c:out
-							value="${actFarmer.actTimeSta}" /> 到 <c:out
-							value="${actFarmer.actDateEnd}" />&nbsp; <c:out
-							value="${actFarmer.actTimeEnd}" /></td>
-					<td><c:out value="${actFarmer.numLim}" /></td>
-					<td><c:out value="${actFarmer.price}" /></td>
-					<td><c:out value="${actFarmer.signDateSta}" /> <c:out
-							value="${actFarmer.signTimeSta}" /> 到 <c:out
-							value="${actFarmer.signDateEnd}" /> <c:out
-							value="${actFarmer.signTimeEnd}" /></td>
-					<td><c:out value="${actFarmer.actNum}" /></td>
-					<td><c:out value="${actFarmer.sigStat}" /></td>
-					<td>
-						<form action="<c:url value='/actFarmerPreRead.do'/>" method="get">
-							<input type="hidden" id="actId" name="actId"
-								value="${actFarmer.actId}"> <input name="look"
-								type="submit" value="檢視">
-						</form>
-					</td>
-					<td>
-						<form action="<c:url value='/actFarmerPreUpdate.do'/>"
-							method="get">
-							<input type="hidden" id="actId" name="actId"
-								value="${actFarmer.actId}"> <input name="update"
-								type="submit" value="修改">
-						</form>
-					</td>
-					<td>
-						<form action="<c:url value='/actFarmerDelete.do'/>" method="post">
-							<input type="hidden" id="actId" name="actId"
-								value="${actFarmer.actId}"> <input name="delete"
-								type="submit" value="刪除">
-						</form>
-					</td>
-				</tr>
-			</c:forEach>
 		</table>
 	</div>
 

@@ -1,5 +1,7 @@
 package tw.group5.mall.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -121,7 +123,7 @@ public class MallOrderController {
 		try {
 			orderService.persistOrder(pob);
 			cart.deleteAllOrders();
-			return "/mall/ThanksForOrdering";
+			return "/mall/mall_thankForOrder";
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return "/mall/mall_shoppingcart";
@@ -131,7 +133,7 @@ public class MallOrderController {
 // 顯示訂單內容
 	@PostMapping(value = "/OrderContent")
 	public ModelAndView showOrderContent(@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb,
-			@RequestParam(value = "order_pageNo", required = false) Integer pageNoP,HttpServletRequest request,
+			@RequestParam(value = "order_pageNo", required = false) Integer pageNoP, HttpServletRequest request,
 			Model model) {
 		HttpSession session = request.getSession(false);
 		Integer pageNo = (Integer) session.getAttribute("order_pageNo");
@@ -143,10 +145,32 @@ public class MallOrderController {
 		Integer buyerId = mb.getMember_no();
 		int totalPages = orderService.getTotalPages(buyerId);
 		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(buyerId);
+		session.setAttribute("memberOrders", memberOrders);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/orderContent");
-		mav.addObject("memberOrders", memberOrders);
 		mav.addObject("order_totalPages", totalPages);
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+
+// 訂單詳細內容
+	@PostMapping(value = "/OrderDetail")
+	public ModelAndView showOrderDetail(@RequestParam(value = "orderId", required = false) Integer orderId,
+			HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		List<ProductOrderBean> memberOrders = (List<ProductOrderBean>) session.getAttribute("memberOrders");
+		ProductOrderBean order = null;
+		for (ProductOrderBean pob : memberOrders) {
+			if (pob.getOrderId() == orderId) {
+				order = pob;
+				break;
+			}
+		}
+		Set<ProductOrderItemBean> items = order.getItems();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/orderDetailContent");
+		mav.addObject("items", items);
+		mav.addObject("orderId",orderId);
 		mav.setStatus(HttpStatus.OK);
 		return mav;
 	}

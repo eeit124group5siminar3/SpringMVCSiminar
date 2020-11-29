@@ -3,6 +3,7 @@ package tw.group5.recipe.service;
 import java.util.List;
 
 import tw.group5.mall.model.ProductBean;
+import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
@@ -23,4 +24,13 @@ public interface recipe_Service_interface {
 	Recipe_Bean getImage(String rec_id);
 	
 	List<ProductBean> getProducts(String searchString);
+
+	Bookmark_Bean bookmark(Bookmark_Bean bean);
+
+	List<Bookmark_Bean> listOfBookmark(Integer mem_no);
+
+	List<Bookmark_Bean> deleteBookmark(String rec_id,Integer mem_no);
+
+	long getRecordCounts();
+
 }

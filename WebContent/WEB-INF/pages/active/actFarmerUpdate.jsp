@@ -78,7 +78,7 @@ function backHome(){
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 <!-- --------管理左邊bar-------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
-
+<section class="ftco-section ftco-degree-bg">
 <div>	
 <h3 align="center">一日農夫活動修改</h3>
 <form:form action="actFarmerUpdate.do" modelAttribute="afBean" method="POST" enctype="multipart/form-data" name="act">
@@ -173,7 +173,7 @@ function backHome(){
 </table>
 </form:form>
 </div>
-
+</section>
 <!-- --------------footer----------------------------------------------------------- -->
 
 <!-- 	<footer class="ftco-footer backstage-footer-ground"> -->

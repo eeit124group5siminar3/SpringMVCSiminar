@@ -155,7 +155,7 @@ public class ProductDAO {
 	public List<ProductBean> getPageProducts(int producterId) {
 		Session session = sessionFactory.getCurrentSession();
 		int startRecordNo = (maintainPageNo - 1) * recordsPerPage;
-		String hql = "from ProductBean where stock != 0 and producterId =?0 ORDER BY ProductId";
+		String hql = "from ProductBean where stock != 0 and producterId =?0 ORDER BY ProductId desc";
 		Query<ProductBean> query = session.createQuery(hql, ProductBean.class);
 		query.setParameter(0, producterId);
 		query.setFirstResult(startRecordNo);

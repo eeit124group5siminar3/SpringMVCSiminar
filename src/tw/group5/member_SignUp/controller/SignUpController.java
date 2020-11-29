@@ -1,5 +1,6 @@
 package tw.group5.member_SignUp.controller;
 
+
 import java.sql.Date;
 
 import javax.servlet.http.HttpSession;
@@ -57,7 +58,7 @@ public class SignUpController {
 		String e_paper = null;
 		Integer member_gg = 0;
 		String member_lock_acc = "0";
-
+		
 		String member_id = member_idLower.toUpperCase();
 		Date member_birthday = Date.valueOf(member_birthdayString);
 

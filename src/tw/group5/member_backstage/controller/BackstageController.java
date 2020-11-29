@@ -1,6 +1,7 @@
 package tw.group5.member_backstage.controller;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -36,7 +37,7 @@ public class BackstageController {
 	}
 	
 	@RequestMapping(path = "/memberUpdate.controller", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public String MemberUpdate(Model m,HttpServletRequest request) {
+	public String MemberUpdate(Model m,HttpServletRequest request) throws ParseException {
 		Member_SignUp session = (Member_SignUp) m.getAttribute("login_ok");
 //		Member_SignUp session = (Member_SignUp )request.getSession(true).getAttribute("login_ok");
 
@@ -51,8 +52,11 @@ public class BackstageController {
 		String member_gui_number = session.getMember_gui_number();
 		String e_paper = session.getE_paper();
 		String member_bank_code = session.getMember_bank_code();
-		String member_bank_account = session.getMember_bank_account();
-
+		String member_bank_account = session.getMember_bank_account();	
+		
+		System.out.println("生日是"+member_birthday);
+		
+		
 		if (member_gui_number == null) {
 			member_gui_number = "";
 		}

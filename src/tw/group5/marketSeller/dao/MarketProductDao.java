@@ -25,7 +25,7 @@ public class MarketProductDao {
 	private Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	//=========================CRUD==========================================
 	//顯示賣家全部商品
 	public List<MarketProductTotalBean> selectAll( Integer mid) {
 		Query<MarketProductTotalBean> query =getSession().createQuery("From MarketProductTotalBean where MEMBER_NO=" + mid, MarketProductTotalBean.class);
@@ -70,5 +70,6 @@ public class MarketProductDao {
 		getSession().update(bean);
 	    return bean;
 		}
+	
 
 }

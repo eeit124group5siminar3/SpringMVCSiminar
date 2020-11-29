@@ -33,9 +33,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.group5.active.model.ActFarmer;
-import tw.group5.active.model.ActFarmerService;
 import tw.group5.active.model.Active;
 import tw.group5.active.model.Clock;
+import tw.group5.active.service.ActFarmerService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
@@ -46,22 +46,9 @@ public class ActFarmerController {
 	@Autowired
 	private ActFarmerService actFarmerService;
 	
-//	@Autowired
-//	private HttpServletRequest request;
-//	
-//	@Autowired
-//	private HttpServletResponse response;
 	
 	@Autowired
-	ServletContext ctx;
-	
-//	//查詢所有活動-一日農夫
-//	@RequestMapping(value = "")
-//	public String getAllactFarmer(Model model) {
-//		Collection<ActFarmer> collFarmers = actFarmerService.getPageActFarmers();
-//		model.addAttribute("collFarmers", collFarmers);
-//		return "";
-//	}
+	ServletContext ctx;	
 	
 	//廠商活動管理頁面-一日農夫
 	@RequestMapping(value = "allActFarmer.do")
@@ -116,13 +103,19 @@ public class ActFarmerController {
 	
 	//名字找活動
 	@RequestMapping(path = "/SelectNameSeller.do")
-	public String ProcessSelectName(@RequestParam("selectname") String actName, 
+	public String ProcessSelectName(
+			@RequestParam("selectname") String actName, 
+			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
 			@SessionAttribute(value = "login_ok")Member_SignUp mb, Model m) {
 		Integer sellerId = mb.getMember_no();
 		Collection<ActFarmer> collFarmer = actFarmerService.selectNameSeller(actName,sellerId);
+		m.addAttribute("totalPages", actFarmerService.getTotalPages(sellerId));
+		m.addAttribute("MaintainPageNo",maintainPageNo);
 		m.addAttribute("collFarmer", collFarmer);
-		return "active/ActiveHome";
+		return "active/actFarmerMaintain";
 	}
+	
+	
 	
 	//申請活動準備(建立空的物件)
 	@GetMapping(path = "/actFarmerPreInsert.do")

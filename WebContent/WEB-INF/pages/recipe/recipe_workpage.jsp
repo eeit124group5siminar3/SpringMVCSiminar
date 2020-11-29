@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -75,7 +74,9 @@
 /* } */
 	 
 	 
-	 
+.heart:hover{
+	 color:red;
+}	 
 
 
 
@@ -108,6 +109,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value='updatePage.controller'/>">Update</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value='myRecipe'/>">Bookmark</a>
       </li>
 
 <!--       <li class="nav-item dropdown"> -->
@@ -189,6 +193,7 @@
     		<div id="searchSuccess">
     		
     		<div class="row">
+    		<a href="<c:url value='/tesstt'/>">123</a>
     		<c:forEach var='BeanToken'  items="${searchAll}">
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">								
@@ -215,10 +220,10 @@
 <!-- 	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1"> -->
 <!-- 	    								<span><i class="ion-ios-cart"></i></span> -->
 <!-- 	    							</a> -->
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
+	    							<a href="<c:url value='/bookmark?rec_id=${BeanToken.rec_id}'/>" class="heart d-flex justify-content-center align-items-center " id="heart" >
 	    								<span><i class="ion-ios-heart"></i></span>
 	    							</a>
-<!--     							</div> -->
+<!--     							</div>   -->
     						</div>
     					</div>
     				</div>
@@ -226,6 +231,8 @@
     		
     		
     		</c:forEach>
+    		
+    		
     		</div>
     		<div class="row mt-5">
           <div class="col text-center">
@@ -247,17 +254,6 @@
     	
     </section>
 
-
-<!-- --------------------------------------------------------------------- -->
-
-
-
-
-<%-- </c:forEach> --%>
-	
-	
-	
-<!-- 	</form> -->
 	<!------------------------------------------------------------------>
 	<jsp:include page="../footer.jsp" />
 
@@ -284,7 +280,7 @@
         			},
 				success:function(data){
 					$("#searchSuccess").html(data);
-					alert("successsssssssss");
+// 					alert("successsssssssss");
        				console.log(data.length);
 //            	     $.each(data,function(i,list){
 //            	      alert(list[0]);
@@ -297,7 +293,7 @@
                          var ingredients_A=ls.ingredients_A;
 
 //                           	searchProduct(ingredients_A);
-                         html +=
+//                          html +=
 //                          "<div align='center'><p><a href='<c:url value='/RetrieveSearch/?searchString="+ingredients_A+"&search="+str+"'/>'>"+ls.ingredients_A+"</a></p>"
 //                          "<div align='center'><p><a href='<c:url value='/RetrievePageProducts?searchString="+ingredients_A+"&search="+str+"'/>'>"+ls.ingredients_A+"</a></p>"
 //                       "<div align='center'><p><a href='<c:url value='/searchProducts?search="+ingredients_A+"'/>'>"+ls.ingredients_A+"</a></p>"
@@ -330,7 +326,7 @@
 //     	    								<span><i class="ion-ios-heart"></i></span>
 //     	    							</a>
 //         						</div>
-//         					</div> 
+//         					</div>  
 //         				</div>`;
 //         			</div>`;
 //         			</div>`;
@@ -338,7 +334,7 @@
 
 
 
-		           ` <div class="blog-entry align-self-stretch d-md-flex">
+		           ` <div class="blog-entry align-self-stretch d-md-flex">  
 		              <a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="block-20" 
 			              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${ls.rec_id}'/>');">
 		              </a>
@@ -351,7 +347,7 @@
 		            </div>
 		          </div>`;
 
-
+ 
 
 
                          
@@ -368,181 +364,17 @@
 			});
 			});
 
-// 	--------------------連結商城---------------------------------
-
-
-	function productList(pageNo) {
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/RetrievePageProducts' />", true);
-		xhr.send();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var aProductBean = JSON.parse(xhr.responseText);
-				var content = "";
-				for (var i = 0; i < aProductBean.length; i++) {
-					content += "<div class='col-md-6 col-lg-3'>"
-							+ "<div class='product'><a href='#mall_products' class='img-prod'><img class='img-fluid' src=<c:url value='retrieveImageServlet?id="
-							+ aProductBean[i].productId
-							+ "&type=PRODUCT' /> alt='Colorlib Template'>";
-					if (aProductBean[i].discount != 1) {
-						content += "<span class='status'>"
-								+ (1 - aProductBean[i].discount) * 100
-								+ "%</span>";
-					}
-					content += "<div class='overlay'></div> </a><div class='text py-3 pb-4 px-3 text-center'><h3><a href='#'>"
-							+ aProductBean[i].product
-							+ "</a></h3><div class='d-flex'><div class='pricing'>";
-					if (aProductBean[i].discount != 1) {
-						content += "<p class='price'><span class='mr-2 price-dc'>"
-								+ aProductBean[i].price
-								+ "元</span><span class='price-sale'>"
-								+ aProductBean[i].price
-								* aProductBean[i].discount + "元</span></p>";
-					} else {
-						content += "<span>" + aProductBean[i].price
-								+ "元</span>";
-					}
-					content += "</div></div><div class='bottom-area d-flex px-3'><div class='m-auto d-flex'>"
-							+ "<a href='#mall_products' class='add-to-cart d-flex justify-content-center align-items-center text-center'><span><i class='ion-ios-menu'></i></span></a>"
-							+ "<a href='#mall_products' class='buy-now d-flex justify-content-center align-items-center mx-1'><span><i class='ion-ios-cart'></i></span></a>"
-							+ "<a href='#mall_products' class='heart d-flex justify-content-center align-items-center '><span><i class='ion-ios-heart'></i></span></a>"
-							+ "</div></div></div></div></div>"
-				}
-				let divs = document.getElementById("mall_products");
-				divs.innerHTML = content;
-			}
-		}
-	}
-
-	function page(pageNo) {
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/RetrievePage/"+pageNo+"' />", true);
-		xhr.send();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var content = "<div class='row mt-5'><div class='col text-center'><div class='block-27'><ul>";
-				var totalPages = xhr.responseText;
-				if (pageNo == 1) {
-					content += "<li><span>&lt;&lt;</span></li><li><span>&lt;</span></li>";
-				} else {
-					content += "<li><a href='#product_top'onclick='page("
-							+ 1
-							+ ")'>&lt;&lt;</a></li><li><a href='#product_top'onclick='page("
-							+ (pageNo - 1) + ")'>&lt;</a></li>";
-				}
-				if (totalPages <= 5) {
-					for (var i = 1; i <= totalPages; i++) {
-						if (pageNo == i) {
-							content += "<li class='active'><span>" + i
-									+ "</span></li>"
-						} else {
-							content += "<li><a href='#product_top' onclick='page("
-									+ i + ")'>" + i + "</a></li>"
-						}
-					}
-				} else if (pageNo > (totalPages - 3)) {
-					for (var i = totalPages - 4; i <= totalPages; i++) {
-						if (pageNo == i) {
-							content += "<li class='active'><span>" + i
-									+ "</span></li>"
-						} else {
-							content += "<li><a href='#product_top' onclick='page("
-									+ i + ")'>" + i + "</a></li>"
-						}
-					}
-				} else {
-					for (var i = pageNo - 2; i <= pageNo + 2; i++) {
-						if (pageNo == i) {
-							content += "<li class='active'><span>" + i
-									+ "</span></li>"
-						} else {
-							content += "<li><a href='#product_top' onclick='page("
-									+ i + ")'>" + i + "</a></li>"
-						}
-					}
-				}
-				if (pageNo == totalPages) {
-					content += "<li><span>&gt;</span></li><li><span>&gt;&gt;</span></li>";
-				} else {
-					content += "<li><a href='#product_top'onclick='page("
-							+ (pageNo + 1)
-							+ ")'>&gt;</a></li><li><a href='#product_top'onclick='page("
-							+ totalPages + ")'>&gt;&gt;</a></li>";
-				}
-			}
-			productList(pageNo);
-			content += "</ul></div></div></div>";
-			let divs = document.getElementById("mall_pages");
-			divs.innerHTML = content;
-			console.log(totalPages);
-		}
-	}
-
-	function searchProduct() {
-// 		var searchString = document.forms[0].elements[0].value;
-		console.log(searchString);
-		var xhr = new XMLHttpRequest();
-		if (searchString == null || searchString == "") {
-			var url = "<c:url value='/RetrieveSearch/' />"
-			console.log(searchString);
-		} else {
-			var url = "<c:url value='/RetrieveSearch/" + searchString + "' />"
-		}
-		xhr.open("GET", url, false);
-		xhr.send();
-		page(1);
-	}
-
-	function productCategory(categoryId) {
-		var categoryList = document.getElementById("product-category");
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='/RetrieveCategory/"+categoryId+"' />",
-				true);
-		xhr.send();
-		content = ""
-		xhr.onreadystatechange = function() {
-			page(1);
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var categoryBean = JSON.parse(xhr.responseText);
-				categoryBean.unshift({
-					id : 0,
-					name : "全部"
-				});
-				for (var i = 0; i < categoryBean.length; i++) {
-					if (i == categoryId) {
-						content += "<li class='active'><span>" 
-								+ categoryBean[i].name + "</span></li>";
-					} else {
-						content += "<li><a href='#product_top' onclick='productCategory("
-								+ i
-								+ ")'>"
-								+ categoryBean[i].name
-								+ "</a></li>";
-					}
-				}
-			}
-			categoryList.innerHTML = content;
-		}
-		
-	}
-
-	window.onload =function() {
-		productCategory(0);
-		page(1);
-	}
-	
-	</script>
-
-		<script type="text/javascript">
-	function ch() {
-
-		let search = document.getElementById("send").value;
-		let inputLen = search.length;
-		let spid = document.getElementById("sp");
-		if (search == "") {
-			spid.innerHTML = "請輸入";
-		}
-	}
 </script>
+<script type="text/javascript"> 
+	$(function(){
+		$.get({
+			url:"",
+			
+
+			});
+
+		});	
+
+</script> 
 </body>
 </html>

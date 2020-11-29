@@ -8,6 +8,7 @@
 				<table class="table">
 					<thead class="thead-primary">
 						<tr class="text-center">
+							<th>&nbsp;</th>
 							<th>訂單編號</th>
 							<th>訂購日期</th>
 							<th>收件者姓名</th>
@@ -15,17 +16,19 @@
 							<th>連絡電話</th>
 							<th>總金額</th>
 							<th>處理狀態</th>
-							<th>出貨時間</th>
 							<th>&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach varStatus="stVar" var="list" items="${memberOrders}">
 							<tr class="text-center">
+								<td>
+									<button type="button" class="btn btn-outline-secondary"
+										onclick="orderDetail(${list.orderId})">詳細資料</button>
+								</td>
 								<td class="product-remove">
 									<p>${list.orderId}</p>
 								</td>
-
 								<td>
 									<p>${list.orderDate.toString().substring(0,10)}</p>
 								</td>
@@ -42,7 +45,6 @@
 								<td class="total">
 									<p>${list.total}元</p>
 								</td>
-								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 							</tr>
@@ -68,7 +70,7 @@
 										<li class='active'><span>${i}</span></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href='#product_top' onclick='orderpage(${i})'>${i}</a></li>
+										<li><a href='#product_top' onclick='orderPage(${i})'>${i}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -98,18 +100,4 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-function orderpage(pageNo) {
-	$.ajax({
-		url : "OrderContent",
-		type : "POST",
-		data : {"order_pageNo":pageNo},
-		datatype : "html",
-		success : function(data, status) {
-			$("#orderContent").html(data);
-		},
-		error : function(data, status) {
-			$("#orderContent").html(data);
-		}
-	});
-}
 </script>
