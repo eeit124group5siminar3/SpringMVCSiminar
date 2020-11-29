@@ -66,7 +66,9 @@
 	vertical-align: middle;
 	padding-left: 20px;
 }
-	 
+.heart:hover {
+	color: red;
+} 
 	 
 </style>
 
@@ -80,8 +82,6 @@
 
 <div align="center">
 	<form action="frontPage.controller" method="get" runat="server">
-<%-- 		<jsp:include page="/top.jsp" /> --%>
-<%-- 		<jsp:include page="../header.jsp" /> --%>
 		<fieldset>
 			<legend>搜尋結果</legend>
 			<c:forEach var='BeanToken' items="${List}">
@@ -92,15 +92,26 @@
 			</a>
 					
 			<div class="txt">
-					<h2>
+			<div align="center">
+				<h2 align="center" style="width:200px; float:left; display:inline">
 						<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
-					</h2>
-					<hr>
+						
+				</h2>
+				<input type="hidden" id="send" value="${BeanToken.rec_id}" />
+				<h2 style="width:50px; float:left; display:inline" >
+					<a href="javascript:void(0);" 
+							class="heart d-flex justify-content-center align-items-center " id="heart" >
+			    		<span><i class="ion-ios-heart"></i></span></a>
+				</h2>
+				</div>
+				<br>
+				<hr>
+					<div>
 					<a href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>"><p>食材: ${BeanToken.ingredients_A} </p></a>	
 					<p>食材: ${BeanToken.ingredients_B} </p>
 					<p>介紹 : ${BeanToken.desc}</p>				
 					<p>料理方法 : ${BeanToken.method}</p>
-				
+				</div>
 		</div>
 	</div>
 				<hr>
@@ -227,22 +238,39 @@
 	
 	
 	<script type="text/javascript">
-	$(document).ready(function() {
-		// 			var cartcontent=document.getElementById("cartContent");
-		$.ajax({
-			url : "MallContent",
-			type : "GET",
-			data : {"categoryId":0,"pageNo":1},
-			datatype : "html",
-			success : function(data, status) {
-				$("#mainContent").html(data);
-			},
-			error : function(data, status) {
-				$("#mainContent").html(data);
-			}
-		});
-	});
+// 	$(document).ready(function() {
+// 		// 			var cartcontent=document.getElementById("cartContent");
+// 		$.ajax({
+// 			url : "MallContent",
+// 			type : "GET",
+// 			data : {"categoryId":0,"pageNo":1},
+// 			datatype : "html",
+// 			success : function(data, status) {
+// 				$("#mainContent").html(data);
+// 			},
+// 			error : function(data, status) {
+// 				$("#mainContent").html(data);
+// 			}
+// 		});
+// 	}); 
 
+		
+		$("#heart").click(function(){
+			var rec_id=$("#send").val();
+			console.log('rec_id: '+rec_id);
+				$.ajax({
+				type:"GET",
+				url:"./bookmark",
+				data:{"rec_id":rec_id},
+				success:function(response){
+					alert('succcccccccccccccccces');
+					console.log('response: '+response);
+					
+					
+					}
+			
+				});
+			});
 	</script>
 </body>
 </html>
