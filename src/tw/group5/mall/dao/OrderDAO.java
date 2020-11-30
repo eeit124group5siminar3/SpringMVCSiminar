@@ -138,6 +138,7 @@ public class OrderDAO {
 						"庫存數量不足: ProductId: " + oib.getProductId() + ", 在庫量: " + stock + ", 訂購量: " + oib.getAmount());
 			} else {
 				bean.setStock(stock - oib.getAmount());
+				bean.setSold(bean.getSold()+oib.getAmount());
 			}
 			return bean;
 		}

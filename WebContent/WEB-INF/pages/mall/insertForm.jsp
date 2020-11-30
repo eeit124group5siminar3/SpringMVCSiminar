@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <form:form id="updaeteForm" name="updaeteForm" method="post"
-	action="UpdateProduct" enctype="multipart/form-data"
-	modelAttribute="updateBean">
+	action="InsertProduct" enctype="multipart/form-data"
+	modelAttribute="insertBean">
 
 	<table style="width: 640px">
 		<tr>
@@ -64,7 +64,7 @@
 <!-- 					<tr> -->
 						<td style="padding-top: 0; padding-bottom: 5px"><img
 							height='120' width='120'
-							src=<c:url value='retrieveImageServlet?id=${updateBean.productId}&type=PRODUCT' /> />
+							src=<c:url value='retrieveImageServlet?id=${insertBean.productId}&type=PRODUCT' /> />
 						</td>
 						<td style="padding-top: 0; padding-bottom: 5px" colspan='2'><form:input
 								type="file" name="uploadFile" path="multipartFile" size='6'/>

@@ -38,15 +38,10 @@ public class ProductOrderItemBean implements Serializable{
 	private	Double discount;
 	private	Date shippingDate;
 	private	Integer status;
+	private ProducterBean producterBean;
 	private String producterName;
 	private ProductOrderBean productOrderBean;
-	@Transient
-	public String getProducterName() {
-		return producterName;
-	}
-	public void setProducterName(String producterName) {
-		this.producterName = producterName;
-	}
+	
 	public ProductOrderItemBean() {
 		super();
 	}
@@ -145,6 +140,24 @@ public class ProductOrderItemBean implements Serializable{
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "producterId")
+	public ProducterBean getProducterBean() {
+		return producterBean;
+	}
+
+	public void setProducterBean(ProducterBean producterBean) {
+		this.producterBean = producterBean;
+	}
+	@Transient
+	public String getProducterName() {
+		String producterName=producterBean.getMember_name();
+		return producterName;
+	}
+	public void setProducterName(String producterName) {
+		this.producterName = producterName;
 	}
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="ORDERID")

@@ -7,12 +7,12 @@
 		<div class="col-md-12 ftco-animate">
 			<div>
 				<button class="btn btn-primary btn-block" data-toggle="modal"
-							data-target="#exampleModal">新增商品</button>
+					data-target="#insert">新增商品</button>
 				<br />
 			</div>
 			<div>
-				<span id='test1'></span>
 				<table class="table table-hover">
+				<span id="test"></span>
 					<thead class="thead-light">
 						<tr>
 							<th>&nbsp;</th>
@@ -26,8 +26,15 @@
 					</thead>
 					<c:forEach var="item" items="${management_DPP}">
 						<tr class="table-=active text-center" data-toggle="modal"
-							data-target="#exampleModal" data-whatever="${item.productId}">
-							<td>&nbsp;</td>
+							data-target="#update" data-whatever="${item.productId}">
+							<td>
+							<c:if test="${item.status==0}">
+									<button type="button" class="btn btn-primary btn-sm" onclick="shelf()">上架</button>
+							</c:if>
+							<c:if test="${item.status==1}">
+									<button type="button" class="btn btn-primary btn-sm" onclick="shelf()">下架</button>
+							</c:if>
+							</td>
 							<td class="image-prod"
 								style="padding-top: 5px; padding-bottom: 5px"><div
 									class="img"
@@ -162,5 +169,8 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-
+function shelf(){
+	var test=document.getElementById("test");
+	test.innerHTML="123";
+}
 </script>

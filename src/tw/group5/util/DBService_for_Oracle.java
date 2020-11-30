@@ -37,6 +37,9 @@ public class DBService_for_Oracle {
 			+"FILENAME VARCHAR2(20 BYTE)," 
 			+"DESCRIPTION VARCHAR2(255 BYTE)," 
 			+"CATEGORY NUMBER(20) REFERENCES PRODUCTCATEGORY(ID) on DELETE cascade"
+			+"VIEWS NUMBER(20)"
+			+"SOLD NUMBER(20)"
+			
 			+ " ) ";
 
 	private static final String CREATE_ProductCategory_Oracle = "CREATE TABLE PRODUCTCATEGORY (	"
