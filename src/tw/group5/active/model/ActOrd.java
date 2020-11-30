@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @DynamicUpdate
 public class ActOrd {
 
-	private String actOrdId;
+	private Integer actOrdId;
 	private Integer memNo;
 	private String memName;
 	private String memTel;
@@ -45,7 +45,7 @@ public class ActOrd {
 	public ActOrd() {
 	}
 
-	public ActOrd(String actOrdId, Integer memNo, String memName, String memTel, String memEmail, Integer actId,
+	public ActOrd(Integer actOrdId, Integer memNo, String memName, String memTel, String memEmail, Integer actId,
 			Integer ordActNum, Double totalPrice, Integer ordState, Timestamp ordTime, ActFarmer actFarmer) {
 		super();
 		this.actOrdId = actOrdId;
@@ -64,11 +64,11 @@ public class ActOrd {
 	@Id
 	@Column(name = "actOrdId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public String getActOrdId() {
+	public Integer getActOrdId() {
 		return actOrdId;
 	}
 
-	public void setActOrdId(String actOrdId) {
+	public void setActOrdId(Integer actOrdId) {
 		this.actOrdId = actOrdId;
 	}
 

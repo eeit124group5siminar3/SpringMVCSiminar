@@ -1,13 +1,9 @@
 package tw.group5.active.controller;
 
 
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -110,20 +106,52 @@ public class ActSignController {
 		}
 	}
 	
+//	//查詢該活動的某一筆訂單
+//	public String actOrdOne(Model model,
+//		@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, 
+//		@RequestParam(value = "actOrdId") Integer actOrdId,
+//		@RequestParam(value = "actId") Integer actId) {
+//		
+//		Collection<ActOrd> collOrd = actOrdService.getActOrdsByOrdId(actOrdId, actId);
+//		if(collOrd.isEmpty()) {
+//			return "redirect:/maintainActFarmer.do";
+//		}else {
+//			model.addAttribute("collOrd", collOrd);
+//			return "/active/actOrdMaintain";			
+//		}		
+//	}
 	
-	public String actOrdOne(Model model,
-		@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, 
-		@RequestParam(value = "actOrdId") Integer actOrdId,
-		@RequestParam(value = "actId") Integer actId) {
-		
-		Collection<ActOrd> collOrd = actOrdService.getActOrdsByOrdId(actOrdId, actId);
-		if(collOrd.isEmpty()) {
-			return "redirect:/maintainActFarmer.do";
-		}else {
-			System.out.println("到底有沒有訂單請繼續看下去"+collOrd);
-			model.addAttribute("collOrd", collOrd);
-			return "/active/actOrdMaintain";			
-		}
+	//刪除某一筆訂單
+	@PostMapping(value = "/actOrdDelet.do")
+	public String actOrdDelet(@RequestParam(value="actOrdId")Integer actOrdId) {
+		Integer id = Integer.valueOf(actOrdId);
+		actOrdService.delectActOrd(id);
+		return "redirect:/maintainActFarmer.do";
 		
 	}
+	
+	//修改活動準備(找到該筆物件)
+	@GetMapping(value = "/actOrdPreUpdate.do")
+	public String actOrdPreUpdate(Model model,
+		@RequestParam(value="actOrdId") Integer actOrdId,
+		@SessionAttribute(value = "actFarmer") ActFarmer actFarmer) {
+		
+		ActOrd aoBean = actOrdService.getActOrdOne(actOrdId);
+		aoBean.setActFarmer(actFarmer);
+		model.addAttribute("aoBean", aoBean);
+		return "/active/actSignUpdate";
+	}
+	
+	//修改某一筆報名訂單
+	@PostMapping(value = "/actOrdUpdate.do")
+	public String actOrdUpdate(@ModelAttribute(value = "aoBean")ActOrd actOrd,
+		Model model, @SessionAttribute(value = "login_ok")Member_SignUp mb) {		
+		
+		actOrdService.updateActOrd(actOrd);
+		return "redirect:/maintainActFarmer.do";
+	}
+	
+	
+	
+	
 }

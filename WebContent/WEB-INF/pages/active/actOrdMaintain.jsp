@@ -95,7 +95,7 @@
 <!-- 							<input name="apply" type="submit" value="申請"> -->
 <%-- 						</form> --%>
 <!-- 					</td> -->
-					<td style="border: 0px" align="right" colspan="11">
+					<td style="border: 0px" align="right" colspan="10">
 						<form action="<c:url value='/'/>" method="get">
 							<input name="selectAll" type="submit" value="查詢全部">
 						</form>
@@ -110,7 +110,7 @@
 					<th>總金額</th>
 					<th>報名狀態</th>
 					<th>下單時間</th>
-					<th colspan="3">Action</th>
+					<th colspan="2">Action</th>
 				</tr>
 				<c:forEach var="actOrd" items="${collOrd}">
 					<tr>
@@ -123,14 +123,7 @@
 						<td><c:out value="${actOrd.ordState}" /></td>
 						<td><c:out value="${actOrd.ordTime}" /></td>
 						<td>
-							<form action="<c:url value='/actFarmerPreRead.do'/>" method="get">
-								<input type="hidden" id="actOrdId" name="actOrdId"
-									value="${actOrd.actOrdId}"> <input name="look"
-									type="submit" value="檢視">
-							</form>
-						</td>
-						<td>
-							<form action="<c:url value='/actFarmerPreUpdate.do'/>"
+							<form action="<c:url value='/actOrdPreUpdate.do'/>"
 								method="get">
 								<input type="hidden" id="actOrdId" name="actOrdId"
 									value="${actOrd.actOrdId}"> <input name="update"
@@ -138,10 +131,9 @@
 							</form>
 						</td>
 						<td>
-							<form action="<c:url value='/actFarmerDelete.do'/>" method="post">
-								<input type="hidden" id="actOrdId" name="actOrdId"
-									value="${actOrd.actOrdId}"> <input name="delete"
-									type="submit" value="刪除">
+							<form action="<c:url value='/actOrdDelet.do'/>" method="post">
+								<input type="hidden" id="actOrdId" name="actOrdId" value="${actOrd.actOrdId}"> 
+								<input name="delete" type="submit" value="刪除">
 							</form>
 						</td>
 					</tr>
@@ -160,7 +152,7 @@
 				<!-- 				ajax -->
 
 				<tr>
-					<td style="border: 0px" colspan="6"></td>
+					<td style="border: 0px" colspan="5"></td>
 					<td style="border: 0px" colspan="5">
 						<form action="<c:url value='/'/>" method="get">
 							<label for="">訂單編號:</label> 
