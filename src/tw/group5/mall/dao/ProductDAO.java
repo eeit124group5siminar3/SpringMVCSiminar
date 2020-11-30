@@ -246,7 +246,7 @@ public class ProductDAO {
 	public String getSelectTag() {
 		String ans = "";
 //		List<CategoryBean> cb = getCategory();
-		ans += "<SELECT name='" + getTagName() + "'>";
+		ans += "<select name='" + getTagName() + "'>";
 //		for (CategoryBean bean : cb) {
 		for (int i = 1; i <= (CategoryClass.CATEGORY_MAP.size()-1); i++) {
 			String name = CategoryClass.getCategory(i);
@@ -258,7 +258,7 @@ public class ProductDAO {
 				ans += "<option value='" + i + "'>" + name + "</option>";
 			}
 		}
-		ans += "</SELECT>";
+		ans += "</select>";
 		return ans;
 	}
 
