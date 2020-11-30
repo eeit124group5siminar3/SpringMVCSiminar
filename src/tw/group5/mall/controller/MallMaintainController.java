@@ -25,7 +25,7 @@ import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "bean" })
+@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean" })
 public class MallMaintainController {
 //	public final int RECORDS_PER_PAGE = 5;
 	@Autowired
@@ -34,11 +34,10 @@ public class MallMaintainController {
 // 顯示商品管理頁面
 	@PostMapping(value = "/ManagementContent")
 	public ModelAndView showManagementMallContent(HttpServletRequest request,
-			@RequestParam(value = "management_pageNo", required = false) Integer pageNoP
-			) {
+			@RequestParam(value = "management_pageNo", required = false) Integer pageNoP) {
 		HttpSession session = request.getSession(false);
 		Integer pageNo = (Integer) session.getAttribute("management_pageNo");
-		Member_SignUp mb=(Member_SignUp) session.getAttribute("login_ok");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 		Integer producterId = mb.getMember_no();
 		if (pageNoP != null) {
 			pageNo = pageNoP;
@@ -51,6 +50,21 @@ public class MallMaintainController {
 		mav.setViewName("/mall/managementContent");
 		mav.addObject("management_totalPages", totalPages);
 		mav.addObject("management_DPP", list);
+		return mav;
+	}
+
+// 修改資料前置
+	@PostMapping(value = "/Preupdate")
+	public ModelAndView preupdate(HttpServletRequest request,
+			@RequestParam(value = "productId") Integer productId) {
+		ProductBean updateBean=service.getProduct(productId);
+		service.setSelected(updateBean.getCategory());
+		service.setTagName("categoryId");
+		String categoryTag = service.getSelectTag();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/updateForm");
+		mav.addObject("SelectCategoryTag", categoryTag);
+		mav.addObject("updateBean", updateBean);
 		return mav;
 	}
 
