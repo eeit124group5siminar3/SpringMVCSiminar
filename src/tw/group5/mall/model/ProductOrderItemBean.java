@@ -16,6 +16,9 @@ import javax.persistence.Transient;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 @Scope(value = "prototype")
 @Entity

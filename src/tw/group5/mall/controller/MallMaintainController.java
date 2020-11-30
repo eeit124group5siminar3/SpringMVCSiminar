@@ -2,7 +2,11 @@ package tw.group5.mall.controller;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,42 +17,81 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import tw.group5.mall.model.CategoryClass;
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "bean" })
+@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean" })
 public class MallMaintainController {
-	public final int RECORDS_PER_PAGE = 5;
+//	public final int RECORDS_PER_PAGE = 5;
 	@Autowired
 	private ProductService service;
 
-	@GetMapping(value = "/DisplayMaintainProduct")
-	public String displayMaintainProduct(
-			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
-			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model model) {
-		if (mb == null) {
-			return "/index";
-		}
+// 顯示商品管理頁面
+	@PostMapping(value = "/ManagementContent")
+	public ModelAndView showManagementMallContent(HttpServletRequest request,
+			@RequestParam(value = "management_pageNo", required = false) Integer pageNoP) {
+		HttpSession session = request.getSession(false);
+		Integer pageNo = (Integer) session.getAttribute("management_pageNo");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 		Integer producterId = mb.getMember_no();
-		if (maintainPageNo == null) {
-			if (model.getAttribute("MaintainPageNo") != null) {
-				maintainPageNo = (Integer) model.getAttribute("MaintainPageNo");
-			} else {
-				maintainPageNo = 1;
-			}
+		if (pageNoP != null) {
+			pageNo = pageNoP;
+			session.setAttribute("management_pageNo", pageNo);
+			service.setMaintainPageNo(pageNo);
 		}
-		model.addAttribute("baBean", service);
-		service.setMaintainPageNo(maintainPageNo);
-		service.setRecordsPerPage(RECORDS_PER_PAGE);
-		model.addAttribute("totalPages", service.getTotalPages(producterId));
-		Collection<ProductBean> coll = service.getPageProducts(producterId);
-		model.addAttribute("MaintainPageNo", maintainPageNo);
-		model.addAttribute("products_DPP", coll);
-		return "/mall/ProductMaintainList";
+		int totalPages = service.getTotalPages(producterId);
+		List<ProductBean> list = service.getPageProducts(producterId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/managementContent");
+		mav.addObject("management_totalPages", totalPages);
+		mav.addObject("management_DPP", list);
+		return mav;
 	}
+
+// 修改資料前置
+	@PostMapping(value = "/Preupdate")
+	public ModelAndView preupdate(HttpServletRequest request,
+			@RequestParam(value = "productId") Integer productId) {
+		ProductBean updateBean=service.getProduct(productId);
+		service.setSelected(updateBean.getCategory());
+		service.setTagName("categoryId");
+		String categoryTag = service.getSelectTag();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/updateForm");
+		mav.addObject("SelectCategoryTag", categoryTag);
+		mav.addObject("updateBean", updateBean);
+		return mav;
+	}
+
+//	@GetMapping(value = "/DisplayMaintainProduct")
+//	public String displayMaintainProduct(
+//			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
+//			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model model) {
+//		if (mb == null) {
+//			return "/index";
+//		}
+//		Integer producterId = mb.getMember_no();
+//		if (maintainPageNo == null) {
+//			if (model.getAttribute("MaintainPageNo") != null) {
+//				maintainPageNo = (Integer) model.getAttribute("MaintainPageNo");
+//			} else {
+//				maintainPageNo = 1;
+//			}
+//		}
+//		model.addAttribute("baBean", service);
+//		service.setMaintainPageNo(maintainPageNo);
+//		service.setRecordsPerPage(RECORDS_PER_PAGE);
+//		model.addAttribute("totalPages", service.getTotalPages(producterId));
+//		Collection<ProductBean> coll = service.getPageProducts(producterId);
+//		model.addAttribute("MaintainPageNo", maintainPageNo);
+//		model.addAttribute("products_DPP", coll);
+//		return "/mall/ProductMaintainList";
+//	}
 
 	@PostMapping(value = "/ProductDeleteServlet")
 	public String productDelete(@RequestParam(value = "productId") Integer productId, Model model) {
@@ -71,8 +114,9 @@ public class MallMaintainController {
 		model.addAttribute("successMsg", successMsgs);
 		service.setCategoryId(category);
 		insert.setCategory(category);
-		service.getCategoryById();
-		insert.setCategoryBean(service.getCategoryById());
+//		service.getCategoryById();
+		CategoryClass.getCategory(category);
+//		insert.setCategoryBean(service.getCategoryById());
 		Integer producterId = mb.getMember_no();
 		insert.setProducterId(producterId);
 		service.saveProduct(insert);
@@ -100,7 +144,7 @@ public class MallMaintainController {
 		ProductBean bean = service.getProduct(productId);
 		System.err.println(bean.hashCode());
 		model.addAttribute("bean", bean);
-		service.setSelected(bean.getCategoryBean().getId());
+		service.setSelected(bean.getCategory());
 		service.setTagName("categoryId");
 		String categoryTag = service.getSelectTag();
 		model.addAttribute("SelectCategoryTag", categoryTag);
@@ -118,7 +162,7 @@ public class MallMaintainController {
 		model.addAttribute("ErrMsg", errorMsgs);
 		model.addAttribute("successMsg", successMsgs);
 		service.setCategoryId(category);
-		bb.setCategoryBean(service.getCategoryById());
+		bb.setCategory(category);
 		service.updateProduct(bb);
 
 		return "redirect:DisplayMaintainProduct?MaintainPageNo=" + maintainPageNo;

@@ -1,5 +1,7 @@
 package tw.group5.admin_menage_members.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -55,8 +57,6 @@ public class Admin_ManageMembersController {
 	public Map<String, Object> processSelectManageMembers(@RequestParam(name = "select_member_no") String member_no) {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-
-		System.out.println("會員編號是：" + member_no);
 
 		if (member_no != "") {
 
@@ -201,8 +201,8 @@ public class Admin_ManageMembersController {
 			@RequestParam(name = "member_lock_acc2", required = false) String member_lock_acc2, Model m) {
 
 		Date member_birthday1 = Date.valueOf(member_birthdayString1);
-		String member_id1 = member_idLower1.toUpperCase();
 
+		//預設修改資料為原始資料
 		String member_permissions = member_permissions1;
 		String member_email = member_email1;
 		String member_password = member_password1;
@@ -217,10 +217,17 @@ public class Admin_ManageMembersController {
 		String member_bank_account = member_bank_account1;
 		String member_gg = member_gg1;
 		String member_lock_acc = member_lock_acc1;
-		
+
+		//預設所有判斷Error為True(無Error)
 		boolean sel_email = true;
 		boolean sel_id = true;
-		
+		boolean boolean_member_password = true;
+		boolean boolean_member_permissions = true;
+		boolean boolean_member_gg = true;
+		boolean boolean_member_lock_acc = true;
+		boolean boolean_e_paper = true;
+
+		//判斷Admin是否有輸入更改資料，有就以Admin輸入的資料為主，沒有就用原始資料
 		if (member_permissions2 != "") {
 			member_permissions = member_permissions2;
 		}
@@ -242,7 +249,8 @@ public class Admin_ManageMembersController {
 			member_cellphone = member_cellphone2;
 		}
 		if (member_idLower2 != "") {
-			sel_id = member_Service.check_signup_id(member_idLower2);
+			String member_id2 = member_idLower2.toUpperCase();
+			sel_id = member_Service.check_signup_id(member_id2);
 			member_id = member_idLower2.toUpperCase();
 		}
 		if (member_address2 != "") {
@@ -267,80 +275,94 @@ public class Admin_ManageMembersController {
 			member_lock_acc = member_lock_acc2;
 		}
 
-		boolean boolean_member_password = true;
-		boolean boolean_member_permissions = true;
-		boolean boolean_member_gg = true;
-		boolean boolean_member_lock_acc = true;
-		boolean boolean_e_paper = true;
+		//判斷身分證是否正確
 		boolean check_id = signUp_Function.check_id(member_id);
+		//判斷生日格式是否正確
 		boolean check_date = signUp_Function.check_date(member_birthday);
-		String[] check = new String[11];
 
+		String[] check = new String[10];
+
+		//判斷Admin資料是否有誤，有就把Error放入map回傳
 		if (!sel_email) {
-			check[0] = "2";
+			check[1] = "1";
 		}
 		if (!sel_id) {
-			check[1] = "3";
+			check[2] = "2";
 		}
 		if (!check_id) {
-			check[2] = "12";
-		}
-		if (!check_date) {
-			check[3] = "6";
+			check[3] = "3";
 		}
 		if (!member_password.equals("")) {
 			boolean_member_password = true;
-		}else {
+		} else {
 			boolean_member_password = false;
-			check[6] = "5";
+			check[4] = "4";
+		}
+		if (!check_date) {
+			check[5] = "5";
 		}
 		if (member_permissions.equals("0") || member_permissions.equals("1")) {
 			boolean_member_permissions = true;
-		}else {
+		} else {
 			boolean_member_permissions = false;
-			check[7] = "7";
+			check[6] = "6";
 		}
 		if (member_gg.equals("0") || member_gg.equals("1") || member_gg.equals("2") || member_gg.equals("3")) {
 			boolean_member_gg = true;
-		}else {
+		} else {
 			boolean_member_gg = false;
-			check[8] = "8";			
+			check[7] = "7";
 		}
 		if (member_lock_acc.equals("0") || member_lock_acc.equals("1")) {
 			boolean_member_lock_acc = true;
-		}else {
+		} else {
 			boolean_member_lock_acc = false;
-			check[9] = "9";			
+			check[8] = "8";
 		}
 		if (e_paper.equals("0") || e_paper.equals("1")) {
 			boolean_e_paper = true;
-		}else {
+		} else {
 			boolean_e_paper = false;
-			check[10] = "10";			
+			check[9] = "9";
 		}
-		System.out.println("email:"+sel_email);
-		System.out.println("id:"+sel_id);
-		System.out.println("check_ID:"+check_id);
-		System.out.println("check_date:"+check_date);
-		System.out.println("boolean_password:"+boolean_member_password);
-		System.out.println("boolean_permissions:"+boolean_member_permissions);
-		System.out.println("boolean_gg:"+boolean_member_gg);
-		System.out.println("boolean_lock_acc:"+boolean_member_lock_acc);
-		System.out.println("boolean_epaper:"+boolean_e_paper);
-		
-		System.out.println("準備近更新");
+
+		//當所有Error判斷皆為True，就執行修改，回傳map[0]=0
 		if (sel_email && sel_id && check_id && check_date && boolean_member_password && boolean_member_permissions
 				&& boolean_member_gg && boolean_member_lock_acc && boolean_e_paper) {
-			check[5] = "1";
-			
-			System.out.println("近更新");
-			
-			member_Service.Admin_Updata_Member_Data(member_no, member_permissions, member_email, member_password,
-					member_name, member_birthday, member_cellphone, member_id, member_address, member_gui_number, e_paper,
-					member_bank_code, member_bank_account, member_gg, member_lock_acc);
+			check[0] = "0";
 
+			member_Service.Admin_Updata_Member_Data(member_no, member_permissions, member_email, member_password,
+					member_name, member_birthday, member_cellphone, member_id, member_address, member_gui_number,
+					e_paper, member_bank_code, member_bank_account, member_gg, member_lock_acc);
 		}
 		return check;
+	}
+	
+	//會員管理，回傳要刪除的資料內容
+	@RequestMapping(value = "/viewDeleteManageMembersData.controller", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> processViewDeleteManageMembers(@RequestParam(name = "member_no") String member_no) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		Member_SignUp member_data = member_Service.select_member_no(member_no);
+		map.put("deletedata", member_data);
+		return map;
+	}
+	
+	//會員管理，確定刪除資料
+	@RequestMapping(value = "/viewDeleteManageMembersDataSure.controller", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean processViewDeleteManageMembersSure(@RequestParam(name = "member_no") Integer member_no) {
+
+		System.out.println("會員編號是"+member_no);
+		boolean delete_member = member_Service.Admin_Delete_Member_Data(member_no);
+		System.err.println(delete_member);
+		if (delete_member) {
+			
+			return true;
+		}
+		return false;
 	}
 
 }
