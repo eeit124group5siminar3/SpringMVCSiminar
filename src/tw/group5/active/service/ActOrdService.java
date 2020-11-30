@@ -2,6 +2,8 @@ package tw.group5.active.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,14 @@ public class ActOrdService {
 		return actOrdDAO.insertActOrd(actOrd) ;
 
 	}
-
+	
+	//查詢某一活動的訂單列表
+	public List<ActOrd> getActOrdsById(Integer actId){			
+			return actOrdDAO.getActOrdsById(actId);
+	}
+		
+	//查詢某一活動的某一筆訂單
+	public List<ActOrd> getActOrdsByOrdId(Integer actOrdId,Integer actId){
+		return actOrdDAO.getActOrdsByOrdId(actOrdId, actId);
+	}
 }

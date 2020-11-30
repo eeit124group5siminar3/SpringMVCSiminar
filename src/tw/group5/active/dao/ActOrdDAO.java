@@ -63,12 +63,12 @@ public class ActOrdDAO {
 
 	}
 
-	// =========================CRUD==========================================
+	// =========================消費者CRUD==========================================
 
 	// 查詢該會員報名列表
 	public List<ActOrd> getActOrds(Integer memNo) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "form ActOrd where memNO =?0 ORDER BY ordId";
+		String hql = "from ActOrd where memNO =?0 ORDER BY ordId";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, memNo);
 		List<ActOrd> list = query.list();
@@ -80,7 +80,7 @@ public class ActOrdDAO {
 		public List<ActOrd> getPageActOrds(Integer memNo) {
 			Session session = sessionFactory.getCurrentSession();
 			Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-			String hql = "form ActOrd where memNO =?0 ORDER BY ordId";
+			String hql = "from ActOrd where memNO =?0 ORDER BY ordId";
 			Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 			query.setParameter(0, memNo);
 			query.setFirstResult(startRecordNo);
@@ -97,5 +97,28 @@ public class ActOrdDAO {
 		return actOrd;
 
 	}
-
+	
+// =========================廠商CRUD==========================================
+	
+	//查詢某一活動的訂單列表
+	public List<ActOrd> getActOrdsById(Integer actId){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActOrd where actId =?0 ORDER BY actOrdId";
+		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
+		query.setParameter(0, actId);
+		List<ActOrd> list = query.list();
+		return list;
+	}
+	
+	//查詢某一活動的某一筆訂單
+		public List<ActOrd> getActOrdsByOrdId(Integer actOrdId,Integer actId){
+			Session session = sessionFactory.getCurrentSession();
+			String hql = "from ActOrd where actId =?0 and where actOrdId =?1 ORDER BY actOrdId";
+			Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
+			query.setParameter(0, actId);
+			query.setParameter(1, actOrdId);
+			List<ActOrd> list = query.list();
+			return list;
+		}
+	
 }
