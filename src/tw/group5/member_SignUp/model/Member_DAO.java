@@ -63,7 +63,6 @@ public class Member_DAO {
 		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_id = session.createQuery("From Member_SignUp Where Member_id=?0");
 		Query<?> result = query_id.setParameter(0, member_id);
-
 		// 若無資料回傳null
 		if (result.uniqueResult() == null) {
 			return true;
@@ -260,5 +259,16 @@ public class Member_DAO {
 		}
 		return false;
 	}
-
+	
+	//Admin 刪除會員資料
+	public boolean Admin_Delete_Member_Data(Integer member_no) {
+		Session session = sessionFactory.getCurrentSession();
+		Member_SignUp result = session.get(Member_SignUp.class,member_no);	
+		
+		if (result != null) {
+			session.delete(result);
+			return true;
+		}
+		return false;
+	}
 }
