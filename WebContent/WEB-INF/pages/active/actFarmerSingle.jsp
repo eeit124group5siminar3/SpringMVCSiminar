@@ -84,10 +84,10 @@
             <div class="col-md-5sidebar-box ftco-animate" >
             	<h3 class="heading" style="color: #82ae46">報名資訊</h3>
               <ul class="categories">
-                <li><a href="#">活動開始時間 <span>${collFarmer.signDateSta} ${collFarmer.signTimeSta}</span></a></li>
-                <li><a href="#">活動截止時間 <span>${collFarmer.signDateEnd} ${collFarmer.signTimeEnd}</span></a></li>
+                <li><a href="#">報名開始時間 <span>${collFarmer.signDateSta} ${collFarmer.signTimeSta}</span></a></li>
+                <li><a href="#">報名截止時間 <span>${collFarmer.signDateEnd} ${collFarmer.signTimeEnd}</span></a></li>
                 <li><a href="#">報名人數 <span>${collFarmer.actNum}</span></a></li>
-                <li><a href="#" class="btn btn-primary py-2 px-3">我要報名</a></li>
+                <li><a href="<c:url value='actSignPreInsert.do?id=${collFarmer.actId}'/>" class="btn btn-primary py-2 px-3">我要報名</a></li>
               </ul>
             </div>
             </div>

@@ -142,7 +142,7 @@ function list(){
 			             	<p>活動地址:  \${data[i].actAddr}<br>活動電話: \${data[i].tel}<br>
 			             	活動日期: \${data[i].actDateSta}~\${data[i].actDateEnd}</p>
 			                <p><a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">了解更多</a>
-		                <a href="actSignForm" class="btn btn-primary py-2 px-3">我要報名</a></p>
+		                <a href="<c:url value='actSignPreInsert.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">我要報名</a></p>
 			        </div>
 			</div></div>`;
 		}
