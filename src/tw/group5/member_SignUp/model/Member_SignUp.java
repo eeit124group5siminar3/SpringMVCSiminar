@@ -34,7 +34,7 @@ public class Member_SignUp implements Serializable {
 	private String member_address;
 	private String member_gui_number;
 	private String member_permissions;
-	private Integer member_gg;
+	private String member_gg;
 	private String member_lock_acc;
 	private String e_paper;
 	private String member_bank_code;
@@ -67,7 +67,7 @@ public class Member_SignUp implements Serializable {
 	// 註冊Bean
 	public Member_SignUp(String member_permissions, String member_email, String member_password, String member_name,
 			Date member_birthday, String member_cellphone, String member_id, String member_address,
-			String member_gui_number,String e_paper,Integer member_gg,String member_lock_acc,String member_bank_code,String member_bank_account) {
+			String member_gui_number,String e_paper,String member_gg,String member_lock_acc,String member_bank_code,String member_bank_account) {
 
 		this.member_permissions = member_permissions;
 		this.member_email = member_email;
@@ -199,11 +199,11 @@ public class Member_SignUp implements Serializable {
 	}
 
 	@Column(name="MEMBER_GG")
-	public Integer getMember_gg() {
+	public String getMember_gg() {
 		return member_gg;
 	}
 
-	public void setMember_gg(Integer member_gg) {
+	public void setMember_gg(String member_gg) {
 		this.member_gg = member_gg;
 	}
 

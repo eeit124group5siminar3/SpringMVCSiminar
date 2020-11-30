@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%-- <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> --%>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -57,11 +58,54 @@
 			</div>
 		</div>
 	</div>
-
-	<section class="ftco-section" id="managementContent">
-	</section>
-
+	<section class="ftco-section" id="managementContent"></section>
 	<jsp:include page="../footer.jsp" />
+	
+	<div class="modal fade" id="insert" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width:640px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">商品資料新增</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="insertForm" style="width:640px">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" form="updaeteForm">新增</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="update" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width:640px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">商品資料修改</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="updateForm" style="width:640px">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" form="updaeteForm">修改</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
@@ -86,9 +130,9 @@
 	<script src="js/jquery.animateNumber.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/scrollax.min.js"></script>
-<!-- 	<script -->
-<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-<!-- 	<script src="js/google-map.js"></script> -->
+	<!-- 	<script -->
+	<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+	<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
 	<jsp:include page="../js/mall.jsp" />
 
@@ -112,6 +156,42 @@
 			});
 		});
 		
+
+		$('#update').on('show.bs.modal', function (event) {
+			var tr = $(event.relatedTarget);
+			var productId = tr.data('whatever');
+			$.ajax({
+				url : "Preupdate",
+				type : "POST",
+				data : {
+					"productId":productId	
+				},
+				datatype : "html",
+				success : function(data, status) {
+					$("#updateForm").html(data);
+				},
+				error : function(data, status) {
+					$("#updateForm").html(data);
+				}
+			});			
+			})
+			
+		$('#insert').on('show.bs.modal', function (event) {
+			$.ajax({
+				url : "Preinsert",
+				type : "POST",
+				datatype : "html",
+				success : function(data, status) {
+					$("#insertForm").html(data);
+				},
+				error : function(data, status) {
+					$("#insertForm").html(data);
+				}
+			});			
+			})
+			
 	</script>
+	
+	
 </body>
 </html>

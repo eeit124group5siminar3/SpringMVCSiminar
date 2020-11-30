@@ -30,6 +30,7 @@ import tw.group5.mall.ShoppingCart;
 import tw.group5.mall.model.OrderItem;
 import tw.group5.mall.model.ProductOrderBean;
 import tw.group5.mall.model.ProductOrderItemBean;
+import tw.group5.mall.model.ProducterBean;
 import tw.group5.mall.service.OrderService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
@@ -100,17 +101,18 @@ public class MallOrderController {
 		Date today = new Date();
 		pob.setOrderDate(today);
 		Set<ProductOrderItemBean> items = new HashSet<ProductOrderItemBean>();
-		System.err.println(cart);
 		Map<Integer, OrderItem> carts = cart.getContent();
 		Set<Integer> set = carts.keySet();
-		System.err.println(set);
 		for (Integer k : set) {
 			OrderItem oi = carts.get(k);
 			String description = oi.getProduct() + " " + oi.getContent() + oi.getUnit();
 			ProductOrderItemBean oib = new ProductOrderItemBean();
+			ProducterBean producterBean=new ProducterBean();
+			producterBean.setMember_no(oi.getProductId());
+			producterBean.setMember_name(oi.getProducterName());
+			oib.setProducterBean(producterBean);
 			oib.setProductId(oi.getProductId());
-			System.err.println(oi.getProductId());
-			oib.setProducterId(oi.getProducterId());
+//			oib.setProducterId(oi.getProducterId());
 			oib.setDescription(description);
 			oib.setDiscount(oi.getDiscount());
 			oib.setUnitPrice(oi.getPrice());
