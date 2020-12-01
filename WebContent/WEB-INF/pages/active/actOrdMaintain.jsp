@@ -86,70 +86,54 @@
 	<div align="center" id="backstage_page">
 
 		<div>
-			<h1 align="center">活動管理-一日農夫</h1>
+			<h1 align="center">報名管理-一日農夫</h1>
 			<table align="center" style="border: 8px gray groove;" border="1"; >
 				<!-- 		<h2>活動列表</h2> -->
 				<tr>
+<!-- 					<td style="border: 0px" align="right" colspan="10"> -->
+<%-- 						<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get"> --%>
+<!-- 							<input name="apply" type="submit" value="申請"> -->
+<%-- 						</form> --%>
+<!-- 					</td> -->
 					<td style="border: 0px" align="right" colspan="10">
-						<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get">
-							<input name="apply" type="submit" value="申請" >
-						</form>
-					</td>
-					<td style="border: 0px" align="right" colspan="2">
-						<form action="<c:url value='/maintainActFarmer.do'/>" method="get">
-							<input name="selectAll" type="submit" value="查詢全部" >
+						<form action="<c:url value='/'/>" method="get">
+							<input name="selectAll" type="submit" value="查詢全部">
 						</form>
 					</td>
 				</tr>
 				<tr>
-					<th>活動編號</th>
-					<th>活動名稱</th>
-					<th>活動類型</th>
-					<th>活動日期/時間</th>
-					<th>人數上限</th>
-					<th>價格</th>
-					<th>報名日期/時間</th>
+					<th>訂單編號</th>
+					<th>會員名稱</th>
+					<th>會員連絡電話</th>
+					<th>會員信箱</th>
 					<th>報名人數</th>
+					<th>總金額</th>
 					<th>報名狀態</th>
-					<th colspan="3">Action</th>
+					<th>下單時間</th>
+					<th colspan="2">Action</th>
 				</tr>
-				<c:forEach var="actFarmer" items="${collFarmer}">
+				<c:forEach var="actOrd" items="${collOrd}">
 					<tr>
-						<td><a href="<c:url value='/actOrdList.do?actId=${actFarmer.actId}'/>" ><c:out value="${actFarmer.actId}" /></a></td>						
-						<td><c:out value="${actFarmer.actName}" /></td>
-						<td><c:out value="${actFarmer.actType}" /></td>
-						<td><c:out value="${actFarmer.actDateSta}" />&nbsp; <c:out
-								value="${actFarmer.actTimeSta}" /> 到 <c:out
-								value="${actFarmer.actDateEnd}" />&nbsp; <c:out
-								value="${actFarmer.actTimeEnd}" /></td>
-						<td><c:out value="${actFarmer.numLim}" /></td>
-						<td><c:out value="${actFarmer.price}" /></td>
-						<td><c:out value="${actFarmer.signDateSta}" /> <c:out
-								value="${actFarmer.signTimeSta}" /> 到 <c:out
-								value="${actFarmer.signDateEnd}" /> <c:out
-								value="${actFarmer.signTimeEnd}" /></td>
-						<td><c:out value="${actFarmer.actNumTol}" /></td>
-						<td><c:out value="${actFarmer.sigStat}" /></td>
+						<td><c:out value="${actOrd.actOrdId}" /></td>
+						<td><c:out value="${actOrd.memName}" /></td>
+						<td><c:out value="${actOrd.memTel}" /></td>
+						<td><c:out value="${actOrd.memEmail}" /></td>
+						<td><c:out value="${actOrd.ordActNum}" /></td>
+						<td><c:out value="${actOrd.totalPrice}" /></td>
+						<td><c:out value="${actOrd.ordState}" /></td>
+						<td><c:out value="${actOrd.ordTime}" /></td>
 						<td>
-							<form action="<c:url value='/actFarmerPreRead.do'/>" method="get">
-								<input type="hidden" id="actId" name="actId"
-									value="${actFarmer.actId}"> <input name="look"
-									type="submit" value="檢視" >
-							</form>
-						</td>
-						<td>
-							<form action="<c:url value='/actFarmerPreUpdate.do'/>"
+							<form action="<c:url value='/actOrdPreUpdate.do'/>"
 								method="get">
-								<input type="hidden" id="actId" name="actId"
-									value="${actFarmer.actId}"> <input name="update"
-									type="submit" value="修改" >
+								<input type="hidden" id="actOrdId" name="actOrdId"
+									value="${actOrd.actOrdId}"> <input name="update"
+									type="submit" value="修改">
 							</form>
 						</td>
 						<td>
-							<form action="<c:url value='/actFarmerDelete.do'/>" method="post">
-								<input type="hidden" id="actId" name="actId"
-									value="${actFarmer.actId}"> <input name="delete"
-									type="submit" value="刪除" > 
+							<form action="<c:url value='/actOrdDelet.do'/>" method="post">
+								<input type="hidden" id="actOrdId" name="actOrdId" value="${actOrd.actOrdId}"> 
+								<input name="delete" type="submit" value="刪除">
 							</form>
 						</td>
 					</tr>
@@ -168,50 +152,50 @@
 				<!-- 				ajax -->
 
 				<tr>
-					<td style="border: 0px" colspan="6"></td>
-					<td style="border: 0px" colspan="6">
-						<form action="<c:url value='/SelectNameSeller.do'/>" method="get">
-							<label for="">活動名稱:</label> <input type="text" id="selectname"
-								name="selectname"> &nbsp; <input name="selectone"
-								type="submit" value="查詢" class="btn btn-primary">
+					<td style="border: 0px" colspan="5"></td>
+					<td style="border: 0px" colspan="5">
+						<form action="<c:url value='/'/>" method="get">
+							<label for="">訂單編號:</label> 
+							<input type="text" id="selectname" name="selectordid"> &nbsp; 
+							<input name="selectone" type="submit" value="查詢">
 						</form>
 					</td>
 			</table>
 	</div>
 	<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
-	<form>
-	<div id="bpaging">
-	<table border="1" style="margin-right: 0px;">
-	<tr align="center">
-		<td width='80' height='20'><c:if test="${MaintainPageNo > 1}">
-			<div id="blfirst"><a
-				href="<c:url value='maintainActFarmer.do?MaintainPageNo=1' />"> 
-				<img border='0' alt='第一頁' height='30' width='30'
-				src='./images/first-icon.png' /> </a></div>
-		</c:if></td>
-		<td width='80'><c:if test="${MaintainPageNo > 1}">
-			<div id="blprev"><a
-				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${MaintainPageNo-1}' />">
-			<img border='0' alt='前一頁' height='30' width='30'
-				src='./images/prev-icon.png' /></a></div>
-		</c:if></td>
-		<td width='76'>${MaintainPageNo} / ${totalPages}</td>
-		<td width='80'><c:if test="${MaintainPageNo != totalPages}">
-			<div id="blnext"><a
-				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${MaintainPageNo+1}' />">
-			<img border='0' alt='最末頁' height='30' width='30'
-				src='./images/next-icon.png'/> </a></div>
-		</c:if></td>
-		<td width='80'><c:if test="${MaintainPageNo != totalPages}">
-			<div id="bllast"><a
-				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${totalPages}' />">
-			<img border='0' alt='最末頁' height='30' width='30'
-				src='./images/last-icon.png' /> </a></div>
-		</c:if></td>
-	</tr>
-</table>
-</div>
-</form>
+<%-- 	<form> --%>
+<!-- 	<div id="bpaging"> -->
+<!-- 	<table border="1" style="margin-right: 0px;"> -->
+<!-- 	<tr align="center"> -->
+<%-- 		<td width='80' height='20'><c:if test="${MaintainPageNo > 1}"> --%>
+<!-- 			<div id="blfirst"><a -->
+<%-- 				href="<c:url value='maintainActFarmer.do?MaintainPageNo=1' />">  --%>
+<!-- 				<img border='0' alt='第一頁' height='30' width='30' -->
+<!-- 				src='./images/first-icon.png' /> </a></div> -->
+<%-- 		</c:if></td> --%>
+<%-- 		<td width='80'><c:if test="${MaintainPageNo > 1}"> --%>
+<!-- 			<div id="blprev"><a -->
+<%-- 				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${MaintainPageNo-1}' />"> --%>
+<!-- 			<img border='0' alt='前一頁' height='30' width='30' -->
+<!-- 				src='./images/prev-icon.png' /></a></div> -->
+<%-- 		</c:if></td> --%>
+<%-- 		<td width='76'>${MaintainPageNo} / ${totalPages}</td> --%>
+<%-- 		<td width='80'><c:if test="${MaintainPageNo != totalPages}"> --%>
+<!-- 			<div id="blnext"><a -->
+<%-- 				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${MaintainPageNo+1}' />"> --%>
+<!-- 			<img border='0' alt='最末頁' height='30' width='30' -->
+<!-- 				src='./images/next-icon.png'/> </a></div> -->
+<%-- 		</c:if></td> --%>
+<%-- 		<td width='80'><c:if test="${MaintainPageNo != totalPages}"> --%>
+<!-- 			<div id="bllast"><a -->
+<%-- 				href="<c:url value='maintainActFarmer.do?MaintainPageNo=${totalPages}' />"> --%>
+<!-- 			<img border='0' alt='最末頁' height='30' width='30' -->
+<!-- 				src='./images/last-icon.png' /> </a></div> -->
+<%-- 		</c:if></td> --%>
+<!-- 	</tr> -->
+<!-- </table> -->
+<!-- </div> -->
+<%-- </form> --%>
 </div>
 </section>
 			<!-- --------footer------------------------------------- -->

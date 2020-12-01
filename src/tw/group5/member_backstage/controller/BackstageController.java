@@ -52,10 +52,7 @@ public class BackstageController {
 		String member_gui_number = session.getMember_gui_number();
 		String e_paper = session.getE_paper();
 		String member_bank_code = session.getMember_bank_code();
-		String member_bank_account = session.getMember_bank_account();	
-		
-		System.out.println("生日是"+member_birthday);
-		
+		String member_bank_account = session.getMember_bank_account();			
 		
 		if (member_gui_number == null) {
 			member_gui_number = "";

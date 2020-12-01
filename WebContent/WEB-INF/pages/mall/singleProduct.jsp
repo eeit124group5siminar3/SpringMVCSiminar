@@ -25,12 +25,12 @@
 							class="ion-ios-star-outline"></span></a>
 					</p>
 					<p class="text-left mr-4">
-						<a href="#" class="mr-2" style="color: #000;">100 <span
-							style="color: #bbb;">Rating</span></a>
+						<a href="#" class="mr-2" style="color: #000;">瀏覽次數 <span
+							style="color: #bbb;">${selectedProduct.views}</span></a>
 					</p>
 					<p class="text-left">
-						<a href="#" class="mr-2" style="color: #000;">500 <span
-							style="color: #bbb;">Sold</span></a>
+						<a href="#" class="mr-2" style="color: #000;">出售數 <span
+							style="color: #bbb;">${selectedProduct.sold}</span></a>
 					</p>
 				</div>
 				<c:choose>
@@ -45,6 +45,7 @@
 						</p>
 					</c:otherwise>
 				</c:choose>
+				<p>生產者:${selectedProduct.producterName}</p>
 				<p>上架日期:${selectedProduct.addedDate}</p>
 				<p>保質期:${selectedProduct.shelfTime}</p>
 				<p>${selectedProduct.content}${selectedProduct.unit}</p>
@@ -76,6 +77,7 @@
 					<a href="#" onclick="addToCart(${selectedProduct.stock-oi.qty})" class="btn btn-black py-3 px-5">加入購物車</a> 					
 					</c:otherwise>
 				</c:choose>
+					<a href="<c:url value='mall_shoppingcart'/>" class="btn btn-black py-3 px-5">前往購物車</a>
 					<a href="#" onclick="goback()" class="btn btn-black py-3 px-5">返回</a>
 				</p>
 			</div>

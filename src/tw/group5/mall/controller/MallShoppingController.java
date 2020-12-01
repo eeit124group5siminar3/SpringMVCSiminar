@@ -79,6 +79,7 @@ public class MallShoppingController {
 			@RequestParam(value = "qty", required = false) Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		ProductBean selectedProduct = service.getProduct(productId);
+		selectedProduct.setViews(selectedProduct.getViews()+1);
 		OrderItem oi = new OrderItem();
 		oi.setProductId(selectedProduct.getProductId());
 		oi.setProduct(selectedProduct.getProduct());
@@ -114,6 +115,7 @@ public class MallShoppingController {
 			@RequestParam(value = "qty") Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		ProductBean selectedProduct = service.getProduct(productId);
+		selectedProduct.setViews(selectedProduct.getViews()+1);
 		OrderItem oi = new OrderItem();
 		oi.setProductId(selectedProduct.getProductId());
 		oi.setProduct(selectedProduct.getProduct());

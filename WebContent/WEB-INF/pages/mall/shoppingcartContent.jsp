@@ -14,6 +14,7 @@
 							<th>&nbsp;</th>
 							<th>&nbsp;</th>
 							<th>商品名稱</th>
+							<th>生產者</th>
 							<th>單價</th>
 							<th>數量</th>
 							<th>價格</th>
@@ -34,11 +35,12 @@
 										</c:if>
 									</div></td>
 
-								<td class="product-name">
+								<td>
 									<h3>${anEntry.value.product}</h3>
 									<p>${anEntry.value.content}${anEntry.value.unit}</p>
 								</td>
 
+								<td class="price">${anEntry.value.producterName}</td>
 								<td class="price">${anEntry.value.price*anEntry.value.discount}元</td>
 
 								<td class="quantity">

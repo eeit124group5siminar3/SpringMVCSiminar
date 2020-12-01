@@ -56,7 +56,7 @@ public class SignUpController {
 
 		String member_permissions = null;
 		String e_paper = null;
-		Integer member_gg = 0;
+		String member_gg = "0";
 		String member_lock_acc = "0";
 		
 		String member_id = member_idLower.toUpperCase();

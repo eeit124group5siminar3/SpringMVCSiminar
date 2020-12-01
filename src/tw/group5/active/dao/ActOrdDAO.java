@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActOrd;
 
 @Repository
@@ -63,12 +64,12 @@ public class ActOrdDAO {
 
 	}
 
-	// =========================CRUD==========================================
+	// =========================消費者CRUD==========================================
 
 	// 查詢該會員報名列表
 	public List<ActOrd> getActOrds(Integer memNo) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "form ActOrd where memNO =?0 ORDER BY ordId";
+		String hql = "from ActOrd where memNO =?0 ORDER BY ordId";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, memNo);
 		List<ActOrd> list = query.list();
@@ -77,18 +78,18 @@ public class ActOrdDAO {
 	}
 	
 	// 查詢該會員報名列表+分頁
-		public List<ActOrd> getPageActOrds(Integer memNo) {
-			Session session = sessionFactory.getCurrentSession();
-			Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-			String hql = "form ActOrd where memNO =?0 ORDER BY ordId";
-			Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
-			query.setParameter(0, memNo);
-			query.setFirstResult(startRecordNo);
-			query.setMaxResults(recordsPerPage);
-			List<ActOrd> list = query.list();
-			return list;
+	public List<ActOrd> getPageActOrds(Integer memNo) {
+		Session session = sessionFactory.getCurrentSession();
+		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
+		String hql = "from ActOrd where memNO =?0 ORDER BY ordId";
+		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
+		query.setParameter(0, memNo);
+		query.setFirstResult(startRecordNo);
+		query.setMaxResults(recordsPerPage);
+		List<ActOrd> list = query.list();
+		return list;
 
-		}
+	}
 
 	// 新增活動報名資訊
 	public ActOrd insertActOrd(ActOrd actOrd) {
@@ -97,5 +98,55 @@ public class ActOrdDAO {
 		return actOrd;
 
 	}
-
+	
+// =========================廠商CRUD==========================================
+	
+	//查詢某一活動的報名列表
+	public List<ActOrd> getActOrdsById(Integer actId){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActOrd where actId =?0 ORDER BY actOrdId";
+		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
+		query.setParameter(0, actId);
+		List<ActOrd> list = query.list();
+		return list;
+	}
+	
+//	//查詢某一活動的某一筆報名
+//	public List<ActOrd> getActOrdsByOrdId(Integer actOrdId){
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from ActOrd where actOrdId =?0 ORDER BY actOrdId";
+//		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
+//		query.setParameter(0, actOrdId);
+//		List<ActOrd> list = query.list();
+//		return list;
+//		}
+		
+	
+	//獲得單筆資料ById
+	public ActOrd getActOrdOne(Integer actOrdId) {
+		Session session = sessionFactory.getCurrentSession();
+		ActOrd actOrd = session.get(ActOrd.class, actOrdId);
+		return actOrd;
+	}
+	
+	//刪除報名
+	public boolean delectActOrd(Integer actOrdId) {
+		Session session = sessionFactory.getCurrentSession();
+		ActOrd result = session.get(ActOrd.class, actOrdId);
+		
+		if(result!=null) {
+			session.delete(result);
+			return true;
+		}
+		return false;
+	}
+	 
+	
+	//修改報名
+	public ActOrd updateActOrd(ActOrd actOrd) {
+		Session session = sessionFactory.getCurrentSession();
+		session.merge(actOrd);
+		return actOrd;
+	}
+	
 }
