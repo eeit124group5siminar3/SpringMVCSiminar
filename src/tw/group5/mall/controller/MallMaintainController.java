@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,7 +27,8 @@ import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean","insertBean" })
+@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean",
+		"insertBean" })
 public class MallMaintainController {
 //	public final int RECORDS_PER_PAGE = 5;
 	@Autowired
@@ -87,6 +89,7 @@ public class MallMaintainController {
 	public ModelAndView preinsert(HttpServletRequest request) {
 		ProductBean insertBean = new ProductBean();
 		service.setSelected(1);
+		service.setTagName("categoryId");
 		String categoryTag = service.getSelectTag();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/insertForm");
@@ -96,23 +99,38 @@ public class MallMaintainController {
 	}
 
 // 資料新增
-		@PostMapping(value = "/InsertProduct")
-		public String productInsert(@ModelAttribute(value = "insertBean") ProductBean insertBean, Model model,
-				@RequestParam(value = "categoryId") Integer category,
-				@SessionAttribute(value = "login_ok") Member_SignUp mb) {
-			insertBean.setCategory(category);
+	@PostMapping(value = "/InsertProduct")
+	public String productInsert(@ModelAttribute(value = "insertBean") ProductBean insertBean, Model model,
+			@RequestParam(value = "categoryId") Integer category,
+			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
+		insertBean.setCategory(category);
 //			Integer producterId=mb.getMember_no();
-			ProducterBean producterBean=new ProducterBean();
-			producterBean.setMember_no(mb.getMember_no());
-			producterBean.setMember_name(mb.getMember_name());
-			insertBean.setProducterBean(producterBean);
+		ProducterBean producterBean = new ProducterBean();
+		producterBean.setMember_no(mb.getMember_no());
+		producterBean.setMember_name(mb.getMember_name());
+		insertBean.setProducterBean(producterBean);
 //			Map<String, String> errorMsgs = new HashMap<String, String>();
 //			Map<String, String> successMsgs = new HashMap<String, String>();
 //			model.addAttribute("ErrMsg", errorMsgs);
 //			model.addAttribute("successMsg", successMsgs);
-			service.saveProduct(insertBean);
-			return "/mall/mall_management";
+		service.saveProduct(insertBean);
+		return "/mall/mall_management";
+	}
+
+// 修改上下架
+	@PostMapping(value = "/Shelf")
+	public @ResponseBody Integer shelf(@RequestParam(value = "productId")Integer productId,
+			@RequestParam(value = "status")Integer status) {
+		ProductBean product = service.getProduct(productId);
+		if(status==1) {
+			product.setStatus(1);
+			return 1;
+		}else{			
+			product.setStatus(0);
+			return 0;
+
 		}
+	}
 //	@GetMapping(value = "/DisplayMaintainProduct")
 //	public String displayMaintainProduct(
 //			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
@@ -138,16 +156,16 @@ public class MallMaintainController {
 //		return "/mall/ProductMaintainList";
 //	}
 
-	@PostMapping(value = "/ProductDeleteServlet")
-	public String productDelete(@RequestParam(value = "productId") Integer productId, Model model) {
-		ProductBean n = service.deleteProduct(productId);
-		if (n != null) {
-			model.addAttribute("ProductDeleteMsg", "商品編號(" + productId + ")刪除成功");
-		} else {
-			model.addAttribute("ProductDeleteMsg", "商品編號(" + productId + ")刪除失敗");
-		}
-		return "redirect:/DisplayMaintainProduct";
-	}
+//	@PostMapping(value = "/ProductDeleteServlet")
+//	public String productDelete(@RequestParam(value = "productId") Integer productId, Model model) {
+//		ProductBean n = service.deleteProduct(productId);
+//		if (n != null) {
+//			model.addAttribute("ProductDeleteMsg", "商品編號(" + productId + ")刪除成功");
+//		} else {
+//			model.addAttribute("ProductDeleteMsg", "商品編號(" + productId + ")刪除失敗");
+//		}
+//		return "redirect:/DisplayMaintainProduct";
+//	}
 
 //	@PostMapping(value = "/ProductInsertServlet")
 //	public String productInsert(Model model, @ModelAttribute(value = "Insert") ProductBean insert,
