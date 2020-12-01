@@ -99,6 +99,10 @@
 					</c:if></li>
 				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />"
 					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
+					
+				<li class="nav-item cta cta-colored"><a href="<c:url value='' />"
+					class="nav-link"><img height='15' width='15'
+					 src="images/MarketBasket.jpg">[0]</a></li>
 			</ul>
 			<c:if test="${!empty login_ok}">
 			<ul class="navbar-nav">
