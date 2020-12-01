@@ -18,7 +18,7 @@
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
 
-	<!-- 會員新增買賣家 -->
+	<!-- 會員新增買賣家選項 -->
 	<script>
 	window.onload = function() {
 		var customRadioInline1 = document.getElementById("customRadioInline1");
@@ -71,6 +71,324 @@
 	}
 </script>
 
+<!-- 刪除按鈕回傳會員資料 -->
+<script>
+$(function(){
+	$("#member_tr").on("click","#delete_button",function(){
+	$.ajax({
+		url:"viewDeleteManageMembersData.controller",
+		data:{
+			member_no:$(this).prev().val()
+		 	},
+		type:"POST", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	success:function(data){
+		let deletedata = data.deletedata
+		
+		if(deletedata){
+			$("#delete_content").html(
+					`
+				<form id="delete_form" method="post">	
+					<input type="hidden" id="hidden_delete_member_no" value="\${deletedata.member_no}">	
+					<p style="float:left">會員編號:<font style="color:red">\${deletedata.member_no}</font></p><br><br>
+					<p style="float:left">會員姓名:<font style="color:red">\${deletedata.member_name}</font></p><br><br>
+					<a>是否確定刪除整筆資料</a><br><br>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+						    <button type="button" id="delete_button_sure" class="btn btn-primary">確定</button>
+						</div>
+					</div>
+				</form>`
+			);		
+		}
+	}
+    });  
+});
+})
+</script>
+	
+<!-- 確定刪除會員資料 -->
+<script>
+$(function(){
+	$("#member_tr").on("click","#delete_button_sure",function(){
+	$.ajax({
+		url:"viewDeleteManageMembersDataSure.controller",
+		data:{
+			member_no:$("#hidden_delete_member_no").val(),
+		 	},
+		type:"POST", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	success:function(data){
+		if(data){
+			window.location.href = "goManageMembers.controller";	
+		}
+	}
+    });  
+});
+})
+</script>
+
+	<!-- 檢視會員詳細資料 -->
+	<script>
+$(function(){
+	$("#member_tr").on("click","#view_content",function(){
+	$.ajax({
+		url:"viewSelectManageMembersData.controller",
+		data:{
+			member_no:$(this).prev().val()
+		 	},
+		type:"POST", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	success:function(data){
+		let viewdata = data.viewdata
+		
+		if(viewdata){
+			$("#select_content").html(
+					`
+					<form id="view_form" method="post">
+					<div class="signup-form container">
+							<div class="form-row">
+							<div class="form-group col-md-6">
+							<label for="inputEmail4" style="float:left">會員編號</label> <input type="text"
+								class="form-control" id="update_member_no"
+								value="\${viewdata.member_no}" disabled>
+								</div>
+								<div class="form-group col-md-6">
+								<label for="inputEmail4" style="float:left">註冊日期</label> <input type="text"
+									class="form-control"
+									placeholder="\${viewdata.member_signup_date}" disabled>
+									</div>
+								<div class="form-group col-md-6">
+									<label for="inputEmail4" style="float:left">買賣家</label> <span style="color: red"><small><small
+									id="update_span_premissions"></small></small></span>
+									<input type="text"
+										class="form-control" id="update_member_permissions1"
+										value="\${viewdata.member_permissions}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_member_permissions2">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color: red"><small><small
+									id="update_span_id"></small></small></span>
+									<input type="text"
+										class="form-control" id="update_member_id1"
+										value="\${viewdata.member_id}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_member_id2">
+								</div>
+								<div class="form-group col-md-6">
+								<label for="inputEmail4" style="float:left">帳號</label> <span style="color: red"><small><small 
+								id="update_span_email"></small></small></span>
+								<input type="text"
+									class="form-control" id="update_member_email1"
+									value="\${viewdata.member_email}" disabled>
+									<input type="email"
+										class="form-control"
+										id="update_member_email2">
+							</div>
+								<div class="form-group col-md-6">
+									<label for="inputPassword4" style="float:left">密碼</label> <span style="color: red"><small><small 
+									id="update_span_password"></small></small></span>
+									<input type="text"
+										class="form-control" id="update_member_password1"
+										value="\${viewdata.member_password}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_member_password2">
+								</div>
+									<div class="form-group col-md-6">
+										<label for="inputPassword4" style="float:left">銀行代號</label> <input type="text"
+											class="form-control" id="update_member_bank_code1"
+											value="\${viewdata.member_bank_code}" disabled>
+											<input type="text"
+												class="form-control"
+												id="update_member_bank_code2">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputPassword4" style="float:left">銀行帳號</label> <input type="text"
+											class="form-control" id="update_member_bank_account1"
+											value="\${viewdata.member_bank_account}" disabled>
+											<input type="text"
+												class="form-control"
+												id="update_member_bank_account2">
+									</div>
+								<div class="form-group col-md-6">
+									<label for="inputPassword4" style="float:left">名稱</label> <span style="color: red"><small><small
+									id="update_span_name"></small></small></span>
+									<input type="text"
+										class="form-control" id="update_member_name1"
+										value="\${viewdata.member_name}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_member_name2">
+									<p></p>
+									<label for="inputPassword4" style="float:left">生日</label> <span style="color: red"><small><small
+									id="update_span_birthday"></small></small></span>
+									<input type="text"
+										class="form-control" id="update_member_birthday1"
+										value="\${viewdata.member_birthday}" disabled>
+									<input type="date"
+										class="form-control"
+										id="update_member_birthday2">
+									<p></p>
+									<label for="inputPassword4" style="float:left">連絡電話</label> <span style="color: red"><small><small
+									id="update_span_cellphone"></small></small></span>
+									<input type="text"
+										class="form-control" id="update_member_cellphone1"
+										value="\${viewdata.member_cellphone}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_member_cellphone2">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputAddress" style="float:left">地址</label> <input type="text"
+									class="form-control" id="update_member_address1"
+									value="\${viewdata.member_address}" disabled>
+									<input type="text"
+										class="form-control"
+										id="update_member_address2">
+							</div>
+
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputEmail4" style="float:left">統一編號</label> <input type="text"
+										class="form-control" id="update_member_gui_number1"
+										value="\${viewdata.member_gui_number}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_member_gui_number2">
+										
+								</div>
+								<div class="form-group col-md-6">
+								
+								</div>
+								<div class="form-group col-md-6">
+								<label for="inputEmail4" style="float:left">檢舉次數</label> <span style="color: red"><small><small
+								id="update_span_gg"></small></small></span>
+								<input type="text"
+									class="form-control" id="update_member_gg1"
+									value="\${viewdata.member_gg}" disabled>
+									<input type="text"
+										class="form-control"
+										id="update_member_gg2">
+									<p></p>
+									<label for="inputEmail4" style="float:left">電子報</label> <span style="color: red"><small><small
+									id="update_span_e_paper"></small></small></span>
+									<input type="text"
+										class="form-control" id="update_e_paper1"
+										value="\${viewdata.e_paper}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_e_paper2">
+									</div>
+									<div class="form-group col-md-6">
+									
+									<label for="inputEmail4" style="float:left">停權狀態</label> <span style="color: red"><small><small
+									id="update_span_lock_acc"></small></small></span>
+									<input type="text"
+										class="form-control" id="update_member_lock_acc1"
+										value="\${viewdata.member_lock_acc}" disabled>
+										<input type="text"
+											class="form-control"
+											id="update_member_lock_acc2">
+								</div>
+							</div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+						        <button type="submit" id="update_button" class="btn btn-primary">修改</button>
+						      </div>
+					</div>
+				</form>`
+			);		
+		}
+	}
+    });  
+});
+})
+</script>
+
+	<!-- 檢視內修改 -->
+	<script>
+$(function(){
+	$("#member_tr").on("submit",function(ev){
+		$("#update_span_email").html("");
+		$("#update_span_id").html("");
+		$("#update_span_password").html("");
+		$("#update_span_birthday").html("");
+		$("#update_span_premissions").html("");
+		$("#update_span_gg").html("");
+		$("#update_span_lock_acc").html("");
+		$("#update_span_e_paper").html("");
+		$.ajax({
+			url:"adminMemberUpdate.controller",
+			data:{
+				member_no:$("#update_member_no").val(),
+				member_permissions1:$("#update_member_permissions1").val(),
+				member_email1:$("#update_member_email1").val(),
+				member_password1:$("#update_member_password1").val(),
+				member_name1:$("#update_member_name1").val(),
+				member_birthday1:$("#update_member_birthday1").val(),
+				member_cellphone1:$("#update_member_cellphone1").val(),
+				member_id1:$("#update_member_id1").val(),
+				member_address1:$("#update_member_address1").val(),
+				member_gui_number1:$("#update_member_gui_number1").val(),
+				e_paper1:$("#update_e_paper1").val(),
+				member_bank_code1:$("#update_member_bank_code1").val(),
+				member_bank_account1:$("#update_member_bank_account1").val(),
+				member_gg1:$("#update_member_gg1").val(),
+				member_lock_acc1:$("#update_member_lock_acc1").val(),
+				member_permissions2:$("#update_member_permissions2").val(),
+				member_email2:$("#update_member_email2").val(),
+				member_password2:$("#update_member_password2").val(),
+				member_name2:$("#update_member_name2").val(),
+				member_birthday2:$("#update_member_birthday2").val(),
+				member_cellphone2:$("#update_member_cellphone2").val(),
+				member_id2:$("#update_member_id2").val(),
+				member_address2:$("#update_member_address2").val(),
+				member_gui_number2:$("#update_member_gui_number2").val(),
+				e_paper2:$("#update_e_paper2").val(),
+				member_bank_code2:$("#update_member_bank_code2").val(),
+				member_bank_account2:$("#update_member_bank_account2").val(),
+				member_gg2:$("#update_member_gg2").val(),
+				member_lock_acc2:$("#update_member_lock_acc2").val()
+			 	},
+			type:"POST", 
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			 
+		success:function(data){
+			console.log(data[1]);
+			if(data[0] == "0"){
+				window.location.href = "goManageMembers.controller";
+			}if(data[1] == "1"){
+				$("#update_span_email").html("Email已被註冊");
+			}if(data[2] == "2"){
+				$("#update_span_id").html("身份證字號已被註冊");
+			}if(data[3] == "3"){
+				$("#update_span_id").html("格式錯誤");
+			}if(data[4] == "4"){
+				$("#update_span_password").html("格式錯誤");
+			}if(data[5] == "5"){
+				$("#update_span_birthday").html("格式錯誤");
+			}if(data[6] == "6"){
+				$("#update_span_premissions").html("格式錯誤，0為買家  1為賣家");
+			}if(data[7] == "7"){
+				$("#update_span_gg").html("4次以上請更改停權狀態");
+			}if(data[8] == "8"){
+				$("#update_span_lock_acc").html("格式錯誤，0為正常  1為停權");
+			}if(data[9] == "9"){
+				$("#update_span_e_paper").html("格式錯誤，0為不訂閱  1為訂閱");
+			}
+		}
+	    })
+	    ev.preventDefault(); 
+	})
+	})
+
+</script>
+
 	<!-- 畫面顯示所有會員資料 -->
 	<script>
 $(document).ready(function(){
@@ -94,25 +412,57 @@ var currentPage = 1;
 				<td>\${data1[i].member_gg}</td>
 				<td>\${data1[i].member_lock_acc}</td>
 				<td>
-					<form action="#" method="get">
-						<input type="hidden" id="actId" name="actId"
-						value="\${data1[i].member_no}"> <input name="look"
-						type="submit" value="檢視">
-					</form>
+					<form method="POST">
+						<input type="hidden" id="view_member_no"+[i] name="actId"
+						value="\${data1[i].member_no}"> 
+					<button type="button" id="view_content" data-toggle="modal" data-target="#exampleModal1">
+					  檢視
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">詳細資料</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div id="select_content" class="modal-body">
+					      </div>
+					    </div>
+					  </div>
+					</div>
+</form>
+
 				</td>
+				
 				<td>
-					<form action="#" method="get">
-						<input type="hidden" id="actId" name="actId"
-						value="\${data1[i].member_no}"> <input name="update"
-						type="submit" value="修改">
-					</form>
-				</td>
-				<td>
-					<form action="#" method="post">
-						<input type="hidden" id="actId" name="actId"
-						value="\${data1[i].member_no}"> <input name="delete"
-						type="submit" value="刪除">
-				</form>
+				<form method="POST">
+				<input type="hidden" id="delete_member_no" name="actId"
+				value="\${data1[i].member_no}"> 
+
+			<!-- Button trigger modal -->
+			<button type="button" id="delete_button" data-toggle="modal" data-target="#exampleModal_delete">
+			  刪除
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">刪除資料</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div id="delete_content" class="modal-body"></div>
+			    </div>
+			  </div>
+			</div>
+</form>
 				</td>
 				</tr>`;
 		}
@@ -127,7 +477,7 @@ var currentPage = 1;
 				<th style="width: 150px;">註冊時間</th>
 				<th>檢舉次數</th>
 				<th>停權狀態</th>
-				<th colspan="3"></th>
+				<th colspan="2"></th>
 				</tr>`+content);
 		
 	}
@@ -166,25 +516,58 @@ $("#select_member_no").on("submit",function(ev){
 					<td>\${data1.member_gg}</td>
 					<td>\${data1.member_lock_acc}</td>
 					<td>
-						<form action="#" method="get">
-							<input type="hidden" id="actId" name="actId"
-							value="\${data1.member_no}"> <input name="look"
-							type="submit" value="檢視">
-						</form>
+					<form method="POST">
+					<input type="hidden" id="view_member_no"+[i] name="actId"
+					value="\${data1.member_no}"> 
+
+				<!-- Button trigger modal -->
+				<button type="button" id="view_content" data-toggle="modal" data-target="#exampleModal1">
+				  檢視
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">詳細資料</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div id="select_content" class="modal-body">
+				      </div>
+				    </div>
+				  </div>
+				</div>
+</form>
 					</td>
+					
 					<td>
-						<form action="#" method="get">
-							<input type="hidden" id="actId" name="actId"
-							value="\${data1.member_no}"> <input name="update"
-							type="submit" value="修改">
-						</form>
-					</td>
-					<td>
-						<form action="#" method="post">
-							<input type="hidden" id="actId" name="actId"
-							value="\${data1.member_no}"> <input name="delete"
-							type="submit" value="刪除">
-					</form>
+					<form method="POST">
+					<input type="hidden" id="delete_member_no" name="actId"
+					value="\${data1.member_no}"> 
+
+				<!-- Button trigger modal -->
+				<button type="button" id="delete_button" data-toggle="modal" data-target="#exampleModal_delete">
+				  刪除
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">刪除資料</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div id="delete_content" class="modal-body"></div>
+				    </div>
+				  </div>
+				</div>
+	</form>
 					</td>
 					</tr>`;
 			$('#member_tr').html(
@@ -198,7 +581,7 @@ $("#select_member_no").on("submit",function(ev){
 					<th style="width: 150px;">註冊時間</th>
 					<th>檢舉次數</th>
 					<th>停權狀態</th>
-					<th colspan="3"></th>
+					<th colspan="2"></th>
 					</tr>`+content);
 		}else if(data2){
 			content="";
@@ -215,25 +598,58 @@ $("#select_member_no").on("submit",function(ev){
 					<td>\${data2[i].member_gg}</td>
 					<td>\${data2[i].member_lock_acc}</td>
 					<td>
-						<form action="#" method="get">
-							<input type="hidden" id="actId" name="actId"
-							value="\${data2[i].member_no}"> <input name="look"
-							type="submit" value="檢視">
-						</form>
+					<form method="POST">
+					<input type="hidden" id="view_member_no" name="actId"
+					value="\${data2[i].member_no}"> 
+
+				<!-- Button trigger modal -->
+				<button type="button" id="view_content" data-toggle="modal" data-target="#exampleModal2">
+				  檢視
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">詳細資料</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div id="select_content" class="modal-body">
+				      </div>
+				    </div>
+				  </div>
+				</div>
+</form>
 					</td>
+					
 					<td>
-						<form action="#" method="get">
-							<input type="hidden" id="actId" name="actId"
-							value="\${data2[i].member_no}"> <input name="update"
-							type="submit" value="修改">
-						</form>
-					</td>
-					<td>
-						<form action="#" method="post">
-							<input type="hidden" id="actId" name="actId"
-							value="\${data2[i].member_no}"> <input name="delete"
-							type="submit" value="刪除">
-					</form>
+					<form method="POST">
+					<input type="hidden" id="delete_member_no" name="actId"
+					value="\${data2[i].member_no}"> 
+
+				<!-- Button trigger modal -->
+				<button type="button" id="delete_button" data-toggle="modal" data-target="#exampleModal_delete">
+				  刪除
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">刪除資料</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div id="delete_content" class="modal-body"></div>
+				    </div>
+				  </div>
+				</div>
+	</form>
 					</td>
 					</tr>`;
 			}
@@ -248,7 +664,7 @@ $("#select_member_no").on("submit",function(ev){
 					<th style="width: 150px;">註冊時間</th>
 					<th>檢舉次數</th>
 					<th>停權狀態</th>
-					<th colspan="3"></th>
+					<th colspan="2"></th>
 					</tr>`+content);
 		}else{
 			$("#select_error").html("查無資料，請重新輸入");

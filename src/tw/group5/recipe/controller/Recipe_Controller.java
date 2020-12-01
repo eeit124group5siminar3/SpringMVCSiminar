@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import oracle.net.aso.m;
+import tw.group5.marketSeller.model.MarketMallBean;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
@@ -148,7 +152,8 @@ public class Recipe_Controller {
 	
 	//bookmark
 	@GetMapping(value="/bookmark",produces ="text/plain;charset=UTF-8")
-	public String bookmark(@RequestParam(name="rec_id",required = false)String rec_id) {
+	@ResponseBody
+	public String bookmarkLogin(@RequestParam(name="rec_id",required = false)String rec_id) {
 		if (session.getAttribute("login_ok") != null) {
 			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
 			Integer mem_no=OK.getMember_no();
@@ -157,13 +162,34 @@ public class Recipe_Controller {
 			System.out.println(mem_no);
 			bean.setRec_id(rec_id);
 			System.out.println(rec_id);
-			service.bookmark(bean);
+			
+			List<Bookmark_Bean> bookmark=service.listOfBookmark(mem_no);
+			for(Bookmark_Bean b:bookmark) {
+				if(b.getRec_id().equals(rec_id)) {
+					return "alert("+"已新"+")";
+				}else{
+					service.bookmark(bean);
+					return "新增成功!";
+					
+				}
+			}
+			bookmark(rec_id,mem_no);
 		}
 		 else if (session.getAttribute("login_ok") == null) {
 				return "redirect:/login.controller";
 			}
 		return "redirect:/frontPage.controller";
 	}
+	
+	public Map<String, Object> bookmark(String rec_id,Integer mem_no) {
+			Map<String, Object> map=new HashMap<String, Object>();
+			
+			if (rec_id !=null && rec_id.length() !=0) {
+				List<Recipe_Bean_noImage> list=service.partSearch(rec_id);
+				map.put("List", list);
+			}
+			return map;
+		}
 	
 	// search bookmark
 	@GetMapping(value="myRecipe")
@@ -198,11 +224,36 @@ public class Recipe_Controller {
 //	}
 	
 	
-	@GetMapping(value="/tesstt")
-	public long test() {
+	
+	@GetMapping(value="/getPageInfo/{pageNo}")
+	@ResponseBody
+	public Map<String, Object> getPageInfo(@PathVariable(name="pageNo",required = false)Integer pageNo,Model m) {
 		long count=service.getRecordCounts();
 		System.out.println(count);
-		return count;
+		System.err.println(pageNo);
+		Integer page=(Integer) session.getAttribute("pageNo");
+		int totalPages =(int) service.getRecordCounts();//總比數
+		System.out.println("抓session 中的 page: "+page);
+		if(pageNo!=null) {
+			page=pageNo;
+			System.out.println("page: "+page);
+			session.setAttribute("pageNo", page);
+		}
+		List<Recipe_Bean_noImage> searchAllRecipe=service.searchAllRecipe(pageNo, null);
+		int totalPage =(int) Math.ceil(totalPages*1.0 /2);//總頁數
+
+//		ModelAndView mav=new ModelAndView();
+//		mav.setViewName("/recipe/recipe_workpage");
+//		mav.addObject("selectAllRecipe",selectAllRecipe);
+//		service.setPageNo(pageNo);
+		Map<String , Object> map=new HashMap<String, Object>();
+		map.put("searchAllRecipe", searchAllRecipe);
+		map.put("totalPage",totalPage);
+		map.put("pageNo",pageNo);
+		return map;
+		
+		
+		
 	}
 	
 }

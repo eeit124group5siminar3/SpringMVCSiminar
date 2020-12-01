@@ -22,7 +22,7 @@ public class ActPageTo {
 	//活動報名頁面
 	@RequestMapping(value = "/actSignFormPage")
 	public String actSignFormPage() {
-		return "active/actSignForm";
+		return "/actFarmerHome";
 	}
 	
 	

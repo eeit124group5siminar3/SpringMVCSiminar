@@ -1,6 +1,6 @@
 package tw.group5.active.model;
 
-
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +20,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "actOrd")
@@ -26,7 +29,7 @@ import org.springframework.stereotype.Component;
 @DynamicUpdate
 public class ActOrd {
 
-	private String actOrdId;
+	private Integer actOrdId;
 	private Integer memNo;
 	private String memName;
 	private String memTel;
@@ -35,14 +38,16 @@ public class ActOrd {
 	private Integer ordActNum;
 	private Double totalPrice;
 	private Integer ordState;
+	private Timestamp ordTime;
 
 	private ActFarmer actFarmer;
 
 	public ActOrd() {
 	}
 
-	public ActOrd(String actOrdId, Integer memNo, String memName, String memTel, String memEmail, Integer actId,
-			Integer ordActNum, Double totalPrice, Integer ordState, ActFarmer actFarmer) {
+	public ActOrd(Integer actOrdId, Integer memNo, String memName, String memTel, String memEmail, Integer actId,
+			Integer ordActNum, Double totalPrice, Integer ordState, Timestamp ordTime, ActFarmer actFarmer) {
+		super();
 		this.actOrdId = actOrdId;
 		this.memNo = memNo;
 		this.memName = memName;
@@ -52,16 +57,18 @@ public class ActOrd {
 		this.ordActNum = ordActNum;
 		this.totalPrice = totalPrice;
 		this.ordState = ordState;
+		this.ordTime = ordTime;
 		this.actFarmer = actFarmer;
 	}
 
 	@Id
 	@Column(name = "actOrdId")
-	public String getActOrdId() {	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Integer getActOrdId() {
 		return actOrdId;
 	}
 
-	public void setActOrdId(String actOrdId) {
+	public void setActOrdId(Integer actOrdId) {
 		this.actOrdId = actOrdId;
 	}
 
@@ -103,13 +110,21 @@ public class ActOrd {
 
 	@Transient
 //	@Column(name = "actId")
-	public Integer getOrdActId() {
+	public Integer getActId() {
 		return actId;
 	}
 
-	public void setOrdActId(Integer ordActId) {
-		this.actId = ordActId;
+	public void setActId(Integer actId) {
+		this.actId = actId;
 	}
+
+//	public Integer getOrdActId() {
+//		return actId;
+//	}
+//
+//	public void setOrdActId(Integer ordActId) {
+//		this.actId = ordActId;
+//	}
 
 	@Column(name = "ordActNum")
 	public Integer getOrdActNum() {
@@ -138,8 +153,16 @@ public class ActOrd {
 		this.ordState = ordState;
 	}
 
-	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="actId")
+	@Column(name = "ordTime")
+	public Timestamp getOrdTime() {
+		return ordTime;
+	}
+
+	public void setOrdTime(Timestamp ordTime) {
+		this.ordTime = ordTime;
+	}
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "actId",referencedColumnName = "actId")
 	public ActFarmer getActFarmer() {
 		return actFarmer;
 	}
@@ -147,7 +170,5 @@ public class ActOrd {
 	public void setActFarmer(ActFarmer actFarmer) {
 		this.actFarmer = actFarmer;
 	}
-	
-	
 
 }

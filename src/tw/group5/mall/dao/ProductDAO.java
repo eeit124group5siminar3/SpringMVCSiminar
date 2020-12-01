@@ -24,6 +24,7 @@ public class ProductDAO {
 	private int pageNo = 1;
 	private int maintainPageNo = 0;
 	private int recordsPerPage = 12;
+	private int maintainPerPage= 10;
 	private int totalPages = -1;
 	private int totalPagesWithoutZero = -1;
 	private String tagName = "";
@@ -64,7 +65,7 @@ public class ProductDAO {
 
 	public int getTotalPages(int producterId) {
 		// 注意下一列敘述的每一個型態轉換
-		totalPages = (int) (Math.ceil(getRecordCounts(producterId) / (double) recordsPerPage));
+		totalPages = (int) (Math.ceil(getRecordCounts(producterId) / (double) maintainPerPage));
 		return totalPages;
 	}
 
@@ -154,12 +155,12 @@ public class ProductDAO {
 //查詢某一生產者出售的產品
 	public List<ProductBean> getPageProducts(int producterId) {
 		Session session = sessionFactory.getCurrentSession();
-		int startRecordNo = (maintainPageNo - 1) * recordsPerPage;
-		String hql = "from ProductBean where stock != 0 and producterId =?0 ORDER BY ProductId";
+		int startRecordNo = (maintainPageNo - 1) * maintainPerPage;
+		String hql = "from ProductBean where producterId =?0 ORDER BY ProductId desc";
 		Query<ProductBean> query = session.createQuery(hql, ProductBean.class);
 		query.setParameter(0, producterId);
 		query.setFirstResult(startRecordNo);
-		query.setMaxResults(recordsPerPage);
+		query.setMaxResults(maintainPerPage);
 		List<ProductBean> list = query.list();
 		return list;
 
@@ -245,7 +246,7 @@ public class ProductDAO {
 	public String getSelectTag() {
 		String ans = "";
 //		List<CategoryBean> cb = getCategory();
-		ans += "<SELECT name='" + getTagName() + "'>";
+		ans += "<select name='" + getTagName() + "'>";
 //		for (CategoryBean bean : cb) {
 		for (int i = 1; i <= (CategoryClass.CATEGORY_MAP.size()-1); i++) {
 			String name = CategoryClass.getCategory(i);
@@ -257,7 +258,7 @@ public class ProductDAO {
 				ans += "<option value='" + i + "'>" + name + "</option>";
 			}
 		}
-		ans += "</SELECT>";
+		ans += "</select>";
 		return ans;
 	}
 

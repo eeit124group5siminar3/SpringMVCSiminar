@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     
+ 
+    
 </head>
 <body class="goto-here">
 
@@ -42,12 +44,21 @@
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
 
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
-     
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="<c:url value='/actFarmerHome'/>">Home</a></span> <span>Active</span></p>
             <h1 class="mb-0 bread">活動報名</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Active</span></p>
+            <h1 class="mb-0 bread">Active</h1>
           </div>
         </div>
       </div>
@@ -58,130 +69,118 @@
         <div class="row justify-content-center">
           <div class="col-xl-7 ftco-animate">
 			<h3 class="mb-4 billing-heading">活動報名</h3>
-			<form:form action="actSignPreInsert.do" modelAttribute="actsigninert" method="POST" class="billing-form">
-			<form:label path="memNo">會員編號</form:label>
-			<form:input type="text" path="memNo"/>
+			<form action="actSignInsert.do" method="POST" class="billing-form">
 	          <div class="row align-items-end">
+	          <div class="col-md-12">
+		            <div class="form-group">
+<!-- 	                	<label for="memNo">會員編號</label> -->
+						<input type="hidden" class="form-control" name="memNo" value="${mbBean.member_no}"/>
+	                </div>
+		         </div>
+               	 <div class="w-100"></div>
 	          	<div class="col-md-6">
 	                <div class="form-group">
-	                	<form:label path="memName">會員姓名</form:label>
-	                  	<form:input type="text" class="form-control" placeholder="會員姓名" path="memName"/>
+	                	<label for="memName">會員姓名</label>
+	                  	<input type="text" class="form-control" value="${mbBean.member_name}" name="memName"/>
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
-	                	<form:label path="memTel">會員電話</form:label>
-	                  	<form:input type="text" class="form-control" placeholder="會員電話" path="memTel"/>
+	                	<label for="memTel">會員電話</label>
+	                  	<input type="text" class="form-control" value="${mbBean.member_address}" name="memTel"/>
 	                </div>
                 </div>
 		         <div class="w-100"></div>
 		         <div class="col-md-12">
 		            <div class="form-group">
-	                	<form:label path="memEmail">會員信箱</form:label>
-	                  	<form:input type="text" class="form-control" placeholder="會員信箱" path="memEmail"/>
+	                	<label for="memEmail">會員信箱</label>
+	                  	<input type="text" class="form-control" value="${mbBean.member_email}" name="memEmail"/>
 	                </div>
 		         </div>
                	 <div class="w-100"></div>
-               	 <hr>
                	 
-<!--                	 <div class="cart-detail cart-total p-3 p-md-4"> -->
-<!-- 	          			<h3 class="billing-heading mb-4">Cart Total</h3> -->
-<!-- 	          			<p class="d-flex"> -->
-<!-- 		    						<span>Subtotal</span> -->
-<!-- 		    						<span>$20.60</span> -->
-<!-- 		    					</p> -->
-<!-- 		    					<p class="d-flex"> -->
-<!-- 		    						<span>Delivery</span> -->
-<!-- 		    						<span>$0.00</span> -->
-<!-- 		    					</p> -->
-<!-- 		    					<p class="d-flex"> -->
-<!-- 		    						<span>Discount</span> -->
-<!-- 		    						<span>$3.00</span> -->
-<!-- 		    					</p> -->
-<!-- 		    					<hr> -->
-<!-- 		    					<p class="d-flex total-price"> -->
-<!-- 		    						<span>Total</span> -->
-<!-- 		    						<span>$17.60</span> -->
-<!-- 		    					</p> -->
-<!-- 								</div> -->
-<!-- 	          	</div> -->
-               	 
-               	                	 
                	 <div class="col-md-12">
 	                <div class="form-group">
-	                	<form:label path="actName">活動名稱</form:label>
-	                  	<form:input type="text" class="form-control" placeholder="活動名稱"  path="actName" readOnly="true"/>
+	                	<label for="actId">活動編號</label>
+	                  	<input type="" class="form-control" value="${actFarmer.actId}" name="actId"/>
+	                </div>
+	              </div>
+	            <div class="w-100"></div>
+               	 <div class="col-md-12">
+	                <div class="form-group">
+	                	<label for="actName">活動名稱</label>
+	                  	<input type="text" class="form-control" placeholder="${actFarmer.actName}" name="actName" readOnly/>
+	                </div>
+	              </div>
+	            <div class="w-100"></div>
+	          	<div class="col-md-6">
+	                <div class="form-group">
+	                	<label for="memTel">活動時間</label>
+	                  	<input type="date" class="form-control" value="${actFarmer.actDateSta}" name="actDateSta" readOnly="true"/>
+<!-- 	                  	<input type="time" class="form-control" placeholder="活動時間" name="acttimeSta" readOnly="true"/> -->
+	                  	<input type="date" class="form-control" value="${actFarmer.actDateEnd}" name="actDateEnd" readOnly="true"/>
+<!-- 	                  	<input type="time" class="form-control" placeholder="活動時間" name="actTimeEnd" readOnly="true"/>	                  	 -->
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
-	                	<form:label path="memTel">活動時間</form:label>
-	                  	<form:input type="date" class="form-control" placeholder="活動時間" path="actDateSta" readOnly="true"/>
-	                  	<form:input type="time" class="form-control" placeholder="活動時間" path="acttimeSta" readOnly="true"/>
-	                  	<form:input type="date" class="form-control" placeholder="活動時間" path="actDateEnd" readOnly="true"/>
-	                  	<form:input type="time" class="form-control" placeholder="活動時間" path="actTimeEnd" readOnly="true"/>	                  	
+<!-- 	                  	<input type="date" class="form-control" placeholder="活動時間" name="actDateSta" readOnly="true"/> -->
+	                  	<input type="time" class="form-control" value="${actFarmer.actTimeSta}" name="actTimeSta" readOnly="true"/>
+<!-- 	                  	<input type="date" class="form-control" placeholder="活動時間" name="actDateEnd" readOnly="true"/> -->
+	                  	<input type="time" class="form-control" value="${actFarmer.actTimeEnd}" name="actTimeEnd" readOnly="true"/>	                  	
 	                </div>
                 </div>
-		         <div class="w-100"></div>
+		         <div class="w-100"></div>	                          
 		            <div class="col-md-12">
 		            	<div class="form-group">
-	                	<form:label path="actAddr">活動地址</form:label>
-	                 	 <form:input type="text" class="form-control" placeholder="活動地址" path="actAddr"/>
+	                	<label for="actAddr">活動地址</label>
+	                 	 <input type="text" class="form-control" placeholder="${actFarmer.actAddr}" name="actAddr"/>
 	                	</div>
 		            </div>
                 <div class="w-100"></div>
+                
+            
 		            <div class="col-md-6">
 		            	<div class="form-group">
-		            		<form:label path="ordActNum">報名人數</form:label>
+		            		<label for="ordActNum">報名人數</label>
 		            		<div class="select-wrap">
 		                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-		                  <form:select class="form-control" path="ordActNum">
-		                  	<form:option value="1">1</form:option>
-		                    <form:option value="2">2</form:option>
-		                    <form:option value="3">3</form:option>
-		                    <form:option value="4">3</form:option>
-		                    <form:option value="5">4</form:option>
-		                    <form:option value="6">5</form:option>
-		                  </form:select>
+		                  <select class="form-control" name="ordActNum" id="ordActNum" onChange="getNum()">
+		                  	<option name="operation" value="1">1</option>
+		                    <option name="operation" value="2">2</option>
+		                    <option name="operation" value="3">3</option>
+		                    <option name="operation" value="4">4</option>
+		                    <option name="operation" value="5">5</option>
+		                    <option name="operation" value="6">6</option>
+		                  </select>
 		                </div>
 		            	</div>
 		            </div>
 		            <div class="col-md-6">
 		            	<div class="form-group">
-	                  <form:input type="text" class="form-control" placeholder="總金額" path="totalPrice"/>
+		            	<label for="totalPrice">總金額</label>
+	                  	<input type="text" class="form-control" name="totalPrice" id="result123"  readOnly/>
 	                </div>
 		            </div>
 		            <div class="w-100"></div>
+		            
+	          	<div class="col-md-6">
+	                <div class="form-group">
+ 	                <input type="submit" class="btn btn-primary py-3 px-4 w-100" value="下單" />	                
+	                </div>
+	              </div>
+	             <div class="col-md-6">
+	                <div class="form-group">
+					<input type="button" class="btn btn-primary py-3 px-4 w-100" value="取消訂單" />	                
+	                </div>
+                </div>
+		         <div class="w-100"></div>	                
 		         </div>
-	          </form:form><!-- END -->
+	          </form><!-- END -->
+		         </div>
 	          </div>
 		</div>
-<!-- 			<div class="col-xl-5"> -->
-<!-- 	          <div class="row mt-5 pt-3"> -->
-<!-- 	          	<div class="col-md-12 d-flex mb-5"> -->
-<!-- 	          		<div class="cart-detail cart-total p-3 p-md-4"> -->
-<!-- 	          			<h3 class="billing-heading mb-4">Cart Total</h3> -->
-<!-- 	          			<p class="d-flex"> -->
-<!-- 		    						<span>Subtotal</span> -->
-<!-- 		    						<span>$20.60</span> -->
-<!-- 		    					</p> -->
-<!-- 		    					<p class="d-flex"> -->
-<!-- 		    						<span>Delivery</span> -->
-<!-- 		    						<span>$0.00</span> -->
-<!-- 		    					</p> -->
-<!-- 		    					<p class="d-flex"> -->
-<!-- 		    						<span>Discount</span> -->
-<!-- 		    						<span>$3.00</span> -->
-<!-- 		    					</p> -->
-<!-- 		    					<hr> -->
-<!-- 		    					<p class="d-flex total-price"> -->
-<!-- 		    						<span>Total</span> -->
-<!-- 		    						<span>$17.60</span> -->
-<!-- 		    					</p> -->
-<!-- 								</div> -->
-<!-- 	          	</div> -->
-	          	
-	 
+          		 
 	          	<div class="col-md-12">
 	          		<div class="cart-detail p-3 p-md-4">
 	          			<h3 class="billing-heading mb-4">Payment Method</h3>
@@ -253,41 +252,17 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-  <script>
-		$(document).ready(function(){
-
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-		        
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		            
-		            $('#quantity').val(quantity + 1);		          
-		            // Increment
-		        
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		      
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
-		    
-		});
-	</script>	
+<script>
+  function getNum(){
+		 var totalprice = ($("select[name='ordActNum']").val())*`${actFarmer.price}`;  
+		 $("#result123").val(totalprice) ;	  	  
+	  }
+  
+window.onload = getNum();
+	  
+</script>	
 	
 </body>
 </html>

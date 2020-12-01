@@ -1,6 +1,5 @@
 package tw.group5.active.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -72,6 +71,32 @@ public class ActHomeController {
 	}
 	
 	
+//	@RequestParam(name="searchString", required = false)String searchString,
+	
+//	public Map<String, Object> actFarmerListSearch(
+//			@PathVariable(name = "pageNo", required = false) Integer pageNo, Model model,
+//			HttpServletRequest rq){
+//		List<ActFarmer> list = null;
+//		String searchString = (String) rq.getAttribute("searchString");
+//		if(pageNo == null) {
+//			if(model.getAttribute("pageNO") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			}else {
+//				pageNo = 1;
+//			}
+//		}
+//		actFarmerService.setPageNo(pageNo);
+//		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
+//		list = actFarmerService.selectName(actName);
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("data", list);
+//		map.put("totalPages", actFarmerService.getTotalPages());
+//		map.put("pageNo", pageNo);
+//		
+//		return map;
+//	}
+	
 	//取得所有頁面數
 	@GetMapping(value = "/actFarmerPage.do/{pageNo}", produces = {"text/html;charset=UTF-8" })
 	@ResponseBody
@@ -91,4 +116,9 @@ public class ActHomeController {
 		m.addAttribute("collFarmer", collFarmer);
 		return "active/actFarmerSingle";
 	} 
+	
+	//查詢單一活動
+	
+	
+	
 }

@@ -46,7 +46,7 @@ public class ActFarmerDAO {
 	
 	//計算該廠商總共有幾頁
 	public Integer getTotalPages(Integer sellerId) {
-		totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
+		totalPages = (int) (Math.ceil(getRecordCounts(sellerId) / (double) recordsPerPage));
 		return totalPages;
 	}
 	
@@ -203,7 +203,7 @@ public class ActFarmerDAO {
 		return list;		
 	}
 	
-	// 查詢單筆資料ByName
+	// 查詢廠商單筆資料ByName
 	public List<ActFarmer> selectNameSeller(String actName,Integer sellerId){
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ActFarmer where actName like?1 && sellerId =?2";
