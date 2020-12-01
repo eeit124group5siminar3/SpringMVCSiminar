@@ -3,6 +3,7 @@ package tw.group5.mall.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -92,7 +93,8 @@ public class ProductOrderItemBean implements Serializable{
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
-	@Column(name="PRODUCTERID")
+	@Transient
+//	@Column(name="PRODUCTERID")
 	public Integer getProducterId() {
 		return producterId;
 	}
@@ -142,7 +144,7 @@ public class ProductOrderItemBean implements Serializable{
 		this.status = status;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "producterId")
 	public ProducterBean getProducterBean() {
 		return producterBean;

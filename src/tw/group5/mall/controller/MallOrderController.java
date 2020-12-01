@@ -71,15 +71,15 @@ public class MallOrderController {
 	}
 
 // 結帳畫面內容
-	@PostMapping(value = "/CheckoutContent")
-	public ModelAndView showCheckoutContent(
-			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/mall/checkoutContent");
-		mav.addObject("ShoppingCart", cart);
-		mav.setStatus(HttpStatus.OK);
-		return mav;
-	}
+//	@PostMapping(value = "/CheckoutContent")
+//	public ModelAndView showCheckoutContent(
+//			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart) {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("/mall/checkoutContent");
+//		mav.addObject("ShoppingCart", cart);
+//		mav.setStatus(HttpStatus.OK);
+//		return mav;
+//	}
 
 // 建立新訂單
 	@GetMapping(value = "/Mall_checkout")
@@ -104,13 +104,14 @@ public class MallOrderController {
 		Map<Integer, OrderItem> carts = cart.getContent();
 		Set<Integer> set = carts.keySet();
 		for (Integer k : set) {
-			OrderItem oi = carts.get(k);
-			String description = oi.getProduct() + " " + oi.getContent() + oi.getUnit();
 			ProductOrderItemBean oib = new ProductOrderItemBean();
-			ProducterBean producterBean=new ProducterBean();
-			producterBean.setMember_no(oi.getProductId());
-			producterBean.setMember_name(oi.getProducterName());
+			OrderItem oi = carts.get(k);
+			System.err.println(oi.getProducterId());
+			ProducterBean producterBean=orderService.getProducterId(oi.getProducterId());
+//			producterBean.setMember_no(oi.getProducterId());
+//			producterBean.setMember_name(oi.getProducterName());
 			oib.setProducterBean(producterBean);
+			String description = oi.getProduct() + " " + oi.getContent() + oi.getUnit();
 			oib.setProductId(oi.getProductId());
 //			oib.setProducterId(oi.getProducterId());
 			oib.setDescription(description);
@@ -119,8 +120,10 @@ public class MallOrderController {
 			oib.setAmount(oi.getQty());
 			oib.setOrderId(null);
 			oib.setProductOrderBean(pob);
+			
 			items.add(oib);
 		}
+		
 		pob.setItems(items);
 		try {
 			orderService.persistOrder(pob);

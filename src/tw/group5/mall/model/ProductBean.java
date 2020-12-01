@@ -45,8 +45,8 @@ public class ProductBean implements Serializable {
 	private String unit;
 	private String description;
 	private Integer category;
-	private Integer views;
-	private Integer sold;
+	private Integer views=0;
+	private Integer sold=0;
 	private Integer status=1;
 	private ProducterBean producterBean;
 	private String producterName;
@@ -74,7 +74,8 @@ public class ProductBean implements Serializable {
 	}
 
 	public void setProduct(String product) {
-		this.product = product;
+		
+		this.product = product.toUpperCase();
 	}
 
 	@Transient
