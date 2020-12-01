@@ -126,9 +126,6 @@ public class Recipe_Controller_update {
 
 	}
 	
-	
-	
-	
 	//update
 	@RequestMapping(path = "/submitChoose.controller",method = RequestMethod.POST)
 	public String submitChoose(@RequestParam String action,@RequestParam MultipartFile multipartFile,

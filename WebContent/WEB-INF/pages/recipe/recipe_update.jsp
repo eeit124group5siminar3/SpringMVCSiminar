@@ -161,14 +161,13 @@
 				<label for="exampleFormControlTextarea1" style="font-size:20px;">料理方法: </label>
 				<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="method" >${BeanToken.method}</textarea>
 			</div>
-			<br>
-			<div  align="center">
 			
 			<br>
-				<img  height="250" width="70%"  
-				src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>">
+			<div align="center">
+				<img id="image" src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" width="60%">
 			</div>
 			<br>
+
 			<div class="custom-file">
 				<input type="file" class="custom-file-input"
 					id="validatedCustomFile" name="multipartFile" />

@@ -285,6 +285,7 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
 
+
   <!--	<script type="text/javascript">  
    		window.onload = function(){
 		var succ=document.getElementById("uploadSuccess");
