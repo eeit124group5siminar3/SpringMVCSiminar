@@ -27,6 +27,7 @@ public class Recipe_Bean_noImage {
 	private String gram_B;
 	private Integer member_no;
 	private String date;
+	private Integer views;
 	
 	public Recipe_Bean_noImage() {
 	}
@@ -138,6 +139,15 @@ public class Recipe_Bean_noImage {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	@Column(name="views")
+	public Integer getViews() {
+		return views;
+	}
+
+	public void setViews(Integer views) {
+		this.views = views;
 	}
 	
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActOrd;
+import tw.group5.active.model.ActOrdNum;
 
 @Repository
 public class ActOrdDAO {
@@ -131,21 +132,30 @@ public class ActOrdDAO {
 	
 	//刪除報名
 	public boolean delectActOrd(Integer actOrdId) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();	
 		ActOrd result = session.get(ActOrd.class, actOrdId);
-		
+
 		if(result!=null) {
 			session.delete(result);
 			return true;
 		}
 		return false;
 	}
-	 
+//		System.err.println(actOrdOne);
+//		System.err.println(result);
+//		System.err.println(result.getActOrdId());
+//		if(actOrdId!=null) {
+//			session.delete(actOrdId);
+//			return true;
+//		}
+//		return false;
+//	}
+		
 	
 	//修改報名
 	public ActOrd updateActOrd(ActOrd actOrd) {
 		Session session = sessionFactory.getCurrentSession();
-		session.merge(actOrd);
+		session.update(actOrd);
 		return actOrd;
 	}
 	

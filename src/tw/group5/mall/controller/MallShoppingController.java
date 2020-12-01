@@ -48,7 +48,7 @@ public class MallShoppingController {
 		if (searchStringP != null) {
 			searchString = searchStringP;
 			session.setAttribute("mall_searchString", searchString);
-			service.setSearchString(searchString);
+			service.setSearchString(searchString.toUpperCase());
 		}
 		Integer categoryId = (Integer) session.getAttribute("mall_categoryId");
 		if (categoryIdP != null) {
@@ -85,7 +85,7 @@ public class MallShoppingController {
 		oi.setProduct(selectedProduct.getProduct());
 		oi.setContent(selectedProduct.getContent());
 		oi.setUnit(selectedProduct.getUnit());
-		oi.setProducterId(selectedProduct.getProducterId());
+		oi.setProducterId(selectedProduct.getProducterBean().getMember_no());
 		oi.setPrice(selectedProduct.getPrice());
 		oi.setDiscount(selectedProduct.getDiscount());
 		oi.setProducterName(selectedProduct.getProducterName());
@@ -121,7 +121,7 @@ public class MallShoppingController {
 		oi.setProduct(selectedProduct.getProduct());
 		oi.setContent(selectedProduct.getContent());
 		oi.setUnit(selectedProduct.getUnit());
-		oi.setProducterId(selectedProduct.getProducterId());
+		oi.setProducterId(selectedProduct.getProducterBean().getMember_no());
 		oi.setPrice(selectedProduct.getPrice());
 		oi.setDiscount(selectedProduct.getDiscount());
 		oi.setProducterName(selectedProduct.getProducterName());

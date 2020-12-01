@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@page import="tw.group5.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,9 +96,9 @@
 <!-- 							<input name="apply" type="submit" value="申請"> -->
 <%-- 						</form> --%>
 <!-- 					</td> -->
-					<td style="border: 0px" align="right" colspan="10">
-						<form action="<c:url value='/'/>" method="get">
-							<input name="selectAll" type="submit" value="查詢全部">
+					<td style="border: 0px" align="right" colspan="9">
+						<form action="<c:url value='/maintainActFarmer.do'/>" method="get">
+							<input name="selectAll" type="submit" value="回活動管理">
 						</form>
 					</td>
 				</tr>
@@ -110,7 +111,7 @@
 					<th>總金額</th>
 					<th>報名狀態</th>
 					<th>下單時間</th>
-					<th colspan="2">Action</th>
+					<th colspan="1">Action</th>
 				</tr>
 				<c:forEach var="actOrd" items="${collOrd}">
 					<tr>
@@ -125,17 +126,17 @@
 						<td>
 							<form action="<c:url value='/actOrdPreUpdate.do'/>"
 								method="get">
-								<input type="hidden" id="actOrdId" name="actOrdId"
-									value="${actOrd.actOrdId}"> <input name="update"
-									type="submit" value="修改">
-							</form>
-						</td>
-						<td>
-							<form action="<c:url value='/actOrdDelet.do'/>" method="post">
 								<input type="hidden" id="actOrdId" name="actOrdId" value="${actOrd.actOrdId}"> 
-								<input name="delete" type="submit" value="刪除">
+								<input type="hidden" id="actId" name="actId" value="${actOrd.actFarmer.actId}"> 
+								<input name="update" type="submit" value="修改">
 							</form>
 						</td>
+<!-- 						<td> -->
+<%-- 							<form action="<c:url value='/actOrdDelet.do'/>" method="post"> --%>
+<%-- 								<input type="hidden" id="actOrdId" name="actOrdId" value="${actOrd.actOrdId}">   --%>
+<!-- 								<input name="delete" type="submit" value="刪除"> -->
+<%-- 							</form> --%>
+<!-- 						</td> -->
 					</tr>
 				</c:forEach>
 
@@ -151,15 +152,16 @@
 				<!-- 					</tr> -->
 				<!-- 				ajax -->
 
-				<tr>
-					<td style="border: 0px" colspan="5"></td>
-					<td style="border: 0px" colspan="5">
-						<form action="<c:url value='/'/>" method="get">
-							<label for="">訂單編號:</label> 
-							<input type="text" id="selectname" name="selectordid"> &nbsp; 
-							<input name="selectone" type="submit" value="查詢">
-						</form>
-					</td>
+<!-- 				<tr> -->
+<!-- 					<td style="border: 0px" colspan="6"></td> -->
+<!-- 					<td style="border: 0px" colspan="3"> -->
+<%-- 						<form action="<c:url value='/'/>" method="get"> --%>
+<!-- 							<label for="">訂單編號:</label>  -->
+<!-- 							<input type="text" id="selectname" name="selectordid"> &nbsp;  -->
+<!-- 							<input name="selectone" type="submit" value="查詢"> -->
+<%-- 						</form> --%>
+<!-- 					</td> -->
+<!-- 				</tr> -->
 			</table>
 	</div>
 	<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->

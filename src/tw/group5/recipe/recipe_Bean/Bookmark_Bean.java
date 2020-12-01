@@ -6,8 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import tw.group5.recipe.DAO.Recipe_DAO_spring;
 
 @Entity
 @Table(name="bookmark")
@@ -16,6 +22,10 @@ public class Bookmark_Bean {
 	private String id;
 	private Integer member_no;
 	private String rec_id;
+	private boolean value;
+	
+	@Autowired @JsonIgnore
+	private Recipe_DAO_spring rDAO;
 	
 	@Id @Column(name="id")
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -41,6 +51,17 @@ public class Bookmark_Bean {
 	public void setRec_id(String rec_id) {
 		this.rec_id = rec_id;
 	}
+	
+//	@Transient
+//	public boolean getValue() {
+//		return value;
+//	}
+//	public void setValue(boolean value) {
+//		this.value = rDAO.bookmarkExist(rec_id,mem_no);
+//	}
+	
+	
+
 	
 	
 }

@@ -1,11 +1,15 @@
 package tw.group5.active.controller;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +29,7 @@ import tw.group5.member_SignUp.model.Member_Service;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(names= {"pageNo","login_ok","actFarmer","actOrd"})
+@SessionAttributes(names= {"pageNo","login_ok","actFarmer","actOrd","aoBean","collOrd"})
 public class ActSignController {
 	
 	@Autowired
@@ -37,7 +41,8 @@ public class ActSignController {
 	@Autowired
 	private Member_Service mbService;
 	
-	
+//	@Autowired
+//	private HttpRequest request;
 	
 	
 //======================================消費者報名=============================================	
@@ -123,9 +128,24 @@ public class ActSignController {
 	
 	//刪除某一筆訂單
 	@PostMapping(value = "/actOrdDelet.do")
-	public String actOrdDelet(@RequestParam(value="actOrdId")Integer actOrdId) {
-		Integer id = Integer.valueOf(actOrdId);
-		actOrdService.delectActOrd(id);
+//	public String actOrdDelet(@RequestParam(value="actOrd")ActOrd actOrd, Model model) {
+		public String actOrdDelet(@RequestParam(value="actOrdId")Integer actOrdId, Model model) {
+//		Integer id = Integer.valueOf(actOrdId);
+//		Collection<ActOrd> collOrd= (Collection<ActOrd>) model.getAttribute("collOrd");
+//		Iterator<ActOrd> iterator = collOrd.iterator();
+//		ActOrd actOrd=null;
+//		if(iterator.hasNext()) {
+//		for(ActOrd ao:iterator) {
+//			ActOrd ao=(ActOrd)iterator.next();
+//			if(ao.getActOrdId()==actOrdId) {	
+//			actOrd=ao;
+//			}
+//		}
+//		ActOrd actOrdOne = actOrdService.getActOrdOne(actOrdId);
+//		actOrdService.delectActOrd(actOrdId);
+		actOrdService.delectActOrd(actOrdId);
+//		System.err.println(actOrdId);
+//		System.err.println(bean.getActOrdId());
 		return "redirect:/maintainActFarmer.do";
 		
 	}
@@ -134,10 +154,12 @@ public class ActSignController {
 	@GetMapping(value = "/actOrdPreUpdate.do")
 	public String actOrdPreUpdate(Model model,
 		@RequestParam(value="actOrdId") Integer actOrdId,
-		@SessionAttribute(value = "actFarmer") ActFarmer actFarmer) {
+		@RequestParam(value="actId") Integer actId
+		) {
 		
-		ActOrd aoBean = actOrdService.getActOrdOne(actOrdId);
-		aoBean.setActFarmer(actFarmer);
+		ActOrd aoBean = actOrdService.getActOrdOne(actOrdId);	
+//		ActFarmer afBean = actFarmerService.getActFarmer(actId);
+//		aoBean.setActFarmer(afBean);
 		model.addAttribute("aoBean", aoBean);
 		return "/active/actSignUpdate";
 	}
@@ -146,7 +168,13 @@ public class ActSignController {
 	@PostMapping(value = "/actOrdUpdate.do")
 	public String actOrdUpdate(@ModelAttribute(value = "aoBean")ActOrd actOrd,
 		Model model, @SessionAttribute(value = "login_ok")Member_SignUp mb) {		
+//		actOrd.setMemName(((Object) request).getParameter("memName"));
+//		actOrd.getMemTel();
+//		actOrd.getMemEmail();
+//		actOrd.getOrdActNum();
+//		actOrd.getTotalPrice();
 		
+		System.out.println(actOrd.toString());
 		actOrdService.updateActOrd(actOrd);
 		return "redirect:/maintainActFarmer.do";
 	}

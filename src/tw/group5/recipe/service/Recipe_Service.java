@@ -72,8 +72,8 @@ public class Recipe_Service implements recipe_Service_interface {
 	}
 
 	@Override
-	public List<Bookmark_Bean> deleteBookmark(String rec_id, Integer mem_no) {
-		return rDAO.deleteBookmark(rec_id, mem_no);
+	public boolean deleteBookmark(String id) {
+		return rDAO.deleteBookmark(id);
 	}
 
 	@Override
@@ -96,5 +96,15 @@ public class Recipe_Service implements recipe_Service_interface {
 	@Override
 	public void setPageNo(Integer pageNo) {
 		rDAO.setPageNo(pageNo);
+	}
+	
+	@Override
+	public List<Bookmark_Bean> partSearchBookmark(Integer mem_no,String rec_id) {
+		return rDAO.partSearchBookmark(mem_no, rec_id);
+	}
+	
+	@Override
+	public boolean bookmarkExist(String rec_id,Integer mem_no) {
+		return rDAO.bookmarkExist(rec_id,mem_no);
 	}
 }
