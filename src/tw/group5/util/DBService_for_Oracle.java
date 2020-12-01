@@ -36,9 +36,9 @@ public class DBService_for_Oracle {
 			+"COVERIMAGE BLOB," 
 			+"FILENAME VARCHAR2(20 BYTE)," 
 			+"DESCRIPTION VARCHAR2(255 BYTE)," 
-			+"CATEGORY NUMBER(20) REFERENCES PRODUCTCATEGORY(ID) on DELETE cascade"
-			+"VIEWS NUMBER(20)"
-			+"SOLD NUMBER(20)"
+			+"CATEGORY NUMBER(20) REFERENCES PRODUCTCATEGORY(ID) on DELETE cascade,"
+			+"VIEWS NUMBER(20),"
+			+"SOLD NUMBER(20),"
 			+"STATUS NUMBER(2)"
 			+ " ) ";
 
@@ -55,7 +55,7 @@ public class DBService_for_Oracle {
 			+"TEL VARCHAR2(255 BYTE)," 
 			+"BNO VARCHAR2(20 BYTE)," 
 			+"TOTAL NUMBER(20,2)," 
-			+"ORDERDATE DATE"
+			+"ORDERDATE DATE,"
 			+"SHIPPINGTIME NUMBER(20)"
 			+ " )";
 	
