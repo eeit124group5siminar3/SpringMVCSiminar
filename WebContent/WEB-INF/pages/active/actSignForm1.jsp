@@ -87,7 +87,7 @@
 	             <div class="col-md-6">
 	                <div class="form-group">
 	                	<label for="memTel">會員電話</label>
-	                  	<input type="text" class="form-control" value="${mbBean.member_address}" name="memTel"/>
+	                  	<input type="text" class="form-control" value="${mbBean.member_cellphone}" name="memTel"/>
 	                </div>
                 </div>
 		         <div class="w-100"></div>
