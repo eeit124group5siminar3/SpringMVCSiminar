@@ -33,7 +33,13 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-    
+
+<script>
+function backHome(){
+	document.act.action="maintainActFarmer.do";
+    document.act.submit();
+}
+</script>    
  
     
 </head>
@@ -53,88 +59,78 @@
         </div>
       </div>
     </div>
-    
-    <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Active</span></p>
-            <h1 class="mb-0 bread">Active</h1>
-          </div>
-        </div>
-      </div>
-    </div>
 
      <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-7 ftco-animate">
 			<h3 class="mb-4 billing-heading">活動報名</h3>
-			<form action="actSignInsert.do" method="POST" class="billing-form">
+			<form:form action="actOrdUpdate.do" modelAttribute="aoBean" class="billing-form" method="POST" name="act">
 	          <div class="row align-items-end">
 	          <div class="col-md-12">
 		            <div class="form-group">
 <!-- 	                	<label for="memNo">會員編號</label> -->
-						<input type="hidden" class="form-control" name="memNo" value="${mbBean.member_no}"/>
+						<form:input type="hidden" class="form-control" path="memNo" value="${mbBean.member_no}"/>
 	                </div>
 		         </div>
                	 <div class="w-100"></div>
 	          	<div class="col-md-6">
 	                <div class="form-group">
-	                	<label for="memName">會員姓名</label>
-	                  	<input type="text" class="form-control" value="${mbBean.member_name}" name="memName"/>
+	                	<form:label path="memName">會員姓名</form:label>
+	                  	<form:input type="text" class="form-control" value="${mbBean.member_name}" path="memName"/>
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
-	                	<label for="memTel">會員電話</label>
-	                  	<input type="text" class="form-control" value="${mbBean.member_address}" name="memTel"/>
+	                	<form:label path="memTel">會員電話</form:label>
+	                  	<form:input type="text" class="form-control" value="${mbBean.member_address}" path="memTel"/>
 	                </div>
                 </div>
 		         <div class="w-100"></div>
 		         <div class="col-md-12">
 		            <div class="form-group">
-	                	<label for="memEmail">會員信箱</label>
-	                  	<input type="text" class="form-control" value="${mbBean.member_email}" name="memEmail"/>
+	                	<form:label path="memEmail">會員信箱</form:label>
+	                  	<form:input type="text" class="form-control" value="${mbBean.member_email}" path="memEmail"/>
 	                </div>
 		         </div>
                	 <div class="w-100"></div>
                	 
                	 <div class="col-md-12">
 	                <div class="form-group">
-	                	<label for="actId">活動編號</label>
-	                  	<input type="" class="form-control" value="${actFarmer.actId}" name="actId"/>
+	                	<form:label path="actId">活動編號</form:label>
+	                  	<form:input type="" class="form-control" value="${actFarmer.actId}" path="actId"/>
 	                </div>
 	              </div>
 	            <div class="w-100"></div>
                	 <div class="col-md-12">
 	                <div class="form-group">
-	                	<label for="actName">活動名稱</label>
-	                  	<input type="text" class="form-control" placeholder="${actFarmer.actName}" name="actName" readOnly/>
+	                	<form:label path="actName">活動名稱</form:label>
+	                  	<form:input type="text" class="form-control" placeholder="${actFarmer.actName}" path="actName" readOnly="true"/>
 	                </div>
 	              </div>
 	            <div class="w-100"></div>
 	          	<div class="col-md-6">
 	                <div class="form-group">
-	                	<label for="memTel">活動時間</label>
-	                  	<input type="date" class="form-control" value="${actFarmer.actDateSta}" name="actDateSta" readOnly="true"/>
+	                	<form:label path="memTel">活動時間</form:label>
+	                  	<form:input type="date" class="form-control" value="${actFarmer.actDateSta}" path="actDateSta" readOnly="true"/>
 <!-- 	                  	<input type="time" class="form-control" placeholder="活動時間" name="acttimeSta" readOnly="true"/> -->
-	                  	<input type="date" class="form-control" value="${actFarmer.actDateEnd}" name="actDateEnd" readOnly="true"/>
+	                  	<form:input type="date" class="form-control" value="${actFarmer.actDateEnd}" path="actDateEnd" readOnly="true"/>
 <!-- 	                  	<input type="time" class="form-control" placeholder="活動時間" name="actTimeEnd" readOnly="true"/>	                  	 -->
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
 <!-- 	                  	<input type="date" class="form-control" placeholder="活動時間" name="actDateSta" readOnly="true"/> -->
-	                  	<input type="time" class="form-control" value="${actFarmer.actTimeSta}" name="actTimeSta" readOnly="true"/>
+	                  	<form:input type="time" class="form-control" value="${actFarmer.actTimeSta}" path="actTimeSta" readOnly="true"/>
 <!-- 	                  	<input type="date" class="form-control" placeholder="活動時間" name="actDateEnd" readOnly="true"/> -->
-	                  	<input type="time" class="form-control" value="${actFarmer.actTimeEnd}" name="actTimeEnd" readOnly="true"/>	                  	
+	                  	<form:input type="time" class="form-control" value="${actFarmer.actTimeEnd}" path="actTimeEnd" readOnly="true"/>	                  	
 	                </div>
                 </div>
 		         <div class="w-100"></div>	                          
 		            <div class="col-md-12">
 		            	<div class="form-group">
-	                	<label for="actAddr">活動地址</label>
-	                 	 <input type="text" class="form-control" placeholder="${actFarmer.actAddr}" name="actAddr"/>
+	                	<form:label path="actAddr">活動地址</form:label>
+	                 	 <form:input type="text" class="form-control" placeholder="${actFarmer.actAddr}" path="actAddr"/>
 	                	</div>
 		            </div>
                 <div class="w-100"></div>
@@ -142,41 +138,41 @@
             
 		            <div class="col-md-6">
 		            	<div class="form-group">
-		            		<label for="ordActNum">報名人數</label>
+		            		<label path="ordActNum">報名人數</label>
 		            		<div class="select-wrap">
 		                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-		                  <select class="form-control" name="ordActNum" id="ordActNum" onChange="getNum()">
-		                  	<option name="operation" value="1">1</option>
-		                    <option name="operation" value="2">2</option>
-		                    <option name="operation" value="3">3</option>
-		                    <option name="operation" value="4">4</option>
-		                    <option name="operation" value="5">5</option>
-		                    <option name="operation" value="6">6</option>
-		                  </select>
+		                  <form:select class="form-control" path="ordActNum" id="ordActNum" onChange="getNum()">
+		                  	<form:option name="operation" value="1">1</form:option>
+		                    <form:option name="operation" value="2">2</form:option>
+		                    <form:option name="operation" value="3">3</form:option>
+		                    <form:option name="operation" value="4">4</form:option>
+		                    <form:option name="operation" value="5">5</form:option>
+		                    <form:option name="operation" value="6">6</form:option>
+		                  </form:select>
 		                </div>
 		            	</div>
 		            </div>
 		            <div class="col-md-6">
 		            	<div class="form-group">
-		            	<label for="totalPrice">總金額</label>
-	                  	<input type="text" class="form-control" name="totalPrice" id="result123"  readOnly/>
+		            	<form:label path="totalPrice">總金額</form:label>
+	                  	<form:input type="text" class="form-control" path="totalPrice" id="result123"  readOnly/>
 	                </div>
 		            </div>
 		            <div class="w-100"></div>
 		            
 	          	<div class="col-md-6">
 	                <div class="form-group">
- 	                <input type="submit" class="btn btn-primary py-3 px-4 w-100" value="下單" />	                
+ 	                <form:button class="btn btn-primary py-3 px-4 w-100" value="下單" >報名活動</form:button>	                
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
-					<input type="button" class="btn btn-primary py-3 px-4 w-100" value="取消訂單" />	                
+					<form:button class="btn btn-primary py-3 px-4 w-100" value="取消訂單" >取消訂單"</form:button>               
 	                </div>
                 </div>
 		         <div class="w-100"></div>	                
 		         </div>
-	          </form><!-- END -->
+	          </form:form><!-- END -->
 		         </div>
 	          </div>
 		</div>

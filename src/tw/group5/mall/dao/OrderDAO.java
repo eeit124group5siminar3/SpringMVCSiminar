@@ -17,6 +17,7 @@ import tw.group5.mall.ProductStockException;
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.model.ProductOrderBean;
 import tw.group5.mall.model.ProductOrderItemBean;
+import tw.group5.mall.model.ProducterBean;
 
 @Repository
 //@Scope(value = "session")
@@ -75,7 +76,7 @@ public class OrderDAO {
 // 查詢某一消費者的訂單
 	public List<ProductOrderBean> getMemberOrders(int BuyerId) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from ProductOrderBean where BuyerId = ?0 Order by orderDate desc ";
+		String hql = "from ProductOrderBean where buyerId = ?0 Order by orderDate desc ";
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
 		Query<ProductOrderBean> query = session.createQuery(hql, ProductOrderBean.class);
 		query.setParameter(0, BuyerId);
@@ -139,10 +140,20 @@ public class OrderDAO {
 			} else {
 				bean.setStock(stock - oib.getAmount());
 				bean.setSold(bean.getSold()+oib.getAmount());
+				if(stock - oib.getAmount()==0) {
+					bean.setStatus(2);
+				}
 			}
 			return bean;
 		}
 		return null;
+	}
+
+// 取得會員姓名
+	public ProducterBean getProducterId(Integer producterId) {
+		Session session = sessionFactory.getCurrentSession();
+		ProducterBean bean = session.get(ProducterBean.class, producterId);
+		return bean;
 	}
 
 }

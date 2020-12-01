@@ -24,7 +24,7 @@ public class ProductDAO {
 	private int pageNo = 1;
 	private int maintainPageNo = 0;
 	private int recordsPerPage = 12;
-	private int maintainPerPage= 10;
+	private int maintainPerPage = 10;
 	private int totalPages = -1;
 	private int totalPagesWithoutZero = -1;
 	private String tagName = "";
@@ -119,11 +119,11 @@ public class ProductDAO {
 		return list;
 	}
 
-// 查詢一頁面的產品(不包含庫存為0)
+// 查詢已上架一頁面的產品
 	public List<ProductBean> getPageProductsWithoutZero() {
 		Session session = sessionFactory.getCurrentSession();
 		int startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ProductBean where stock != 0";
+		String hql = "from ProductBean where status = 1";
 		Query<ProductBean> query = null;
 		if (searchString == null) {
 			if (categoryId == null) {
@@ -152,18 +152,17 @@ public class ProductDAO {
 		return list;
 	}
 
-//查詢某一生產者出售的產品
+//查詢某一生產者的一頁面產品
 	public List<ProductBean> getPageProducts(int producterId) {
 		Session session = sessionFactory.getCurrentSession();
 		int startRecordNo = (maintainPageNo - 1) * maintainPerPage;
-		String hql = "from ProductBean where producterId =?0 ORDER BY ProductId desc";
+		String hql = "from ProductBean where status !=2 and producterId =?0 ORDER BY ProductId desc";
 		Query<ProductBean> query = session.createQuery(hql, ProductBean.class);
 		query.setParameter(0, producterId);
 		query.setFirstResult(startRecordNo);
 		query.setMaxResults(maintainPerPage);
 		List<ProductBean> list = query.list();
 		return list;
-
 	}
 
 // 查詢資料庫商品數
@@ -178,24 +177,11 @@ public class ProductDAO {
 		return count;
 	}
 
-// 查詢資料庫某一生產者上架的商品數
-	public long getRecordCounts(int producterId) {
-		Session session = sessionFactory.getCurrentSession();
-		int count = 0; // 必須使用 long 型態
-		String hql = "select count( * ) from ProductBean where producterId=?0";
-		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
-		query.setParameter(0, producterId);
-		Object objectNumber = query.uniqueResult();
-		long longNumber = (long) objectNumber;
-		count = (int) longNumber;
-		return count;
-	}
-
-//查詢庫存量不為0的商品數
+//查詢上架的商品數
 	public long getRecordCountsWithoutZero() {
 		Session session = sessionFactory.getCurrentSession();
 		int count = 0; // 必須使用 long 型態
-		String hql = "select count( * ) from ProductBean where stock != 0";
+		String hql = "select count( * ) from ProductBean where status = 1";
 		Query<Long> query = null;
 		if (searchString == null) {
 			if (categoryId == null) {
@@ -223,6 +209,18 @@ public class ProductDAO {
 		return count;
 	}
 
+// 查詢資料庫某一生產者的商品數
+	public long getRecordCounts(int producterId) {
+		Session session = sessionFactory.getCurrentSession();
+		int count = 0; // 必須使用 long 型態
+		String hql = "select count( * ) from ProductBean where status !=2 and producterId=?0";
+		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
+		query.setParameter(0, producterId);
+		Object objectNumber = query.uniqueResult();
+		long longNumber = (long) objectNumber;
+		count = (int) longNumber;
+		return count;
+	}
 //依照ID查詢類別
 //	public CategoryBean getCategoryById() {
 //		Session session = sessionFactory.getCurrentSession();
@@ -248,7 +246,7 @@ public class ProductDAO {
 //		List<CategoryBean> cb = getCategory();
 		ans += "<select name='" + getTagName() + "'>";
 //		for (CategoryBean bean : cb) {
-		for (int i = 1; i <= (CategoryClass.CATEGORY_MAP.size()-1); i++) {
+		for (int i = 1; i <= (CategoryClass.CATEGORY_MAP.size() - 1); i++) {
 			String name = CategoryClass.getCategory(i);
 //			int id = bean.getId();
 //			String name = bean.getName();
@@ -266,6 +264,9 @@ public class ProductDAO {
 	public ProductBean updateProduct(ProductBean bean) {
 
 		Session session = sessionFactory.getCurrentSession();
+		if(bean.getStock()<=0) {
+			bean.setStatus(0);
+		}
 		session.update(bean);
 		return bean;
 	}
@@ -287,6 +288,9 @@ public class ProductDAO {
 		java.util.Date now = new java.util.Date();
 		Date date = new Date(now.getTime());
 		bean.setAddedDate(date);
+		if(bean.getStock()<=0) {
+			bean.setStatus(0);
+		}
 		session.save(bean);
 		return bean;
 	}

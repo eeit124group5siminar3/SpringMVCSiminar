@@ -66,7 +66,7 @@
 					<ul class="act-type" id="product-category"></ul>
 					<form class="product-category" action="?????????" method="GET">
 						<input type="search" name="searchString" id="searchString"
-							value=${searchString}>
+							value="${searchString}"/>
 						<button name="searchButton" style="border-radius: 5px;" onclick="????">查詢</button>
 					</form>
 				</div>
@@ -133,14 +133,14 @@ function list(){
 		for(var i = 0; i<data.length; i++){
 		content+=
 		`<div class="col-md-12 d-flex"><div class="blog-entry align-self-stretch d-md-flex">
-			<a href="blog-single.html" class="block-20" style="background-image: url('<c:url value='ActImageController?id=\${data[i].actId}&type=ACTFARMER'/>');"></a>
+			<a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="block-20" style="background-image: url('<c:url value='ActImageController?id=\${data[i].actId}&type=ACTFARMER'/>');"></a>
 				<div class="text d-block pl-md-4">
 						<div class="meta mb-3">
 			                 <div><a href="#">\${data[i].actType}</a></div>
 						</div>
 						 <h3 class="heading"><a href="#">\${data[i].actName}</a></h3>
 			             	<p>活動地址:  \${data[i].actAddr}<br>活動電話: \${data[i].tel}<br>
-			             	活動日期: \${data[i].actDateSta}~\${data[i].actDateEnd}</p>
+			            	活動日期: \${data[i].actDateSta}~\${data[i].actDateEnd}</p>
 			                <p><a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">了解更多</a>
 		                <a href="<c:url value='actSignPreInsert.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">我要報名</a></p>
 			        </div>

@@ -68,4 +68,8 @@ public class Member_Service {
 				member_name, member_birthday, member_cellphone, member_id, member_address, member_gui_number, e_paper,
 				member_bank_code, member_bank_account, member_gg, member_lock_acc);
 	}
+	
+	public boolean Admin_Delete_Member_Data(Integer member_no) {
+		return memberDao.Admin_Delete_Member_Data(member_no);
+	}
 }

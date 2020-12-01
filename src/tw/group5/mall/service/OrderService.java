@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tw.group5.mall.dao.OrderDAO;
 import tw.group5.mall.model.ProductOrderBean;
 import tw.group5.mall.model.ProductOrderItemBean;
+import tw.group5.mall.model.ProducterBean;
 
 @Service
 @Transactional
@@ -67,5 +68,9 @@ public class OrderService {
 
 	public int getTotalPages(Integer buyerId) {
 		return odao.getTotalPages(buyerId);
+	}
+
+	public ProducterBean getProducterId(Integer producterId) {
+		return odao.getProducterId(producterId);
 	}
 }

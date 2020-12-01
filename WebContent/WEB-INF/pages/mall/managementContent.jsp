@@ -12,7 +12,7 @@
 			</div>
 			<div>
 				<table class="table table-hover">
-				<span id="test"></span>
+					<span id="test"></span>
 					<thead class="thead-light">
 						<tr>
 							<th>&nbsp;</th>
@@ -27,14 +27,23 @@
 					<c:forEach var="item" items="${management_DPP}">
 						<tr class="table-=active text-center" data-toggle="modal"
 							data-target="#update" data-whatever="${item.productId}">
-							<td>
+							<td id="${item.productId}">
+							<c:choose>
+							<c:when test="${item.stock<=0}">
+							<button type="button" class="btn btn-primary btn-sm"
+										disabled="disabled">上架</button>
+							</c:when>
+							<c:otherwise>
 							<c:if test="${item.status==0}">
-									<button type="button" class="btn btn-primary btn-sm" onclick="shelf()">上架</button>
-							</c:if>
-							<c:if test="${item.status==1}">
-									<button type="button" class="btn btn-primary btn-sm" onclick="shelf()">下架</button>
-							</c:if>
-							</td>
+									<button type="button" class="btn btn-primary btn-sm"
+										onclick="shelf(event,1)">上架</button>
+								</c:if> <c:if test="${item.status==1}">
+									<button type="button" class="btn btn-primary btn-sm disabled"
+										onclick="shelf(event,0)">下架</button>
+								</c:if>
+							</c:otherwise>								
+							</c:choose>
+								</td>
 							<td class="image-prod"
 								style="padding-top: 5px; padding-bottom: 5px"><div
 									class="img"
@@ -169,8 +178,31 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-function shelf(){
-	var test=document.getElementById("test");
-	test.innerHTML="123";
+function shelf(event,status){
+	event.stopPropagation(); 
+	var productId=event.path[1].id;
+	$.ajax({
+		url : "Shelf",
+		type : "POST",
+		data : {
+			"productId" : productId,
+			"status" :status
+		},
+		success : function(data, status) {
+			if(data==1){
+			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
+				}else{
+			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
+					}
+		},
+		error : function(data, status) {
+			if(data==1){
+				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
+					}else{
+				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
+						}
+		}
+	});
+	
 }
 </script>
