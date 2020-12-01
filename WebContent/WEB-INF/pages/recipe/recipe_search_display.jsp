@@ -95,7 +95,7 @@
 								<div class="txt">
 									<div align="center">
 										<h2 align="center"
-											style="width: 200px; float: left; display: inline">
+											style="width: 300px; float: left; display: inline">
 											<a
 												href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
 										</h2>
@@ -108,7 +108,7 @@
 													class="ion-ios-heart" id="heart"></i></span> </a>
 										</h2>
 									</div>
-									<br>
+									<h3>累積人氣: ${BeanToken.views}</h3>
 									<hr>
 									<div>
 										<a
@@ -151,33 +151,20 @@
 									<div class="txt">
 										<div align="center">
 											<h2 align="center"
-												style="width: 200px; float: left; display: inline">
+												style="width: 300px; float: left; display: inline">
 												<a
 													href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
 											</h2>
 
 											<input type="hidden" id="send" value="${BeanToken.rec_id}" />
-
-
-											<%-- 										<c:forEach var='myRecipe' items="${myRecipe}"> --%>
-											<%-- 										<c:choose> --%>
-											<%-- 										<c:when test="${BeanToken.rec_id==bookmark.rec_id}"> --%>
-											<%-- 										<c:if test="${BeanToken.rec_id==myRecipe.rec_id}"> --%>
 											<h2 style="width: 50px; float: left; display: inline">
 												<a href="javascript:void(0);"
 													class="heart d-flex justify-content-center align-items-center "
 													onclick="fun('${login_ok}')"> <span><i
 														class="ion-ios-heart" id="heart" style="color: red;"></i></span></a>
 											</h2>
-											<%-- 										</c:when> --%>
-											<%-- 										<c:otherwise> --%>
-
-
-											<%-- 								</c:choose> --%>
-											<%-- 										</c:forEach> --%>
-
 										</div>
-										<br>
+										<h3>累積人氣: ${BeanToken.views}</h3>
 										<hr>
 										<div>
 											<a
@@ -220,10 +207,11 @@
 									<div class="txt">
 										<div align="center">
 											<h2 align="center"
-												style="width: 200px; float: left; display: inline">
+												style="width: 300px; float: left; display: inline">
 												<a
 													href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
 											</h2>
+
 
 											<input type="hidden" id="send" value="${BeanToken.rec_id}" />
 											<h2 style="width: 50px; float: left; display: inline">
@@ -233,7 +221,7 @@
 														class="ion-ios-heart" id="heart"></i></span></a>
 											</h2>
 										</div>
-										<br>
+										<h3>累積人氣: ${BeanToken.views}</h3>
 										<hr>
 										<div>
 											<a

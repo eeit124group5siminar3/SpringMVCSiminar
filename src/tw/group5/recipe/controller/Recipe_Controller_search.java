@@ -97,9 +97,16 @@ public class Recipe_Controller_search {
 //		return "成功!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 	}
 	
-	//recipe is include or not 
+	//recipe is include or not  and search recipe
 	@GetMapping(value="/recipeDetail.controller" ,produces = "application/json;charset=UTF-8")
 	public String recipeDetail(@RequestParam(name="rec_id",required = false)String rec_id,Model m){
+		
+		//計算瀏覽量
+		Recipe_Bean bean=service.getImage(rec_id);
+		System.err.println("getViews(): "+bean.getViews());
+		bean.setViews(bean.getViews()+1);
+		service.update(rec_id, bean);
+		
 		if (session.getAttribute("login_ok") != null) {
 			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
 			Integer mem_no=OK.getMember_no();
@@ -181,18 +188,15 @@ public class Recipe_Controller_search {
 			List<Bookmark_Bean> bookmark=service.listOfBookmark(mem_no);
 			List<Bookmark_Bean> myRecipe=new ArrayList<Bookmark_Bean>();
 			List<Recipe_Bean> allRecipe=new ArrayList<Recipe_Bean>();
-			System.err.println("111");
 			for(Bookmark_Bean bBean:bookmark) {
 				for(Recipe_Bean rBean:searchAll) {
 					if(bBean.getRec_id().equals(rBean.getRec_id())) {
-//						myRecipe.add(bBean);
 						allRecipe.add(rBean);
 						System.out.println(rBean.getName());
 					}
 				}
 			}
 			
-//			m.addAttribute("myRecipe",myRecipe);
 			m.addAttribute("allRecipe",allRecipe);
 			return "recipe/recipe_bookmark";
 		}else {

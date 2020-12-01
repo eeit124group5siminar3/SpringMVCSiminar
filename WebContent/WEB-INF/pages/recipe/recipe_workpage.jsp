@@ -251,18 +251,18 @@
                          var ingredients_A=ls.ingredients_A;
                          html +=
 		           ` <div class="blog-entry align-self-stretch d-md-flex"> 
-		              <a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="block-20" 
+		              <a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="block-20" target="_blank"
 			              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${ls.rec_id}'/>');">
 		              </a>
 		              <div class="text d-block pl-md-4">
 
-		                <h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-		                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="btn btn-primary py-2 px-3">Read more</a></p>
+		                <h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" target="_blank">\${ls.name}</a><h5>累積人氣: \${ls.views}</h5></h3>
+		                <p>\${ls.desc}</p>
+		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" target="_blank" class="btn btn-primary py-2 px-3">Read more</a></p>
 		              </div>
 		            </div>
 		          </div>`;
-
+						
                 		console.log('ls.ingredients_A: '+ls.ingredients_A);
                     	}
                   		console.log(html);
@@ -321,7 +321,7 @@
 		              	</a>
 		           
 		            <div class="text d-block pl-md-4">
-						<h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" target="_blank">\${val.name}</a></h3>
+						<h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" target="_blank">\${val.name}</a><h5>累積人氣: \${val.views}</h5></h3>
 		                <p>\${val.desc}</p>
 		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" target="_blank">Read more</a>            
 	                    </p>
@@ -330,8 +330,8 @@
 		            </div><br>`;
 				console.log('val.rec_id: '+val.rec_id);
 					}
-
 				$("#Success").html(content);
+		
 
 
 				currentPage=response.pageNo;
@@ -342,31 +342,33 @@
 				content=`
 					<li>
 						<div id="afirst"><a href="#" onclick="pagechange('first')">
-						<img border='0' alt='第一頁' height='30' width='30' src='./images/first-icon.png' /> </a></div>
+								&lt;&lt;</a>
 						</div>
 					</li>
 					<li>
 						<div id="apre"><a href="#" onclick="pagechange('pre')">
-						<img border='0' alt='前一頁' height='30' width='30' src='./images/prev-icon.png' /></a></div>
+								&lt;</a>
 						</div>
 					</li>
 					<li>\${currentPage}/ \${totalPages}</li>
 					<li>
 						<div id="bnext"><a href="#" onclick="pagechange('next')">
-						<img border='0' alt='下一頁' height='30' width='30' src='./images/next-icon.png'/> </a></div>
+
+								&gt;</a>
 						</div>
 					</li>
 					<li>
 						<div id="blast"><a href="#" onclick="pagechange('last')">
-						<img border='0' alt='最末頁' height='30' width='30' src='./images/last-icon.png' /> </a></div>
+								&gt;&gt;</a>
 						</div>
 					</li>`;
 					$("#nowPage").html(content);
 									
+				
 				}
 			});
-
 		}
+//		<img border='0' alt='下一頁' height='30' width='30' src='./images/next-icon.png'/> </a></div>
 	window.onload = list();
 		
 	function pagechange(val){

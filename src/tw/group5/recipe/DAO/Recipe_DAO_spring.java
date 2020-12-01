@@ -109,6 +109,8 @@ public class Recipe_DAO_spring {
 		return false;
 	}
 
+	
+	//取得圖片
 	public Recipe_Bean getImage(String rec_id) {
 		Session session = sessionFactory.getCurrentSession();
 		Recipe_Bean bean = session.get(Recipe_Bean.class, rec_id);
