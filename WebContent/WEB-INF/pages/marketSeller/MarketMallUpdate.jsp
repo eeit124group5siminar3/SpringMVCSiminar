@@ -101,7 +101,7 @@ body {
 		  
 			<div>
 				<form:label path="mallDescription">店家描述:</form:label> 
-				<form:textarea name="mallDescription" cols="80" rows="15" path="mallDescription"></form:textarea>
+				<form:textarea wrap="physical" name="mallDescription" cols="80" rows="15" path="mallDescription"></form:textarea>
 			</div>
 	      <div>
 	            原版封面 

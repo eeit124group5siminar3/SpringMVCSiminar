@@ -34,7 +34,7 @@
 		                <h3 class="heading">
 		                <a href="#" onclick='goShopping(${item.memberNo})'>${item.mallName}</a>
 		                </h3>
-		                <a >${item.mallDescription}</a><br>
+		                 <p>${item.mallDescription} </p><br>
 		                <p>地址 : ${item.address} </p>
 		                <p><a href="#" onclick='goShopping(${item.memberNo})' class="btn btn-primary py-2 px-3">來去逛逛</a></p>
 		              </div>
