@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //新增、修改
 @Component
 @Entity
@@ -44,6 +45,10 @@ public class ProductBean implements Serializable {
 	private String unit;
 	private String description;
 	private Integer category;
+	private Integer views=0;
+	private Integer sold=0;
+	private Integer status=1;
+	private ProducterBean producterBean;
 	private String producterName;
 //	private CategoryBean categoryBean;
 	private MultipartFile multipartFile;
@@ -69,10 +74,12 @@ public class ProductBean implements Serializable {
 	}
 
 	public void setProduct(String product) {
-		this.product = product;
+		
+		this.product = product.toUpperCase();
 	}
 
-	@Column(name = "PRODUCTERID", updatable = false)
+	@Transient
+//	@Column(name = "PRODUCTERID", updatable = false)
 	public Integer getProducterId() {
 		return producterId;
 	}
@@ -181,14 +188,52 @@ public class ProductBean implements Serializable {
 	public void setCategory(Integer category) {
 		this.category = category;
 	}
-	
+
+	@Column(name = "VIEWS")
+	public Integer getViews() {
+		return views;
+	}
+
+	public void setViews(Integer views) {
+		this.views = views;
+	}
+
+	@Column(name = "SOLD")
+	public Integer getSold() {
+		return sold;
+	}
+
+	public void setSold(Integer sold) {
+		this.sold = sold;
+	}
+
+	@Column(name = "STATUS")
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	@Transient
 	public String getCategoryName() {
 		return CategoryClass.getCategory(category);
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "producterId")
+	public ProducterBean getProducterBean() {
+		return producterBean;
+	}
+
+	public void setProducterBean(ProducterBean producterBean) {
+		this.producterBean = producterBean;
+	}
+
 	@Transient
 	public String getProducterName() {
+		String producterName = producterBean.getMember_name();
 		return producterName;
 	}
 

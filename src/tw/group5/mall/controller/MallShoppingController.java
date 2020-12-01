@@ -48,7 +48,7 @@ public class MallShoppingController {
 		if (searchStringP != null) {
 			searchString = searchStringP;
 			session.setAttribute("mall_searchString", searchString);
-			service.setSearchString(searchString);
+			service.setSearchString(searchString.toUpperCase());
 		}
 		Integer categoryId = (Integer) session.getAttribute("mall_categoryId");
 		if (categoryIdP != null) {
@@ -79,12 +79,13 @@ public class MallShoppingController {
 			@RequestParam(value = "qty", required = false) Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		ProductBean selectedProduct = service.getProduct(productId);
+		selectedProduct.setViews(selectedProduct.getViews()+1);
 		OrderItem oi = new OrderItem();
 		oi.setProductId(selectedProduct.getProductId());
 		oi.setProduct(selectedProduct.getProduct());
 		oi.setContent(selectedProduct.getContent());
 		oi.setUnit(selectedProduct.getUnit());
-		oi.setProducterId(selectedProduct.getProducterId());
+		oi.setProducterId(selectedProduct.getProducterBean().getMember_no());
 		oi.setPrice(selectedProduct.getPrice());
 		oi.setDiscount(selectedProduct.getDiscount());
 		oi.setProducterName(selectedProduct.getProducterName());
@@ -114,12 +115,13 @@ public class MallShoppingController {
 			@RequestParam(value = "qty") Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		ProductBean selectedProduct = service.getProduct(productId);
+		selectedProduct.setViews(selectedProduct.getViews()+1);
 		OrderItem oi = new OrderItem();
 		oi.setProductId(selectedProduct.getProductId());
 		oi.setProduct(selectedProduct.getProduct());
 		oi.setContent(selectedProduct.getContent());
 		oi.setUnit(selectedProduct.getUnit());
-		oi.setProducterId(selectedProduct.getProducterId());
+		oi.setProducterId(selectedProduct.getProducterBean().getMember_no());
 		oi.setPrice(selectedProduct.getPrice());
 		oi.setDiscount(selectedProduct.getDiscount());
 		oi.setProducterName(selectedProduct.getProducterName());

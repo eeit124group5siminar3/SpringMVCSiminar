@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,102 +41,225 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-*{
-	box-sizing:border-box;
+* {
+	box-sizing: border-box;
 }
 
-.wrap{
+.wrap {
 	width: 600px;
 	margin: auto;
-	display:flex;
-	align-items:center;
+	display: flex;
+	align-items: center;
 	padding-top: 10px;
 }
 
-.wrap img{
+.wrap img {
 	width: 250px;
-	height:200px;
+	height: 200px;
 	vertical-align: middle;
-	margin:20px;
-	
+	margin: 20px;
 }
 
-.txt{
+.txt {
 	width: 50%;
 	vertical-align: middle;
 	padding-left: 20px;
 }
+
 .heart:hover {
 	color: red;
-} 
-	 
+}
 </style>
 
 </head>
 <body class="goto-here">
-
+	<div id="addSuccess">
 		<jsp:include page="../header.jsp" />
 
 
-	<!-------------------------內容區--------------------------------->
+		<!-------------------------內容區--------------------------------->
 
-<div align="center">
-	<form action="frontPage.controller" method="get" runat="server">
-		<fieldset>
-			<legend>搜尋結果</legend>
-			<c:forEach var='BeanToken' items="${List}">
-						<div class="wrap" style="text-align: center;">
-			<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">
-					<img height="100" width="80"   
-					src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" />
-			</a>
-					
-			<div class="txt">
+		<c:if test="${login_ok==null}">
 			<div align="center">
-				<h2 align="center" style="width:200px; float:left; display:inline">
-						<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
-						
-				</h2>
-				<input type="hidden" id="send" value="${BeanToken.rec_id}" />
-				<h2 style="width:50px; float:left; display:inline" >
-					<a href="javascript:void(0);" 
-							class="heart d-flex justify-content-center align-items-center " id="heart" >
-			    		<span><i class="ion-ios-heart"></i></span></a>
-				</h2>
-				</div>
-				<br>
-				<hr>
-					<div>
-					<a href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>"><p>食材: ${BeanToken.ingredients_A} </p></a>	
-					<p>食材: ${BeanToken.ingredients_B} </p>
-					<p>介紹 : ${BeanToken.desc}</p>				
-					<p>料理方法 : ${BeanToken.method}</p>
-				</div>
-		</div>
-	</div>
-				<hr>
-			</c:forEach>
-			<div style="text-align: center;">
-				<label>
-					<input type="submit" value="回首頁" />
-				</label>
+				<form action="frontPage.controller" method="get" runat="server">
+					<fieldset>
+						<legend>搜尋結果</legend>
+						<c:forEach var='BeanToken' items="${List}">
+							<div class="wrap" style="text-align: center;">
+								<a
+									href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">
+									<img height="100" width="80"
+									src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" />
+								</a>
+
+								<div class="txt">
+									<div align="center">
+										<h2 align="center"
+											style="width: 300px; float: left; display: inline">
+											<a
+												href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
+										</h2>
+
+										<input type="hidden" id="send" value="${BeanToken.rec_id}" />
+										<h2 style="width: 50px; float: left; display: inline">
+											<a href="javascript:void(0);"
+												class="heart d-flex justify-content-center align-items-center "
+												onclick="fun(${login_ok})"><span><i
+													class="ion-ios-heart" id="heart"></i></span> </a>
+										</h2>
+									</div>
+									<h3>累積人氣: ${BeanToken.views}</h3>
+									<hr>
+									<div>
+										<a
+											href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>">
+											<p>食材:${BeanToken.ingredients_A}</p>
+										</a>
+										<p>食材: ${BeanToken.ingredients_B}</p>
+										<p>介紹 : ${BeanToken.desc}</p>
+										<p>料理方法 : ${BeanToken.method}</p>
+									</div>
+								</div>
+							</div>
+							<hr>
+						</c:forEach>
+						<div style="text-align: center;">
+							<label> <input type="submit" value="回首頁" />
+							</label>
+						</div>
+					</fieldset>
+				</form>
 			</div>
-		</fieldset>
-	</form>
+		</c:if>
+
+		<c:if test="${login_ok!=null}">
+			<c:if test="${flag==true}">
+				<div align="center">
+					<form action="frontPage.controller" method="get" runat="server">
+						<fieldset>
+							<legend>搜尋結果</legend>
+
+
+							<c:forEach var='BeanToken' items="${list}">
+								<div class="wrap" style="text-align: center;">
+									<a
+										href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">
+										<img height="100" width="80"
+										src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" />
+									</a>
+
+									<div class="txt">
+										<div align="center">
+											<h2 align="center"
+												style="width: 300px; float: left; display: inline">
+												<a
+													href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
+											</h2>
+
+											<input type="hidden" id="send" value="${BeanToken.rec_id}" />
+											<h2 style="width: 50px; float: left; display: inline">
+												<a href="javascript:void(0);"
+													class="heart d-flex justify-content-center align-items-center "
+													onclick="fun('${login_ok}')"> <span><i
+														class="ion-ios-heart" id="heart" style="color: red;"></i></span></a>
+											</h2>
+										</div>
+										<h3>累積人氣: ${BeanToken.views}</h3>
+										<hr>
+										<div>
+											<a
+												href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>">
+												<p>食材:${BeanToken.ingredients_A}</p>
+											</a>
+											<p>食材: ${BeanToken.ingredients_B}</p>
+											<p>介紹 : ${BeanToken.desc}</p>
+											<p>料理方法 : ${BeanToken.method}</p>
+										</div>
+									</div>
+								</div>
+								<hr>
+							</c:forEach>
+
+							<div style="text-align: center;">
+								<label> <input type="submit" value="回首頁" />
+								</label>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</c:if>
+
+			<c:if test="${flag!=true}">
+				<div align="center">
+					<form action="frontPage.controller" method="get" runat="server">
+						<fieldset>
+							<legend>搜尋結果</legend>
+
+
+							<c:forEach var='BeanToken' items="${list}">
+								<div class="wrap" style="text-align: center;">
+									<a
+										href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">
+										<img height="100" width="80"
+										src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" />
+									</a>
+
+									<div class="txt">
+										<div align="center">
+											<h2 align="center"
+												style="width: 300px; float: left; display: inline">
+												<a
+													href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
+											</h2>
+
+
+											<input type="hidden" id="send" value="${BeanToken.rec_id}" />
+											<h2 style="width: 50px; float: left; display: inline">
+												<a href="javascript:void(0);"
+													class="heart d-flex justify-content-center align-items-center "
+													onclick="fun('${login_ok}')"> <span><i
+														class="ion-ios-heart" id="heart"></i></span></a>
+											</h2>
+										</div>
+										<h3>累積人氣: ${BeanToken.views}</h3>
+										<hr>
+										<div>
+											<a
+												href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>">
+												<p>食材:${BeanToken.ingredients_A}</p>
+											</a>
+											<p>食材: ${BeanToken.ingredients_B}</p>
+											<p>介紹 : ${BeanToken.desc}</p>
+											<p>料理方法 : ${BeanToken.method}</p>
+										</div>
+									</div>
+								</div>
+								<hr>
+							</c:forEach>
+
+							<div style="text-align: center;">
+								<label> <input type="submit" value="回首頁" />
+								</label>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</c:if>
+
+
+		</c:if>
+
 	</div>
-
-
-
 	<!------------------------------------------------------------------>
 	<footer class="ftco-footer ftco-section">
 		<div class="container">
 			<div class="row">
 				<div class="mouse">
-<!-- 					<a href="#" class="mouse-icon"> -->
-<!-- 						<div class="mouse-wheel"> -->
-<!-- 							<span class="ion-ios-arrow-up"></span> -->
-<!-- 						</div> -->
-<!-- 					</a> -->
+					<!-- 					<a href="#" class="mouse-icon"> -->
+					<!-- 						<div class="mouse-wheel"> -->
+					<!-- 							<span class="ion-ios-arrow-up"></span> -->
+					<!-- 						</div> -->
+					<!-- 					</a> -->
 				</div>
 			</div>
 			<div class="row mb-5">
@@ -235,8 +358,8 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-	
-	
+
+
 	<script type="text/javascript">
 // 	$(document).ready(function() {
 // 		// 			var cartcontent=document.getElementById("cartContent");
@@ -254,23 +377,47 @@
 // 		});
 // 	}); 
 
-		
-		$("#heart").click(function(){
-			var rec_id=$("#send").val();
-			console.log('rec_id: '+rec_id);
-				$.ajax({
-				type:"GET",
-				url:"./bookmark",
-				data:{"rec_id":rec_id},
-				success:function(response){
-					alert('succcccccccccccccccces');
-					console.log('response: '+response);
-					
-					
-					}
-			
-				});
+
+// 	$("#heart").click(function(){
+// 		var addSuccess=$("#addSuccess");
+// 		var rec_id=$("#send").val();
+// 			console.log('rec_id: '+rec_id);
+// 			$.ajax({
+// 	 			type:"GET",
+// 	 			url:"./bookmark",
+// 	 			data:{"rec_id":rec_id},
+// 	 			success:function(response){
+// 	 				alert('succccccccccccccccccccces');
+// 	 				console.log('response: '+response);
+// 	 				}
+// 	 			});
+// 	});
+
+	function fun(login_ok){
+		var addSuccess=$("#addSuccess");
+		console.log('login_okval: '+login_ok);
+		var rec_id=$("#send").val();
+		console.log('rec_id: '+rec_id);
+		if(login_ok!=null){
+			$.ajax({
+			type:"GET",
+			url:"./bookmark",
+			data:{"rec_id":rec_id},
+			success:function(response){
+				alert(response);
+				$("#heart").css("color","red");
+				}
 			});
+		}else{
+			$.ajax({
+				type:"GET",
+				url:"./login.controller",
+				success:function(response){				
+				addSuccess.html(response);
+				}
+			});
+		}
+	}
 	</script>
 </body>
 </html>

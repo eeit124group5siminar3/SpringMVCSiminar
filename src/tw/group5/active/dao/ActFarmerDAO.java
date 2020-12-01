@@ -203,7 +203,7 @@ public class ActFarmerDAO {
 		return list;		
 	}
 	
-	// 查詢單筆資料ByName
+	// 查詢廠商單筆資料ByName
 	public List<ActFarmer> selectNameSeller(String actName,Integer sellerId){
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ActFarmer where actName like?1 && sellerId =?2";

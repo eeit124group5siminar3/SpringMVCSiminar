@@ -1,13 +1,18 @@
 package tw.group5.active.model;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -71,6 +76,8 @@ public class ActFarmer implements Serializable {
 	private Integer actNum = 0;
 	private String sigStat;
 	private MultipartFile multipartFile;
+	
+	
 
 	private Set<ActOrdNum> actOrdNum = new HashSet<ActOrdNum>(0);
 
@@ -356,8 +363,8 @@ public class ActFarmer implements Serializable {
 		}
 	}
 
-
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "actFarmer")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "actFarmer",cascade = CascadeType.ALL)
 //	@JoinColumn(name = "actId")
 	public Set<ActOrdNum> getActOrdNum() {
 		return actOrdNum;
@@ -377,5 +384,16 @@ public class ActFarmer implements Serializable {
 //	public void setClock(Clock clock) {
 //		this.clock = clock;
 //	}
-
+	@Transient
+	public Integer getActNumTol() {
+		actOrdNum.iterator();
+		Integer sum=0;
+		for(ActOrdNum actOrdNum: actOrdNum) {
+			sum += (Integer)actOrdNum.getOrdActNum();
+			System.out.println(sum);
+		};
+		return sum;
+		
+	}
+	
 }

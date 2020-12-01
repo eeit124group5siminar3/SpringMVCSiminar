@@ -77,11 +77,12 @@
 	<!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
+<section class="ftco-section ftco-degree-bg">
 	<!-- --------管理左邊bar-------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
 
+
 	<!-- --------一日農夫管理 內容區------------------------ -->
-<section class="ftco-section ftco-degree-bg">
 	<div align="center" id="backstage_page">
 
 		<div>
@@ -89,14 +90,14 @@
 			<table align="center" style="border: 8px gray groove;" border="1"; >
 				<!-- 		<h2>活動列表</h2> -->
 				<tr>
-					<td style="border: 0px" align="right" colspan="10">
+					<td style="border: 0px" align="right" colspan="12">
 						<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get">
-							<input name="apply" type="submit" value="申請">
+							<input name="apply" type="submit" value="申請" >
 						</form>
 					</td>
-					<td style="border: 0px" align="right" colspan="2">
+					<td style="border: 0px" align="right" colspan="1">
 						<form action="<c:url value='/maintainActFarmer.do'/>" method="get">
-							<input name="selectAll" type="submit" value="查詢全部">
+							<input name="selectAll" type="submit" value="查詢全部" >
 						</form>
 					</td>
 				</tr>
@@ -110,11 +111,11 @@
 					<th>報名日期/時間</th>
 					<th>報名人數</th>
 					<th>報名狀態</th>
-					<th colspan="3">Action</th>
+					<th colspan="4">Action</th>
 				</tr>
 				<c:forEach var="actFarmer" items="${collFarmer}">
 					<tr>
-						<td><c:out value="${actFarmer.actId}" /></td>
+						<td><a href="<c:url value='/actOrdList.do?actId=${actFarmer.actId}'/>" ><c:out value="${actFarmer.actId}" /></a></td>						
 						<td><c:out value="${actFarmer.actName}" /></td>
 						<td><c:out value="${actFarmer.actType}" /></td>
 						<td><c:out value="${actFarmer.actDateSta}" />&nbsp; <c:out
@@ -127,13 +128,13 @@
 								value="${actFarmer.signTimeSta}" /> 到 <c:out
 								value="${actFarmer.signDateEnd}" /> <c:out
 								value="${actFarmer.signTimeEnd}" /></td>
-						<td><c:out value="${actFarmer.actNum}" /></td>
+						<td><c:out value="${actFarmer.actNumTol}" /></td>
 						<td><c:out value="${actFarmer.sigStat}" /></td>
 						<td>
 							<form action="<c:url value='/actFarmerPreRead.do'/>" method="get">
 								<input type="hidden" id="actId" name="actId"
 									value="${actFarmer.actId}"> <input name="look"
-									type="submit" value="檢視">
+									type="submit" value="檢視" >
 							</form>
 						</td>
 						<td>
@@ -141,14 +142,21 @@
 								method="get">
 								<input type="hidden" id="actId" name="actId"
 									value="${actFarmer.actId}"> <input name="update"
-									type="submit" value="修改">
+									type="submit" value="修改" >
 							</form>
 						</td>
 						<td>
 							<form action="<c:url value='/actFarmerDelete.do'/>" method="post">
 								<input type="hidden" id="actId" name="actId"
 									value="${actFarmer.actId}"> <input name="delete"
-									type="submit" value="刪除">
+									type="submit" value="刪除" > 
+							</form>
+						</td>
+						<td>
+							<form action="<c:url value='/actOrdList.do'/>" method="post">
+								<input type="hidden" id="actId" name="actId"
+									value="${actFarmer.actId}"> <input name="delete"
+									type="submit" value="查詢訂單" > 
 							</form>
 						</td>
 					</tr>
@@ -167,12 +175,12 @@
 				<!-- 				ajax -->
 
 				<tr>
-					<td style="border: 0px" colspan="6"></td>
-					<td style="border: 0px" colspan="6">
+					<td style="border: 0px" colspan="8"></td>
+					<td style="border: 0px" colspan="5">
 						<form action="<c:url value='/SelectNameSeller.do'/>" method="get">
 							<label for="">活動名稱:</label> <input type="text" id="selectname"
 								name="selectname"> &nbsp; <input name="selectone"
-								type="submit" value="查詢">
+								type="submit" value="查詢" class="btn btn-primary">
 						</form>
 					</td>
 			</table>

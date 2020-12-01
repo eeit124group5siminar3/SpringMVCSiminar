@@ -51,6 +51,7 @@ public class ActFarmerController {
 			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
 			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model model
 			) {
+		
 		try {
 		if (mb == null) {
 			return "/index";
@@ -72,6 +73,7 @@ public class ActFarmerController {
 	public String maintainActFarmer(
 			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
 			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model model) {
+		
 		if(mb == null) {
 			return "/index";
 		}
@@ -102,6 +104,7 @@ public class ActFarmerController {
 			@RequestParam("selectname") String actName, 
 			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
 			@SessionAttribute(value = "login_ok")Member_SignUp mb, Model m) {
+		
 		Integer sellerId = mb.getMember_no();
 		Collection<ActFarmer> collFarmer = actFarmerService.selectNameSeller(actName,sellerId);
 		m.addAttribute("totalPages", actFarmerService.getTotalPages(sellerId));
@@ -115,6 +118,7 @@ public class ActFarmerController {
 	//申請活動準備(建立空的物件)
 	@GetMapping(path = "/actFarmerPreInsert.do")
 	public String actFarmerPreInsert(Model model) {
+		
 		System.out.println("成功進入");
 		ActFarmer actInsert = new ActFarmer();
 		model.addAttribute("farmerinsert", actInsert);
@@ -144,6 +148,7 @@ public class ActFarmerController {
 	//檢視活動準備(找到該筆物件)
 	@RequestMapping(path="/actFarmerPreRead.do")
 	public String actFarmerPreRead(@RequestParam(value = "actId") Integer actId, Model model) {
+		
 		ActFarmer afBean = actFarmerService.getActFarmer(actId);
 		model.addAttribute("afBean", afBean);
 		return "/active/actFarmerRead";

@@ -15,17 +15,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import tw.group5.mall.model.CategoryClass;
 import tw.group5.mall.model.ProductBean;
+import tw.group5.mall.model.ProducterBean;
 import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean" })
+@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean",
+		"insertBean" })
 public class MallMaintainController {
 //	public final int RECORDS_PER_PAGE = 5;
 	@Autowired
@@ -55,9 +58,8 @@ public class MallMaintainController {
 
 // 修改資料前置
 	@PostMapping(value = "/Preupdate")
-	public ModelAndView preupdate(HttpServletRequest request,
-			@RequestParam(value = "productId") Integer productId) {
-		ProductBean updateBean=service.getProduct(productId);
+	public ModelAndView preupdate(HttpServletRequest request, @RequestParam(value = "productId") Integer productId) {
+		ProductBean updateBean = service.getProduct(productId);
 		service.setSelected(updateBean.getCategory());
 		service.setTagName("categoryId");
 		String categoryTag = service.getSelectTag();
@@ -68,6 +70,67 @@ public class MallMaintainController {
 		return mav;
 	}
 
+// 資料修改
+	@PostMapping(value = "/UpdateProduct")
+	public String productUpdate(@ModelAttribute(value = "updateBean") ProductBean updateBean, Model model,
+			@RequestParam(value = "categoryId") Integer category,
+			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
+		updateBean.setCategory(category);
+//		Map<String, String> errorMsgs = new HashMap<String, String>();
+//		Map<String, String> successMsgs = new HashMap<String, String>();
+//		model.addAttribute("ErrMsg", errorMsgs);
+//		model.addAttribute("successMsg", successMsgs);
+		service.updateProduct(updateBean);
+		return "/mall/mall_management";
+	}
+
+// 新增資料前置
+	@PostMapping(value = "/Preinsert")
+	public ModelAndView preinsert(HttpServletRequest request) {
+		ProductBean insertBean = new ProductBean();
+		service.setSelected(1);
+		service.setTagName("categoryId");
+		String categoryTag = service.getSelectTag();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/insertForm");
+		mav.addObject("SelectCategoryTag", categoryTag);
+		mav.addObject("insertBean", insertBean);
+		return mav;
+	}
+
+// 資料新增
+	@PostMapping(value = "/InsertProduct")
+	public String productInsert(@ModelAttribute(value = "insertBean") ProductBean insertBean, Model model,
+			@RequestParam(value = "categoryId") Integer category,
+			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
+		insertBean.setCategory(category);
+//			Integer producterId=mb.getMember_no();
+		ProducterBean producterBean = new ProducterBean();
+		producterBean.setMember_no(mb.getMember_no());
+		producterBean.setMember_name(mb.getMember_name());
+		insertBean.setProducterBean(producterBean);
+//			Map<String, String> errorMsgs = new HashMap<String, String>();
+//			Map<String, String> successMsgs = new HashMap<String, String>();
+//			model.addAttribute("ErrMsg", errorMsgs);
+//			model.addAttribute("successMsg", successMsgs);
+		service.saveProduct(insertBean);
+		return "/mall/mall_management";
+	}
+
+// 修改上下架
+	@PostMapping(value = "/Shelf")
+	public @ResponseBody Integer shelf(@RequestParam(value = "productId")Integer productId,
+			@RequestParam(value = "status")Integer status) {
+		ProductBean product = service.getProduct(productId);
+		if(status==1) {
+			product.setStatus(1);
+			return 1;
+		}else{			
+			product.setStatus(0);
+			return 0;
+
+		}
+	}
 //	@GetMapping(value = "/DisplayMaintainProduct")
 //	public String displayMaintainProduct(
 //			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
@@ -93,78 +156,78 @@ public class MallMaintainController {
 //		return "/mall/ProductMaintainList";
 //	}
 
-	@PostMapping(value = "/ProductDeleteServlet")
-	public String productDelete(@RequestParam(value = "productId") Integer productId, Model model) {
-		ProductBean n = service.deleteProduct(productId);
-		if (n != null) {
-			model.addAttribute("ProductDeleteMsg", "商品編號(" + productId + ")刪除成功");
-		} else {
-			model.addAttribute("ProductDeleteMsg", "商品編號(" + productId + ")刪除失敗");
-		}
-		return "redirect:/DisplayMaintainProduct";
-	}
+//	@PostMapping(value = "/ProductDeleteServlet")
+//	public String productDelete(@RequestParam(value = "productId") Integer productId, Model model) {
+//		ProductBean n = service.deleteProduct(productId);
+//		if (n != null) {
+//			model.addAttribute("ProductDeleteMsg", "商品編號(" + productId + ")刪除成功");
+//		} else {
+//			model.addAttribute("ProductDeleteMsg", "商品編號(" + productId + ")刪除失敗");
+//		}
+//		return "redirect:/DisplayMaintainProduct";
+//	}
 
-	@PostMapping(value = "/ProductInsertServlet")
-	public String productInsert(Model model, @ModelAttribute(value = "Insert") ProductBean insert,
-			@RequestParam(value = "categoryId") Integer category,
-			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
-		Map<String, String> errorMsgs = new HashMap<String, String>();
-		Map<String, String> successMsgs = new HashMap<String, String>();
-		model.addAttribute("ErrMsg", errorMsgs);
-		model.addAttribute("successMsg", successMsgs);
-		service.setCategoryId(category);
-		insert.setCategory(category);
-//		service.getCategoryById();
-		CategoryClass.getCategory(category);
-//		insert.setCategoryBean(service.getCategoryById());
-		Integer producterId = mb.getMember_no();
-		insert.setProducterId(producterId);
-		service.saveProduct(insert);
-		service.setCategoryId(1);
-		String categoryTag = service.getSelectTag();
-		model.addAttribute("SelectCategoryTag", categoryTag);
-		successMsgs.put("success", "資料新增成功");
-		return "/mall/ProductInsert";
-	}
+//	@PostMapping(value = "/ProductInsertServlet")
+//	public String productInsert(Model model, @ModelAttribute(value = "Insert") ProductBean insert,
+//			@RequestParam(value = "categoryId") Integer category,
+//			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
+//		Map<String, String> errorMsgs = new HashMap<String, String>();
+//		Map<String, String> successMsgs = new HashMap<String, String>();
+//		model.addAttribute("ErrMsg", errorMsgs);
+//		model.addAttribute("successMsg", successMsgs);
+//		service.setCategoryId(category);
+//		insert.setCategory(category);
+////		service.getCategoryById();
+//		CategoryClass.getCategory(category);
+////		insert.setCategoryBean(service.getCategoryById());
+//		Integer producterId = mb.getMember_no();
+//		insert.setProducterId(producterId);
+//		service.saveProduct(insert);
+//		service.setCategoryId(1);
+//		String categoryTag = service.getSelectTag();
+//		model.addAttribute("SelectCategoryTag", categoryTag);
+//		successMsgs.put("success", "資料新增成功");
+//		return "/mall/ProductInsert";
+//	}
+//
+//	@GetMapping(value = "/ProductPreInsertServlet")
+//	public String productPreInsert(Model model) {
+//		ProductBean insert = new ProductBean();
+//		service.setTagName("categoryId");
+//		String categoryTag = service.getSelectTag();
+//		model.addAttribute("SelectCategoryTag", categoryTag);
+//		model.addAttribute("Insert", insert);
+//		model.addAttribute("baBean", service);
+//		return "/mall/ProductInsert";
+//	}
 
-	@GetMapping(value = "/ProductPreInsertServlet")
-	public String productPreInsert(Model model) {
-		ProductBean insert = new ProductBean();
-		service.setTagName("categoryId");
-		String categoryTag = service.getSelectTag();
-		model.addAttribute("SelectCategoryTag", categoryTag);
-		model.addAttribute("Insert", insert);
-		model.addAttribute("baBean", service);
-		return "/mall/ProductInsert";
-	}
+//	@GetMapping(value = "/ProductPreUpdateServlet")
+//	public String productPreUpdate(@RequestParam(value = "ProductId") Integer productId, Model model) {
+//
+//		ProductBean bean = service.getProduct(productId);
+//		System.err.println(bean.hashCode());
+//		model.addAttribute("bean", bean);
+//		service.setSelected(bean.getCategory());
+//		service.setTagName("categoryId");
+//		String categoryTag = service.getSelectTag();
+//		model.addAttribute("SelectCategoryTag", categoryTag);
+//		return "/mall/ProductUpdate";
+//	}
 
-	@GetMapping(value = "/ProductPreUpdateServlet")
-	public String productPreUpdate(@RequestParam(value = "ProductId") Integer productId, Model model) {
+//	@PostMapping(value = "/ProductUpdateServlet")
+//	public String productUpdate(@ModelAttribute(value = "bean") ProductBean bb, Model model,
+//			@RequestParam(value = "categoryId") Integer category,
+//			@SessionAttribute(value = "login_ok") Member_SignUp mb,
+//			@SessionAttribute(value = "MaintainPageNo") Integer maintainPageNo) {
+//		System.err.println(bb.hashCode());
+//		Map<String, String> errorMsgs = new HashMap<String, String>();
+//		Map<String, String> successMsgs = new HashMap<String, String>();
+//		model.addAttribute("ErrMsg", errorMsgs);
+//		model.addAttribute("successMsg", successMsgs);
+//		service.setCategoryId(category);
+//		bb.setCategory(category);
+//		service.updateProduct(bb);
+//		return "redirect:DisplayMaintainProduct?MaintainPageNo=" + maintainPageNo;
+//	}
 
-		ProductBean bean = service.getProduct(productId);
-		System.err.println(bean.hashCode());
-		model.addAttribute("bean", bean);
-		service.setSelected(bean.getCategory());
-		service.setTagName("categoryId");
-		String categoryTag = service.getSelectTag();
-		model.addAttribute("SelectCategoryTag", categoryTag);
-		return "/mall/ProductUpdate";
-	}
-
-	@PostMapping(value = "/ProductUpdateServlet")
-	public String productUpdate(@ModelAttribute(value = "bean") ProductBean bb, Model model,
-			@RequestParam(value = "categoryId") Integer category,
-			@SessionAttribute(value = "login_ok") Member_SignUp mb,
-			@SessionAttribute(value = "MaintainPageNo") Integer maintainPageNo) {
-		System.err.println(bb.hashCode());
-		Map<String, String> errorMsgs = new HashMap<String, String>();
-		Map<String, String> successMsgs = new HashMap<String, String>();
-		model.addAttribute("ErrMsg", errorMsgs);
-		model.addAttribute("successMsg", successMsgs);
-		service.setCategoryId(category);
-		bb.setCategory(category);
-		service.updateProduct(bb);
-
-		return "redirect:DisplayMaintainProduct?MaintainPageNo=" + maintainPageNo;
-	}
 }

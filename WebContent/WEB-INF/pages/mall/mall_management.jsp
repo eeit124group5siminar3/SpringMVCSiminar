@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%-- <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> --%>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -37,7 +38,7 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
-<!-- <link rel="stylesheet" href="css/mall.css"> -->
+<link rel="stylesheet" href="css/mall.css">
 </head>
 <body class="goto-here">
 	<jsp:include page="../header.jsp" />
@@ -57,13 +58,36 @@
 			</div>
 		</div>
 	</div>
-
 	<section class="ftco-section" id="managementContent"></section>
+	<jsp:include page="../footer.jsp" />
 	
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="insert" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
 		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
+			<div class="modal-content" style="width:640px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">商品資料新增</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="insertForm" style="width:640px">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" form="updaeteForm">新增</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="update" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width:640px">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">商品資料修改</h5>
 					<button type="button" class="close" data-dismiss="modal"
@@ -71,18 +95,17 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" id="updateForm">
+				<div class="modal-body" id="updateForm" style="width:640px">
 					
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">修改</button>
+					<button type="submit" class="btn btn-primary" form="updaeteForm">修改</button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">關閉</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../footer.jsp" />
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
@@ -132,8 +155,9 @@
 				}
 			});
 		});
+		
 
-		$('#exampleModal').on('show.bs.modal', function (event) {
+		$('#update').on('show.bs.modal', function (event) {
 			var tr = $(event.relatedTarget);
 			var productId = tr.data('whatever');
 			$.ajax({
@@ -144,7 +168,6 @@
 				},
 				datatype : "html",
 				success : function(data, status) {
-					console.log(data);
 					$("#updateForm").html(data);
 				},
 				error : function(data, status) {
@@ -152,6 +175,23 @@
 				}
 			});			
 			})
+			
+		$('#insert').on('show.bs.modal', function (event) {
+			$.ajax({
+				url : "Preinsert",
+				type : "POST",
+				datatype : "html",
+				success : function(data, status) {
+					$("#insertForm").html(data);
+				},
+				error : function(data, status) {
+					$("#insertForm").html(data);
+				}
+			});			
+			})
+			
 	</script>
+	
+	
 </body>
 </html>

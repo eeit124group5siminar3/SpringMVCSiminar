@@ -29,8 +29,6 @@ public interface recipe_Service_interface {
 
 	List<Bookmark_Bean> listOfBookmark(Integer mem_no);
 
-	List<Bookmark_Bean> deleteBookmark(String rec_id,Integer mem_no);
-
 	long getRecordCounts();
 
 	List<Recipe_Bean_noImage> searchAllRecipe(Integer page, Integer showData);
@@ -38,5 +36,11 @@ public interface recipe_Service_interface {
 	Integer getTotalPages();
 
 	void setPageNo(Integer pageNo);
+
+	List<Bookmark_Bean> partSearchBookmark(Integer mem_no, String rec_id);
+
+	boolean deleteBookmark(String id);
+
+	boolean bookmarkExist(String rec_id, Integer mem_no);
 
 }

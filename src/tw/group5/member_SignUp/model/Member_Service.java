@@ -72,4 +72,8 @@ public class Member_Service {
 	public boolean Admin_Delete_Member_Data(Integer member_no) {
 		return memberDao.Admin_Delete_Member_Data(member_no);
 	}
+	
+	public int totalPages() {
+		return memberDao.totalPages();
+	}
 }

@@ -7,12 +7,12 @@
 		<div class="col-md-12 ftco-animate">
 			<div>
 				<button class="btn btn-primary btn-block" data-toggle="modal"
-							data-target="#exampleModal">新增商品</button>
+					data-target="#insert">新增商品</button>
 				<br />
 			</div>
 			<div>
-				<span id='test1'></span>
 				<table class="table table-hover">
+					<span id="test"></span>
 					<thead class="thead-light">
 						<tr>
 							<th>&nbsp;</th>
@@ -26,8 +26,24 @@
 					</thead>
 					<c:forEach var="item" items="${management_DPP}">
 						<tr class="table-=active text-center" data-toggle="modal"
-							data-target="#exampleModal" data-whatever="${item.productId}">
-							<td>&nbsp;</td>
+							data-target="#update" data-whatever="${item.productId}">
+							<td id="${item.productId}">
+							<c:choose>
+							<c:when test="${item.stock<=0}">
+							<button type="button" class="btn btn-primary btn-sm"
+										disabled="disabled">上架</button>
+							</c:when>
+							<c:otherwise>
+							<c:if test="${item.status==0}">
+									<button type="button" class="btn btn-primary btn-sm"
+										onclick="shelf(event,1)">上架</button>
+								</c:if> <c:if test="${item.status==1}">
+									<button type="button" class="btn btn-primary btn-sm disabled"
+										onclick="shelf(event,0)">下架</button>
+								</c:if>
+							</c:otherwise>								
+							</c:choose>
+								</td>
 							<td class="image-prod"
 								style="padding-top: 5px; padding-bottom: 5px"><div
 									class="img"
@@ -162,5 +178,31 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-
+function shelf(event,status){
+	event.stopPropagation(); 
+	var productId=event.path[1].id;
+	$.ajax({
+		url : "Shelf",
+		type : "POST",
+		data : {
+			"productId" : productId,
+			"status" :status
+		},
+		success : function(data, status) {
+			if(data==1){
+			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
+				}else{
+			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
+					}
+		},
+		error : function(data, status) {
+			if(data==1){
+				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
+					}else{
+				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
+						}
+		}
+	});
+	
+}
 </script>

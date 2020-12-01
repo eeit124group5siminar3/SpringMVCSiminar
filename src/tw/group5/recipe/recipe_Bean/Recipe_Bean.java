@@ -50,6 +50,7 @@ public class Recipe_Bean {
 	private Blob data;
 	private MultipartFile multipartFile;
 	private String date;
+	private Integer views;
 	
 	public Recipe_Bean() {
 	}
@@ -199,4 +200,12 @@ public class Recipe_Bean {
 	}
 	
 
+	@Column(name="views")
+	public Integer getViews() {
+		return views;
+	}
+
+	public void setViews(Integer views) {
+		this.views = views;
+	}
 }
