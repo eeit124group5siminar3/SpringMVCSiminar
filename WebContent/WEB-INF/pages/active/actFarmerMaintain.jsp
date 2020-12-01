@@ -90,12 +90,12 @@
 			<table align="center" style="border: 8px gray groove;" border="1"; >
 				<!-- 		<h2>活動列表</h2> -->
 				<tr>
-					<td style="border: 0px" align="right" colspan="10">
+					<td style="border: 0px" align="right" colspan="12">
 						<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get">
 							<input name="apply" type="submit" value="申請" >
 						</form>
 					</td>
-					<td style="border: 0px" align="right" colspan="2">
+					<td style="border: 0px" align="right" colspan="1">
 						<form action="<c:url value='/maintainActFarmer.do'/>" method="get">
 							<input name="selectAll" type="submit" value="查詢全部" >
 						</form>
@@ -111,7 +111,7 @@
 					<th>報名日期/時間</th>
 					<th>報名人數</th>
 					<th>報名狀態</th>
-					<th colspan="3">Action</th>
+					<th colspan="4">Action</th>
 				</tr>
 				<c:forEach var="actFarmer" items="${collFarmer}">
 					<tr>
@@ -152,6 +152,13 @@
 									type="submit" value="刪除" > 
 							</form>
 						</td>
+						<td>
+							<form action="<c:url value='/actOrdList.do'/>" method="post">
+								<input type="hidden" id="actId" name="actId"
+									value="${actFarmer.actId}"> <input name="delete"
+									type="submit" value="查詢訂單" > 
+							</form>
+						</td>
 					</tr>
 				</c:forEach>
 
@@ -168,8 +175,8 @@
 				<!-- 				ajax -->
 
 				<tr>
-					<td style="border: 0px" colspan="6"></td>
-					<td style="border: 0px" colspan="6">
+					<td style="border: 0px" colspan="8"></td>
+					<td style="border: 0px" colspan="5">
 						<form action="<c:url value='/SelectNameSeller.do'/>" method="get">
 							<label for="">活動名稱:</label> <input type="text" id="selectname"
 								name="selectname"> &nbsp; <input name="selectone"

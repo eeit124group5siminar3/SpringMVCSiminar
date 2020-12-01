@@ -49,6 +49,7 @@ public class MarketHome {
 			@RequestParam(value = "marketPageNo", required = false) Integer pageNoP,
 			@RequestParam(value = "searchString", required = false) String searchStringP
 			){
+		
 		HttpSession session = request.getSession(false);
 		Integer pageNo = (Integer) session.getAttribute("marketPageNo");
 		int totalPages =sellerService.sellerPages();//總比數
@@ -76,5 +77,25 @@ public class MarketHome {
            mav.setViewName("/marketSeller/MarketMallProduct");
            mav.addObject("totalProducts",list);
 		   return mav;
+	}
+	//商品詳細資訊
+	@PostMapping(value = "/ProductNews")
+	@ResponseBody
+	public ModelAndView productNews(
+			@RequestParam(value = "productId", required = false) Integer productId
+			) {
+		System.out.println("來囉來囉");
+		//商品詳細資訊
+		System.out.println("商品ID在這 : " + productId);		
+		MarketProductTotalBean pBean = productService.select(productId);	
+		//推薦商品
+		Integer memberNo =pBean.getMarketMallBean().getMemberNo();
+		System.out.println("會員ID在這 : " + memberNo);					
+		List<MarketProductTotalBean> list = productService.selectBuyerAll(memberNo);
+		ModelAndView mav =new ModelAndView();
+        mav.setViewName("/marketSeller/MarketMallOneProduct");
+        mav.addObject("oneProduct",pBean);
+        mav.addObject("totalProducts",list);
+		return mav;
 	}
 }
