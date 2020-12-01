@@ -316,14 +316,14 @@
 
 		           `<div style="margin:auto;width:1500px"><div class="blog-entry align-self-stretch d-md-flex"> 
 		           	
-		             	 <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
+		             	 <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" target="_blank"
 			            	  style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${val.rec_id}'/>');">
 		              	</a>
 		           
 		            <div class="text d-block pl-md-4">
-						<h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>">\${val.name}</a></h3>
+						<h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" target="_blank">\${val.name}</a></h3>
 		                <p>\${val.desc}</p>
-		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3">Read more</a>            
+		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" target="_blank">Read more</a>            
 	                    </p>
 		             </div>
 		            </div>

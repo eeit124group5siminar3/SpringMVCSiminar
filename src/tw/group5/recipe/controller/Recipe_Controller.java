@@ -150,78 +150,7 @@ public class Recipe_Controller {
 		return "recipe/recipe_blog";
 	}
 	
-	//bookmark
-	@GetMapping(value="/bookmark",produces ="text/plain;charset=UTF-8")
-	@ResponseBody
-	public String bookmarkLogin(@RequestParam(name="rec_id",required = false)String rec_id) {
-		if (session.getAttribute("login_ok") != null) {
-			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
-			Integer mem_no=OK.getMember_no();
-			Bookmark_Bean bean = new Bookmark_Bean();
-			bean.setMember_no(mem_no);
-			System.out.println(mem_no);
-			bean.setRec_id(rec_id);
-			System.out.println(rec_id);
-			
-			List<Bookmark_Bean> bookmark=service.listOfBookmark(mem_no);
-			for(Bookmark_Bean b:bookmark) {
-				if(b.getRec_id().equals(rec_id)) {
-					return "alert("+"已新"+")";
-				}else{
-					service.bookmark(bean);
-					return "新增成功!";
-					
-				}
-			}
-			bookmark(rec_id,mem_no);
-		}
-		 else if (session.getAttribute("login_ok") == null) {
-				return "redirect:/login.controller";
-			}
-		return "redirect:/frontPage.controller";
-	}
-	
-	public Map<String, Object> bookmark(String rec_id,Integer mem_no) {
-			Map<String, Object> map=new HashMap<String, Object>();
-			
-			if (rec_id !=null && rec_id.length() !=0) {
-				List<Recipe_Bean_noImage> list=service.partSearch(rec_id);
-				map.put("List", list);
-			}
-			return map;
-		}
-	
-	// search bookmark
-	@GetMapping(value="myRecipe")
-	public String myRecipe(Model m) {
-		List<Recipe_Bean> searchLove=new ArrayList<Recipe_Bean>();
-		if (session.getAttribute("login_ok") != null) {
-			Member_SignUp mbean = (Member_SignUp) session.getAttribute("login_ok");
-			Integer mem_no = mbean.getMember_no();	
-			List<Recipe_Bean> searchAll=service.listOfJavaBean();
-			List<Bookmark_Bean> bookmark=service.listOfBookmark(mem_no);
-			for(Bookmark_Bean b:bookmark) {
-				for(Recipe_Bean all:searchAll) {
-					if(b.getRec_id().equals(all.getRec_id())) {
-						searchLove.add(all);
-					}
-				}
-			}
-			m.addAttribute("searchLove",searchLove);
-			return "recipe/recipe_bookmark";
-		}else {
-			return "redirect:/login.controller";
-		}
-	}
-	
-	
-	//delete bookmark
-//	@GetMapping(value = "/removeMyRecipe")
-//	public String removeMyRecipe(String rec_id) {
-//		service.deleteBookmark(rec_id);
-//		service.listOfBookmark(mem_no)
-//		return rec_id;
-//	}
+
 	
 	
 	

@@ -138,12 +138,8 @@ public class Recipe_DAO_spring {
 		query.setParameter("mem_no", bean.getMember_no());
 		query.setParameter("rec_id", bean.getRec_id());
 		List<Bookmark_Bean> list = query.list();
-		if(list.isEmpty()) {
-			session.save(bean);
-		}else {
-			
-			System.out.println("exiiiiiiiiiist");
-		}
+		System.out.println("enter insert process");
+		session.save(bean);
 
 		return bean;
 	}
@@ -158,22 +154,51 @@ public class Recipe_DAO_spring {
 		return list;
 	}
 	
-	//delete bookmark
-	public List<Bookmark_Bean> deleteBookmark(String rec_id,Integer mem_no) {
+	public List<Bookmark_Bean> partSearchBookmark(Integer mem_no,String rec_id) {
 		Session session = sessionFactory.getCurrentSession();
-		Bookmark_Bean result=session.get(Bookmark_Bean.class,rec_id);
-		if(result!=null) {
-			session.delete(rec_id);
-			String hql="From Bookmark_Bean where member_no=:mem_no order by member_no";
-			Query<Bookmark_Bean> query=session.createQuery(hql);
-			query.setParameter("mem_no", mem_no);
-			List<Bookmark_Bean> list=query.list();
-			return list;
-		}
-		return null ;
-	}
+		String hql = "From Bookmark_Bean where recipe_id=:rec_id and member_no=:mem_no";
+		Query<Bookmark_Bean> query = session.createQuery(hql, Bookmark_Bean.class);
+		query.setParameter("rec_id", rec_id);
+		query.setParameter("mem_no", mem_no);
 
+		List<Bookmark_Bean> list = query.list();
+		return list;
+	}
 	
+	//delete bookmark
+	public boolean deleteBookmark(String id) {
+		Session session = sessionFactory.getCurrentSession();
+		Bookmark_Bean result = session.get(Bookmark_Bean.class, id);
+		System.out.println(id);
+		if (result != null) {
+			session.delete(result);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean bookmarkExist(String rec_id,Integer mem_no) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "From Bookmark_Bean where recipe_id=:rec_id and member_no=:mem_no";
+		Query<Bookmark_Bean> query=session.createQuery(hql);
+		query.setParameter("rec_id", rec_id);
+		query.setParameter("mem_no", mem_no);
+		List<Bookmark_Bean> list = query.list();
+		for(Bookmark_Bean bean:list) {
+			if(bean.getRec_id().equals(rec_id)) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+		return false;
+		
+//		Bookmark_Bean result = session.get(Bookmark_Bean.class, rec_id);
+//		if(result!=null) {
+//			return true;
+//		}
+//		return false;
+	}
 	
 	
 	//-------------------取得分頁------------------------

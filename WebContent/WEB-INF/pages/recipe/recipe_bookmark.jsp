@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +37,8 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+
 
 <style>
 *{
@@ -51,6 +51,7 @@
  .heart:hover{ 
  	 color:gray; 
  }	  
+ .heart:
 
 
 
@@ -115,12 +116,15 @@
     			</div>
     		</div>
     		
-    		<div id="searchSuccess">
-    		
+    		<div id="searchSuccess">    		
     		<div class="row">
-    		<c:forEach var='BeanToken'  items="${searchLove}">
+    		
+    		
+    		
+    		
+    		<c:forEach var='BeanToken'  items="${allRecipe}">
     			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product">								
+    				<div class="product" class="shadow-lg p-3 mb-5 bg-white rounded">								
     						<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>" class="img-prod"><img class="img-fluid" src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" alt="">
     						</a>	
     						
@@ -132,8 +136,8 @@
 
 
 
-	    					<div style="float: right;" class="deleteRecipe">
-
+	    					<div style="float: right;" class="deleteRecipe" id="heart">
+							
 	    							<span class="heart d-flex justify-content-center align-items-center "  >
 	    								<span><i class="ion-ios-heart" style="color: red" id="heart" onclick="fun(${BeanToken.rec_id})"></i></span>
 	    							</span>
@@ -144,6 +148,9 @@
     		
     		
     		</c:forEach>
+    		
+    		
+    		
     		</div>
     		<div class="row mt-5">
           <div class="col text-center">
@@ -164,30 +171,65 @@
     	</div>
     	
     </section>
-
+    
+    
+    
+<!--     <table id="myDataTalbe" class="display" cellspacing="0" width="100%"> -->
+<!--        <thead> -->
+<!--        <tr> -->
+<!--            <th>食譜</th> -->
+<!--            <th>作者</th> -->
+<!--            <th>人氣</th> -->
+<!--            <th>上傳日期</th> -->
+<!--            <th>刪除</th> -->
+<!--        </tr> -->
+<!--        </thead> -->
+<%--     <c:forEach var='BeanToken'  items="${searchLove}"> --%>
+<!--        <tbody> -->
+<!--        <tr> -->
+<%--            <td><a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.id}</a></td> --%>
+<%--            <td>${BeanToken.member_no}</td> --%>
+<!--            <td>1000</td> -->
+<%--            <td>${BeanToken.date}</td> --%>
+<%--            <td><input type="submit" name="delete" value="刪除" onclick="fun(${BeanToken.id})"/></td> --%>
+<!--        </tr> -->
+<!--        </tbody> -->
+<%-- </c:forEach> --%>
+<!--    </table> -->
 	<!------------------------------------------------------------------>
 	<jsp:include page="../footer.jsp" />
 </div>
-
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript">
-	function fun(rec_id){
-		var deleteSuccess=document.getElementById("deleteSuccess");
-		var xhr = new XMLHttpRequest();	
-		xhr.onreadystatechange = function(){
-			if (xhr.readyState === 4) {
-				// 伺服器回應成功
-				if (xhr.status === 200) {
-					// 收到伺服器的回應
-					deleteSuccess.innerHTML= xhr.responseText;
-				}
-			}	
-		}
-		var url = "<c:url value='/myRecipe?rec_id=" + rec_id + "' />"
-		xhr.open("GET",url,true);
-		xhr.send();
-		}
-
-
+function fun(rec_id){
+	var deleteSuccess=$("#deleteSuccess");
+	console.log('rec_id: '+rec_id)
+	$.ajax({
+		type:"GET",
+		url:"./removeMyRecipe",
+		data:{
+			"rec_id":rec_id
+			},
+		success:function(response){
+			alert('succccccccccccccccccces');
+			deleteSuccess.html(response);			
+			}
+		});
+}
 </script>
+ <script type="text/javascript">
+//         $(function () {
+
+//             $("#myDataTalbe").DataTable({
+//                 searching: false,
+//                 columnDefs: [{
+//                     targets: [3],
+//                     orderable: false,
+//                 }]
+//             });
+//         });
+    </script>
 </body>
 </html>
