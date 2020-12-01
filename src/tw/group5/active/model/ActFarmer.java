@@ -364,7 +364,7 @@ public class ActFarmer implements Serializable {
 	}
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "actFarmer")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "actFarmer",cascade = CascadeType.ALL)
 //	@JoinColumn(name = "actId")
 	public Set<ActOrdNum> getActOrdNum() {
 		return actOrdNum;
