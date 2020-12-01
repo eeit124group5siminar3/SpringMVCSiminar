@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -363,7 +364,7 @@ public class ActFarmer implements Serializable {
 	}
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "actFarmer")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "actFarmer",cascade = CascadeType.ALL)
 //	@JoinColumn(name = "actId")
 	public Set<ActOrdNum> getActOrdNum() {
 		return actOrdNum;
