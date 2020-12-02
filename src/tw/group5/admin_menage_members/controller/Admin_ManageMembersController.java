@@ -41,12 +41,18 @@ public class Admin_ManageMembersController {
 	@GetMapping(value = "/manageMembersData.controller/{pageNo}")
 	@ResponseBody
 	public Map<String, Object> processManageMembers(@PathVariable(name = "pageNo") String pageNo) {
-
+		
+		int intNO = Integer.valueOf(pageNo);
+		
 		List<Member_SignUp> member_data = member_Service.select_member(pageNo);
+		int total_pages = member_Service.totalPages();
 
+		int totalPage =(int) Math.ceil(total_pages*1.0 /10);//總頁數
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-
 		map.put("data", member_data);
+		map.put("pageNO", intNO);
+		map.put("totalPageNo",totalPage);
 
 		return map;
 	}
@@ -56,6 +62,11 @@ public class Admin_ManageMembersController {
 	@ResponseBody
 	public Map<String, Object> processSelectManageMembers(@RequestParam(name = "select_member_no") String member_no) {
 
+		int total_pages = member_Service.totalPages();
+		int totalPage =(int) Math.ceil(total_pages*1.0 /10);//總頁數
+		
+		int intNO = Integer.valueOf("1");
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		if (member_no != "") {
@@ -72,6 +83,8 @@ public class Admin_ManageMembersController {
 		}
 		List<Member_SignUp> member_data1 = member_Service.select_member("1");
 		map.put("totaldata", member_data1);
+		map.put("pageNO", intNO);
+		map.put("totalPageNo",totalPage);
 		return map;
 	}
 
