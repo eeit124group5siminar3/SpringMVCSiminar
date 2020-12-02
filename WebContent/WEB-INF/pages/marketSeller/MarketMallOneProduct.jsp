@@ -3,10 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     	<div class="container">
     		<div class="row">
-    			<div class="col-lg-6 mb-5 ftco-animate">
-    				<a href="#" class="image-popup">
+    		<div style="padding: 20px;">
+    			<div  class="col-lg-6 mb-5 ftco-animate">
+    				<a href="#"  class="image-popup" >
     				<img src=<c:url value='MarketImageServlet?id=${oneProduct.marketProductImgBean.productId}&type=PRODUCT' />
     				 class="img-fluid" alt="Colorlib Template"></a>
+    			</div>
     			</div>
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
     				<h3>${oneProduct.productName}</h3>
