@@ -186,7 +186,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				data-target="#demo1">商城管理</button>
 			<div id="demo1" class="collapse">
 				<li align="left"><a href="<c:url value='mall_management'  />" class="hyperlink">商品管理</a></li>
-				<li align="left"><a href="" class="hyperlink">訂單管理</a></li>
+				<li align="left"><a href="<c:url value='mall_manageOrder'  />" class="hyperlink">訂單管理</a></li>
 			</div>
 		</div>
 		<br> <br>

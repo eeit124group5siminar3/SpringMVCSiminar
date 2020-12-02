@@ -26,10 +26,13 @@ public class OrderDAO {
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
 	private String BuyerId = null;
-	int orderNo = 0;
+	private int orderNo = 0;
 	private int pageNo = 1;
+	private int maintainPageNo = 0;
+	private int maintainPerPage = 10;
 	private int recordsPerPage = 5;
 	private int totalPages = -1;
+	private int maintainTotalPages = -1;
 
 	public int getPageNo() {
 		return pageNo;
@@ -37,6 +40,14 @@ public class OrderDAO {
 
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
+	}
+
+	public int getMaintainPageNo() {
+		return maintainPageNo;
+	}
+
+	public void setMaintainPageNo(int maintainPageNo) {
+		this.maintainPageNo = maintainPageNo;
 	}
 
 	public int getRecordsPerPage() {
@@ -47,12 +58,26 @@ public class OrderDAO {
 		this.recordsPerPage = recordsPerPage;
 	}
 
+	public int getMaintainPerPage() {
+		return maintainPerPage;
+	}
+
+	public void setMaintainPerPage(int maintainPerPage) {
+		this.maintainPerPage = maintainPerPage;
+	}
+
 	public int getTotalPages(int buyerId) {
 		// 注意下一列敘述的每一個型態轉換
 		totalPages = (int) (Math.ceil(getRecordCounts(buyerId) / (double) recordsPerPage));
 		return totalPages;
 	}
-	
+
+	public int getMaintainTotalPages(int producterId) {
+		// 注意下一列敘述的每一個型態轉換
+		maintainTotalPages = (int) (Math.ceil(getMaintainRecordCounts(producterId) / (double) maintainPerPage));
+		return maintainTotalPages;
+	}
+
 // 新增訂單
 	public ProductOrderBean insertOrder(ProductOrderBean ob) {
 		Session session = sessionFactory.getCurrentSession();
@@ -85,7 +110,33 @@ public class OrderDAO {
 		List<ProductOrderBean> list = query.list();
 		return list;
 	}
-	
+
+// 查詢資料庫某一生產者的訂單數
+	public long getMaintainRecordCounts(int producterId) {
+		Session session = sessionFactory.getCurrentSession();
+		int count = 0; // 必須使用 long 型態
+		String hql = "select count( * ) from ProductOrderItemBean where producterId=?0";
+		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
+		query.setParameter(0, producterId);
+		Object objectNumber = query.uniqueResult();
+		long longNumber = (long) objectNumber;
+		count = (int) longNumber;
+		return count;
+	}
+
+// 查詢某一生產者的訂單
+	public List<ProductOrderItemBean> getMaintainOrders(int producterId) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ProductOrderItemBean where producterId = ?0 Order by itemId";
+		int startRecordNo = (maintainPageNo - 1) * maintainPerPage;
+		Query<ProductOrderItemBean> query = session.createQuery(hql, ProductOrderItemBean.class);
+		query.setParameter(0, producterId);
+		query.setFirstResult(startRecordNo);
+		query.setMaxResults(maintainPerPage);
+		List<ProductOrderItemBean> list = query.list();
+		return list;
+	}
+
 	public List<ProductOrderBean> getAllOrders() {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ProductOrderBean";
@@ -120,8 +171,6 @@ public class OrderDAO {
 		this.BuyerId = BuyerId;
 	}
 
-	
-
 	public double findItemAmount(ProductOrderItemBean oib) {
 		double subtotal = oib.getAmount() * oib.getUnitPrice() * oib.getDiscount();
 		return subtotal;
@@ -139,8 +188,8 @@ public class OrderDAO {
 						"庫存數量不足: ProductId: " + oib.getProductId() + ", 在庫量: " + stock + ", 訂購量: " + oib.getAmount());
 			} else {
 				bean.setStock(stock - oib.getAmount());
-				bean.setSold(bean.getSold()+oib.getAmount());
-				if(stock - oib.getAmount()==0) {
+				bean.setSold(bean.getSold() + oib.getAmount());
+				if (stock - oib.getAmount() == 0) {
 					bean.setStatus(2);
 				}
 			}

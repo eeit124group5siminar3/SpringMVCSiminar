@@ -209,7 +209,7 @@ function orderDetail(orderId) {
 		}
 	});
 }
-// 管理頁面
+// 商品管理頁面
 function managementPage(pageNo) {
 	$.ajax({
 		url : "ManagementContent",
@@ -221,6 +221,21 @@ function managementPage(pageNo) {
 		},
 		error : function(data, status) {
 			$("#managementContent").html(data);
+		}
+	});
+}
+// 訂單管理頁面
+function manageOrderPage(pageNo) {
+	$.ajax({
+		url : "ManageOrderContent",
+		type : "POST",
+		data : {"manageOrder_pageNo":pageNo},
+		datatype : "html",
+		success : function(data, status) {
+			$("#manageOrderContent").html(data);
+		},
+		error : function(data, status) {
+			$("#manageOrderContent").html(data);
 		}
 	});
 }
