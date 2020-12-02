@@ -11,7 +11,7 @@ document.getElementById("actType").value="<c:out value='${afBean.actType}'/>";
 document.getElementById("sigStat").value="<c:out value='${afBean.sigStat}'/>"; 
 </script> 
 <meta charset="UTF-8">
-<title>一日農夫活動申請</title>
+<title>一日農夫活動修改</title>
 </head>
 <body>
 <h1 align="center">一日農夫申請活動</h1>

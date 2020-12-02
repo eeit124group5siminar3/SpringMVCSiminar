@@ -45,47 +45,48 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="css/style.css">
 <style>
 .backstage-footer-ground {
-	width: 100%;
-	top: 800px;
-	position: absolute;
-}
+	width: 100%; 
+	top: 800px; 
+	position: absolute; 
+} 
 
-#project_backstage {
-	width: 150px;
-	position: absolute;
-	font-weight: bold;
-	top: 150px;
-	left: 15px;
-	color: white;
-	display: block;
-}
+#project_backstage { 
+	width: 150px; 
+	position: absolute; 
+	font-weight: bold; 
+	left: 15px; 
+	color: white; 
+	display: block; 
+} 
 
-.active_backstage {
-	height: 400px;
-	width: 1100px;
-}
+.active_backstage { 
+	height: 400px; 
+	width: 1100px; 
+} 
 
-#carousel_backstage {
-	height: 400px;
-	width: 1300px;
-}
+#carousel_backstage { 
+	height: 400px; 
+	width: 1300px; 
+} 
 
-#backstage_page {
-	position: absolute;
-	top: 150px;
-	left: 250px;
-	right: 50px;
-	text-align: center;
-}
+#backstage_page { 
+	position: absolute; 
+	top: 150px; 
+	left: 250px; 
+	right: 50px; 
+	text-align: center; 
+} 
 </style>
 </head>
 <body class="goto-here">
-			<jsp:include page="/WEB-INF/pages/header.jsp" />
-	
+	<jsp:include page="/WEB-INF/pages/header.jsp" />
+
+
 
 	<!-------------------------內容區--------------------------------->
-
-	<div id="project_backstage">
+	<section class="ftco-section" id="managementContent"
+		style="padding-top:10px">
+	<div id="project_backstage" style="float:left">
 		<div style="margin-left: 25px">
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo">會員管理</button>
@@ -106,8 +107,10 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo1">商城管理</button>
 			<div id="demo1" class="collapse">
-				<li align="left"><a href="<c:url value='mall_management'  />" class="hyperlink">商品管理</a></li>
-				<li align="left"><a href="<c:url value='mall_manageOrder'  />" class="hyperlink">訂單管理</a></li>
+				<li align="left"><a href="<c:url value='mall_management'  />"
+					class="hyperlink">商品管理</a></li>
+				<li align="left"><a href="<c:url value='mall_manageOrder'  />"
+					class="hyperlink">訂單管理</a></li>
 			</div>
 		</div>
 		<br> <br>
@@ -115,9 +118,11 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo2">市場管理</button>
 			<div id="demo2" class="collapse">
-			<br>
-				<li align="left"><a href="MarketMall.GoUpdate" class="hyperlink">商家資訊</a></li>
-				<li align="left"><a href="MarketProduct.selectAll" class="hyperlink">商品管理</a></li>
+				<br>
+				<li align="left"><a href="MarketMall.GoUpdate"
+					class="hyperlink">商家資訊</a></li>
+				<li align="left"><a href="MarketProduct.selectAll"
+					class="hyperlink">商品管理</a></li>
 			</div>
 		</div>
 		<br> <br>
@@ -134,47 +139,48 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo4">活動管理</button>
 			<div id="demo4" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
+				<li align="left"><a
+					href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>"
+					class="hyperlink">一日農夫</a></li>
+				<!-- 				<li align="left"><a href="" class="hyperlink">????</a></li> -->
 			</div>
 		</div>
 	</div>
 
-	<div align="center" id="backstage_page">
-		<div id="carousel_backstage" class="container">
-			<div id="carouselExampleIndicators" class="carousel slide"
-				data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators" data-slide-to="0"
-						class="active_backstage">></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img height="400px" src="<c:url value='/images/farm.jpg'  />"
-							class="d-block w-100">
-					</div>
-					<div class="carousel-item">
-						<img height="400px"
-							src="<c:url value='/images/vegetables.jpg'  />"
-							class="d-block w-100">
-					</div>
-					<div class="carousel-item">
-						<img height="400px" src="<c:url value='/images/recipe.jpg'  />"
-							class="d-block w-100">
-					</div>
+	<div id="carousel_backstage" class="container"
+		style="padding-top: 10px">
+
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0"
+					class="active_backstage">></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img height="400px" src="<c:url value='/images/farm.jpg'  />"
+						class="d-block w-100">
 				</div>
-				<a class="carousel-control-prev" href="#carouselExampleIndicators"
-					role="button" data-slide="prev"> <span
-					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-					class="sr-only">Previous</span>
-				</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-					role="button" data-slide="next"> <span
-					class="carousel-control-next-icon" aria-hidden="true"></span> <span
-					class="sr-only">Next</span>
-				</a>
+				<div class="carousel-item">
+					<img height="400px" src="<c:url value='/images/vegetables.jpg'  />"
+						class="d-block w-100">
+				</div>
+				<div class="carousel-item">
+					<img height="400px" src="<c:url value='/images/recipe.jpg'  />"
+						class="d-block w-100">
+				</div>
 			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+			</a>
 		</div>
 		<br>
 		<table>
@@ -196,99 +202,106 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			</tr>
 		</table>
 	</div>
-	<!-- ----------------------------------------- -->
+	
+	</section>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+	<!-- ----------------------------------------- --> <!------------------------------------------------------------------>
+	<jsp:include page="/WEB-INF/pages/footer.jsp" />
+	<!-- 	<footer class="ftco-footer backstage-footer-ground"> -->
+	<!-- 	<div class="container"> -->
+	<!-- 		<div class="row"> -->
+	<!-- 			<div class="mouse"></div> -->
+	<!-- 		</div> -->
+	<!-- 		<div class="row mb-5"> -->
+	<!-- 			<div class="col-md"> -->
+	<!-- 				<div class="ftco-footer-widget mb-4"> -->
+	<!-- 					<h2 class="ftco-heading-2">農郁</h2> -->
+	<!-- 					<p>最適合您的電商平台</p> -->
+	<!-- 					<ul -->
+	<!-- 						class="ftco-footer-social list-unstyled float-md-left float-lft mt-5"> -->
+	<!-- 						<li class="ftco-animate"><a href="#"><span -->
+	<!-- 								class="icon-twitter"></span></a></li> -->
+	<!-- 						<li class="ftco-animate"><a href="#"><span -->
+	<!-- 								class="icon-facebook"></span></a></li> -->
+	<!-- 						<li class="ftco-animate"><a href="#"><span -->
+	<!-- 								class="icon-instagram"></span></a></li> -->
+	<!-- 					</ul> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 			<div class="col-md"> -->
+	<!-- 				<div class="ftco-footer-widget mb-4 ml-md-5"> -->
+	<!-- 					<h2 class="ftco-heading-2">Menu</h2> -->
+	<!-- 					<ul class="list-unstyled"> -->
+	<!-- 						<li><a href="#" class="py-2 d-block">商城</a></li> -->
+	<!-- 						<li><a href="#" class="py-2 d-block">關於我</a></li> -->
+	<!-- 						<li><a href="#" class="py-2 d-block">Journal</a></li> -->
+	<!-- 						<li><a href="#" class="py-2 d-block">聯絡我們</a></li> -->
+	<!-- 					</ul> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 			<div class="col-md-4"> -->
+	<!-- 				<div class="ftco-footer-widget mb-4"> -->
+	<!-- 					<h2 class="ftco-heading-2">其他問題</h2> -->
+	<!-- 					<div class="d-flex"> -->
+	<!-- 						<ul class="list-unstyled mr-l-5 pr-l-3 mr-4"> -->
+	<!-- 							<li><a href="#" class="py-2 d-block">運送訊息</a></li> -->
+	<!-- 							<li><a href="#" class="py-2 d-block">退換貨</a></li> -->
+	<!-- 							<li><a href="#" class="py-2 d-block">條款及細則</a></li> -->
+	<!-- 							<li><a href="#" class="py-2 d-block">隱私政策</a></li> -->
+	<!-- 						</ul> -->
+	<!-- 						<ul class="list-unstyled"> -->
+	<!-- 							<li><a href="#" class="py-2 d-block">常見問題</a></li> -->
+	<!-- 							<li><a href="#" class="py-2 d-block">Contact</a></li> -->
+	<!-- 						</ul> -->
+	<!-- 					</div> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 			<div class="col-md"> -->
+	<!-- 				<div class="ftco-footer-widget mb-4"> -->
+	<!-- 					<h2 class="ftco-heading-2">Have a Questions?</h2> -->
+	<!-- 					<div class="block-23 mb-3"> -->
+	<!-- 						<ul> -->
+	<!-- 							<li><span class="icon icon-map-marker"></span><span -->
+	<!-- 								class="text">320 桃園市中壢區中大路300號</span></li> -->
+	<!-- 							<li><a href="#"><span class="icon icon-phone"></span><span -->
+	<!-- 									class="text">0800-092-000</span></a></li> -->
+	<!-- 							<li><a href="#"><span class="icon icon-envelope"></span><span -->
+	<!-- 									class="text">service@nonre.com</span></a></li> -->
+	<!-- 						</ul> -->
+	<!-- 					</div> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+	<!-- 		<div class="row"> -->
+	<!-- 			<div class="col-md-12 text-center"> -->
 
-
-
-
-
-
-	<!------------------------------------------------------------------>
-	<footer class="ftco-footer backstage-footer-ground">
-	<div class="container">
-		<div class="row">
-			<div class="mouse"></div>
-		</div>
-		<div class="row mb-5">
-			<div class="col-md">
-				<div class="ftco-footer-widget mb-4">
-					<h2 class="ftco-heading-2">農郁</h2>
-					<p>最適合您的電商平台</p>
-					<ul
-						class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-						<li class="ftco-animate"><a href="#"><span
-								class="icon-twitter"></span></a></li>
-						<li class="ftco-animate"><a href="#"><span
-								class="icon-facebook"></span></a></li>
-						<li class="ftco-animate"><a href="#"><span
-								class="icon-instagram"></span></a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md">
-				<div class="ftco-footer-widget mb-4 ml-md-5">
-					<!-- <h2 class="ftco-heading-2">Menu</h2> -->
-					<ul class="list-unstyled">
-						<li><a href="#" class="py-2 d-block">商城</a></li>
-						<li><a href="#" class="py-2 d-block">關於我</a></li>
-						<!-- <li><a href="#" class="py-2 d-block">Journal</a></li> -->
-						<li><a href="#" class="py-2 d-block">聯絡我們</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="ftco-footer-widget mb-4">
-					<!-- <h2 class="ftco-heading-2">其他問題</h2> -->
-					<div class="d-flex">
-						<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-							<li><a href="#" class="py-2 d-block">運送訊息</a></li>
-							<li><a href="#" class="py-2 d-block">退換貨</a></li>
-							<li><a href="#" class="py-2 d-block">條款及細則</a></li>
-							<li><a href="#" class="py-2 d-block">隱私政策</a></li>
-						</ul>
-						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">常見問題</a></li>
-							<!-- <li><a href="#" class="py-2 d-block">Contact</a></li> -->
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="col-md">
-				<div class="ftco-footer-widget mb-4">
-					<!-- <h2 class="ftco-heading-2">Have a Questions?</h2> -->
-					<div class="block-23 mb-3">
-						<ul>
-							<li><span class="icon icon-map-marker"></span><span
-								class="text">320 桃園市中壢區中大路300號</span></li>
-							<li><a href="#"><span class="icon icon-phone"></span><span
-									class="text">0800-092-000</span></a></li>
-							<li><a href="#"><span class="icon icon-envelope"></span><span
-									class="text">service@nonre.com</span></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 text-center">
-
-				<p>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
-					<script>
-						document.write(new Date().getFullYear());
-					</script>
-					All rights reserved | This template is made with <i
-						class="icon-heart color-danger" aria-hidden="true"></i> by <a
-						href="https://colorlib.com" target="_blank">Colorlib</a>.
-					Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</p>
-			</div>
-		</div>
-	</div>
-	</footer>
+	<!-- 				<p> -->
+	<!-- 					Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	<!-- 					Copyright &copy; -->
+	<!-- 					<script> -->
+	// document.write(new Date().getFullYear());
+	<!-- 					</script> -->
+	<!-- 					All rights reserved | This template is made with <i -->
+	<!-- 						class="icon-heart color-danger" aria-hidden="true"></i> by <a -->
+	<!-- 						href="https://colorlib.com" target="_blank">Colorlib</a>. -->
+	<!-- 					Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a> -->
+	<!-- 					Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	<!-- 				</p> -->
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+	<!-- 	</footer> -->
 
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px"> <circle

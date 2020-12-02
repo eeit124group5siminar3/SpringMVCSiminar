@@ -48,7 +48,6 @@
 	width: 150px;
 	position: absolute;
 	font-weight: bold;
-	top: 150px;
 	left: 15px;
 	color: white;
 	display: block;
