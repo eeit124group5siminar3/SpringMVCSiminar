@@ -43,49 +43,152 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 
-.fieldset{
-	margin-left:;
-	margin-right: 20%;
+ .fieldset{ 
+ 	margin-left:; 
+ 	margin-right: 20%; 
 	
-}
-.wrap {
-	width: 800px;
-	margin: auto;
-	display: flex;
-	align-items: center;
-}
+ } 
+ .wrap { 
+ 	width: 800px; 
+ 	margin: auto; 
+ 	display: flex; 
+ 	align-items: center; 
+ } 
 
-.wrap1 {
-	vertical-align: middle;
-	width: 30%;
-	margin-left: 100px;
+ .wrap1 { 
+ 	vertical-align: middle; 
+ 	width: 30%; 
+ 	margin-left: 100px; 
 	
 	
-}
-.wrap2 {
-	vertical-align: middle;
-	width: 70%;
-	margin-left: 150px;
+ } 
+ .wrap2 { 
+ 	vertical-align: middle; 
+	width: 70%; 
+ 	margin-left: 150px; 
 	
-}
-.txt {
-	width: 50%;
-	vertical-align: middle;
-	margin-left: 150px;
-}
- .deleteRecipe{ 
+ } 
+ .txt { 
  	width: 50%; 
  	vertical-align: middle; 
- 	margin-left: 100px;
+ 	margin-left: 150px; 
  } 
+  .deleteRecipe{  
+  	width: 50%;  
+  	vertical-align: middle;  
+  	margin-left: 100px; 
+  } 
 </style>
 
 </head>
 <body class="goto-here">
 <div id="deleteSuccess">
+	<div class="py-1 bg-primary">
+		<div class="container">
+			<div
+				class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+				<div class="col-lg-12 d-block">
+					<div class="row d-flex">
+						<div class="col-md pr-4 d-flex topper align-items-center">
+							<div
+								class="icon mr-2 d-flex justify-content-center align-items-center">
+								<span class="icon-phone2"></span>
+							</div>
+							<span class="text">0800-092-000</span>
+						</div>
+						<div class="col-md pr-4 d-flex topper align-items-center">
+							<div
+								class="icon mr-2 d-flex justify-content-center align-items-center">
+								<span class="icon-paper-plane"></span>
+							</div>
+							<span class="text">service@nonre.com</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav
+	class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+	id="ftco-navbar">
+	<div class="container">
+		<a class="navbar-brand" href="index.html">農郁</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#ftco-nav" aria-controls="ftco-nav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="oi oi-menu"></span> 列表
+		</button>
 
+		<div class="collapse navbar-collapse" id="ftco-nav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active"><a href="<c:url value='/index' />"
+					class="nav-link" >首頁</a></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown04">
+						<a class="dropdown-item" href="<c:url value='/mall_shop' />">商城</a> 
+						<a class="dropdown-item" href="<c:url value='/mall_shoppingcart' />">購物車</a> 
+						<a class="dropdown-item" href="<c:url value='/mall_order' />">查看訂單</a>
+					</div></li>
+				<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
+				
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item"
+								href="<c:url value='GoMarketHome'/>">市場</a>
+						</div></li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown04">
+						<a class="dropdown-item" href="<c:url value='/actFarmerHome'/>">一日農夫</a>
+						<a class="dropdown-item" href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>">一日農夫管理頁面</a>
+						<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a>
+						<a class="dropdown-item" href="<c:url value='        '/>">農農市集管理頁面</a>
+					</div>
+				</li>
 
-		<jsp:include page="../header.jsp" />
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown04">
+						<a class="dropdown-item"
+							href="<c:url value='frontPage.controller'/>">食譜</a> 
+						<a class="dropdown-item"
+							href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
+							<a
+							class="dropdown-item"
+							href="<c:url value='updatePage.controller'/>">修改食譜</a> 
+							<a
+							class="dropdown-item"
+							href="<c:url value='myRecipe'/>">我的食譜</a>
+					</div></li>
+
+				<li class="nav-item"><c:if test="${empty login_ok}">
+						<a class="nav-link" href="<c:url value='login.controller' />">會員</a>
+					</c:if> <c:if test="${!empty login_ok}">
+						<a class="nav-link" href="<c:url value='backstage.controller' />">會員</a>
+					</c:if></li>
+				<li class="nav-item"><c:if test="${empty login_ok}">
+						<a class="nav-link" href="<c:url value='login.controller' />">登錄</a>
+					</c:if></li>
+				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />"
+					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
+					
+				<li class="nav-item cta cta-colored"><a href="<c:url value='' />"
+					class="nav-link"><img height='15' width='15'
+					 src="images/MarketBasket.jpg">[0]</a></li>
+			</ul>
+			<c:if test="${!empty login_ok}">
+			<ul class="navbar-nav">
+				<li class="nav-item cta cta-colored"><a class="nav-link">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNo.${login_ok.member_no}&nbsp&nbsp${login_ok.member_name}&nbsp您好！ </a></li>
+			</ul>
+			</c:if>
+		</div>
+	</div>
+</nav>
 
 	<!-------------------------內容區--------------------------------->
 	
@@ -154,17 +257,46 @@
 						${BeanToken.date}
 					</div>
 					<div class="deleteRecipe">	
-<%-- 					<input type="hidden" id="delete_id" name="delete_id" value="${BeanToken.rec_id}" />						 --%>
+ 					<input type="hidden" id="delete_id" name="delete_id" value="${BeanToken.rec_id}" />						
 						<input class="btn btn-outline-danger" id="send" type="submit" onclick="fun(${BeanToken.rec_id})" name="delete" value="刪除" />
 
-					</div>
+ 					</div> 
 				
-				<br>
+ 				<br> 
 		</div>
 		<br>
+		
 	</form>
 </c:forEach>
 	</fieldset>
+	
+	
+	<div class="modal fade" id="insert" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width:640px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">商品資料新增</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="insertForm" style="width:640px">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" form="updaeteForm">新增</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
 	</div>
 <!-- 			<div style="text-align: center;"> -->
 <!-- 				<label> -->
@@ -289,6 +421,21 @@
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
  	
+ 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $("#myDataTalbe").DataTable({
+                searching: true,
+                columnDefs: [{
+                    targets: [3],
+                    orderable: false,
+                }]
+            });
+        });
+    </script>
+ 	
  	 	<script type="text/javascript"> 
 // 		$(function(){		
 // // 			var data=$("#delete_id").serializeArray();
@@ -322,6 +469,7 @@
 					// 伺服器回應成功
 					if (xhr.status === 200) {
 						// 收到伺服器的回應
+						alert('刪除成功');
 						deleteSuccess.innerHTML= xhr.responseText;
 					}
 				}	
