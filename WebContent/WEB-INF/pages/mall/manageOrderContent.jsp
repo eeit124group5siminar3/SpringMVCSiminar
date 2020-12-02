@@ -22,10 +22,10 @@
 						<tr class="table-=active text-center" data-toggle="modal"
 							data-target="#manageOrder" data-whatever="${item.productId}">
 							<td id="${item.orderId}"></td>
-							<td>${item.orderId}</td>
+							<td>${item.productOrderBean.orderId}</td>
 							<td>${item.description}</td>
 							<td>${item.amount}</td>
-							<td>${item.productOrderBean.orderDate}</td>
+							<td>${item.productOrderBean.orderDate.toString().substring(0,10)}</td>
 							<td>${item.productOrderBean.shippingTime}</td>
 							<td>${item.status}</td>
 						</tr>
@@ -42,9 +42,9 @@
 									<li><span>&lt;</span></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href='#product_top' onclick='managementPage(1)'>&lt;&lt;</a></li>
+									<li><a href='#product_top' onclick='manageOrderPage(1)'>&lt;&lt;</a></li>
 									<li><a href='#product_top'
-										onclick='managementPage(${manageOrder_pageNo - 1})'>&lt;</a></li>
+										onclick='manageOrderPage(${manageOrder_pageNo - 1})'>&lt;</a></li>
 								</c:otherwise>
 							</c:choose>
 
@@ -58,7 +58,7 @@
 											</c:when>
 											<c:otherwise>
 												<li><a href='#product_top'
-													onclick='managementPage(${i})'>${i}</a></li>
+													onclick='manageOrderPage(${i})'>${i}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -73,7 +73,7 @@
 													</c:when>
 													<c:otherwise>
 														<li><a href='#product_top'
-															onclick='managementPage(${i})'>${i}</a></li>
+															onclick='manageOrderPage(${i})'>${i}</a></li>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
@@ -88,7 +88,7 @@
 													</c:when>
 													<c:otherwise>
 														<li><a href='#product_top'
-															onclick='managementPage(${i})'>${i}</a></li>
+															onclick='manageOrderPage(${i})'>${i}</a></li>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
@@ -102,7 +102,7 @@
 													</c:when>
 													<c:otherwise>
 														<li><a href='#product_top'
-															onclick='managementPage(${i})'>${i}</a></li>
+															onclick='manageOrderPage(${i})'>${i}</a></li>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
@@ -118,9 +118,9 @@
 								</c:when>
 								<c:otherwise>
 									<li><a href='#product_top'
-										onclick='managementPage(${manageOrder_pageNo + 1})'>&gt;</a></li>
+										onclick='manageOrderPage(${manageOrder_pageNo + 1})'>&gt;</a></li>
 									<li><a href='#product_top'
-										onclick='managementPage(${manageOrder_totalPages})'>&gt;&gt;</a></li>
+										onclick='manageOrderPage(${manageOrder_totalPages})'>&gt;&gt;</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>

@@ -109,7 +109,13 @@ public class Recipe_Controller_upload {
 //		System.out.println(bean.getIngredients_A());
 //		
 		if (action.equals("送出")) {
-			service.insert(bean);
+			if(bean.getViews()==null) {
+				bean.setViews(0);
+				service.insert(bean);
+			}else {
+				service.insert(bean);
+				
+			}
 ////			session.removeAttribute("details");
 ////			status.setComplete();
 			return "redirect:/frontPage.controller";
