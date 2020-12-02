@@ -32,6 +32,11 @@ public class PageTo {
 	public String manageOrderPage() {
 		return "/mall/mall_manageOrder";
 	}
+	
+	@GetMapping(value = "/Member_Login")
+	public String loginOK() {
+		return "/Member_SignUp/Member_Login";
+	}
 //	@GetMapping(value = "/mall_checkout")
 //	public String checkOut() {
 //		return "/mall/mall_checkout";
