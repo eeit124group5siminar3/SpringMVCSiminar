@@ -42,7 +42,7 @@
 								</td>
 
 								<td>
-									<p>${set.status}</p>
+									<p>${set.statusWord}</p>
 								</td>
 								<td>
 									<p>${set.shippingDate}</p>

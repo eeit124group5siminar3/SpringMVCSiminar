@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -115,6 +116,11 @@ public class ProductOrderBean implements Serializable{
 
 	public void setItems(Set<ProductOrderItemBean> items) {
 		this.items = items;
+	}
+	
+	@Transient
+	public String getShippingTimeWord() {
+		return ShippingTimeClass.getShippingTime(shippingTime);
 	}
 }
 
