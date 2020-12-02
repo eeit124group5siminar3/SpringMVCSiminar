@@ -46,19 +46,19 @@
 }
 
 .wrap {
-	width: 600px;
+	width: 900px;
 	margin: auto;
 	display: flex;
 	align-items: center;
 	padding-top: 10px;
 }
 
-.wrap img {
-	width: 250px;
-	height: 200px;
-	vertical-align: middle;
-	margin: 20px;
-}
+ .wrap img { 
+ 	width: 100%; 
+ 	height: 100%; 
+ 	vertical-align: middle; 
+ 	margin-right: 20px; 
+ } 
 
 .txt {
 	width: 50%;
@@ -88,7 +88,7 @@
 							<div class="wrap" style="text-align: center;">
 								<a
 									href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">
-									<img height="100" width="80"
+									<img height="100" width="100%"
 									src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" />
 								</a>
 
@@ -108,7 +108,9 @@
 													class="ion-ios-heart" id="heart"></i></span> </a>
 										</h2>
 									</div>
-									<h3>累積人氣: ${BeanToken.views}</h3>
+									<div>
+										<p>累積人氣: ${BeanToken.views}</p>
+									</div>
 									<hr>
 									<div>
 										<a
@@ -164,16 +166,21 @@
 														class="ion-ios-heart" id="heart" style="color: red;"></i></span></a>
 											</h2>
 										</div>
-										<h3>累積人氣: ${BeanToken.views}</h3>
+										<div>
+										<p>累積人氣: ${BeanToken.views}</p>
+										</div>
 										<hr>
 										<div>
 											<a
 												href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>">
 												<p>食材:${BeanToken.ingredients_A}</p>
 											</a>
-											<p>食材: ${BeanToken.ingredients_B}</p>
-											<p>介紹 : ${BeanToken.desc}</p>
-											<p>料理方法 : ${BeanToken.method}</p>
+											<h5>食材  :  </h5>
+											<p>${BeanToken.ingredients_B}</p>
+											<h5>介紹  :  </h5>
+											<p>${BeanToken.desc}</p>
+											<h5>料理方法 :  </h5>
+											<p>${BeanToken.method}</p>
 										</div>
 									</div>
 								</div>
@@ -221,16 +228,21 @@
 														class="ion-ios-heart" id="heart"></i></span></a>
 											</h2>
 										</div>
-										<h3>累積人氣: ${BeanToken.views}</h3>
+										<div>
+										<p>累積人氣: ${BeanToken.views}</p>
+										</div>
 										<hr>
 										<div>
 											<a
 												href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>">
 												<p>食材:${BeanToken.ingredients_A}</p>
 											</a>
-											<p>食材: ${BeanToken.ingredients_B}</p>
-											<p>介紹 : ${BeanToken.desc}</p>
-											<p>料理方法 : ${BeanToken.method}</p>
+											<h5>食材  :  </h5>
+											<p>${BeanToken.ingredients_B}</p>
+											<h5>介紹  :  </h5>
+											<p>${BeanToken.desc}</p>
+											<h5>料理方法 :  </h5>
+											<p>${BeanToken.method}</p>
 										</div>
 									</div>
 								</div>

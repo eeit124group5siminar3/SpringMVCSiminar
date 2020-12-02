@@ -59,7 +59,7 @@ public class Recipe_DAO_spring {
 	public List<Recipe_Bean> listOfJavaBean() {
 		Session session = sessionFactory.getCurrentSession();
 //		session.beginTransaction();
-		String hql = "From Recipe_Bean order by member_no";
+		String hql = "From Recipe_Bean order by upload_date";
 		Query query = session.createQuery(hql, Recipe_Bean.class);
 		List<Recipe_Bean> list = query.list();
 //		session.getTransaction().commit();

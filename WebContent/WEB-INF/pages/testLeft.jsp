@@ -53,7 +53,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	width: 150px;
 	position: absolute;
 	font-weight: bold;
-	top: 150px;
 	left: 15px;
 	color: white;
 	display: block;
@@ -87,16 +86,16 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div style="margin-left: 25px">
 			<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">商城管理</button>
 			<div id="demo1" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
+				<li align="left"><a href="<c:url value='mall_management' />" class="hyperlink">商品管理</a></li>
+				<li align="left"><a href="<c:url value='mall_manageOrder' />" class="hyperlink">訂單管理</a></li>
 			</div>
 		</div>
 		<br> <br>
 		<div style="margin-left: 25px">
 			<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">市場管理</button>
 			<div id="demo2" class="collapse">
-				<li align="left"><a href="actFarmerMaintain.jsp" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
+				<li align="left"><a href="MarketMall.GoUpdate" class="hyperlink">商家資訊</a></li>
+				<li align="left"><a href="MarketProduct.selectAll" class="hyperlink">商品管理</a></li>
 			</div>
 		</div>
 		<br> <br>
@@ -112,10 +111,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div style="margin-left: 25px">
 			<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo4">活動管理</button>
 			<div id="demo4" class="collapse">
-				<li align="left"><a href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>" class="hyperlink">一日農夫</a></li>
-				<li align="left"><a href="<c:url value='/'/>" class="hyperlink">報名管理</a></li>
-				
-				<li align="left"><a href="" class="hyperlink">農農市集</a></li>
+				<li align="left"><a href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>" class="hyperlink">一日農夫</a></li>				
+<!-- 				<li align="left"><a href="" class="hyperlink">農農市集</a></li> -->
 			</div>
 		</div>
 	</div>

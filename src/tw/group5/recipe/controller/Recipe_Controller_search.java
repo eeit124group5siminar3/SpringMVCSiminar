@@ -146,7 +146,6 @@ public class Recipe_Controller_search {
 	@GetMapping(value="/bookmark",produces ="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String bookmarkLogin(@RequestParam(name="rec_id",required = false)String rec_id) {
-		Map<String, Object> map=new HashMap<String, Object>();
 		if (session.getAttribute("login_ok") != null) {
 			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
 			Integer mem_no=OK.getMember_no();
@@ -157,20 +156,20 @@ public class Recipe_Controller_search {
 			System.out.println(rec_id);
 			
 			List<Bookmark_Bean> bookmark=service.listOfBookmark(mem_no);
-			for(Bookmark_Bean b:bookmark) {
-				System.out.println(b.getRec_id());
-				if(b.getRec_id().equals(rec_id)) {
-					System.err.println(1);
-					return "已經新增過囉~";
-				}else {
-					service.bookmark(bean);
-					return "新增成功~";				
-				}
-			}
+			boolean flag=service.bookmarkExist(rec_id,mem_no);
+			System.err.println("flag: "+flag);
 			if(bookmark.isEmpty()) {
 				service.bookmark(bean);
 				return "新增成功~";	
+			}else if(flag==true) {
+				System.out.println("flag=true");
+				return "已經新增過囉~";
+			}else if(flag!=true){
+				System.out.println("flag=false");
+				service.bookmark(bean);
+				return "新增成功~";	
 			}
+			
 		}
 		
 		return  rec_id;
