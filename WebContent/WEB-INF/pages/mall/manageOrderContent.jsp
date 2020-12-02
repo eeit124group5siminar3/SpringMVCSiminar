@@ -14,20 +14,20 @@
 							<th>產品</th>
 							<th>數量</th>
 							<th>下定日期</th>
-							<th>預期送達時間</th>
+							<th>期望送達時段</th>
 							<th>狀態管理</th>
 						</tr>
 					</thead>
 					<c:forEach var="item" items="${manageOrder_DPP}">
-						<tr class="table-=active text-center" data-toggle="modal"
+						<tr class="text-center" data-toggle="modal"
 							data-target="#manageOrder" data-whatever="${item.productId}">
 							<td id="${item.orderId}"></td>
 							<td>${item.productOrderBean.orderId}</td>
 							<td>${item.description}</td>
 							<td>${item.amount}</td>
 							<td>${item.productOrderBean.orderDate.toString().substring(0,10)}</td>
-							<td>${item.productOrderBean.shippingTime}</td>
-							<td>${item.status}</td>
+							<td>${item.productOrderBean.shippingTimeWord}</td>
+							<td>${item.statusTag}</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -124,6 +124,8 @@
 								</c:otherwise>
 							</c:choose>
 						</ul>
+						<a href="<c:url value='/mall_management'/>"
+						class="btn btn-primary py-3 px-4" style="float:right" >商品管理</a>
 					</div>
 				</div>
 
