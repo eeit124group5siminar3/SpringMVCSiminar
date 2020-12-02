@@ -61,27 +61,27 @@
 	<section class="ftco-section" id="manageOrderContent"></section>
 	<jsp:include page="../footer.jsp" />
 	
-	<div class="modal fade" id="manageOrder" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true" >
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content" style="width:640px">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">訂單詳細資料</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id="orderDetail" style="width:640px">
+<!-- 	<div class="modal fade" id="manageOrder" tabindex="-1" role="dialog" -->
+<!-- 		aria-labelledby="exampleModalLabel" aria-hidden="true" > -->
+<!-- 		<div class="modal-dialog modal-dialog-centered" role="document"> -->
+<!-- 			<div class="modal-content" style="width:640px"> -->
+<!-- 				<div class="modal-header"> -->
+<!-- 					<h5 class="modal-title" id="exampleModalLabel">訂單詳細資料</h5> -->
+<!-- 					<button type="button" class="close" data-dismiss="modal" -->
+<!-- 						aria-label="Close"> -->
+<!-- 						<span aria-hidden="true">&times;</span> -->
+<!-- 					</button> -->
+<!-- 				</div> -->
+<!-- 				<div class="modal-body" id="orderDetail" style="width:640px"> -->
 					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">關閉</button>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- 				</div> -->
+<!-- 				<div class="modal-footer"> -->
+<!-- 					<button type="button" class="btn btn-secondary" -->
+<!-- 						data-dismiss="modal">關閉</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
@@ -115,13 +115,13 @@
 	<script>
 		$(document).ready(function() {
 			var pageNo=1;
-			if(${management_pageNo!=null}){
-				pageNo=`${management_pageNo}`;				
+			if(${manageOrder_pageNo!=null}){
+				pageNo=`${manageOrder_pageNo}`;				
 					}
 			$.ajax({
-				url : "ManagementContent",
+				url : "ManageOrderContent",
 				type : "POST",
-				data : {"management_pageNo":pageNo},
+				data : {"manageOrder_pageNo":pageNo},
 				datatype : "html",
 				success : function(data, status) {
 					$("#manageOrderContent").html(data);
@@ -133,24 +133,24 @@
 		});
 		
 
-		$('#manageOrder').on('show.bs.modal', function (event) {
-			var tr = $(event.relatedTarget);
-			var productId = tr.data('whatever');
-			$.ajax({
-				url : "Preupdate",
-				type : "POST",
-				data : {
-					"productId":productId	
-				},
-				datatype : "html",
-				success : function(data, status) {
-					$("#orderDetail").html(data);
-				},
-				error : function(data, status) {
-					$("#orderDetail").html(data);
-				}
-			});			
-			})
+// 		$('#manageOrder').on('show.bs.modal', function (event) {
+// 			var tr = $(event.relatedTarget);
+// 			var productId = tr.data('whatever');
+// 			$.ajax({
+// 				url : "Preupdate",
+// 				type : "POST",
+// 				data : {
+// 					"productId":productId	
+// 				},
+// 				datatype : "html",
+// 				success : function(data, status) {
+// 					$("#orderDetail").html(data);
+// 				},
+// 				error : function(data, status) {
+// 					$("#orderDetail").html(data);
+// 				}
+// 			});			
+// 			})
 			
 	</script>
 	

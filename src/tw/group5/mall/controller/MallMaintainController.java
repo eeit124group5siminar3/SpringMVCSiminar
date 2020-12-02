@@ -22,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.group5.mall.model.CategoryClass;
 import tw.group5.mall.model.ProductBean;
+import tw.group5.mall.model.ProductOrderItemBean;
 import tw.group5.mall.model.ProducterBean;
+import tw.group5.mall.service.OrderService;
 import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
@@ -33,6 +35,8 @@ public class MallMaintainController {
 //	public final int RECORDS_PER_PAGE = 5;
 	@Autowired
 	private ProductService service;
+	@Autowired
+	private OrderService orderService;
 
 // 顯示商品管理頁面
 	@PostMapping(value = "/ManagementContent")
@@ -119,17 +123,39 @@ public class MallMaintainController {
 
 // 修改上下架
 	@PostMapping(value = "/Shelf")
-	public @ResponseBody Integer shelf(@RequestParam(value = "productId")Integer productId,
-			@RequestParam(value = "status")Integer status) {
+	public @ResponseBody Integer shelf(@RequestParam(value = "productId") Integer productId,
+			@RequestParam(value = "status") Integer status) {
 		ProductBean product = service.getProduct(productId);
-		if(status==1) {
+		if (status == 1) {
 			product.setStatus(1);
 			return 1;
-		}else{			
+		} else {
 			product.setStatus(0);
 			return 0;
 
 		}
+	}
+
+// 顯示訂單管理頁面
+	@PostMapping(value = "/ManageOrderContent")
+	public ModelAndView showManageOrderMallContent(HttpServletRequest request,
+			@RequestParam(value = "manageOrder_pageNo", required = false) Integer pageNoP) {
+		HttpSession session = request.getSession(false);
+		Integer pageNo = (Integer) session.getAttribute("management_pageNo");
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+		Integer producterId = mb.getMember_no();
+		if (pageNoP != null) {
+			pageNo = pageNoP;
+			session.setAttribute("manageOrder_pageNo", pageNo);
+			orderService.setMaintainPageNo(pageNo);
+		}
+		int totalPages = orderService.getMaintainTotalPages(producterId);
+		List<ProductOrderItemBean> list = orderService.getMaintainOrders(producterId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/manageOrderContent");
+		mav.addObject("manageOrder_totalPages", totalPages);
+		mav.addObject("manageOrder_DPP", list);
+		return mav;
 	}
 //	@GetMapping(value = "/DisplayMaintainProduct")
 //	public String displayMaintainProduct(
