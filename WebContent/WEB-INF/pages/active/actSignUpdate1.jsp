@@ -59,88 +59,78 @@ function backHome(){
         </div>
       </div>
     </div>
-    
-    <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Active</span></p>
-            <h1 class="mb-0 bread">Active</h1>
-          </div>
-        </div>
-      </div>
-    </div>
 
      <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-7 ftco-animate">
 			<h3 class="mb-4 billing-heading">報名修改</h3>
-			<form action="actOrdUpdate.do" method="POST" class="billing-form" name="act">
+			<form:form action="actOrdUpdate.do" modelAttribute="aoBean" method="POST" class="billing-form" name="act" >
 	          <div class="row align-items-end">
 	          <div class="col-md-12">
 		            <div class="form-group">
 <!-- 	                	<label for="memNo">會員編號</label> -->
-						<input type="hidden" class="form-control" name="memNo" value="${aoBean.memNo}"/>
+						<form:input type="hidden" class="form-control" path="memNo" value="${aoBean.memNo}"/>
 	                </div>
 		         </div>
                	 <div class="w-100"></div>
 	          	<div class="col-md-6">
 	                <div class="form-group">
-	                	<label for="memName">會員姓名</label>
-	                  	<input type="text" class="form-control" value="${aoBean.memName}" name="memName"/>
+	                	<form:label path="memName">會員姓名</form:label>
+	                  	<form:input type="text" class="form-control" value="${aoBean.memName}" path="memName"/>
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
-	                	<label for="memTel">會員電話</label>
-	                  	<input type="text" class="form-control" value="${aoBean.memTel}" name="memTel"/>
+	                	<form:label path="memTel">會員電話</form:label>
+	                  	<form:input type="text" class="form-control" value="${aoBean.memTel}" path="memTel"/>
 	                </div>
                 </div>
 		         <div class="w-100"></div>
 		         <div class="col-md-12">
 		            <div class="form-group">
-	                	<label for="memEmail">會員信箱</label>
-	                  	<input type="text" class="form-control" value="${aoBean.memEmail}" name="memEmail"/>
+	                	<form:label path="memEmail">會員信箱</form:label>
+	                  	<form:input type="text" class="form-control" value="${aoBean.memEmail}" path="memEmail"/>
 	                </div>
 		         </div>
                	 <div class="w-100"></div>
                	 
                	 <div class="col-md-12">
 	                <div class="form-group">
-	                	<label for="actId">活動編號</label>
-	                  	<input type="" class="form-control" value="${aoBean.actFarmer.actId}" name="actId"/>
+	                	<form:label path="actId">活動編號</form:label>
+	                  	<form:input type="" class="form-control" value="${aoBean.actFarmer.actId}" path="actId"/>
 	                </div>
 	              </div>
 	            <div class="w-100"></div>
                	 <div class="col-md-12">
 	                <div class="form-group">
-	                	<label for="actName">活動名稱</label>
-	                  	<input type="text" class="form-control" placeholder="${aoBean.actFarmer.actName}" name="actName" readOnly/>
+	                	<form:label path="${aoBean.actFarmer.actName}">活動名稱</form:label>
+	                  	<form:input type="text" class="form-control" value="${aoBean.actFarmer.actName}" path="actName" readOnly="true"/>
 	                </div>
 	              </div>
 	            <div class="w-100"></div>
 	          	<div class="col-md-6">
 	                <div class="form-group">
-	                	<label for="memTel">活動時間</label>
-	                  	<input type="date" class="form-control" value="${aoBean.actFarmer.actDateSta}" name="actDateSta" readOnly="true"/>
+	                	<form:label path="memTel">活動時間</form:label>
+	                  	<form:input type="date" class="form-control" value="${aoBean.actFarmer.actDateSta}" path="actDateSta" readOnly="true"/>
 <!-- 	                  	<input type="time" class="form-control" placeholder="活動時間" name="acttimeSta" readOnly="true"/> -->
-	                  	<input type="date" class="form-control" value="${aoBean.actFarmer.actDateEnd}" name="actDateEnd" readOnly="true"/>
+	                  	<form:input type="date" class="form-control" value="${aoBean.actFarmer.actDateEnd}" path="actDateEnd" readOnly="true"/>
 <!-- 	                  	<input type="time" class="form-control" placeholder="活動時間" name="actTimeEnd" readOnly="true"/>	                  	 -->
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
 <!-- 	                  	<input type="date" class="form-control" placeholder="活動時間" name="actDateSta" readOnly="true"/> -->
-	                  	<input type="time" class="form-control" value="${aoBean.actFarmer.actTimeSta}" name="actTimeSta" readOnly="true"/>
+	                  	<form:input type="time" class="form-control" value="${aoBean.actFarmer.actTimeSta}" path="actTimeSta" readOnly="true"/>
 <!-- 	                  	<input type="date" class="form-control" placeholder="活動時間" name="actDateEnd" readOnly="true"/> -->
-	                  	<input type="time" class="form-control" value="${aoBean.actFarmer.actTimeEnd}" name="actTimeEnd" readOnly="true"/>	                  	
+	                  	<form:input type="time" class="form-control" value="${aoBean.actFarmer.actTimeEnd}" path="actTimeEnd" readOnly="true"/>	                  	
 	                </div>
                 </div>
 		         <div class="w-100"></div>	                          
 		            <div class="col-md-12">
 		            	<div class="form-group">
-	                	<label for="actAddr">活動地址</label>
-	                 	 <input type="text" class="form-control" placeholder="${aoBean.actFarmer.actAddr}" name="actAddr"/>
+	                	<form:label path="actAddr">活動地址</form:label>
+	                 	 <form:input type="text" class="form-control" placeholder="${aoBean.actFarmer.actAddr}" path="actAddr"/>
 	                	</div>
 		            </div>
                 <div class="w-100"></div>
@@ -148,41 +138,41 @@ function backHome(){
             
 		            <div class="col-md-6">
 		            	<div class="form-group">
-		            		<label for="ordActNum">報名人數</label>
+		            		<form:label path="ordActNum">報名人數</form:label>
 		            		<div class="select-wrap">
 		                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-		                  <select class="form-control" name="ordActNum" id="ordActNum" onChange="getNum()">
-		                  	<option name="operation" value="1">1</option>
-		                    <option name="operation" value="2">2</option>
-		                    <option name="operation" value="3">3</option>
-		                    <option name="operation" value="4">4</option>
-		                    <option name="operation" value="5">5</option>
-		                    <option name="operation" value="6">6</option>
-		                  </select>
+		                  <form:select class="form-control" path="ordActNum" id="ordActNum" onChange="getNum()">
+		                  	<form:option name="operation" value="1">1</form:option>
+		                    <form:option name="operation" value="2">2</form:option>
+		                    <form:option name="operation" value="3">3</form:option>
+		                    <form:option name="operation" value="4">4</form:option>
+		                    <form:option name="operation" value="5">5</form:option>
+		                    <form:option name="operation" value="6">6</form:option>
+		                  </form:select>
 		                </div>
 		            	</div>
 		            </div>
 		            <div class="col-md-6">
 		            	<div class="form-group">
-		            	<label for="totalPrice">總金額</label>
-	                  	<input type="text" class="form-control" name="totalPrice" id="result123"  readOnly/>
+		            	<form:label path="totalPrice">總金額</form:label>
+	                  	<form:input type="text" class="form-control" path="totalPrice" id="result123" readOnly="true"/>
 	                </div>
 		            </div>
 		            <div class="w-100"></div>
 		            
 	          	<div class="col-md-6">
 	                <div class="form-group">
- 	                <input type="submit" class="btn btn-primary py-3 px-4 w-100" value="修改訂單" />	                
+ 	                <form:button class="btn btn-primary py-3 px-4 w-100" value="修改訂單" />	                
 	                </div>
 	              </div>
 	             <div class="col-md-6">
 	                <div class="form-group">
-					<input type="button" class="btn btn-primary py-3 px-4 w-100" value="回訂單管理" onclick="backHome()"/>	                
+					<form:button class="btn btn-primary py-3 px-4 w-100" value="回訂單管理" onclick="backHome()"/>	                
 	                </div>
                 </div>
 		         <div class="w-100"></div>	                
 		         </div>
-	          </form><!-- END -->
+	          </form:form><!-- END -->
 		         </div>
 	          </div>
 		</div>

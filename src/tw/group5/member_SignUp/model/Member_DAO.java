@@ -211,6 +211,15 @@ public class Member_DAO {
 
 		return list;
 	}
+	
+	//搜尋總比數
+	public int totalPages() {
+		Session session = sessionFactory.getCurrentSession();
+
+		 Query<?> query =session.createQuery("select count(*) From Member_SignUp");
+		 long result = (long) query.uniqueResult();
+		 return(int)result;
+	}
 
 	// Admin會員搜尋部分資料
 	public Member_SignUp Select_Member_no(String member_no) {

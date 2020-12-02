@@ -2,12 +2,15 @@ package tw.group5.active.service;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.active.dao.ActOrdDAO;
 import tw.group5.active.model.ActOrd;
-
+@Transactional
 @Service
 public class ActOrdService {
 	
@@ -31,7 +34,7 @@ public class ActOrdService {
 			return actOrdDAO.getActOrdsById(actId);
 	}
 		
-//	//查詢某一活動的某一筆訂單
+	//查詢某一活動的某一筆訂單
 //	public List<ActOrd> getActOrdsByOrdId(Integer actOrdId){
 //		return actOrdDAO.getActOrdsByOrdId(actOrdId);
 //	}
@@ -49,7 +52,7 @@ public class ActOrdService {
 		
 	//修改報名
 	public ActOrd updateActOrd(ActOrd actOrd) {
-		return updateActOrd(actOrd);
+		return actOrdDAO.updateActOrd(actOrd);
 	}	
 	
 }

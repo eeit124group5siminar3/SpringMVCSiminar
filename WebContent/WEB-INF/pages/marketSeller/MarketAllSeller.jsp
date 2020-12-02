@@ -32,15 +32,17 @@
 					</p>
 		                
 		                <h3 class="heading">
-		                <a >${item.mallName}</a>
+		                <a href="#" onclick='goShopping(${item.memberNo})'>${item.mallName}</a>
 		                </h3>
-		                <a >${item.mallDescription}</a><br>
+		                 <p>${item.mallDescription} </p><br>
 		                <p>地址 : ${item.address} </p>
 		                <p><a href="#" onclick='goShopping(${item.memberNo})' class="btn btn-primary py-2 px-3">來去逛逛</a></p>
 		              </div>
+		              
 		            </div>
 		          </div>
 			 </div>
+			 
          </div> 
    </div>
    </c:forEach>
@@ -139,23 +141,5 @@
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
 <jsp:include page="../js/Market.jsp" />
-<script>
-function goShopping(memberNo) {
-	console.log("我要進來囉");
-$.ajax({
-	url : "ProductContent",
-	type : "POST",
-	data : {
-		"memberNo" : memberNo
-	},
-	datatype : "html",
-	success : function(data, status) {
-		$("#mainContent").html(data);
-	},
-	error : function(data, status) {
-		$("#mainContent").html(data);
-	}
-});
-}
-</script>
+
 
