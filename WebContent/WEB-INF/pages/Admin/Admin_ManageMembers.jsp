@@ -71,8 +71,8 @@
 	}
 </script>
 
-<!-- 刪除按鈕回傳會員資料 -->
-<script>
+	<!-- 刪除按鈕回傳會員資料 -->
+	<script>
 $(function(){
 	$("#member_tr").on("click","#delete_button",function(){
 	$.ajax({
@@ -106,9 +106,9 @@ $(function(){
 });
 })
 </script>
-	
-<!-- 確定刪除會員資料 -->
-<script>
+
+	<!-- 確定刪除會員資料 -->
+	<script>
 $(function(){
 	$("#member_tr").on("click","#delete_button_sure",function(){
 	$.ajax({
@@ -398,6 +398,9 @@ var currentPage = 1;
 		success:function(data){
 		console.log(data);
 		let data1 = data.data;
+		let pageNo = data.pageNO;
+		let totalPages = data.totalPageNo;
+		
 		content="";
 		for(var i=0 ; i<data1.length ; i++){
 			content+=
@@ -466,6 +469,93 @@ var currentPage = 1;
 				</td>
 				</tr>`;
 		}
+		pages="";
+		if(totalPages <=1){
+			pages+=
+				`
+				<tr>
+					<td style="border: 0px; text-align: center;" colspan="10">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+							<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="1"style="color:black" disabled="disabled">1</button></li>
+								<li class="page-item"><button type="button" class="page-link" disabled="disabled">&raquo;</button></li>
+							</ul>
+						</nav>
+					</td>
+				</tr>
+				`;
+		}if(totalPages ==2){
+			pages+=
+				`
+				<tr>
+					<td style="border: 0px; text-align: center;" colspan="10">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+							<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+							</ul>
+						</nav>
+					</td>
+				</tr>
+				`;
+		}if(totalPages ==3){
+			pages+=
+				`
+				<tr>
+					<td style="border: 0px; text-align: center;" colspan="10">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+							<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+							</ul>
+						</nav>
+					</td>
+				</tr>
+				`;
+		}if(totalPages ==4){
+			pages+=
+				`
+				<tr>
+					<td style="border: 0px; text-align: center;" colspan="10">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+							<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+							</ul>
+						</nav>
+					</td>
+				</tr>
+				`;
+		}if(totalPages >=5){
+			pages+=
+				`
+				<tr>
+					<td style="border: 0px; text-align: center;" colspan="10">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+							<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="5" >5</button></li>
+								<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+							</ul>
+						</nav>
+					</td>
+				</tr>
+				`;
+		}
 		$('#member_tr').html(
 				`
 				<tr>
@@ -478,10 +568,495 @@ var currentPage = 1;
 				<th>檢舉次數</th>
 				<th>停權狀態</th>
 				<th colspan="2"></th>
-				</tr>`+content);
+				</tr>`+content+pages);
 		
 	}
     });  
+})
+</script>
+
+	<!-- 分頁 -->
+	<script>
+$(function(){
+	$("#member_tr").on("click","button",function(){
+		var PageNo =$(this).val();
+		$.get({
+			url:"${pageContext.request.contextPath}/manageMembersData.controller/"+PageNo,
+			success:function(data){
+			console.log(data);
+			let data1 = data.data;
+			let pageNo = data.pageNO;
+			let totalPages = data.totalPageNo;
+			
+			content="";
+			for(var i=0 ; i<data1.length ; i++){
+				content+=
+					`
+					<tr>
+					<td>\${data1[i].member_permissions}</td>
+					<td>\${data1[i].member_no}</td>
+					<td>\${data1[i].member_name}</td>
+					<td>\${data1[i].member_cellphone}</td>
+					<td>\${data1[i].member_address}</td>
+					<td>\${data1[i].member_signup_date}</td>
+					<td>\${data1[i].member_gg}</td>
+					<td>\${data1[i].member_lock_acc}</td>
+					<td>
+						<form method="POST">
+							<input type="hidden" id="view_member_no"+[i] name="actId"
+							value="\${data1[i].member_no}"> 
+						<button type="button" id="view_content" data-toggle="modal" data-target="#exampleModal1">
+						  檢視
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">詳細資料</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div id="select_content" class="modal-body">
+						      </div>
+						    </div>
+						  </div>
+						</div>
+	</form>
+
+					</td>
+					
+					<td>
+					<form method="POST">
+					<input type="hidden" id="delete_member_no" name="actId"
+					value="\${data1[i].member_no}"> 
+
+				<!-- Button trigger modal -->
+				<button type="button" id="delete_button" data-toggle="modal" data-target="#exampleModal_delete">
+				  刪除
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">刪除資料</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div id="delete_content" class="modal-body"></div>
+				    </div>
+				  </div>
+				</div>
+	</form>
+					</td>
+					</tr>`;
+			}
+			pages="";
+			if(totalPages <=2){
+				if((totalPages-pageNo) == 1){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}if((totalPages-pageNo) == 0){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2" style="color:black" disabled="disabled">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" disabled="disabled">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}
+			}
+			if(totalPages ==3){
+				if((totalPages-pageNo) == 2){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}if((totalPages-pageNo) == 1){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2" style="color:black" disabled="disabled">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}if((totalPages-pageNo) == 0){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3" style="color:black" disabled="disabled">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" disabled="disabled">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}
+			}
+				if(totalPages ==4){
+					if((totalPages-pageNo) == 3){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+			}if((totalPages-pageNo) == 2){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2" style="color:black" disabled="disabled">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+			}if((totalPages-pageNo) == 1){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="3" style="color:black" disabled="disabled">3</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+			}if((totalPages-pageNo) == 0){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="4"  style="color:black" disabled="disabled">4</button></li>
+									<li class="page-item"><button type="button" class="page-link" disabled="disabled">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+				}
+			}
+			if(totalPages ==5){
+				if((totalPages-pageNo) == 4){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="5">5</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+			}if((totalPages-pageNo) == 3){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2" style="color:black" disabled="disabled">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="5">5</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+				}if((totalPages-pageNo) == 2){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3" style="color:black" disabled="disabled">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="5">5</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}if((totalPages-pageNo) == 1){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="4" style="color:black" disabled="disabled">4</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="5">5</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}if((totalPages-pageNo) == 0){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="5" style="color:black" disabled="disabled">5</button></li>
+										<li class="page-item"><button type="button" class="page-link" disabled="disabled">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}
+			}
+			if(totalPages >=6){
+				if(pageNo ==1){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="5">5</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+				}if(pageNo ==2){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="2" style="color:black" disabled="disabled">2</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="5">5</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+					}if(pageNo ==3){
+						pages+=
+							`
+							<tr>
+								<td style="border: 0px; text-align: center;" colspan="10">
+									<nav aria-label="Page navigation example">
+										<ul class="pagination">
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+											<li class="page-item"><button type="button" class="page-link" value="1">1</button></li>
+											<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+											<li class="page-item"><button type="button" class="page-link" value="3" style="color:black" disabled="disabled">3</button></li>
+											<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+											<li class="page-item"><button type="button" class="page-link" value="5">5</button></li>
+											<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+										</ul>
+									</nav>
+								</td>
+							</tr>
+							`;
+						}
+				
+				if(pageNo >=4 && (totalPages-pageNo)>=2){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-2}">\${pageNo*1-2}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">\${pageNo*1-1}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo}" style="color:black" disabled="disabled">\${pageNo}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">\${pageNo*1+1}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+2}">\${pageNo*1+2}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}
+				if(pageNo >=4 && (totalPages-pageNo)==1){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-3}">\${pageNo*1-3}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-2}">\${pageNo*1-2}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">\${pageNo*1-1}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo}" style="color:black" disabled="disabled">\${pageNo}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">\${pageNo*1+1}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}
+				if(pageNo >=4 && (totalPages-pageNo)==0){
+					pages+=
+						`
+						<tr>
+							<td style="border: 0px; text-align: center;" colspan="10">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">&laquo;</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-4}">\${pageNo*1-4}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-3}">\${pageNo*1-3}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-2}">\${pageNo*1-2}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1-1}">\${pageNo*1-1}</button></li>
+										<li class="page-item"><button type="button" class="page-link" value="\${pageNo}" style="color:black" disabled="disabled">\${pageNo}</button></li>
+										<li class="page-item"><button type="button" class="page-link" disabled="disabled">&raquo;</button></li>
+									</ul>
+								</nav>
+							</td>
+						</tr>
+						`;
+				}
+			}
+			$('#member_tr').html(
+					`
+					<tr>
+					<th>買賣家</th>
+					<th style="width: 100px;">會員編號</th>
+					<th style="width: 130px;">會員名稱</th>
+					<th style="width: 130px;">會員電話</th>
+					<th style="width: 350px;">會員地址</th>
+					<th style="width: 150px;">註冊時間</th>
+					<th>檢舉次數</th>
+					<th>停權狀態</th>
+					<th colspan="2"></th>
+					</tr>`+content+pages);
+			
+		}
+	    });    
+	})
 })
 </script>
 
@@ -502,6 +1077,8 @@ $("#select_member_no").on("submit",function(ev){
 			let data1 = data.data;
 			let data2 = data.totaldata;			
 			let data3 = data.error;
+			let pageNo = data.pageNO;
+			let totalPages = data.totalPageNo;
 		if(data1){
 			content="";
 				content+=
@@ -570,6 +1147,21 @@ $("#select_member_no").on("submit",function(ev){
 	</form>
 					</td>
 					</tr>`;
+					pages="";
+						pages+=
+							`
+							<tr>
+								<td style="border: 0px; text-align: center;" colspan="10">
+									<nav aria-label="Page navigation example">
+										<ul class="pagination">
+										<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+											<li class="page-item"><button type="button" class="page-link" value="1"style="color:black" disabled="disabled">1</button></li>
+											<li class="page-item"><button type="button" class="page-link" disabled="disabled">&raquo;</button></li>
+										</ul>
+									</nav>
+								</td>
+							</tr>
+							`;
 			$('#member_tr').html(
 					`
 					<tr>
@@ -582,7 +1174,7 @@ $("#select_member_no").on("submit",function(ev){
 					<th>檢舉次數</th>
 					<th>停權狀態</th>
 					<th colspan="2"></th>
-					</tr>`+content);
+					</tr>`+content+pages);
 		}else if(data2){
 			content="";
 			for(var i=0 ; i<data2.length ; i++){
@@ -653,6 +1245,93 @@ $("#select_member_no").on("submit",function(ev){
 					</td>
 					</tr>`;
 			}
+			pages="";
+			if(totalPages <=1){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1"style="color:black" disabled="disabled">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" disabled="disabled">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+			}if(totalPages ==2){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+			}if(totalPages ==3){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+			}if(totalPages ==4){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+			}if(totalPages >=5){
+				pages+=
+					`
+					<tr>
+						<td style="border: 0px; text-align: center;" colspan="10">
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								<li class="page-item"><button type="button" class="page-link" disabled="disabled">&laquo;</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="1" style="color:black" disabled="disabled">1</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="2">2</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="3">3</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="4">4</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="5" >5</button></li>
+									<li class="page-item"><button type="button" class="page-link" value="\${pageNo*1+1}">&raquo;</button></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+					`;
+			}
 			$('#member_tr').html(
 					`
 					<tr>
@@ -665,7 +1344,7 @@ $("#select_member_no").on("submit",function(ev){
 					<th>檢舉次數</th>
 					<th>停權狀態</th>
 					<th colspan="2"></th>
-					</tr>`+content);
+					</tr>`+content+pages);
 		}else{
 			$("#select_error").html("查無資料，請重新輸入");
 		}
@@ -945,23 +1624,23 @@ $("#signup_form").on("submit",function(ev){
 			</tr>
 
 			<tr id="member_tr"></tr>
-			<tr>
-				<td style="border: 0px; text-align: center;" colspan="12">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ul>
-					</nav>
-				</td>
-			</tr>
+			<!-- 			<tr> -->
+			<!-- 				<td style="border: 0px; text-align: center;" colspan="12"> -->
+			<!-- 					<nav aria-label="Page navigation example"> -->
+			<!-- 						<ul class="pagination"> -->
+			<!-- 							<li class="page-item"><a class="page-link" href="#" -->
+			<!-- 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span> -->
+			<!-- 							</a></li> -->
+			<!-- 							<li class="page-item"><a class="page-link" href="#">1</a></li> -->
+			<!-- 							<li class="page-item"><a class="page-link" href="#">2</a></li> -->
+			<!-- 							<li class="page-item"><a class="page-link" href="#">3</a></li> -->
+			<!-- 							<li class="page-item"><a class="page-link" href="#" -->
+			<!-- 								aria-label="Next"> <span aria-hidden="true">&raquo;</span> -->
+			<!-- 							</a></li> -->
+			<!-- 						</ul> -->
+			<!-- 					</nav> -->
+			<!-- 				</td> -->
+			<!-- 			</tr> -->
 		</table>
 	</div>
 
