@@ -50,7 +50,7 @@ public class Recipe_Bean {
 	private Blob data;
 	private MultipartFile multipartFile;
 	private String date;
-	private Integer views;
+	private Integer views=0;
 	
 	public Recipe_Bean() {
 	}
