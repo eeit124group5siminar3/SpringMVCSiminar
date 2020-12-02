@@ -6,51 +6,28 @@
 	<div class="row">
 		<div class="col-md-12 ftco-animate">
 			<div>
-				<button class="btn btn-primary btn-block" data-toggle="modal"
-					data-target="#insert">新增商品</button>
-				<br />
-			</div>
-			<div>
 				<table class="table table-hover">
 					<thead class="thead-light">
 						<tr>
 							<th>&nbsp;</th>
-							<th>&nbsp;</th>
-							<th>產品名稱</th>
-							<th>內容</th>
-							<th>庫存</th>
-							<th>上架時間</th>
-							<th>保質期</th>
+							<th>訂單編號</th>
+							<th>產品</th>
+							<th>數量</th>
+							<th>下定日期</th>
+							<th>預期送達時間</th>
+							<th>狀態管理</th>
 						</tr>
 					</thead>
-					<c:forEach var="item" items="${management_DPP}">
+					<c:forEach var="item" items="${manageOrder_DPP}">
 						<tr class="table-=active text-center" data-toggle="modal"
-							data-target="#update" data-whatever="${item.productId}">
-							<td id="${item.productId}"><c:choose>
-									<c:when test="${item.stock<=0}">
-										<button type="button" class="btn btn-primary btn-sm"
-											disabled="disabled">上架</button>
-									</c:when>
-									<c:otherwise>
-										<c:if test="${item.status==0}">
-											<button type="button" class="btn btn-primary btn-sm"
-												onclick="shelf(event,1)">上架</button>
-										</c:if>
-										<c:if test="${item.status==1}">
-											<button type="button" class="btn btn-primary btn-sm disabled"
-												onclick="shelf(event,0)">下架</button>
-										</c:if>
-									</c:otherwise>
-								</c:choose></td>
-							<td class="image-prod"
-								style="padding-top: 5px; padding-bottom: 5px"><div
-									class="img"
-									style="background-image: url(<c:url value='retrieveImageServlet?id=${item.productId}&type=PRODUCT' />);"></div></td>
-							<td>${item.product}</td>
-							<td>${item.content}${item.unit}</td>
-							<td>${item.stock}</td>
-							<td>${item.addedDate}</td>
-							<td>${item.shelfTime}</td>
+							data-target="#manageOrder" data-whatever="${item.productId}">
+							<td id="${item.orderId}"></td>
+							<td>${item.orderId}</td>
+							<td>${item.description}</td>
+							<td>${item.amount}</td>
+							<td>${item.productOrderBean.orderDate}</td>
+							<td>${item.productOrderBean.shippingTime}</td>
+							<td>${item.status}</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -60,23 +37,23 @@
 					<div class='block-27'>
 						<ul>
 							<c:choose>
-								<c:when test="${management_pageNo <= 1}">
+								<c:when test="${manageOrder_pageNo <= 1}">
 									<li><span>&lt;&lt;</span></li>
 									<li><span>&lt;</span></li>
 								</c:when>
 								<c:otherwise>
 									<li><a href='#product_top' onclick='managementPage(1)'>&lt;&lt;</a></li>
 									<li><a href='#product_top'
-										onclick='managementPage(${management_pageNo - 1})'>&lt;</a></li>
+										onclick='managementPage(${manageOrder_pageNo - 1})'>&lt;</a></li>
 								</c:otherwise>
 							</c:choose>
 
 							<c:choose>
-								<c:when test="${management_totalPages <= 5}">
-									<c:forEach begin="1" end="${management_totalPages}" step="1"
+								<c:when test="${manageOrder_totalPages <= 5}">
+									<c:forEach begin="1" end="${manageOrder_totalPages}" step="1"
 										var="i">
 										<c:choose>
-											<c:when test="${management_pageNo == i}">
+											<c:when test="${manageOrder_pageNo == i}">
 												<li class='active'><span>${i}</span></li>
 											</c:when>
 											<c:otherwise>
@@ -88,10 +65,10 @@
 								</c:when>
 								<c:otherwise>
 									<c:choose>
-										<c:when test="${management_pageNo <4 }">
+										<c:when test="${manageOrder_pageNo <4 }">
 											<c:forEach begin="1" end="5" step="1" var="i">
 												<c:choose>
-													<c:when test="${management_pageNo == i}">
+													<c:when test="${manageOrder_pageNo == i}">
 														<li class='active'><span>${i}</span></li>
 													</c:when>
 													<c:otherwise>
@@ -102,11 +79,11 @@
 											</c:forEach>
 										</c:when>
 										<c:when
-											test="${management_pageNo > (management_totalPages - 3)}">
-											<c:forEach begin="${management_totalPages - 4}"
-												end="${management_totalPages}" step="1" var="i">
+											test="${manageOrder_pageNo > (manageOrder_totalPages - 3)}">
+											<c:forEach begin="${manageOrder_totalPages - 4}"
+												end="${manageOrder_totalPages}" step="1" var="i">
 												<c:choose>
-													<c:when test="${management_pageNo == i}">
+													<c:when test="${manageOrder_pageNo == i}">
 														<li class='active'><span>${i}</span></li>
 													</c:when>
 													<c:otherwise>
@@ -117,10 +94,10 @@
 											</c:forEach>
 										</c:when>
 										<c:otherwise>
-											<c:forEach begin="${management_pageNo - 2}"
-												end="${management_pageNo + 2}" step="1" var="i">
+											<c:forEach begin="${manageOrder_pageNo - 2}"
+												end="${manageOrder_pageNo + 2}" step="1" var="i">
 												<c:choose>
-													<c:when test="${management_pageNo == i}">
+													<c:when test="${manageOrder_pageNo == i}">
 														<li class='active'><span>${i}</span></li>
 													</c:when>
 													<c:otherwise>
@@ -135,15 +112,15 @@
 							</c:choose>
 
 							<c:choose>
-								<c:when test="${management_pageNo >= management_totalPages}">
+								<c:when test="${manageOrder_pageNo >= manageOrder_totalPages}">
 									<li><span>&gt;</span></li>
 									<li><span>&gt;&gt;</span></li>
 								</c:when>
 								<c:otherwise>
 									<li><a href='#product_top'
-										onclick='managementPage(${management_pageNo + 1})'>&gt;</a></li>
+										onclick='managementPage(${manageOrder_pageNo + 1})'>&gt;</a></li>
 									<li><a href='#product_top'
-										onclick='managementPage(${management_totalPages})'>&gt;&gt;</a></li>
+										onclick='managementPage(${manageOrder_totalPages})'>&gt;&gt;</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>
@@ -176,31 +153,31 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-function shelf(event,status){
-	event.stopPropagation(); 
-	var productId=event.path[1].id;
-	$.ajax({
-		url : "Shelf",
-		type : "POST",
-		data : {
-			"productId" : productId,
-			"status" :status
-		},
-		success : function(data, status) {
-			if(data==1){
-			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
-				}else{
-			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
-					}
-		},
-		error : function(data, status) {
-			if(data==1){
-				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
-					}else{
-				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
-						}
-		}
-	});
+// function shelf(event,status){
+// 	event.stopPropagation(); 
+// 	var productId=event.path[1].id;
+// 	$.ajax({
+// 		url : "Shelf",
+// 		type : "POST",
+// 		data : {
+// 			"productId" : productId,
+// 			"status" :status
+// 		},
+// 		success : function(data, status) {
+// 			if(data==1){
+// 			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
+// 				}else{
+// 			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
+// 					}
+// 		},
+// 		error : function(data, status) {
+// 			if(data==1){
+// 				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
+// 					}else{
+// 				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
+// 						}
+// 		}
+// 	});
 	
-}
+// }
 </script>

@@ -56,6 +56,14 @@ public class ProductDAO {
 		this.recordsPerPage = recordsPerPage;
 	}
 
+	public int getMaintainPerPage() {
+		return maintainPerPage;
+	}
+
+	public void setMaintainPerPage(int maintainPerPage) {
+		this.maintainPerPage = maintainPerPage;
+	}
+
 	public int getTotalPages() {
 		// 注意下一列敘述的每一個型態轉換
 		totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
@@ -264,7 +272,7 @@ public class ProductDAO {
 	public ProductBean updateProduct(ProductBean bean) {
 
 		Session session = sessionFactory.getCurrentSession();
-		if(bean.getStock()<=0) {
+		if (bean.getStock() <= 0) {
 			bean.setStatus(0);
 		}
 		session.update(bean);
@@ -288,7 +296,7 @@ public class ProductDAO {
 		java.util.Date now = new java.util.Date();
 		Date date = new Date(now.getTime());
 		bean.setAddedDate(date);
-		if(bean.getStock()<=0) {
+		if (bean.getStock() <= 0) {
 			bean.setStatus(0);
 		}
 		session.save(bean);
