@@ -91,14 +91,7 @@
 						href="<c:url value='myRecipe'/>">Bookmark</a></li>
 				</ul>
 
-				<form class="form-inline my-2 my-lg-0" id="search"
-					action="javascript:void(0);" method="post">
-					<input class="form-control mr-sm-2" type="text" id="searchInput"
-						name="searchInput" placeholder="search delicious"
-						aria-label="Search" /> <input
-						class="btn btn-outline-success my-2 my-sm-0" 　 onblur="ch()"
-						id="send" type="submit" name="action" value="Search" />
-				</form>
+				
 			</div>
 		</nav>
 
@@ -121,37 +114,30 @@
 				</div>
 
 				<div id="searchSuccess">
+				
 					<div class="row">
-
-
-
-
 						<c:forEach var='BeanToken' items="${allRecipe}">
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="product" class="shadow-lg p-3 mb-5 bg-white rounded">
-									<a
-										href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>"
-										class="img-prod"><img class="img-fluid"
-										src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>"
-										alt=""> </a>
-
 									<div class="text py-3 pb-4 px-3 text-center">
-										<a
-											href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.name}</a>
-
-
-
-
-
-
+										<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>"
+										style="font-size: 23px">
+										${BeanToken.name}</a>
 										<div style="float: right;" class="deleteRecipe" id="heart">
 											<a href="" data-toggle="tooltip" title="確定要移除嗎?"> <span
 												class="heart d-flex justify-content-center align-items-center ">
-													<span><i class="ion-ios-heart" style="color: red"
+													<span><i class="ion-ios-heart" style="color: red;font-size:20px"
 														id="heart" onclick="fun(${BeanToken.rec_id})"></i></span>
 											</span></a>
 										</div>
+									</div>									
+									<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>"
+										class="img-prod"><img class="img-fluid"
+										src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>"
+										alt=""> </a>
 									</div>
+								<div class="text py-3 pb-4 px-3 text-center">
+									<p>累積人氣 :  ${BeanToken.views}</p>
 								</div>
 							</div>
 
