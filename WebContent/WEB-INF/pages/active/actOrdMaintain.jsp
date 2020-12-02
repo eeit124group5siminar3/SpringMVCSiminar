@@ -71,7 +71,7 @@
 	}
 </script>
 
-<title>一日農夫活動申請</title>
+<title>報名管理</title>
 </head>
 
 <body class="goto-here">

@@ -64,7 +64,7 @@ $("#form_submit").on("submit",function(ev){
 		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 	success:function(data){
 		if(data){
-			window.location.href = "index.controller";
+			self.location=document.referrer;
 		}else{
 			$("#check_email").html("帳號或密碼錯誤，請重新輸入");
 		}
