@@ -100,6 +100,16 @@ public class ActOrdDAO {
 
 	}
 	
+	//查詢某一會員的訂單
+	public List<ActOrd> getActOrdsByMember(Integer memNo){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActOrd where memNo =?0 ORDER BY actOrdId";
+		Query<ActOrd> query = session.createQuery(hql,ActOrd.class);
+		query.setParameter(0, memNo);
+		List<ActOrd> list = query.list();
+		return list;
+	}
+	
 // =========================廠商CRUD==========================================
 	
 	//查詢某一活動的報名列表
