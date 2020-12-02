@@ -22,7 +22,7 @@ public class Bookmark_Bean {
 	private String id;
 	private Integer member_no;
 	private String rec_id;
-	private boolean value;
+//	private boolean value;
 	
 	@Autowired @JsonIgnore
 	private Recipe_DAO_spring rDAO;
