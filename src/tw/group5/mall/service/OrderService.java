@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.mall.dao.OrderDAO;
+import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.model.ProductOrderBean;
 import tw.group5.mall.model.ProductOrderItemBean;
 import tw.group5.mall.model.ProducterBean;
@@ -72,5 +73,18 @@ public class OrderService {
 
 	public ProducterBean getProducterId(Integer producterId) {
 		return odao.getProducterId(producterId);
+	}
+
+	public void setMaintainPageNo(Integer pageNo) {
+		odao.setMaintainPageNo(pageNo);
+	}
+
+	public int getMaintainTotalPages(Integer producterId) {
+		return odao.getMaintainTotalPages(producterId);
+	}
+
+	public List<ProductOrderItemBean> getMaintainOrders(Integer producterId) {
+		// TODO Auto-generated method stub
+		return odao.getMaintainOrders(producterId);
 	}
 }
