@@ -214,7 +214,7 @@ public class ProductOrderItemBean implements Serializable {
 					statusTag += "<input type='radio' checked='checked' name='" + itemId + "' value='" + i + "'/>"
 							+ StatusClass.getStatus(i);
 				} else {
-					statusTag += "<input type='radio' name='" + itemId + "' value='" + i + "'/>"
+					statusTag += "<input type='radio' name='" + itemId + "' value='" + i + "' onclick='orderManagement(event,"+i+")'/>"
 							+ StatusClass.getStatus(i);
 				}
 			}
@@ -236,7 +236,7 @@ public class ProductOrderItemBean implements Serializable {
 					statusTag += "<input type='radio' checked='checked' name='" + itemId + "' value='" + i + "'/>"
 							+ StatusClass.getStatus(i);
 				} else if (i>status){
-					statusTag += "<input type='radio' name='" + itemId + "' value='" + i + "'/>"
+					statusTag += "<input type='radio' name='" + itemId + "' value='" + i + "' onclick='orderManagement(event,"+i+")'/>"
 							+ StatusClass.getStatus(i);
 				} else {
 					statusTag += "<input type='radio' disabled='disabled' name='" + itemId + "' value='" + i + "'/>"
