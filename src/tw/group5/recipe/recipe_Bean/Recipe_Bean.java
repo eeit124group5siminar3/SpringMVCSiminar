@@ -166,6 +166,7 @@ public class Recipe_Bean {
 	}
 
 	@Column(name="data")
+	@JsonIgnore
 	public Blob getData() {
 		return data;
 	}
@@ -175,6 +176,7 @@ public class Recipe_Bean {
 	}
 
 	@Transient
+	@JsonIgnore
 	public MultipartFile getMultipartFile() {
 		return multipartFile;
 	}
@@ -208,4 +210,7 @@ public class Recipe_Bean {
 	public void setViews(Integer views) {
 		this.views = views;
 	}
+
+	
+	
 }

@@ -75,7 +75,18 @@ public class Recipe_Service implements recipe_Service_interface {
 	public boolean deleteBookmark(String id) {
 		return rDAO.deleteBookmark(id);
 	}
-
+	
+	@Override
+	public List<Bookmark_Bean> partSearchBookmark(Integer mem_no,String rec_id) {
+		return rDAO.partSearchBookmark(mem_no, rec_id);
+	}
+	
+	@Override
+	public boolean bookmarkExist(String rec_id,Integer mem_no) {
+		return rDAO.bookmarkExist(rec_id,mem_no);
+	}
+	
+	//----------------------首頁分頁--------------------------------
 	@Override
 	public long getRecordCounts() {
 		return rDAO.getRecordCounts();
@@ -87,24 +98,28 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.searchAllRecipe(page, showData);
 	}
 	
+//	@Override
+//	public Integer getTotalPages() {
+//		return rDAO.getTotalPages();
+//	}
 	
+//	@Override
+//	public void setPageNo(Integer pageNo) {
+//		rDAO.setPageNo(pageNo);
+//	}
+	
+//	----------------------------------------------------------------
+	
+	
+//  -----------------------修改食譜分頁-----------------------------
 	@Override
-	public Integer getTotalPages() {
-		return rDAO.getTotalPages();
+	public List<Recipe_Bean> searchMyRecipe(Integer page,Integer showData,Integer mem_no){
+		return rDAO.searchMyRecipe(page, showData, mem_no);
 	}
 	
 	@Override
-	public void setPageNo(Integer pageNo) {
-		rDAO.setPageNo(pageNo);
+	public long getMyRecipeCounts(Integer mem_no) {
+		return rDAO.getMyRecipeCounts(mem_no);
 	}
 	
-	@Override
-	public List<Bookmark_Bean> partSearchBookmark(Integer mem_no,String rec_id) {
-		return rDAO.partSearchBookmark(mem_no, rec_id);
-	}
-	
-	@Override
-	public boolean bookmarkExist(String rec_id,Integer mem_no) {
-		return rDAO.bookmarkExist(rec_id,mem_no);
-	}
 }
