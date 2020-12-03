@@ -46,33 +46,41 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+	crossorigin="anonymous"></script>
 <script>
-$(function(){
-$("#form_submit").on("submit",function(ev){
-	$.ajax({
-		url:"checkLogin.controller",
-		data:{
-			email:$("#exampleInputEmail1").val(),
-			password:$("#exampleInputPassword1").val(),
-			remember:$("#exampleCheck1").val()
-		 	},
-		type:"POST", 
-		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-	success:function(data){
-		if(data){
-			self.location=document.referrer;
-		}else{
-			$("#check_email").html("帳號或密碼錯誤，請重新輸入");
-		}
-	}
-    })  
-    ev.preventDefault(); 
-})
-})
+	$(function() {
+		$("#form_submit")
+				.on(
+						"submit",
+						function(ev) {
+							$
+									.ajax({
+										url : "checkLogin.controller",
+										data : {
+											email : $("#exampleInputEmail1")
+													.val(),
+											password : $(
+													"#exampleInputPassword1")
+													.val(),
+											remember : $("#exampleCheck1")
+													.val()
+										},
+										type : "POST",
+										contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+										success : function(data) {
+											if (data) {
+												self.location = document.referrer;
+											} else {
+												$("#check_email").html(
+														"帳號或密碼錯誤，請重新輸入");
+											}
+										}
+									})
+							ev.preventDefault();
+						})
+	})
 </script>
 <body class="goto-here body-hegiht">
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
@@ -83,7 +91,7 @@ $("#form_submit").on("submit",function(ev){
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
 				<div id="check_email" class="center"
-					style="color: red; text-align: center;height:20px"></div>
+					style="color: red; text-align: center; height: 20px"></div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">帳號</label> <input type="email"
 						name="email" value="${requestScope.user}${param.email}"
@@ -198,7 +206,7 @@ $("#form_submit").on("submit",function(ev){
 				<p>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy;
-<!-- 					<script> 
+					<!-- 					<script> 
  						document.write(new Date().getFullYear());
  					</script> -->
 					All rights reserved | This template is made with <i

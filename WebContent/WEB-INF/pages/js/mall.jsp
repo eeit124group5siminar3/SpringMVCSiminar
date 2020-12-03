@@ -239,4 +239,41 @@ function manageOrderPage(pageNo) {
 		}
 	});
 }
+//管理訂單狀態
+function orderManagement(event,orderStatus){
+	event.stopPropagation(); 
+	var yes=confirm("狀態改變為不可逆");
+	var orderDetailId=event.path[1].id;
+	if(yes){
+	$.ajax({
+		url : "OrderManagement",
+		type : "POST",
+		data : {
+			"orderDetailId" : orderDetailId,
+			"status" : orderStatus
+		},
+		success : function(data, status) {
+			event.path[1].innerHTML=data;
+		},
+		error : function(data, status) {
+			event.path[1].innerHTML=data;
+		}	
+		});	
+
+	}else{
+		$.ajax({
+			url : "OrderManagement",
+			type : "POST",
+			data : {
+				"orderDetailId" : orderDetailId
+			},
+			success : function(data, status) {
+				event.path[1].innerHTML=data;
+			},
+			error : function(data, status) {
+				event.path[1].innerHTML=data;
+			}	
+			});	
+		}
+	}
 </script>
