@@ -178,7 +178,7 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-function shelf(event,status){
+function shelf(event,productStatus){
 	event.stopPropagation(); 
 	var productId=event.path[1].id;
 	$.ajax({
@@ -186,7 +186,7 @@ function shelf(event,status){
 		type : "POST",
 		data : {
 			"productId" : productId,
-			"status" :status
+			"status" :productStatus
 		},
 		success : function(data, status) {
 			if(data==1){
