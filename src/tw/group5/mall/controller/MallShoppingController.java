@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -110,10 +112,11 @@ public class MallShoppingController {
 	}
 
 // 直接加入購物車
-	@PostMapping(value = "/AddToCart")
-	public String addToCart(@RequestParam(value = "productId") Integer productId,
-			@RequestParam(value = "qty") Integer qty,
+	@RequestMapping(value = "/AddToCart",method = {RequestMethod.GET,RequestMethod.POST})
+	public String addToCart(@RequestParam(value = "productId",required = false) Integer productId,
+			@RequestParam(value = "qty",required = false) Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
+		if(productId!=null) {
 		ProductBean selectedProduct = service.getProduct(productId);
 		selectedProduct.setViews(selectedProduct.getViews()+1);
 		OrderItem oi = new OrderItem();
@@ -132,7 +135,7 @@ public class MallShoppingController {
 			model.addAttribute("ShoppingCart", cart);
 		}
 		oi.setQty(qty);
-		cart.addToCart(productId, oi);
+		cart.addToCart(productId, oi);}
 		return "/mall/mall_shoppingcart";
 	}
 

@@ -21,13 +21,13 @@
 					<c:forEach var="item" items="${manageOrder_DPP}">
 						<tr class="text-center" data-toggle="modal"
 							data-target="#manageOrder" data-whatever="${item.productId}">
-							<td id="${item.orderId}"></td>
+							<td></td>
 							<td>${item.productOrderBean.orderId}</td>
 							<td>${item.description}</td>
 							<td>${item.amount}</td>
 							<td>${item.productOrderBean.orderDate.toString().substring(0,10)}</td>
 							<td>${item.productOrderBean.shippingTimeWord}</td>
-							<td>${item.statusTag}</td>
+							<td id="${item.itemId}">${item.statusTag}</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -125,7 +125,7 @@
 							</c:choose>
 						</ul>
 						<a href="<c:url value='/mall_management'/>"
-						class="btn btn-primary py-3 px-4" style="float:right" >商品管理</a>
+							class="btn btn-primary py-3 px-4" style="float: right">商品管理</a>
 					</div>
 				</div>
 
@@ -155,31 +155,23 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-// function shelf(event,status){
+// function orderManagement(event,orderStatus){
 // 	event.stopPropagation(); 
-// 	var productId=event.path[1].id;
+// 	console.log(event);
+// 	var orderDetailId=event.path[1].id;
 // 	$.ajax({
-// 		url : "Shelf",
+// 		url : "OrderManagement",
 // 		type : "POST",
 // 		data : {
-// 			"productId" : productId,
-// 			"status" :status
+// 			"orderDetailId" : orderDetailId,
+// 			"status" : orderStatus
 // 		},
 // 		success : function(data, status) {
-// 			if(data==1){
-// 			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
-// 				}else{
-// 			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
-// 					}
+// 			event.path[1].innerHTML=data;
 // 		},
 // 		error : function(data, status) {
-// 			if(data==1){
-// 				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
-// 					}else{
-// 				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
-// 						}
-// 		}
-// 	});
-	
+// 			event.path[1].innerHTML=data;
+// 		}	
+// 		});	
 // }
 </script>

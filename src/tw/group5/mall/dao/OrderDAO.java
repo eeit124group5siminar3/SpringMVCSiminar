@@ -205,4 +205,12 @@ public class OrderDAO {
 		return bean;
 	}
 
+// 取得單筆訂單詳細資料
+	public ProductOrderItemBean getOrderItem(Integer orderDetailId) {
+		Session session = sessionFactory.getCurrentSession();
+		System.err.println(orderDetailId);
+		ProductOrderItemBean poib=session.load(ProductOrderItemBean.class, orderDetailId);
+		return poib;
+	}
+
 }

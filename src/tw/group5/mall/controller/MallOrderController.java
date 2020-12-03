@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-
 import tw.group5.mall.ShoppingCart;
 import tw.group5.mall.model.OrderItem;
 import tw.group5.mall.model.ProductOrderBean;
@@ -90,7 +90,7 @@ public class MallOrderController {
 	}
 
 // 送出訂單
-	@PostMapping(value = "/ProcessOrder")
+	@RequestMapping(value = "/ProcessOrder",method = {RequestMethod.GET,RequestMethod.POST})
 	public String processOrderServlet(@ModelAttribute(value = "pob") ProductOrderBean pob,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		if (cart == null || cart.getContent().isEmpty()) {
