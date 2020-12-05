@@ -250,18 +250,19 @@
                          var ls = data[i];   
                          var ingredients_A=ls.ingredients_A;
                          html +=
-		           ` <div class="blog-entry align-self-stretch d-md-flex"> 
+		           ` <div style="margin:auto;width:1500px"><div class="blog-entry align-self-stretch d-md-flex"> 
 		              <a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="block-20" target="_blank"
 			              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${ls.rec_id}'/>');">
 		              </a>
 		              <div class="text d-block pl-md-4">
 
-		                <h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" target="_blank">\${ls.name}</a><h5>累積人氣: \${ls.views}</h5></h3>
+		                <h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" target="_blank">\${ls.name}</a></h3>
+		                <p>累積人氣: \${ls.views}</p>
 		                <p>\${ls.desc}</p>
 		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" target="_blank" class="btn btn-primary py-2 px-3">Read more</a></p>
 		              </div>
 		            </div>
-		          </div>`;
+		          </div></div>`;
 						
                 		console.log('ls.ingredients_A: '+ls.ingredients_A);
                     	}
@@ -321,7 +322,8 @@
 		              	</a>
 		           
 		            <div class="text d-block pl-md-4">
-						<h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" target="_blank">\${val.name}</a><h5>累積人氣: \${val.views}</h5></h3>
+						<h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" target="_blank">\${val.name}</a></h3>
+						<p>累積人氣: \${val.views}</p>
 		                <p>\${val.desc}</p>
 		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" target="_blank">Read more</a>            
 	                    </p>

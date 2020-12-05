@@ -1,6 +1,7 @@
 package tw.group5.mall.controller;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -156,6 +158,22 @@ public class MallMaintainController {
 		mav.addObject("manageOrder_totalPages", totalPages);
 		mav.addObject("manageOrder_DPP", list);
 		return mav;
+	}
+
+// 管理訂單狀態
+	@RequestMapping(value = "/OrderManagement", produces = "text/HTML;charset=UTF-8")
+	public @ResponseBody String orderManagement(@RequestParam(value = "orderDetailId") Integer orderDetailId,
+			@RequestParam(value = "status", required = false) Integer status) {
+		ProductOrderItemBean poib = orderService.getOrderItem(orderDetailId);
+		if (status != null) {
+			poib.setStatus(status);
+			if (status == 2) {
+				Date today = new Date();
+				poib.setShippingDate(today);
+			}
+		}
+		String statusTag = poib.getStatusTag();
+		return statusTag;
 	}
 //	@GetMapping(value = "/DisplayMaintainProduct")
 //	public String displayMaintainProduct(

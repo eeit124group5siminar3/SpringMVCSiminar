@@ -106,8 +106,14 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo1">商城管理</button>
 			<div id="demo1" class="collapse">
+				<c:if test="${login_ok.member_permissions==1}">
 				<li align="left"><a href="<c:url value='mall_management'  />" class="hyperlink">商品管理</a></li>
 				<li align="left"><a href="<c:url value='mall_manageOrder'  />" class="hyperlink">訂單管理</a></li>
+				</c:if>
+				<c:if test="${login_ok.member_permissions!=1}">
+				<li align="left"><font color="gray">商品管理</font></li>
+				<li align="left"><font color="gray">訂單管理</font></li>
+				</c:if>
 			</div>
 		</div>
 		<br> <br>
@@ -134,8 +140,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo4">活動管理</button>
 			<div id="demo4" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
+				<li align="left"><a href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>" class="hyperlink">一日農夫</a></li>
+<!-- 				<li align="left"><a href="" class="hyperlink">????</a></li> -->
 			</div>
 		</div>
 	</div>

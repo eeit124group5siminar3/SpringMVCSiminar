@@ -27,7 +27,7 @@ public class Recipe_Bean_noImage {
 	private String gram_B;
 	private Integer member_no;
 	private String date;
-	private Integer views;
+	private Integer views=0;
 	
 	public Recipe_Bean_noImage() {
 	}

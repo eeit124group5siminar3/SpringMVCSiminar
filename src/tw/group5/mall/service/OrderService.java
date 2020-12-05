@@ -84,7 +84,10 @@ public class OrderService {
 	}
 
 	public List<ProductOrderItemBean> getMaintainOrders(Integer producterId) {
-		// TODO Auto-generated method stub
 		return odao.getMaintainOrders(producterId);
+	}
+
+	public ProductOrderItemBean getOrderItem(Integer orderDetailId) {
+		return odao.getOrderItem(orderDetailId);
 	}
 }

@@ -24,7 +24,7 @@
 						</tr>
 					</thead>
 					<c:forEach var="item" items="${management_DPP}">
-						<tr class="table-=active text-center" data-toggle="modal"
+						<tr class="text-center" data-toggle="modal"
 							data-target="#update" data-whatever="${item.productId}">
 							<td id="${item.productId}"><c:choose>
 									<c:when test="${item.stock<=0}">
@@ -147,6 +147,8 @@
 								</c:otherwise>
 							</c:choose>
 						</ul>
+						<a href="<c:url value='/mall_manageOrder'/>"
+						class="btn btn-primary py-3 px-4" style="float:right" >訂單管理</a>
 					</div>
 				</div>
 
@@ -176,7 +178,7 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-function shelf(event,status){
+function shelf(event,productStatus){
 	event.stopPropagation(); 
 	var productId=event.path[1].id;
 	$.ajax({
@@ -184,7 +186,7 @@ function shelf(event,status){
 		type : "POST",
 		data : {
 			"productId" : productId,
-			"status" :status
+			"status" :productStatus
 		},
 		success : function(data, status) {
 			if(data==1){

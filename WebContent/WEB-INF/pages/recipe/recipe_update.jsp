@@ -170,7 +170,8 @@
 
 			<div class="custom-file">
 				<input type="file" class="custom-file-input"
-					id="validatedCustomFile" name="multipartFile" />
+					id="validatedCustomFile" name="multipartFile" 
+					onchange="loadImageFile(event)"/>
 				<label class="custom-file-label" for="validatedCustomFile">Choose file</label>
 				<div class="invalid-feedback">請上傳圖片</div>
 			</div>
@@ -324,6 +325,12 @@
 			});
 		
  	</script>
+ 		<script type="text/javascript">
+		function loadImageFile(event) {
+			var image = document.getElementById('image');
+			image.src = URL.createObjectURL(event.target.files[0]);
+		};
+	</script>
 	 						   
 </body>
 </html>
