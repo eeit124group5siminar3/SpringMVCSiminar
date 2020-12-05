@@ -83,6 +83,44 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	})
 </script>
 <body class="goto-here body-hegiht">
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '857264848365975',
+				xfbml : true,
+				version : 'v9.0'
+			});
+			FB.AppEvents.logPageView();
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		FB.getLoginStatus(function(response) {
+		    statusChangeCallback(response);
+		});
+		{
+		    status: 'connected',
+		    authResponse: {
+		        accessToken: '{access-token}',
+		        expiresIn:'{unix-timestamp}',
+		        reauthorize_required_in:'{seconds-until-token-expires}',
+		        signedRequest:'{signed-parameter}',
+		        userID:'{user-id}'
+		    }
+		}
+	</script>
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous"
+		src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v9.0&appId=857264848365975"
+		nonce="cfWAXRRI"></script>
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
 
@@ -110,7 +148,12 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						id="exampleCheck1"
 						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if>
 						value="true"> <label class="form-check-label"
-						for="exampleCheck1">記住我</label>
+						for="exampleCheck1">記住我</label><hr>
+						
+					<div class="fb-login-button" data-size="large"
+						data-button-type="continue_with" data-layout="default"
+						data-auto-logout-link="false" data-use-continue-as="false"
+						data-width=""></div>
 				</div>
 				<a class="btn btn-primary" href="goMemberSignUp.controller"
 					style="float: counter">註冊</a> <a class="btn btn-primary"
