@@ -46,6 +46,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
+<body class="goto-here body-hegiht">
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
@@ -82,7 +84,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						})
 	})
 </script>
-<body class="goto-here body-hegiht">
 	<script>
 		window.fbAsyncInit = function() {
 			FB.init({
@@ -117,6 +118,22 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		    }
 		}
 	</script>
+	<script>
+$(function(){
+	var buyer_account="123@222";
+	var buyer_password="123456aA"
+	var seller_account="test@yahoo.com.tw";
+	var seller_password="123456aA";
+	$("#buyer_button").click(function(){
+		$("#exampleInputEmail1").val(buyer_account);
+		$("#exampleInputPassword1").val(buyer_password);
+});
+	$("#seller_button").click(function(){
+		$("#exampleInputEmail1").val(seller_account);
+		$("#exampleInputPassword1").val(seller_password);
+});
+})
+</script>
 	<div id="fb-root"></div>
 	<script async defer crossorigin="anonymous"
 		src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v9.0&appId=857264848365975"
@@ -128,6 +145,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div class="login-form">
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
+				<button type="button" id="buyer_button">買家</button>
+				<button type="button" id="seller_button">賣家</button>
 				<div id="check_email" class="center"
 					style="color: red; text-align: center; height: 20px"></div>
 				<div class="form-group">
