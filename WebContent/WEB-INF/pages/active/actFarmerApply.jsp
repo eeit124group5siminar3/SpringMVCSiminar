@@ -38,6 +38,10 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
 <style>
 .backstage-footer-ground {
 	width: 100%;
@@ -94,12 +98,12 @@ function backHome(){
 		<td><form:input path="actId" type="hidden" ></form:input></td>
 	</tr>
 	<tr>
-		<td><form:label path="actName">活動名稱</form:label></td>
-		<td><form:input path="actName" type="text" id=""/></td>
+		<td><form:label for="actName" path="actName">活動名稱</form:label></td>
+		<td><form:input path="actName" type="text" id="actName" required="ture"/><span id="nameMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="actType">活動類型:</form:label></td>
-		<td><form:select path="actType" type="text" id="">		
+		<td><form:select path="actType" type="text" id=""  required="ture">		
 				<form:option value="體驗類">體驗類</form:option>
 				<form:option value="採收類">採收類</form:option>
 				<form:option value="文藝類">文藝類</form:option>
@@ -109,55 +113,55 @@ function backHome(){
 	</tr>
 	<tr>
 		<td><form:label path="actAddr">活動地址:</form:label></td>
-		<td><form:input path="actAddr" type="text" id=""/></td>
+		<td><form:input path="actAddr" type="text" id="actAddr" required="ture"/><span id="addrMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="tel">連絡電話:</form:label></td>
-		<td><form:input path="tel" type="text" id=""/></td>
+		<td><form:input path="tel" type="text" id="tel" required="ture"/><span id="telMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="actDateSta">活動開始日期:</form:label></td>
-		<td><form:input path="actDateSta" type="date" id=""/></td>
+		<td><form:input path="actDateSta" type="date" id="" required="ture"/></td>
 		<td><form:label path="actTimeSta">活動開始時間:</form:label></td>
-		<td><form:input path="actTimeSta"  type="time" id=""></form:input></td>
+		<td><form:input path="actTimeSta"  type="time" id="" required="ture"></form:input></td>
 	</tr>
 	<tr>
 		<td><form:label path="actDateEnd">活動結束日期:</form:label></td>
-		<td><form:input path="actDateEnd" type="date" id="actDateEnd"/></td>
+		<td><form:input path="actDateEnd" type="date" id="actDateEnd" required="ture"/></td>
 		<td><form:label path="actTimeEnd">活動結束時間:</form:label></td>
-		<td><form:input path="actTimeEnd" type="time" id="actTimeEnd"></form:input></td>
+		<td><form:input path="actTimeEnd" type="time" id="actTimeEnd" required="ture"></form:input></td>
 	</tr>
 	<tr>
 		<td><form:label path="numLim">活動人數上限:</form:label></td>
-		<td><form:input path="numLim" type="text" id="numLim"/></td>
+		<td><form:input path="numLim" type="text" id="numLim" required="ture"/><span id="numLimMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="price">活動費用:</form:label></td>
-		<td><form:input path="price" type="text" id="price"/></td>
+		<td><form:input path="price" type="text" id="price" required="ture"/><span id="priceMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="actDescri">活動描述:</form:label></td>
 <%-- 		<td><form:input path="actDescri" type="text" required="required"/></td> --%>
-		<td colspan="2"><form:textarea cols="50" rows="6" path="actDescri" id="actDescri"></form:textarea></td>
+		<td colspan="2"><form:textarea cols="50" rows="6" path="actDescri" id="actDescri" required="ture"></form:textarea><span id="descriMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="actImg">活動海報:</form:label></td>
-		<td><form:input path="multipartFile" type="file" /></td>
+		<td><form:input path="multipartFile" type="file" id="imgfile" required="ture"/><span id="fileMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="signDateSta">報名開始日期:</form:label></td>
-		<td><form:input path="signDateSta" type="date"/></td>
+		<td><form:input path="signDateSta" type="date" required="ture"/></td>
 		<td><form:label path="signTimeSta">報名開始時間:</form:label></td>
-		<td><form:input path="signTimeSta" type="time"></form:input></td>
+		<td><form:input path="signTimeSta" type="time" required="ture"></form:input></td>
 	</tr>
 	<tr>
 		<td><form:label path="signDateEnd">報名結束日期:</form:label></td>
-		<td><form:input path="signDateEnd" type="date"/></td>
+		<td><form:input path="signDateEnd" type="date" required="ture"/></td>
 		<td><form:label path="signTimeEnd">報名結束時間:</form:label></td>
-		<td><form:input path="signTimeEnd" type="time" ></form:input></td>
+		<td><form:input path="signTimeEnd" type="time" required="ture"></form:input></td>
 	</tr>
 	<tr>
-		<td><form:label path="sigStat">報名狀態:</form:label></td>
+		<td><form:label path="sigStat" required="ture">報名狀態:</form:label></td>
 		<td>
 			<form:radiobutton path="sigStat" value="未開放" id="sigStat"/>未開放
 			<form:radiobutton path="sigStat" value="開放中" id="sigStat"/>開放中
@@ -165,7 +169,7 @@ function backHome(){
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><form:button class="btn btn-primary py-1 px-2" value="Send" >送出</form:button></td>	
+		<td colspan="2" align="center"><form:button class="btn btn-primary py-1 px-2" value="Send" id="send">送出</form:button></td>	
 		<td><form:button class="btn btn-primary py-1 px-2" value="back" onclick="backHome()">回管理頁面</form:button></td>		
 	</tr>
 
@@ -203,8 +207,8 @@ function backHome(){
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+	<script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
+</script> 
 <script>
 function readURL(input){
 	if(input.files && input.files[0]){
@@ -219,6 +223,7 @@ function readURL(input){
 $("#imgInp").change(function(){
 		readURL(this);
 	});
+
 
 </script>
 

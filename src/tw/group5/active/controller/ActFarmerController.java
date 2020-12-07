@@ -36,7 +36,7 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 @Controller
 @SessionAttributes(names = {"MaintainPageNo", "login_ok","actFarmer"})
 public class ActFarmerController {
-	public final int RECORDS_PER_PAGE = 5;
+	public final int RECORDS_PER_PAGE = 3;
 	
 	@Autowired
 	private ActFarmerService actFarmerService;
@@ -95,7 +95,7 @@ public class ActFarmerController {
 		Collection<ActFarmer> collFarmer = actFarmerService.getPageActFarmers(sellerId);
 		model.addAttribute("MaintainPageNo",maintainPageNo);
 		model.addAttribute("collFarmer", collFarmer);
-		return "/active/actFarmerMaintain";
+		return "/active/actFarmerMaintain1";
 	}
 	
 	//名字找活動

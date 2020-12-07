@@ -93,30 +93,29 @@
 	</div>
 
 <section class="ftco-section ftco-degree-bg">
-	<!-- --------管理左邊bar-------------------------------- -->
-	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
+<!-- --------管理左邊bar-------------------------------- -->
+<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
 
-	<!-- --------一日農夫管理 內容區------------------------ -->
+<!-- --------一日農夫管理 內容區------------------------ -->
+	<div id="backstage_page" >
 	
-
-	<div align="center" id="backstage_page" class="row">
-		<div>
-			<h1 align="center">活動管理-一日農夫</h1>
-			<br>
-<!-- 			<table align="center" style="border: 8px gray groove;" border="1"; > -->
+		<div class="row">
+			<div class="col-md-12" >
+			<h1>活動管理-一日農夫</h1>
+			</div>
+			<div class="col-md-6">
+	    		<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get">
+					<input name="apply" type="submit" value="申請活動" class="btn btn-primary">
+				</form>
+	    		</div>
+	    		<div class="col-md-6">
+	    		<form action="<c:url value='/maintainActFarmer.do'/>" method="get">
+					<input name="selectAll" type="submit" value="查詢全部" class="btn btn-primary py-6 px-6">
+				</form>
+        		</div>
+                <div class="w-100"></div>
+                <br>               
 			<table class="table table-hover">
-			<tr>
-					<td style="border: 0px" align="right" colspan="12">
-						<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get">
-							<input name="apply" type="submit" value="申請" >
-						</form>
-					</td>
-					<td style="border: 0px" align="right" colspan="1">
-						<form action="<c:url value='/maintainActFarmer.do'/>" method="get">
-							<input name="selectAll" type="submit" value="查詢全部" >
-						</form>
-					</td>
-				</tr>
 				<tr>
 					<th>活動編號</th>
 					<th>活動名稱</th>
@@ -177,19 +176,6 @@
 						</td>
 					</tr>
 				</c:forEach>
-
-				<!-- 				ajax -->
-				<!-- 					<tr id="test_id"> -->
-				<!-- 						<td></td> -->
-				<!-- 						<td></td> -->
-				<!-- 						<td></td>						 -->
-
-				<!-- 						<td>檢視</td> -->
-				<!-- 						<td>修改</td> -->
-				<!-- 						<td>刪除</td> -->
-				<!-- 					</tr> -->
-				<!-- 				ajax -->
-
 				<tr>
 					<td style="border: 0px" colspan="8"></td>
 					<td style="border: 0px" colspan="5">
@@ -200,7 +186,7 @@
 						</form>
 					</td>
 			</table>
-	</div>
+		</div>
 	<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
 	<form>
 	<div id="bpaging">
