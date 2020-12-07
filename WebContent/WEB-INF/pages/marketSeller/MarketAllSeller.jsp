@@ -36,6 +36,10 @@
 		                 <p>${item.mallDescription} </p><br>
 		                <p>地址 : ${item.address} </p>
 		                <p><a href="#" onclick='goShopping(${item.memberNo})' class="btn btn-primary py-2 px-3">來去逛逛</a></p>
+		                <p><a href="#" data-toggle="modal" data-target="#showMap" 
+		                data-whatever="${item.memberNo}"
+		                class="btn btn-primary py-2 px-3">地點</a></p>	
+                
 		              </div>
 		              
 		            </div>
@@ -119,6 +123,29 @@
 		</div>
 	</div>
 </div>
+
+	<div class="modal fade" id="showMap" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width:640px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">市集地點</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="showMapForm" style="width:640px">
+					
+				</div>
+				<div class="modal-footer">
+					
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
  
  
  
