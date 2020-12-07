@@ -13,13 +13,13 @@ public class MarketOrder {
 	private String unit;
 	private Integer quantity = 0; //數量
 	private Integer productId = 0;
-	private Double price = 0.0;
+	private Integer price = 0;
 	private Integer stock; //庫存
 	
 
 	
 	public MarketOrder(String product, Integer memberNo, String producterName, Integer content, String unit,
-			Integer quantity, Integer productId, Double price, Integer stock) {
+			Integer quantity, Integer productId, Integer price, Integer stock) {
 		super();
 		this.product = product;
 		this.memberNo = memberNo;
@@ -80,11 +80,11 @@ public class MarketOrder {
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
-	public Double getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPrice(Integer integer) {
+		this.price = integer;
 	}
 	public Integer getStock() {
 		return stock;

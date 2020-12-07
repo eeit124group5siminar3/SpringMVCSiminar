@@ -31,6 +31,7 @@
     				<p class="price"><span>${oneProduct.price}元</span></p>
     				<p>${oneProduct.marketProductImgBean.description}
 						</p>
+						
 						<div class="row mt-4">
 							<div class="col-md-6">
 								<div class="form-group d-flex">
@@ -43,11 +44,11 @@
 					<div class="input-group col-md-6 d-flex mb-3">
 						<span class="input-group-btn mr-2"> </span> <input type="number"
 							id="quantity" name="quantity" class="form-control input-number"
-							value="1" min="1" max="${oneProduct.quantity}">
+							value="1" min="1" max="${oneProduct.quantity-marketOrder.quantity}">
 						<span class="input-group-btn ml-2"> </span>
 					</div>
 	          	<div class="col-md-12">
-						<p style="color: #000;">庫存:${oneProduct.quantity}</p>
+						<p style="color: #000;">庫存:${oneProduct.quantity-marketOrder.quantity}</p>
 			    </div>
 	          	<div class="w-100"></div>
 	         
@@ -55,70 +56,20 @@
           	<div class="row">
           	<p>
           	<c:choose>
-          	<c:when test="${oneProduct.quantity<=quantity}">	
+          	<c:when test="${oneProduct.quantity<=marketOrder.quantity}">	
           	<a href="#" onclick="notEnough()" class="btn btn-black py-3 px-5">放入菜籃</a>  	
           	</c:when>
           	<c:otherwise>
-			<a href="#" onclick="addToCart()" class="btn btn-black py-3 px-5">放入菜籃</a>					
+			<a href="#" onclick="addToCart(${oneProduct.quantity-marketOrder.quantity})" class="btn btn-black py-3 px-5">放入菜籃</a>					
 			</c:otherwise>
           	</c:choose>
           	</p>&nbsp;        	
+          	<p><a href="#" onclick="" class="btn btn-black py-3 px-5">查看菜籃</a></p>
           	<p><a href="#" onclick="goShopping(${oneProduct.marketMallBean.memberNo})" class="btn btn-black py-3 px-3">返回</a></p>
           	</div>
     			</div>
     		</div>
-    	</div>
-       
-       
-    	<div class="container">
-				<div class="row justify-content-center mb-3 pb-3">
-          <div class="col-md-12 heading-section text-center ftco-animate">
-          	<span class="subheading"></span>
-            <h2 class="mb-4">推薦商品</h2>
-            <p></p>
-          </div>
-        </div>   		
-    	</div>
-    	<div class="container">
-    		<div class="row">
-<%--      		<c:forEach var="item" items="${totalProducts}">  --%>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" 
-    					src=<c:url value='MarketImageServlet?id=${item.marketProductImgBean.productId}&type=PRODUCT' />
-    					alt="Colorlib Template">
-    						<div class="overlay"></div>
-    					</a>
-    					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Bell Pepper</a></h3>
-    						<div class="d-flex">
-    							<div class="pricing">
-		    						<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
-		    					</div>
-	    					</div>
-	    					<div class="bottom-area d-flex px-3">
-	    						<div class="m-auto d-flex">
-	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-	    								<span><i class="ion-ios-menu"></i></span>
-	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-	    								<span><i class="ion-ios-cart"></i></span>
-	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
-	    								<span><i class="ion-ios-heart"></i></span>
-	    							</a>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-<%--      			</c:forEach>  --%>
-    		</div>
-    	</div>
-    
- 
- 
- 
+    	</div> 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>
