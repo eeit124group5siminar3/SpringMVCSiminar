@@ -71,6 +71,17 @@ public class MarketHome {
 		mav.addObject("marketPageNo",pageNo);
 		return mav;		
 	}
+	//顯示地圖
+	@PostMapping(value = "/showMap")
+	public ModelAndView showMap(HttpServletRequest request,
+			@RequestParam(value = "memberNo", required = false) Integer memberNo){
+		MarketMallBean map =sellerService.selectid(memberNo);
+		ModelAndView mav =new ModelAndView();
+		mav.setViewName("/marketSeller/MarketMallMap");
+		mav.addObject("map",map);
+		return mav;
+	}
+	
 	//取得賣家商品
 	@PostMapping(value = "/ProductContent")
 	@ResponseBody

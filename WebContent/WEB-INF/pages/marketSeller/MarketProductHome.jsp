@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
@@ -63,6 +64,7 @@
                <th>圖片</th> 
                 <th>修改 </th>
                 <th> 刪除</th>
+                
 
          
             </tr>
@@ -70,7 +72,7 @@
                 <tr>
                     <td>${IBean.productId}</td>
                     <td><c:out value="${IBean.productName}"/></td>
-                    <td><c:out value="${IBean.marketProductImgBean.description}"/></td>                    
+                    <td Width="200"><c:out value="${IBean.marketProductImgBean.description}"/></td>                    
                     <td><c:out value="${IBean.productArea}"/></td>
                     <td><c:out value="${IBean.quantity}"/></td>      
 <%--                     <td>1<c:out value="${IBean.unit}"/></td> --%>
@@ -91,8 +93,7 @@
 			     </td>
 			     <td>
 				<form action="<c:url value='/MarketProduct.delete'></c:url>" method="post">
-				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
-              
+				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">     
                  <input  type="submit" value="刪除">
                  </form>
                  </td>
