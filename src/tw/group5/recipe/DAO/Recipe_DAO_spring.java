@@ -205,46 +205,49 @@ public class Recipe_DAO_spring {
 	
 	//-------------------取得分頁------------------------
 	
-	public final Integer RECORDS_PER_PAGE=5;
+//	public final Integer RECORDS_PER_PAGE=5;
 	
-	private Integer pageNo=-1;
-	private Integer maintainPageNo=0;
+//	private Integer pageNo=-1;
+//	private Integer maintainPageNo=0;
 	//每頁顯示幾筆資料
-	private Integer recordsPerPage=RECORDS_PER_PAGE; 
-	private Integer totalPages=-1;
-	private Integer totalPageWithSearch=-1;
-	private String searchString;
+//	private Integer recordsPerPage=RECORDS_PER_PAGE; 
+//	private Integer totalPages=-1;
+//	private Integer totalPageWithSearch=-1;
+//	private String searchString;
 	
-	//計算總共幾頁
-	public Integer getTotalPages() {
-		totalPages=(int) Math.ceil(getRecordCounts()/(double)recordsPerPage);
-		return totalPages;
-	}
+	
+	//計算總共幾頁  	//首頁分頁
+//	public Integer getTotalPages() {
+//		totalPages=(int) Math.ceil(getRecordCounts()/(double)recordsPerPage);
+//		return totalPages;
+//	}
+	
+	
 	
 	//計算Search的總page
-	public Integer getTotalPageWithSearch() {
-		totalPageWithSearch=(int) Math.ceil(getRecordCounts()/(double)recordsPerPage);
-		return totalPageWithSearch;
-	}
+//	public Integer getTotalPageWithSearch() {
+//		totalPageWithSearch=(int) Math.ceil(getRecordCounts()/(double)recordsPerPage);
+//		return totalPageWithSearch;
+//	}
 	
 
 	
 	
-	public Integer getPageNo() {
-		return pageNo;
-	}
+//	public Integer getPageNo() {
+//		return pageNo;
+//	}
+//
+//	public void setPageNo(Integer pageNo) {
+//		this.pageNo = pageNo;
+//	}
 
-	public void setPageNo(Integer pageNo) {
-		this.pageNo = pageNo;
-	}
-
-	public Integer getMaintainPageNo() {
-		return maintainPageNo;
-	}
-
-	public void setMaintainPageNo(Integer maintainPageNo) {
-		this.maintainPageNo = maintainPageNo;
-	}
+//	public Integer getMaintainPageNo() {
+//		return maintainPageNo;
+//	}
+//
+//	public void setMaintainPageNo(Integer maintainPageNo) {
+//		this.maintainPageNo = maintainPageNo;
+//	}
 
 //	public String getSearchString() {
 //		return searchString;
@@ -265,6 +268,7 @@ public class Recipe_DAO_spring {
 		return (int) count;
 	}
 	
+	//首頁分頁
 	public List<Recipe_Bean_noImage> searchAllRecipe(Integer page,Integer showData){
 		if(page==null) {
 			page=1;
@@ -276,6 +280,40 @@ public class Recipe_DAO_spring {
 		Integer startPosition=(page-1)*showData; 
 		Query<Recipe_Bean_noImage> query=session.createQuery("from Recipe_Bean_noImage",Recipe_Bean_noImage.class);
 		List<Recipe_Bean_noImage> list=query.setFirstResult(startPosition)
+				.setMaxResults(showData)
+				.setReadOnly(true)
+				.getResultList();
+		return list;
+	}
+	
+	
+	//上傳食譜分頁
+	public long getMyRecipeCounts(Integer mem_no) {
+		Session session=sessionFactory.getCurrentSession();
+		String hql="select count(*) from Recipe_Bean where member_no=:mem_no";
+		Query<Long> query = session.createQuery(hql);
+		query.setParameter("mem_no", mem_no);
+		long count=(long) query.uniqueResult();
+//		long longNumber = (long) getNumber;
+//		Integer count=(int) longNumber;
+		System.out.println("計算總比數      DAOOOOOOOOOOOOOOOOOOOO");
+		System.out.println( (int) count);
+		return (int) count;
+	}
+	
+	public List<Recipe_Bean> searchMyRecipe(Integer page,Integer showData,Integer mem_no){
+		if(page==null) {
+			page=1;
+		}
+		if(showData==null) {
+			showData=2;
+		}
+		Session session=sessionFactory.getCurrentSession();
+		Integer startPosition=(page-1)*showData; 
+		String hql="from Recipe_Bean where member_no=:mem_no";
+		Query<Recipe_Bean> query=session.createQuery(hql,Recipe_Bean.class);
+		query.setParameter("mem_no", mem_no);
+		List<Recipe_Bean> list=query.setFirstResult(startPosition)
 				.setMaxResults(showData)
 				.setReadOnly(true)
 				.getResultList();

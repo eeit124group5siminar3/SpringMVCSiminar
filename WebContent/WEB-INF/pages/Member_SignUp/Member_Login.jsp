@@ -46,6 +46,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
+<body class="goto-here body-hegiht">
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
@@ -82,7 +84,60 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						})
 	})
 </script>
-<body class="goto-here body-hegiht">
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '857264848365975',
+				xfbml : true,
+				version : 'v9.0'
+			});
+			FB.AppEvents.logPageView();
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		FB.getLoginStatus(function(response) {
+		    statusChangeCallback(response);
+		});
+		{
+		    status: 'connected',
+		    authResponse: {
+		        accessToken: '{access-token}',
+		        expiresIn:'{unix-timestamp}',
+		        reauthorize_required_in:'{seconds-until-token-expires}',
+		        signedRequest:'{signed-parameter}',
+		        userID:'{user-id}'
+		    }
+		}
+	</script>
+	<script>
+$(function(){
+	var buyer_account="123@222";
+	var buyer_password="123456aA"
+	var seller_account="test@yahoo.com.tw";
+	var seller_password="123456aA";
+	$("#buyer_button").click(function(){
+		$("#exampleInputEmail1").val(buyer_account);
+		$("#exampleInputPassword1").val(buyer_password);
+});
+	$("#seller_button").click(function(){
+		$("#exampleInputEmail1").val(seller_account);
+		$("#exampleInputPassword1").val(seller_password);
+});
+})
+</script>
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous"
+		src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v9.0&appId=857264848365975"
+		nonce="cfWAXRRI"></script>
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
 
@@ -90,6 +145,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div class="login-form">
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
+				<button type="button" id="buyer_button">買家</button>
+				<button type="button" id="seller_button">賣家</button>
 				<div id="check_email" class="center"
 					style="color: red; text-align: center; height: 20px"></div>
 				<div class="form-group">
@@ -110,7 +167,12 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						id="exampleCheck1"
 						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if>
 						value="true"> <label class="form-check-label"
-						for="exampleCheck1">記住我</label>
+						for="exampleCheck1">記住我</label><hr>
+						
+					<div class="fb-login-button" data-size="large"
+						data-button-type="continue_with" data-layout="default"
+						data-auto-logout-link="false" data-use-continue-as="false"
+						data-width=""></div>
 				</div>
 				<a class="btn btn-primary" href="goMemberSignUp.controller"
 					style="float: counter">註冊</a> <a class="btn btn-primary"
