@@ -127,19 +127,19 @@ function GetProfile() {
           var fb_email = user.email; 
           var page2 = $("#url").val();
 			$.ajax({
-      		url: "facebookLoging",
+      		url: "fbMemberSignUp.controller",
       		method: "post",
       		data: { 
-          			name: name,
-          			email: fb_email
+          			member_name: fb_name,
+          			member_email: fb_email
           		 },
-      		success: function (msg) {
+      		success: function (data) {
           		if(msg.registSuccess){//跳轉填寫資料
           			$(window).attr('location',"googleInfo");
                   }
           		if(msg.loginSuccess){//跳轉首頁
-          			$(window).attr('location',page2);
-                  }
+          			$("#check_email").html("");
+				  }
           		if(msg.inputInfo){//跳轉填寫資料
           			$(window).attr('location',"googleInfo");
                   }
