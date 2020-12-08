@@ -136,7 +136,7 @@
 					</button>
 				</div>
 				<div class="modal-body" id="showMapForm" style="width:640px">
-					
+				<br><br><iframe width="100%" height="250" frameborder="0" src="https://www.google.com/maps?q=${item.address}&output=embed"></iframe>	
 				</div>
 				<div class="modal-footer">
 					

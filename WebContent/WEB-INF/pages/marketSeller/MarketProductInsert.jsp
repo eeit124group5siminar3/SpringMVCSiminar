@@ -38,14 +38,16 @@
 <title>商品管理</title>
 </head>
 <body>
-<h2>
+<jsp:include page="../header.jsp"/>
+ <section class="ftco-section ftco-degree-bg">
+<div>
+<h2 align="center">
 商品管理
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
-<jsp:include page="../header.jsp"/>
 <form:form action="MarketProduct.insert"  method="post" modelAttribute="Insert1" enctype="multipart/form-data">
-<table  cellspacing="2" cellpadding="1" border="1" width="100%">
+<table  align="center">
 
 <!--     <tr> -->
 <%--     <td><form:label path="marketMallBean.memberNo">測試:</form:label></td> --%>
@@ -116,6 +118,11 @@
             <font color='red' size='-1'>${errors.errPicture}</font></td>
     </tr>
     <tr>
+    <td></td>
+    <td><img height='230' width='230'  id="blah" src="#" alt="your image" />
+    </td>
+    </tr>
+    <tr>
    
     <td>  商品狀態 </td>
     
@@ -133,8 +140,9 @@
 </table>
 </form:form>
 
+</div> 
+</section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
- <img height='120' width='96'  id="blah" src="#" alt="your image" />
 <script>
 function readURL(input) {
   if (input.files && input.files[0]) {
