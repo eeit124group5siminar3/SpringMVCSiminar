@@ -46,6 +46,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
+<body class="goto-here body-hegiht">
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
@@ -82,7 +84,130 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						})
 	})
 </script>
-<body class="goto-here body-hegiht">
+	
+<script>
+<!--FaceBook-->
+
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '857264848365975',
+    cookie     : true,
+    xfbml      : true,
+    version    : 'v9.0'
+  });
+    
+  FB.AppEvents.logPageView();   
+    
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+
+
+function GetProfile() {
+  //document.getElementById('content').innerHTML = "";//先清空顯示結果
+
+  //FB.api()使用說明：https://developers.facebook.com/docs/javascript/reference/FB.api
+  //取得用戶個資
+  FB.api("/me", "GET", { fields: 'last_name,first_name,name,email' }, function (user) {
+      //user物件的欄位：https://developers.facebook.com/docs/graph-api/reference/user
+      if (user.error) {
+          console.log(response);
+      } else {      
+          console.log(user);
+          console.log(user.email);
+          console.log(user.name);
+          var fb_name = user.name;
+          var fb_email = user.email; 
+          var page2 = $("#url").val();
+			$.ajax({
+      		url: "fbMemberSignUp.controller",
+      		method: "post",
+      		data: { 
+          			member_name: fb_name,
+          			member_email: fb_email
+          		 },
+      		success: function (data) {
+          		if(msg.registSuccess){//跳轉填寫資料
+          			$(window).attr('location',"googleInfo");
+                  }
+          		if(msg.loginSuccess){//跳轉首頁
+          			$("#check_email").html("");
+				  }
+          		if(msg.inputInfo){//跳轉填寫資料
+          			$(window).attr('location',"googleInfo");
+                  }
+          		if(msg.emailExist){//帳號已存在
+          			$("#result").text(msg.emailExist);
+                  }
+          		if(msg.error){//報錯
+          			$("#result").text(msg.error);
+                  }
+                  
+      		}
+  		});//end $.ajax                    
+      }
+  });
+
+}
+function FBLogin(){
+FB.getLoginStatus(function(res) {//
+    console.log('status:'+res.status);//Debug
+
+    if (res.status === "connected") { 
+        let userID = res["authResponse"]["userID"];
+        console.log("用戶已授權您的App，用戶須先revoke撤除App後才能再重新授權你的App");
+        console.log(`已授權App登入FB 的 userID:${userID}`);
+        GetProfile();
+    		 
+    } else if (res.status === 'not_authorized' || res.status === "unknown") {
+        //App未授權或用戶登出FB網站才讓用戶執行登入動作
+        FB.login(function (response) {
+            //console.log(response); //debug用
+            if (response.status === 'connected') {
+                //user已登入FB
+                //抓userID
+                let userID = response.authResponse.userID;
+                console.log('已授權App登入FB 的 userID:'+userID);
+                GetProfile();
+                
+
+            } else {
+                // user FB取消授權
+                alert("Facebook帳號無法登入");
+            }
+            //"public_profile"可省略，仍然可以取得name、userID
+        }, { scope: 'email' }); 
+    }
+  
+});
+
+}
+	</script>
+
+	<script>
+$(function(){
+	var buyer_account="123@222";
+	var buyer_password="123456aA"
+	var seller_account="test@yahoo.com.tw";
+	var seller_password="123456aA";
+	$("#buyer_button").click(function(){
+		$("#exampleInputEmail1").val(buyer_account);
+		$("#exampleInputPassword1").val(buyer_password);
+});
+	$("#seller_button").click(function(){
+		$("#exampleInputEmail1").val(seller_account);
+		$("#exampleInputPassword1").val(seller_password);
+});
+})
+</script>
+
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
 
@@ -90,6 +215,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div class="login-form">
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
+				<button type="button" id="buyer_button">買家</button>
+				<button type="button" id="seller_button">賣家</button>
 				<div id="check_email" class="center"
 					style="color: red; text-align: center; height: 20px"></div>
 				<div class="form-group">
@@ -110,7 +237,12 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						id="exampleCheck1"
 						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if>
 						value="true"> <label class="form-check-label"
-						for="exampleCheck1">記住我</label>
+						for="exampleCheck1">記住我</label><hr>
+						
+						
+    <div>
+        Facebook登入：<input type="button"  value="Facebook登入" onclick="FBLogin();" />
+    </div>						
 				</div>
 				<a class="btn btn-primary" href="goMemberSignUp.controller"
 					style="float: counter">註冊</a> <a class="btn btn-primary"

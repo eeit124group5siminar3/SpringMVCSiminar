@@ -126,5 +126,42 @@ public class SignUpController {
 
 		return "redirect:index.controller";
 	}
+	
+	//FB登錄註冊
+	@RequestMapping(path = "/fbMemberSignUp.controller", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean processfbMemberSignUp(
+			@RequestParam(name = "member_name") String member_name,
+			@RequestParam(name = "member_email") String member_email, Model m) {
+		String member_permissions = "0";
+		String member_password = "";
+		Date member_birthday = null;
+		String member_cellphone = "";
+		String member_id = "";
+		String member_address = "";
+		String member_gui_number = "";
+		String e_paper = "";
+		String member_bank_code = "";
+		String member_bank_account = "";
+		String member_gg = "0";
+		String member_lock_acc = "0";
+		
+		Member_SignUp member_data = new Member_SignUp(member_permissions, member_email, member_password, member_name,
+				member_birthday, member_cellphone, member_id, member_address, member_gui_number, e_paper, member_gg,
+				member_lock_acc, member_bank_code, member_bank_account);
+		
+		member_Service.insert_member_sing_up(member_data);
 
+
+
+		System.err.println("姓名是："+member_name);
+		System.err.println("信箱是："+member_email);
+
+		
+		return true;
+		
+		
+	}
+	
+	
 }

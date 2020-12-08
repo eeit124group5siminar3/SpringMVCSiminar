@@ -74,22 +74,38 @@
 </head>
 
 <body class="goto-here">
-	<!-- --------Header------------------------------------- -->
-	<jsp:include page="/WEB-INF/pages/header.jsp" />
+<!-- --------Header------------------------------------- -->
+<jsp:include page="/WEB-INF/pages/header.jsp" />
+	
+<div class="hero-wrap hero-bread"
+		style="background-image: url('images/bg_1.jpg');" id="product_top">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="index.html">Home</a></span> <span>Active</span>
+					</p>
+					<h1 class="mb-0 bread">活動管理</h1>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <section class="ftco-section ftco-degree-bg">
 	<!-- --------管理左邊bar-------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
 
-
 	<!-- --------一日農夫管理 內容區------------------------ -->
-	<div align="center" id="backstage_page">
+	
 
+	<div align="center" id="backstage_page" class="row">
 		<div>
 			<h1 align="center">活動管理-一日農夫</h1>
-			<table align="center" style="border: 8px gray groove;" border="1"; >
-				<!-- 		<h2>活動列表</h2> -->
-				<tr>
+			<br>
+<!-- 			<table align="center" style="border: 8px gray groove;" border="1"; > -->
+			<table class="table table-hover">
+			<tr>
 					<td style="border: 0px" align="right" colspan="12">
 						<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get">
 							<input name="apply" type="submit" value="申請" >
@@ -221,17 +237,30 @@
 </form>
 </div>
 </section>
-			<!-- --------footer------------------------------------- -->
-			<footer class="ftco-footer backstage-footer-ground">
-				<jsp:include page="/WEB-INF/pages/footer.jsp" />
-			</footer>
+<!-- --------footer------------------------------------- -->
+<%-- <jsp:include page="/WEB-INF/pages/footer.jsp" /> --%>
 
-			<div id="ftco-loader" class="show fullscreen">
-				<svg class="circular" width="48px" height="48px">
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> 
  			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
- 				</svg>
- 				</div>
+ 		</svg>
+ 	</div>
+ 				
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/scrollax.min.js"></script>
+
 <script type="text/javascript">
 	$.post({
         url:"${pageContext.request.contextPath}/test",

@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -87,6 +89,49 @@ public class Recipe_Controller_update {
 		} else
 			return "Member_SignUp/Member_Login";
 	}
+	
+	//ajax choose 頁面彈出浮動視窗
+//	@GetMapping(value="/ChoosePage/{pageNo}")
+//	@ResponseBody
+//	public Map<String, Object> getPageInfo(@PathVariable(name="pageNo",required = false)Integer pageNo,Model m) {
+//		Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
+//		mem_no=OK.getMember_no();
+//		System.out.println(mem_no);
+//		long count=service.getMyRecipeCounts(mem_no);
+//		System.out.println("===============================================");
+//		System.out.println(count);
+//		System.out.println(pageNo);
+//		Integer page=(Integer) session.getAttribute("pageNo");
+//		int totalPages =(int) count;
+//		System.out.println("抓session 中的 page: "+page);
+//		if(pageNo!=null) {
+//			page=pageNo;
+//			System.out.println("page: "+page);
+//			session.setAttribute("pageNo", page);
+//		}
+//		List<Recipe_Bean> searchAllRecipe=service.searchMyRecipe(page, 3, mem_no);
+//		System.out.println("------------------------------------");
+//		int totalPage =(int) Math.ceil(totalPages*1.0 /2);//總頁數
+//		System.out.println("totalPage: "+totalPage);
+////		ModelAndView mav=new ModelAndView();
+////		mav.setViewName("/recipe/recipe_workpage");
+////		mav.addObject("selectAllRecipe",selectAllRecipe);
+////		service.setPageNo(pageNo);
+//		for(Recipe_Bean bean:searchAllRecipe) {
+//			System.out.println(bean.getName());
+//		}
+//		
+//		Map<String , Object> map=new HashMap<String, Object>();
+//		map.put("searchMyRecipe", searchAllRecipe);
+//		map.put("totalPage",totalPage);
+//		map.put("pageNo",pageNo);
+//		return map;
+//		
+//		
+//		
+//	}
+	
+	
 	
 	//update_choose
 	@RequestMapping(path = "/updateProcess.controller",method = {RequestMethod.POST,RequestMethod.GET})

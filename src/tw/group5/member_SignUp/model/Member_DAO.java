@@ -280,4 +280,6 @@ public class Member_DAO {
 		}
 		return false;
 	}
+	
+	
 }

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#bg{
+	height:3000px;
+	}
+	
+#signbar{ 
+	display:none; 
+	postition:absolute;
+	}

@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
 
+
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
@@ -51,7 +52,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Active</span></p>
-            <h1 class="mb-0 bread">Active</h1>
+            <h1 class="mb-0 bread">活動列表</h1>
           </div>
         </div>
       </div>
@@ -117,7 +118,7 @@
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
-	<script src="js/main.js"></script>
+
 	
 <!-- ------------------------script的 ----------------------------------------------------------------- -->	
 <script type="text/javascript">
@@ -154,10 +155,10 @@ function list(){
         <li>
 			<div id="blfirst"><a href="javascript:pagechange('first')"> 
 			<img border='0' alt='第一頁' height='30' width='30' src='./images/first-icon.png' /> </a></div>
-		
+	
 		</li>
         <li>
-			<div id="blprev"><a href="javascript:pagechange('pre')">
+        	<div id="blprev"><a href="javascript:pagechange('pre')">
 			<img border='0' alt='前一頁' height='30' width='30' src='./images/prev-icon.png' /></a></div>
 		</li>
 		<li>\${currentPage} / \${totalPages}</li>
