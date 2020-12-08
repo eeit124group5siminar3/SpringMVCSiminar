@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import tw.group5.mall.dao.ProductDAO;
 
 import tw.group5.mall.model.ProductBean;
+import tw.group5.mall.model.ProductFavoriteBean;
 import tw.group5.mall.model.ProductImageBean;
+import tw.group5.member_SignUp.model.Member_SignUp;
 
 
 @Service
@@ -109,8 +111,17 @@ public class ProductService {
 		return dao.getSelected();
 	}
 
-	public List<ProductBean> getPageProductsWithoutZero() {
-		return dao.getPageProductsWithoutZero();
+	public List<ProductBean> getPageProductsWithoutZero(Member_SignUp mb) {
+		List<ProductBean> list =dao.getPageProductsWithoutZero();
+		if(mb!=null) {
+			Integer userId=mb.getMember_no();
+			for(ProductBean productBean:list) {
+				if(dao.getFavorite(userId,productBean.getProductId())!=null) {
+					productBean.setFavorite(1);
+				}
+			}
+		}
+		return list;
 	}
 
 	public int getTotalPagesWithoutZero() {
@@ -131,6 +142,14 @@ public class ProductService {
 
 	public ProductImageBean getProductImage(int productId) {
 		return dao.getProductImage(productId);
+	}
+
+	public ProductFavoriteBean saveFavorite(ProductFavoriteBean pfb) {
+		return dao.savaFavorite(pfb);
+	}
+
+	public ProductFavoriteBean getFavorite(Integer userId, Integer productId) {
+		return dao.getFavorite(userId,productId);
 	}
 
 

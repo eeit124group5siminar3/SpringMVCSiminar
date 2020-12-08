@@ -42,6 +42,8 @@
 </style>
 <!-- Custom styles for this template -->
 </head>
+
+<body class="text-center">
 		<script
   src="https://code.jquery.com/jquery-3.5.1.js"
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -69,12 +71,23 @@ $(function(){
 });
 })
 </script>
-<body class="text-center">
+	<script>
+$(function(){
+	var admin_account="admin";
+	var admin_password="admin"
+	$("#login_button").click(function(){
+		$("#exampleInputEmail1").val(admin_account);
+		$("#exampleInputPassword1").val(admin_password);
+});
+
+})
+</script>
 
 	<form id="index_form" method="post">
 		<div class="login-form">
 			<fieldset class="border login-form-fieldset">
 				<legend>請登入</legend>
+				<button type="button" id="login_button">Admin</button>
 				<div id="check_account" class="center"
 					style="color: red; text-align: center; height: 20px"></div>
 				<div class="form-group">

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import tw.group5.mall.model.CategoryClass;
 import tw.group5.mall.model.ProductBean;
+import tw.group5.mall.model.ProductFavoriteBean;
 import tw.group5.mall.model.ProductImageBean;
 
 @Repository
@@ -229,6 +230,7 @@ public class ProductDAO {
 		count = (int) longNumber;
 		return count;
 	}
+	
 //依照ID查詢類別
 //	public CategoryBean getCategoryById() {
 //		Session session = sessionFactory.getCurrentSession();
@@ -270,7 +272,6 @@ public class ProductDAO {
 
 // 修改商品資料
 	public ProductBean updateProduct(ProductBean bean) {
-
 		Session session = sessionFactory.getCurrentSession();
 		if (bean.getStock() <= 0) {
 			bean.setStatus(0);
@@ -296,6 +297,10 @@ public class ProductDAO {
 		java.util.Date now = new java.util.Date();
 		Date date = new Date(now.getTime());
 		bean.setAddedDate(date);
+		System.err.println(bean);
+		System.err.println(bean.getProductId());
+		System.err.println(bean.getProduct());
+		System.err.println(bean.getStock());
 		if (bean.getStock() <= 0) {
 			bean.setStatus(0);
 		}
@@ -316,4 +321,22 @@ public class ProductDAO {
 		ProductImageBean bean = session.get(ProductImageBean.class, productId);
 		return bean;
 	}
+	
+// 新增願望清單
+	public ProductFavoriteBean savaFavorite(ProductFavoriteBean productFavorite) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(productFavorite);
+		return productFavorite;
+	}
+
+	public ProductFavoriteBean getFavorite(Integer userId, Integer productId) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ProductFavoriteBean where userId = :userId and productId= :productId";
+		Query<ProductFavoriteBean> query = session.createQuery(hql, ProductFavoriteBean.class);
+		query.setParameter("userId", userId);
+		query.setParameter("productId", productId);
+		ProductFavoriteBean pfb=query.uniqueResult();
+		return pfb;
+	}
+	
 }

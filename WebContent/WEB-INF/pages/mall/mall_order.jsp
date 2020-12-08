@@ -40,6 +40,27 @@
 <link rel="stylesheet" href="css/mall.css">
 </head>
 <body class="goto-here">
+
+	<div class="modal fade" id="scoreOrder" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">產品評價</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="score"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->
 
@@ -58,8 +79,7 @@
 		</div>
 	</div>
 
-	<section class="ftco-section" id="orderContent">
-	</section>
+	<section class="ftco-section" id="orderContent"></section>
 
 	<jsp:include page="../footer.jsp" />
 
@@ -72,8 +92,8 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
-
 	<script src="js/jquery.min.js"></script>
+	<!-- 	<script src="js/jquery-3.5.1.min.js"></script> -->
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -86,9 +106,9 @@
 	<script src="js/jquery.animateNumber.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/scrollax.min.js"></script>
-<!-- 	<script -->
-<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-<!-- 	<script src="js/google-map.js"></script> -->
+	<!-- 	<script -->
+	<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+	<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
 	<jsp:include page="../js/mall.jsp" />
 
@@ -112,6 +132,54 @@
 			});
 		});
 		
-	</script>
+		$('#scoreOrder').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget);
+			var itemId = button.data('whatever');
+			var scoreContent="<img style='width: 50px'></img> <img style='width: 50px'></img> <img style='width: 50px'></img> <img style='width: 50px'></img> <img style='width: 50px'></img><hr /><button type='button' class='btn btn-primary btn-block' id='makechoice'>評分</button>";	
+			$("div#score").empty().append(scoreContent);
+		$("div img").attr("src", "/siminar/images/star0.png").css("margin-left", "30px").mouseover(mouseover).mouseout(mouseout).click(choosen);
+		 	function mouseover() {
+	            $(this).attr("src", "/siminar/images/star1.png").prevAll().attr("src", "/siminar/images/star1.png").end().nextAll().attr("src", "/siminar/images/star0.png");
+	        }
+	        function mouseout() {
+	            $("img").attr("src", "/siminar/images/star0.png")
+	        }
+	        function choosen() {
+	            $(this).attr("src", "/siminar/images/star1.png").prevAll().attr("src", "/siminar/images/star1.png").end().nextAll().attr("src", "/siminar/images/star0.png");
+	            $("img").unbind("mouseover").unbind("mouseout");
+	            choosenOne=$(this).index()+1;
+	       		$("button#makechoice").on("click",{itemId:itemId,choosenOne:choosenOne},makechoice);
+	        }
+			})
+	        
+	        function makechoice(event){
+				var itemId=event.data.itemId;
+				var choosenOne=event.data.choosenOne;
+				var yes = confirm("是否已收到商品");
+				if(yes){
+			$.ajax({
+				url : "ThankForScore",
+				type : "POST",
+				data : {
+					"itemId":itemId,
+					"score":choosenOne	
+				},
+				success : function(data, status) {	
+					$("#score").html(data.thankyou);
+					$("#statusTag"+itemId).html(data.statusTagForUser);
+					$("#statusWord"+itemId).html(data.statusWord);
+				},
+				error : function(data, status) {
+					$("#score").html(data.thankyou);
+					$("#statusTag"+itemId).html(data.statusTagForUser);
+					$("#statusWord"+itemId).html(data.statusWord);
+				}
+			});	
+				}		
+	        }
+			
+
+       
+</script>
 </body>
 </html>

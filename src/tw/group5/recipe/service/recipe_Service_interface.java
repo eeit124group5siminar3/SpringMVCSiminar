@@ -33,14 +33,18 @@ public interface recipe_Service_interface {
 
 	List<Recipe_Bean_noImage> searchAllRecipe(Integer page, Integer showData);
 
-	Integer getTotalPages();
+//	Integer getTotalPages();
 
-	void setPageNo(Integer pageNo);
+//	void setPageNo(Integer pageNo);
 
 	List<Bookmark_Bean> partSearchBookmark(Integer mem_no, String rec_id);
 
 	boolean deleteBookmark(String id);
 
 	boolean bookmarkExist(String rec_id, Integer mem_no);
+
+	List<Recipe_Bean> searchMyRecipe(Integer page, Integer showData, Integer mem_no);
+
+	long getMyRecipeCounts(Integer mem_no);
 
 }

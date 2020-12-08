@@ -56,7 +56,7 @@
 	}
     //查詢單筆商品
 	function goProduct(productId) {
-		console.log("我要進來囉");
+		
 		$.ajax({
 			url : "ProductNews",
 			type : "POST",
@@ -75,5 +75,28 @@
 	// 庫存不足	
 	function notEnough() {
 		alert("庫存量不足");
+	}
+	
+	//加入購物車
+	function addToCart(quantity) {
+		var qty = $("#quantity").val();
+		if (quantity<qty) {
+			alert("購買超過庫存量");
+		} else {
+		$.ajax({
+			url : "ProductNews",
+			type : "POST",
+			data : {
+				"qty" : qty,
+				"productId" : `${oneProduct.productId}`
+			},
+			success : function(data, status) {
+				$("#mainContent").html(data);
+			},
+			error : function(data, status) {
+				$("#mainContent").html(data);
+			}
+		});
+		}
 	}
 </script>

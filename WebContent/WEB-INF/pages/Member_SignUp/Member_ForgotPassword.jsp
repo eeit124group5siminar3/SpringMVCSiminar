@@ -59,6 +59,7 @@
 }
 </style>
 </head>
+<body class="goto-here">
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
@@ -88,7 +89,20 @@ $(function(){
 })
 })
 </script>
-<body class="goto-here">
+	<script>
+$(function(){
+	var member_email="待輸入";
+	var member_id="待輸入"
+	var member_name="待輸入";
+	var member_cellphone="待輸入";
+	$("#ForPwd_button").click(function(){
+		$("#member_email").val(member_email);
+		$("#member_id").val(member_id);
+		$("#member_name").val(member_name);
+		$("#member_cellphone").val(member_cellphone);
+});
+})
+</script>
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
 
@@ -98,6 +112,7 @@ $(function(){
 		<div class="forgotResetPwd-form container">
 			<fieldset class="border forgotResetPwd-form-fieldset">
 				<legend>忘記密碼</legend>
+				<button type="button" id="ForPwd_button">....</button>
 				<div id="check_restPwd" class="center"
 					style="color: red; text-align: center; height: 20px"></div>
 				<div class="form-group">

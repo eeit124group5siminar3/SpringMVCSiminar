@@ -41,7 +41,7 @@
 								</td>
 
 								<td class="price">${anEntry.value.producterName}</td>
-								<td class="price">${anEntry.value.price*anEntry.value.discount}元</td>
+								<td class="price">${Math.round(anEntry.value.price*anEntry.value.discount)}元</td>
 
 								<td class="quantity">
 									<div class="input-group mb-3">
@@ -53,7 +53,7 @@
 									</div>
 								</td>
 
-								<td class="total">${anEntry.value.price*anEntry.value.qty*anEntry.value.discount}元</td>
+								<td class="total">${Math.round(anEntry.value.price*anEntry.value.qty*anEntry.value.discount)}元</td>
 							</tr>
 							<!-- END TR-->
 						</c:forEach>
@@ -73,7 +73,7 @@
 			<!-- 				<span>運費</span> <span>$0.00</span> -->
 			<!-- 			</p> -->
 			<p class="d-flex">
-				<span>折扣</span> <span>${ShoppingCart.total-ShoppingCart.subtotal}</span>
+				<span>折扣</span> <span>${ShoppingCart.subtotal-ShoppingCart.total}</span>
 			</p>
 			<hr>
 			<p class="d-flex total-price">
@@ -83,7 +83,7 @@
 		<p>
 			<a href="<c:url value='/Mall_checkout' />"
 				class="btn btn-primary py-3 px-4">去結帳</a> <a
-				href="<c:url value='/mall_shop' />"
+				href="<c:url value='/mall_shop#mainContent' />"
 				class="btn btn-primary py-3 px-4">回商城</a>
 		</p>
 	</div>

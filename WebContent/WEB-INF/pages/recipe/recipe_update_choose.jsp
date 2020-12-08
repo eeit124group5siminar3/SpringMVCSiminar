@@ -236,7 +236,7 @@
   </div>
 </nav>
 
-
+<div id="Success"></div>
 
 	<div align="center" >
 	<fieldset class="border signup-form-fieldset">
@@ -259,50 +259,21 @@
 					<div class="deleteRecipe">	
  					<input type="hidden" id="delete_id" name="delete_id" value="${BeanToken.rec_id}" />						
 						<input class="btn btn-outline-danger" id="send" type="submit" onclick="fun(${BeanToken.rec_id})" name="delete" value="刪除" />
-
  					</div> 
-				
  				<br> 
 		</div>
 		<br>
 		
+		
 	</form>
 </c:forEach>
 	</fieldset>
-	
-	
-	<div class="modal fade" id="insert" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true" >
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content" style="width:640px">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">商品資料新增</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id="insertForm" style="width:640px">
-					
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" form="updaeteForm">新增</button>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">關閉</button>
-				</div>
+	</div>
+			<div style="text-align: center;">
+				<label>
+					<input type="submit" name="action" value="回首頁">
+				</label>
 			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-	</div>
-<!-- 			<div style="text-align: center;"> -->
-<!-- 				<label> -->
-<!-- 					<input type="submit" name="action" value="回首頁"> -->
-<!-- 				</label> -->
-<!-- 			</div> -->
 
 
 
@@ -479,5 +450,134 @@
 			xhr.send();
 			}
  	</script>  
+ 	
+<!-- <script type="text/javascript"> 
+$(function(){
+	var currentPage=1;
+	var totalPages;
+	console.log('currentPage'+currentPage);
+	function list(){
+		$.ajax({
+// 			type:"GET",
+// 			url:"${pageContext.request.contextPath}/ChoosePage/"+currentPage, 
+			$.getJSON("./ChoosePage/"+currentPage, {jsonData: JSON.stringify(getFormData())}, 
+					function(data) 
+					{
+					alert(data[0].name);
+					});
+// 			success:function(data){
+// 				alert('succccccccccccccccces');
+// 				console.log(data.length);
+// 				var data=response.searchMyRecipe;
+// 				console.log('length'+data.length);
+
+// 				var data2=response.pageNo;
+// 				console.log('pageNo'+data2);
+
+// 				let content="";
+// 				for(var i=0;i<data.length;i++){
+// 				var val=data[i];
+// 					content+=
+// 						`<div class="row">
+// 			    			<div class="col-md-6 col-lg-3 ftco-animate">
+			    
+// 			    				<div>							                                                                           
+// 					              <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
+// 						              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${val.rec_id}'/>');">
+// 					              </a>
+			    						
+// 			    					<div class="text py-3 pb-4 px-3 text-center">
+// 			    							<a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>">\${val.name}</a>
+// 				    					<div style="float: right;"
+// 				    							<a href="<c:url value='/bookmark?rec_id=\${val.rec_id}'/>" class="heart d-flex justify-content-center align-items-center " id="heart" >
+// 				    								<span><i class="ion-ios-heart"></i></span>
+// 				    							</a>
+// 			    						</div>
+// 			    					</div>
+// 			    				</div>
+// 			    			</div>  					    		
+// 			    		</div>`;
+
+		           	
+ 
+		           
+// 						`<div><p>累積人氣: \${val.name}</p>
+// 		                <p>\${val.desc}</p></div>`;
+// 				console.log('val.rec_id: '+val.rec_id);
+// 					}
+// 				$("#Success").html(content);
+		
+
+
+				currentPage=response.pageNo;
+				console.log('1: '+currentPage);
+				totalPages=response.totalPage;
+				console.log('2: '+totalPages);
+				
+				content=
+					`<li>
+						<div id="afirst"><a href="#" onclick="pagechange('first')">
+								&lt;&lt;</a>
+						</div>
+					</li>
+					<li>
+						<div id="apre"><a href="#" onclick="pagechange('pre')">
+								&lt;</a>
+						</div>
+					</li>
+					<li>\${currentPage}/ \${totalPages}</li>
+					<li>
+						<div id="bnext"><a href="#" onclick="pagechange('next')">
+
+								&gt;</a>
+						</div>
+					</li>
+					<li>
+						<div id="blast"><a href="#" onclick="pagechange('last')">
+								&gt;&gt;</a>
+						</div>
+					</li>`;
+					$("#nowPage").html(content);
+									
+				
+				}
+			});
+		}
+//		<img border='0' alt='下一頁' height='30' width='30' src='./images/next-icon.png'/> </a></div>
+});
+		
+	function pagechange(val){
+		console.log(val);
+		console.log(currentPage);
+		console.log(totalPages);
+		if(val=='first'){
+			currentPage=1;
+			list();
+		}else if(val=='pre'){
+			if(currentPage>1){
+				currentPage--;
+				list();
+				}else{
+					currentPage=1;
+					list();
+				}	
+		}
+		else if(val=='next'){
+			if(currentPage<totalPages){
+				currentPage++;
+				list();
+				}else{
+					currentPage=totalPages;					
+					list();
+					}
+		}else{
+			currentPage=totalPages;
+			list();
+			}
+	
+	
+	}
+
+</script> -->
 </body>
 </html>

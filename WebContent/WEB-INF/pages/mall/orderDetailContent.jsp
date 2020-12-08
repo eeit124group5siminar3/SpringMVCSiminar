@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-12 ftco-animate">
 			<div class="cart-list">
-			<h1>訂單編號&nbsp;:&nbsp;${orderId}</h1>
+				<h1>訂單編號&nbsp;:&nbsp;${orderId}</h1>
 				<table class="table">
 					<thead class="thead-primary">
 						<tr class="text-center">
@@ -29,7 +29,7 @@
 								<td class="product-name">
 									<p>${set.description}</p>
 								</td>
-								<td>${set.producterName}</td>
+								<td><p>${set.producterName}</p></td>
 								<td class="product-remove">
 									<p>${set.unitPrice}</p>
 								</td>
@@ -42,13 +42,13 @@
 								</td>
 
 								<td>
-									<p>${set.statusWord}</p>
+									<p id="statusWord${set.itemId}">${set.statusWord}</p>
 								</td>
 								<td>
 									<p>${set.shippingDate}</p>
 								</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
+								<td><p id="statusTag${set.itemId}">${set.statusTagForUser}</p></td>
+
 							</tr>
 							<!-- END TR-->
 						</c:forEach>
@@ -65,6 +65,8 @@
 		</div>
 	</div>
 </div>
+
+
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -83,3 +85,27 @@
 <!-- <script src="js/google-map.js"></script> -->
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
+<script>
+function cancelOrder(itemId){
+	var yes = confirm("是否真的要取消訂單");
+	if(yes){
+		$.ajax({
+			url : "CancelOrder",
+			type : "POST",
+			data : {
+				"itemId" : itemId
+			},
+			success : function(data, status) {
+				console.log(itemId);
+				$("#statusWord"+itemId).html(data.statusWord);
+				$("#statusTag"+itemId).html(data.statusTagForUser);
+			},
+			error : function(data, status) {
+				$("#statusWord"+itemId).html(data.statusWord);
+				$("#statusTag"+itemId).html(data.statusTagForUser);
+			}
+		});
+		}
+}
+
+</script>

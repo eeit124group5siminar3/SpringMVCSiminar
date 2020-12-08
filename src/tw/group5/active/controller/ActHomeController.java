@@ -33,7 +33,7 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 @SessionAttributes(value = {"pageNo", "login_ok"})
 public class ActHomeController {
 	
-	public final int RECORDS_PER_PAGE = 5;
+	public final int RECORDS_PER_PAGE = 3;
 	
 	@Autowired
 	private ServletContext stx;

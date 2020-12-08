@@ -147,6 +147,39 @@ $("#signup_form").on("submit",function(ev){
 })
 })
 </script>
+	<script>
+$(function(){
+	var member_email="待輸入";
+	var member_id="待輸入";
+	var member_password="待輸入";
+	var member_password1="待輸入";
+	var member_bank_code="待輸入";
+	var member_bank_account="待輸入";
+	var member_name="待輸入";
+	var member_cellphone="待輸入";
+	var member_address="待輸入";
+
+	$("#buyersignup_button").click(function(){
+		$("#member_email").val(member_email);
+		$("#member_id").val(member_id);
+		$("#member_password").val(member_password);
+		$("#member_password1").val(member_password1);
+		$("#member_name").val(member_name);
+		$("#member_cellphone").val(member_cellphone);
+		$("#member_address").val(member_address);
+});
+	$("#sellersignup_button").click(function(){
+		$("#member_email").val(member_email);
+		$("#member_id").val(member_id);
+		$("#member_password").val(member_password);
+		$("#member_password1").val(member_password1);
+		$("#member_bank_code").val(member_bank_code);
+		$("#member_bank_account").val(member_bank_account);
+		$("#member_name").val(member_name);
+		$("#member_cellphone").val(member_cellphone);
+		$("#member_address").val(member_address);});
+})
+</script>
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
 
@@ -156,6 +189,9 @@ $("#signup_form").on("submit",function(ev){
 		<div class="signup-form container">
 			<fieldset class="border signup-form-fieldset">
 				<legend>會員註冊</legend>
+				<button type="button" id="buyersignup_button">買家</button>
+				<button type="button" id="sellersignup_button">買家</button>
+				<hr>
 				<div id="member_permissions0"
 					class="custom-control custom-radio custom-control-inline">
 					<input type="radio" id="customRadioInline1"
