@@ -13,11 +13,9 @@ import tw.group5.mall.model.ProductFavoriteBean;
 import tw.group5.mall.model.ProductImageBean;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
-
 @Service
 @Transactional
 public class ProductService {
-
 
 	@Autowired
 	private ProductDAO dao;
@@ -58,9 +56,20 @@ public class ProductService {
 		return dao.getRecordCounts();
 	}
 
-	public ProductBean getProduct(int productId) {
-
-		return dao.getProduct(productId);
+	public ProductBean getProduct(int productId, Member_SignUp mb) {
+		ProductBean productBean = dao.getProduct(productId);
+		if (mb != null) {
+			Integer userId = mb.getMember_no();
+			ProductFavoriteBean pfb=dao.getFavorite(userId, productBean.getProductId());
+			if (pfb != null&&pfb.getStatus()==1) {
+				productBean.setFavorite(1);
+			} else {
+				productBean.setFavorite(0);
+			}
+		}else {
+			productBean.setFavorite(0);
+		}
+		return productBean;
 	}
 
 	public ProductBean updateProduct(ProductBean bean) {
@@ -112,14 +121,21 @@ public class ProductService {
 	}
 
 	public List<ProductBean> getPageProductsWithoutZero(Member_SignUp mb) {
-		List<ProductBean> list =dao.getPageProductsWithoutZero();
-		if(mb!=null) {
-			Integer userId=mb.getMember_no();
-			for(ProductBean productBean:list) {
-				if(dao.getFavorite(userId,productBean.getProductId())!=null) {
+		List<ProductBean> list = dao.getPageProductsWithoutZero();
+		if (mb != null) {
+			Integer userId = mb.getMember_no();
+			for (ProductBean productBean : list) {
+				ProductFavoriteBean pfb=dao.getFavorite(userId, productBean.getProductId());
+				if (pfb != null&&pfb.getStatus()==1) {
 					productBean.setFavorite(1);
+				} else {
+					productBean.setFavorite(0);
 				}
 			}
+			}else {
+				for (ProductBean productBean : list) {
+					productBean.setFavorite(0);
+				}
 		}
 		return list;
 	}
@@ -135,7 +151,7 @@ public class ProductService {
 	public void setSearchString(String searchString) {
 		dao.setSearchString(searchString);
 	}
-	
+
 	public String getSearchString() {
 		return dao.getSearchString();
 	}
@@ -149,8 +165,16 @@ public class ProductService {
 	}
 
 	public ProductFavoriteBean getFavorite(Integer userId, Integer productId) {
-		return dao.getFavorite(userId,productId);
+		return dao.getFavorite(userId, productId);
 	}
 
+	public List<ProductBean> getFavoriteList(Integer userId) {
+		return dao.getFavoriteList(userId);
+	}
+
+	public void cancelFavorite(Integer userId, Integer productId) {
+		dao.cancelFavorite(userId, productId);
+		
+	}
 
 }

@@ -304,6 +304,13 @@
 		// 		}
 
 		$(document).ready(function() {
+			var url = window.location.href;//獲取當前瀏覽器的url
+			index = url.indexOf("flag")
+			if(index !=-1) {
+				var start = url.indexOf("productId");
+				var productId = url.substring(start + "productId".length+1);
+				singleProduct(productId);
+			}else{
 			var	categoryId=0;
 			if(${mall_categoryId!=null}){
 				categoryId=`${mall_categoryId}`;				
@@ -325,6 +332,7 @@
 					$("#mainContent").html(data);
 				}
 			});
+			}
 		});
 	</script>
 </body>

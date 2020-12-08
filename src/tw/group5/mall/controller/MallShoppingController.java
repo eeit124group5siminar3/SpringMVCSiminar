@@ -83,9 +83,10 @@ public class MallShoppingController {
 // 顯示單筆商品資料及加入購物車
 	@PostMapping(value = "/SingleProduct")
 	public ModelAndView showSingleProduct(@RequestParam(value = "productId", required = false) Integer productId,
+			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb,
 			@RequestParam(value = "qty", required = false) Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
-		ProductBean selectedProduct = service.getProduct(productId);
+		ProductBean selectedProduct = service.getProduct(productId,mb);
 		selectedProduct.setViews(selectedProduct.getViews() + 1);
 		OrderItem oi = new OrderItem();
 		oi.setProductId(selectedProduct.getProductId());
@@ -122,7 +123,7 @@ public class MallShoppingController {
 			@RequestParam(value = "qty", required = false) Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		if (productId != null) {
-			ProductBean selectedProduct = service.getProduct(productId);
+			ProductBean selectedProduct = service.getProduct(productId,null);
 			selectedProduct.setViews(selectedProduct.getViews() + 1);
 			OrderItem oi = new OrderItem();
 			oi.setProductId(selectedProduct.getProductId());
@@ -178,5 +179,21 @@ public class MallShoppingController {
 			pfb.setStatus(0);
 			return false;
 		}
+	}
+	
+// 顯示願望清單
+	@PostMapping(value = "/WishListContent")
+	public ModelAndView showWishListContent(@SessionAttribute(value = "login_ok") Member_SignUp mb,
+			@RequestParam(value = "productId",required = false)Integer productId) {	
+		Integer userId= mb.getMember_no();
+		if(productId!=null) {
+		service.cancelFavorite(userId,productId);
+		}
+		List<ProductBean> list =service.getFavoriteList(userId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/wishListContent");
+		mav.addObject("productWishList", list);
+		mav.setStatus(HttpStatus.OK);
+		return mav;
 	}
 }
