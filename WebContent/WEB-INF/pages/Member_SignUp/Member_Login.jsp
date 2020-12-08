@@ -53,33 +53,24 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	crossorigin="anonymous"></script>
 <script>
 	$(function() {
-		$("#form_submit")
-				.on(
-						"submit",
-						function(ev) {
-							$
-									.ajax({
-										url : "checkLogin.controller",
-										data : {
-											email : $("#exampleInputEmail1")
-													.val(),
-											password : $(
-													"#exampleInputPassword1")
-													.val(),
-											remember : $("#exampleCheck1")
-													.val()
-										},
-										type : "POST",
-										contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-										success : function(data) {
-											if (data) {
-												self.location = document.referrer;
-											} else {
-												$("#check_email").html(
-														"帳號或密碼錯誤，請重新輸入");
-											}
-										}
-									})
+		$("#form_submit").on("submit",function(ev) {
+			$.ajax({
+				url : "checkLogin.controller",
+				data : {
+					email : $("#exampleInputEmail1").val(),
+					password : $("#exampleInputPassword1").val(),
+					remember : $("#exampleCheck1").val()
+				},
+				type : "POST",
+				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+					if (data) {
+						self.location = document.referrer;
+					} else {
+				$("#check_email").html("帳號或密碼錯誤，請重新輸入");
+				}
+		}
+	})
 							ev.preventDefault();
 						})
 	})
@@ -125,33 +116,22 @@ function GetProfile() {
           console.log(user.name);
           var fb_name = user.name;
           var fb_email = user.email; 
-          var page2 = $("#url").val();
-			$.ajax({
-      		url: "fbMemberSignUp.controller",
-      		method: "post",
-      		data: { 
-          			member_name: fb_name,
-          			member_email: fb_email
-          		 },
-      		success: function (data) {
-          		if(msg.registSuccess){//跳轉填寫資料
-          			$(window).attr('location',"googleInfo");
-                  }
-          		if(msg.loginSuccess){//跳轉首頁
-          			$("#check_email").html("");
-				  }
-          		if(msg.inputInfo){//跳轉填寫資料
-          			$(window).attr('location',"googleInfo");
-                  }
-          		if(msg.emailExist){//帳號已存在
-          			$("#result").text(msg.emailExist);
-                  }
-          		if(msg.error){//報錯
-          			$("#result").text(msg.error);
-                  }
-                  
+   $.ajax({
+        url: "fbMemberSignUp.controller",
+        method: "post",
+        data: { 
+             member_name: fb_name,
+             member_email: fb_email
+             },
+        success: function (data) {
+            if(data){//跳轉填寫資料
+				self.location = document.referrer;
+            }if(!data){//跳轉首頁
+             $("#check_email").html("資料錯誤，請重新登錄");
       		}
-  		});//end $.ajax                    
+                  
+        }
+    });//end $.ajax                    
       }
   });
 
@@ -165,7 +145,7 @@ FB.getLoginStatus(function(res) {//
         console.log("用戶已授權您的App，用戶須先revoke撤除App後才能再重新授權你的App");
         console.log(`已授權App登入FB 的 userID:${userID}`);
         GetProfile();
-    		 
+       
     } else if (res.status === 'not_authorized' || res.status === "unknown") {
         //App未授權或用戶登出FB網站才讓用戶執行登入動作
         FB.login(function (response) {
@@ -189,7 +169,7 @@ FB.getLoginStatus(function(res) {//
 });
 
 }
-	</script>
+ </script>
 
 	<script>
 $(function(){
@@ -241,7 +221,7 @@ $(function(){
 						
 						
     <div>
-        Facebook登入：<input type="button"  value="Facebook登入" onclick="FBLogin();" />
+        Facebook登入：<input type="button"  value="Facebook登入" onclick="FBLogin();"/>
     </div>						
 				</div>
 				<a class="btn btn-primary" href="goMemberSignUp.controller"
