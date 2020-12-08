@@ -68,12 +68,21 @@ public class Member_Service {
 				member_name, member_birthday, member_cellphone, member_id, member_address, member_gui_number, e_paper,
 				member_bank_code, member_bank_account, member_gg, member_lock_acc);
 	}
-	
+
 	public boolean Admin_Delete_Member_Data(Integer member_no) {
 		return memberDao.Admin_Delete_Member_Data(member_no);
 	}
-	
+
 	public int totalPages() {
 		return memberDao.totalPages();
+	}
+
+	public boolean Fb_Updata_Member_Data(String member_email, String member_permissions, String member_password,
+			Date member_birthday, String member_cellphone, String member_id, String member_address,
+			String member_gui_number, String e_paper, String member_gg, String member_lock_acc, String member_bank_code,
+			String member_bank_account) {
+		return memberDao.Fb_Updata_Member_Data(member_email, member_permissions, member_password, member_birthday,
+				member_cellphone, member_id, member_address, member_gui_number, e_paper, member_gg, member_lock_acc,
+				member_bank_code, member_bank_account);
 	}
 }
