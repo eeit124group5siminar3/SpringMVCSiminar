@@ -83,10 +83,13 @@
 							href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
 							<a
 							class="dropdown-item"
-							href="<c:url value='updatePage.controller'/>">修改食譜</a> 
+							href="<c:url value='updatePage.controller'/>">我的食譜</a> 
 							<a
 							class="dropdown-item"
-							href="<c:url value='myRecipe'/>">我的食譜</a>
+							href="<c:url value='myRecipe'/>">我的最愛</a>
+							<a
+							class="dropdown-item"
+							href="<c:url value='blogPage'/>">討論區</a>
 					</div></li>
 
 				<li class="nav-item"><c:if test="${empty login_ok}">
