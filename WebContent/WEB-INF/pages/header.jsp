@@ -52,6 +52,7 @@
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item" href="<c:url value='/mall_shop' />">商城</a> 
 						<a class="dropdown-item" href="<c:url value='/mall_shoppingcart' />">購物車</a> 
+						<a class="dropdown-item" href="<c:url value='/mall_wishList' />">願望清單</a>
 						<a class="dropdown-item" href="<c:url value='/mall_order' />">查看訂單</a>
 					</div></li>
 				<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->

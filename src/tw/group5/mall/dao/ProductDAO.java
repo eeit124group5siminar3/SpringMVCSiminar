@@ -1,6 +1,7 @@
 package tw.group5.mall.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -230,7 +231,7 @@ public class ProductDAO {
 		count = (int) longNumber;
 		return count;
 	}
-	
+
 //依照ID查詢類別
 //	public CategoryBean getCategoryById() {
 //		Session session = sessionFactory.getCurrentSession();
@@ -321,7 +322,7 @@ public class ProductDAO {
 		ProductImageBean bean = session.get(ProductImageBean.class, productId);
 		return bean;
 	}
-	
+
 // 新增願望清單
 	public ProductFavoriteBean savaFavorite(ProductFavoriteBean productFavorite) {
 		Session session = sessionFactory.getCurrentSession();
@@ -329,14 +330,44 @@ public class ProductDAO {
 		return productFavorite;
 	}
 
+// 取得單筆願望
 	public ProductFavoriteBean getFavorite(Integer userId, Integer productId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ProductFavoriteBean where userId = :userId and productId= :productId";
 		Query<ProductFavoriteBean> query = session.createQuery(hql, ProductFavoriteBean.class);
 		query.setParameter("userId", userId);
 		query.setParameter("productId", productId);
-		ProductFavoriteBean pfb=query.uniqueResult();
+		ProductFavoriteBean pfb = query.uniqueResult();
 		return pfb;
 	}
-	
+
+// 取得願望清單
+	public List<ProductBean> getFavoriteList(Integer userId) {
+		Session session = sessionFactory.getCurrentSession();
+		String fhql = "from ProductFavoriteBean where userId = :userId and status=1";
+		Query<ProductFavoriteBean> fquery = session.createQuery(fhql, ProductFavoriteBean.class);
+		fquery.setParameter("userId", userId);
+		List<ProductFavoriteBean> favoriteList = fquery.list();
+		List<Integer> productIdList=new ArrayList<Integer>();
+		for(ProductFavoriteBean favorite:favoriteList) {
+			productIdList.add(favorite.getProductId());
+		}
+		String hql = "from ProductBean where productId in :productIdList";
+		Query<ProductBean> query = session.createQuery(hql, ProductBean.class);
+		query.setParameter("productIdList", productIdList);
+		List<ProductBean> list=query.list();
+		return list;
+	}
+
+	public void cancelFavorite(Integer userId, Integer productId) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ProductFavoriteBean where userId = :userId and productId= :productId";
+		Query<ProductFavoriteBean> query = session.createQuery(hql, ProductFavoriteBean.class);
+		query.setParameter("userId", userId);
+		query.setParameter("productId", productId);
+		ProductFavoriteBean pfb = query.uniqueResult();
+		pfb.setStatus(0);
+		session.update(pfb);	
+	}
+
 }

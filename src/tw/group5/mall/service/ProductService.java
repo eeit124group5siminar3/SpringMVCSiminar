@@ -60,9 +60,14 @@ public class ProductService {
 		ProductBean productBean = dao.getProduct(productId);
 		if (mb != null) {
 			Integer userId = mb.getMember_no();
-			if (dao.getFavorite(userId, productBean.getProductId()) != null) {
+			ProductFavoriteBean pfb=dao.getFavorite(userId, productBean.getProductId());
+			if (pfb != null&&pfb.getStatus()==1) {
 				productBean.setFavorite(1);
+			} else {
+				productBean.setFavorite(0);
 			}
+		}else {
+			productBean.setFavorite(0);
 		}
 		return productBean;
 	}
@@ -120,10 +125,17 @@ public class ProductService {
 		if (mb != null) {
 			Integer userId = mb.getMember_no();
 			for (ProductBean productBean : list) {
-				if (dao.getFavorite(userId, productBean.getProductId()) != null) {
+				ProductFavoriteBean pfb=dao.getFavorite(userId, productBean.getProductId());
+				if (pfb != null&&pfb.getStatus()==1) {
 					productBean.setFavorite(1);
+				} else {
+					productBean.setFavorite(0);
 				}
 			}
+			}else {
+				for (ProductBean productBean : list) {
+					productBean.setFavorite(0);
+				}
 		}
 		return list;
 	}
@@ -154,6 +166,15 @@ public class ProductService {
 
 	public ProductFavoriteBean getFavorite(Integer userId, Integer productId) {
 		return dao.getFavorite(userId, productId);
+	}
+
+	public List<ProductBean> getFavoriteList(Integer userId) {
+		return dao.getFavoriteList(userId);
+	}
+
+	public void cancelFavorite(Integer userId, Integer productId) {
+		dao.cancelFavorite(userId, productId);
+		
 	}
 
 }

@@ -75,7 +75,7 @@
 												class='ion-ios-heart'></i></span></a>
 									</c:when>
 									<c:otherwise>
-										<a
+										<a title="加入願望清單"
 											class='heart d-flex justify-content-center align-items-center'
 											onclick="favorite(${item.productId})"><span
 											id="favorite${item.productId}"> <c:choose>
