@@ -133,6 +133,8 @@ $(function(){
 	<script>
 $(function(){
 	$("#member_tr").on("click","#view_content",function(){
+		var permissions = "";
+		var gui_number = "";
 	$.ajax({
 		url:"viewSelectManageMembersData.controller",
 		data:{
@@ -141,9 +143,40 @@ $(function(){
 		type:"POST", 
 		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 	success:function(data){
-		let viewdata = data.viewdata
+		let viewdata = data.viewdata;
+		let code = data.viewdata.member_bank_code;
+		let account = data.viewdata.member_bank_account;
+		let gui_number = data.viewdata.member_gui_number;
+		let lock_acc = data.viewdata.member_lock_acc;
+		let epaper = data.viewdata.e_paper;
+		console.log("code是"+code);
 		
 		if(viewdata){
+			if(viewdata.member_permissions == 0){
+				permissions = "買家";
+			}else{
+				permissions = "賣家";				
+			}
+			console.log(viewdata.member_bank_code);
+			if(viewdata.member_bank_code == null){
+ 				code = "";
+			}
+			if(viewdata.member_bank_account == null){
+ 				account = "";
+			}
+			if(viewdata.member_gui_number == null){
+ 				gui_number = "";
+			}
+			if(viewdata.member_lock_acc == 0){
+				lock_acc = "未停權";
+			}else{
+				lock_acc = "停權";				
+			}
+			if(viewdata.e_paper == 0){
+				epaper = "未訂閱";
+			}else{
+				epaper = "已訂閱";				
+			}
 			$("#select_content").html(
 					`
 					<form id="view_form" method="post">
@@ -164,10 +197,12 @@ $(function(){
 									id="update_span_premissions"></small></small></span>
 									<input type="text"
 										class="form-control" id="update_member_permissions1"
-										value="\${viewdata.member_permissions}" disabled>
-										<input type="text"
-											class="form-control"
-											id="update_member_permissions2">
+										value="\${permissions}" disabled>
+										<select class="form-control" style="float:left" id="update_member_permissions2">
+										<option value="0">買家</option>
+										<option value="1">賣家</option>
+										</select>
+
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputEmail4" style="float:left">身份證字號</label> <span style="color: red"><small><small
@@ -202,7 +237,7 @@ $(function(){
 									<div class="form-group col-md-6">
 										<label for="inputPassword4" style="float:left">銀行代號</label> <input type="text"
 											class="form-control" id="update_member_bank_code1"
-											value="\${viewdata.member_bank_code}" disabled>
+											value="\${code}" disabled>
 											<input type="text"
 												class="form-control"
 												id="update_member_bank_code2">
@@ -210,7 +245,7 @@ $(function(){
 									<div class="form-group col-md-6">
 										<label for="inputPassword4" style="float:left">銀行帳號</label> <input type="text"
 											class="form-control" id="update_member_bank_account1"
-											value="\${viewdata.member_bank_account}" disabled>
+											value="\${account}" disabled>
 											<input type="text"
 												class="form-control"
 												id="update_member_bank_account2">
@@ -257,7 +292,7 @@ $(function(){
 								<div class="form-group col-md-6">
 									<label for="inputEmail4" style="float:left">統一編號</label> <input type="text"
 										class="form-control" id="update_member_gui_number1"
-										value="\${viewdata.member_gui_number}" disabled>
+										value="\${gui_number}" disabled>
 										<input type="text"
 											class="form-control"
 											id="update_member_gui_number2">
@@ -272,18 +307,23 @@ $(function(){
 								<input type="text"
 									class="form-control" id="update_member_gg1"
 									value="\${viewdata.member_gg}" disabled>
-									<input type="text"
-										class="form-control"
-										id="update_member_gg2">
+									<select class="form-control" style="float:left" id="update_member_gg2">
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									</select>
+
 									<p></p>
 									<label for="inputEmail4" style="float:left">電子報</label> <span style="color: red"><small><small
 									id="update_span_e_paper"></small></small></span>
 									<input type="text"
 										class="form-control" id="update_e_paper1"
-										value="\${viewdata.e_paper}" disabled>
-										<input type="text"
-											class="form-control"
-											id="update_e_paper2">
+										value="\${epaper}" disabled>
+										<select class="form-control" style="float:left" id="update_e_paper2">
+										<option value="1">已訂閱</option>
+										<option value="0">未訂閱</option>
+										</select>
 									</div>
 									<div class="form-group col-md-6">
 									
@@ -291,10 +331,11 @@ $(function(){
 									id="update_span_lock_acc"></small></small></span>
 									<input type="text"
 										class="form-control" id="update_member_lock_acc1"
-										value="\${viewdata.member_lock_acc}" disabled>
-										<input type="text"
-											class="form-control"
-											id="update_member_lock_acc2">
+										value="\${lock_acc}" disabled>
+										<select class="form-control" style="float:left" id="update_member_lock_acc2">
+										<option value="0">未停權</option>
+										<option value="1">停權</option>
+										</select>
 								</div>
 							</div>
 						      <div class="modal-footer">
@@ -393,6 +434,8 @@ $(function(){
 	<!-- 畫面顯示所有會員資料 -->
 	<script>
 $(document).ready(function(){
+var permissions = "";
+var lock_acc = "";
 var currentPage = 1;
 	$.get({
 		url:"${pageContext.request.contextPath}/manageMembersData.controller/"+currentPage,
@@ -404,17 +447,27 @@ var currentPage = 1;
 		
 		content="";
 		for(var i=0 ; i<data1.length ; i++){
+			if(data1[i].member_permissions == 0){
+				permissions = "買家";
+			}else{
+				permissions = "賣家";				
+			}
+			if(data1[i].member_lock_acc == 0){
+				lock_acc = "未停權";
+			}else{
+				lock_acc = "停權";				
+			}
 			content+=
 				`
 				<tr>
-				<td>\${data1[i].member_permissions}</td>
+				<td>\${permissions}</td>
 				<td>\${data1[i].member_no}</td>
 				<td>\${data1[i].member_name}</td>
 				<td>\${data1[i].member_cellphone}</td>
 				<td>\${data1[i].member_address}</td>
 				<td>\${data1[i].member_signup_date}</td>
 				<td>\${data1[i].member_gg}</td>
-				<td>\${data1[i].member_lock_acc}</td>
+				<td>\${lock_acc}</td>
 				<td>
 					<form method="POST">
 						<input type="hidden" id="view_member_no"+[i] name="actId"
@@ -581,6 +634,8 @@ var currentPage = 1;
 $(function(){
 	$("#member_tr").on("click","button",function(){
 		var PageNo =$(this).val();
+		var permissions = "";
+		var lock_acc = "";
 		$.get({
 			url:"${pageContext.request.contextPath}/manageMembersData.controller/"+PageNo,
 			success:function(data){
@@ -591,17 +646,27 @@ $(function(){
 			
 			content="";
 			for(var i=0 ; i<data1.length ; i++){
+				if(data1[i].member_permissions == 0){
+					permissions = "買家";
+				}else{
+					permissions = "賣家";				
+				}
+				if(data1[i].member_lock_acc == 0){
+					lock_acc = "未停權";
+				}else{
+					lock_acc = "停權";				
+				}
 				content+=
 					`
 					<tr>
-					<td>\${data1[i].member_permissions}</td>
+					<td>\${permissions}</td>
 					<td>\${data1[i].member_no}</td>
 					<td>\${data1[i].member_name}</td>
 					<td>\${data1[i].member_cellphone}</td>
 					<td>\${data1[i].member_address}</td>
 					<td>\${data1[i].member_signup_date}</td>
 					<td>\${data1[i].member_gg}</td>
-					<td>\${data1[i].member_lock_acc}</td>
+					<td>\${lock_acc}</td>
 					<td>
 						<form method="POST">
 							<input type="hidden" id="view_member_no"+[i] name="actId"
@@ -1065,6 +1130,8 @@ $(function(){
 	<script>
 $(function(){
 $("#select_member_no").on("submit",function(ev){
+	var permissions = "";
+	var lock_acc = "";
 	$("#select_error").html("");
 	$.ajax({
 		url:"selectManageMembersData.controller",
@@ -1081,18 +1148,28 @@ $("#select_member_no").on("submit",function(ev){
 			let pageNo = data.pageNO;
 			let totalPages = data.totalPageNo;
 		if(data1){
+			if(data1.member_permissions == 0){
+				permissions = "買家";
+			}else{
+				permissions = "賣家";				
+			}
+			if(data1.member_lock_acc == 0){
+				lock_acc = "未停權";
+			}else{
+				lock_acc = "停權";				
+			}
 			content="";
 				content+=
 					`
 					<tr>
-					<td>\${data1.member_permissions}</td>
+					<td>\${permissions}</td>
 					<td>\${data1.member_no}</td>
 					<td>\${data1.member_name}</td>
 					<td>\${data1.member_cellphone}</td>
 					<td>\${data1.member_address}</td>
 					<td>\${data1.member_signup_date}</td>
 					<td>\${data1.member_gg}</td>
-					<td>\${data1.member_lock_acc}</td>
+					<td>\${lock_acc}</td>
 					<td>
 					<form method="POST">
 					<input type="hidden" id="view_member_no"+[i] name="actId"
@@ -1179,17 +1256,27 @@ $("#select_member_no").on("submit",function(ev){
 		}else if(data2){
 			content="";
 			for(var i=0 ; i<data2.length ; i++){
+				if(data2[i].member_permissions == 0){
+					permissions = "買家";
+				}else{
+					permissions = "賣家";				
+				}
+				if(data2[i].member_lock_acc == 0){
+					lock_acc = "未停權";
+				}else{
+					lock_acc = "停權";				
+				}
 				content+=
 					`
 					<tr>
-					<td>\${data2[i].member_permissions}</td>
+					<td>\${permissions}</td>
 					<td>\${data2[i].member_no}</td>
 					<td>\${data2[i].member_name}</td>
 					<td>\${data2[i].member_cellphone}</td>
 					<td>\${data2[i].member_address}</td>
 					<td>\${data2[i].member_signup_date}</td>
 					<td>\${data2[i].member_gg}</td>
-					<td>\${data2[i].member_lock_acc}</td>
+					<td>\${lock_acc}</td>
 					<td>
 					<form method="POST">
 					<input type="hidden" id="view_member_no" name="actId"
@@ -1489,7 +1576,7 @@ $(function(){
 												<input type="radio" id="customRadioInline2"
 													name="member_permissions" class="custom-control-input"
 													value="1"> <label class="custom-control-label"
-													for="customRadioInline2">買家與賣家</label>
+													for="customRadioInline2">賣家</label>
 											</div>
 											<p></p>
 											<div class="form-row">
