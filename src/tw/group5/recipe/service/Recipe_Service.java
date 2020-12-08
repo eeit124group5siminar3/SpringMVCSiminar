@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.DAO.Recipe_DAO_spring;
+import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
@@ -84,6 +85,47 @@ public class Recipe_Service implements recipe_Service_interface {
 	@Override
 	public boolean bookmarkExist(String rec_id,Integer mem_no) {
 		return rDAO.bookmarkExist(rec_id,mem_no);
+	}
+	
+	@Override
+	public Recipe_Bean recipeBean(String rec_id) {
+		return rDAO.recipeBean(rec_id);
+	}
+	
+	//blog
+	@Override
+	public Blog_Bean insert(Blog_Bean bean) {
+		return rDAO.insert(bean);
+	}
+	
+	@Override
+	public Blog_Bean updateBlog(Blog_Bean bean) {
+		return rDAO.updateBlog(bean);
+	}
+	
+	@Override
+	public List<Blog_Bean> searchAllOfBlog() {
+		return rDAO.searchAllOfBlog();
+	}
+	
+	@Override
+	public Blog_Bean blogBean(Integer blog_id) {
+		return rDAO.blogBean(blog_id);
+	}
+	
+	@Override
+	public List<Blog_Bean> getMemBlog(Integer mem_no) {
+		return rDAO.getMemBlog(mem_no);
+	}
+	
+	@Override
+	public long BlogIdMsg(Integer blog_id) {
+		return rDAO.BlogIdMsg(blog_id);
+	}
+	
+	@Override
+	public boolean deleteBlog(Integer blog_id) {
+		return rDAO.deleteBlog(blog_id);
 	}
 	
 	//----------------------首頁分頁--------------------------------

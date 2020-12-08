@@ -108,6 +108,12 @@
 					href="<c:url value='updatePage.controller'/>">Update</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="<c:url value='myRecipe'/>">Bookmark</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="<c:url value='blogEdit'/>">blogedit</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="<c:url value='blogPage'/>">blogPage</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="<c:url value='blog_personal'/>">personalBlog</a></li>
 
 				<!--       <li class="nav-item dropdown"> -->
 				<!--         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> -->
@@ -250,7 +256,7 @@
                          var ls = data[i];   
                          var ingredients_A=ls.ingredients_A;
                          html +=
-		           ` <div style="margin:auto;width:1500px"><div class="blog-entry align-self-stretch d-md-flex"> 
+		           ` <div style="margin:auto;width:1500px"><div class="blog-entry align-self-stretch d-md-flex">
 		              <a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="block-20" target="_blank"
 			              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${ls.rec_id}'/>');">
 		              </a>
