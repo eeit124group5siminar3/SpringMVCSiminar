@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,14 +17,17 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import tw.group5.mall.ShoppingCart;
+import tw.group5.marketSeller.MarketCart;
 import tw.group5.marketSeller.model.MarketMallBean;
+import tw.group5.marketSeller.model.MarketOrder;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
 import tw.group5.marketSeller.service.MarketProductBeanService;
 import tw.group5.marketSeller.service.MarketSellBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(value = {"login_ok"} )
+@SessionAttributes(value = {"login_ok","MarketCart"} )
 public class MarketHome {
 	public static final int IMAGE_FILENAME_LENGTH = 20;
 	
@@ -66,6 +71,17 @@ public class MarketHome {
 		mav.addObject("marketPageNo",pageNo);
 		return mav;		
 	}
+	//顯示地圖
+	@PostMapping(value = "/showMap")
+	public ModelAndView showMap(HttpServletRequest request,
+			@RequestParam(value = "memberNo", required = false) Integer memberNo){
+		MarketMallBean map =sellerService.selectid(memberNo);
+		ModelAndView mav =new ModelAndView();
+		mav.setViewName("/marketSeller/MarketMallMap");
+		mav.addObject("map",map);
+		return mav;
+	}
+	
 	//取得賣家商品
 	@PostMapping(value = "/ProductContent")
 	@ResponseBody
@@ -78,24 +94,39 @@ public class MarketHome {
            mav.addObject("totalProducts",list);
 		   return mav;
 	}
-	//商品詳細資訊
+	//商品詳細資訊及加入購物車
 	@PostMapping(value = "/ProductNews")
 	@ResponseBody
 	public ModelAndView productNews(
-			@RequestParam(value = "productId", required = false) Integer productId
+			@RequestParam(value = "productId", required = false) Integer productId,
+			@RequestParam(value = "qty", required = false) Integer qty,
+			@SessionAttribute(value = "MarketCart", required = false) MarketCart cart, Model model
 			) {
-		System.out.println("來囉來囉");
-		//商品詳細資訊
-		System.out.println("商品ID在這 : " + productId);		
-		MarketProductTotalBean pBean = productService.select(productId);	
-		//推薦商品
-		Integer memberNo =pBean.getMarketMallBean().getMemberNo();
-		System.out.println("會員ID在這 : " + memberNo);					
-		List<MarketProductTotalBean> list = productService.selectBuyerAll(memberNo);
+		//商品詳細資訊	
+		MarketProductTotalBean pBean = productService.select(productId);
+		MarketOrder marketOrder =new MarketOrder();
+		marketOrder.setMemberNo(pBean.getMemberNo());
+		marketOrder.setProductId(pBean.getProductId());
+		marketOrder.setProducterName(pBean.getMarketMallBean().getMallName());
+		marketOrder.setProduct(pBean.getProductName());
+		marketOrder.setPrice(pBean.getPrice());
+        marketOrder.setStock(pBean.getQuantity());
+        marketOrder.setQuantity(0);
+        if (cart == null) {
+			cart =new MarketCart();
+			model.addAttribute("MarketCart", cart);
+		}
+        cart.addToCart(productId, marketOrder);
+        if (qty !=null ) {
+			marketOrder.setQuantity(qty);
+			cart.addToCart(productId, marketOrder);
+		}
+        marketOrder =cart.getContent().get(productId);
 		ModelAndView mav =new ModelAndView();
         mav.setViewName("/marketSeller/MarketMallOneProduct");
         mav.addObject("oneProduct",pBean);
-        mav.addObject("totalProducts",list);
+        mav.addObject("marketOrder",marketOrder);
+        mav.setStatus(HttpStatus.OK);
 		return mav;
 	}
 }

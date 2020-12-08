@@ -13,6 +13,8 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tw.group5.member_SignUp.model.Member_SignUp;
+
 @WebFilter(urlPatterns = {"/mall_order","/mall_management","/mall_manageOrder","/Mall_checkout"}, initParams = @WebInitParam(name = "LOGIN_PATH", value = "Member_Login"))
 public class AccessController extends HttpFilter implements Filter {
 	private String LOGIN_PATH;
@@ -28,7 +30,8 @@ public class AccessController extends HttpFilter implements Filter {
 
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		if (request.getSession().getAttribute("login_ok") == null) {
+		Member_SignUp mb=(Member_SignUp) request.getSession().getAttribute("login_ok");
+		if (mb == null) {
 //			response.sendRedirect(request.getContextPath()+LOGIN_PATH);
 			response.sendRedirect(LOGIN_PATH);
 		} else {

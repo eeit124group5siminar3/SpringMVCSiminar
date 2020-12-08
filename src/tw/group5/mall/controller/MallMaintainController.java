@@ -1,13 +1,17 @@
 package tw.group5.mall.controller;
 
-import java.util.Collection;
+import java.io.File;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +26,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import tw.group5.mall.model.CategoryClass;
 import tw.group5.mall.model.ProductBean;
 import tw.group5.mall.model.ProductOrderItemBean;
 import tw.group5.mall.model.ProducterBean;
@@ -34,7 +37,6 @@ import tw.group5.member_SignUp.model.Member_SignUp;
 @SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean",
 		"insertBean" })
 public class MallMaintainController {
-//	public final int RECORDS_PER_PAGE = 5;
 	@Autowired
 	private ProductService service;
 	@Autowired
@@ -64,15 +66,16 @@ public class MallMaintainController {
 
 // 修改資料前置
 	@PostMapping(value = "/Preupdate")
-	public ModelAndView preupdate(HttpServletRequest request, @RequestParam(value = "productId") Integer productId) {
+	public ModelAndView preupdate(HttpServletRequest request, @RequestParam(value = "productId") Integer productId,Model model) {
 		ProductBean updateBean = service.getProduct(productId);
 		service.setSelected(updateBean.getCategory());
 		service.setTagName("categoryId");
 		String categoryTag = service.getSelectTag();
+		model.addAttribute("updateBean", updateBean);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/updateForm");
 		mav.addObject("SelectCategoryTag", categoryTag);
-		mav.addObject("updateBean", updateBean);
+//		mav.addObject("updateBean", updateBean);
 		return mav;
 	}
 
@@ -92,15 +95,16 @@ public class MallMaintainController {
 
 // 新增資料前置
 	@PostMapping(value = "/Preinsert")
-	public ModelAndView preinsert(HttpServletRequest request) {
+	public ModelAndView preinsert(HttpServletRequest request,Model model) {
 		ProductBean insertBean = new ProductBean();
 		service.setSelected(1);
 		service.setTagName("categoryId");
 		String categoryTag = service.getSelectTag();
+		model.addAttribute("insertBean", insertBean);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/insertForm");
 		mav.addObject("SelectCategoryTag", categoryTag);
-		mav.addObject("insertBean", insertBean);
+//		mav.addObject("insertBean", insertBean);
 		return mav;
 	}
 
@@ -175,6 +179,59 @@ public class MallMaintainController {
 		String statusTag = poib.getStatusTag();
 		return statusTag;
 	}
+	
+// 顯示單筆訂單詳細資料
+	@PostMapping(value = "/OrderForm")
+	public ModelAndView showOrderForm(@RequestParam(value = "itemId", required = false) Integer itemId) {	
+		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/orderForm");
+		mav.addObject("orderItem", orderItem);
+		return mav;
+	}
+	
+// 商品評價
+	@PostMapping(value = "/ThankForScore")
+	public @ResponseBody Map<String, String> thankForScore(@RequestParam Integer itemId,@RequestParam Double score) {
+		Map<String, String>map=new HashMap<String, String>();
+		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
+		Integer productId = orderItem.getProductId();
+		ProductBean product = service.getProduct(productId);
+		product.setScore(score);
+		product.setScorenum(product.getScorenum()+1);
+		orderItem.setStatus(3);
+		map.put("thankyou", "<h1>感謝你的評分</h1>");
+		map.put("statusTagForUser",orderItem.getStatusTagForUser());
+		map.put("statusWord",orderItem.getStatusWord());		
+		return map;		
+	}
+
+// 下載訂單資料
+	@GetMapping(value = "/aaa")
+	public String downloadOrder(HttpServletRequest request) {
+//		GregorianCalendar calender = new GregorianCalendar();
+//		Date date = new Date(calender.getTimeInMillis());
+		int v=1;
+		String filePath="c:/data/v" + v + ".xml";
+		File file = new File(filePath);
+		while (file.exists()) {
+			v++;
+			filePath="c:/data/v" + v + ".xml";
+			file = new File(filePath);
+		}
+		ProductOrderItemBean poibBean=orderService.getOrderItem(49);
+		try {
+		JAXBContext ctx = JAXBContext.newInstance(ProductOrderItemBean.class);
+		Marshaller marchaller = ctx.createMarshaller() ;
+		System.err.println(file);
+		System.err.println(file.length());
+		marchaller.marshal(poibBean, file);
+	} catch (JAXBException e) {
+		e.printStackTrace();
+	}
+		return "/index";
+	}
+}
 //	@GetMapping(value = "/DisplayMaintainProduct")
 //	public String displayMaintainProduct(
 //			@RequestParam(value = "MaintainPageNo", required = false) Integer maintainPageNo,
@@ -273,5 +330,3 @@ public class MallMaintainController {
 //		service.updateProduct(bb);
 //		return "redirect:DisplayMaintainProduct?MaintainPageNo=" + maintainPageNo;
 //	}
-
-}

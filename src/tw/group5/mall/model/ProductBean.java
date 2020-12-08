@@ -34,7 +34,7 @@ public class ProductBean implements Serializable {
 	private Integer productId;
 	private String product;
 	private Integer producterId;
-	private Double price;
+	private Integer price;
 	private Double discount = 1.0;
 	private Blob coverImage;
 	private String fileName;
@@ -48,8 +48,11 @@ public class ProductBean implements Serializable {
 	private Integer views=0;
 	private Integer sold=0;
 	private Integer status=1;
+	private Double score=0.0;
+	private Integer scorenum=0;
 	private ProducterBean producterBean;
 	private String producterName;
+	private Integer favorite=0;
 //	private CategoryBean categoryBean;
 	private MultipartFile multipartFile;
 
@@ -89,11 +92,11 @@ public class ProductBean implements Serializable {
 	}
 
 	@Column(name = "PRICE")
-	public Double getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
@@ -216,6 +219,26 @@ public class ProductBean implements Serializable {
 		this.status = status;
 	}
 
+	@Column(name = "SCORE")
+	public Double getScore() {
+		return score;
+	}
+
+// 需要比scorenum先輸入
+	public void setScore(Double score) {
+		Double avg=(this.score*scorenum+score)/(scorenum+1);
+		this.score = avg;
+	}
+
+	@Column(name = "SCORENUM")
+	public Integer getScorenum() {
+		return scorenum;
+	}
+
+	public void setScorenum(Integer scorenum) {
+		this.scorenum = scorenum;
+	}
+
 	@Transient
 	public String getCategoryName() {
 		return CategoryClass.getCategory(category);
@@ -251,6 +274,14 @@ public class ProductBean implements Serializable {
 //	public void setCategoryBean(CategoryBean categoryBean) {
 //		this.categoryBean = categoryBean;
 //	}
+	@Transient
+	public Integer getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(Integer favorite) {
+		this.favorite = favorite;
+	}
 
 	@JsonIgnore
 	@Transient

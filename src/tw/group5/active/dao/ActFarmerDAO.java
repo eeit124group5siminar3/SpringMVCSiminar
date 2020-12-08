@@ -24,7 +24,7 @@ public class ActFarmerDAO {
 //=========================取得分頁==========================================
 
 	// 抓分頁
-	public final Integer RECORDS_PER_PAGE = 5;
+	public final Integer RECORDS_PER_PAGE = 3;
 	
 	private Integer pageNo = 1;// 存放目前顯示之頁面的編號
 	private Integer maintainPageNo = 0;
@@ -161,7 +161,7 @@ public class ActFarmerDAO {
 		String hql = "from ActFarmer ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setFirstResult(startRecordNo);
-		query.setMaxResults(5);
+		query.setMaxResults(3);
 		List<ActFarmer> list = query.list();
 		return list;
 	}

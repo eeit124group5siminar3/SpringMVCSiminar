@@ -68,7 +68,7 @@ public class BackstageController {
 	}
 
 	// 會員修改資料
-	@RequestMapping(path = "/memberBackstageUpDate.controller", method = RequestMethod.POST)
+	@RequestMapping(value = "/memberBackstageUpDate.controller", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean MemberBackstageUpDate(@RequestParam(name = "member_permissions") boolean boolean_member_permissions,
 			@RequestParam(name = "member_password") String member_password,

@@ -65,8 +65,8 @@
 									<li><span>&lt;</span></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href='#product_top' onclick='managementPage(1)'>&lt;&lt;</a></li>
-									<li><a href='#product_top'
+									<li><a href='#managementContent' onclick='managementPage(1)'>&lt;&lt;</a></li>
+									<li><a href='#managementContent'
 										onclick='managementPage(${management_pageNo - 1})'>&lt;</a></li>
 								</c:otherwise>
 							</c:choose>
@@ -80,7 +80,7 @@
 												<li class='active'><span>${i}</span></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href='#product_top'
+												<li><a href='#managementContent'
 													onclick='managementPage(${i})'>${i}</a></li>
 											</c:otherwise>
 										</c:choose>
@@ -95,7 +95,7 @@
 														<li class='active'><span>${i}</span></li>
 													</c:when>
 													<c:otherwise>
-														<li><a href='#product_top'
+														<li><a href='#managementContent'
 															onclick='managementPage(${i})'>${i}</a></li>
 													</c:otherwise>
 												</c:choose>
@@ -110,7 +110,7 @@
 														<li class='active'><span>${i}</span></li>
 													</c:when>
 													<c:otherwise>
-														<li><a href='#product_top'
+														<li><a href='#managementContent'
 															onclick='managementPage(${i})'>${i}</a></li>
 													</c:otherwise>
 												</c:choose>
@@ -124,7 +124,7 @@
 														<li class='active'><span>${i}</span></li>
 													</c:when>
 													<c:otherwise>
-														<li><a href='#product_top'
+														<li><a href='#managementContent'
 															onclick='managementPage(${i})'>${i}</a></li>
 													</c:otherwise>
 												</c:choose>
@@ -140,9 +140,9 @@
 									<li><span>&gt;&gt;</span></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href='#product_top'
+									<li><a href='#managementContent'
 										onclick='managementPage(${management_pageNo + 1})'>&gt;</a></li>
-									<li><a href='#product_top'
+									<li><a href='#managementContent'
 										onclick='managementPage(${management_totalPages})'>&gt;&gt;</a></li>
 								</c:otherwise>
 							</c:choose>
@@ -205,4 +205,66 @@ function shelf(event,productStatus){
 	});
 	
 }
+
+function fastInput1(){
+	document.forms[0][0].value="波菜";
+	document.forms[0][1].value=50;
+	document.forms[0][2].value=7;
+	document.forms[0][3].value=35;
+	document.forms[0][4].value=1;
+	document.forms[0][5].value="臺斤";
+	document.forms[0][6].value=1.0;
+	document.forms[0][7].value=1;
+// 	document.forms[0][8].src="<c:url value='/images/波菜.jpg' />";
+	document.forms[0][9].value="新鮮美味的波菜，產地直銷";
+	console.log(document.forms[0][8].src);
+	}
+function fastInput2(){
+	document.forms[0][0].value="地瓜";
+	document.forms[0][1].value=75;
+	document.forms[0][2].value=15;
+	document.forms[0][3].value=60;
+	document.forms[0][4].value=500;
+	document.forms[0][5].value="克";
+	document.forms[0][6].value=1.0;
+	document.forms[0][7].value=2;
+// 	document.forms[0][8].value="/WEB-INF/pages/images/地瓜.jpg";
+	document.forms[0][9].value="好吃又營養的地瓜，現在購買正是時候";
+	}
+function fastInput3(){
+	document.forms[0][0].value="栗子南瓜";
+	document.forms[0][1].value=150;
+	document.forms[0][2].value=30;
+	document.forms[0][3].value=50;
+	document.forms[0][4].value=1;
+	document.forms[0][5].value="顆";
+	document.forms[0][6].value=1.0;
+	document.forms[0][7].value=3;
+// 	document.forms[0][8].value="/WEB-INF/pages/images/栗子南瓜.jpg";
+	document.forms[0][9].value="好吃的栗子南瓜，每顆足重1.5公斤";
+	}
+function fastInput4(){
+	document.forms[0][0].value="包種茶";
+	document.forms[0][1].value=300;
+	document.forms[0][2].value=180;
+	document.forms[0][3].value=100;
+	document.forms[0][4].value=1;
+	document.forms[0][5].value="公斤";
+	document.forms[0][6].value=1.0;
+	document.forms[0][7].value=4;
+// 	document.forms[0][8].value="/WEB-INF/pages/images/包種茶.jpg";
+	document.forms[0][9].value="坪林特產，春茶上市";
+	}
+function fastInput5(){
+	document.forms[0][0].value="西瓜";
+	document.forms[0][1].value=119;
+	document.forms[0][2].value=15;
+	document.forms[0][3].value=200;
+	document.forms[0][4].value=1;
+	document.forms[0][5].value="顆";
+	document.forms[0][6].value=1.0;
+	document.forms[0][7].value=5;
+// 	document.forms[0][8].value="/WEB-INF/pages/images/西瓜.jpg";
+	document.forms[0][9].value="包甜，每顆約20公斤";
+	}
 </script>

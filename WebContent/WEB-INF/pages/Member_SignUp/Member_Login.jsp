@@ -53,71 +53,124 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	crossorigin="anonymous"></script>
 <script>
 	$(function() {
-		$("#form_submit")
-				.on(
-						"submit",
-						function(ev) {
-							$
-									.ajax({
-										url : "checkLogin.controller",
-										data : {
-											email : $("#exampleInputEmail1")
-													.val(),
-											password : $(
-													"#exampleInputPassword1")
-													.val(),
-											remember : $("#exampleCheck1")
-													.val()
-										},
-										type : "POST",
-										contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-										success : function(data) {
-											if (data) {
-												self.location = document.referrer;
-											} else {
-												$("#check_email").html(
-														"帳號或密碼錯誤，請重新輸入");
-											}
-										}
-									})
+		$("#form_submit").on("submit",function(ev) {
+			$.ajax({
+				url : "checkLogin.controller",
+				data : {
+					email : $("#exampleInputEmail1").val(),
+					password : $("#exampleInputPassword1").val(),
+					remember : $("#exampleCheck1").val()
+				},
+				type : "POST",
+				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+					if (data) {
+						self.location = document.referrer;
+					} else {
+				$("#check_email").html("帳號或密碼錯誤，請重新輸入");
+				}
+		}
+	})
 							ev.preventDefault();
 						})
 	})
 </script>
-	<script>
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId : '857264848365975',
-				xfbml : true,
-				version : 'v9.0'
-			});
-			FB.AppEvents.logPageView();
-		};
+	
+<script>
+<!--FaceBook-->
 
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {
-				return;
-			}
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-		FB.getLoginStatus(function(response) {
-		    statusChangeCallback(response);
-		});
-		{
-		    status: 'connected',
-		    authResponse: {
-		        accessToken: '{access-token}',
-		        expiresIn:'{unix-timestamp}',
-		        reauthorize_required_in:'{seconds-until-token-expires}',
-		        signedRequest:'{signed-parameter}',
-		        userID:'{user-id}'
-		    }
-		}
-	</script>
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '857264848365975',
+    cookie     : true,
+    xfbml      : true,
+    version    : 'v9.0'
+  });
+    
+  FB.AppEvents.logPageView();   
+    
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+
+
+function GetProfile() {
+  //document.getElementById('content').innerHTML = "";//先清空顯示結果
+
+  //FB.api()使用說明：https://developers.facebook.com/docs/javascript/reference/FB.api
+  //取得用戶個資
+  FB.api("/me", "GET", { fields: 'last_name,first_name,name,email' }, function (user) {
+      //user物件的欄位：https://developers.facebook.com/docs/graph-api/reference/user
+      if (user.error) {
+          console.log(response);
+      } else {      
+          console.log(user);
+          console.log(user.email);
+          console.log(user.name);
+          var fb_name = user.name;
+          var fb_email = user.email; 
+   $.ajax({
+        url: "fbMemberSignUp.controller",
+        method: "post",
+        data: { 
+             member_name: fb_name,
+             member_email: fb_email
+             },
+        success: function (data) {
+            if(data){//跳轉填寫資料
+				self.location = document.referrer;
+            }if(!data){//跳轉首頁
+             $("#check_email").html("資料錯誤，請重新登錄");
+      		}
+                  
+        }
+    });//end $.ajax                    
+      }
+  });
+
+}
+function FBLogin(){
+FB.getLoginStatus(function(res) {//
+    console.log('status:'+res.status);//Debug
+
+    if (res.status === "connected") { 
+        let userID = res["authResponse"]["userID"];
+        console.log("用戶已授權您的App，用戶須先revoke撤除App後才能再重新授權你的App");
+        console.log(`已授權App登入FB 的 userID:${userID}`);
+        GetProfile();
+       
+    } else if (res.status === 'not_authorized' || res.status === "unknown") {
+        //App未授權或用戶登出FB網站才讓用戶執行登入動作
+        FB.login(function (response) {
+            //console.log(response); //debug用
+            if (response.status === 'connected') {
+                //user已登入FB
+                //抓userID
+                let userID = response.authResponse.userID;
+                console.log('已授權App登入FB 的 userID:'+userID);
+                GetProfile();
+                
+
+            } else {
+                // user FB取消授權
+                alert("Facebook帳號無法登入");
+            }
+            //"public_profile"可省略，仍然可以取得name、userID
+        }, { scope: 'email' }); 
+    }
+  
+});
+
+}
+ </script>
+
 	<script>
 $(function(){
 	var buyer_account="123@222";
@@ -134,10 +187,7 @@ $(function(){
 });
 })
 </script>
-	<div id="fb-root"></div>
-	<script async defer crossorigin="anonymous"
-		src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v9.0&appId=857264848365975"
-		nonce="cfWAXRRI"></script>
+
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
 
@@ -169,10 +219,10 @@ $(function(){
 						value="true"> <label class="form-check-label"
 						for="exampleCheck1">記住我</label><hr>
 						
-					<div class="fb-login-button" data-size="large"
-						data-button-type="continue_with" data-layout="default"
-						data-auto-logout-link="false" data-use-continue-as="false"
-						data-width=""></div>
+						
+    <div>
+        Facebook登入：<input type="button"  value="Facebook登入" onclick="FBLogin();"/>
+    </div>						
 				</div>
 				<a class="btn btn-primary" href="goMemberSignUp.controller"
 					style="float: counter">註冊</a> <a class="btn btn-primary"

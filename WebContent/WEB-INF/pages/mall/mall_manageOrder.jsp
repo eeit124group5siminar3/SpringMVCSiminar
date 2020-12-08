@@ -41,6 +41,29 @@
 <link rel="stylesheet" href="css/mall.css">
 </head>
 <body class="goto-here">
+
+	<div class="modal fade" id="manageOrder" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width: 640px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">訂單詳細資料</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="orderDetail" style="width: 640px">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->
 
@@ -60,28 +83,6 @@
 	</div>
 	<section class="ftco-section" id="manageOrderContent"></section>
 	<jsp:include page="../footer.jsp" />
-	
-<!-- 	<div class="modal fade" id="manageOrder" tabindex="-1" role="dialog" -->
-<!-- 		aria-labelledby="exampleModalLabel" aria-hidden="true" > -->
-<!-- 		<div class="modal-dialog modal-dialog-centered" role="document"> -->
-<!-- 			<div class="modal-content" style="width:640px"> -->
-<!-- 				<div class="modal-header"> -->
-<!-- 					<h5 class="modal-title" id="exampleModalLabel">訂單詳細資料</h5> -->
-<!-- 					<button type="button" class="close" data-dismiss="modal" -->
-<!-- 						aria-label="Close"> -->
-<!-- 						<span aria-hidden="true">&times;</span> -->
-<!-- 					</button> -->
-<!-- 				</div> -->
-<!-- 				<div class="modal-body" id="orderDetail" style="width:640px"> -->
-					
-<!-- 				</div> -->
-<!-- 				<div class="modal-footer"> -->
-<!-- 					<button type="button" class="btn btn-secondary" -->
-<!-- 						data-dismiss="modal">關閉</button> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
@@ -133,27 +134,27 @@
 		});
 		
 
-// 		$('#manageOrder').on('show.bs.modal', function (event) {
-// 			var tr = $(event.relatedTarget);
-// 			var productId = tr.data('whatever');
-// 			$.ajax({
-// 				url : "Preupdate",
-// 				type : "POST",
-// 				data : {
-// 					"productId":productId	
-// 				},
-// 				datatype : "html",
-// 				success : function(data, status) {
-// 					$("#orderDetail").html(data);
-// 				},
-// 				error : function(data, status) {
-// 					$("#orderDetail").html(data);
-// 				}
-// 			});			
-// 			})
+		$('#manageOrder').on('show.bs.modal', function (event) {
+			var tr = $(event.relatedTarget);
+			var itemId = tr.data('whatever');
+			$.ajax({
+				url : "OrderForm",
+				type : "POST",
+				data : {
+					"itemId":itemId	
+				},
+				datatype : "html",
+				success : function(data, status) {
+					$("#orderDetail").html(data);
+				},
+				error : function(data, status) {
+					$("#orderDetail").html(data);
+				}
+			});			
+			})
 			
 	</script>
-	
-	
+
+
 </body>
 </html>

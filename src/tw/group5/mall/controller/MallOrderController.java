@@ -1,8 +1,7 @@
 package tw.group5.mall.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +10,6 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.FormSubmitEvent.MethodType;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -23,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -106,7 +104,6 @@ public class MallOrderController {
 		for (Integer k : set) {
 			ProductOrderItemBean oib = new ProductOrderItemBean();
 			OrderItem oi = carts.get(k);
-			System.err.println(oi.getProducterId());
 			ProducterBean producterBean=orderService.getProducterId(oi.getProducterId());
 //			producterBean.setMember_no(oi.getProducterId());
 //			producterBean.setMember_name(oi.getProducterName());
@@ -180,34 +177,26 @@ public class MallOrderController {
 		return mav;
 	}
 
-	@GetMapping("/AbortServlet")
-	public String abortServlet(Model model) {
-		ShoppingCart cart = (ShoppingCart) model.getAttribute("ShoppingCart");
-		if (cart != null) {
-			cart.deleteAllOrders();
-			cart = null;
-		}
-		return "redirect:/RetrievePageProducts";
-	}
 
-	@GetMapping(value = "/OrderListServlet")
-	public String orderListServlet(@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb,
-			Model model) {
-		if (mb == null) {
-			mb = (Member_SignUp) model.getAttribute("login_guest");
-		}
-		List<ProductOrderBean> memberOrders = orderService.getMemberOrders(mb.getMember_no());
-		model.addAttribute("memberOrders", memberOrders);
-		return "/mall/OrderList";
-	}
-
-	@GetMapping(value = "/OrderDetailServlet")
-	public String orderDetailServlet(@RequestParam(value = "orderId") int no, Model model) {
-		ProductOrderBean ob = orderService.getOrder(no);
-		model.addAttribute("OrderBean", ob);
-		return "/mall/ShowOrderDetail";
+// 取消訂單
+	@PostMapping(value = "/CancelOrder")
+	public @ResponseBody Map<String, String> cancelOrder(@RequestParam(value = "itemId")Integer itemId){
+		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
+		orderItem.setStatus(-2);
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("statusWord", orderItem.getStatusWord());
+		map.put("statusTagForUser", orderItem.getStatusTagForUser());
+		return map;
 	}
 }
+
+//
+//	@GetMapping(value = "/OrderDetailServlet")
+//	public String orderDetailServlet(@RequestParam(value = "orderId") int no, Model model) {
+//		ProductOrderBean ob = orderService.getOrder(no);
+//		model.addAttribute("OrderBean", ob);
+//		return "/mall/ShowOrderDetail";
+//	}
 
 //	@PostMapping(value = "/UpdateProductServlet")
 //	public String updateProductServlet(@RequestParam(value = "cmd", required = false) String cmd,
@@ -291,3 +280,22 @@ public class MallOrderController {
 //			return "/mall/ProductShowCart";
 //		}
 //	}
+//	@GetMapping("/AbortServlet")
+//	public String abortServlet(Model model) {
+//		ShoppingCart cart = (ShoppingCart) model.getAttribute("ShoppingCart");
+//		if (cart != null) {
+//			cart.deleteAllOrders();
+//			cart = null;
+//		}
+//		return "redirect:/RetrievePageProducts";
+//	}
+//@GetMapping(value = "/OrderListServlet")
+//public String orderListServlet(@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb,
+//		Model model) {
+//	if (mb == null) {
+//		mb = (Member_SignUp) model.getAttribute("login_guest");
+//	}
+//	List<ProductOrderBean> memberOrders = orderService.getMemberOrders(mb.getMember_no());
+//	model.addAttribute("memberOrders", memberOrders);
+//	return "/mall/OrderList";
+//}

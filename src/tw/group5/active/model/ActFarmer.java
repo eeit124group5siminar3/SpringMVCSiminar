@@ -74,7 +74,7 @@ public class ActFarmer implements Serializable {
 	private Date signDateEnd;
 	private String signTimeEnd;
 	private Integer actNum = 0;
-	private String sigStat;
+	private Integer sigStat;
 	private MultipartFile multipartFile;
 	
 	
@@ -89,7 +89,7 @@ public class ActFarmer implements Serializable {
 	public ActFarmer(Integer actId, String actName, String actType, String actAddr, String tel, Date actDateSta,
 			String actTimeSta, Date actDateEnd, String actTimeEnd, Integer numLim, Integer sellerId, Integer price,
 			String actDescri, String imgName, Blob actImg, Integer actLock, Date signDateSta, String signTimeSta,
-			Date signDateEnd, String signTimeEnd, Integer actNum, String sigStat, MultipartFile multipartFile,
+			Date signDateEnd, String signTimeEnd, Integer actNum, Integer sigStat, MultipartFile multipartFile,
 			Set<ActOrdNum> actOrdNum) {
 		super();
 		this.actId = actId;
@@ -121,7 +121,7 @@ public class ActFarmer implements Serializable {
 	public ActFarmer(Integer actId, String actName, String actType, String actAddr, String tel, Date actDateSta,
 			String actTimeSta, Date actDateEnd, String actTimeEnd, Integer numLim, Integer sellerId, Integer price,
 			String actDescri, String imgName, Blob actImg, Date signDateSta, String signTimeSta, Date signDateEnd,
-			String signTimeEnd, Integer actNum, String sigStat) {
+			String signTimeEnd, Integer actNum, Integer sigStat) {
 
 		this.actId = actId;
 		this.actName = actName;
@@ -339,11 +339,11 @@ public class ActFarmer implements Serializable {
 	}
 
 	@Column(name = "sigStat")
-	public String getSigStat() {
+	public Integer getSigStat() {
 		return sigStat;
 	}
 
-	public void setSigStat(String sigStat) {
+	public void setSigStat(Integer sigStat) {
 		this.sigStat = sigStat;
 	}
 
