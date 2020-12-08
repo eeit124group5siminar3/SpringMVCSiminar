@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<form:form id="updaeteForm" name="updaeteForm" method="post"
+<form:form id="insertForm" name="insertForm" method="post"
 	action="InsertProduct" enctype="multipart/form-data"
 	modelAttribute="insertBean">
 
@@ -63,11 +63,11 @@
 <!-- 				<table border='0'> -->
 <!-- 					<tr> -->
 						<td style="padding-top: 0; padding-bottom: 5px"><img
-							height='120' width='120'
+							height='120' width='120' id="newImage"
 							src=<c:url value='retrieveImageServlet?id=${insertBean.productId}&type=PRODUCT' /> />
 						</td>
 						<td style="padding-top: 0; padding-bottom: 5px" colspan='2'><form:input
-								type="file" name="uploadFile" path="multipartFile" size='6'/>
+								type="file" name="uploadFile" path="multipartFile" size='6' id="newFile" onchange="loadImageFile(event)"/>
 							<font color='red' size='-1'> ${ErrMsg.errPicture} </font></td>
 <!-- 					</tr> -->
 <!-- 				</table> -->

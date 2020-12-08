@@ -36,7 +36,7 @@ public class ProductOrderBean implements Serializable{
 	private String address;
 	private String tel;
 	private String bNo;
-	private Double total;
+	private Integer total;
 	private	Date orderDate;
 	private Integer shippingTime;
 	private Set<ProductOrderItemBean> items = new LinkedHashSet<>();
@@ -81,17 +81,18 @@ public class ProductOrderBean implements Serializable{
 	}
 	
 	@Column(name="BNO")
-	public String getBNo() {
+	public String getbNo() {
 		return bNo;
 	}
-	public void setBNo(String bNo) {
+	public void setbNo(String bNo) {
 		this.bNo = bNo;
 	}
+	
 	@Column(name="TOTAL")
-	public Double getTotal() {
+	public Integer getTotal() {
 		return total;
 	}
-	public void setTotal(Double total) {
+	public void setTotal(Integer total) {
 		this.total = total;
 	}
 	@Column(name="ORDERDATE",updatable = false)
@@ -122,6 +123,7 @@ public class ProductOrderBean implements Serializable{
 	public String getShippingTimeWord() {
 		return ShippingTimeClass.getShippingTime(shippingTime);
 	}
+	
 }
 
 //	public ProductOrderBean(Integer orderId, Integer buyerId, String buyerName, String address, String tel, String bNo,

@@ -67,7 +67,7 @@
 				<div class="col-xl-7 ftco-animate">
 					<form:form action='ProcessOrder' method="post" class="billing-form"
 						id="orderform" modelAttribute="pob">
-						<h3 class="mb-4 billing-heading">結帳資訊</h3>
+						<h3 class="mb-4 billing-heading">結帳資訊&nbsp;<font style="font-size:12px"><a href="#checkoutContent" onclick="fastInput()">一鍵輸入</a>&nbsp;<a href="#checkoutContent" onclick="fastReset()">一鍵還原</a></font></h3>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -129,14 +129,15 @@
 							value="${ShoppingCart.total}" path="total" />
 						<form:input type="hidden" id="total" name="total"
 							value="${login_ok.member_no}" path="buyerId" />
-						<form:input type="hidden" id="total" name="total"
-							value="${ShoppingCart.total}" path="total" />
+<%-- 						<form:input type="hidden" id="total" name="total" --%>
+<%-- 							value="${ShoppingCart.total}" path="total" /> --%>
 					</form:form>
 					<p>
 						<a href="<c:url value='/mall_shop' />"
 							class="btn btn-primary py-3 px-4">回商城</a> <a
 							href="<c:url value='/mall_shoppingcart' />"
 							class="btn btn-primary py-3 px-4">回購物車</a>
+						 
 					</p>
 					<!-- END -->
 				</div>
@@ -149,7 +150,7 @@
 									<span>小計</span> <span>${ShoppingCart.subtotal}</span>
 								</p>
 								<p class="d-flex">
-									<span>折扣</span> <span>${ShoppingCart.total-ShoppingCart.subtotal}</span>
+									<span>折扣</span> <span>${ShoppingCart.subtotal-ShoppingCart.total}</span>
 								</p>
 								<hr>
 								<p class="d-flex total-price">
@@ -209,6 +210,20 @@
 	<jsp:include page="../js/mall.jsp" />
 
 	<script>
+	function fastInput(){
+		document.forms[0][0].value="路人甲";
+		document.forms[0][1].value=0919633486;
+		document.forms[0][2].value="桃園市中壢區中大路300號";
+		document.forms[0][3].value=3;
+		document.forms[0][4].value=87654321;
+		}
+	function fastReset(){
+		document.forms[0][0].value=document.forms[0][0].defaultValue;
+		document.forms[0][1].value=document.forms[0][1].defaultValue;
+		document.forms[0][2].value=document.forms[0][2].defaultValue;
+		document.forms[0][3].value=1;
+		document.forms[0][4].value=document.forms[0][4].defaultValue;
+		}
 		
 	</script>
 

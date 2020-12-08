@@ -28,7 +28,7 @@ public class RetrieveImageServlet {
 
 	@GetMapping(value = "/retrieveImageServlet")
 	@ResponseBody
-	public ResponseEntity<byte[]> retrieveImage(@RequestParam Integer id, @RequestParam String type) throws Exception {
+	public ResponseEntity<byte[]> retrieveImage(@RequestParam(value = "id",required = false) Integer id, @RequestParam String type) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setCacheControl(CacheControl.noCache());
 		headers.setPragma("no-cache");
@@ -40,6 +40,7 @@ public class RetrieveImageServlet {
 		Blob blob = null;
 		switch (type.toUpperCase()) {
 		case "PRODUCT":
+			if(id!=null) {
 			ProductImageBean bean1 = productService.getProductImage(id);
 			if (bean1 != null) {
 				blob = bean1.getCoverImage();
@@ -50,9 +51,10 @@ public class RetrieveImageServlet {
 			}
 			break;
 		}
+		}
 		if (is == null) {
 			fileName = "NoImage.png";
-			is = servletContext.getResourceAsStream("/images/" + fileName);
+			is = servletContext.getResourceAsStream("/WEB-INF/pages/images/" + fileName);
 		}
 //		String mimeType=servletContext.getMimeType(fileName);
 //		MediaType mediaType=MediaType.valueOf(mimeType);

@@ -14,15 +14,55 @@
 					class="img-fluid" alt="Colorlib Template"></a>
 			</div>
 			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-				<h3>${selectedProduct.product}</h3>
+				<h3>${selectedProduct.product}<c:choose>
+						<c:when test="${empty login_ok}">
+							<span class='heart'
+								id="favorite${selectedProduct.productId}"> <i
+								class='ion-ios-heart'></i></span>
+						</c:when>
+						<c:otherwise>
+							<span class='heart'
+								onclick="favorite(${selectedProduct.productId})"
+								id="favorite${selectedProduct.productId}"> <c:choose>
+									<c:when test="${selectedProduct.favorite==0}">
+										<i class='ion-ios-heart'></i>
+									</c:when>
+									<c:otherwise>
+										<i class='ion-ios-heart' style="color: red"></i>
+									</c:otherwise>
+								</c:choose>
+							</span>
+						</c:otherwise>
+					</c:choose>
+				</h3>
 				<div class="rating d-flex">
 					<p class="text-left mr-4">
-						<a href="#" class="mr-2">5.0</a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a>
+						<span class="mr-2" style="color: #00BB00">${selectedProduct.score.toString().substring(0,3)}</span>
+						<c:forEach begin="1" end="5" var="i">
+							<c:choose>
+								<c:when test="${i<Math.ceil(selectedProduct.score)}">
+									<span class="ion-ios-star" style="color: #FFD306"></span>
+								</c:when>
+								<c:when test="${i==Math.ceil(selectedProduct.score)}">
+									<c:choose>
+										<c:when
+											test="${Math.ceil(selectedProduct.score)-selectedProduct.score<0.25}">
+											<span class="ion-ios-star" style="color: #FFD306"></span>
+										</c:when>
+										<c:when
+											test="${Math.ceil(selectedProduct.score)-selectedProduct.score>0.75}">
+											<span class="ion-ios-star-outline"></span>
+										</c:when>
+										<c:otherwise>
+											<span class="ion-ios-star-half" style="color: #FFD306"></span>
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+								<c:otherwise>
+									<span class="ion-ios-star-outline"></span>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</p>
 					<p class="text-left mr-4">
 						<a href="#" class="mr-2" style="color: #000;">瀏覽次數 <span
@@ -36,7 +76,7 @@
 				<c:choose>
 					<c:when test="${selectedProduct.discount!=1}">
 						<p class='price'>
-							<span style="color: red">特價${selectedProduct.price * selectedProduct.discount}元</span>
+							<span style="color: red">特價${Math.round(selectedProduct.price * selectedProduct.discount)}元</span>
 						</p>
 					</c:when>
 					<c:otherwise>
@@ -69,16 +109,18 @@
 					</div>
 				</div>
 				<p>
-				<c:choose>
-					<c:when test="${selectedProduct.stock<=oi.qty}">
-					<a href="#" onclick="notEnough()" class="btn btn-black py-3 px-5">加入購物車</a>
-					</c:when>
-					<c:otherwise>
-					<a href="#" onclick="addToCart(${selectedProduct.stock-oi.qty})" class="btn btn-black py-3 px-5">加入購物車</a> 					
-					</c:otherwise>
-				</c:choose>
-					<a href="<c:url value='mall_shoppingcart'/>" class="btn btn-black py-3 px-5">前往購物車</a>
-					<a href="#" onclick="goback()" class="btn btn-black py-3 px-5">返回</a>
+					<c:choose>
+						<c:when test="${selectedProduct.stock<=oi.qty}">
+							<a href="#" onclick="notEnough()" class="btn btn-black py-3 px-5">加入購物車</a>
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="addToCart(${selectedProduct.stock-oi.qty})"
+								class="btn btn-black py-3 px-5">加入購物車</a>
+						</c:otherwise>
+					</c:choose>
+					<a href="<c:url value='mall_shoppingcart#cartContent'/>"
+						class="btn btn-black py-3 px-5">前往購物車</a> <a href="#mainContent"
+						onclick="goback()" class="btn btn-black py-3 px-5">返回</a>
 				</p>
 			</div>
 		</div>

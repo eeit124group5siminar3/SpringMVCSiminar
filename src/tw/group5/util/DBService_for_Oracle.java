@@ -17,6 +17,7 @@ public class DBService_for_Oracle {
 	private static final String DROP_PRODUCT = "DROP TABLE PRODUCT";
 
 	private static final String DROP_PRODUCTCATEGORY = "DROP TABLE PRODUCTCATEGORY";
+	private static final String DROP_PRODUCTFAVORITE = "DROP TABLE PRODUCTFAVORITE";
 
 	private static final String DROP_ORDERFORM = "DROP TABLE ORDERFORM";
 
@@ -29,23 +30,25 @@ public class DBService_for_Oracle {
 			+"STOCK NUMBER(38,0)," 
 			+"CONTENT NUMBER(38,0)," 
 			+"UNIT VARCHAR2(12 BYTE)," 
-			+"PRICE NUMBER(12,2)," 
+			+"PRICE NUMBER(12)," 
 			+"DISCOUNT NUMBER(12,2)," 
 			+"ADDEDDATE DATE," 
 			+"SHELFTIME NUMBER(12,0)," 
 			+"COVERIMAGE BLOB," 
-			+"FILENAME VARCHAR2(20 BYTE)," 
+			+"FILENAME VARCHAR2(255 BYTE)," 
 			+"DESCRIPTION VARCHAR2(255 BYTE)," 
-			+"CATEGORY NUMBER(20) REFERENCES PRODUCTCATEGORY(ID) on DELETE cascade,"
+			+"CATEGORY NUMBER(20),"
 			+"VIEWS NUMBER(20),"
 			+"SOLD NUMBER(20),"
-			+"STATUS NUMBER(2)"
+			+"STATUS NUMBER(2),"
+			+"SCORE NUMBER(3,2),"
+			+"SCORENUM NUMBER(20)"
 			+ " ) ";
 
-	private static final String CREATE_ProductCategory_Oracle = "CREATE TABLE PRODUCTCATEGORY (	"
-			+"ID NUMBER(20,0) generated always as identity (start with 1 increment by 1 noCache) primary key not null," 
-			+"NAME VARCHAR2(20 BYTE)"
-			+ " ) ";
+//	private static final String CREATE_ProductCategory_Oracle = "CREATE TABLE PRODUCTCATEGORY (	"
+//			+"ID NUMBER(20,0) generated always as identity (start with 1 increment by 1 noCache) primary key not null," 
+//			+"NAME VARCHAR2(20 BYTE)"
+//			+ " ) ";
 	
 	private static final String CREATE_OrderForm_Oracle = " CREATE TABLE ORDERFORM (" 
 			+"ORDERID NUMBER(20,0) generated always as identity (start with 1 increment by 1 noCache) primary key not null," 
@@ -54,7 +57,7 @@ public class DBService_for_Oracle {
 			+"ADDRESS VARCHAR2(100 BYTE),"
 			+"TEL VARCHAR2(255 BYTE)," 
 			+"BNO VARCHAR2(20 BYTE)," 
-			+"TOTAL NUMBER(20,2)," 
+			+"TOTAL NUMBER(20)," 
 			+"ORDERDATE DATE,"
 			+"SHIPPINGTIME NUMBER(20)"
 			+ " )";
@@ -66,13 +69,21 @@ public class DBService_for_Oracle {
 			+"PRODUCTERID NUMBER REFERENCES MEMBER_SIGNUP(MEMBER_NO) on DELETE cascade," 
 			+"DESCRIPTION VARCHAR2(255 BYTE)," 
 			+"AMOUNT NUMBER(38,0)," 
-			+"UNITPRICE NUMBER(12,2)," 
+			+"UNITPRICE NUMBER(12)," 
 			+"DISCOUNT NUMBER(12,2)," 
 			+"STATUS NUMBER(20,0)," 
 			+"SHIPPINGDATE DATE"
 			+ " )";
 	
-	private static final String[] INSERT_ProductCategory_ORACLE = {"葉菜","根莖","瓜果","茶葉","水果"};
+	private static final String CREATE_ProductFavorite_Oracle = "CREATE TABLE PRODUCTFAVORITE (	"
+	+"ID NUMBER(20,0) generated always as identity (start with 1 increment by 1 noCache) primary key not null," 
+	+"USERID NUMBER(38,0),"
+	+"PRODUCTID NUMBER(38,0),"
+	+"STATUS NUMBER(20,0)"
+	+ " ) ";
+
+	
+//	private static final String[] INSERT_ProductCategory_ORACLE = {"葉菜","根莖","瓜果","茶葉","水果"};
 
 
 
@@ -91,11 +102,11 @@ public class DBService_for_Oracle {
 		return drop;
 	}
 
-	public static String getCreateProductCategory() {
-		String create = CREATE_ProductCategory_Oracle;
-		
-		return create;
-	}
+//	public static String getCreateProductCategory() {
+//		String create = CREATE_ProductCategory_Oracle;
+//		
+//		return create;
+//	}
 
 	public static String getDropOrderForm() {
 		String drop = DROP_ORDERFORM;
@@ -118,10 +129,10 @@ public class DBService_for_Oracle {
 		return create;
 	}
 	
-	public static String[] getInsertProductCategory() {
-		String[] insert=INSERT_ProductCategory_ORACLE;
-		return insert;
-	}
+//	public static String[] getInsertProductCategory() {
+//		String[] insert=INSERT_ProductCategory_ORACLE;
+//		return insert;
+//	}
 	
 	public static String getDbUrl() {
 		String url = DBURL_Oracle;
@@ -136,6 +147,16 @@ public class DBService_for_Oracle {
 	public static String getPassword() {
 //		String pswd = "hr";
 		return PSWD_Oracle;
+	}
+	
+	public static String getDropProductFavorite() {
+		String drop = DROP_PRODUCTFAVORITE;
+		return drop;
+	}
+
+	public static String getCreateProductFavorite() {
+		String create = CREATE_ProductFavorite_Oracle;
+		return create;
 	}
 
 }
