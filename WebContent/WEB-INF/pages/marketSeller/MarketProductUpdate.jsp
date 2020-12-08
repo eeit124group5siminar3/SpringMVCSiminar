@@ -46,9 +46,9 @@ fieldset {
 	border :8px #FFD382 groove;
 	border-radius: 15px;
 }
-body {  
-	background:#EBFFEB;
-}
+/* body {   */
+/* 	background:#EBFFEB; */
+/* } */
 
 </style>
 </head>

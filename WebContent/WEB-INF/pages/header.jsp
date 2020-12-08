@@ -52,6 +52,7 @@
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item" href="<c:url value='/mall_shop' />">商城</a> 
 						<a class="dropdown-item" href="<c:url value='/mall_shoppingcart' />">購物車</a> 
+						<a class="dropdown-item" href="<c:url value='/mall_wishList' />">願望清單</a>
 						<a class="dropdown-item" href="<c:url value='/mall_order' />">查看訂單</a>
 					</div></li>
 				<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
@@ -84,10 +85,13 @@
 							href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
 							<a
 							class="dropdown-item"
-							href="<c:url value='updatePage.controller'/>">修改食譜</a> 
+							href="<c:url value='updatePage.controller'/>">我的食譜</a> 
 							<a
 							class="dropdown-item"
-							href="<c:url value='myRecipe'/>">我的食譜</a>
+							href="<c:url value='myRecipe'/>">我的最愛</a>
+							<a
+							class="dropdown-item"
+							href="<c:url value='blogPage'/>">討論區</a>
 					</div></li>
 
 				<li class="nav-item"><c:if test="${empty login_ok}">

@@ -40,8 +40,10 @@
 		<button type="button" class="btn btn-info" data-toggle="collapse"
 			data-target="#demo3">食譜管理</button>
 		<div id="demo3" class="collapse">
-			<li align="left"><a href="" class="hyperlink">食譜新增</a></li>
-			<li align="left"><a href="" class="hyperlink">食譜修改</a></li>
+			<li align="left"><a href="<c:url value='uploadPage.controller'/>" class="hyperlink">食譜新增</a></li>
+			<li align="left"><a href="<c:url value='updatePage.controller'/>" class="hyperlink">我的食譜</a></li>
+			<li align="left"><a href="<c:url value='myRecipe'/>" class="hyperlink">我的最愛</a></li>
+			<li align="left"><a href="<c:url value='blogEdit'/>" class="hyperlink">發表文章</a></li>
 		</div>
 	</div>
 	<br> <br>

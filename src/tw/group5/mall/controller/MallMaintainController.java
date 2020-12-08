@@ -67,7 +67,7 @@ public class MallMaintainController {
 // 修改資料前置
 	@PostMapping(value = "/Preupdate")
 	public ModelAndView preupdate(HttpServletRequest request, @RequestParam(value = "productId") Integer productId,Model model) {
-		ProductBean updateBean = service.getProduct(productId);
+		ProductBean updateBean = service.getProduct(productId,null);
 		service.setSelected(updateBean.getCategory());
 		service.setTagName("categoryId");
 		String categoryTag = service.getSelectTag();
@@ -131,7 +131,7 @@ public class MallMaintainController {
 	@PostMapping(value = "/Shelf")
 	public @ResponseBody Integer shelf(@RequestParam(value = "productId") Integer productId,
 			@RequestParam(value = "status") Integer status) {
-		ProductBean product = service.getProduct(productId);
+		ProductBean product = service.getProduct(productId,null);
 		if (status == 1) {
 			product.setStatus(1);
 			return 1;
@@ -196,7 +196,7 @@ public class MallMaintainController {
 		Map<String, String>map=new HashMap<String, String>();
 		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
 		Integer productId = orderItem.getProductId();
-		ProductBean product = service.getProduct(productId);
+		ProductBean product = service.getProduct(productId,null);
 		product.setScore(score);
 		product.setScorenum(product.getScorenum()+1);
 		orderItem.setStatus(3);

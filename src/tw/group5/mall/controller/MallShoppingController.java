@@ -180,4 +180,20 @@ public class MallShoppingController {
 			return false;
 		}
 	}
+	
+// 顯示願望清單
+	@PostMapping(value = "/WishListContent")
+	public ModelAndView showWishListContent(@SessionAttribute(value = "login_ok") Member_SignUp mb,
+			@RequestParam(value = "productId",required = false)Integer productId) {	
+		Integer userId= mb.getMember_no();
+		if(productId!=null) {
+		service.cancelFavorite(userId,productId);
+		}
+		List<ProductBean> list =service.getFavoriteList(userId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/wishListContent");
+		mav.addObject("productWishList", list);
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
 }
