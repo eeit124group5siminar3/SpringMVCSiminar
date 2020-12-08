@@ -314,22 +314,17 @@
 					success : function(data, status) {
 						if (data) {
 							console.log(data);
-							$("#favorite" + productId)
-									.html(
-											"<i class='ion-ios-heart' style='color: red'></i>");
+							$("#favorite" + productId).html("<i class='ion-ios-heart'></i>");
 						} else {
-							$("#favorite" + productId).html(
-									"<i class='ion-ios-heart'></i>");
+							$("#favorite" + productId).html("<i class='ion-ios-heart' style='color: red'></i>");
 						}
 					},
 					error : function(data, status) {
 						if (data) {
-							$("#favorite" + productId)
-									.html(
-											"<i class='ion-ios-heart' style='color: red'></i>");
+							$("#favorite" + productId).html("<i class='ion-ios-heart'></i>");			
 						} else {
-							$("#favorite" + productId).html(
-									"<i class='ion-ios-heart'></i>");
+							$("#favorite" + productId).html("<i class='ion-ios-heart' style='color: red'></i>");
+									
 						}
 					}
 				});
