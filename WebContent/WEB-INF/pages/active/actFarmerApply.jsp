@@ -68,6 +68,13 @@
 	text-align: center;	
 }
 
+input{
+
+align-content: center;
+border: #82ae46 2px solid;
+
+}
+
 </style>
 <script type="text/javascript">
 //============================返回頁面=====================================================//
