@@ -30,6 +30,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import oracle.net.aso.b;
 import oracle.net.aso.m;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
@@ -47,7 +49,7 @@ import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
-@SessionAttributes(names={"login_ok"})
+@SessionAttributes(names={"login_ok","updateBean"})
 public class Recipe_Controller_update {
 	
 	@Autowired
@@ -64,7 +66,7 @@ public class Recipe_Controller_update {
 	private List<Recipe_Bean> list;
 	private ByteArrayOutputStream baos;
 	private Integer  mem_no;
-	private Recipe_Bean bean;
+	private	String fieldRec_id;
 	
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {
@@ -72,89 +74,64 @@ public class Recipe_Controller_update {
 			Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
 			mem_no=OK.getMember_no();
 			System.out.println(mem_no);
-			bean = new Recipe_Bean();
-			bean.setMember_no(mem_no);
+			
+			Recipe_Bean updateBean=new Recipe_Bean();
+			updateBean.setMember_no(mem_no);
 			
 			List<Recipe_Bean> list = service.listOfJavaBean();
+			System.out.println(list);
 			List<Recipe_Bean> user_recipe = new ArrayList<Recipe_Bean>();
 			System.out.println("------------------------------------");
 			for (Recipe_Bean b : list) {
-				System.out.println(b.getMember_no());
-				if (b.getMember_no().equals(bean.getMember_no())) {
+				System.out.println(b.getMember_no()); 
+				
+				if (b.getMember_no().equals(mem_no)) {
 					user_recipe.add(b);
-				}
+				} 
 			}
+			m.addAttribute("updateBean",updateBean);
 			m.addAttribute("user_recipe", user_recipe);
 			return "recipe/recipe_update_choose";
 		} else
 			return "Member_SignUp/Member_Login";
 	}
 	
-	//ajax choose 頁面彈出浮動視窗
-//	@GetMapping(value="/ChoosePage/{pageNo}")
-//	@ResponseBody
-//	public Map<String, Object> getPageInfo(@PathVariable(name="pageNo",required = false)Integer pageNo,Model m) {
-//		Member_SignUp OK=(Member_SignUp) session.getAttribute("login_ok");
-//		mem_no=OK.getMember_no();
-//		System.out.println(mem_no);
-//		long count=service.getMyRecipeCounts(mem_no);
-//		System.out.println("===============================================");
-//		System.out.println(count);
-//		System.out.println(pageNo);
-//		Integer page=(Integer) session.getAttribute("pageNo");
-//		int totalPages =(int) count;
-//		System.out.println("抓session 中的 page: "+page);
-//		if(pageNo!=null) {
-//			page=pageNo;
-//			System.out.println("page: "+page);
-//			session.setAttribute("pageNo", page);
-//		}
-//		List<Recipe_Bean> searchAllRecipe=service.searchMyRecipe(page, 3, mem_no);
-//		System.out.println("------------------------------------");
-//		int totalPage =(int) Math.ceil(totalPages*1.0 /2);//總頁數
-//		System.out.println("totalPage: "+totalPage);
-////		ModelAndView mav=new ModelAndView();
-////		mav.setViewName("/recipe/recipe_workpage");
-////		mav.addObject("selectAllRecipe",selectAllRecipe);
-////		service.setPageNo(pageNo);
-//		for(Recipe_Bean bean:searchAllRecipe) {
-//			System.out.println(bean.getName());
-//		}
-//		
-//		Map<String , Object> map=new HashMap<String, Object>();
-//		map.put("searchMyRecipe", searchAllRecipe);
-//		map.put("totalPage",totalPage);
-//		map.put("pageNo",pageNo);
-//		return map;
-//		
-//		
-//		
-//	}
 	
 	
+	//update_choose ajax  頁面彈出浮動視窗
+	@GetMapping(value = "/updateProcess.controller")
+	public ModelAndView updateProcess(@RequestParam(name = "rec_id", required = false) String rec_id, Model m)
+			throws FileNotFoundException, IOException, SQLException {
+		fieldRec_id = rec_id;
+		System.out.println(rec_id);
+		List<Recipe_Bean_noImage> list = service.partSearch(rec_id);
+		Recipe_Bean updateBean = service.recipeBean(rec_id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/recipe/updateForm");
+		mav.addObject("recipe_table", list);
+		mav.addObject("updateBean", updateBean);
+		return mav;
+	}
 	
-	//update_choose
-	@RequestMapping(path = "/updateProcess.controller",method = {RequestMethod.POST,RequestMethod.GET})
-	public String updateProcess(
-			@RequestParam(name="choose",required = false)String rec_id,Model m) throws FileNotFoundException, IOException, SQLException {
+
+	//update  
+	@PostMapping(value = "/updateRecipe")
+	public String updateRecipe(@ModelAttribute("updateBean")Recipe_Bean updateBean){
+//		Recipe_Bean updateBean=(Recipe_Bean) session.getAttribute("updateBean");
+		System.out.println("!!!!!!!!!!!succcccccccccces!!!!!!!!!!!!!!");
+		System.out.println(fieldRec_id);
+		System.out.println(updateBean.getName());
 		
-		if (rec_id!=null) {
-			System.out.println(rec_id);
-			List<Recipe_Bean_noImage> list = service.partSearch(rec_id);
-			
-			m.addAttribute("recipe_table", list);
-			return "recipe/recipe_update";
-		
-		}else
-			return "redirect:/updatePage.controller";
+		service.update(fieldRec_id, updateBean);
+		return "redirect:/updatePage.controller";
+
 	}
 	
 	
-	//update_choose ajax
+	//delete ajax
 	@GetMapping(value="/deleteConfirm")
 	public  String deleteConfirm(@RequestParam(name="rec_id")String rec_id,Model m) {
 		service.delete(rec_id);
-		Integer mem_no=bean.getMember_no();
 		System.out.println("mem_no: "+mem_no);
 		List<Recipe_Bean> list=service.listOfJavaBean();
 		List<Recipe_Bean> user_recipe=new ArrayList<Recipe_Bean>();
@@ -170,25 +147,6 @@ public class Recipe_Controller_update {
 		return "redirect:/updatePage.controller";
 
 	}
-	
-	//update
-	@RequestMapping(path = "/submitChoose.controller",method = RequestMethod.POST)
-	public String submitChoose(@RequestParam String action,@RequestParam MultipartFile multipartFile,
-		Recipe_Bean bean,String rec_id) throws SerialException, IOException, SQLException {
-		bean.setMember_no(mem_no);
-		bean.setMultipartFile(multipartFile);
-		if(action.equals("確認修改")) {
-			service.update(rec_id, bean);
-			return "redirect:/updatePage.controller";
-		}
-		if(action.equals("刪除")) {
-			service.delete(rec_id);
-			return "redirect:/updatePage.controller";
-		}
-
-		return rec_id;
-	}
-	
 	
 	//getImage
 	@GetMapping("/getImage.controller")

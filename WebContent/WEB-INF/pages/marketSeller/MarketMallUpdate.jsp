@@ -132,8 +132,10 @@ body {
  </div>	
 </section> <!-- .section -->	
 			</form:form>
-			<form action="<c:url value='/'></c:url>" >
-			<input  type="submit" value="回首頁">
+			<form class="container" action="<c:url value='/'></c:url>" >
+			<div>
+			<br><br><input  type="submit" value="回首頁">
+			</div>
 			</form>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
