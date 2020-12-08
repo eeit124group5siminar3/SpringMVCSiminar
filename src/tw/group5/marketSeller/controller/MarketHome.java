@@ -76,6 +76,7 @@ public class MarketHome {
 	public ModelAndView showMap(HttpServletRequest request,
 			@RequestParam(value = "memberNo", required = false) Integer memberNo){
 		MarketMallBean map =sellerService.selectid(memberNo);
+		System.out.println("地址在這 :"+ map.getAddress());
 		ModelAndView mav =new ModelAndView();
 		mav.setViewName("/marketSeller/MarketMallMap");
 		mav.addObject("map",map);

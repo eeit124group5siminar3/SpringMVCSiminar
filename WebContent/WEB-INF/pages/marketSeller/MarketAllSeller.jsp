@@ -39,13 +39,10 @@
 		                <p><a href="#" data-toggle="modal" data-target="#showMap" 
 		                data-whatever="${item.memberNo}"
 		                class="btn btn-primary py-2 px-3">地點</a></p>	
-                
 		              </div>
-		              
 		            </div>
 		          </div>
-			 </div>
-			 
+			 </div> 
          </div> 
    </div>
    </c:forEach>
@@ -115,7 +112,7 @@
 						</c:when>
 						<c:otherwise>
 							<li><a href="#"  onclick='mPage(${marketPageNo + 1})'>&gt;</a></li>
-							<li><a href="#"  onclick='mPage(${totalPages})'>&gt;&gt;</a></li>
+				  		<li><a href="#"  onclick='mPage(${totalPages})'>&gt;&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -135,8 +132,8 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" id="showMapForm" style="width:640px">
-				<br><br><iframe width="100%" height="250" frameborder="0" src="https://www.google.com/maps?q=${item.address}&output=embed"></iframe>	
+				<div class="modal-body" id="mapHere" style="width: 640px">
+
 				</div>
 				<div class="modal-footer">
 					
@@ -167,5 +164,26 @@
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
 <jsp:include page="../js/Market.jsp" />
+<script>
+
+$('#showMap').on('show.bs.modal', function (event) {
+	var aHref = $(event.relatedTarget);
+	var memberNo = aHref.data('whatever');
+	$.ajax({
+		url : "showMap",
+		type : "POST",
+		data : {
+			"memberNo":memberNo	
+		},
+		datatype : "html",
+		success : function(data, status) {
+			$("#mapHere").html(data);
+		},
+		error : function(data, status) {
+			$("#mapHere").html(data);
+		}
+	});			
+	})
+</script>
 
 
