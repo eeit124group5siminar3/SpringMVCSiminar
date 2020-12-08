@@ -66,16 +66,17 @@ public class ShoppingCart {
 		return cart.size();
 	}
 	
-//計算購物車內所有商品的小計(每項商品的單價*數量的總和)
-	public double getTotal(){
-		double subTotal = 0 ;
+//計算購物車內所有商品的總計(每項商品的單價*數量的總和)
+	public Integer getTotal(){
+		Double summary = 0.0 ;
 		Set<Integer> set = cart.keySet();
 		for(int n : set){
 			double price    = cart.get(n).getPrice();
 			double discount = cart.get(n).getDiscount();
 			int    qty      = cart.get(n).getQty();
-			subTotal +=  price * discount * qty;
+			summary += Math.round(price * discount * qty);
 		}
+		Integer subTotal=summary.intValue();
 		return subTotal;
 	}
 

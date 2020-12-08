@@ -78,19 +78,21 @@ public class EDMTableReset {
 				ex.printStackTrace();
 			}
 
-			stmt.executeUpdate(DBService_for_Oracle.getCreateProductCategory());
-			System.out.println("ProductCategory表格產生成功");
+			stmt.executeUpdate(DBService_for_Oracle.getCreateProductFavorite());
+			System.out.println("ProductFavorite表格產生成功");
 			stmt.executeUpdate(DBService_for_Oracle.getCreateProduct());
 			System.out.println("Product表格產生成功");
 			stmt.executeUpdate(DBService_for_Oracle.getCreateOrderFrom());
 			System.out.println("OrderForm表格產生成功");
-
 			stmt.executeUpdate(DBService_for_Oracle.getCreateOrderDetails());
 			System.out.println("OrderDetails表格產生成功");
-			for(String category:DBService_for_Oracle.getInsertProductCategory()) {
-				stmt.executeUpdate("insert into productcategory (name) values('"+category+"')");
-				
-			}
+			
+//		  	for(String category:DBService_for_Oracle.getInsertProductCategory()) {
+//			stmt.executeUpdate("insert into productcategory (name) values('"+category+
+//			"')");
+//			  
+//			}
+//			 
 			// 2-2 由"data/bookCompany.dat"逐筆讀入BookCompany表格內的初始資料，
 			// 然後依序新增到BookCompany表格中
 //			try (

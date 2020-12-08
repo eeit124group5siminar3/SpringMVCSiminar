@@ -211,14 +211,14 @@ public class Member_DAO {
 
 		return list;
 	}
-	
-	//搜尋總比數
+
+	// 搜尋總比數
 	public int totalPages() {
 		Session session = sessionFactory.getCurrentSession();
 
-		 Query<?> query =session.createQuery("select count(*) From Member_SignUp");
-		 long result = (long) query.uniqueResult();
-		 return(int)result;
+		Query<?> query = session.createQuery("select count(*) From Member_SignUp");
+		long result = (long) query.uniqueResult();
+		return (int) result;
 	}
 
 	// Admin會員搜尋部分資料
@@ -268,18 +268,47 @@ public class Member_DAO {
 		}
 		return false;
 	}
-	
-	//Admin 刪除會員資料
+
+	// Admin 刪除會員資料
 	public boolean Admin_Delete_Member_Data(Integer member_no) {
 		Session session = sessionFactory.getCurrentSession();
-		Member_SignUp result = session.get(Member_SignUp.class,member_no);	
-		
+		Member_SignUp result = session.get(Member_SignUp.class, member_no);
+
 		if (result != null) {
 			session.delete(result);
 			return true;
 		}
 		return false;
 	}
-	
-	
+
+	// FB會員完整註冊(更新)
+	public boolean Fb_Updata_Member_Data(String member_email, String member_permissions, String member_password, Date member_birthday,
+			String member_cellphone, String member_id, String member_address, String member_gui_number, String e_paper,
+			String member_gg, String member_lock_acc, String member_bank_code, String member_bank_account) {
+
+		Session session = sessionFactory.getCurrentSession();
+		Query<Member_SignUp> query_member_no = session.createQuery("From Member_SignUp Where Member_email=?0",
+				Member_SignUp.class);
+		Query<Member_SignUp> result = query_member_no.setParameter(0, member_email);
+
+		if (result.uniqueResult() != null) {
+			Member_SignUp member_bean = (Member_SignUp) result.uniqueResult();
+			member_bean.setMember_permissions(member_permissions);
+			member_bean.setMember_password(member_password);
+			member_bean.setMember_birthday(member_birthday);
+			member_bean.setMember_cellphone(member_cellphone);
+			member_bean.setMember_id(member_id);
+			member_bean.setMember_address(member_address);
+			member_bean.setMember_gui_number(member_gui_number);
+			member_bean.setE_paper(e_paper);
+			member_bean.setMember_bank_code(member_bank_code);
+			member_bean.setMember_bank_account(member_bank_account);
+			member_bean.setMember_gg(member_gg);
+			member_bean.setMember_lock_acc(member_lock_acc);
+
+			return true;
+		}
+		return false;
+	}
+
 }

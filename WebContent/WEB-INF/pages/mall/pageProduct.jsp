@@ -11,7 +11,7 @@
 							<li class='active'><span>${anEntry.value}</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href='#product_top'
+							<li><a href='#mainContent'
 								onclick='productCategory(${anEntry.key})'>${anEntry.value}</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -30,7 +30,7 @@
 		<c:forEach var="item" items="${products_DPP}">
 			<div class='col-md-6 col-lg-3'>
 				<div class='product'>
-					<a href='#mall_products' class='img-prod'
+					<a href='#mainContent' class='img-prod'
 						onclick='singleProduct(${item.productId})'> <img
 						class='img-fluid'
 						src=<c:url value='retrieveImageServlet?id=${item.productId}&type=PRODUCT' />
@@ -49,7 +49,7 @@
 									<c:when test="${item.discount!=1}">
 										<p class='price'>
 											<span class='mr-2 price-dc'>${item.price}元</span> <span
-												class='price-sale'>${item.price*item.discount}元</span>
+												class='price-sale'>${Math.round(item.price*item.discount)}元</span>
 										</p>
 									</c:when>
 									<c:otherwise>
@@ -60,16 +60,35 @@
 						</div>
 						<div class='bottom-area d-flex px-3'>
 							<div class='m-auto d-flex'>
-								<a href='#mall_products' title="產品內容"
+								<a href='#mainContent' title="產品內容"
 									class='add-to-cart d-flex justify-content-center align-items-center text-center'
 									onclick='singleProduct(${item.productId})'><span><i
-										class='ion-ios-menu'></i></span></a>" <a href='#mall_products'
-									title="加入購物車"
+										class='ion-ios-menu'></i></span></a>" <a href='#' title="立即購買"
 									class='buy-now d-flex justify-content-center align-items-center mx-1'
 									onclick='add_To_Cart(${item.productId},${item.stock},${ShoppingCart.content[item.productId].qty})'><span><i
-										class='ion-ios-cart'></i></span></a> <a href='#mall_products'
-									class='heart d-flex justify-content-center align-items-center '><span><i
-										class='ion-ios-heart'></i></span></a>
+										class='ion-ios-cart'></i></span></a>
+								<c:choose>
+									<c:when test="${empty login_ok}">
+										<a title="加入願望清單"
+											class='heart d-flex justify-content-center align-items-center'><span
+											id="favorite${item.productId}"> <i
+												class='ion-ios-heart'></i></span></a>
+									</c:when>
+									<c:otherwise>
+										<a
+											class='heart d-flex justify-content-center align-items-center'
+											onclick="favorite(${item.productId})"><span
+											id="favorite${item.productId}"> <c:choose>
+													<c:when test="${item.favorite==0}">
+														<i class='ion-ios-heart'></i>
+													</c:when>
+													<c:otherwise>
+														<i class='ion-ios-heart' style="color: red"></i>
+													</c:otherwise>
+												</c:choose>
+										</span></a>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -89,8 +108,9 @@
 							<li><span>&lt;</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href='#product_top' onclick='page(1)'>&lt;&lt;</a></li>
-							<li><a href='#product_top' onclick='page(${mall_pageNo - 1})'>&lt;</a></li>
+							<li><a href='#mainContent' onclick='page(1)'>&lt;&lt;</a></li>
+							<li><a href='#mainContent'
+								onclick='page(${mall_pageNo - 1})'>&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
 
@@ -102,7 +122,7 @@
 										<li class='active'><span>${i}</span></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
+										<li><a href='#mainContent' onclick='page(${i})'>${i}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -116,33 +136,33 @@
 												<li class='active'><span>${i}</span></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
+												<li><a href='#mainContent' onclick='page(${i})'>${i}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 								</c:when>
 								<c:when test="${mall_pageNo > (mall_totalPages - 3)}">
-									<c:forEach begin="${mall_totalPages - 4}" end="${mall_totalPages}"
+									<c:forEach begin="${mall_totalPages - 4}"
+										end="${mall_totalPages}" step="1" var="i">
+										<c:choose>
+											<c:when test="${mall_pageNo == i}">
+												<li class='active'><span>${i}</span></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href='#mainContent' onclick='page(${i})'>${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<c:forEach begin="${mall_pageNo - 2}" end="${mall_pageNo + 2}"
 										step="1" var="i">
 										<c:choose>
 											<c:when test="${mall_pageNo == i}">
 												<li class='active'><span>${i}</span></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<c:forEach begin="${mall_pageNo - 2}" end="${mall_pageNo + 2}" step="1"
-										var="i">
-										<c:choose>
-											<c:when test="${mall_pageNo == i}">
-												<li class='active'><span>${i}</span></li>
-											</c:when>
-											<c:otherwise>
-												<li><a href='#product_top' onclick='page(${i})'>${i}</a></li>
+												<li><a href='#mainContent' onclick='page(${i})'>${i}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -157,8 +177,10 @@
 							<li><span>&gt;&gt;</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href='#product_top' onclick='page(${mall_pageNo + 1})'>&gt;</a></li>
-							<li><a href='#product_top' onclick='page(${mall_totalPages})'>&gt;&gt;</a></li>
+							<li><a href='#mainContent'
+								onclick='page(${mall_pageNo + 1})'>&gt;</a></li>
+							<li><a href='#mainContent'
+								onclick='page(${mall_totalPages})'>&gt;&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -185,4 +207,28 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
+// function favorite(productId){
+// 	$.ajax({
+// 		url : "SetFavorite",
+// 		type : "GET",
+// 		data : {
+// 			"productId" : productId
+// 		},
+// 		success : function(data, status) {
+// 			if(data){
+// 				console.log(data);
+// 					$("#favorite"+productId).html("<i class='ion-ios-heart' style='color: red'></i>");	
+// 				}else{
+// 				$("#favorite"+productId).html("<i class='ion-ios-heart'></i>");
+// 					}
+// 		},
+// 		error : function(data, status) {
+// 			if(data){
+// 					$("#favorite"+productId).html("<i class='ion-ios-heart' style='color: red'></i>");	
+// 				}else{
+// 				$("#favorite"+productId).html("<i class='ion-ios-heart'></i>");
+// 					}
+// 		}
+// 	});	
+// }
 </script>

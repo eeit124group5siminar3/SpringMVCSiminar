@@ -139,6 +139,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 			registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/pages/css/");
 			registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/pages/js/");
 			registry.addResourceHandler("/fonts/**").addResourceLocations("/WEB-INF/pages/fonts/");
+			registry.addResourceHandler("/files/**").addResourceLocations("/WEB-INF/pages/files/");
 		}
 
 

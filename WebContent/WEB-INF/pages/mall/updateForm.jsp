@@ -64,10 +64,10 @@
 <!-- 					<tr> -->
 						<td style="padding-top: 0; padding-bottom: 5px"><img
 							height='120' width='120'
-							src=<c:url value='retrieveImageServlet?id=${updateBean.productId}&type=PRODUCT' /> />
+							src=<c:url value='retrieveImageServlet?id=${updateBean.productId}&type=PRODUCT' /> id="updateImage"/>
 						</td>
 						<td style="padding-top: 0; padding-bottom: 5px" colspan='2'><form:input
-								type="file" name="uploadFile" path="multipartFile" size='6'/>
+								type="file" name="uploadFile" path="multipartFile" size='6' onchange="loadUpdateImageFile(event)"/>
 							<font color='red' size='-1'> ${ErrMsg.errPicture} </font></td>
 <!-- 					</tr> -->
 <!-- 				</table> -->

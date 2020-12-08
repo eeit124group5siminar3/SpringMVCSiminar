@@ -13,7 +13,7 @@ public class OrderItem {
 	private String unit;
 	private Integer qty = 0;
 	private Integer productId = 0;
-	private Double price = 0.0;
+	private Integer price = 0;
 	private Double discount = 1.0;
 	private Integer stock;
 
@@ -22,7 +22,7 @@ public class OrderItem {
 	}
 
 	public OrderItem(String product, Integer producterId, Integer content, String unit, Integer qty, Integer productId,
-			Double price, Double discount, String producterName) {
+			Integer price, Double discount, String producterName) {
 		super();
 		this.product = product;
 		this.producterId = producterId;
@@ -83,11 +83,11 @@ public class OrderItem {
 		this.productId = productId;
 	}
 
-	public Double getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 

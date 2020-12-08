@@ -41,6 +41,63 @@
 <link rel="stylesheet" href="css/mall.css">
 </head>
 <body class="goto-here">
+
+	<div class="modal fade" id="insert" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel1" aria-hidden="true" style="left: 0">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width: 640px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel1">
+						商品資料新增
+						&nbsp;<font style="font-size: 12px">
+						<a href="#checkoutContent" onclick="fastInput1()">波菜</a>&nbsp;
+						<a href="#checkoutContent" onclick="fastInput2()">地瓜</a>&nbsp;
+						<a href="#checkoutContent" onclick="fastInput3()">栗子南瓜</a>&nbsp;
+						<a href="#checkoutContent" onclick="fastInput4()">包種茶</a>&nbsp;
+						<a href="#checkoutContent" onclick="fastInput5()">西瓜</a>&nbsp;
+							</font>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="insertFormContent" style="width: 640px">
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" form="insertForm">新增</button>
+					<button type="reset" class="btn btn-primary" form="insertForm" onclick="loadImageFile(event)">重置</button>					
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="update" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel2" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width: 640px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel2">商品資料修改</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="updateFormContent" style="width: 640px">
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" form="updaeteForm">修改</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->
 
@@ -60,52 +117,8 @@
 	</div>
 	<section class="ftco-section" id="managementContent"></section>
 	<jsp:include page="../footer.jsp" />
-	
-	<div class="modal fade" id="insert" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true" >
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content" style="width:640px">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">商品資料新增</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id="insertForm" style="width:640px">
-					
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" form="updaeteForm">新增</button>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">關閉</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="modal fade" id="update" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true" >
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content" style="width:640px">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">商品資料修改</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id="updateForm" style="width:640px">
-					
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" form="updaeteForm">修改</button>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">關閉</button>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
@@ -168,10 +181,10 @@
 				},
 				datatype : "html",
 				success : function(data, status) {
-					$("#updateForm").html(data);
+					$("#updateFormContent").html(data);
 				},
 				error : function(data, status) {
-					$("#updateForm").html(data);
+					$("#updateFormContent").html(data);
 				}
 			});			
 			})
@@ -182,16 +195,17 @@
 				type : "POST",
 				datatype : "html",
 				success : function(data, status) {
-					$("#insertForm").html(data);
+					$("#insertFormContent").html(data);
 				},
 				error : function(data, status) {
-					$("#insertForm").html(data);
+					$("#insertFormContent").html(data);
 				}
 			});			
 			})
 			
+		
 	</script>
-	
-	
+
+
 </body>
 </html>

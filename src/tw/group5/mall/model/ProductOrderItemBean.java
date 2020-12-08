@@ -38,7 +38,7 @@ public class ProductOrderItemBean implements Serializable {
 	private Integer producterId;
 	private String description;
 	private Integer amount;
-	private Double unitPrice;
+	private Integer unitPrice;
 	private Double discount;
 	private Date shippingDate;
 	private Integer status = 0;
@@ -51,7 +51,7 @@ public class ProductOrderItemBean implements Serializable {
 	}
 
 	public ProductOrderItemBean(Integer orderId, Integer productId, Integer producterId, String description,
-			Integer amount, Double unitPrice, Double discount) {
+			Integer amount, Integer unitPrice, Double discount) {
 		super();
 		this.orderId = orderId;
 		this.productId = productId;
@@ -63,7 +63,7 @@ public class ProductOrderItemBean implements Serializable {
 	}
 
 	public ProductOrderItemBean(Integer itemId, Integer orderId, Integer productId, Integer producterId,
-			String description, Integer amount, Double unitPrice, Double discount, Date shippingDate, Integer status) {
+			String description, Integer amount, Integer unitPrice, Double discount, Date shippingDate, Integer status) {
 		super();
 		this.itemId = itemId;
 		this.orderId = orderId;
@@ -135,11 +135,11 @@ public class ProductOrderItemBean implements Serializable {
 	}
 
 	@Column(name = "UNITPRICE")
-	public Double getUnitPrice() {
+	public Integer getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(Double unitPrice) {
+	public void setUnitPrice(Integer unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
@@ -208,17 +208,17 @@ public class ProductOrderItemBean implements Serializable {
 	@Transient
 	public String getStatusTag() {
 		String statusTag = "";
-		if (status== 0) {
+		if (status == 0) {
 			for (int i = -1; i <= 2; i++) {
 				if (i == status) {
 					statusTag += "<input type='radio' checked='checked' name='" + itemId + "' value='" + i + "'/>"
 							+ StatusClass.getStatus(i);
 				} else {
-					statusTag += "<input type='radio' name='" + itemId + "' value='" + i + "' onclick='orderManagement(event,"+i+")'/>"
-							+ StatusClass.getStatus(i);
+					statusTag += "<input type='radio' name='" + itemId + "' value='" + i
+							+ "' onclick='orderManagement(event," + i + ")'/>" + StatusClass.getStatus(i);
 				}
 			}
-		} else if(status==-1){
+		} else if (status == -1) {
 			for (int i = -1; i <= 2; i++) {
 				if (i == -1) {
 					statusTag += "<input type='radio' checked='checked' name='" + itemId + "' value='" + i + "'/>"
@@ -228,21 +228,40 @@ public class ProductOrderItemBean implements Serializable {
 							+ StatusClass.getStatus(i);
 				}
 			}
-		} else if(status==-2){
-			statusTag+="<p>訂單已被取消</p>";
+		} else if (status == -2) {
+			statusTag = "<p>訂單已被取消</p>";
+		} else if (status == 3) {
+			statusTag = "<p>商品已送達</p>";
 		} else {
 			for (int i = -1; i <= 2; i++) {
 				if (i == status) {
 					statusTag += "<input type='radio' checked='checked' name='" + itemId + "' value='" + i + "'/>"
 							+ StatusClass.getStatus(i);
-				} else if (i>status){
-					statusTag += "<input type='radio' name='" + itemId + "' value='" + i + "' onclick='orderManagement(event,"+i+")'/>"
-							+ StatusClass.getStatus(i);
+				} else if (i > status) {
+					statusTag += "<input type='radio' name='" + itemId + "' value='" + i
+							+ "' onclick='orderManagement(event," + i + ")'/>" + StatusClass.getStatus(i);
 				} else {
 					statusTag += "<input type='radio' disabled='disabled' name='" + itemId + "' value='" + i + "'/>"
 							+ StatusClass.getStatus(i);
 				}
 			}
+		}
+		return statusTag;
 	}
-	return statusTag;
-}}
+	
+	@Transient
+	public String getStatusTagForUser() {
+		String statusTagForUser="";
+		if(status==2) {
+			statusTagForUser="<button type='button' class='btn btn-primary' data-toggle='modal'" + 
+					"data-target='#scoreOrder' data-whatever="+itemId+">已收到</button>";
+		}else if (status==3) {
+			statusTagForUser="<button type='button' class='btn btn-primary' disabled='disabled'>已收到</button>";
+		}else if (status==0) {
+			statusTagForUser="<button type='button' class='btn btn-primary' onclick='cancelOrder("+itemId+")'>取消訂單</button>";
+		}else {
+			statusTagForUser="<button type='button' class='btn btn-primary' disabled='disabled' onclick=''>取消訂單</button>";
+		}
+		return statusTagForUser;
+	}
+}
