@@ -40,18 +40,23 @@
 </head>
 <body>
  <jsp:include page="/WEB-INF/pages/header.jsp" />
-<h2>
+<!-- -----------------------------------改這裡-------------------------------------------------- -->
+ <section class="ftco-section ftco-degree-bg">
+<div>
+
+
+<h2 align="center">
 店家資訊管理
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
 
 <form:form action="MarketMall.Insert"  method="post" modelAttribute="Insert" enctype="multipart/form-data">
-<table  cellspacing="2" cellpadding="1" border="1" width="100%">
+<table align="center" >
 
     <tr>
     <td>店家名稱:</td>
-    <td><form:input   type="text" name="mallName" id="mallName" class='InputClass'
+    <td><form:input type="text" name="mallName" id="mallName" class='InputClass'
      size="35" maxlength="10" value="" path="mallName"/>
            <font color='red' size='-1'>
               ${errors.errMallName}
@@ -81,19 +86,27 @@
         <td >店面圖片</td>
         <td >
             <form:input style="background:#FFFFFF" class='InputClass'  type="file" path="multipartFile" accept="image/*" name="mallImg" id="imgInp" size="25" /><br>
-            <font color='red' size='-1'>${errors.errPicture}</font></td>
+            <font color='red' size='-1'>${errors.errPicture}</font>
+       	</td>
     </tr>
-        <tr height="36" >
-      <td height="61" colspan="6" align="center">
-         <form:button value="Send">註冊</form:button>
+    <tr>
+    	<td></td>
+    	<td><img height='230' width='230'  id="blah" src="#" alt="your image" /></td>
+    </tr>
+        <tr  height="36" >
+      <td height="61" c align="center">
+         <form:button class="btn btn-primary py-2 px-3" value="Send">註冊</form:button>
       </td>
     </tr>
    
 </table>
 </form:form>
+<!-- -----------------------------------改這裡-------------------------------------------------- -->
+
+</div> 
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
- <img height='120' width='96'  id="blah" src="#" alt="your image" />
   <jsp:include page="/WEB-INF/pages/footer.jsp" />
 <script>
 function readURL(input) {
