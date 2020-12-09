@@ -273,62 +273,62 @@ $("#imgInp").change(function(){
 		readURL(this);
 })
 
-// $(document).ready(function(){
-// 	$("#send").click(function(){
-// 		if($("#actName").val() == ""){
-// 			 $("#nameMsg").append("請輸入活動名稱");
-// 			 eval("document.form1['actName'].focus()");
-// 		}else if($("#actName").val() !=""){
-// 		 	$("#nameMsg").empty();
+$(document).ready(function(){
+	$("#send").click(function(){
+		if($("#actName").val() == ""){
+			 $("#nameMsg").append("請輸入活動名稱");
+			 eval("document.form1['actName'].focus()");
+		}else if($("#actName").val() !=""){
+		 	$("#nameMsg").empty();
 
 	 	
-// 		}else if(("#actAddr").val() ==""){
-// 		 	$("#addrMsg").append("請輸入活動地址");
-// 		 	eval("document.form1['actAddr'].focus()");
-// 		}else if($("#actAddr").val() !=""){
-// 			 	$("#addrMsg").empty();
+		}else if(("#actAddr").val() ==""){
+		 	$("#addrMsg").append("請輸入活動地址");
+		 	eval("document.form1['actAddr'].focus()");
+		}else if($("#actAddr").val() !=""){
+			 	$("#addrMsg").empty();
 
 	 	
-// 		}else if(("#tel").val() ==""){
-// 			$("#telMsg").append("請輸入電話");
-// 			eval("document.form1['tel'].focus()");
-// 		}else if($("#tel").val() !=""){
-// 		 	$("#telMsg").empty();
+		}else if(("#tel").val() ==""){
+			$("#telMsg").append("請輸入電話");
+			eval("document.form1['tel'].focus()");
+		}else if($("#tel").val() !=""){
+		 	$("#telMsg").empty();
 
  			 
-// 		}else if(("#numLim").val() ==""){
-// 			$("#numLimMsg").append("請輸入活動人數上限");
-// 			eval("document.form1['numLim'].focus()");
-// 		}else if($("#numLim").val() !=""){
-// 		 	$("#numLimMsg").empty();
+		}else if(("#numLim").val() ==""){
+			$("#numLimMsg").append("請輸入活動人數上限");
+			eval("document.form1['numLim'].focus()");
+		}else if($("#numLim").val() !=""){
+		 	$("#numLimMsg").empty();
 			
 			
-// 		}else if(("#price").val() ==""){
-// 			$("#priceMsg").append("請輸入活動費用");
-// 			eval("document.act['price'].focus()");
-// 		}else if($("#price").val() !=""){
-// 		 	$("#priceMsg").empty();
+		}else if(("#price").val() ==""){
+			$("#priceMsg").append("請輸入活動費用");
+			eval("document.act['price'].focus()");
+		}else if($("#price").val() !=""){
+		 	$("#priceMsg").empty();
 
 			
-// 		}else if(("#actDescri").val() ==""){
-// 			$("#descriMsg").append("請輸入活動描述");
-// 			eval("document.act['actDescri'].focus()");
-// 		}else if($("#actDescri").val() !=""){
-// 		 	$("#descriMsg").empty();
+		}else if(("#actDescri").val() ==""){
+			$("#descriMsg").append("請輸入活動描述");
+			eval("document.act['actDescri'].focus()");
+		}else if($("#actDescri").val() !=""){
+		 	$("#descriMsg").empty();
 			
 			
-// 		}else if(("#file").val() ==""){
-// 			$("#fileMsg").append("請上傳圖片");
-// 			eval("document.act['file'].focus()");
-// 		}else if($("#file").val() !=""){
-// 		 	$("#fileMsg").empty();
-// 		}else if(dateVaild());
+		}else if(("#file").val() ==""){
+			$("#fileMsg").append("請上傳圖片");
+			eval("document.act['file'].focus()");
+		}else if($("#file").val() !=""){
+		 	$("#fileMsg").empty();
+		}else if(dateVaild());
 		
-// 		}else{
-// 			document.act.submit();
-// 		};
-// 	})
-// })
+		}else{
+			document.act.submit();
+		};
+	})
+})
 
 
 </script>

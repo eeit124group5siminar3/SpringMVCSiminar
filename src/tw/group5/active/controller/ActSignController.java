@@ -1,12 +1,13 @@
 package tw.group5.active.controller;
 
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Iterator;
+
+import javax.persistence.criteria.From;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -20,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
+import example.ExampleAllInOne;
+import oracle.net.aso.m;
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActOrd;
 import tw.group5.active.service.ActFarmerService;
@@ -39,7 +43,9 @@ public class ActSignController {
 	private ActOrdService actOrdService;
 	
 	@Autowired
-	private Member_Service mbService;
+	private Member_Service mbService;	
+	
+	
 	
 //	@Autowired
 //	private HttpRequest request;
@@ -87,10 +93,29 @@ public class ActSignController {
 		time = Timestamp.valueOf(timeStr); 
 		aoInsert.setOrdTime(time);
 		
-		actOrdService.insertActOrd(aoInsert);
-		return "active/actFarmerHome";
+		//新增報名訂單
+		actOrdService.insertActOrd(aoInsert);	
+		
+		
+		//取得信用卡付款畫面
+//		ExampleAllInOne all = new ExampleAllInOne();
+//		
+//		String form = all.genAioCheckOutALL();
+		
+		String tradeNo= aoInsert.getActOrdId().toString();
+		String tradeDate=aoInsert.getOrdTime().toString();
+		String tradeTotal=aoInsert.getTotalPrice().toString();
+		String tradeItem=aoInsert.getActFarmer().getActName();
+		String tradeDesc=aoInsert.getOrdActNum().toString()+"人";
+		
+		System.out.println("到底有沒有有沒有有沒有"+tradeNo);
+		String form = actOrdService.payActSign(tradeNo,tradeDate,tradeTotal,tradeItem,tradeDesc);
+		model.addAttribute("form", form);
+		return "active/actSuccess";
 		
 	}
+	
+
 	
 	//======================================廠商CRUD=============================================	
 	
@@ -160,6 +185,7 @@ public class ActSignController {
 		ActOrd aoBean = actOrdService.getActOrdOne(actOrdId);	
 //		ActFarmer afBean = actFarmerService.getActFarmer(actId);
 //		aoBean.setActFarmer(afBean);
+		
 		model.addAttribute("aoBean", aoBean);
 		return "/active/actSignUpdate";
 	}
