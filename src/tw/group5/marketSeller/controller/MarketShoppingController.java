@@ -3,6 +3,7 @@ package tw.group5.marketSeller.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -19,11 +20,11 @@ public class MarketShoppingController {
 	 if (marketCart ==null) {
 		marketCart =new MarketCart();
 	}
-	 ModelAndView mav =new ModelAndView();
-	 mav.setViewName("/marketSeller/MarketShoppingcart");
-	 mav.addObject("MarketCar",marketCart);
-	 mav.setStatus(HttpStatus.OK);
-	 return mav;
+    ModelAndView mav =new ModelAndView();
+    mav.setViewName("/marketSeller/MarketBuyerCart");
+    mav.addObject("marketCart",marketCart);
+	
+	 return null;
  }
 
 }

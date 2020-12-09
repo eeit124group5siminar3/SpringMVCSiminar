@@ -64,7 +64,7 @@
 			</c:otherwise>
           	</c:choose>
           	</p>&nbsp;        	
-          	<p><a href="#" onclick="" class="btn btn-black py-3 px-5">查看菜籃</a></p>
+          	<p><a href="<c:url value='/MarketCartContent'/>" class="btn btn-black py-3 px-5">查看菜籃</a></p>
           	<p><a href="#" onclick="goShopping(${oneProduct.marketMallBean.memberNo})" class="btn btn-black py-3 px-3">返回</a></p>
           	</div>
     			</div>
