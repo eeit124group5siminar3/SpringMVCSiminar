@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tw.group5.member_SignUp.model.Member_SignUp;
 
-@WebFilter(urlPatterns = {"/mall_order","/mall_management","/mall_manageOrder","/Mall_checkout","/Mall_WishListContent"}, initParams = @WebInitParam(name = "LOGIN_PATH", value = "goFbMemberSignUp.controller"))
+@WebFilter(urlPatterns = {"/mall_order","/mall_management","/mall_manageOrder","/Mall_checkout","/mall_wishList"}, initParams = @WebInitParam(name = "LOGIN_PATH", value = "goFbMemberSignUp.controller"))
 public class OtherAccessController extends HttpFilter implements Filter {
 	private String LOGIN_PATH;
 

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import tw.group5.mall.model.ProductBean;
+import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
+import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
@@ -16,17 +18,10 @@ import java.util.List;
 
 @Repository
 public class Recipe_DAO_spring {
+	
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
-
-//	public Recipe_DAO_spring() {
-//
-//	}
-
-//	public Recipe_DAO_hibernate(Session session) {
-//		this.session = session;
-//	}
 
 	// Recipe_Servlet_insert
 	public boolean insert(Recipe_Bean bean) {
@@ -35,7 +30,6 @@ public class Recipe_DAO_spring {
 			System.out.println(bean.getRec_id());
 			session.save(bean);
 			System.out.println("insert success");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
@@ -46,32 +40,35 @@ public class Recipe_DAO_spring {
 	// Recipe_Servlet_update
 	public Recipe_Bean update(String rec_id, Recipe_Bean bean) {
 		Session session = sessionFactory.getCurrentSession();
-//			session.beginTransaction();
 		bean.setRec_id(rec_id);
 		System.out.println(bean.getName());
 		session.update(bean);
-
-//			session.getTransaction().commit();
 		return bean;
 	}
 
 	// 取得資料庫所有資料
 	public List<Recipe_Bean> listOfJavaBean() {
 		Session session = sessionFactory.getCurrentSession();
-//		session.beginTransaction();
-		String hql = "From Recipe_Bean order by upload_date";
+		String hql = "From Recipe_Bean order by views";
 		Query query = session.createQuery(hql, Recipe_Bean.class);
 		List<Recipe_Bean> list = query.list();
-//		session.getTransaction().commit();
 		return list;
-
 	}
+	
+	public Recipe_Bean recipeBean(String rec_id) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "From Recipe_Bean ";
+		Recipe_Bean bean = session.get(Recipe_Bean.class, rec_id);
+		return bean;
+	}
+	
+	
+	
 
 	// 查詢某資料
 	// Recipe_Servlet_search
 	public List<Recipe_Bean_noImage> ListOfSearch(String name) {
 		Session session = sessionFactory.getCurrentSession();
-//		session.beginTransaction();
 		String hql = "From Recipe_Bean_noImage where recipe_name like:name";
 		Query<Recipe_Bean_noImage> query = session.createQuery(hql, Recipe_Bean_noImage.class);
 		query.setParameter("name", name);
@@ -85,13 +82,11 @@ public class Recipe_DAO_spring {
 	// 查詢使用者擁有食譜中,其中一筆資料
 	public List<Recipe_Bean_noImage> partSearch(String rec_id) {
 		Session session = sessionFactory.getCurrentSession();
-//		session.beginTransaction();
 		String hql = "From Recipe_Bean_noImage where recipe_id=?0";
 		Query<Recipe_Bean_noImage> query = session.createQuery(hql, Recipe_Bean_noImage.class);
 		query.setParameter(0, rec_id);
 
 		List<Recipe_Bean_noImage> list = query.list();
-//		session.getTransaction().commit();
 		return list;
 
 	}
@@ -99,11 +94,9 @@ public class Recipe_DAO_spring {
 	// Recipe_Servlet_delete
 	public boolean delete(String rec_id) {
 		Session session = sessionFactory.getCurrentSession();
-//		session.beginTransaction();
 		Recipe_Bean result = session.get(Recipe_Bean.class, rec_id);
 		if (result != null) {
 			session.delete(result);
-//			session.getTransaction().commit();
 			return true;
 		}
 		return false;
@@ -179,6 +172,7 @@ public class Recipe_DAO_spring {
 		return false;
 	}
 	
+	//比對是否已經加入我的最愛
 	public boolean bookmarkExist(String rec_id,Integer mem_no) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "From Bookmark_Bean where recipe_id=:rec_id and member_no=:mem_no";
@@ -194,14 +188,76 @@ public class Recipe_DAO_spring {
 			}
 		}
 		return false;
-		
-//		Bookmark_Bean result = session.get(Bookmark_Bean.class, rec_id);
-//		if(result!=null) {
-//			return true;
-//		}
-//		return false;
 	}
 	
+	
+	//---------------------blog--------------------------
+	
+	//新增資料
+	public Blog_Bean insert(Blog_Bean bean) {
+		Session session=sessionFactory.getCurrentSession();
+		session.save(bean);
+		return bean;
+		
+	}
+	
+	
+	public Blog_Bean updateBlog(Blog_Bean bean) {
+		Session session=sessionFactory.getCurrentSession();
+		session.update(bean);
+		return bean;
+		
+	}
+	
+	public boolean deleteBlog(Integer blog_id) {
+		Session session = sessionFactory.getCurrentSession();
+		Blog_Bean result = session.get(Blog_Bean.class, blog_id);
+		if(result!=null) {
+			session.delete(result);
+			return true;
+		}
+		return false;
+	}
+	
+	//搜尋全部資料
+	public List<Blog_Bean> searchAllOfBlog() {
+		Session session=sessionFactory.getCurrentSession();
+		Query<Blog_Bean> query=session.createQuery("From Blog_Bean order by views",Blog_Bean.class);
+		List<Blog_Bean> list=query.list();
+		return list;
+		
+	}
+	
+	//搜尋某個會員資料
+	public List<Blog_Bean> getMemBlog(Integer mem_no) {
+		Session session=sessionFactory.getCurrentSession();
+		Query<Blog_Bean> query=session.createQuery("From Blog_Bean where member_no=:mem_no order by post_date",Blog_Bean.class);
+		query.setParameter("mem_no", mem_no);
+		List<Blog_Bean> list=query.list();
+		return list;
+		
+	}
+	
+	//搜尋某一文章資料
+	public Blog_Bean blogBean(Integer blog_id) {
+		Session session=sessionFactory.getCurrentSession();
+		System.out.println("enter blogbean");
+		Blog_Bean bean = session.get(Blog_Bean.class, blog_id);
+		return bean;
+	}
+	
+	
+	//計算某一文章回文數
+	public long BlogIdMsg(Integer blog_id) {
+		Session session=sessionFactory.getCurrentSession();
+		String hql="select count(*) from Msg_Blog_Bean where blog_id=:blog_id";
+		Query<Long> query=session.createQuery(hql);
+		query.setParameter("blog_id",blog_id);
+		long counts=(Long) query.uniqueResult();
+		
+		System.out.println("countsssssssssssssssssss: "+counts);
+		return (int) counts;
+	}
 	
 	//-------------------取得分頁------------------------
 	

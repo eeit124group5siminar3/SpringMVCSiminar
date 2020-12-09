@@ -3,6 +3,7 @@ package tw.group5.recipe.service;
 import java.util.List;
 
 import tw.group5.mall.model.ProductBean;
+import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
@@ -46,5 +47,21 @@ public interface recipe_Service_interface {
 	List<Recipe_Bean> searchMyRecipe(Integer page, Integer showData, Integer mem_no);
 
 	long getMyRecipeCounts(Integer mem_no);
+
+	Recipe_Bean recipeBean(String rec_id);
+
+	Blog_Bean insert(Blog_Bean bean);
+
+	List<Blog_Bean> searchAllOfBlog();
+
+	Blog_Bean blogBean(Integer id);
+
+	List<Blog_Bean> getMemBlog(Integer mem_no);
+
+	Blog_Bean updateBlog(Blog_Bean bean);
+
+	long BlogIdMsg(Integer blog_id);
+
+	boolean deleteBlog(Integer blog_id);
 
 }

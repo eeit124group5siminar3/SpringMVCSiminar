@@ -36,6 +36,7 @@ public class ExampleAllInOne {
 //		System.out.println("fundingReconDetail: " + postFundingReconDetail());
 		System.out.println("aioCheckOutALL: " + genAioCheckOutALL());
 //		System.out.println("aioCheckOutATM: " + genAioCheckOutATM());
+//		System.out.println("aioCheckOutCVS: " + genAioCheckOutCVS());
 //		System.out.println("aioCheckOutBARCODE: " + genAioCheckOutBARCODE());
 //		System.out.println("aioCheckOutDevide: " + genAioCheckOutDevide());
 //		System.out.println("aioCheckOutOneTime: " + genAioCheckOutOneTime());
@@ -132,16 +133,51 @@ public class ExampleAllInOne {
 	}
 	
 	public static String genAioCheckOutALL(){
-		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo("testCompany0004");
+//		AioCheckOutALL obj = new AioCheckOutALL();
+//		obj.setMerchantTradeNo("testCompany0004");
+//		obj.setMerchantTradeDate("2017/01/01 08:05:23");
+//		obj.setTotalAmount("50");
+//		obj.setTradeDesc("test Description");
+//		obj.setItemName("TestItem");
+//		obj.setReturnURL("http://211.23.128.214:5000");
+//		obj.setNeedExtraPaidInfo("N");
+//		String form = all.aioCheckOut(obj, null);
+//		return form;
+		
+		
+		AioCheckOutCVS obj = new AioCheckOutCVS();
+		InvoiceObj invoice = new InvoiceObj();
+		UUID uid = UUID.randomUUID();
+		obj.setMerchantTradeNo(uid.toString().replaceAll("-", "").substring(0, 20));
 		obj.setMerchantTradeDate("2017/01/01 08:05:23");
 		obj.setTotalAmount("50");
 		obj.setTradeDesc("test Description");
 		obj.setItemName("TestItem");
 		obj.setReturnURL("http://211.23.128.214:5000");
 		obj.setNeedExtraPaidInfo("N");
-		String form = all.aioCheckOut(obj, null);
+		obj.setStoreExpireDate("3");
+		obj.setInvoiceMark("Y");
+		invoice.setRelateNumber("test202017test");
+		invoice.setCustomerID("123456");
+		invoice.setCarruerType("1");
+		invoice.setTaxType("1");
+		invoice.setCarruerNum("");
+		invoice.setDonation("0");
+		invoice.setLoveCode("X123456");
+		invoice.setPrint("0");
+		invoice.setCustomerName("Mark");
+		invoice.setCustomerAddr("台北市南港區三重路");
+		invoice.setCustomerPhone("0911429215");
+		invoice.setDelayDay("1");
+		invoice.setInvType("07");
+		invoice.setInvoiceItemName("測試");
+		invoice.setInvoiceItemCount("1");
+		invoice.setInvoiceItemWord("人");
+		invoice.setInvoiceItemPrice("50");
+		invoice.setInvoiceItemTaxType("1");
+		String form = all.aioCheckOut(obj, invoice);
 		return form;
+		
 	}
 	
 	public static String genAioCheckOutATM(){

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,7 @@ public class Recipe_Bean_noImage {
 	private Integer member_no;
 	private String date;
 	private Integer views=0;
+	private int favor=0;
 	
 	public Recipe_Bean_noImage() {
 	}
@@ -148,6 +150,15 @@ public class Recipe_Bean_noImage {
 
 	public void setViews(Integer views) {
 		this.views = views;
+	}
+
+	@Transient
+	public int getFavor() {
+		return favor;
+	}
+
+	public void setFavor(int favor) {
+		this.favor = favor;
 	}
 	
 
