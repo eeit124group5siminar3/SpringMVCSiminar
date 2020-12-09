@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<section class="ftco-section" id="top_singleProduct">
+<section class="ftco-section carousel" id="top_singleProduct">
+<a class="carousel-control-prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden" style="font-size:80px" onclick="preProduct(${selectedProduct.productId})" role="button" title="前一筆商品">&lt;</span></a>
+<a class="carousel-control-next"> <span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden" style="font-size:80px" onclick="nextProduct(${selectedProduct.productId})"  role="button" title="後一筆商品">&gt;</span></a>
+
 	<div class="container">
 		<div class="row">
-
 			<div class="col-lg-6 mb-5 ftco-animate">
 				<a
 					href="<c:url value='retrieveImageServlet?id=${selectedProduct.productId}&type=PRODUCT' />"
@@ -21,7 +23,7 @@
 								class='ion-ios-heart'></i></span>
 						</c:when>
 						<c:otherwise>
-							<span class='heart'
+							<span class='heart' title="願望清單"
 								onclick="favorite(${selectedProduct.productId})"
 								id="favorite${selectedProduct.productId}"> <c:choose>
 									<c:when test="${selectedProduct.favorite==0}">

@@ -1,5 +1,6 @@
 package tw.group5.mall.dao;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -232,25 +233,6 @@ public class ProductDAO {
 		return count;
 	}
 
-//依照ID查詢類別
-//	public CategoryBean getCategoryById() {
-//		Session session = sessionFactory.getCurrentSession();
-//		String hql = "from CategoryBean where id =?0";
-//		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
-//		query.setParameter(0, categoryId);
-//		CategoryBean cb = query.uniqueResult();
-//		return cb;
-//	}
-
-//查詢全部類別
-//	public List<CategoryBean> getCategory() {
-//		Session session = sessionFactory.getCurrentSession();
-//		String hql = "from CategoryBean";
-//		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
-//		List<CategoryBean> list = query.list();
-//		return list;
-//	}
-
 // 獲得類別下拉式選單的JSP語法字串
 	public String getSelectTag() {
 		String ans = "";
@@ -348,17 +330,18 @@ public class ProductDAO {
 		Query<ProductFavoriteBean> fquery = session.createQuery(fhql, ProductFavoriteBean.class);
 		fquery.setParameter("userId", userId);
 		List<ProductFavoriteBean> favoriteList = fquery.list();
-		List<Integer> productIdList=new ArrayList<Integer>();
-		for(ProductFavoriteBean favorite:favoriteList) {
+		List<Integer> productIdList = new ArrayList<Integer>();
+		for (ProductFavoriteBean favorite : favoriteList) {
 			productIdList.add(favorite.getProductId());
 		}
 		String hql = "from ProductBean where productId in :productIdList";
 		Query<ProductBean> query = session.createQuery(hql, ProductBean.class);
 		query.setParameter("productIdList", productIdList);
-		List<ProductBean> list=query.list();
+		List<ProductBean> list = query.list();
 		return list;
 	}
 
+// 取消願望清單
 	public void cancelFavorite(Integer userId, Integer productId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from ProductFavoriteBean where userId = :userId and productId= :productId";
@@ -367,7 +350,96 @@ public class ProductDAO {
 		query.setParameter("productId", productId);
 		ProductFavoriteBean pfb = query.uniqueResult();
 		pfb.setStatus(0);
-		session.update(pfb);	
+		session.update(pfb);
+	}
+
+// 取得上一項商品的ID
+	public Integer getPreProductId(Integer productId) {
+		Integer preProductId = null;
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "select pre from (select productId ,lag(productID) over(ORDER BY productId) pre from product where status !=2";
+		Query<?> query = null;
+		if (searchString == null) {
+			if (categoryId == null) {
+				hql += ") where productId= :productId";
+				query = session.createSQLQuery(hql);
+			} else {
+				hql += " and category = :categoryId) where productId= :productId";
+				query = session.createSQLQuery(hql);
+				query.setParameter("categoryId", categoryId);
+			}
+		} else {
+			if (categoryId == null) {
+				hql += " and product like :searchString) where productId= :productId";
+				query = session.createSQLQuery(hql);
+				query.setParameter("searchString", "%" + searchString + "%");
+			} else {
+				hql += " and product like :searchString and  category = :categoryId) where productId= :productId";
+				query = session.createSQLQuery(hql);
+				query.setParameter("searchString", "%" + searchString + "%");
+				query.setParameter("categoryId", categoryId);
+			}
+		}
+		query.setParameter("productId", productId);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		if (uniqueResult != null) {
+			preProductId = uniqueResult.intValue();
+		}
+		return preProductId;
+	}
+
+// 取得下一項商品的ID
+	public Integer getNextProductId(Integer productId) {
+		Integer preProductId = null;
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "select next from (select productId ,lead(productID) over(ORDER BY productId) next from product where status !=2";
+		Query<?> query = null;
+		if (searchString == null) {
+			if (categoryId == null) {
+				hql += ") where productId= :productId";
+				query = session.createSQLQuery(hql);
+			} else {
+				hql += " and category = :categoryId) where productId= :productId";
+				query = session.createSQLQuery(hql);
+				query.setParameter("categoryId", categoryId);
+			}
+		} else {
+			if (categoryId == null) {
+				hql += " and product like :searchString) where productId= :productId";
+				query = session.createSQLQuery(hql);
+				query.setParameter("searchString", "%" + searchString + "%");
+			} else {
+				hql += " and product like :searchString and  category = :categoryId) where productId= :productId";
+				query = session.createSQLQuery(hql);
+				query.setParameter("searchString", "%" + searchString + "%");
+				query.setParameter("categoryId", categoryId);
+			}
+		}
+		query.setParameter("productId", productId);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		if (uniqueResult != null) {
+			preProductId = uniqueResult.intValue();
+		}
+		return preProductId;
 	}
 
 }
+
+//依照ID查詢類別
+//	public CategoryBean getCategoryById() {
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from CategoryBean where id =?0";
+//		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
+//		query.setParameter(0, categoryId);
+//		CategoryBean cb = query.uniqueResult();
+//		return cb;
+//	}
+
+//查詢全部類別
+//	public List<CategoryBean> getCategory() {
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from CategoryBean";
+//		Query<CategoryBean> query = session.createQuery(hql, CategoryBean.class);
+//		List<CategoryBean> list = query.list();
+//		return list;
+//	}
