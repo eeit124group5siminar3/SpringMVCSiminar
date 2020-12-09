@@ -9,13 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
+import ecpay.payment.integration.domain.AioCheckOutOneTime;
+import ecpay.payment.integration.domain.InvoiceObj;
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActOrd;
 import tw.group5.active.model.ActOrdNum;
 
 @Repository
 public class ActOrdDAO {
-
+	public AllInOne all;
+	
+	
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
@@ -168,5 +174,39 @@ public class ActOrdDAO {
 		session.update(actOrd);
 		return actOrd;
 	}
+	
+	
+	//訂單信用卡結帳頁面生成
+	public String payActSign(String tradeNo,String tradeDate,String tradeTotal,String tradeDesc,String tradeItem) {
+		all = new AllInOne("");
+		AioCheckOutALL obj = new AioCheckOutALL();
+//		InvoiceObj invoice = new InvoiceObj();
+
+//		AioCheckOutOneTime obj = new AioCheckOutOneTime();
+	
+		obj.setMerchantTradeNo(tradeNo);
+		obj.setMerchantTradeDate(tradeDate);
+		obj.setTotalAmount(tradeTotal);
+		obj.setTradeDesc("test Description");
+		obj.setItemName(tradeItem);
+		obj.setClientBackURL("http://localhost:8080/siminar/index");
+		obj.setReturnURL("http://211.23.128.214:5000");
+		obj.setNeedExtraPaidInfo("N");
+		obj.setRedeem("Y");
+		
+//		obj.setMerchantTradeNo("testCompa454ny0008");
+//		obj.setMerchantTradeDate("2017/01/01 08:05:23");
+//		obj.setTotalAmount("50");
+//		obj.setTradeDesc("test Description");
+//		obj.setItemName("TestItem");
+//		obj.setReturnURL("http://211.23.128.214:5000");
+//		obj.setNeedExtraPaidInfo("N");
+//		obj.setRedeem("Y");
+				
+		String form = all.aioCheckOut(obj, null);
+		return form;	
+		
+	}
+	
 	
 }

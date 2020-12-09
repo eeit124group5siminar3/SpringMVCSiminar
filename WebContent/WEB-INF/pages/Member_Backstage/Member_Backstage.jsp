@@ -109,10 +109,12 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<c:if test="${login_ok.member_permissions==1}">
 				<li align="left"><a href="<c:url value='mall_management'  />" class="hyperlink">商品管理</a></li>
 				<li align="left"><a href="<c:url value='mall_manageOrder'  />" class="hyperlink">訂單管理</a></li>
+				<li align="left"><a href="<c:url value='mall_analysis'  />" class="hyperlink">商品資料分析</a></li>
 				</c:if>
 				<c:if test="${login_ok.member_permissions!=1}">
 				<li align="left"><font color="gray">商品管理</font></li>
 				<li align="left"><font color="gray">訂單管理</font></li>
+				<li align="left"><font color="gray">商品資料分析</font></li>
 				</c:if>
 			</div>
 		</div>

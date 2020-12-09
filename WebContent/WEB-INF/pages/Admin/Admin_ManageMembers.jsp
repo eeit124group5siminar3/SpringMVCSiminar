@@ -199,6 +199,7 @@ $(function(){
 										class="form-control" id="update_member_permissions1"
 										value="\${permissions}" disabled>
 										<select class="form-control" style="float:left" id="update_member_permissions2">
+										<option value="\${viewdata.member_permissions}" hidden></option>
 										<option value="0">買家</option>
 										<option value="1">賣家</option>
 										</select>
@@ -308,6 +309,7 @@ $(function(){
 									class="form-control" id="update_member_gg1"
 									value="\${viewdata.member_gg}" disabled>
 									<select class="form-control" style="float:left" id="update_member_gg2">
+									<option value="\${viewdata.member_gg}" hidden></option>
 									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
@@ -319,8 +321,9 @@ $(function(){
 									id="update_span_e_paper"></small></small></span>
 									<input type="text"
 										class="form-control" id="update_e_paper1"
-										value="\${epaper}" disabled>
+										value="\${epaper}">
 										<select class="form-control" style="float:left" id="update_e_paper2">
+										<option value="\${viewdata.e_paper}" hidden></option>
 										<option value="1">已訂閱</option>
 										<option value="0">未訂閱</option>
 										</select>
@@ -333,6 +336,7 @@ $(function(){
 										class="form-control" id="update_member_lock_acc1"
 										value="\${lock_acc}" disabled>
 										<select class="form-control" style="float:left" id="update_member_lock_acc2">
+										<option value="\${viewdata.member_lock_acc}" hidden></option>
 										<option value="0">未停權</option>
 										<option value="1">停權</option>
 										</select>

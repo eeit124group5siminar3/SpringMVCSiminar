@@ -59,16 +59,19 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				data : {
 					email : $("#exampleInputEmail1").val(),
 					password : $("#exampleInputPassword1").val(),
-					remember : $("#exampleCheck1").val()
+					remember : $("#exampleCheck1").val(),
+					code : $("#check_code").val()
 				},
 				type : "POST",
 				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 				success : function(data) {
-					if (data) {
+					if(data[2] == "2"){
 						self.location = document.referrer;
-					} else {
-				$("#check_email").html("帳號或密碼錯誤，請重新輸入");
-				}
+					}if(data[1] == "1"){
+						$("#check_email").html("驗證碼輸入錯誤");
+					}if(data[0] == "0"){
+						$("#check_email").html("帳號或密碼錯誤，請重新輸入");
+					}
 		}
 	})
 							ev.preventDefault();
@@ -187,6 +190,13 @@ $(function(){
 });
 })
 </script>
+<script>
+function refresh(){
+	  //$("#basePath").val()+
+	  var url="createCode?number="+Math.random();//這裡沒有隨機引數的話就只進兩次後臺就再也不進了，這個現在還不太明白為什麼
+	  $("#img").attr("src",url);  
+}
+</script>
 
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
@@ -211,6 +221,14 @@ $(function(){
 						value="${requestScope.password}${param.password}"
 						class="form-control" id="exampleInputPassword1"
 						placeholder="請輸入密碼">
+				</div>
+				<div class="form-group">
+				<label for="check_code">驗證碼</label>
+				     <p><img id="img" src="<c:url value='createCode'/>" onclick="refresh()"> </p>
+				</div>
+				<div class="form-group">
+				     <!--跳到Controller層createCode方法裡獲取隨機數和圖片-->
+				     <input type="code" name="code" class="form-control" id="check_code"/>
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" name="remember" class="form-check-input"
@@ -270,18 +288,15 @@ $(function(){
 			</div>
 			<div class="col-md">
 				<div class="ftco-footer-widget mb-4 ml-md-5">
-					<!-- <h2 class="ftco-heading-2">Menu</h2> -->
 					<ul class="list-unstyled">
 						<li><a href="#" class="py-2 d-block">商城</a></li>
 						<li><a href="#" class="py-2 d-block">關於我</a></li>
-						<!-- <li><a href="#" class="py-2 d-block">Journal</a></li> -->
 						<li><a href="#" class="py-2 d-block">聯絡我們</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="ftco-footer-widget mb-4">
-					<!-- <h2 class="ftco-heading-2">其他問題</h2> -->
 					<div class="d-flex">
 						<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
 							<li><a href="#" class="py-2 d-block">運送訊息</a></li>
@@ -291,14 +306,12 @@ $(function(){
 						</ul>
 						<ul class="list-unstyled">
 							<li><a href="#" class="py-2 d-block">常見問題</a></li>
-							<!-- <li><a href="#" class="py-2 d-block">Contact</a></li> -->
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="col-md">
 				<div class="ftco-footer-widget mb-4">
-					<!-- <h2 class="ftco-heading-2">Have a Questions?</h2> -->
 					<div class="block-23 mb-3">
 						<ul>
 							<li><span class="icon icon-map-marker"></span><span
@@ -314,18 +327,13 @@ $(function(){
 		</div>
 		<div class="row">
 			<div class="col-md-12 text-center">
-
 				<p>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy;
-					<!-- 					<script> 
- 						document.write(new Date().getFullYear());
- 					</script> -->
+
 					All rights reserved | This template is made with <i
 						class="icon-heart color-danger" aria-hidden="true"></i> by <a
 						href="https://colorlib.com" target="_blank">Colorlib</a>.
 					Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>
 		</div>

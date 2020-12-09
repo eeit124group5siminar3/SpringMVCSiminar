@@ -177,4 +177,12 @@ public class ProductService {
 		
 	}
 
+	public Integer getPreProductId(Integer productId) {
+		return dao.getPreProductId(productId);
+	}
+
+	public Integer getNextProductId(Integer productId) {
+		return dao.getNextProductId(productId);
+	}
+
 }
