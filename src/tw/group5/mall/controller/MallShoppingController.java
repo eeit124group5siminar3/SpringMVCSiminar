@@ -116,6 +116,20 @@ public class MallShoppingController {
 		mav.setStatus(HttpStatus.OK);
 		return mav;
 	}
+	
+// 取的上一筆商品ID
+	@PostMapping(value = "/preProduct")
+	public @ResponseBody Integer getPreId(@RequestParam(value = "productId")Integer productId) {
+		Integer preProductId=service.getPreProductId(productId);
+		return preProductId;
+	}
+	
+// 取的下一筆商品ID
+	@PostMapping(value = "/nextProduct")
+	public @ResponseBody Integer getNextId(@RequestParam(value = "productId")Integer productId) {
+		Integer nextProductId=service.getNextProductId(productId);
+		return nextProductId;
+	}
 
 // 直接加入購物車
 	@RequestMapping(value = "/AddToCart", method = { RequestMethod.GET, RequestMethod.POST })
