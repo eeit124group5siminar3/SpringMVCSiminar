@@ -39,6 +39,12 @@ public class ActOrdService {
 		public List<ActOrd> getActOrdsByMember(Integer memNo){
 			return actOrdDAO.getActOrdsByMember(memNo);
 		}
+		
+		
+	//訂單信用卡結帳頁面生成
+		public String payActSign(String tradeNo,String tradeDate,String tradeTotal,String tradeDesc,String tradeItem) {
+			return actOrdDAO.payActSign(tradeNo,tradeDate,tradeTotal,tradeItem,tradeDesc);	
+		}	
 	
 //==============================================================================================================		
 	//查詢某一活動的某一筆訂單
