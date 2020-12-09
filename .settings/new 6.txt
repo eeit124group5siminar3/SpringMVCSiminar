@@ -1,0 +1,6 @@
+ashleylai58@gmail.com
+https://hackmd.io/@ashleylai/iii-cloud-iaas-part1
+http://gaga-snake.s3-website-ap-northeast-1.amazonaws.com/
+https://hackmd.io/@ashleylai/iii-cloud-iaas-part2#/
+lucent
+vpc

@@ -42,6 +42,11 @@ public class PageTo {
 	public String wishListPage() {
 		return "/mall/mall_wishList";
 	}
+	
+	@GetMapping(value = "/mall_analysis")
+	public String analysisPage() {
+		return "/mall/mall_analysis";
+	}
 //	@GetMapping(value = "/mall_checkout")
 //	public String checkOut() {
 //		return "/mall/mall_checkout";
