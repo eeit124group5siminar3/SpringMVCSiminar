@@ -59,7 +59,7 @@
 		</div>
 	</div>
 
-	<section class="ftco-section ftco-cart" id="marketCartContent"></section>
+<section class="ftco-section ftco-cart" id="marketCartContent"></section>
 
 
 	<jsp:include page="../footer.jsp" />
