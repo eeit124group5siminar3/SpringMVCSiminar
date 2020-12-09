@@ -10111,9 +10111,9 @@ textarea.form-control {
 .login-form{
   width:400px;
   height:600px;
-  position:relative;
   top:100px;
   left:60%;
+  position:absolute;
   /* right:50px; */
 }
 
@@ -10126,6 +10126,7 @@ textarea.form-control {
 
 .footer-ground{
   width:100%;
+  TOP:800px;
   position:absolute;
 }
 
