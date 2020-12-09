@@ -203,7 +203,7 @@ $(function(){
 					class="custom-control custom-radio custom-control-inline">
 					<input type="radio" id="customRadioInline2"
 						name="member_permissions" class="custom-control-input" value="1">
-					<label class="custom-control-label" for="customRadioInline2">買家與賣家</label>
+					<label class="custom-control-label" for="customRadioInline2">賣家</label>
 				</div>
 				<p></p>
 				<div class="form-row">
@@ -239,8 +239,7 @@ $(function(){
 					
 					<div class="form-group col-md-6" style="text-align:center">
 						<label for="inputPassword4" style="float:left">名稱<a style="color:red">*</a></label> <span style="color:red"><small id="span_name"></small></span> <input type="text"
-							name="member_name" id="member_name" class="form-control" placeholder="請填入姓名或商家名稱"
-							pattern="^[\u4e00-\u9fa5]{0,}$" title="只接受中文字" required>
+							name="member_name" id="member_name" class="form-control" placeholder="請填入姓名或商家名稱" required>
 						<p></p>
 						
 						<label for="inputPassword4" style="float:left">生日<a style="color:red">*</a></label> <span style="color:red"><small id="span_birthday"></small></span> <input type="date"

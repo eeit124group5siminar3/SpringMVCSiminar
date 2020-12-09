@@ -3,10 +3,7 @@ package tw.group5.util;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpFilter;
@@ -15,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tw.group5.member_SignUp.model.Member_SignUp;
 
-@WebFilter(urlPatterns = {"/mall_order","/mall_management","/mall_manageOrder","/Mall_checkout"}, initParams = @WebInitParam(name = "LOGIN_PATH", value = "goFbMemberSignUp.controller"))
+@WebFilter(urlPatterns = {"/mall_order","/mall_management","/mall_manageOrder","/Mall_checkout","/mall_wishList"}, initParams = @WebInitParam(name = "LOGIN_PATH", value = "goFbMemberSignUp.controller"))
 public class OtherAccessController extends HttpFilter implements Filter {
 	private String LOGIN_PATH;
 

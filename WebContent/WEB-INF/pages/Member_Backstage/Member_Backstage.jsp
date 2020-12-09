@@ -109,10 +109,12 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<c:if test="${login_ok.member_permissions==1}">
 				<li align="left"><a href="<c:url value='mall_management'  />" class="hyperlink">商品管理</a></li>
 				<li align="left"><a href="<c:url value='mall_manageOrder'  />" class="hyperlink">訂單管理</a></li>
+				<li align="left"><a href="<c:url value='mall_analysis'  />" class="hyperlink">商品資料分析</a></li>
 				</c:if>
 				<c:if test="${login_ok.member_permissions!=1}">
 				<li align="left"><font color="gray">商品管理</font></li>
 				<li align="left"><font color="gray">訂單管理</font></li>
+				<li align="left"><font color="gray">商品資料分析</font></li>
 				</c:if>
 			</div>
 		</div>
@@ -131,8 +133,12 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo3">食譜管理</button>
 			<div id="demo3" class="collapse">
-				<li align="left"><a href="" class="hyperlink">食譜新增</a></li>
-				<li align="left"><a href="" class="hyperlink">食譜修改</a></li>
+				<li align="left"><a href="<c:url value='uploadPage.controller'/>" class="hyperlink">上傳食譜</a></li>
+				<li align="left"><a href="<c:url value='updatePage.controller'/>" class="hyperlink">我的食譜</a></li>
+				<li align="left"><a href="<c:url value='myRecipe'/>" class="hyperlink">我的最愛</a></li>
+				<li align="left"><a href="<c:url value=''/>" class="hyperlink">我的部落格</a></li>
+				
+
 			</div>
 		</div>
 		<br> <br>

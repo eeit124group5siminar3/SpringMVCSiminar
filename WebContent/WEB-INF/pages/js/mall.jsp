@@ -4,12 +4,16 @@
 <script>
 	// 返回頁面
 	function goback() {
+		var pageNo=1;
+		if(${mall_pageNo!=null}){
+			pageNo=`${mall_pageNo}`;				
+				}
 		$.ajax({
 			url : "MallContent",
 			type : "POST",
 			data : {
 				"mall_categoryId" : `${mall_categoryId}`,
-				"mall_pageNo" : `${mall_pageNo}`,
+				"mall_pageNo" : pageNo,
 				"mall_searchString" : `${mall_searchString}`
 			},
 			datatype : "html",
@@ -312,21 +316,71 @@
 						"productId" : productId
 					},
 					success : function(data, status) {
-						if (data) {
+							console.log(productId);
 							console.log(data);
-							$("#favorite" + productId).html("<i class='ion-ios-heart'></i>");
-						} else {
+						if (data) {
 							$("#favorite" + productId).html("<i class='ion-ios-heart' style='color: red'></i>");
+						} else {
+							$("#favorite" + productId).html("<i class='ion-ios-heart'></i>");
 						}
 					},
 					error : function(data, status) {
 						if (data) {
-							$("#favorite" + productId).html("<i class='ion-ios-heart'></i>");			
-						} else {
 							$("#favorite" + productId).html("<i class='ion-ios-heart' style='color: red'></i>");
+						} else {
+							$("#favorite" + productId).html("<i class='ion-ios-heart'></i>");			
 									
 						}
 					}
 				});
+	}
+	//取得上一筆商品
+	function preProduct(productId){
+		$.ajax({
+			url : "preProduct",
+			type : "POST",
+			data : {
+				"productId" : productId
+			},
+			datatype : "html",
+			success : function(data, status) {
+
+				if(data==null||data==""){
+					alert("已到第一筆商品")
+				}else{
+				singleProduct(data);
+						}
+			},
+			error : function(data, status) {
+				if(data==null||data==""){
+				}else{
+				singleProduct(data);
+						}
+			}
+		});
+	}
+	//取得下一筆商品
+	function nextProduct(productId){
+		$.ajax({
+			url : "nextProduct",
+			type : "POST",
+			data : {
+				"productId" : productId
+			},
+			datatype : "html",
+			success : function(data, status) {
+				if(data==null||data==""){
+					alert("已到最後一筆商品")
+				}else{
+				singleProduct(data);
+						}
+			},
+			error : function(data, status) {
+				if(data==null||data==""){
+				}else{
+				singleProduct(data);
+						}
+			}
+		});
 	}
 </script>

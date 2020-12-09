@@ -145,7 +145,6 @@
 						</c:forEach>
 
 
-
 					</div>
 					<div class="row mt-5">
 						<div class="col text-center">
@@ -166,31 +165,15 @@
 			</div>
 
 		</section>
-
-
-
-<!-- 		    <table id="myDataTalbe" class="display" cellspacing="0" width="100%"> -->
-<!-- 		       <thead> -->
-<!-- 		       <tr> -->
-<!-- 		           <th>食譜</th> -->
-<!-- 		           <th>作者</th> -->
-<!-- 		           <th>人氣</th> -->
-<!-- 		           <th>上傳日期</th> -->
-<!-- 		           <th>刪除</th> -->
-<!-- 		       </tr> -->
-<!-- 		       </thead> -->
-<%-- 		    <c:forEach var='BeanToken'  items="${searchLove}"> --%>
-<!-- 		       <tbody> -->
-<!-- 		       <tr> -->
-<%-- 		           <td><a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">${BeanToken.id}</a></td> --%>
-<%-- 		           <td>${BeanToken.member_no}</td> --%>
-<!-- 		           <td>1000</td> -->
-<%-- 		           <td>${BeanToken.date}</td> --%>
-<%-- 		           <td><input type="submit" name="delete" value="刪除" onclick="fun(${BeanToken.id})"/></td> --%>
-<!-- 		       </tr> -->
-<!-- 		       </tbody> -->
-<%-- 		</c:forEach> --%>
-<!-- 		   </table> -->
+		
+		
+		
+		
+    <form id="form1" runat="server">
+        <div style="margin: 0 auto; width: 700px">
+            <textarea id="editor"></textarea>
+        </div>
+    </form>
 		<!------------------------------------------------------------------>
 		<jsp:include page="../footer.jsp" />
 	</div>
@@ -219,20 +202,26 @@ function fun(rec_id){
 	}
 }
 </script>
-	<script type="text/javascript">
-	$(function(){
-		$('[data-toggle="tooltip"]').tooltip();
-	});
-//         $(function () {
+    
+    
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                console.log(editor);
+            })
 
-//             $("#myDataTalbe").DataTable({
-//                 searching: false,
-//                 columnDefs: [{
-//                     targets: [3],
-//                     orderable: false,
-//                 }]
-//             });
-//         });
-    </script>
+            console.log('#editor: '+$("#editor"));
+            CKEDITOR.replace("editor1", {
+        extraAllowedContent: "img[src,alt,width,height]"
+        });
+
+        class UploadAdapter {
+            constructor(loader) {
+                // The file loader instance to use during the upload.
+                this.loader = loader;
+            }
+            </script>
 </body>
 </html>

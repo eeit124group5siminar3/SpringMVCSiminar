@@ -92,7 +92,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 			'<label for="inputPassword4">'
 					+ '銀行代號</label>'
-					+ '<input type="text" name="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
+					+ '<input type="text" name="member_bank_code" id="member_bank_code" class="form-control" placeholder="請填入銀行代號" required>';
 
 			ckeckbank1.classList.add("form-group");
 			ckeckbank1.classList.add("col-md-6");
@@ -100,7 +100,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 			'<label for="inputPassword4">'
 					+ '銀行帳號</label>'
-					+ '<input type="text" name="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
+					+ '<input type="text" name="member_bank_account" id="member_bank_account" class="form-control" placeholder="銀行帳號不含dash (-)" required>';
 
 		}
 
@@ -233,7 +233,7 @@ $(function(){
 							<input type="radio" id="customRadioInline2"
 								name="member_permissions" id="member_permissions1"
 								class="custom-control-input" value="1" checked="true"> <label
-								class="custom-control-label" for="customRadioInline2">買家與賣家</label>
+								class="custom-control-label" for="customRadioInline2">賣家</label>
 						</div><p></p>
 					</c:if>
 					<div class="form-row">

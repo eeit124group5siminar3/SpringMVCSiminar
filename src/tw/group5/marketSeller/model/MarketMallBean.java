@@ -44,6 +44,7 @@ public class MarketMallBean {
 	private String  address;
 	private String mallDescription;
 	private Integer mallStatus;
+	private String pickupTime;
 	private MultipartFile multipartFile;
     private Set<MarketProductTotalBean> marketProductTotalBean =
             new HashSet<MarketProductTotalBean>(0);
@@ -116,6 +117,15 @@ public class MarketMallBean {
 		this.imgName = imgName;
 	}
 	
+	@Column(name = "PICKUP_TIME")
+	public String getPickupTime() {
+		return pickupTime;
+	}
+
+	public void setPickupTime(String pickupTime) {
+		this.pickupTime = pickupTime;
+	}
+
 	@Column(name = "MALL_STATUS")
 	public Integer getMallStatus() {
 		return mallStatus;
@@ -132,7 +142,5 @@ public class MarketMallBean {
 	public void setMarketProductTotalBean(Set<MarketProductTotalBean> marketProductTotalBean) {
 		this.marketProductTotalBean = marketProductTotalBean;
 	}
-
-	
 
 }

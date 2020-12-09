@@ -69,13 +69,13 @@
 										class='ion-ios-cart'></i></span></a>
 								<c:choose>
 									<c:when test="${empty login_ok}">
-										<a title="加入願望清單"
+										<a 
 											class='heart d-flex justify-content-center align-items-center'><span
 											id="favorite${item.productId}"> <i
 												class='ion-ios-heart'></i></span></a>
 									</c:when>
 									<c:otherwise>
-										<a
+										<a title="願望清單" 
 											class='heart d-flex justify-content-center align-items-center'
 											onclick="favorite(${item.productId})"><span
 											id="favorite${item.productId}"> <c:choose>

@@ -143,6 +143,10 @@ public class SignUpController {
 	@ResponseBody
 	public boolean processfbMemberSignUp(@RequestParam(name = "member_name") String member_name,
 			@RequestParam(name = "member_email") String member_email, Model m) {
+		
+		boolean check_email = member_Service.check_signup_email(member_email);
+		if (check_email) {
+		
 		String member_permissions = "0";
 		String member_password = "";
 		Date member_birthday = null;
@@ -163,6 +167,12 @@ public class SignUpController {
 		member_Service.insert_member_sing_up(member_data);
 
 		m.addAttribute("login_ok", member_data);
+
+		return true;
+		}
+		
+		Member_SignUp login_bean = member_Service.login_bean(member_email);
+		m.addAttribute("login_ok", login_bean);
 
 		return true;
 	}

@@ -109,201 +109,14 @@
 	<jsp:include page="../js/mall.jsp" />
 
 	<script>
-// 		function productList(pageNo) {
-// 			var xhr = new XMLHttpRequest();
-// 			xhr.open("GET", "<c:url value='/RetrievePageProducts' />", true);
-// 			xhr.send();
-// 			xhr.onreadystatechange = function() {
-// 				if (xhr.readyState == 4 && xhr.status == 200) {
-// 					var aProductBean = JSON.parse(xhr.responseText);
-// 					var content = "";
-// 					for (var i = 0; i < aProductBean.length; i++) {
-// 						content += "<div class='col-md-6 col-lg-3'>"
-// 								+ "<div class='product'><a href='#mall_products' class='img-prod'><img class='img-fluid' src=<c:url value='retrieveImageServlet?id="
-// 								+ aProductBean[i].productId
-// 								+ "&type=PRODUCT' /> alt='Colorlib Template'>";
-// 						if (aProductBean[i].discount != 1) {
-// 							content += "<span class='status'>"
-// 									+ Math
-// 											.round((1 - aProductBean[i].discount) * 100)
-// 									+ "%</span>";
-// 						}
-// 						content += "<div class='overlay'></div> </a><div class='text py-3 pb-4 px-3 text-center'><h3><a href='#'>"
-// 								+ aProductBean[i].product
-// 								+ "</a></h3><div class='d-flex'><div class='pricing'>";
-// 						if (aProductBean[i].discount != 1) {
-// 							content += "<p class='price'><span class='mr-2 price-dc'>"
-// 									+ aProductBean[i].price
-// 									+ "元</span><span class='price-sale'>"
-// 									+ aProductBean[i].price
-// 									* aProductBean[i].discount + "元</span></p>";
-// 						} else {
-// 							content += "<span>" + aProductBean[i].price
-// 									+ "元</span>";
-// 						}
-// 						content += "</div></div><div class='bottom-area d-flex px-3'><div class='m-auto d-flex'>"
-// 								+ "<a href='#mall_products' class='add-to-cart d-flex justify-content-center align-items-center text-center' onclick='singleProduct("
-// 								+ aProductBean[i].productId
-// 								+ ")' data-whatever='@getbootstrap'><span><i class='ion-ios-menu'></i></span></a>"
-// 								+ "<a href='#mall_products' class='buy-now d-flex justify-content-center align-items-center mx-1'><span><i class='ion-ios-cart'></i></span></a>"
-// 								+ "<a href='#mall_products' class='heart d-flex justify-content-center align-items-center '><span><i class='ion-ios-heart'></i></span></a>"
-// 								+ "</div></div></div></div></div>"
-// 					}
-// 					let divs = document.getElementById("mall_products");
-// 					divs.innerHTML = content;
-// 				}
-// 			}
-// 		}
-
-// 		function page(pageNo) {
-// 			var xhr = new XMLHttpRequest();
-// 			xhr.open("GET", "<c:url value='/RetrievePage/"+pageNo+"' />", true);
-// 			xhr.send();
-// 			xhr.onreadystatechange = function() {
-// 				if (xhr.readyState == 4 && xhr.status == 200) {
-// 					var content = "<div class='row mt-5'><div class='col text-center'><div class='block-27'><ul>";
-// 					var totalPages = xhr.responseText;
-// 					if (pageNo == 1) {
-// 						content += "<li><span>&lt;&lt;</span></li><li><span>&lt;</span></li>";
-// 					} else {
-// 						content += "<li><a href='#product_top'onclick='page("
-// 								+ 1
-// 								+ ")'>&lt;&lt;</a></li><li><a href='#product_top'onclick='page("
-// 								+ (pageNo - 1) + ")'>&lt;</a></li>";
-// 					}
-// 					if (totalPages <= 5) {
-// 						for (var i = 1; i <= totalPages; i++) {
-// 							if (pageNo == i) {
-// 								content += "<li class='active'><span>" + i
-// 										+ "</span></li>"
-// 							} else {
-// 								content += "<li><a href='#product_top' onclick='page("
-// 										+ i + ")'>" + i + "</a></li>"
-// 							}
-// 						}
-// 					} else if (pageNo > (totalPages - 3)) {
-// 						for (var i = totalPages - 4; i <= totalPages; i++) {
-// 							if (pageNo == i) {
-// 								content += "<li class='active'><span>" + i
-// 										+ "</span></li>"
-// 							} else {
-// 								content += "<li><a href='#product_top' onclick='page("
-// 										+ i + ")'>" + i + "</a></li>"
-// 							}
-// 						}
-// 					} else {
-// 						for (var i = pageNo - 2; i <= pageNo + 2; i++) {
-// 							if (pageNo == i) {
-// 								content += "<li class='active'><span>" + i
-// 										+ "</span></li>"
-// 							} else {
-// 								content += "<li><a href='#product_top' onclick='page("
-// 										+ i + ")'>" + i + "</a></li>"
-// 							}
-// 						}
-// 					}
-// 					if (pageNo == totalPages) {
-// 						content += "<li><span>&gt;</span></li><li><span>&gt;&gt;</span></li>";
-// 					} else {
-// 						content += "<li><a href='#product_top'onclick='page("
-// 								+ (pageNo + 1)
-// 								+ ")'>&gt;</a></li><li><a href='#product_top'onclick='page("
-// 								+ totalPages + ")'>&gt;&gt;</a></li>";
-// 					}
-// 				}
-// 				productList(pageNo);
-// 				content += "</ul></div></div></div>";
-// 				let divs = document.getElementById("mall_pages");
-// 				divs.innerHTML = content;
-// 			}
-// 		}
-
-// 		function searchProduct(backWord) {
-// 			
-// 		var searchString = document.forms[0].elements[0].value;
-		// 			var xhr = new XMLHttpRequest();			
-		// 			if (searchString == null || searchString == "") {	
-		// 				var url = "<c:url value='/RetrieveSearch/' />"
-		// 			} else {
-		// 				var url = "<c:url value='/RetrieveSearch/" + searchString + "' />"
-		// 			if(backWord==0){
-		// 				page(1);
-		// 					}else
-		// 						page(${pageNo});
-		// 						}
-		// 			xhr.open("GET", url, false);
-		// 			xhr.send();
-		// // 			page(1);
-		// 		}
-
-		// 		function productCategory(categoryId,backWord) {
-		// 			var categoryList = document.getElementById("product-category");
-		// 			var xhr = new XMLHttpRequest();
-		// 			xhr.open("GET",
-		// 					"<c:url value='/RetrieveCategory/"+categoryId+"' />", true);
-		// 			xhr.send();
-		// 			content = ""
-		// 			xhr.onreadystatechange = function() {
-		// 				if(backWord==0){
-		// 					page(1);
-		// 						}else{
-		// 							page(${pageNo});
-		// 							}
-		// 				if (xhr.readyState == 4 && xhr.status == 200) {
-		// 					var categoryBean = JSON.parse(xhr.responseText);
-		// 					categoryBean[0] = "全部";
-		// 					for ( var i in categoryBean) {
-		// 						if (i == categoryId) {
-		// 							content += "<li class='active'><span>"
-		// 									+ categoryBean[i] + "</span></li>";
-		// 						} else {
-		// 							content += "<li><a href='#product_top' onclick='productCategory("
-		// 									+ i + ",0)'>" + categoryBean[i] + "</a></li>";
-		// 						}
-		// 					}
-		// 				}
-		// 				categoryList.innerHTML = content;
-		// 			}
-		// 		}
-
-		// 		function singleProduct(productId) {
-		// 			$.ajax({
-		// 				url : "SingleProduct",
-		// 				type : "POST",
-		// 				data : {"productId":productId},
-		// 				datatype : "html",
-		// 				success : function(data, status) {
-		// 					$("#singleProduct").html(data);
-		// 				},
-		// 				error : function(data, status) {
-		// 					$("#singleProduct").html(data);
-		// 					console.log(data);
-		// 				}
-		// 			});
-		// 		}
-
-		// 		window.onload = function() {
-		// 			if(${categoryId==null}){
-		// 				if(${searchString==null}){
-		// 			searchProduct(0);
-		// 			productCategory(0,0);
-		// 					}else{
-		// 						productCategory(0,0);
-		// 						searchProduct(1);
-		// 						}
-		// 			}
-		// 			else{
-		// 				if(${searchString==null}){
-		// 					searchProduct(0);
-		// 					productCategory(`${categoryId}`,1);
-		// 				}else{
-		// 					productCategory(`${categoryId}`,1);
-		// 					searchProduct(1);
-		// 					}
-		// 				};
-		// 		}
-
 		$(document).ready(function() {
+			var url = window.location.href;//獲取當前瀏覽器的url
+			index = url.indexOf("flag")
+			if(index !=-1) {
+				var start = url.indexOf("productId");
+				var productId = url.substring(start + "productId".length+1);
+				singleProduct(productId);
+			}else{
 			var	categoryId=0;
 			if(${mall_categoryId!=null}){
 				categoryId=`${mall_categoryId}`;				
@@ -325,6 +138,7 @@
 					$("#mainContent").html(data);
 				}
 			});
+			}
 		});
 	</script>
 </body>
