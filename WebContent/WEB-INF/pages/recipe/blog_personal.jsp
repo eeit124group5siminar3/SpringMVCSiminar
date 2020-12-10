@@ -57,16 +57,16 @@
 	margin-left: 50px;
 }
 
-.wrap2 {
-	vertical-align: middle;
-	width: 70%;
-	margin-left: 150px;
-}
+/* .wrap2 { */
+/* 	vertical-align: middle; */
+/* 	width: 70%; */
+/* 	margin-left: 150px; */
+/* } */
 
 .txt {
 	width: 50%;
 	vertical-align: middle;
-	margin-left: 150px;
+	margin-left:95px;
 }
 
 .deleteRecipe {
@@ -77,60 +77,81 @@
 </style>
 </head>
 <body class="goto-here">
+<div id="deleteSuccess">
 	<jsp:include page="../header.jsp" />
-		
-		
-		<div align="center">
-			<div id="searchSuccess">
-			<fieldset class="border signup-form-fieldset">
-				<legend style="color: black; font-size: 23px;">發表過的文章</legend>
-						<div class="wrap" style="text-align: center">								
-						
-							<div style="margin-left: 120px">標題</div>
-							<div class="txt">上傳日期</div>
-						</div>
-					<br>
-				<form class="formSet" action="javascript:void(0);" method="post">
-					<c:forEach var='BeanToken' items="${user_blog}">
-						<div class="wrap">
 
-							<div class="wrap1">
-								<a href="#"
-									class="list-group-item list-group-item-action list-group-item-warning"
-									style="width: 200px;" class="wrapLink">${BeanToken.title}</a>
-							</div>
-							
-							<div class="txt">上傳日期 : ${BeanToken.date}</div>
-							<div class="deleteRecipe"> 
-								<button class="btn btn-outline-success" id="send" type="submit" 
-								 onclick="funSearch(${BeanToken.blog_id})">查看</button>
-								<button class="btn btn-outline-danger" id="send" type="submit" 
-								onclick="funDelete(${BeanToken.blog_id})" >刪除</button>
-							</div>
-							<br>
+
+	<div align="center">
+		<fieldset class="border signup-form-fieldset">
+			<legend style="color: black; font-size: 23px;">發表過的文章</legend>
+			<div class="wrap" style="text-align: center">
+
+				<div style="margin-left: 165px">標題</div>
+				<div class="txt">上傳日期</div>
+			</div>
+			<br>
+			<form class="formSet" action="javascript:void(0);" method="post">
+				<c:forEach var='BeanToken' items="${user_blog}">
+					<div class="wrap">
+					
+<!-- 					開關 -->
+					<input type="hidden" id="status" value="${BeanToken.status}"/>
+					
+					<c:if test="${BeanToken.status==1}">
+					<input type="hidden" id="blog_id" value="${BeanToken.blog_id}"/>
+					<div >
+					<span onclick="funBtn(${BeanToken.blog_id})"><span id="btnChange${BeanToken.blog_id}"><span class="btn btn-warning">開啟</span></span></span>
+					</div>
+					</c:if>		
+					
+						
+					<c:if test="${BeanToken.status==0}">
+					<input type="hidden" id="blog_id" value="${BeanToken.blog_id}"/>
+					<div >
+					<span  onclick="funBtn(${BeanToken.blog_id})"><span id="btnChange${BeanToken.blog_id}"><span class="btn btn-outline-warning">關閉</span></span></span>
+					</div>
+					</c:if>		
+					
+						
+						<div class="wrap1">
+							<a href="#"
+								class="list-group-item list-group-item-action list-group-item-warning"
+								style="width: 200px;" class="wrapLink">${BeanToken.title}</a>
+						</div>
+
+						<div class="txt">上傳日期 : ${BeanToken.date}</div>
+						<div class="deleteRecipe">
+							<a class="btn btn-outline-success"
+								href="<c:url value='/getIdContent?blog_id=${BeanToken.blog_id}'/>">查詢
+							</a>
+							<button class="btn btn-outline-danger" id="send" type="submit"
+								onclick="funDelete(${BeanToken.blog_id})">刪除</button>
 						</div>
 						<br>
-					</c:forEach>
-
-
+					</div>
+					<br>
+				</c:forEach>
+					<a class="btn btn-primary py-3 px-4"  
+						href="<c:url value='blogEdit'/>">發表文章</a>
+<!-- style="float: right;" -->
 				</form>
-			</fieldset>
-				</div>
-		</div>
+		</fieldset>
+	</div>
 
 	<jsp:include page="../footer.jsp" />
+	</div>
 	<script type="text/javascript">
-	function funSearch(id){
-		$.ajax({
-			type:"post",
-			url:"./getIdContent",
-			data:{"id":id},
-			success:function(data){
-				$("#searchSuccess").html(data);
-				}
+//  	function funSearch(id){
+// 		$.ajax({
+// 			type:"post",
+// 			url:"./getIdContent",
+// 			data:{"id":id},
+// 			success:function(data){
+// 				$("#searchSuccess").html(data);
+// 				}
 
-			})
-		}
+// 			})
+// 		}
 	
 	function funDelete(blog_id){
 		$.ajax({
@@ -138,9 +159,29 @@
 			url:"./blogPostDelete",
 			data:{"blog_id":blog_id},
 			success:function(data){
-				$("#searchSuccess").html(data);
+				$("#deleteSuccess").html(data);
 				}
 
+			})
+		}
+	
+	function funBtn(blog_id){
+		var a = $("#status").val();
+		console.log('blog_id: '+blog_id);
+		$.ajax({
+			type:"post",
+			url:"checkStatus",
+			data:{"blog_id":blog_id},
+			success:function(data){
+				if(data){
+					$("#btnChange"+blog_id).html(`<span class="btn btn-warning" 
+							>開啟</span>`);  
+					}
+				else {			 		
+					$("#btnChange"+blog_id).html(`<span class="btn btn-outline-warning"
+							>關閉</span>`);
+					}
+				}
 			})
 		}
 	</script>
