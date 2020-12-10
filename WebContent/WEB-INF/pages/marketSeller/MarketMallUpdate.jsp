@@ -66,74 +66,72 @@ body {
       </div>
     </div>
     <!-- 蔬菜圖 -->
+<div>
+<h2 align="center">
+新增商品
+</h2>
+<!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
+<!-- 而且method屬性必須是 "post" -->
 		<form:form id="form2" name="form2" method="post"
 				action="MarketMall.update" enctype="multipart/form-data"
 				align="center"
 				modelAttribute="mallBean">
-<section class="ftco-section">				
- <div class="container">
-    <div class="row justify-content-center">
-     <div class="col-xl-7 ftco-animate">
-		<h3 class="mb-4 billing-heading">店家資料</h3>
-		  <div class="row align-items-end">
-		     
-	          <div class="col-md-6">
-	             <div class="form-group">
-	                <form:input type="hidden" id="memberNo" name="memberNo" path="memberNo" />
-				    <form:label path="mallName">店家名稱:</form:label>
-				    <form:input type="text" id="mallName" name="mallName" path="mallName" />
-                     <font color='red' size='-1'>
-                          ${errors.errMallName}
-                     </font>
-	              </div>
-	          </div>
-	         <div class="w-100"></div>
-             <div class="col-md-6">
-              <div class="form-group">
-				<form:label path="address">地址</form:label> 
-				<form:input  type="text" id="address" name="address" path="address" />
-		          <font color='red' size='-1'>
-                   ${errors.errAddress}
-                  </font>
-                 
-              </div>
-             </div>
-		  
-			<div>
-				<form:label path="mallDescription">店家描述:</form:label> 
-				<form:textarea wrap="physical" name="mallDescription" cols="80" rows="15" path="mallDescription"></form:textarea>
-			</div>
-	      <div>
-	            原版封面 
-	      </div>
-		<div>
-		<img height='240' width='360'
-		src=<c:url value='MarketImageServlet?id=${mallBean.memberNo}&type=MALLIMG' /> /> 
-		</div>
-		<hr>
-		<div> 
-		<form:label path="multipartFile">圖片:</form:label> <br> 
-		<form:input  style="background: #FFFFFF"
-		 class='InputClass' 
-		  type="file" id="imgInp" 	  
-		   path="multipartFile" 
-		    accept="image/*" 
-		   size="25"/> 
-		</div> 
-		<div> 
-		 <img height='240' width='360' id="blah" src="#" alt="your image" />
-		 更新後
-		</div>
+<table  align="center">
 
-			<form:button value="Send" >更新</form:button>
-	 </div>		
-   </div>	
-  </div>	
- </div>	
-</section> <!-- .section -->	
-			</form:form>
+    <tr>
+    <td>店家名稱:</td>
+    <td><form:input type="text" name="mallName" id="mallName" class='InputClass'
+     size="20" maxlength="10" path="mallName"/>
+    </td>
+</tr>
+<tr>
+    <td>地址:</td>
+    <td><form:input type="text" name="address" id="address" size="20" maxlength="10"
+          path="address"/>
+    </td>
+</tr>
+<tr>
+    <td>顧客取貨時間:</td>
+    <td><form:input type="text" name="pickupTime" id="pickupTime" maxlength="10"
+       path="pickupTime"  size="20" />         
+    </td>
+</tr>
+    <tr height="36" >
+    <td >店家描述:</td>
+      <td>         
+         <form:textarea name="mallDescription" cols="80" rows="4" path="mallDescription"></form:textarea>
+      </td>
+    </tr>
+    <tr height='36'>
+        <td >原版封面</td>
+        <td >
+            <img height='360' width='360'
+		src=<c:url value='MarketImageServlet?id=${mallBean.memberNo}&type=MALLIMG' /> /> 
+        </td>
+    </tr>
+    <tr height='36'>
+        <td >更新封面</td>
+        <td >
+            <form:input style="background:#FFFFFF" class='InputClass'  type="file" path="multipartFile" accept="image/*" name="product_img" id="imgInp" size="25" /><br>
+        </td>
+    </tr>
+    <tr>
+    <td></td>
+    <td><img height='360' width='360'  id="blah" src="#" alt="your image" />
+    </td>
+    </tr>
+ 
+        <tr height="36" >
+      <td height="61" colspan="6" align="center">
+         <form:button value="Send" >更新</form:button>
+      </td>
+    </tr>
+   
+</table>
+</form:form>
+
 			<form class="container" action="<c:url value='/'></c:url>" >
-			<div>
+			<div align="center">
 			<br><br><input  type="submit" value="回首頁">
 			</div>
 			</form>

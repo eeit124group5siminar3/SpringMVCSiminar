@@ -133,10 +133,10 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo3">食譜管理</button>
 			<div id="demo3" class="collapse">
-				<li align="left"><a href="<c:url value='uploadPage.controller'/>" class="hyperlink">上傳食譜</a></li>
-				<li align="left"><a href="<c:url value='updatePage.controller'/>" class="hyperlink">我的食譜</a></li>
-				<li align="left"><a href="<c:url value='myRecipe'/>" class="hyperlink">我的最愛</a></li>
-				<li align="left"><a href="<c:url value=''/>" class="hyperlink">我的部落格</a></li>
+			<li align="left"><a href="<c:url value='uploadPage.controller'/>" class="hyperlink">上傳食譜</a></li>
+			<li align="left"><a href="<c:url value='updatePage.controller'/>" class="hyperlink">我的食譜</a></li>
+			<li align="left"><a href="<c:url value='myRecipe'/>" class="hyperlink">我的最愛</a></li>
+			<li align="left"><a href="<c:url value='blog_personal'/>" class="hyperlink">文章管理</a></li>
 				
 
 			</div>
