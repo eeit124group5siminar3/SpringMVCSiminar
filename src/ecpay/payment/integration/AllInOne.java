@@ -464,7 +464,6 @@ public class AllInOne extends AllInOneBase{
 				invoice.setInvoiceItemWord(EcpayFunction.urlEncode(invoice.getInvoiceItemWord()));
 				invoice.setInvoiceRemark(EcpayFunction.urlEncode(invoice.getInvoiceRemark()));
 			}
-			System.err.println("789");
 			out.append(genCheckOutHtmlCode(obj, invoice));
 		} catch (EcpayException e) {
 			e.ShowExceptionMessage();
