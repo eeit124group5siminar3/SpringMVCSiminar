@@ -16,7 +16,7 @@
     <div>
     		<div class="row">
     		<c:forEach var="item" items="${totalProducts}">
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-3 col-lg-3 ftco-animate">
     				<div class="product" >
     					<a href="#" onclick='goProduct(${item.productId})' class="img-prod"><img class="img-fluid" 
     					 src=<c:url value='MarketImageServlet?id=${item.marketProductImgBean.productId}&type=PRODUCT' />
