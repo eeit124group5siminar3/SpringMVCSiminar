@@ -20,7 +20,7 @@
 					<tbody>
 						<c:forEach varStatus="stVar" var="list" items="${productWishList}">
 							<tr class="text-center">
-								<td class="product-remove"><a href="#" onclick="reduceFavorite(${list.productId})"><span
+								<td class="product-remove"><a onclick="reduceFavorite(${list.productId})"><span
 										class="ion-ios-close"></span></a></span></a></td>
 
 								<td class="image-prod"><div class="img"
