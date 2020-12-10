@@ -69,7 +69,7 @@
 		<!-------------------------內容區--------------------------------->
 
 
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- 		<nav class="navbar navbar-expand-lg navbar-light bg-light"> 
 			<a class="navbar-brand">Recipe</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
@@ -93,9 +93,9 @@
 
 				
 			</div>
-		</nav>
+ 		</nav> -->
 
-		<p style="font-size: 60px; text-align: center;">我的食譜</p>
+		<p style="font-size: 60px; text-align: center;">我的最愛</p>
 		<!-- --------------------------------------------------------------------- -->
 
 
@@ -169,11 +169,6 @@
 		
 		
 		
-    <form id="form1" runat="server">
-        <div style="margin: 0 auto; width: 700px">
-            <textarea id="editor"></textarea>
-        </div>
-    </form>
 		<!------------------------------------------------------------------>
 		<jsp:include page="../footer.jsp" />
 	</div>
@@ -196,7 +191,9 @@ function fun(rec_id){
 			"rec_id":rec_id
 			},
 		success:function(response){
+			$("#deleteSuccess").html(response);
 			console.log('response:'+response);
+			
 			}
 		});
 	}

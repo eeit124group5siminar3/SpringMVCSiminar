@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
+    <title>食譜討論區</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -63,7 +63,7 @@
 		              <div class="text d-block pl-md-4">
 		              	<div class="meta mb-3"> 
 		                  <div>${BeanToken.date}</div>
-		                  <div><a href="#">${BeanToken.name}</a></div>
+		                  <div><a href="./SinglePage?blog_id=${BeanToken.blog_id}">${BeanToken.name}</a></div>
 		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
 		                  <div>瀏覽次數 :  ${BeanToken.views}</div>
 		                </div>

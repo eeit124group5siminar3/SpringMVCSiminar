@@ -35,14 +35,14 @@
 <link rel="stylesheet" href="css/style.css">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>商品管理</title>
+<title>新增商品</title>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
  <section class="ftco-section ftco-degree-bg">
 <div>
 <h2 align="center">
-商品管理
+新增商品
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->

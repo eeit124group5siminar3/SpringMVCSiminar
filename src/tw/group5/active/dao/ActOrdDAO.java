@@ -187,7 +187,7 @@ public class ActOrdDAO {
 		obj.setTradeDesc("test Description");
 		obj.setItemName(tradeItem);
 		obj.setClientBackURL("http://localhost:8080/siminar/index");
-		obj.setReturnURL("http://211.23.128.214:5000");
+		obj.setReturnURL("https://211.23.128.214:5000");
 		obj.setNeedExtraPaidInfo("N");
 		obj.setRedeem("Y");
 		
