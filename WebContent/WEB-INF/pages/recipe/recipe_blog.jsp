@@ -63,11 +63,11 @@
 		              <div class="text d-block pl-md-4">
 		              	<div class="meta mb-3"> 
 		                  <div>${BeanToken.date}</div>
-		                  <div><a href="./SinglePage?blog_id=${BeanToken.blog_id}">${BeanToken.name}</a></div>
+		                  <div><a href="#">${BeanToken.name}</a></div>
 		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
 		                  <div>瀏覽次數 :  ${BeanToken.views}</div>
 		                </div>
-		                <h3 class="heading"><a href="#">${BeanToken.title}</a></h3>
+		                <h3 class="heading"><a href="./SinglePage?blog_id=${BeanToken.blog_id}">${BeanToken.title}</a></h3>
 		                <p>${BeanToken.content}</p>
 		                <p><a href="./SinglePage?blog_id=${BeanToken.blog_id}" class="btn btn-primary py-2 px-3">Read more</a></p>
 		              </div>

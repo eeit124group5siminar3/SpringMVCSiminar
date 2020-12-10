@@ -160,14 +160,14 @@ public class Recipe_Controller_search {
 			System.err.println("flag: "+flag);
 			if(bookmark.isEmpty()) {
 				service.bookmark(bean);
-				return "新增成功~";	
+				return "加入成功";	
 			}else if(flag==true) {
 				System.out.println("flag=true");
-				return "已經新增過囉~";
+				return "已經有囉~";
 			}else if(flag!=true){
 				System.out.println("flag=false");
 				service.bookmark(bean);
-				return "新增成功~";	
+				return "加入成功~";	
 			}
 			
 		}

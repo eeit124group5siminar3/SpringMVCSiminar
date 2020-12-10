@@ -43,25 +43,34 @@
 <body class="goto-here">
 	<jsp:include page="../header.jsp" />
 
-	<div style="margin: auto;width: 800px">
-	
-			<form:form action="./blogContent" method='post'
-				modelAttribute="blogBean">
-				<form:label path="title" style="font-size:20px;">標題 :  </form:label>
-				<form:input path="title" />
-				<span style="font-size: smaller;">最多15個字</span>
-				<form:textarea path="content" id="editor"></form:textarea>
+	<div style="margin: auto; width: 800px">
 
-				<%-- <form:label for="exampleFormControlTextarea1" id="editor" path="content"></form:label> --%>
-				<%-- 				<form:textarea id="exampleFormControlTextarea1" --%>
-				<%--  					rows="3" path="content"></form:textarea>  --%>
+		<form:form action="./blogContent" method='post'
+			modelAttribute="blogBean">
+
+			<form:label for="MsgTextarea" path="introduction"
+				style="font-size: 30px;">自我介紹 : <span
+					style="font-size: 15px;">最多400字</span>
+			</form:label>
+			<form:textarea class="form-control" id="MsgTextarea" rows="10"
+				cols="40" path="introduction"></form:textarea>
+
+			<br>
+			<form:label path="title" style="font-size: 30px;">文章標題 :  </form:label>
+			<form:input path="title" />
+			<span style="font-size: 15px;">最多15個字</span>
+			<form:textarea path="content" id="editor"></form:textarea>
+
+			<%-- <form:label for="exampleFormControlTextarea1" id="editor" path="content"></form:label> --%>
+			<%-- 				<form:textarea id="exampleFormControlTextarea1" --%>
+			<%--  					rows="3" path="content"></form:textarea>  --%>
 
 			<br>
 			<div align="center">
 				<button type="submit" class="btn btn-outline-success" id="btn">送出</button>
 			</div>
-			</form:form>
-		</div>
+		</form:form>
+	</div>
 	<jsp:include page="../footer.jsp" />
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
