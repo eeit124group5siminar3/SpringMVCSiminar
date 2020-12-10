@@ -11,6 +11,7 @@ import javax.persistence.criteria.From;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -111,11 +112,29 @@ public class ActSignController {
 		System.out.println("到底有沒有有沒有有沒有"+tradeNo);
 		String form = actOrdService.payActSign(tradeNo,tradeDate,tradeTotal,tradeItem,tradeDesc);
 		model.addAttribute("form", form);
-		return "active/actSuccess";
+		return "active/actSuccess2";
 		
 	}
 	
 
+	//查詢會員報名的活動
+	@RequestMapping(value = "actOrdSelect.do")
+	public String actOrdSelect( Model model,
+		@RequestParam(value = "pageNo", required = false) Integer pageNo,
+		@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb
+		) {
+		if(mb == null) {
+			return "Member_SignUp/Member_Login";
+		}else {
+//		if(pageNo == null) {
+//			if(model.getAttribute("pageNo") != null)
+//		}
+		Integer memNo=mb.getMember_no();
+		Collection<ActOrd> collActOrds = actOrdService.getActOrds(memNo);
+		model.addAttribute("collActOrds", collActOrds);
+		return "/active/actSignOrd";
+		}
+	}
 	
 	//======================================廠商CRUD=============================================	
 	

@@ -1,7 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
+    <title>${partSearch.title}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -27,6 +31,11 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="css/bootstrap.min.css" rel="external nofollow" rel="stylesheet" /> 
+<link href="css/bootstrap-switch.min.css" rel="external nofollow" rel="stylesheet" /> 
+<script src="js/jquery/jquery.1.11.3.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/bootstrap-switch.min.js"></script> 
   </head>
   <body class="goto-here">
 
@@ -76,7 +85,6 @@
               </div>
             </div>
             
-<!-------------------------------- comment ---------------------------------->
             <div class="about-author d-flex p-4 bg-light">
               <div class="bio align-self-md-center mr-4">
                 <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
@@ -87,6 +95,7 @@
               </div>
             </div>
 
+<!-------------------------------- comment ---------------------------------->
 
             <div class="pt-5 mt-5">
               <h3 class="mb-5">6 Comments</h3>
@@ -171,36 +180,32 @@
                 </li>
               </ul>
               <!-- END comment-list -->
-              
-              <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="p-5 bg-light">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website">
-                  </div>
 
-<!--                   <div class="form-group"> -->
-<!--                     <label for="message">Message</label> -->
-<!--                     <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea> -->
-<!--                   </div> -->
-                  <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                  </div>
 
-                </form>
-              </div>
-            </div>
+
+						<div class="comment-form-wrap pt-5">
+							<h3 class="mb-5">Leave a comment</h3>
+
+							<form:form action="javascript:void(0);" method="post"
+								modelAttribute="msgBean" class="p-5 bg-light">
+								<div class="form-group">
+									<form:label for="MsgTextarea" path="content"
+										style="font-size:30px;">留言 :  <span
+											style="font-size: 15px;">最多300字</span>
+									</form:label>
+									<form:textarea class="form-control" id="MsgTextarea" rows="10"
+										cols="40" path="content"></form:textarea>
+								</div>
+								<div align="right" class="form-group">
+									<input type="submit" value="訪客留言"
+										class="btn py-3 px-4 btn-primary"> <input
+										type="submit" value="登入" class="btn py-3 px-4 btn-primary">
+								</div>
+							</form:form>
+						</div>
+					</div>
           </div> <!-- .col-md-8 -->
-          
+<input name="status" type="checkbox" data-size="small">  
  <!-------------------------------- comment ---------------------------------->         
           
           
@@ -293,25 +298,18 @@
   
 
   <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+<%--   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --%>
 
+    <script type="text/javascript">
+// 	$.ajax({
+// 		type:"post",
+// 		url:"./",
+// 		success:function(data){
+// 			alert('succccccccccccccccccccces');
+// 			}
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
-    
+// 		})
+
+    </script>
   </body>
 </html>

@@ -54,26 +54,97 @@
       </div>
     </div>
     
-
-	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>&nbsp;</th>
+						        <th>活動名稱</th>
+						        <th>活動開始時間</th>
+						        <th>活動結束時間</th>						        
+						        <th>連絡電話</th>
+						        <th>報名人數</th>
+						        <th>總金額</th>
+						      </tr>
+						    </thead>
+						    
+						    <tbody>
+						   	<c:forEach var="collActOrds" items="${collActOrds}">
+						    
+						      <tr class="text-center">						        
+						        <td class="image-prod">
+						        <img class="img" src="<c:url value='ActImageController?id=${collActOrds.actFarmer.actId}&type=ACTFARMER'/>"/>
+						        </td>
+						        
+						        <td class="product-name">
+						        <h3>
+						        <a href="<c:url value='getSingleAct.do?id=${collActOrds.actFarmer.actId}'/>">${collActOrds.actFarmer.actName}</a>
+						        </h3>
+						        	<p>${collActOrds.actFarmer.actAddr}</p>
+						        </td>
+						        <td class="product-name">
+						        	<h3>${collActOrds.actFarmer.actDateSta}</h3>
+						        	<p>${collActOrds.actFarmer.actTimeSta}</p>
+						        </td>
+						        <td class="product-name">
+						        	<h3>${collActOrds.actFarmer.actDateEnd}</h3>
+						        	<p>${collActOrds.actFarmer.actTimeEnd}</p>
+						        </td>
+						        <td class="product-name">
+						        	<h3>${collActOrds.actFarmer.tel}</h3>
+						        </td>
+						        <td class="quantity">${collActOrds.ordActNum}</td>
+						    			        
+						        <td class="total">$${collActOrds.totalPrice}</td>
+						      </tr><!-- END TR-->
+						     </c:forEach>
+								<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
+								<form>
+								<div id="bpaging">
+								<table border="1" style="margin-right: 0px;">
+								<tr align="center">
+									<td width='80' height='20'><c:if test="${pageNo > 1}">
+										<div id="blfirst"><a
+											href="<c:url value='maintainActFarmer.do?pageNo=1' />">maintainActFarmer.do?pageNo=1 
+											<img border='0' alt='第一頁' height='30' width='30'
+											src='./images/first-icon.png' /> </a></div>
+									</c:if></td>
+									<td width='80'><c:if test="${pageNo > 1}">
+										<div id="blprev"><a
+											href="<c:url value='maintainActFarmer.do?pageNo=${pageNo-1}' />">
+										<img border='0' alt='前一頁' height='30' width='30'
+											src='./images/prev-icon.png' /></a></div>
+									</c:if></td>
+									<td width='76'>${pageNo} / ${totalPages}</td>
+									<td width='80'><c:if test="${pageNo != totalPages}">
+										<div id="blnext"><a
+											href="<c:url value='maintainActFarmer.do?pageNo=${pageNo+1}' />">
+										<img border='0' alt='最末頁' height='30' width='30'
+											src='./images/next-icon.png'/> </a></div>
+									</c:if></td>
+									<td width='80'><c:if test="${pageNo != totalPages}">
+										<div id="bllast"><a
+											href="<c:url value='maintainActFarmer.do?pageNo=${totalPages}' />">
+										<img border='0' alt='最末頁' height='30' width='30'
+											src='./images/last-icon.png' /> </a></div>
+									</c:if></td>
+								</tr>
+							</table>
+							</div>
+							</form>						     
+						     
+						     
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+    		</div>
+		</section>
 
 
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->

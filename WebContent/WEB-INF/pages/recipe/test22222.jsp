@@ -38,51 +38,19 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/ckeditor.css">
-</head>
-<body>
-	<jsp:include page="../header.jsp" />
-
-	<div align="center">
-        <form:form action="./blogPostUpdate" method='post'
- 			modelAttribute="memBean" style="width: 70%"> 
-			<div>
-			<form:label path="title" style="font-size:20px;" value="${memBean.title}">標題 :   </form:label>
-			<form:input path="title" /><span style="font-size: smaller;">最多15個字</span>
-			</div>
-			<div>
-			<textarea id="editor" name="content">${memBean.content}</textarea>
-			</div> 
-	
-			<button type="submit" class="btn btn-primary" id="btn">送出</button>
-
-		</form:form>
-</div>
-
-<jsp:include page="../footer.jsp" />
-	
-<script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
-
-
-	<script type="text/javascript">  
-var myEditor = null;
-window.onload = function(){
-     ClassicEditor
-    .create(document.querySelector("#editor"))
-    .then(editor => { 
-        myEditor = editor; 
-    }) 
-    .catch(error => {
-        console.error(error);
-    });
-}
-
- </script>
-		 <script>
-//    function processData(){
-//    // getting data
-//    var data = $("#editor").val();
-//    alert(data);
-//   }
- </script>
-</body>
+                <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+        </head>
+        <body>
+                <textarea name="content" id="editor">This is some sample content.</textarea>
+                <script>
+                        ClassicEditor
+                                .create( document.querySelector( '#editor' ) )
+                                .then( editor => {
+                                        console.log( editor );
+                                } )
+                                .catch( error => {
+                                        console.error( error );
+                                } );
+                </script>
+        </body>
 </html>

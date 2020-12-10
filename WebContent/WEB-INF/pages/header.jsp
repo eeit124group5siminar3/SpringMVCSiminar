@@ -71,7 +71,7 @@
 						<a class="dropdown-item" href="<c:url value='/actFarmerHome'/>">一日農夫</a>
 <%-- 						<a class="dropdown-item" href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>">一日農夫管理頁面</a> --%>
 <%-- 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a> --%>
-<%-- 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集管理頁面</a> --%>
+						<a class="dropdown-item" href="<c:url value='/actOrdSelect.do'/>">報名活動管理</a>
 					</div>
 				</li>
 
@@ -81,14 +81,14 @@
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item"
 							href="<c:url value='frontPage.controller'/>">食譜</a> 
-						<a class="dropdown-item"
-							href="<c:url value='uploadPage.controller'/>">上傳食譜</a> 
-							<a
-							class="dropdown-item"
-							href="<c:url value='updatePage.controller'/>">我的食譜</a> 
-							<a
-							class="dropdown-item"
-							href="<c:url value='myRecipe'/>">我的最愛</a>
+<!-- 						<a class="dropdown-item" -->
+<%-- 							href="<c:url value='uploadPage.controller'/>">上傳食譜</a>  --%>
+<!-- 							<a -->
+<!-- 							class="dropdown-item" -->
+<%-- 							href="<c:url value='updatePage.controller'/>">我的食譜</a>  --%>
+<!-- 							<a -->
+<!-- 							class="dropdown-item" -->
+<%-- 							href="<c:url value='myRecipe'/>">我的最愛</a> --%>
 							<a
 							class="dropdown-item"
 							href="<c:url value='blogPage'/>">討論區</a>

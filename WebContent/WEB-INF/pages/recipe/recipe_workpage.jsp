@@ -84,65 +84,35 @@
 
 
 	<jsp:include page="../header.jsp" />
-
-	<!-------------------------內容區--------------------------------->
-
-
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand">Recipe</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link"
-					href="<c:url value='blogPage.controller'/>">User Blog<span
-						class="sr-only">(current)</span></a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='uploadPage.controller'/>">Upload</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='updatePage.controller'/>">Update</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='myRecipe'/>">Bookmark</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='blogEdit'/>">blogedit</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='blogPage'/>">blogPage</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='blog_personal'/>">personalBlog</a></li>
-
-				<!--       <li class="nav-item dropdown"> -->
-				<!--         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> -->
-				<!--           Dropdown -->
-				<!--         </a> -->
-				<!--         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
-				<!--           <a class="dropdown-item" href="#">Action</a> -->
-				<!--           <a class="dropdown-item" href="#">Another action</a> -->
-				<!--           <div class="dropdown-divider"></div> -->
-				<!--           <a class="dropdown-item" href="#">Something else here</a> -->
-				<!--         </div> -->
-				<!--       </li> -->
-				<!--       <li class="nav-item"> -->
-				<!--         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
-				<!--       </li> -->
-			</ul>
-
-			<form class="form-inline my-2 my-lg-0" id="search"
-				action="javascript:void(0);" method="post">
-				<input class="form-control mr-sm-2" type="text" id="searchInput"
-					name="searchInput" placeholder="search delicious"
-					aria-label="Search" /> <input
-					class="btn btn-outline-success my-2 my-sm-0" 　onblur="ch()"
-					id="send" type="submit" name="action" value="Search" />
-			</form>
+	<div class="hero-wrap hero-bread"
+		style="background-image: url('images/bg_1.jpg');">
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a href="index.html">Home</a></span> <span>Recipe</span>
+					</p>
+					<h1 class="mb-0 bread">Recipe</h1>
+				</div>
+			</div>
 		</div>
-	</nav>
+	</div>
+	<br>
+					<div style="margin-left: 800px;">
+						<div> 
+						<form class="form-inline my-2 my-lg-0" id="search"
+							action="javascript:void(0);" method="post">
+							<input class="form-control mr-sm-2" type="text" id="searchInput"
+								name="searchInput" placeholder="search delicious"
+								aria-label="Search" /> <input 
+								class="btn btn-outline-success my-2 my-sm-0" onblur="ch()"
+								id="send" type="submit" name="action" value="Search" />
+						</form>
+					</div>
+				</div>
 
-	<p style="font-size: 60px; text-align: center;">美食推薦</p>
+	<!-- 	<p style="font-size: 60px; text-align: center;">美食推薦</p> -->
 
 
 	<!-- --------------------------------------------------------------------- -->
