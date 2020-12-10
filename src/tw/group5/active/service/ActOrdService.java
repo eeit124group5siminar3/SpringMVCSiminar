@@ -2,8 +2,6 @@ package tw.group5.active.service;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +43,11 @@ public class ActOrdService {
 		public String payActSign(String tradeNo,String tradeDate,String tradeTotal,String tradeDesc,String tradeItem) {
 			return actOrdDAO.payActSign(tradeNo,tradeDate,tradeTotal,tradeItem,tradeDesc);	
 		}	
+		
+	//訂單信用卡結帳頁面生成又善的
+//		public String payOrder(String orderId,String date,String totalPrice,String rbName) {			   
+//			   return actOrdDAO.payOrder(orderId, date, totalPrice, rbName);  
+//			  }		
 	
 //==============================================================================================================		
 	//查詢某一活動的某一筆訂單

@@ -44,7 +44,7 @@ public class AllInOneBase {
 			doc.getDocumentElement().normalize();
 
 			//OperatingMode
-			Element ele = (Element)doc.getElementsByTagName("OperatingMode").item(0);
+			org.w3c.dom.Element ele = (org.w3c.dom.Element)doc.getElementsByTagName("OperatingMode").item(0);
 			operatingMode = ele.getTextContent();
 			//MercProfile
 			ele = (Element)doc.getElementsByTagName("MercProfile").item(0);
