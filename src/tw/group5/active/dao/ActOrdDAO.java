@@ -11,11 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
-import ecpay.payment.integration.domain.AioCheckOutOneTime;
-import ecpay.payment.integration.domain.InvoiceObj;
-import tw.group5.active.model.ActFarmer;
+
 import tw.group5.active.model.ActOrd;
-import tw.group5.active.model.ActOrdNum;
 
 @Repository
 public class ActOrdDAO {
@@ -27,7 +24,7 @@ public class ActOrdDAO {
 	private SessionFactory sessionFactory;
 	private Integer memNo = null;
 	private Integer pageNo = 1;
-	private Integer recordsPerPage = 5;
+	private Integer recordsPerPage = 3;
 	private Integer totalPages = -1;
 
 	public Integer getPageNo() {
@@ -76,7 +73,7 @@ public class ActOrdDAO {
 	// 查詢該會員報名列表
 	public List<ActOrd> getActOrds(Integer memNo) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from ActOrd where memNO =?0 ORDER BY ordId";
+		String hql = "from ActOrd where memNO =?0 ORDER BY actOrdId";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, memNo);
 		List<ActOrd> list = query.list();
@@ -207,6 +204,24 @@ public class ActOrdDAO {
 		return form;	
 		
 	}
+	
+//	//======綠界付款又善的==========================
+//			  
+//			  public String payOrder(String orderId,String date,String totalPrice,String rbName) {
+//			   all = new AllInOne("");
+//			   AioCheckOutOneTime obj = new AioCheckOutOneTime();
+//			   obj.setMerchantTradeNo(orderId);
+//			   obj.setMerchantTradeDate(date);
+//			   obj.setTotalAmount(totalPrice);
+//			   obj.setTradeDesc("test Description");
+//			   obj.setItemName(rbName);
+//			   obj.setReturnURL("http://211.23.128.214:5000");
+//			   obj.setClientBackURL("/homepage");
+//			   obj.setNeedExtraPaidInfo("N");
+//			   obj.setRedeem("Y");
+//			   String form = all.aioCheckOut(obj, null);
+//			   return form;  
+//			  }
 	
 	
 }
