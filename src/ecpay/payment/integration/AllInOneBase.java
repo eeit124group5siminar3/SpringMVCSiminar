@@ -37,10 +37,14 @@ public class AllInOneBase {
 //			String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
 //			doc = EcpayFunction.xmlParser(configPath);
 			/* when using testing code*/
-			String paymentConfPath = "./src/payment_conf.xml";
+//			String paymentConfPath = "http:localhost:8080/./src/payment_conf.xml";
+			String paymentConfPath = "http://localhost:8080/siminar/payment_conf.xml";
+//			String paymentConfPath = "./src/payment_conf.xml";
 			doc = EcpayFunction.xmlParser(paymentConfPath);
 			
+			
 			doc.getDocumentElement().normalize();
+			System.err.println(doc);
 			//OperatingMode
 			Element ele = (Element)doc.getElementsByTagName("OperatingMode").item(0);
 			operatingMode = ele.getTextContent();
