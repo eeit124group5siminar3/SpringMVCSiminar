@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
@@ -32,6 +33,9 @@ public class Blog_Bean {
 	private MultipartFile multipartFile;
 	private String date;
 	private String title;
+	private int status=1;
+	private int counts;
+	private String introduction;
 	private Set<Msg_Blog_Bean> msg_Blog_Bean=
 			new HashSet<Msg_Blog_Bean>(0);
 	
@@ -117,6 +121,31 @@ public class Blog_Bean {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	
+	@Column(name="status")
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	
+	@Transient
+	public int getCounts() {
+		return counts;
+	}
+	public void setCounts(int counts) {
+		this.counts = counts;
+	}
+	
+	@Column(name="introduction")
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 	
 	

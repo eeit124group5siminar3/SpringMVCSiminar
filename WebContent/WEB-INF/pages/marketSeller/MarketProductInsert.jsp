@@ -42,7 +42,7 @@
  <section class="ftco-section ftco-degree-bg">
 <div>
 <h2 align="center">
-新增商品
+新增商品 <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">魠魚片</button>
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
@@ -105,7 +105,7 @@
     <tr height="36" >
     <td >產品描述(75字以內)</td>
       <td>         
-         <form:textarea name="description" cols="80" rows="4" path="marketProductImgBean.description"></form:textarea>
+         <form:textarea name="description" id="description" cols="80" rows="4" path="marketProductImgBean.description"></form:textarea>
          <font color='red' size='-1'>
                 ${errors.errDescription}
             </font>
@@ -159,6 +159,20 @@ function readURL(input) {
 $("#imgInp").change(function() {
   readURL(this);
 });
+
+function fastinsert(){
+	var product_name="澎湖每週限量薄鹽土魠魚片400g";
+	var product_area="澎湖";
+	var price="460";
+	var description="【商品規格】名稱：澎湖每週限量薄鹽土魠魚片規格：400g/片產地：台灣澎湖包裝方式：1片/包，真空包裝保存方式：-18°C以下冷凍保存保存期限：1年加工地：高雄市梓官區漁會食品業者登錄字號：E-188505504-00001-8產品責任險：新光保險產品責任險2000萬"
+	var quantity="30";
+	
+		$("#product_name").val(product_name);
+		$("#product_area").val(product_area);
+		$("#price").val(price);
+		$("#description").val(description);
+		$("#quantity").val(quantity);
+}
 </script>
 <p>&nbsp;</p>
 <c:remove var="ErrMsg" scope='session'/>

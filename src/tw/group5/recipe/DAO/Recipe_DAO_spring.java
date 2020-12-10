@@ -231,7 +231,7 @@ public class Recipe_DAO_spring {
 	//搜尋某個會員資料
 	public List<Blog_Bean> getMemBlog(Integer mem_no) {
 		Session session=sessionFactory.getCurrentSession();
-		Query<Blog_Bean> query=session.createQuery("From Blog_Bean where member_no=:mem_no order by post_date",Blog_Bean.class);
+		Query<Blog_Bean> query=session.createQuery("From Blog_Bean where member_no=:mem_no order by blog_id DESC ",Blog_Bean.class);
 		query.setParameter("mem_no", mem_no);
 		List<Blog_Bean> list=query.list();
 		return list;
@@ -247,8 +247,47 @@ public class Recipe_DAO_spring {
 	}
 	
 	
+	
+	//文章留言
+	public Msg_Blog_Bean insertMsg(Msg_Blog_Bean bean) {
+		Session session=sessionFactory.getCurrentSession();
+		session.save(bean);
+		return bean;
+	}
+	
+	public boolean deleteMsg(Integer blog_id) {
+		Session session=sessionFactory.getCurrentSession();
+		Msg_Blog_Bean result=session.get(Msg_Blog_Bean.class, blog_id);
+		if(result!=null) {
+			session.delete(blog_id);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	//搜尋某一文章 全部回文
+	public List<Msg_Blog_Bean> searchMsg(Integer blog_id){
+		Session session=sessionFactory.getCurrentSession();
+		Query<Msg_Blog_Bean> query=session.createQuery("From Msg_Blog_Bean where blog_id=:blog_id order by msg_date",Msg_Blog_Bean.class);
+		query.setParameter("blog_id", blog_id);
+		List<Msg_Blog_Bean> list=query.list();
+		return list;
+	}
+	
+	//搜尋文章 最高瀏覽
+	public List<Blog_Bean> searchPopular(Integer num){
+		Session session=sessionFactory.getCurrentSession();
+		String hql="from Blog_Bean order by views where rownum<3";
+		Query<Blog_Bean> query=session.createQuery(hql,Blog_Bean.class);
+//		query.setParameter("num", num);
+		List<Blog_Bean> list=query.list();
+		return list;
+	}
+	
+	
 	//計算某一文章回文數
-	public long BlogIdMsg(Integer blog_id) {
+	public long BlogMsgCounts(Integer blog_id) {
 		Session session=sessionFactory.getCurrentSession();
 		String hql="select count(*) from Msg_Blog_Bean where blog_id=:blog_id";
 		Query<Long> query=session.createQuery(hql);
@@ -258,6 +297,9 @@ public class Recipe_DAO_spring {
 		System.out.println("countsssssssssssssssssss: "+counts);
 		return (int) counts;
 	}
+	
+	
+	
 	
 	//-------------------取得分頁------------------------
 	
