@@ -70,7 +70,7 @@ public class MarketCart {
  		double subTotal = 0 ;
  		Set<Integer> set = cart.keySet();
  		for(int n : set){
- 			double price    = cart.get(n).getPrice();		
+ 			int price    = cart.get(n).getPrice();		
  			int    qty      = cart.get(n).getQuantity();
  			subTotal +=  price * qty;
  		}
@@ -82,7 +82,7 @@ public class MarketCart {
  		double subTotal = 0 ;
  		Set<Integer> set = cart.keySet();
  		for(int n : set){
- 			double price    = cart.get(n).getPrice();
+ 			int price    = cart.get(n).getPrice();
  			int    qty      = cart.get(n).getQuantity();
  			subTotal +=  price *  qty;
  		}

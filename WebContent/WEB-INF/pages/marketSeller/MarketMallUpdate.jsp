@@ -68,7 +68,7 @@ body {
     <!-- 蔬菜圖 -->
 <div>
 <h2 align="center">
-新增商品
+店家資訊
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
