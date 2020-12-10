@@ -99,4 +99,46 @@
 		});
 		}
 	}
+
+	// 取消商品訂購
+	function removeItem(productId) {
+		$.ajax({
+			url : "DeleteOrder",
+			type : "POST",
+			data : {
+				"productId" : productId
+			},
+			datatype : "html",
+			success : function(data, status) {
+				$("#cartContent").html(data);
+			},
+			error : function(data, status) {
+				$("#cartContent").html(data);
+			}
+		});
+	}
+
+	// 改變購買數量
+	function changeQty(event, productId, stock, bQty) {
+		var qty = event.path[0].value;
+		if (qty > stock) {
+			event.path[0].value = bQty
+			alert("購買超過庫存量 : " + stock);
+		} else
+			$.ajax({
+				url : "ChangeQty",
+				type : "POST",
+				data : {
+					"productId" : productId,
+					"qty" : qty
+				},
+				datatype : "html",
+				success : function(data, status) {
+					$("#cartContent").html(data);
+				},
+				error : function(data, status) {
+					$("#cartContent").html(data);
+				}
+			});
+	}
 </script>

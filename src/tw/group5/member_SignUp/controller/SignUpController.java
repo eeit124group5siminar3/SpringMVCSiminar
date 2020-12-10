@@ -2,16 +2,6 @@ package tw.group5.member_SignUp.controller;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 import tw.group5.member_SignUp.model.Member_Service;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.member_SignUp.util.SignUp_Function;
+import tw.group5.util.SendMail;
 
 @Controller
 @SessionAttributes(names = { "reg_buyer", "login_ok","email_code" })
@@ -129,55 +121,38 @@ public class SignUpController {
 
 			m.addAttribute("reg_buyer", reg_buyer);
 
-			//產生亂數驗證碼
-			String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-			StringBuffer buffer = new StringBuffer();
-
-			for (int i = 1; i <= 10; i++) {
-
-				char random = chars.charAt((int) (Math.random() * 62));
-				buffer.append(random);
-			}
-			String email_captcha = buffer.toString();
-			//把驗證碼加入Session
-			m.addAttribute("email_code", email_captcha);
-
-			//創建JavaMail
-			String host = "smtp.gmail.com";
-			int port = 587;
-			final String username = "iii.seminar5@gmail.com";
-			final String password = "seminar5";
-
-			Properties props = new Properties();
-			props.put("mail.smtp.host", host);
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.starttls.enable", "true");
-			props.put("mail.smtp.port", port);
-			Session mailSessiona = Session.getInstance(props, new Authenticator() {
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(username, password);
-				}
-			});
-
-			try {
-
-				Message message = new MimeMessage(mailSessiona);
-				message.setFrom(new InternetAddress("iii.seminar5@gmail.com"));
-				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(member_email));
-				message.setSubject("~~歡迎您的加入~~");
-				message.setContent("驗證碼為\n\n<font style='color:red'>"+email_captcha+"</font>", "text/html;charset=utf-8");
-
-				Transport transport = mailSessiona.getTransport("smtp");
-				transport.connect(host, port, username, password);
-
-				Transport.send(message);
-
-				System.out.println("寄送email結束.");
-			} catch (MessagingException e) {
-				throw new RuntimeException(e);
-			}
+			
+			
 		}
 		return check;
+	}
+	
+	// 進入會員註冊確認，同時寄送Mail(減少使用者在前台等待跳轉畫面)
+	@RequestMapping(path = "/sendMail.controller", method = RequestMethod.GET)
+	public void processSendMail(HttpSession session, Model m) {
+		Member_SignUp member_data = (Member_SignUp) m.getAttribute("reg_buyer");
+		String member_email = member_data.getMember_email();
+		
+		//產生亂數驗證碼
+		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		StringBuffer buffer = new StringBuffer();
+
+		for (int i = 1; i <= 10; i++) {
+
+			char random = chars.charAt((int) (Math.random() * 62));
+			buffer.append(random);
+		}
+		String email_captcha = buffer.toString();
+		String email_title = "~~歡迎您的加入~~";
+		String email_content = "驗證碼為\n\n<font style='color:red'>"+email_captcha+"</font>";
+		
+		//把驗證碼加入Session
+		m.addAttribute("email_code", email_captcha);
+		
+		new SendMail(member_email, email_title, email_content);
+		
+		
+
 	}
 
 	// 會員註冊確認資料+mail認證
@@ -200,6 +175,7 @@ public class SignUpController {
 		m.addAttribute("login_ok", member_data);
 		session.removeAttribute("reg_buyer");
 		session.removeAttribute("email_code");
+		
 		return true;
 
 	}

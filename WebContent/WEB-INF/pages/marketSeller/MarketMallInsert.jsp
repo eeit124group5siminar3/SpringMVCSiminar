@@ -46,7 +46,7 @@
 
 
 <h2 align="center">
-店家資訊管理
+店家資訊管理 <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">海產店</button>
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
@@ -64,9 +64,9 @@
     </td>
 </tr>
     <tr height="36" >
-    <td >地址</td>
+    <td>地址</td>
       <td>         
-         <form:input size="35" name="address"  path="address"></form:input> 
+         <form:input size="35" name="address" id="address"  path="address"></form:input> 
          <font color='red' size='-1'>
                 ${errors.errDescription}
             </font>
@@ -76,7 +76,17 @@
     <tr height="36" >
     <td >店家描述</td>
       <td>         
-         <form:textarea name="mallDescription" cols="80" rows="4" path="mallDescription"></form:textarea>
+         <form:textarea name="mallDescription" id="mallDescription" cols="80" rows="4" path="mallDescription"></form:textarea>
+         <font color='red' size='-1'>
+                ${errors.errDescription}
+            </font>
+      </td>
+    </tr>
+    
+   <tr height="36" >
+    <td >可取貨時間</td>
+      <td>         
+         <form:input size="35" name="pickupTime" id="pickupTime"  path="pickupTime"></form:input> 
          <font color='red' size='-1'>
                 ${errors.errDescription}
             </font>
@@ -124,6 +134,21 @@ function readURL(input) {
 $("#imgInp").change(function() {
   readURL(this);
 });
+
+
+
+function fastinsert(){
+	var mallName="超級海產店";
+	var address="320桃園市中壢區中大路300號國立中央大學 (工程二館側面 / 資策會大樓";
+	var mallDescription="專營活海鮮（魚、蝦、蟹、貝），肉類等冷凍產品 各式海、水產批發零售 產品容品質保證、新美味";
+	var pickupTime="取貨時間為平日 10:00-21:00假日 10:00-22:00"
+	
+	
+		$("#mallName").val(mallName);
+		$("#address").val(address);
+		$("#mallDescription").val(mallDescription);
+		$("#pickupTime").val(pickupTime);
+}
 </script>
 <p>&nbsp;</p>
 <c:remove var="ErrMsg" scope='session'/>

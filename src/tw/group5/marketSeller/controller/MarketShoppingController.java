@@ -13,7 +13,14 @@ import tw.group5.marketSeller.MarketCart;
 @Controller
 @SessionAttributes(value = {"login_ok","MarketCart"} )
 public class MarketShoppingController {
-	
+
+	//跳轉購物車介面
+ @GetMapping(value = "/GoMarketShoppingcart")
+ public String productShowCart() {
+ return "/marketSeller/MarketShoppingcart";
+	}
+ 
+ 
  @PostMapping(value = "/MarketCartContent")	
  public ModelAndView showMarketCart(@SessionAttribute(value = "MarketCart", required = false) MarketCart marketCart,
 		 Model model) {
@@ -24,7 +31,7 @@ public class MarketShoppingController {
     mav.setViewName("/marketSeller/MarketBuyerCart");
     mav.addObject("marketCart",marketCart);
 	
-	 return null;
+	 return mav;
  }
 
 }

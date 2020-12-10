@@ -62,7 +62,7 @@
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="<c:url value='GoMarketHome'/>">市場</a>
-						    <a class="dropdown-item" href="<c:url value='/' />">菜籃</a> 
+						    <a class="dropdown-item" href="<c:url value='/GoMarketShoppingcart' />">菜籃</a> 
 						    <a class="dropdown-item" href="<c:url value='/' />">查看預購單</a>
 						</div></li>
 				<li class="nav-item dropdown">
@@ -71,7 +71,7 @@
 						<a class="dropdown-item" href="<c:url value='/actFarmerHome'/>">一日農夫</a>
 <%-- 						<a class="dropdown-item" href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>">一日農夫管理頁面</a> --%>
 <%-- 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a> --%>
-<%-- 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集管理頁面</a> --%>
+						<a class="dropdown-item" href="<c:url value='/actOrdSelect.do'/>">報名活動管理</a>
 					</div>
 				</li>
 
