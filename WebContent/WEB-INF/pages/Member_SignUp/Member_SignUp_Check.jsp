@@ -42,6 +42,39 @@
 
 </head>
 <body class="goto-here">
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+ <script>
+$(function(){
+$("#check_signup").on("submit",function(ev){
+	$("#span_email").html("");
+	$("#span_id").html("");
+	$("#span_password").html("");
+	$("#span_birthday").html("");
+	$.ajax({
+		url:"checkMemberSignUp.controller",
+		data:{
+			email_code:$("#email_code").val()
+		 	},
+		type:"POST", 
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+		 
+	success:function(data){
+		if(data){
+			window.location.href = "index.controller";
+		}else{
+			$("#check_code").html("認證碼輸入錯誤，請重新輸入");
+		}
+		
+
+	}
+    }) 
+    ev.preventDefault(); 
+})
+})
+</script>
 	<jsp:useBean id="reg_buyer"
 		class="tw.group5.member_SignUp.model.Member_SignUp" scope="session" />
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
@@ -49,10 +82,19 @@
 
 	<!-------------------------內容區--------------------------------->
 
-	<form action="checkMemberSignUp.controller" method="post">
+	<form id="check_signup" method="post">
 		<div class="signup-form container">
 			<fieldset class="border signup-form-fieldset">
 				<legend>註冊資料確認</legend>
+				<div id="check_code" class="center"
+					style="color: red; text-align: center; height: 20px"></div>
+					<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputEmail4">認證碼</label> <input type="text"
+							class="form-control" id="email_code">
+					</div>
+				</div>
+					
 				<c:if test="${reg_buyer.member_permissions =='0'}">
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" id="customRadioInline1"

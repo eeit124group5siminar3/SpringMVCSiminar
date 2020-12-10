@@ -111,7 +111,7 @@ public class ActSignController {
 		System.out.println("到底有沒有有沒有有沒有"+tradeNo);
 		String form = actOrdService.payActSign(tradeNo,tradeDate,tradeTotal,tradeItem,tradeDesc);
 		model.addAttribute("form", form);
-		return "active/actSuccess";
+		return "active/actSuccess2";
 		
 	}
 	

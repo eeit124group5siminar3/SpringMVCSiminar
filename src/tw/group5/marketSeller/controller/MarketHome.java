@@ -90,9 +90,12 @@ public class MarketHome {
 			@RequestParam(value = "memberNo", required = false) Integer memberNo
 			) {
            List<MarketProductTotalBean> list = productService.selectBuyerAll(memberNo);
+           MarketMallBean seller =sellerService.selectid(memberNo);
+           System.out.println("賣家名稱"+ seller.getMallName());
            ModelAndView mav =new ModelAndView();
            mav.setViewName("/marketSeller/MarketMallProduct");
            mav.addObject("totalProducts",list);
+           mav.addObject("seller",seller);
 		   return mav;
 	}
 	//商品詳細資訊及加入購物車
