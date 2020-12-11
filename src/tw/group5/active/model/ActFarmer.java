@@ -1,15 +1,12 @@
 package tw.group5.active.model;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,11 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.sql.rowset.serial.SerialBlob;
@@ -31,7 +24,6 @@ import javax.sql.rowset.serial.SerialException;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.ManyToAny;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,7 +58,7 @@ public class ActFarmer implements Serializable {
 	private String imgName;
 	@JsonIgnore
 	private Blob actImg;
-	private Integer actLock;
+	private Integer actLock=0;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date signDateSta;
 	private String signTimeSta;
@@ -74,8 +66,9 @@ public class ActFarmer implements Serializable {
 	private Date signDateEnd;
 	private String signTimeEnd;
 	private Integer actNum = 0;
-	private Integer sigStat;
+	private Integer sigStat=0;
 	private MultipartFile multipartFile;
+
 	
 	
 
@@ -282,7 +275,7 @@ public class ActFarmer implements Serializable {
 		this.actImg = actImg;
 	}
 
-	@Transient
+	
 	@Column(name = "actLock")
 	public Integer getActLock() {
 		return actLock;
@@ -363,6 +356,19 @@ public class ActFarmer implements Serializable {
 		}
 	}
 
+	//取得活動狀態中文
+	@Transient
+	public String getActStatusWord() {
+		return ActStatusClass.getActStatus(actLock);
+	}
+	
+	//取得報名狀態中文
+	@Transient
+	public String getActSignStatusWord() {
+		return ActSignStatusClass.getActSignStatus(sigStat);
+	}
+	
+	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "actFarmer",cascade = CascadeType.ALL)
 //	@JoinColumn(name = "actId")

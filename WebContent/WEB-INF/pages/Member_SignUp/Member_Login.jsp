@@ -51,6 +51,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
+	<script>
+	$(function() {
+		$("#exampleCheck1").on("click",function(){
+			console.log($("#exampleCheck1").val());
+		})
+	})
+	</script>
 <script>
 	$(function() {
 		$("#form_submit").on("submit",function(ev) {
@@ -59,7 +66,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				data : {
 					email : $("#exampleInputEmail1").val(),
 					password : $("#exampleInputPassword1").val(),
-					remember : $("#exampleCheck1").val(),
+					remember : $("#exampleCheck1").prop('checked'),
 					code : $("#check_code").val()
 				},
 				type : "POST",
@@ -71,6 +78,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						$("#check_email").html("驗證碼輸入錯誤");
 					}if(data[0] == "0"){
 						$("#check_email").html("帳號或密碼錯誤，請重新輸入");
+					}if(data[3] == "3"){
+						$("#check_email").html("帳號已停權");
 					}
 		}
 	})
@@ -130,7 +139,7 @@ function GetProfile() {
             if(data){//跳轉填寫資料
 				self.location = document.referrer;
             }if(!data){//跳轉首頁
-             $("#check_email").html("資料錯誤，請重新登錄");
+             $("#check_email").html("帳號已停權");
       		}
                   
         }
@@ -232,9 +241,9 @@ function refresh(){
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" name="remember" class="form-check-input"
-						id="exampleCheck1"
-						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if>
-						value="true"> <label class="form-check-label"
+						id="exampleCheck1" >
+<%-- 						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if> > --%>
+						 <label class="form-check-label"
 						for="exampleCheck1">記住我</label><hr>
 						
 						

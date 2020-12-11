@@ -117,6 +117,7 @@
                 <br>               
 			<table class="table table-hover">
 				<tr>
+					<th>活動狀態</th>
 					<th>活動編號</th>
 					<th>活動名稱</th>
 					<th>活動類型</th>
@@ -130,7 +131,8 @@
 				</tr>
 				<c:forEach var="actFarmer" items="${collFarmer}">
 					<tr>
-						<td><a href="<c:url value='/actOrdList.do?actId=${actFarmer.actId}'/>" ><c:out value="${actFarmer.actId}" /></a></td>						
+						<td><c:out value="${actFarmer.actStatusWord}" /></td>
+						<td><a href="<c:url value='/actFarmerPreRead.do?actId=${actFarmer.actId}'/>" ><c:out value="${actFarmer.actId}" /></a></td>						
 						<td><c:out value="${actFarmer.actName}" /></td>
 						<td><c:out value="${actFarmer.actType}" /></td>
 						<td><c:out value="${actFarmer.actDateSta}" />&nbsp; <c:out
@@ -144,14 +146,14 @@
 								value="${actFarmer.signDateEnd}" /> <c:out
 								value="${actFarmer.signTimeEnd}" /></td>
 						<td><c:out value="${actFarmer.actNumTol}" /></td>
-						<td><c:out value="${actFarmer.sigStat}" /></td>
-						<td>
-							<form action="<c:url value='/actFarmerPreRead.do'/>" method="get">
-								<input type="hidden" id="actId" name="actId"
-									value="${actFarmer.actId}"> <input name="look"
-									type="submit" value="檢視" >
-							</form>
-						</td>
+						<td><c:out value="${actFarmer.actSignStatusWord}" /></td>
+<!-- 						<td> -->
+<%-- 							<form action="<c:url value='/actFarmerPreRead.do'/>" method="get"> --%>
+<!-- 								<input type="hidden" id="actId" name="actId" -->
+<%-- 									value="${actFarmer.actId}"> <input name="look" --%>
+<!-- 									type="submit" value="檢視" > -->
+<%-- 							</form> --%>
+<!-- 						</td> -->
 						<td>
 							<form action="<c:url value='/actFarmerPreUpdate.do'/>"
 								method="get">

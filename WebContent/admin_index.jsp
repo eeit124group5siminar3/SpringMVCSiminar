@@ -103,13 +103,6 @@ $(function(){
 						class="form-control" id="exampleInputPassword1"
 						placeholder="請輸入密碼">
 				</div>
-				<div class="form-group form-check">
-					<input type="checkbox" name="remember" class="form-check-input"
-						id="exampleCheck1"
-						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if>
-						value="true"> <label class="form-check-label"
-						for="exampleCheck1">記住我</label>
-				</div>
 				<button type="button" name="login" id="login"
 					class="btn btn-primary" style="float: center">提交</button>
 			</fieldset>
