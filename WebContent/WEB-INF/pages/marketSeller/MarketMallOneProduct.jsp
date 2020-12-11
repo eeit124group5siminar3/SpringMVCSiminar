@@ -57,14 +57,17 @@
           	<p>
           	<c:choose>
           	<c:when test="${oneProduct.quantity<=marketOrder.quantity}">	
-          	<a href="#" onclick="notEnough()" class="btn btn-black py-3 px-5">放入菜籃</a>  	
+          	<a href="#" onclick="notEnough()" class="btn btn-black py-3 px-5">放入訂購商品清單</a>  	
+          	</c:when>
+          	<c:when test="${oneProduct.quantity==0}">	
+          	<a href="#" onclick="" class="btn btn-black py-3 px-5">補貨通知我</a>  	
           	</c:when>
           	<c:otherwise>
-			<a href="#" onclick="addToCart(${oneProduct.quantity-marketOrder.quantity})" class="btn btn-black py-3 px-5">放入菜籃</a>					
+			<a href="#" onclick="addToCart(${oneProduct.quantity-marketOrder.quantity})" class="btn btn-black py-3 px-5">放入訂購商品清單</a>					
 			</c:otherwise>
           	</c:choose>
           	</p>&nbsp;        	
-          	<p><a href="<c:url value='GoMarketShoppingcart'/>" class="btn btn-black py-3 px-5">查看菜籃</a></p>
+          	<p><a href="<c:url value='GoMarketShoppingcart'/>" class="btn btn-black py-3 px-5">訂購商品清單</a></p>
           	<p><a href="#" onclick="goShopping(${oneProduct.marketMallBean.memberNo})" class="btn btn-black py-3 px-3">返回</a></p>
           	</div>
     			</div>

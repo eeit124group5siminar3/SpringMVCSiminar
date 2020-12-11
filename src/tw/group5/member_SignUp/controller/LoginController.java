@@ -64,7 +64,7 @@ public class LoginController {
 	@ResponseBody
 	public String[] processCheckLogin(HttpServletRequest request, HttpServletResponse response,Model m) {
 		
-		String[] check = new String[3];
+		String[] check = new String[4];
 		
 		HttpSession session=request.getSession();
 		String codeSession=(String)session.getAttribute("code");
@@ -74,12 +74,14 @@ public class LoginController {
 		Cookie cookieRemember = null;
 		
 		String rm = request.getParameter("remember");
+		boolean parseBoolean = Boolean.parseBoolean(rm);
 		String email = request.getParameter("email").trim();
 		String password = request.getParameter("password").trim();
 		String code = request.getParameter("code").trim();
 		
 		boolean login = member_Service.login_check(email, password);
 		Member_SignUp login_bean = member_Service.login_bean(email);
+		String member_lock_acc = login_bean.getMember_lock_acc();
 		
 		if (!codeSession.equalsIgnoreCase(code)) {
 			check[1] = "1";
@@ -90,9 +92,13 @@ public class LoginController {
 			check[0] = "0";
 			return check ;
 		}
+		if (member_lock_acc.equals("1") && codeSession.equalsIgnoreCase(code)) {
+			check[3] = "3";
+			return check ;
+		}
 		
 		if (login && codeSession.equalsIgnoreCase(code)) {
-			if (rm != null) {
+			if (parseBoolean) {
 				check[2] = "2";
 				cookieUser = new Cookie("user", email);
 				cookieUser.setMaxAge(60 * 60 * 24 * 7);

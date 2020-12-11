@@ -214,6 +214,10 @@ public class SignUpController {
 		}
 
 		Member_SignUp login_bean = member_Service.login_bean(member_email);
+		String member_lock_acc = login_bean.getMember_lock_acc();
+		if (member_lock_acc.equals("1")) {
+			return false;
+		}
 		m.addAttribute("login_ok", login_bean);
 
 		return true;
