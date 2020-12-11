@@ -115,6 +115,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<c:if test="${login_ok.member_permissions==1}">
 				<li align="left"><a href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>" class="hyperlink">一日農夫</a></li>
 				<li align="left"><a href="<c:url value='/actOrdSelect.do'/>">已報名活動</a></li>	
+				<li align="left"><a href="<c:url value='/getAllActFarmer.do'/>" class="hyperlink">管理員頁面</a></li>
+				
 				
 				</c:if>
 				<c:if test="${login_ok.member_permissions!=1}">

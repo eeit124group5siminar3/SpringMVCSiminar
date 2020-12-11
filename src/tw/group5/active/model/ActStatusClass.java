@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ActStatusClass {
 	
-	private static final String ACTSTATUS_0 = "審核中";
+	private static final String ACTSTATUS_0 = "待審核";
 	private static final String ACTSTATUS_1 = "申請通過";
 	private static final String ACTSTATUS_2 = "申請未通過";
 	private static final String ACTSTATUS_3 = "活動封鎖";

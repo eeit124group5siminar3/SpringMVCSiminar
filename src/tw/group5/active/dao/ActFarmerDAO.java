@@ -256,6 +256,17 @@ public class ActFarmerDAO {
 		session.merge(actFarmer);
 		return actFarmer;
 	}
+	
+	
+//=========================管理員==========================================
+	
+	public List<ActFarmer> getAllActFarmers(){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActFarmer ORDER BY actId";
+		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
+		List<ActFarmer> list = query.list();
+		return list;
+	} 
 
 //=========================取得時間==========================================
 	

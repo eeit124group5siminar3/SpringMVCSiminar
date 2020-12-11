@@ -218,7 +218,7 @@
 	<tr>
 		<td><form:label path="actImg">活動海報:</form:label></td>				
 		<td><img height='230' width='230' src="<c:url value='ActImageController?id=${afBean.actId}&type=ACTFARMER'/>"/>
-			<form:label path="imgName">${afBean.imgName}</form:label>		
+			<form:label path="imgName" class="align-self-end">${afBean.imgName}</form:label>		
 		</td>
 	</tr>
 	<tr>
@@ -253,7 +253,7 @@
 </table>
 </form:form>
 </div>
-<section class="ftco-section ftco-degree-bg">
+</section>
 
 <!-- --------footer------------------------------------- -->
 
