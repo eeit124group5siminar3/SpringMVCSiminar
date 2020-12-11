@@ -78,10 +78,19 @@ fieldset {
 				<form:label path="productArea">商品出產地:</form:label> 
 				<form:input type="text" id="product_area" name="product_area" path="productArea" />
 			</div>
+			     <form:label path="openDay">開放預購日期/時間:</form:label>
+                 <form:input path="openDay" type="date" />
+                 <form:input path="openDayTime" type="time" />
+			<div>
+			
+			</div>
+			      <form:label path="closeDay">結束預購日期/時間:</form:label>
+                 <form:input path="closeDay" type="date" />
+                 <form:input path="closeDayTime" type="time" />
+            <div>
+            
+            </div>
 
-           <font color='red' size='-1'>
-              ${errors.errUnit}
-           </font> 
 		
 			 <div>
 				<form:label path="quantity">數量:</form:label> 
@@ -100,7 +109,7 @@ fieldset {
            </font> 
 	        </div>
 	        <div>
-	       <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="1" />上架
+	       <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="2" />開放預購
            <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="0" />下架
 	        </div>
 
