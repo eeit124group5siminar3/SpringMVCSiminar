@@ -74,6 +74,7 @@ public class LoginController {
 		Cookie cookieRemember = null;
 		
 		String rm = request.getParameter("remember");
+		boolean parseBoolean = Boolean.parseBoolean(rm);
 		String email = request.getParameter("email").trim();
 		String password = request.getParameter("password").trim();
 		String code = request.getParameter("code").trim();
@@ -92,7 +93,7 @@ public class LoginController {
 		}
 		
 		if (login && codeSession.equalsIgnoreCase(code)) {
-			if (rm != null) {
+			if (parseBoolean) {
 				check[2] = "2";
 				cookieUser = new Cookie("user", email);
 				cookieUser.setMaxAge(60 * 60 * 24 * 7);

@@ -51,6 +51,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
+	<script>
+	$(function() {
+		$("#exampleCheck1").on("click",function(){
+			console.log($("#exampleCheck1").val());
+		})
+	})
+	</script>
 <script>
 	$(function() {
 		$("#form_submit").on("submit",function(ev) {
@@ -59,7 +66,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				data : {
 					email : $("#exampleInputEmail1").val(),
 					password : $("#exampleInputPassword1").val(),
-					remember : $("#exampleCheck1").val(),
+					remember : $("#exampleCheck1").prop('checked'),
 					code : $("#check_code").val()
 				},
 				type : "POST",
@@ -232,9 +239,9 @@ function refresh(){
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" name="remember" class="form-check-input"
-						id="exampleCheck1"
-						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if>
-						value="true"> <label class="form-check-label"
+						id="exampleCheck1" >
+<%-- 						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if> > --%>
+						 <label class="form-check-label"
 						for="exampleCheck1">記住我</label><hr>
 						
 						
