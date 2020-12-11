@@ -78,6 +78,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						$("#check_email").html("驗證碼輸入錯誤");
 					}if(data[0] == "0"){
 						$("#check_email").html("帳號或密碼錯誤，請重新輸入");
+					}if(data[3] == "3"){
+						$("#check_email").html("帳號已停權");
 					}
 		}
 	})
@@ -137,7 +139,7 @@ function GetProfile() {
             if(data){//跳轉填寫資料
 				self.location = document.referrer;
             }if(!data){//跳轉首頁
-             $("#check_email").html("資料錯誤，請重新登錄");
+             $("#check_email").html("帳號已停權");
       		}
                   
         }
