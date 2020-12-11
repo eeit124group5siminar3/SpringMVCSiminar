@@ -175,8 +175,12 @@ public class ActFarmerDAO {
 		query.setParameter(0, sellerId);
 		query.setFirstResult(startRecordNo);
 		query.setMaxResults(recordsPerPage);
+		if(query.getResultList().size() == 0) {
+			return null;
+		}else {
 		List<ActFarmer> list = query.list();
 		return list;
+		}
 	}
 	
 

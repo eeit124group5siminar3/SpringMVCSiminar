@@ -217,7 +217,7 @@
 	</tr>
 	<tr>
 		<td><form:label path="actImg">活動海報:</form:label></td>				
-		<td><img height='120' width='96' src="<c:url value='ActImageController?id=${afBean.actId}&type=ACTFARMER'/>"/>
+		<td><img height='230' width='230' src="<c:url value='ActImageController?id=${afBean.actId}&type=ACTFARMER'/>"/>
 			<form:label path="imgName">${afBean.imgName}</form:label>		
 		</td>
 	</tr>
@@ -236,9 +236,9 @@
 	<tr>
 		<td><form:label path="sigStat">報名狀態:</form:label></td>
 		<td>
-			<form:radiobutton path="sigStat" value="未開放" id="sigStat" readonly="true"/>未開放
-			<form:radiobutton path="sigStat" value="開放中" id="sigStat" readonly="true"/>開放中
-			<form:radiobutton path="sigStat" value="已截止" id="sigStat" readonly="true"/>已截止			
+			<form:radiobutton path="sigStat" value="0" id="sigStat" readonly="true"/>未開放
+			<form:radiobutton path="sigStat" value="1" id="sigStat" readonly="true"/>開放中
+			<form:radiobutton path="sigStat" value="2" id="sigStat" readonly="true"/>已截止			
 		</td>
 	</tr>
 	

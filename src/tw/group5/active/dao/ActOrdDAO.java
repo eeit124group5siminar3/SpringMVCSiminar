@@ -81,9 +81,13 @@ public class ActOrdDAO {
 		String hql = "from ActOrd where memNO =?0 ORDER BY actOrdId";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, memNo);
+
+		if(query.getResultList().size() == 0) {
+			return null;
+		}else {
 		List<ActOrd> list = query.list();
 		return list;
-
+		}
 	}
 	
 	// 查詢該會員報名列表+分頁
