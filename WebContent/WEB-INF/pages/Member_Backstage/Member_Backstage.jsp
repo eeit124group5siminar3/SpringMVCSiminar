@@ -156,7 +156,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				</c:if>
 			</div>
 		</div>
-
+	</div>
 	<div align="center" id="backstage_page">
 		<div id="carousel_backstage" class="container">
 			<div id="carouselExampleIndicators" class="carousel slide"
