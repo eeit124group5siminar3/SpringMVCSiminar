@@ -41,6 +41,8 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="goto-here">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+
 <!-- 	<div class="py-1 bg-primary"> -->
 <!-- 		<div class="container"> -->
 <!-- 			<div -->
