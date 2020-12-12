@@ -53,7 +53,7 @@
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span>
 					</p>
-					<h1 class="mb-0 bread">我的菜籃</h1>
+					<h1 class="mb-0 bread">我的訂購商品清單</h1>
 				</div>
 			</div>
 		</div>

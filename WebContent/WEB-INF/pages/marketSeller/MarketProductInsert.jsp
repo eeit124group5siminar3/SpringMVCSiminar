@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>新增商品</title>
@@ -101,7 +102,19 @@
            </font>           
            
     </td>
-</tr>
+   </tr>
+  <tr>
+  <td>開放預購日期:</td>
+  <td><form:input path="openDay" name="openDay"  type="date" id="openDay" required="required" /></td>
+  <td>開放預購時間:</td>
+  <td><form:input path="openDayTime" type="time" id="openDayTime"/></td>
+  </tr>
+  <tr>
+  <td>結束預購日期:</td>
+  <td><form:input path="closeDay" type="date" id="closeDay" required="required"/></td>
+  <td>結束預購時間:</td>
+  <td><form:input path="closeDayTime" type="time" id="closeDayTime"/></td>
+  </tr>
     <tr height="36" >
     <td >產品描述(75字以內)</td>
       <td>         
@@ -143,6 +156,8 @@
 </div> 
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
 <script>
 function readURL(input) {
   if (input.files && input.files[0]) {
@@ -166,13 +181,25 @@ function fastinsert(){
 	var price="460";
 	var description="【商品規格】名稱：澎湖每週限量薄鹽土魠魚片規格：400g/片產地：台灣澎湖包裝方式：1片/包，真空包裝保存方式：-18°C以下冷凍保存保存期限：1年加工地：高雄市梓官區漁會食品業者登錄字號：E-188505504-00001-8產品責任險：新光保險產品責任險2000萬"
 	var quantity="30";
+	var openDay="2020-12-25";
+	var openDayTime="09:00"
+	var closeDay="2021-03-30";
+	var closeDayTime="17:00";
 	
 		$("#product_name").val(product_name);
 		$("#product_area").val(product_area);
 		$("#price").val(price);
 		$("#description").val(description);
 		$("#quantity").val(quantity);
+		$("#openDay").val(openDay);
+		$("#openDayTime").val(openDayTime);
+		$("#closeDay").val(closeDay);
+		$("#closeDayTime").val(closeDayTime);
+		
 }
+
+
+
 </script>
 <p>&nbsp;</p>
 <c:remove var="ErrMsg" scope='session'/>

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.sql.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -85,7 +85,6 @@ public class MarketSellerProduct {
         imgBean.setMarketProductTotalBean(insert);
         
 		   Integer mNo =mb.getMember_no(); 
-		   System.out.println("Mno :"+ mNo );
 		   MarketMallBean mBean=sellService.selectid(mNo);
 		   insert.setMarketMallBean(mBean);
         model.addAttribute("Insert1",insert);
@@ -98,10 +97,8 @@ public class MarketSellerProduct {
 			
 			@SessionAttribute(value = "login_ok") Member_SignUp mb
 			)throws IllegalStateException, IOException{
-		   Map<String, String> errorMsgs = new HashMap<String, String>();
-		   model.addAttribute("Errors",errorMsgs);
-		   System.out.println("我要新增 拜託");
-		   
+
+		   System.out.println("我要新增 拜託:"+ bean1.getOpenDay());	   
 		   productService.insert(bean1);
 		return "marketSeller/MarketProductSuccess";
 		}
