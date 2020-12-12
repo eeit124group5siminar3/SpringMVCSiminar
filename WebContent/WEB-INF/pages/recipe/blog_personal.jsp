@@ -45,7 +45,7 @@
 }
 
 .wrap {
-	width: 800px;
+	width: 1000px;
 	margin: auto;
 	display: flex;
 	align-items: center;
@@ -72,7 +72,7 @@
 .deleteRecipe {
 	width: 50%;
 	vertical-align: middle;
-	margin-left: 100px;
+	margin-right: 20px;
 }
 </style>
 </head>
@@ -118,11 +118,15 @@
 								class="list-group-item list-group-item-action list-group-item-warning"
 								style="width: 200px;" class="wrapLink">${BeanToken.title}</a>
 						</div>
-
-						<div class="txt">上傳日期 : ${BeanToken.date}</div>
+						<div class="txt">	
+						<div>上傳日期 : ${BeanToken.date}</div><span>修改日期 : </span>
+						<c:if test="${BeanToken.update_date!=null}">
+						<span>${BeanToken.update_date}</span>
+						</c:if>
+						</div>
 						<div class="deleteRecipe">
 							<a class="btn btn-outline-success"
-								href="<c:url value='/getIdContent?blog_id=${BeanToken.blog_id}'/>">查詢
+								href="<c:url value='/getIdContent?blog_id=${BeanToken.blog_id}'/>">編輯
 							</a>
 							<button class="btn btn-outline-danger" id="send" type="submit"
 								onclick="funDelete(${BeanToken.blog_id})">刪除</button>
@@ -131,10 +135,9 @@
 					</div>
 					<br>
 				</c:forEach>
+				</form>
 					<a class="btn btn-primary py-3 px-4"  
 						href="<c:url value='blogEdit'/>">發表文章</a>
-<!-- style="float: right;" -->
-				</form>
 		</fieldset>
 	</div>
 

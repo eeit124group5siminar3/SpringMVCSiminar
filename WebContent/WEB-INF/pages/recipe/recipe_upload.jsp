@@ -154,6 +154,35 @@
 						path="gram_B" />
 				</div>
 			</div>
+						<br>
+
+
+			<div class="form-row">
+				<div class="col">
+					<form:label path="ingredients_C" style="font-size:20px;">食材: </form:label>
+					<form:input type="text" class="form-control" placeholder="食材"
+						path="ingredients_C" />
+				</div>
+				<div class="col">
+					<form:label path="gram_C" style="font-size:20px;">份量: </form:label>
+					<form:input type="text" class="form-control" placeholder="重量  g"
+						path="gram_C" />
+				</div>
+			</div>
+
+			<br>
+			<div class="form-row">
+				<div class="col">
+					<form:label path="ingredients_D"></form:label>
+					<form:input type="text" class="form-control" placeholder="食材"
+						path="ingredients_D" />
+				</div>
+				<div class="col">
+					<form:label path="gram_D"></form:label>
+					<form:input type="text" class="form-control" placeholder="重量  g"
+						path="gram_D" />
+				</div>
+			</div>
 			<br>
 			<div class="form-group">
 				<form:label for="exampleFormControlTextarea1" path="desc"
@@ -182,12 +211,38 @@
 					file</form:label>
 				<div class="invalid-feedback">請上傳圖片</div>
 			</div>
-
+			<br>
+			<div class="custom-file">
+				<form:input type="file" class="custom-file-input"
+					id="validatedCustomFile" path="multipartFile"
+					onchange="loadImageFile(event)" />
+				<form:label class="custom-file-label" for="validatedCustomFile"
+					path="multipartFile">Choose
+					file</form:label>
+				<div class="invalid-feedback">請上傳圖片</div>
+			</div>			<br>
+			<div class="custom-file">
+				<form:input type="file" class="custom-file-input"
+					id="validatedCustomFile" path="multipartFile"
+					onchange="loadImageFile(event)" />
+				<form:label class="custom-file-label" for="validatedCustomFile"
+					path="multipartFile">Choose
+					file</form:label>
+				<div class="invalid-feedback">請上傳圖片</div>
+			</div>			<br>
+			<div class="custom-file">
+				<form:input type="file" class="custom-file-input"
+					id="validatedCustomFile" path="multipartFile"
+					onchange="loadImageFile(event)" />
+				<form:label class="custom-file-label" for="validatedCustomFile"
+					path="multipartFile">Choose
+					file</form:label>
+				<div class="invalid-feedback">請上傳圖片</div>
+			</div>
 			<hr>
 			<div style="text-align: center;">
 				<input id="send" type="submit" name="action"
 					class="btn btn-outline-success" value="送出" onclick="doUpload()" />
-				</label>
 				<!-- 				<label> <input type="submit" name="action" value="回首頁" /> -->
 
 			</div>

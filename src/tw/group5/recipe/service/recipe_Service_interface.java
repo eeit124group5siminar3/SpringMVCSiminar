@@ -25,7 +25,7 @@ public interface recipe_Service_interface {
 
 	Recipe_Bean getImage(String rec_id);
 	
-	List<ProductBean> getProducts(String searchString);
+//	List<ProductBean> getProducts(String searchString);
 
 	Bookmark_Bean bookmark(Bookmark_Bean bean);
 
@@ -71,6 +71,8 @@ public interface recipe_Service_interface {
 
 	List<Msg_Blog_Bean> searchMsg(Integer blog_id);
 
-	List<Blog_Bean> searchPopular(Integer num);
+	List<Blog_Bean> searchPopular();
+
+	List<Blog_Bean> searchPartOfBlog(String title);
 
 }

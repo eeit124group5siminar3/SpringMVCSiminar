@@ -66,9 +66,9 @@
 					<h2 class="mb-3">${partSearch.title}</h2>
 					<p>${partSearch.content}</p>
 
-					<p>
-						<img src="images/image_1.jpg" alt="" class="img-fluid">
-					</p>
+<!-- 					<p> -->
+<!-- 						<img src="images/image_1.jpg" alt="" class="img-fluid"> -->
+<!-- 					</p> -->
 					<!--             <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p> -->
 					<!--             <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2> -->
 					<!--             <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p> -->
@@ -91,8 +91,8 @@
 
 					<div class="about-author d-flex p-4 bg-light">
 						<div class="bio align-self-md-center mr-4">
-							<img src="images/person_1.jpg" alt="Image placeholder"
-								class="img-fluid mb-4">
+<!-- 							<img src="images/person_1.jpg" alt="Image placeholder" -->
+<!-- 								class="img-fluid mb-4"> -->
 						</div>
 						<div class="desc align-self-md-center">
 							<h3>${partSearch.name}</h3>
@@ -105,7 +105,7 @@
 					<div class="pt-5 mt-5">
 						<div id="MsgChange">
 
-							<h3 class="mb-5">${partSearch.counts}&nbsp;&nbsp;Comments</h3>
+							<h3 class="mb-5">${partSearch.counts}&nbsp;&nbsp;則留言</h3>
 							<c:forEach var='BeanToken' items="${searchMsg}">
 								<ul class="comment-list">
 									<li class="comment">
@@ -135,7 +135,7 @@
 						<!-- END comment-list -->
 
 						<div class="comment-form-wrap pt-5">
-							<h3 class="mb-5">Leave a comment</h3>
+							<h3 class="mb-5">發問區</h3>
 							<form action="javascript:void(0);" method="post"
 								class="p-5 bg-light">
 								<div class="form-group">
@@ -176,10 +176,12 @@
 				<!-- .col-md-8 -->
 				<div class="col-lg-4 sidebar ftco-animate">
 					<div class="sidebar-box">
-						<form action="#" class="search-form">
+						<form action="javascript:void(0);" method="post"
+							class="search-form">
 							<div class="form-group">
 								<span class="icon ion-ios-search"></span> <input type="text"
-									class="form-control" placeholder="Search...">
+									class="form-control" id="searchInput" placeholder="Search...">
+								<!-- 									<span> <button type="submit" class="btn btn-primary py-2 px-3" >Search</button></span> -->
 							</div>
 						</form>
 					</div>
@@ -196,71 +198,99 @@
 					<div class="sidebar-box ftco-animate">
 						<h3 class="heading">Recent Blog</h3>
 						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4"
-								style="background-image: url(images/image_1.jpg);"></a>
+
+							<c:if test="${popular1.fileName!=null}">
+								<a class="blog-img mr-4"
+									style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular1.blog_id}'/>);"></a>
+							</c:if>
+							<c:if test="${popular1.fileName==null}">
+								<a href="./SinglePage?blog_id=${popular1.blog_id}"
+									class="blog-img mr-4"
+									style="background-image: url('images/沒有.jpg');"> </a>
+							</c:if>
+
+
+
 							<div class="text">
 								<h3 class="heading-1">
-									<a href="#">Even the all-powerful Pointing has no control
-										about the blind texts</a>
+									<a href="./SinglePage?blog_id=${popular1.blog_id}">${popular1.title}</a>
 								</h3>
 								<div class="meta">
 									<div>
-										<a href="#"><span class="icon-calendar"></span> April 09,
-											2019</a>
+										<a href="#"><span class="icon-calendar"></span> ${popular1.date}</a>
 									</div>
 									<div>
-										<a href="#"><span class="icon-person"></span> Admin</a>
+										<a href="#"><span class="icon-person"></span> ${popular1.name}</a>
 									</div>
+									<div id="chatChange${popular1.blog_id}">
 									<div>
-										<a href="#"><span class="icon-chat"></span> 19</a>
+										<a href="#"><span class="icon-chat"></span> ${chat[0]}</a>
+									</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4"
-								style="background-image: url(images/image_2.jpg);"></a>
+							<c:if test="${popular2.fileName!=null}">
+										<a class="blog-img mr-4"
+										style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular2.blog_id}'/>);"></a>
+									</c:if>
+									<c:if test="${popular2.fileName==null}">
+										<a href="./SinglePage?blog_id=${popular2.blog_id}"             
+											class="blog-img mr-4"
+											style="background-image: url('images/沒有.jpg');">
+										</a>
+									</c:if>
 							<div class="text">
 								<h3 class="heading-1">
-									<a href="#">Even the all-powerful Pointing has no control
-										about the blind texts</a>
+									<a href="./SinglePage?blog_id=${popular2.blog_id}">${popular2.title}</a>
 								</h3>
 								<div class="meta">
 									<div>
-										<a href="#"><span class="icon-calendar"></span> April 09,
-											2019</a>
+										<a href="#"><span class="icon-calendar"></span> ${popular2.date}</a>
 									</div>
 									<div>
-										<a href="#"><span class="icon-person"></span> Admin</a>
+										<a href="#"><span class="icon-person"></span> ${popular2.name}</a>
 									</div>
+									<div id="chatChange${popular2.blog_id}">
 									<div>
-										<a href="#"><span class="icon-chat"></span> 19</a>
+										<a href="#"><span class="icon-chat"></span> ${chat[1]}</a>
+									</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4"
-								style="background-image: url(images/image_3.jpg);"></a>
+							<c:if test="${popular3.fileName!=null}">
+										<a class="blog-img mr-4"
+										style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular3.blog_id}'/>);"></a>
+									</c:if>
+									<c:if test="${popular3.fileName==null}">
+										<a href="./SinglePage?blog_id=${popular3.blog_id}"             
+											class="blog-img mr-4"
+											style="background-image: url('images/沒有.jpg');">
+										</a>
+									</c:if>
 							<div class="text">
 								<h3 class="heading-1">
-									<a href="#">Even the all-powerful Pointing has no control
-										about the blind texts</a>
+									<a href="./SinglePage?blog_id=${popular3.blog_id}">${popular3.title}</a>
 								</h3>
 								<div class="meta">
 									<div>
-										<a href="#"><span class="icon-calendar"></span> April 09,
-											2019</a>
+										<a href="#"><span class="icon-calendar"></span> ${popular3.date}</a>
 									</div>
 									<div>
-										<a href="#"><span class="icon-person"></span> Admin</a>
+										<a href="#"><span class="icon-person"></span> ${popular3.name}</a>
 									</div>
+									<div id="chatChange${popular3.blog_id}">
 									<div>
-										<a href="#"><span class="icon-chat"></span> 19</a>
+										<a href="#"><span class="icon-chat"></span> ${chat[2]}</a>
+									</div>
 									</div>
 								</div>
 							</div>
 						</div>
+
 					</div>
 
 					<div class="sidebar-box ftco-animate">
@@ -324,6 +354,28 @@
 			})
 		}
 	}
+		</script>
+ 
+		<script type="text/javascript">
+		//     $(function(){
+		//     	var event = arguments.callee.caller.arguments[0] || window.event;// 消除浏览器差异
+		$('#searchInput').keydown(function(event) {
+			if (event.keyCode == 13) {
+				var searchInput = $("#searchInput").val();
+				$.ajax({
+					type : "post",
+					url : "./searchPartOfBlog",
+					dataType : "html",
+					data : {
+						"searchInput" : searchInput
+					},
+					success : function(data) {
+						$("#searchSuccess").html(data);
+					}
+				})
+			}
+		})
 	</script>
+
 </body>
 </html>

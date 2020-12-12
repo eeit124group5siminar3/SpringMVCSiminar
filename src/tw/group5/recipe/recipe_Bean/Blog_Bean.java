@@ -1,6 +1,8 @@
 package tw.group5.recipe.recipe_Bean;
 
+import java.io.IOException;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,10 +16,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="blog")
@@ -28,10 +34,11 @@ public class Blog_Bean {
 	private String name;
 	private Integer views=0;
 	private String content;
-	private String FileName;
+	private String fileName;
 	private Blob data;
 	private MultipartFile multipartFile;
 	private String date;
+	private String update_date;
 	private String title;
 	private int status=1;
 	private int counts;
@@ -84,19 +91,29 @@ public class Blog_Bean {
 	}
 	
 	@Column(name="filename")
+	@JsonIgnore
 	public String getFileName() {
-		return FileName;
+		return fileName;
 	}
 	public void setFileName(String fileName) {
-		FileName = fileName;
+		this.fileName = fileName;
 	}
 	
 	@Column(name="data")
+	@JsonIgnore
 	public Blob getData() {
 		return data;
 	}
 	public void setData(Blob data) {
 		this.data = data;
+	}
+	
+	@Column(name = "update_date")
+	public String getUpdate_date() {
+		return update_date;
+	}
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
 	}
 	
 	@Column(name="title")
@@ -108,11 +125,18 @@ public class Blog_Bean {
 	}
 	
 	@Transient
+	@JsonIgnore
 	public MultipartFile getMultipartFile() {
 		return multipartFile;
 	}
-	public void setMultipartFile(MultipartFile multipartFile) {
-		this.multipartFile = multipartFile;
+	public void setMultipartFile(MultipartFile multipartFile) throws IOException, SerialException, SQLException {
+		this.multipartFile=multipartFile;
+		if(multipartFile.getBytes().length>0) {
+			SerialBlob sb=new SerialBlob(multipartFile.getBytes());
+			String filename=multipartFile.getOriginalFilename();
+			setData(sb);
+			setFileName(filename);
+		}
 	}
 	
 	@Column(name="post_date", updatable = false)
@@ -133,6 +157,7 @@ public class Blog_Bean {
 	
 	
 	@Transient
+	@JsonIgnore
 	public int getCounts() {
 		return counts;
 	}
@@ -150,6 +175,7 @@ public class Blog_Bean {
 	
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "blog_Bean",cascade = CascadeType.ALL)
+	@JsonIgnore
 	public Set<Msg_Blog_Bean> getMsg_Blog_Bean() {
 		return msg_Blog_Bean;
 	}
