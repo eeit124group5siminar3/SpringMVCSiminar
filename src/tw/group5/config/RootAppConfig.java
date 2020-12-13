@@ -52,7 +52,7 @@ public class RootAppConfig {
 		properties.put("hibernate.show_sql", Boolean.TRUE);
 		properties.put("hibernate.format_sql", Boolean.TRUE);
 		properties.put("hibernate.current_session_context_class", "thread");
-//		properties.put("hbm2ddl", "update");
+		properties.put("hbm2ddl", "update");
 		return properties;
 	}
 	

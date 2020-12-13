@@ -357,25 +357,25 @@ public class ProductDAO {
 	public Integer getPreProductId(Integer productId) {
 		Integer preProductId = null;
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select pre from (select productId ,lag(productID) over(ORDER BY productId) pre from product where status !=2";
+		String sql = "select pre from (select productId ,lag(productID) over(ORDER BY productId) pre from product where status !=2";
 		Query<?> query = null;
 		if (searchString == null) {
 			if (categoryId == null) {
-				hql += ") where productId= :productId";
-				query = session.createSQLQuery(hql);
+				sql += ") where productId= :productId";
+				query = session.createSQLQuery(sql);
 			} else {
-				hql += " and category = :categoryId) where productId= :productId";
-				query = session.createSQLQuery(hql);
+				sql += " and category = :categoryId) where productId= :productId";
+				query = session.createSQLQuery(sql);
 				query.setParameter("categoryId", categoryId);
 			}
 		} else {
 			if (categoryId == null) {
-				hql += " and product like :searchString) where productId= :productId";
-				query = session.createSQLQuery(hql);
+				sql += " and product like :searchString) where productId= :productId";
+				query = session.createSQLQuery(sql);
 				query.setParameter("searchString", "%" + searchString + "%");
 			} else {
-				hql += " and product like :searchString and  category = :categoryId) where productId= :productId";
-				query = session.createSQLQuery(hql);
+				sql += " and product like :searchString and  category = :categoryId) where productId= :productId";
+				query = session.createSQLQuery(sql);
 				query.setParameter("searchString", "%" + searchString + "%");
 				query.setParameter("categoryId", categoryId);
 			}
@@ -392,25 +392,25 @@ public class ProductDAO {
 	public Integer getNextProductId(Integer productId) {
 		Integer preProductId = null;
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select next from (select productId ,lead(productID) over(ORDER BY productId) next from product where status !=2";
+		String sql = "select next from (select productId ,lead(productID) over(ORDER BY productId) next from product where status !=2";
 		Query<?> query = null;
 		if (searchString == null) {
 			if (categoryId == null) {
-				hql += ") where productId= :productId";
-				query = session.createSQLQuery(hql);
+				sql += ") where productId= :productId";
+				query = session.createSQLQuery(sql);
 			} else {
-				hql += " and category = :categoryId) where productId= :productId";
-				query = session.createSQLQuery(hql);
+				sql += " and category = :categoryId) where productId= :productId";
+				query = session.createSQLQuery(sql);
 				query.setParameter("categoryId", categoryId);
 			}
 		} else {
 			if (categoryId == null) {
-				hql += " and product like :searchString) where productId= :productId";
-				query = session.createSQLQuery(hql);
+				sql += " and product like :searchString) where productId= :productId";
+				query = session.createSQLQuery(sql);
 				query.setParameter("searchString", "%" + searchString + "%");
 			} else {
-				hql += " and product like :searchString and  category = :categoryId) where productId= :productId";
-				query = session.createSQLQuery(hql);
+				sql += " and product like :searchString and  category = :categoryId) where productId= :productId";
+				query = session.createSQLQuery(sql);
 				query.setParameter("searchString", "%" + searchString + "%");
 				query.setParameter("categoryId", categoryId);
 			}
