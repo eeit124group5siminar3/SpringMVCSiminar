@@ -1,7 +1,15 @@
 package tw.group5.marketSeller.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -15,24 +23,33 @@ public class MarketOrderDetailBean {
 	private Integer quantity;
 	private MarketOrderBean marketOrderBean;
 	
+	@Id @Column(name = "DETAIL_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getDetailId() {
 		return detailId;
 	}
 	public void setDetailId(Integer detailId) {
 		this.detailId = detailId;
 	}
+	
+	@Transient
+	@Column(name = "OID")
 	public Integer getOid() {
 		return oid;
 	}
 	public void setOid(Integer oid) {
 		this.oid = oid;
 	}
+	
+	@Column(name = "PRODUCTID")
 	public Integer getProductId() {
 		return productId;
 	}
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
+	
+	@Column(name = "QUANTITY")
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -40,14 +57,13 @@ public class MarketOrderDetailBean {
 		this.quantity = quantity;
 	}
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "OID")
 	public MarketOrderBean getMarketOrderBean() {
 		return marketOrderBean;
 	}
 	public void setMarketOrderBean(MarketOrderBean marketOrderBean) {
 		this.marketOrderBean = marketOrderBean;
 	}
-	
-
-	
 	
 }

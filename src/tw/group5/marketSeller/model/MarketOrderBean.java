@@ -1,12 +1,17 @@
 package tw.group5.marketSeller.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -22,6 +27,8 @@ public class MarketOrderBean {
 	private String buyer;
 	private Date buyTime;
 	private String address;
+    private Set<MarketOrderDetailBean> marketOrderDetailBean =
+            new HashSet<MarketOrderDetailBean>(0);
 	
 	
 	@Id @Column(name = "OID")
@@ -70,6 +77,14 @@ public class MarketOrderBean {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "marketOrderBean", cascade = CascadeType.ALL)
+	public Set<MarketOrderDetailBean> getMarketOrderDetailBean() {
+		return marketOrderDetailBean;
+	}
+	public void setMarketOrderDetailBean(Set<MarketOrderDetailBean> marketOrderDetailBean) {
+		this.marketOrderDetailBean = marketOrderDetailBean;
 	}
 	
 

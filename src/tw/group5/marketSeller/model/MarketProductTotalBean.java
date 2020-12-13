@@ -21,8 +21,6 @@ import org.springframework.stereotype.Component;
 
 
 
-
-
 @Entity
 @Table(name = "market_Product_Total")
 @Component
