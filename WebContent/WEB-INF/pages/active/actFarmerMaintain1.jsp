@@ -61,6 +61,7 @@
 	right: 50px;
 	text-align: center;
 }
+
 </style>
 <script type="text/javascript">
 	function backHome() {
@@ -104,18 +105,19 @@
 			<h1>活動管理-一日農夫</h1>
 			</div>
 			<div class="col-md-6">
-	    		<form action="<c:url value='/actFarmerPreInsert.do'/>" method="get">
+	    		<form action="<c:url value='/actFarmerPreInsert.do'/>" method="POST">
 					<input name="apply" type="submit" value="申請活動" class="btn btn-primary">
 				</form>
 	    		</div>
 	    		<div class="col-md-6">
-	    		<form action="<c:url value='/maintainActFarmer.do'/>" method="get">
+	    		<form action="<c:url value='/maintainActFarmer.do'/>" method="POST">
 					<input name="selectAll" type="submit" value="查詢全部" class="btn btn-primary py-6 px-6">
 				</form>
         		</div>
                 <div class="w-100"></div>
                 <br>               
 			<table class="table table-hover">
+				<thead>
 				<tr>
 					<th>活動狀態</th>
 					<th>活動編號</th>
@@ -129,6 +131,8 @@
 					<th>報名狀態</th>
 					<th colspan="4">Action</th>
 				</tr>
+				</thead>
+				<tbody>
 				<c:forEach var="actFarmer" items="${collFarmer}">
 					<tr>
 						<td><c:out value="${actFarmer.actStatusWord}" /></td>
@@ -163,7 +167,7 @@
 							</form>
 						</td>
 						<td>
-							<form action="<c:url value='/actFarmerDelete.do'/>" method="post">
+							<form action="<c:url value='/actFarmerDeleteF.do'/>" method="post">
 								<input type="hidden" id="actId" name="actId"
 									value="${actFarmer.actId}"> <input name="delete"
 									type="submit" value="刪除" > 
@@ -181,12 +185,13 @@
 				<tr>
 					<td style="border: 0px" colspan="8"></td>
 					<td style="border: 0px" colspan="5">
-						<form action="<c:url value='/SelectNameSeller.do'/>" method="get">
+						<form action="<c:url value='/SelectNameSeller.do'/>" method="POST">
 							<label for="">活動名稱:</label> <input type="text" id="selectname"
 								name="selectname"> &nbsp; <input name="selectone"
 								type="submit" value="查詢" class="btn btn-primary">
 						</form>
 					</td>
+				</tbody>
 			</table>
 		</div>
 	<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->

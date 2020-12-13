@@ -2,6 +2,8 @@ package tw.group5.active.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,14 +63,24 @@ public class ActOrdService {
 		return actOrdDAO.getActOrdOne(actOrdId);
 	}
 	
-	//刪除報名
-	public boolean delectActOrd(Integer actOrdId) {
-		return actOrdDAO.delectActOrd(actOrdId);
-	}
+
 		
 	//修改報名
 	public ActOrd updateActOrd(ActOrd actOrd) {
 		return actOrdDAO.updateActOrd(actOrd);
 	}	
+	
+// =========================管理員==========================================
+
+	//查詢所有報名訂單
+	public List<ActOrd> getActAdminOrds(){
+		return actOrdDAO.getActAdminOrds();
+	}
+		
+	//刪除報名
+	public void delectActAdminOrd(Integer actOrdId) {
+//		return 
+				actOrdDAO.delectActAdminOrd(actOrdId);
+	}
 	
 }

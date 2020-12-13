@@ -63,21 +63,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 .btn-primary{
 	background-color: #b8cdd4;
 	border-color:#b8cdd4;
-	hover :#ccc6ad;
-}
-.btn:hover{
-	background-color:#79a6ad;
-	border-color:#79a6ad;
-	
 }
 
 a{
-	color:#3a728a;
+	color:#6970db;
 }
 
-
 </style>
-
 
 </head>
 
@@ -88,38 +80,42 @@ a{
 	
 	<!-------------------------內容區--------------------------------->
 <div style="width:80%; margin:0 auto" >
-<h3 align="center">活動管理</h3>
-	<table id="actFarmer" class="table table-striped table-bordered" style="width:100%">
+<h3 align="center">報名管理</h3>
+
+	<table id="actord" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>活動狀態</th>            
-                <th>活動編號</th>
-                <th>活動名稱</th>
-                <th>活動時間</th>
-                <th>會員編號</th>
+                <th>訂單編號</th>            
+                <th>訂購人</th>
+                <th>報名活動</th>
+                <th>報名人數</th>
+                <th>總金額</th>
+                <th>訂單狀態</th>
+                <th>付款方式</th>
+                <th>訂單成立時間</th>
                 <th>ACTION</th>
             </tr>
         </thead>
         <tbody>
-        <c:forEach var="actFarmer" items="${collFarmer}">
+        <c:forEach var="actord" items="${collActOrds}">
             <tr>
-                <td>${actFarmer.actStatusWord}</td>
-                <td><a href="<c:url value='/getActByIdForAdmin.do?actId=${actFarmer.actId}'/>" >${actFarmer.actId}</a></td>
-                <td>${actFarmer.actName}</td>
-                <td>
-	                ${actFarmer.actDateSta} ${actFarmer.actTimeSta}~
-	                ${actFarmer.actDateEnd} ${actFarmer.actTimeEnd}
-                </td>
-                <td>${actFarmer.sellerId}</td>
+                <td><a href="<c:url value='/actAdminSignR.do?actOrdId=${actord.actOrdId}'/>" >${actord.actOrdId}</a></td>
+                <td>${actord.memName}</td>
+                <td>${actord.actFarmer.actName}</td>
+                <td>${actord.ordActNum}</td>
+                <td>${actord.totalPrice}</td>
+                <td>${actord.actOrdStatusWord}</td>
+                <td>${actord.actPayWayStatusWord}</td>
+                <td>${actord.ordTime}</td>
                 <td>
                 <div class="form-inline justify-content-center">
-                	<form action="<c:url value='/actAdminPreUpdate.do'/>" method="POST">
-						<input type="hidden" id="actId" name="actId" value="${actFarmer.actId}"> 
+                	<form action="<c:url value='/actAdminPreSignU.do'/>" method="POST">
+						<input type="hidden" id="actOrdId" name="actOrdId" value="${actord.actOrdId}"> 
 						<input class="btn btn-primary py-1 px-2"name="update" type="submit" value="修改" >
 					</form>
-					&emsp;
-					<form action="<c:url value='/actAdminDelect.do'/>" method="POST">
-						<input type="hidden" id="actId" name="actId" value="${actFarmer.actId}"> 
+					<br><br>
+					<form action="<c:url value='/actAdminSignD.do'/>" method="POST">
+						<input type="hidden" id="actOrdId" name="actOrdId" value="${actord.actOrdId}"> 
 						<input class="btn btn-primary py-1 px-2 " name="delet" type="submit" value="刪除" >
 					</form>
 				</div>
@@ -154,7 +150,7 @@ a{
 	<script>
 <!-- -------------------DataTable的javascript---------------------------------------------------------------------- -->
 	$(document).ready(function() {
-	    $('#actFarmer').DataTable();
+	    $('#actord').DataTable();
 	} );
 	</script>
 </body>

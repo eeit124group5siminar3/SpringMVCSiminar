@@ -55,6 +55,13 @@
 .btn-primary{
 	background-color: #b8cdd4;
 	border-color:#b8cdd4;
+	hover :#ccc6ad;
+	font-weight:bold
+}
+.btn:hover{
+	background-color:#79a6ad;
+	border-color:#79a6ad;
+	
 }
 </style>
 
@@ -63,14 +70,14 @@
 </head>
 <body class="goto-here">
 
-	<jsp:include page="/WEB-INF/pages/admin_header.jsp" />
+	<jsp:include page="/WEB-INF/pages/testAdminH.jsp" />
 	
 <!-------------------------內容區--------------------------------->
 <section class="content-wrapper d-flex justify-content-center">
   <form:form action="actAdminUpdate.do" modelAttribute="afBean" method="POST" enctype="multipart/form-data" name="actAdmin">
     <div class="card card-info" style="width: 50rem; ">
       <div class="card-header" style="background-color:#b8cdd4;">
-        <span class="card-title" style="font-size: 40px; color:#FFFFFF">活動修改    </span><span style="font-size: 20px;color:#a63a00 ;font-weight:bold">${afBean.actStatusWord }</span>
+        <span class="card-title" style="font-size: 40px; color:#003440">活動修改    </span><span style="font-size: 20px;color:#a63a00 ;font-weight:bold">${afBean.actStatusWord }</span>
       </div>
       <div class="card-body">
       <div class="form-group">
@@ -161,8 +168,8 @@
           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;          
           <form:label path="signTimeSta">報名開始時間:</form:label>
           <div class="form-inline">
-          	<form:input path="signDateSta" type="date" class="form-control col" readonly="true"/>&emsp;&emsp;
-          	<form:input path="signTimeSta"  type="time" class="form-control col" readonly="true"/>
+          	<form:input path="signDateSta" type="date" class="form-control col"/>&emsp;&emsp;
+          	<form:input path="signTimeSta"  type="time" class="form-control col"/>
           </div>
         </div>
         <!-- /.form group -->
@@ -183,6 +190,21 @@
 			<form:radiobutton path="sigStat" value="1" id="sigStat" />活動報名中&emsp;&emsp;
 			<form:radiobutton path="sigStat" value="2" id="sigStat" />報名已截止
           </div>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="actLock">活動狀態:</form:label>
+          <div class="form-inline" >
+            <form:radiobutton path="actLock" value="0" id="actLock" />待審核&emsp;&emsp;
+			<form:radiobutton path="actLock" value="1" id="actLock" />申請通過&emsp;&emsp;
+			<form:radiobutton path="actLock" value="2" id="actLock" />申請未通過&emsp;&emsp;
+			<form:radiobutton path="actLock" value="3" id="actLock" />活動封鎖&emsp;&emsp;
+          </div>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="actRemarks">備註:</form:label>
+          <form:textarea path="actRemarks" class="form-control" style="height:50px" ></form:textarea>
         </div>
         <!-- /.form group -->
         <div class="form-group form-inline">&emsp;&emsp;&emsp;

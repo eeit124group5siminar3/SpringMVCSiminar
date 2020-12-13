@@ -98,12 +98,12 @@ public class ActFarmerDAO {
 		this.searchString = searchString;
 	}
 
-	//計算所有活動的筆數
+	//計算所有申請成功活動的筆數
 	public long getRecordCounts() {
 		//hibernate Session
 		Session session = sessionFactory.getCurrentSession();
 		Integer count = 0; //必須使用long型態
-		String hql = "select count(*) from ActFarmer";
+		String hql = "select count(*) from ActFarmer where actLock=1";
 		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
@@ -158,7 +158,7 @@ public class ActFarmerDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ActFarmer ORDER BY actId";
+		String hql = "from ActFarmer where actLock=1 ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setFirstResult(startRecordNo);
 		query.setMaxResults(3);
@@ -170,7 +170,7 @@ public class ActFarmerDAO {
 	public List<ActFarmer> getPageActFarmers(Integer sellerId){
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (maintainPageNo - 1) * recordsPerPage;
-		String hql = "from ActFarmer where sellerId =?0 ORDER BY actId";
+		String hql = "from ActFarmer where sellerId =?0 and actLock !=3 ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(0, sellerId);
 		query.setFirstResult(startRecordNo);

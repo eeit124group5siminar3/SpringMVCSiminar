@@ -12,6 +12,7 @@ import javax.servlet.ServletContext;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,12 +60,12 @@ public class ActFarmerController {
 		Integer sellerId = mb.getMember_no();
 		Collection<ActFarmer> collFarmer = actFarmerService.getActFarmers(sellerId);
 		model.addAttribute("collFarmer", collFarmer);
-		return "/active/actFarmerMaintain";
+		return "/active/actFarmerMaintain2";
 		}catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 		}
-		return "/index";
+		return "/active/actFarmerMaintain2";
 	}
 		
 	
@@ -110,13 +111,13 @@ public class ActFarmerController {
 		m.addAttribute("totalPages", actFarmerService.getTotalPages(sellerId));
 		m.addAttribute("MaintainPageNo",maintainPageNo);
 		m.addAttribute("collFarmer", collFarmer);
-		return "active/actFarmerMaintain";
+		return "active/actFarmerMaintain1";
 	}
 	
 	
 	
 	//申請活動準備(建立空的物件)
-	@GetMapping(path = "/actFarmerPreInsert.do")
+	@RequestMapping(path = "/actFarmerPreInsert.do")
 	public String actFarmerPreInsert(Model model) {
 		
 		System.out.println("成功進入");
@@ -156,7 +157,7 @@ public class ActFarmerController {
 	
 	
 	//修改活動準備(找到該筆物件)
-	@GetMapping(value = "/actFarmerPreUpdate.do")
+	@RequestMapping(value = "/actFarmerPreUpdate.do")
 	public String actFarmerPreUpdate(@RequestParam(value = "actId") Integer actId, Model model) {		
 	
 		ActFarmer afBean = actFarmerService.getActFarmer(actId);
@@ -203,6 +204,29 @@ public class ActFarmerController {
 	public String actFarmerDelete(@RequestParam(value = "actId")Integer actId,Model model) {
 		Integer id =Integer.valueOf(actId);
 		actFarmerService.deletActFarmer(id);
+		return "redirect:/maintainActFarmer.do";
+	}
+	
+	//假刪除
+	@PostMapping(value = "actFarmerDeleteF.do")
+	public String actFarmerDeleteF(
+			@RequestParam(value = "actId")Integer actId
+		) {
+		ActFarmer originActFarmer = actFarmerService.getActFarmer(actId);
+		Blob tempBlob = originActFarmer.getActImg();
+		
+		try {
+			SerialBlob sb = new SerialBlob(tempBlob);
+			originActFarmer.setActImg(sb);
+		} catch (SerialException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		originActFarmer.setActLock(3);
+		originActFarmer.setActRemarks("賣家會員刪除活動");
+		actFarmerService.updateActFarmer(originActFarmer);
 		return "redirect:/maintainActFarmer.do";
 	}
 
