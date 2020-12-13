@@ -2,7 +2,7 @@ package tw.group5.marketSeller.controller;
 
 import java.sql.Date;
 import java.util.List;
-
+import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -93,18 +93,12 @@ public class MarketHome {
            List<MarketProductTotalBean> list = productService.selectBuyerAll(memberNo);
            MarketMallBean seller =sellerService.selectid(memberNo);
            
-           System.out.println("商品日期");
-           
-           java.util.Date date = new java.util.Date();
-           date.setHours(0);
-           date.setMinutes(0);
-           date.setSeconds(0);
-           System.out.println("1232132日期"+date);
+
            
            ModelAndView mav =new ModelAndView();
            mav.setViewName("/marketSeller/MarketMallProduct");
            mav.addObject("totalProducts",list);
-           mav.addObject("date",date);
+
            mav.addObject("seller",seller);
 		   return mav;
 	}
@@ -135,6 +129,13 @@ public class MarketHome {
 			marketOrder.setQuantity(qty);
 			cart.addToCart(productId, marketOrder);
 		}
+        
+        System.out.println("商品日期");          
+        java.util.Date date = new java.util.Date();      
+        System.out.println("1232132日期"+date);
+        Date date1=pBean.getCloseDay();
+//        long days = date1.getT;
+        
         marketOrder =cart.getContent().get(productId);
 		ModelAndView mav =new ModelAndView();
         mav.setViewName("/marketSeller/MarketMallOneProduct");

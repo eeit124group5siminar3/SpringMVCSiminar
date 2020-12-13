@@ -33,11 +33,11 @@ public class MarketShoppingController {
 	 if (marketCart ==null) {
 		marketCart =new MarketCart();
 	}
+
 	 
     ModelAndView mav =new ModelAndView();
     mav.setViewName("/marketSeller/MarketBuyerCart");
     mav.addObject("marketCart",marketCart);
-	
 	 return mav;
   }
  
