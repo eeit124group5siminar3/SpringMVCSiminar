@@ -199,26 +199,5 @@ function fun(rec_id){
 	}
 }
 </script>
-    
-    
-    <script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .then(editor => {
-                console.log(editor);
-            })
-
-            console.log('#editor: '+$("#editor"));
-            CKEDITOR.replace("editor1", {
-        extraAllowedContent: "img[src,alt,width,height]"
-        });
-
-        class UploadAdapter {
-            constructor(loader) {
-                // The file loader instance to use during the upload.
-                this.loader = loader;
-            }
-            </script>
 </body>
 </html>

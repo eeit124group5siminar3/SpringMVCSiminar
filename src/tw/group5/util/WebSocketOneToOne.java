@@ -93,22 +93,24 @@ public class WebSocketOneToOne {
 	//发送给指定角色
 	public static void send(String msg,String from,String to,String socketId){
     	try {
+    		System.err.println("from:"+from);
+    		System.err.println("to:"+to);
     		//to指定用户
     		WebSocketOneToOne con = connections.get(to);
 			if(con!=null){
 				if(socketId==con.socketId||con.socketId.equals(socketId)){
-					con.session.getBasicRemote().sendText(from+"说："+msg);	
+					con.session.getBasicRemote().sendText(from+"說："+msg);	
 				}
 	
 			}
 			//from具体用户
-			WebSocketOneToOne confrom = connections.get(from);
-			if(confrom!=null){
-				if(socketId==confrom.socketId||confrom.socketId.equals(socketId)){
-					confrom.session.getBasicRemote().sendText(from+"说："+msg);	
-				}
-	
-			}
+//			WebSocketOneToOne confrom = connections.get(from);
+//			if(confrom!=null){
+//				if(socketId==confrom.socketId||confrom.socketId.equals(socketId)){
+//					confrom.session.getBasicRemote().sendText(from+"說說："+msg);	
+//				}
+//	
+//			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

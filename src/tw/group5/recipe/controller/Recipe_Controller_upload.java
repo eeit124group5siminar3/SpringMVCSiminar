@@ -1,15 +1,7 @@
 package tw.group5.recipe.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,27 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
-
 
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
-@SessionAttributes(names={"details","login_ok"})
+@SessionAttributes({"details","login_ok"})
 public class Recipe_Controller_upload {
 	@Autowired
 	private recipe_Service_interface service;
@@ -65,21 +49,10 @@ public class Recipe_Controller_upload {
 	
 	
 	@RequestMapping(path="/uploadSubmit.controller" ,method = {RequestMethod.POST,RequestMethod.GET} )
-	public String submitProcess(@ModelAttribute("details")Recipe_Bean bean,@RequestParam String action,
+	public String submitProcess(@ModelAttribute("details")Recipe_Bean details,
 			 HttpServletRequest request,Model m) throws IllegalStateException, IOException {
-	
-		if (action.equals("送出")) {
 			System.out.println("get value");
-			m.addAttribute("name", bean.getName());
-			m.addAttribute("cate", bean.getCate());
-			m.addAttribute("desc", bean.getDesc());
-			m.addAttribute("method", bean.getMethod());
-			m.addAttribute("ingredients_A", bean.getIngredients_A());
-			m.addAttribute("gram_A", bean.getGram_A());
-			m.addAttribute("ingredients_B", bean.getIngredients_B());
-			m.addAttribute("gram_B", bean.getGram_B());
-			m.addAttribute("FileName", bean.getFileName());
-			
+			Recipe_Bean bean=(Recipe_Bean) session.getAttribute("details");
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(new Date());
 			int year = cal.get(Calendar.YEAR);
@@ -88,52 +61,8 @@ public class Recipe_Controller_upload {
 			String date=year + "-" + month + "-" + day;
 			System.out.println("date: "+date);
 			bean.setDate(date);
-			
+			service.insert(bean);
 			System.out.println("done");
-			return "recipe/recipe_display";
+			return "Member_Backstage/Member_Backstage";
 		}
-		
-		if(action.equals("回首頁")) {
-			return "recipe/recipe_workpage";
-		}
-		return action;
-	}
-	
-	@PostMapping(value="/uploadConfirm.controller" ,produces = "text/plain;charset=UTF-8")
-	public String saveProcess(
-			@RequestParam String action
-//			,SessionStatus status
-			) {
-		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
-		System.out.println(bean.getName());
-//		System.out.println(bean.getIngredients_A());
-//		
-		if (action.equals("送出")) {
-			if(bean.getViews()==null) {
-				bean.setViews(0);
-				service.insert(bean);
-			}else {
-				service.insert(bean);
-				
-			}
-////			session.removeAttribute("details");
-////			status.setComplete();
-			return "redirect:/frontPage.controller";
-		}
-		if (action.equals("修改")) {
-			return "redirect:/reviseConfirm.controller";
-//			return "recipe/recipe_upload_revise";
-		} 
-////		if (action.equals("回首頁")) {
-////			return "recipe/recipe_workpage";
-////		} 
-		return action;
-	}
-	
-	@GetMapping(value="/reviseConfirm.controller" ,produces = "text/plain;charset=UTF-8")
-	public  String reviseProcess() {
-		Recipe_Bean bean=(Recipe_Bean)session.getAttribute("details");
-		return "recipe/recipe_upload_revise";
-	
-	}
 }
