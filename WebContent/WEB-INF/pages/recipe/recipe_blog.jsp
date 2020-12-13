@@ -39,6 +39,19 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<style type="text/css">
+#div1{
+  margin: 5px auto;
+  overflow: hidden;
+}
+#img1{
+  cursor: pointer;
+  transition: all 0.6s;
+}
+#img1:hover{
+  transform: scale(1.1);
+}
+</style>
 </head>
 <body class="goto-here">
 	<jsp:include page="../header.jsp" />
@@ -64,25 +77,28 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 ftco-animate">
-					<div id="searchSuccess">
 						<div class="row">
-
+					<div id="searchSuccess">
 							<c:forEach begin="0" end="${searchAll.size()}" step="1" var="i">
 								<div class="col-md-12 d-flex ftco-animate">
 									<div class="blog-entry align-self-stretch d-md-flex">
 									<c:if test="${searchAll[i].fileName!=null}">
+										<div id="div1">
+									
 										<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"             
-											class="block-20"
+											class="block-20"  id="img1"
 											style="background-image: url(<c:url value='/getBlogImage?blog_id=${searchAll[i].blog_id}'/>);">
-
 										</a>
+										</div>
 									</c:if>
 									<c:if test="${searchAll[i].fileName==null}">
+									<div id="div1">
 										<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"             
-											class="block-20"
+											class="block-20" id="img1"
 											style="background-image: url('images/沒有.jpg');">
 
 										</a>
+										</div>
 									</c:if>
 										<div class="text d-block pl-md-4">
 											<div class="meta mb-3">

@@ -1,26 +1,19 @@
 package tw.group5.recipe.controller;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.sql.rowset.serial.SerialException;
 
-import org.apache.commons.io.input.ReaderInputStream;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -31,21 +24,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import oracle.net.aso.b;
-import oracle.net.aso.m;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
-import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
+//import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
@@ -60,13 +49,8 @@ public class Recipe_Controller_update {
 	
 	@Autowired
 	ServletContext ctx;
-	
-	private Blob blob;
-	private String FileName;
-	private List<Recipe_Bean> list;
-	private ByteArrayOutputStream baos;
 	private Integer  mem_no;
-	private	String fieldRec_id;
+	private	Integer fieldRec_id;
 	
 	@RequestMapping(path = "/updatePage.controller",method = RequestMethod.GET)
 	public String updatePage(Model m) {
@@ -79,9 +63,7 @@ public class Recipe_Controller_update {
 			updateBean.setMember_no(mem_no);
 			
 			List<Recipe_Bean> list = service.listOfJavaBean();
-			System.out.println(list);
 			List<Recipe_Bean> user_recipe = new ArrayList<Recipe_Bean>();
-			System.out.println("------------------------------------");
 			for (Recipe_Bean b : list) {
 				System.out.println(b.getMember_no()); 
 				
@@ -100,11 +82,11 @@ public class Recipe_Controller_update {
 	
 	//update_choose ajax  頁面彈出浮動視窗
 	@GetMapping(value = "/updateProcess.controller")
-	public ModelAndView updateProcess(@RequestParam(name = "rec_id", required = false) String rec_id, Model m)
+	public ModelAndView updateProcess(@RequestParam(name = "rec_id", required = false) Integer rec_id, Model m)
 			throws FileNotFoundException, IOException, SQLException {
 		fieldRec_id = rec_id;
 		System.out.println(rec_id);
-		List<Recipe_Bean_noImage> list = service.partSearch(rec_id);
+		List<Recipe_Bean> list = service.partSearch(rec_id);
 		Recipe_Bean updateBean = service.recipeBean(rec_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/recipe/updateForm");
@@ -117,11 +99,16 @@ public class Recipe_Controller_update {
 	//update  
 	@PostMapping(value = "/updateRecipe")
 	public String updateRecipe(@ModelAttribute("updateBean")Recipe_Bean updateBean){
-//		Recipe_Bean updateBean=(Recipe_Bean) session.getAttribute("updateBean");
-		System.out.println("!!!!!!!!!!!succcccccccccces!!!!!!!!!!!!!!");
 		System.out.println(fieldRec_id);
-		System.out.println(updateBean.getName());
 		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) +1;
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		String date=year + "-" + month + "-" + day;
+		System.out.println("date: "+date);
+		updateBean.setUpdate_date(date);
 		service.update(fieldRec_id, updateBean);
 		return "redirect:/updatePage.controller";
 
@@ -130,7 +117,7 @@ public class Recipe_Controller_update {
 	
 	//delete ajax
 	@GetMapping(value="/deleteConfirm")
-	public  String deleteConfirm(@RequestParam(name="rec_id")String rec_id,Model m) {
+	public  String deleteConfirm(@RequestParam(name="rec_id")Integer rec_id,Model m) {
 		service.delete(rec_id);
 		System.out.println("mem_no: "+mem_no);
 		List<Recipe_Bean> list=service.listOfJavaBean();
@@ -148,19 +135,28 @@ public class Recipe_Controller_update {
 
 	}
 	
-	//getImage
-	@GetMapping("/getImage.controller")
+	@GetMapping("/getImageA")
 	@ResponseBody
-	public ResponseEntity<byte[]> getImage() throws IOException, SQLException {
+	public ResponseEntity<byte[]> getImageA(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
 		ResponseEntity<byte[]> re = null;
-		for (Recipe_Bean b : list) {
-			blob = b.getData();
-			FileName = b.getFileName();
+		Blob blob = null;
+		String fileName = null;
+		List<Recipe_Bean> list=service.getAllImage();
+		if (rec_id != null) {
+			for (Recipe_Bean b : list) {
+				if (b.getRec_id() == rec_id) {
+					blob = b.getData_A();
+					fileName = b.getFileName_A();
+				}
+			}
+		} else {
+			for (Recipe_Bean b : list) {
+				blob = b.getData_A();
+				fileName = b.getFileName_A();
+			}
 		}
-		System.out.println("----------------");
-		System.out.println(blob);
-
-		String mimeType = ctx.getMimeType(FileName);
+		
+		String mimeType = ctx.getMimeType(fileName);
 		MediaType mediaType = MediaType.valueOf(mimeType);
 		HttpHeaders headers = new HttpHeaders();
 
@@ -181,10 +177,191 @@ public class Recipe_Controller_update {
 //				byte[] bytes = baos.toByteArray();
 			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
 
+		return re;
+
+	}
+	
+	@GetMapping("/getImageB")
+	@ResponseBody
+	public ResponseEntity<byte[]> getImageB(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
+		ResponseEntity<byte[]> re = null;
+		Blob blob = null;
+		String fileName = null;
+		List<Recipe_Bean> list=service.getAllImage();
+		if (rec_id != null) {
+			for (Recipe_Bean b : list) {
+				if (b.getRec_id() == rec_id) {
+					blob = b.getData_B();
+					fileName = b.getFileName_B();
+				}
+			}
+		} else {
+			for (Recipe_Bean b : list) {
+				blob = b.getData_B();
+				fileName = b.getFileName_B();
+			}
+		}
 		
+		String mimeType = ctx.getMimeType(fileName);
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//				
+				InputStream is = blob.getBinaryStream();
+		
+			byte[] b = new byte[81920];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			is.close();
+			// 放入header,告知瀏覽器
+			headers.setContentType(mediaType);
+			//避免資料顯示錯誤.noCache()
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//				byte[] bytes = baos.toByteArray();
+			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
 
 		return re;
 
 	}
 	
+	@GetMapping("/getImageC")
+	@ResponseBody
+	public ResponseEntity<byte[]> getImageC(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
+		ResponseEntity<byte[]> re = null;
+		Blob blob = null;
+		String fileName = null;
+		List<Recipe_Bean> list=service.getAllImage();
+		if (rec_id != null) {
+			for (Recipe_Bean b : list) {
+				if (b.getRec_id() == rec_id) {
+					blob = b.getData_C();
+					fileName = b.getFileName_C();
+				}
+			}
+		} else {
+			for (Recipe_Bean b : list) {
+				blob = b.getData_C();
+				fileName = b.getFileName_C();
+			}
+		}
+		
+		String mimeType = ctx.getMimeType(fileName);
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//				
+				InputStream is = blob.getBinaryStream();
+		
+			byte[] b = new byte[81920];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			is.close();
+			// 放入header,告知瀏覽器
+			headers.setContentType(mediaType);
+			//避免資料顯示錯誤.noCache()
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//				byte[] bytes = baos.toByteArray();
+			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+
+		return re;
+
+	}
+	
+	@GetMapping("/getImageD")
+	@ResponseBody
+	public ResponseEntity<byte[]> getImageD(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
+		ResponseEntity<byte[]> re = null;
+		Blob blob = null;
+		String fileName = null;
+		List<Recipe_Bean> list=service.getAllImage();
+		if (rec_id != null) {
+			for (Recipe_Bean b : list) {
+				if (b.getRec_id() == rec_id) {
+					blob = b.getData_D();
+					fileName = b.getFileName_D();
+				}
+			}
+		} else {
+			for (Recipe_Bean b : list) {
+				blob = b.getData_D();
+				fileName = b.getFileName_D();
+			}
+		}
+		
+		String mimeType = ctx.getMimeType(fileName);
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//				
+				InputStream is = blob.getBinaryStream();
+		
+			byte[] b = new byte[81920];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			is.close();
+			// 放入header,告知瀏覽器
+			headers.setContentType(mediaType);
+			//避免資料顯示錯誤.noCache()
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//				byte[] bytes = baos.toByteArray();
+			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+
+		return re;
+
+	}
+	
+	@GetMapping("/getImageE")
+	@ResponseBody
+	public ResponseEntity<byte[]> getImageE(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
+		ResponseEntity<byte[]> re = null;
+		Blob blob = null;
+		String fileName = null;
+		List<Recipe_Bean> list=service.getAllImage();
+		if (rec_id != null) {
+			for (Recipe_Bean b : list) {
+				if (b.getRec_id() == rec_id) {
+					blob = b.getData_E();
+					fileName = b.getFileName_E();
+				}
+			}
+		} else {
+			for (Recipe_Bean b : list) {
+				blob = b.getData_E();
+				fileName = b.getFileName_E();
+			}
+		}
+		
+		String mimeType = ctx.getMimeType(fileName);
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//				
+				InputStream is = blob.getBinaryStream();
+		
+			byte[] b = new byte[81920];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			is.close();
+			// 放入header,告知瀏覽器
+			headers.setContentType(mediaType);
+			//避免資料顯示錯誤.noCache()
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//				byte[] bytes = baos.toByteArray();
+			re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+
+		return re;
+
+	}
 }
