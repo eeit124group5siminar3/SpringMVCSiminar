@@ -72,9 +72,9 @@
 
 </head>
 <body class="goto-here">
-	<div id="addSuccess">
+	<div id="notLogin">
 		<jsp:include page="../header.jsp" />
-
+	<div id="addSuccess">
 
 		<!-------------------------內容區--------------------------------->
 
@@ -257,15 +257,15 @@
 
 		</c:if>
 
-	</div>
 	<!------------------------------------------------------------------>
+	</div>
 		<jsp:include page="../footer.jsp" />
+	</div>
 
 
 	<script type="text/javascript">
 
 	function fun(login_ok){
-		var addSuccess=$("#addSuccess");
 		console.log('login_okval: '+login_ok);
 		var rec_id=$("#send").val();
 		console.log('rec_id: '+rec_id);
@@ -284,7 +284,7 @@
 				type:"GET",
 				url:"./login.controller",
 				success:function(response){				
-				addSuccess.html(response);
+				$("#notLogin").html(response);
 				}
 			});
 		}

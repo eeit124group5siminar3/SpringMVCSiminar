@@ -5,25 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.DAO.Recipe_DAO_spring;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
-import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
+//import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
 @Service
 public class Recipe_Service implements recipe_Service_interface {
+	
 	@Autowired
 	private Recipe_DAO_spring rDAO;
-	
-	@Autowired
-	private Recipe_Bean_noImage bean;
-	
-//	public Recipe_Service(Session session) {
-//		rDAO=new Recipe_DAO_hibernate(session);
-//	}
 	
 	@Override
 	public boolean insert(Recipe_Bean bean) {
@@ -31,23 +24,25 @@ public class Recipe_Service implements recipe_Service_interface {
 	}
 	
 	@Override
-	public Recipe_Bean update(String rec_id, Recipe_Bean bean) {
+	public Recipe_Bean update(Integer rec_id, Recipe_Bean bean) {
 		return rDAO.update(rec_id, bean);
 	}
 	
+//	------------------------noimage------------------------------
 	@Override
-	public List<Recipe_Bean_noImage> ListOfSearch(String cate) {
-		return rDAO.ListOfSearch(cate);
+	public List<Recipe_Bean> ListOfSearch(String name) {
+		return rDAO.ListOfSearch(name);
 	}
 	
 	@Override
-	public List<Recipe_Bean_noImage> partSearch(String rec_id){
+	public List<Recipe_Bean> partSearch(Integer rec_id){
 		return rDAO.partSearch(rec_id);
 		
 	}
+	//----------------------------------------------------------
 	
 	@Override
-	public boolean delete(String rec_id) {
+	public boolean delete(Integer rec_id) {
 		return rDAO.delete(rec_id);
 	}
 	
@@ -57,8 +52,8 @@ public class Recipe_Service implements recipe_Service_interface {
 	}
 	
 	@Override
-	public Recipe_Bean getImage(String rec_id) {
-		return rDAO.getImage(rec_id);
+	public List<Recipe_Bean> getAllImage() {
+		return rDAO.getAllImage();
 	}
 	
 //	public List<ProductBean> getProducts(String searchString) {
@@ -76,22 +71,22 @@ public class Recipe_Service implements recipe_Service_interface {
 	}
 
 	@Override
-	public boolean deleteBookmark(String id) {
+	public boolean deleteBookmark(Integer id) {
 		return rDAO.deleteBookmark(id);
 	}
 	
 	@Override
-	public List<Bookmark_Bean> partSearchBookmark(Integer mem_no,String rec_id) {
+	public List<Bookmark_Bean> partSearchBookmark(Integer mem_no,Integer rec_id) {
 		return rDAO.partSearchBookmark(mem_no, rec_id);
 	}
 	
 	@Override
-	public boolean bookmarkExist(String rec_id,Integer mem_no) {
+	public boolean bookmarkExist(Integer rec_id,Integer mem_no) {
 		return rDAO.bookmarkExist(rec_id,mem_no);
 	}
 	
 	@Override
-	public Recipe_Bean recipeBean(String rec_id) {
+	public Recipe_Bean recipeBean(Integer rec_id) {
 		return rDAO.recipeBean(rec_id);
 	}
 	
@@ -152,11 +147,6 @@ public class Recipe_Service implements recipe_Service_interface {
 	public List<Msg_Blog_Bean> searchMsg(Integer blog_id){
 		return rDAO.searchMsg(blog_id);
 	}
-	
-	public int getFavor(int favor) {
-		bean.setFavor(favor);
-		return favor;
-	}
 
 	@Override
 	public List<Blog_Bean> searchPopular(){
@@ -171,7 +161,7 @@ public class Recipe_Service implements recipe_Service_interface {
 	}
 	
 	@Override
-	public List<Recipe_Bean_noImage> searchAllRecipe(Integer page,Integer showData){
+	public List<Recipe_Bean> searchAllRecipe(Integer page,Integer showData){
 		return rDAO.searchAllRecipe(page, showData);
 	}
 	

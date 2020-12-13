@@ -9,7 +9,7 @@
 <title>搜尋結果</title>
 </head>
 <body>
-	<c:forEach begin="1" end="${partSearch.size()}" step="1" var="i">
+	<c:forEach begin="0" end="${partSearch.size()-1}" step="1" var="i">
 			<div>
 				<div class="blog-entry align-self-stretch d-md-flex">		
 						<a href="./SinglePage?blog_id=${partSearch[i].blog_id}"
@@ -33,7 +33,7 @@
 						<h3 class="heading">
 							<a href="./SinglePage?blog_id=${partSearch[i].blog_id}">${partSearch[i].title}</a>
 						</h3>
-						<p>${partSearch[i].content}</p>
+<%-- 						<p>${partSearch[i].content}</p> --%>
 						<p>
 							<a href="./SinglePage?blog_id=${partSearch[i].blog_id}"
 								class="btn btn-primary py-2 px-3">Read more</a>

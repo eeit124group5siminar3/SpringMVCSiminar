@@ -47,7 +47,7 @@
 }
 
 .wrap {
-	width: 800px;
+	width: 1000px;
 	margin: auto;
 	display: flex;
 	align-items: center;
@@ -59,33 +59,33 @@
 	margin-left: 50px;
 }
 
-.wrap2 {
-	vertical-align: middle;
-	width: 70%;
-	margin-left: 150px;
-}
+/* .wrap2 { */
+/* 	vertical-align: middle; */
+/* 	width: 70%; */
+/* 	margin-left: 150px; */
+/* } */
 
 .txt {
 	width: 50%;
 	vertical-align: middle;
-	margin-left: 150px;
+	margin-left: 95px;
 }
 
 .deleteRecipe {
 	width: 50%;
 	vertical-align: middle;
-	margin-left: 100px;
+	margin-left: 20px;
 }
 </style>
 
 </head>
 <body class="goto-here">
 	<div id="deleteSuccess">
-	<jsp:include page="../header.jsp" />
+		<jsp:include page="../header.jsp" />
 
 		<!-------------------------內容區--------------------------------->
 
-<!-- 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<!-- 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand">Recipe</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
@@ -107,27 +107,27 @@
 						href="<c:url value='myRecipe'/>">Bookmark</a></li>
 
 					<!--       <li class="nav-item dropdown"> -->
-					<!--         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> -->
-					<!--           Dropdown -->
-					<!--         </a> -->
-					<!--         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
-					<!--           <a class="dropdown-item" href="#">Action</a> -->
-					<!--           <a class="dropdown-item" href="#">Another action</a> -->
-					<!--           <div class="dropdown-divider"></div> -->
-					<!--           <a class="dropdown-item" href="#">Something else here</a> -->
-					<!--         </div> -->
-					<!--       </li> -->
-					<!--       <li class="nav-item"> -->
-					<!--         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
-					<!--       </li> -->
-<!-- 				</ul> -->
+		<!--         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> -->
+		<!--           Dropdown -->
+		<!--         </a> -->
+		<!--         <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+		<!--           <a class="dropdown-item" href="#">Action</a> -->
+		<!--           <a class="dropdown-item" href="#">Another action</a> -->
+		<!--           <div class="dropdown-divider"></div> -->
+		<!--           <a class="dropdown-item" href="#">Something else here</a> -->
+		<!--         </div> -->
+		<!--       </li> -->
+		<!--       <li class="nav-item"> -->
+		<!--         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+		<!--       </li> -->
+		<!-- 				</ul> -->
 
-				<%--     <form class="form-inline my-2 my-lg-0" action='<c:url value="/searchSubmit.controller"/>' method="post"> --%>
-				<!--       <input class="form-control mr-sm-2" type="search" placeholder="search delicious" aria-label="Search"> -->
-				<!--       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action">Search</button> -->
-				<%--     </form> --%>
-<!-- 			</div> -->
-<!--  		</nav> --> 
+		<%--     <form class="form-inline my-2 my-lg-0" action='<c:url value="/searchSubmit.controller"/>' method="post"> --%>
+		<!--       <input class="form-control mr-sm-2" type="search" placeholder="search delicious" aria-label="Search"> -->
+		<!--       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action">Search</button> -->
+		<%--     </form> --%>
+		<!-- 			</div> -->
+		<!--  		</nav> -->
 
 		<div id="Success"></div>
 
@@ -135,8 +135,8 @@
 			<fieldset class="border signup-form-fieldset">
 				<legend style="color: black; font-size: 23px;">已上傳食譜</legend>
 
-				<form:form class="formSet" action="javascript:void(0);" 
-				method="post" modelAttribute="updateBean">
+				<form:form class="formSet" action="javascript:void(0);"
+					method="post" modelAttribute="updateBean">
 					<c:forEach var='BeanToken' items="${user_recipe}">
 						<div class="wrap">
 
@@ -145,13 +145,19 @@
 								<a href="#"
 									class="list-group-item list-group-item-action list-group-item-warning"
 									style="width: 200px;" class="wrapLink" data-toggle="modal"
-									onclick="updateFun(${BeanToken.rec_id})" 
+									onclick="updateFun(${BeanToken.rec_id})"
 									data-target="#exampleModalCenter"> ${BeanToken.name}</a>
 							</div>
-							<div class="txt">上傳日期 : ${BeanToken.date}</div>
-							<div class="deleteRecipe"> 
-								<button class="btn btn-outline-danger" id="send" type="submit" 
-								onclick="fun(${BeanToken.rec_id})" >刪除</button>
+							<div class="txt">
+								<div>上傳日期 : ${BeanToken.date}</div>
+								<span>修改日期 : </span>
+								<c:if test="${BeanToken.update_date!=null}">
+									<span>${BeanToken.update_date}</span>
+								</c:if>
+							</div>
+							<div class="deleteRecipe">
+								<button class="btn btn-outline-danger" id="send" type="submit"
+									onclick="fun(${BeanToken.rec_id})">刪除</button>
 							</div>
 							<br>
 						</div>
@@ -163,7 +169,7 @@
 						role="dialog" aria-labelledby="exampleModalCenterTitle"
 						aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
+							<div class="modal-content"  style="width: 1000px;">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalCenterTitle">更改食譜</h5>
 									<button type="button" class="close" data-dismiss="modal"
@@ -171,7 +177,7 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<div class="modal-body" id="updateForm"></div>
+								<div class="modal-body" id="updateForm" ></div>
 								<div style="text-align: center;">
 									<div class="modal-footer"></div>
 								</div>
@@ -183,10 +189,10 @@
 				</form:form>
 			</fieldset>
 		</div>
-<!-- 		<div style="text-align: center;"> -->
-<!-- 			<label> <input type="submit" name="action" value="回首頁"> -->
-<!-- 			</label> -->
-<!-- 		</div> -->
+		<!-- 		<div style="text-align: center;"> -->
+		<!-- 			<label> <input type="submit" name="action" value="回首頁"> -->
+		<!-- 			</label> -->
+		<!-- 		</div> -->
 
 
 
@@ -195,7 +201,7 @@
 		<!-- <br> -->
 
 		<!------------------------------------------------------------------>
-	<jsp:include page="../footer.jsp" />
+		<jsp:include page="../footer.jsp" />
 
 	</div>
 

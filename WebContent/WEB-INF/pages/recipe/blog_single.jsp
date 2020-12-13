@@ -159,8 +159,9 @@
 										<input type="submit" value="訪客留言"
 											class="btn py-3 px-4 btn-primary"
 											onclick="funSend(${partSearch.blog_id})" />
-										<input type="submit" value="登入"
-											class="btn py-3 px-4 btn-primary" />
+									
+										<input type="submit" value="登入" onclick="javascript:location.href='<c:url value='login.controller'/>'"
+											class="btn py-3 px-4 btn-primary" /> 
 									</c:if>
 
 									<c:if test="${login_ok!=null}">
