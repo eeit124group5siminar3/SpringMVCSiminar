@@ -41,6 +41,8 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="goto-here">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+
 <!-- 	<div class="py-1 bg-primary"> -->
 <!-- 		<div class="container"> -->
 <!-- 			<div -->
@@ -747,24 +749,7 @@
 		</div>
 	</section>
 
-	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-		<div class="container py-4">
-			<div class="row d-flex justify-content-center py-5">
-				<div class="col-md-6">
-					<h2 style="font-size: 22px;" class="mb-0">訂閱我們</h2>
-					<span>獲取有關我們最新商店特惠信息，以及各式活動的電子郵件</span>
-				</div>
-				<div class="col-md-6 d-flex align-items-center">
-					<form action="#" class="subscribe-form">
-						<div class="form-group d-flex">
-							<input type="text" class="form-control" placeholder="請輸入電子信箱">
-							<input type="submit" value="訂閱" class="submit px-3">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+
 	<jsp:include page="/WEB-INF/pages/footer.jsp" />
 
 

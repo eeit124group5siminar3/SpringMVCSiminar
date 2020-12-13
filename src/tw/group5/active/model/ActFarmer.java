@@ -68,6 +68,7 @@ public class ActFarmer implements Serializable {
 	private Integer actNum = 0;
 	private Integer sigStat=0;
 	private MultipartFile multipartFile;
+	private String actRemarks;
 
 	
 	
@@ -79,11 +80,12 @@ public class ActFarmer implements Serializable {
 	public ActFarmer() {
 	}
 
+
 	public ActFarmer(Integer actId, String actName, String actType, String actAddr, String tel, Date actDateSta,
 			String actTimeSta, Date actDateEnd, String actTimeEnd, Integer numLim, Integer sellerId, Integer price,
 			String actDescri, String imgName, Blob actImg, Integer actLock, Date signDateSta, String signTimeSta,
 			Date signDateEnd, String signTimeEnd, Integer actNum, Integer sigStat, MultipartFile multipartFile,
-			Set<ActOrdNum> actOrdNum) {
+			String actRemarks, Set<ActOrdNum> actOrdNum) {
 		super();
 		this.actId = actId;
 		this.actName = actName;
@@ -108,8 +110,11 @@ public class ActFarmer implements Serializable {
 		this.actNum = actNum;
 		this.sigStat = sigStat;
 		this.multipartFile = multipartFile;
+		this.actRemarks = actRemarks;
 		this.actOrdNum = actOrdNum;
 	}
+
+
 
 	public ActFarmer(Integer actId, String actName, String actType, String actAddr, String tel, Date actDateSta,
 			String actTimeSta, Date actDateEnd, String actTimeEnd, Integer numLim, Integer sellerId, Integer price,
@@ -355,6 +360,18 @@ public class ActFarmer implements Serializable {
 			setActImg(sb);
 		}
 	}
+	
+	@Column(name = "actRemarks")
+	public String getActRemarks() {
+		return actRemarks;
+	}
+	
+	
+	public void setActRemarks(String actRemarks) {
+		this.actRemarks = actRemarks;
+	}
+	
+	
 
 	//取得活動狀態中文
 	@Transient
@@ -362,6 +379,7 @@ public class ActFarmer implements Serializable {
 		return ActStatusClass.getActStatus(actLock);
 	}
 	
+
 	//取得報名狀態中文
 	@Transient
 	public String getActSignStatusWord() {

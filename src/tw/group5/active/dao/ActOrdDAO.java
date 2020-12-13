@@ -73,7 +73,7 @@ public class ActOrdDAO {
 
 	}
 
-	// =========================消費者CRUD==========================================
+// =========================  消費者CRUD  ==========================================
 
 	// 查詢該會員報名列表
 	public List<ActOrd> getActOrds(Integer memNo) {
@@ -122,7 +122,38 @@ public class ActOrdDAO {
 		return list;
 	}
 	
-// =========================廠商CRUD==========================================
+	//訂單信用卡結帳頁面生成
+	public String payActSign(String tradeNo,String tradeDate,String tradeTotal,String tradeDesc,String tradeItem) {
+		all = new AllInOne("");
+		AioCheckOutALL obj = new AioCheckOutALL();
+//		InvoiceObj invoice = new InvoiceObj();
+//		String s = UUID.randomUUID().toString(); 
+		
+		Timestamp time= new Timestamp(System.currentTimeMillis());//獲取系統當前時間 
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		String timeStr = df.format(time); 
+		String tardeDate1=tradeDate.replaceAll("-","/");
+		
+		System.out.println(timeStr+tradeNo);
+		System.out.println(tardeDate1);
+		System.out.println(tradeTotal);
+		obj.setMerchantTradeNo(timeStr+tradeNo);
+		obj.setMerchantTradeDate(tardeDate1);
+		obj.setTotalAmount(tradeTotal);
+		obj.setTradeDesc("test Description");
+		obj.setItemName(tradeItem);
+		obj.setClientBackURL("http://localhost:8080/siminar/actSendSignMail.do?actOrd=1&payWay=0&actOrdId="+tradeNo);
+		obj.setReturnURL("https://211.23.128.214:5000");
+		obj.setNeedExtraPaidInfo("N");
+		obj.setRedeem("Y");
+		
+				
+		String form = all.aioCheckOut(obj, null);
+		return form;	
+	}
+
+	
+// =========================  廠商CRUD  ==========================================
 	
 	//查詢某一活動的報名列表
 	public List<ActOrd> getActOrdsById(Integer actId){
@@ -130,8 +161,12 @@ public class ActOrdDAO {
 		String hql = "from ActOrd where actId =?0 ORDER BY actOrdId";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, actId);
+		if(query.getResultList().size() == 0) {
+			return null;
+		}else {
 		List<ActOrd> list = query.list();
 		return list;
+		}
 	}
 	
 //	//查詢某一活動的某一筆報名
@@ -152,26 +187,7 @@ public class ActOrdDAO {
 		return actOrd;
 	}
 	
-	//刪除報名
-	public boolean delectActOrd(Integer actOrdId) {
-		Session session = sessionFactory.getCurrentSession();	
-		ActOrd result = session.get(ActOrd.class, actOrdId);
 
-		if(result!=null) {
-			session.delete(result);
-			return true;
-		}
-		return false;
-	}
-//		System.err.println(actOrdOne);
-//		System.err.println(result);
-//		System.err.println(result.getActOrdId());
-//		if(actOrdId!=null) {
-//			session.delete(actOrdId);
-//			return true;
-//		}
-//		return false;
-//	}
 		
 	
 	//修改報名
@@ -182,49 +198,10 @@ public class ActOrdDAO {
 	}
 	
 	
-	//訂單信用卡結帳頁面生成
-	public String payActSign(String tradeNo,String tradeDate,String tradeTotal,String tradeDesc,String tradeItem) {
-		all = new AllInOne("");
-		AioCheckOutALL obj = new AioCheckOutALL();
-//		InvoiceObj invoice = new InvoiceObj();
 
-//		AioCheckOutOneTime obj = new AioCheckOutOneTime();
-		
-//		String s = UUID.randomUUID().toString(); 
-		Timestamp time= new Timestamp(System.currentTimeMillis());//獲取系統當前時間 
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String timeStr = df.format(time); 
-		String tardeDate1=tradeDate.replaceAll("-","/");
-		
-		System.out.println(timeStr+tradeNo);
-		System.out.println(tardeDate1);
-		System.out.println(tradeTotal);
-		obj.setMerchantTradeNo(timeStr+tradeNo);
-		obj.setMerchantTradeDate(tardeDate1);
-		obj.setTotalAmount(tradeTotal);
-		obj.setTradeDesc("test Description");
-		obj.setItemName(tradeItem);
-		obj.setClientBackURL("http://localhost:8080/siminar/actFarmerHome");
-		obj.setReturnURL("https://211.23.128.214:5000");
-		obj.setNeedExtraPaidInfo("N");
-		obj.setRedeem("Y");
-		
-//		obj.setMerchantTradeNo("testCompa454ny0008");
-//		obj.setMerchantTradeDate("2017/01/01 08:05:23");
-//		obj.setTotalAmount("50");
-//		obj.setTradeDesc("test Description");
-//		obj.setItemName("TestItem");
-//		obj.setReturnURL("http://211.23.128.214:5000");
-//		obj.setNeedExtraPaidInfo("N");
-//		obj.setRedeem("Y");
-				
-		String form = all.aioCheckOut(obj, null);
-		return form;	
-		
-	}
 	
-//	//======綠界付款又善的==========================
-//			  
+//=================  綠界付款又善的  ========================
+			  
 //			  public String payOrder(String orderId,String date,String totalPrice,String rbName) {
 //			   all = new AllInOne("");
 //			   AioCheckOutOneTime obj = new AioCheckOutOneTime();
@@ -240,6 +217,34 @@ public class ActOrdDAO {
 //			   String form = all.aioCheckOut(obj, null);
 //			   return form;  
 //			  }
+	
+// =========================管理員==========================================
+
+	//查詢所有報名訂單
+	public List<ActOrd> getActAdminOrds(){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from ActOrd ORDER BY actOrdId";
+		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
+		if(query.getResultList().size() == 0) {
+			return null;
+		}else {		
+		List<ActOrd> list = query.list();
+		return list;
+		}
+	}
+	
+	
+	//刪除報名
+	public void delectActAdminOrd(Integer actOrdId) {
+		Session session = sessionFactory.getCurrentSession();	
+//		ActOrd result = session.get(ActOrd.class, actOrdId);
+		Query q = session.createSQLQuery("delete  from actord where actordid ="+actOrdId);
+
+		if(actOrdId!=null) {
+			q.executeUpdate();
+			System.out.println("成功"+actOrdId);
+		}
+	}
 	
 	
 }

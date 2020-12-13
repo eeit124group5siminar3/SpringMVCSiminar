@@ -44,7 +44,7 @@ public class ActHomeController {
 //===================================一日農夫===================================
 	
 	//取得活動列表	
-	@GetMapping(value = "/actFarmerList.do/{pageNo}")
+	@RequestMapping(value = "/actFarmerList.do/{pageNo}")
 	@ResponseBody
 	public Map<String, Object> actFarmerList(
 			@PathVariable(name = "pageNo", required = false) Integer pageNo, Model model,
@@ -98,7 +98,7 @@ public class ActHomeController {
 //	}
 	
 	//取得所有頁面數
-	@GetMapping(value = "/actFarmerPage.do/{pageNo}", produces = {"text/html;charset=UTF-8" })
+	@RequestMapping(value = "/actFarmerPage.do/{pageNo}", produces = {"text/html;charset=UTF-8" })
 	@ResponseBody
 	public String actPage(@PathVariable(value = "pageNo", required = false) Integer pageNo,
 			Model model, HttpServletRequest rq) {
