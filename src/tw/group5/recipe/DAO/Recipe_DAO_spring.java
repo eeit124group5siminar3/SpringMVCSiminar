@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
+import tw.group5.recipe.recipe_Bean.Introduction_Bean;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
@@ -112,18 +113,18 @@ public class Recipe_DAO_spring {
 	}
 
 	// 食材連結到商城
-	public List<ProductBean> getProducts(String searchString) {
-		Session session = sessionFactory.getCurrentSession();
-		String hql = "from ProductBean where stock != 0";
-		Query<ProductBean> query = null;
-
-		hql += " and product like ?0 ORDER BY ProductId";
-		query = session.createQuery(hql, ProductBean.class);
-		query.setParameter(0, "%" + searchString + "%");
-
-		List<ProductBean> list = query.list();
-		return list;
-	}
+//	public List<ProductBean> getProducts(String searchString) {
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql = "from ProductBean where stock != 0";
+//		Query<ProductBean> query = null;
+//
+//		hql += " and product like ?0 ORDER BY ProductId";
+//		query = session.createQuery(hql, ProductBean.class);
+//		query.setParameter(0, "%" + searchString + "%");
+//
+//		List<ProductBean> list = query.list();
+//		return list;
+//	}
 
 	// Bookmark
 	public Bookmark_Bean bookmark(Bookmark_Bean bean) {
@@ -193,7 +194,7 @@ public class Recipe_DAO_spring {
 	
 	//---------------------blog--------------------------
 	
-	//新增資料
+	//新增資料 blog
 	public Blog_Bean insert(Blog_Bean bean) {
 		Session session=sessionFactory.getCurrentSession();
 		session.save(bean);
@@ -222,7 +223,19 @@ public class Recipe_DAO_spring {
 	//搜尋全部資料
 	public List<Blog_Bean> searchAllOfBlog() {
 		Session session=sessionFactory.getCurrentSession();
-		Query<Blog_Bean> query=session.createQuery("From Blog_Bean order by views",Blog_Bean.class);
+		Query<Blog_Bean> query=session.createQuery("From Blog_Bean order by blog_id DESC",Blog_Bean.class);
+		List<Blog_Bean> list=query.list();
+		return list;
+		
+	}
+	
+	//模糊查詢
+	public List<Blog_Bean> searchPartOfBlog(String title) {
+		Session session=sessionFactory.getCurrentSession();
+		Query<Blog_Bean> query=session.createQuery("From Blog_Bean where title like:title order by blog_id DESC",Blog_Bean.class);
+		System.out.println("enter                             DAoooooooooooooooooooooooooo");
+		System.out.println("title: "+title);
+		query.setParameter("title",title);
 		List<Blog_Bean> list=query.list();
 		return list;
 		
@@ -251,7 +264,7 @@ public class Recipe_DAO_spring {
 	//文章留言
 	public Msg_Blog_Bean insertMsg(Msg_Blog_Bean bean) {
 		Session session=sessionFactory.getCurrentSession();
-		session.save(bean);
+		session.save(bean);		
 		return bean;
 	}
 	
@@ -275,12 +288,11 @@ public class Recipe_DAO_spring {
 		return list;
 	}
 	
-	//搜尋文章 最高瀏覽
-	public List<Blog_Bean> searchPopular(Integer num){
+	//依照日期排序
+	public List<Blog_Bean> searchPopular(){
 		Session session=sessionFactory.getCurrentSession();
-		String hql="from Blog_Bean order by views where rownum<3";
+		String hql="from Blog_Bean where status=1 order by blog_id DESC";
 		Query<Blog_Bean> query=session.createQuery(hql,Blog_Bean.class);
-//		query.setParameter("num", num);
 		List<Blog_Bean> list=query.list();
 		return list;
 	}

@@ -85,7 +85,7 @@
 						<legend>搜尋結果</legend>
 						<c:forEach var='BeanToken' items="${List}">
 							<div class="wrap" style="text-align: center;">
-								<a
+								<a style="border:3px solid red;"
 									href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>">
 									<img height="100" width="100%"
 									src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>" />
@@ -112,10 +112,9 @@
 									</div>
 									<hr>
 									<div>
-										<a
-											href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>">
-											<p>食材:${BeanToken.ingredients_A}</p>
-										</a>
+											食材: <a href="<c:url value='/connectMall?mall_searchString=${BeanToken.ingredients_A}&mall_pageNo=1'/>" >
+												${BeanToken.ingredients_A}
+											</a>										
 										<p>食材: ${BeanToken.ingredients_B}</p>
 										<p>介紹 : ${BeanToken.desc}</p>
 										<p>料理方法 : ${BeanToken.method}</p>
@@ -170,10 +169,9 @@
 										</div>
 										<hr>
 										<div>
-											<a
-												href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>">
-												<p>食材:${BeanToken.ingredients_A}</p>
-											</a>
+											食材: <a href="<c:url value='/connectMall?mall_searchString=${BeanToken.ingredients_A}&mall_pageNo=1'/>" >
+												${BeanToken.ingredients_A}
+											</a>	
 											<h5>食材  :  </h5>
 											<p>${BeanToken.ingredients_B}</p>
 											<h5>介紹  :  </h5>
@@ -232,10 +230,9 @@
 										</div>
 										<hr>
 										<div>
-											<a
-												href="<c:url value='/MallContent?searchString=${BeanToken.ingredients_A}'/>">
-												<p>食材:${BeanToken.ingredients_A}</p>
-											</a>
+											食材: <a href="<c:url value='/connectMall?mall_searchString=${BeanToken.ingredients_A}&mall_pageNo=1'/>" >
+												${BeanToken.ingredients_A}
+											</a>	
 											<h5>食材  :  </h5>
 											<p>${BeanToken.ingredients_B}</p>
 											<h5>介紹  :  </h5>
@@ -262,144 +259,10 @@
 
 	</div>
 	<!------------------------------------------------------------------>
-	<footer class="ftco-footer ftco-section">
-		<div class="container">
-			<div class="row">
-				<div class="mouse">
-					<!-- 					<a href="#" class="mouse-icon"> -->
-					<!-- 						<div class="mouse-wheel"> -->
-					<!-- 							<span class="ion-ios-arrow-up"></span> -->
-					<!-- 						</div> -->
-					<!-- 					</a> -->
-				</div>
-			</div>
-			<div class="row mb-5">
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">農郁</h2>
-						<p>最適合您的電商平台</p>
-						<ul
-							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-instagram"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4 ml-md-5">
-						<!-- <h2 class="ftco-heading-2">Menu</h2> -->
-						<ul class="list-unstyled">
-							<li><a href="#" class="py-2 d-block">商城</a></li>
-							<li><a href="#" class="py-2 d-block">關於我</a></li>
-							<!-- <li><a href="#" class="py-2 d-block">Journal</a></li> -->
-							<li><a href="#" class="py-2 d-block">聯絡我們</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="ftco-footer-widget mb-4">
-						<!-- <h2 class="ftco-heading-2">其他問題</h2> -->
-						<div class="d-flex">
-							<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-								<li><a href="#" class="py-2 d-block">運送訊息</a></li>
-								<li><a href="#" class="py-2 d-block">退換貨</a></li>
-								<li><a href="#" class="py-2 d-block">條款及細則</a></li>
-								<li><a href="#" class="py-2 d-block">隱私政策</a></li>
-							</ul>
-							<ul class="list-unstyled">
-								<li><a href="#" class="py-2 d-block">常見問題</a></li>
-								<!-- <li><a href="#" class="py-2 d-block">Contact</a></li> -->
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<!-- <h2 class="ftco-heading-2">Have a Questions?</h2> -->
-						<div class="block-23 mb-3">
-							<ul>
-								<li><span class="icon icon-map-marker"></span><span
-									class="text">320 桃園市中壢區中大路300號</span></li>
-								<li><a href="#"><span class="icon icon-phone"></span><span
-										class="text">0800-092-000</span></a></li>
-								<li><a href="#"><span class="icon icon-envelope"></span><span
-										class="text">service@nonre.com</span></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-
-					<p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						All rights reserved | This template is made with <i
-							class="icon-heart color-danger" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>.
-						Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/jquery.waypoints.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/aos.js"></script>
-	<script src="js/jquery.animateNumber.min.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="js/google-map.js"></script>
-	<script src="js/main.js"></script>
+		<jsp:include page="../footer.jsp" />
 
 
 	<script type="text/javascript">
-// 	$(document).ready(function() {
-// 		// 			var cartcontent=document.getElementById("cartContent");
-// 		$.ajax({
-// 			url : "MallContent",
-// 			type : "GET",
-// 			data : {"categoryId":0,"pageNo":1},
-// 			datatype : "html",
-// 			success : function(data, status) {
-// 				$("#mainContent").html(data);
-// 			},
-// 			error : function(data, status) {
-// 				$("#mainContent").html(data);
-// 			}
-// 		});
-// 	}); 
-
-
-// 	$("#heart").click(function(){
-// 		var addSuccess=$("#addSuccess");
-// 		var rec_id=$("#send").val();
-// 			console.log('rec_id: '+rec_id);
-// 			$.ajax({
-// 	 			type:"GET",
-// 	 			url:"./bookmark",
-// 	 			data:{"rec_id":rec_id},
-// 	 			success:function(response){
-// 	 				alert('succccccccccccccccccccces');
-// 	 				console.log('response: '+response);
-// 	 				}
-// 	 			});
-// 	});
 
 	function fun(login_ok){
 		var addSuccess=$("#addSuccess");
