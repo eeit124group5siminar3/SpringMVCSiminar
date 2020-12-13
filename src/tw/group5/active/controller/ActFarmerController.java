@@ -96,7 +96,7 @@ public class ActFarmerController {
 		Collection<ActFarmer> collFarmer = actFarmerService.getPageActFarmers(sellerId);
 		model.addAttribute("MaintainPageNo",maintainPageNo);
 		model.addAttribute("collFarmer", collFarmer);
-		return "/active/actFarmerMaintain1";
+		return "/active/actFarmerMaintain2";
 	}
 	
 	//名字找活動
@@ -111,7 +111,7 @@ public class ActFarmerController {
 		m.addAttribute("totalPages", actFarmerService.getTotalPages(sellerId));
 		m.addAttribute("MaintainPageNo",maintainPageNo);
 		m.addAttribute("collFarmer", collFarmer);
-		return "active/actFarmerMaintain1";
+		return "active/actFarmerMaintain2";
 	}
 	
 	
@@ -143,7 +143,7 @@ public class ActFarmerController {
 		afInsert.setSellerId(sellerId);
 		actFarmerService.insertActFarmer(afInsert);
 		successMsgs.put("sucess", "資料新增成功");
-		return "redirect:/maintainActFarmer.do";
+		return "redirect:/allActFarmer.do";
 		
 	}
 	//檢視活動準備(找到該筆物件)
@@ -196,7 +196,7 @@ public class ActFarmerController {
 		}
 		actFarmerService.updateActFarmer(actFarmer);	
 		
-		return "redirect:/maintainActFarmer.do";
+		return "redirect:/allActFarmer.do";
 	}
 	
 	//刪除活動
@@ -204,7 +204,7 @@ public class ActFarmerController {
 	public String actFarmerDelete(@RequestParam(value = "actId")Integer actId,Model model) {
 		Integer id =Integer.valueOf(actId);
 		actFarmerService.deletActFarmer(id);
-		return "redirect:/maintainActFarmer.do";
+		return "redirect:/allActFarmer.do";
 	}
 	
 	//假刪除
@@ -227,7 +227,7 @@ public class ActFarmerController {
 		originActFarmer.setActLock(3);
 		originActFarmer.setActRemarks("賣家會員刪除活動");
 		actFarmerService.updateActFarmer(originActFarmer);
-		return "redirect:/maintainActFarmer.do";
+		return "redirect:/allActFarmer.do";
 	}
 
 	

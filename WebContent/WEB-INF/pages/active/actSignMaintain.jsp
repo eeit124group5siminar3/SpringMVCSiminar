@@ -113,11 +113,11 @@ a{
 
 <div class="form-group">
 <!-- --------管理左邊bar-------------------------------- -->
+<section class="content-wrapper d-flex justify-content-center">
 <div class="nav">
 	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />	
 </div>
 <!-------------------------內容區--------------------------------->
-<section class="content-wrapper d-flex justify-content-center">
 <div class="col-9" style="width:80%; margin:0 auto" >
 <h3 align="center">報名管理-一日農夫</h3>
 	

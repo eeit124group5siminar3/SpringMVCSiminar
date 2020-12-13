@@ -58,7 +58,7 @@ public class ActSignController {
 //======================================消費者報名=============================================	
 	
 	//報名活動準備
-	@GetMapping(path = "/actSignPreInsert.do")
+	@RequestMapping(path = "/actSignPreInsert.do")
 	public String actSignPreInsert(Model model,
 			@RequestParam(value = "id") Integer actId,
 			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb 
@@ -118,7 +118,9 @@ public class ActSignController {
 		String form = actOrdService.payActSign(tradeNo,tradeDate,tradeTotal,tradeItem,tradeDesc);
 		model.addAttribute("actOrdId",tradeNo);
 		model.addAttribute("form", form);
-		return "active/EcpayForTest";
+//		return "active/EcpayForTest";
+		return "redirect:/actOrdSelect.do";  //新增DB用
+
 		
 	}
 
@@ -234,7 +236,7 @@ public class ActSignController {
 	}
 	
 	//修改活動準備(找到該筆物件)
-	@GetMapping(value = "/actOrdPreUpdate.do")
+	@RequestMapping(value = "/actOrdPreUpdate.do")
 	public String actOrdPreUpdate(Model model,
 		@RequestParam(value="actOrdId") Integer actOrdId,
 		@RequestParam(value="actId") Integer actId

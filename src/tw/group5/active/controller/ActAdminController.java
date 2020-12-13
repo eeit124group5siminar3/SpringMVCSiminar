@@ -4,9 +4,12 @@ package tw.group5.active.controller;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -158,5 +162,19 @@ public class ActAdminController {
 		return "redirect:/actAdminSign.do";
 	}
 
+	
+//======================================  報名訂單分析  =============================================================
+	
+	@RequestMapping(value = "actAnalysisType.do")
+	@ResponseBody
+	public Map<String, Object> actAnalysisType() {
+		
+		Map<String, Integer> list = null;
+		list = actOrdService.countActType();
+		Map<String, Object> map = new HashedMap();
+		map.put("actTypeData", list);
+		
+		return map;
+	}
 	
 }

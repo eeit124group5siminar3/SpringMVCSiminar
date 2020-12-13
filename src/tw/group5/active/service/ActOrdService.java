@@ -1,6 +1,9 @@
 package tw.group5.active.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -82,5 +85,16 @@ public class ActOrdService {
 //		return 
 				actOrdDAO.delectActAdminOrd(actOrdId);
 	}
+	
+// =========================訂單分析資料=========================================
+	
+	//活動類型的圓餅圖
+	public Map<String, Integer> countActType(){
+		return actOrdDAO.countActType();
+	}
+	
+	
+	
+	
 	
 }

@@ -80,7 +80,7 @@ border: #82ae46 2px solid;
 //============================返回頁面=====================================================//
 
 function backHome(){
-	document.act.action="maintainActFarmer.do";
+	document.act.action="allActFarmer.do";
     document.act.submit();
 	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
 }
@@ -201,20 +201,20 @@ function fastinsert3(){
 <body class="goto-here">
 <!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
-<section class="ftco-section ftco-degree-bg">
 <!-- --------管理左邊bar-------------------------------- -->
+<div class="nav">
 	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
-	
-
-<div class="form-inline row justify-content-center" >
+</div>	
+<section class="content-wrapper row justify-content-center">
+<div>
+<div class="form-inline" >
 <h3>一日農夫申請活動</h3>&emsp;&emsp;&emsp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">活動1</button>&ensp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert2()">活動2</button>&ensp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert3()">活動3</button>&ensp;
-</div>
-	
+</div>	
 <form:form action="actFarmerInsert.do" modelAttribute="farmerinsert" method="POST" enctype="multipart/form-data" name="act"  >
-<table align="center">
+<table class="justify-content-right">
 	<tr>
 <%-- 		<td><form:label path="actId" type="hidden">活動編號</form:label></td> --%>
 		<td><form:input path="actId" type="hidden" ></form:input></td>
@@ -301,6 +301,8 @@ function fastinsert3(){
 </table>
 </form:form>
 </div>
+</div>
+
 <!-- --------------footer----------------------------------------------------------- -->
 </section>
 	

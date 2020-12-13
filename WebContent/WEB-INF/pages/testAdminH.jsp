@@ -32,6 +32,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown04">
     <a class="dropdown-item" href="<c:url value='getAllActFarmer.do'/>">活動總覽</a>
     <a class="dropdown-item" href="<c:url value='actAdminSign.do'/>">報名管理</a>
+    <a class="dropdown-item" href="<c:url value='/goActAdminAnalysis'/>">活動分析</a>
 
   </div>
 </li>

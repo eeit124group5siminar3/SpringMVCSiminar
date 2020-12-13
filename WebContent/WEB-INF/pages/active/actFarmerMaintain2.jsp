@@ -64,7 +64,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 #project_backstage {
 	width: 150px;
-	position: absolute;
 	font-weight: bold;
 	top: 150px;
 	left: 15px;
@@ -118,8 +117,12 @@ a{
 <!-------------------------內容區--------------------------------->
 <section class="content-wrapper justify-content-center">
 <div class="col-9" style="width:80%; margin:0 auto" >
-<h3 align="center">報名管理-一日農夫</h3>
-	
+	<div class="form-inline row justify-content-center align-items-center">
+		<h2 >活動列表</h2>&emsp;&emsp;&emsp;
+	    <form action="<c:url value='/actFarmerPreInsert.do'/>" method="POST">
+			<input name="apply" type="submit" value="申請活動" class="btn btn-primary">
+		</form>
+	 </div>	
 	<table id="actFarmer" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
