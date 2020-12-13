@@ -47,7 +47,8 @@ public class MarketProductTotalBean {
 	private MarketMallBean marketMallBean;
 	private MarketProductImgBean marketProductImgBean;
 	private MarketPutOutBean marketPutOutBean;//設計單向
-
+    
+	
 	public MarketProductTotalBean(int productId, String productName, String productArea, String productCatgory,
 			Integer price, String unit, String discount, Integer quantity, MarketProductImgBean marketProductImgBean) {
 		super();
@@ -264,8 +265,8 @@ public class MarketProductTotalBean {
 	public void setMarketMallBean(MarketMallBean marketMallBean) {
 		this.marketMallBean = marketMallBean;
 	}
+
 	
-	
-	
+
 
 }

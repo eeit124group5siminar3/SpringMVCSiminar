@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
 	<div class="row">
@@ -72,14 +72,14 @@
 			<p class="d-flex total-price">
 				<span>總計</span> <span>${marketCart.total}</span>
 			</p>
-		</div>
-		<p>
-			<a href="<c:url value='/Mall_checkout' />"
+		     <p>
+			<a href="<c:url value='/Market_checkout' />"
 				class="btn btn-primary py-3 px-4">去結帳</a> <a
 				href="<c:url value='/GoMarketHome' />"
 				class="btn btn-primary py-3 px-4">我要繼續買</a>
-		</p>
-	</div>
+		     </p>
+		</div>
+	</div>	
 </div>
 
 <script src="js/jquery.min.js"></script>
