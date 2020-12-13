@@ -146,12 +146,17 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#demo4">活動管理</button>
 			<div id="demo4" class="collapse">
+				<c:if test="${login_ok.member_permissions==1}">
 				<li align="left"><a href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>" class="hyperlink">一日農夫</a></li>
-<!-- 				<li align="left"><a href="" class="hyperlink">????</a></li> -->
+				<li align="left"><a href="<c:url value='/actOrdSelect.do'/>">已報名活動</a></li>	
+				
+				</c:if>
+				<c:if test="${login_ok.member_permissions!=1}">
+				<li align="left"><a href="<c:url value='/actOrdSelect.do'/>">已報名活動</a></li>	
+				</c:if>
 			</div>
 		</div>
 	</div>
-
 	<div align="center" id="backstage_page">
 		<div id="carousel_backstage" class="container">
 			<div id="carouselExampleIndicators" class="carousel slide"

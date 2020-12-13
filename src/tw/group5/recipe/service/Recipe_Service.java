@@ -9,6 +9,7 @@ import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.DAO.Recipe_DAO_spring;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
+import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
@@ -16,6 +17,9 @@ import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 public class Recipe_Service implements recipe_Service_interface {
 	@Autowired
 	private Recipe_DAO_spring rDAO;
+	
+	@Autowired
+	private Recipe_Bean_noImage bean;
 	
 //	public Recipe_Service(Session session) {
 //		rDAO=new Recipe_DAO_hibernate(session);
@@ -57,10 +61,9 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.getImage(rec_id);
 	}
 	
-	@Override
-	public List<ProductBean> getProducts(String searchString) {
-		return rDAO.getProducts(searchString);
-	}
+//	public List<ProductBean> getProducts(String searchString) {
+//		return rDAO.getProducts(searchString);
+//	}
 	
 	@Override
 	public Bookmark_Bean bookmark(Bookmark_Bean bean){
@@ -92,7 +95,9 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.recipeBean(rec_id);
 	}
 	
-	//blog
+
+	
+	//--------------blog------------------------------
 	@Override
 	public Blog_Bean insert(Blog_Bean bean) {
 		return rDAO.insert(bean);
@@ -109,6 +114,11 @@ public class Recipe_Service implements recipe_Service_interface {
 	}
 	
 	@Override
+	public List<Blog_Bean> searchPartOfBlog(String title) {
+		return rDAO.searchPartOfBlog(title);
+	}
+	
+	@Override
 	public Blog_Bean blogBean(Integer blog_id) {
 		return rDAO.blogBean(blog_id);
 	}
@@ -119,13 +129,38 @@ public class Recipe_Service implements recipe_Service_interface {
 	}
 	
 	@Override
-	public long BlogIdMsg(Integer blog_id) {
-		return rDAO.BlogIdMsg(blog_id);
+	public long BlogMsgCounts(Integer blog_id) {
+		return rDAO.BlogMsgCounts(blog_id);
 	}
 	
 	@Override
 	public boolean deleteBlog(Integer blog_id) {
 		return rDAO.deleteBlog(blog_id);
+	}
+	
+	@Override
+	public Msg_Blog_Bean insertMsg(Msg_Blog_Bean bean) {
+		return rDAO.insertMsg(bean);
+	}
+	
+	@Override
+	public boolean deleteMsg(Integer blog_id) {
+		return rDAO.deleteMsg(blog_id);
+	}
+	
+	@Override
+	public List<Msg_Blog_Bean> searchMsg(Integer blog_id){
+		return rDAO.searchMsg(blog_id);
+	}
+	
+	public int getFavor(int favor) {
+		bean.setFavor(favor);
+		return favor;
+	}
+
+	@Override
+	public List<Blog_Bean> searchPopular(){
+		return rDAO.searchPopular();
 	}
 	
 	//----------------------首頁分頁--------------------------------
@@ -149,8 +184,6 @@ public class Recipe_Service implements recipe_Service_interface {
 //	public void setPageNo(Integer pageNo) {
 //		rDAO.setPageNo(pageNo);
 //	}
-	
-//	----------------------------------------------------------------
 	
 	
 //  -----------------------修改食譜分頁-----------------------------

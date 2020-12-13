@@ -5,6 +5,7 @@ import java.util.List;
 import tw.group5.mall.model.ProductBean;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
+import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
 
@@ -24,7 +25,7 @@ public interface recipe_Service_interface {
 
 	Recipe_Bean getImage(String rec_id);
 	
-	List<ProductBean> getProducts(String searchString);
+//	List<ProductBean> getProducts(String searchString);
 
 	Bookmark_Bean bookmark(Bookmark_Bean bean);
 
@@ -60,8 +61,18 @@ public interface recipe_Service_interface {
 
 	Blog_Bean updateBlog(Blog_Bean bean);
 
-	long BlogIdMsg(Integer blog_id);
+	long BlogMsgCounts(Integer blog_id);
 
 	boolean deleteBlog(Integer blog_id);
+
+	Msg_Blog_Bean insertMsg(Msg_Blog_Bean bean);
+
+	boolean deleteMsg(Integer blog_id);
+
+	List<Msg_Blog_Bean> searchMsg(Integer blog_id);
+
+	List<Blog_Bean> searchPopular();
+
+	List<Blog_Bean> searchPartOfBlog(String title);
 
 }

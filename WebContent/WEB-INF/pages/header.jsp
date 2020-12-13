@@ -59,10 +59,10 @@
 				
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市場</a>
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">預購</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="<c:url value='GoMarketHome'/>">市場</a>
-						    <a class="dropdown-item" href="<c:url value='/' />">菜籃</a> 
+						    <a class="dropdown-item" href="<c:url value='/GoMarketShoppingcart' />">我的訂購商品清單</a> 
 						    <a class="dropdown-item" href="<c:url value='/' />">查看預購單</a>
 						</div></li>
 				<li class="nav-item dropdown">

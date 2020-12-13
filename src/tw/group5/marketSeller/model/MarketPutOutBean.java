@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class MarketPutOutBean {
 	private Integer putOut;
 	private String status;
+
 	
 //    private Set<MarketProductTotalBean> marketProductTotalBean =
 //    		                            new HashSet<MarketProductTotalBean>(0);
@@ -48,6 +49,10 @@ public class MarketPutOutBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+	
+	
 	
 //	@OneToMany(fetch = FetchType.LAZY,mappedBy = "marketPutOutBean",cascade = CascadeType.ALL)
 //	public Set<MarketProductTotalBean> getMarketProductTotalBean() {

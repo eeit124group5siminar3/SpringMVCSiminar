@@ -1,6 +1,6 @@
 package tw.group5.marketSeller.dao;
 
-import java.sql.SQLException;
+
 import java.util.List;
 
 import org.hibernate.query.Query;

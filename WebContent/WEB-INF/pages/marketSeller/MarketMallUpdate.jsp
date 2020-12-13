@@ -68,7 +68,7 @@ body {
     <!-- 蔬菜圖 -->
 <div>
 <h2 align="center">
-新增商品
+店家資訊
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
@@ -86,13 +86,13 @@ body {
 </tr>
 <tr>
     <td>地址:</td>
-    <td><form:input type="text" name="address" id="address" size="20" maxlength="10"
+    <td><form:input type="text" name="address" id="address" size="20" 
           path="address"/>
     </td>
 </tr>
 <tr>
     <td>顧客取貨時間:</td>
-    <td><form:input type="text" name="pickupTime" id="pickupTime" maxlength="10"
+    <td><form:input type="text" name="pickupTime" id="pickupTime" 
        path="pickupTime"  size="20" />         
     </td>
 </tr>

@@ -64,7 +64,18 @@ public class ActFarmerService {
 	public ActFarmer updateActFarmer(ActFarmer actFarmer) {
 		return actFarmerDAO.updateActFarmer(actFarmer);
 	}
+	
+	
+	
+//=========================管理員==========================================
+	
+	
+	// 查詢所有資料
+	public List<ActFarmer> getAllActFarmers(){
+		return actFarmerDAO.getAllActFarmers();
+	} 
 
+//=========================頁數==========================================
 	
 	
 	//計算頁數

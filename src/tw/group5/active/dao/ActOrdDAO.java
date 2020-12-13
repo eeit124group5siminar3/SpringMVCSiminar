@@ -1,6 +1,11 @@
 package tw.group5.active.dao;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
+
+import javax.sound.midi.Soundbank;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -76,9 +81,13 @@ public class ActOrdDAO {
 		String hql = "from ActOrd where memNO =?0 ORDER BY actOrdId";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, memNo);
+
+		if(query.getResultList().size() == 0) {
+			return null;
+		}else {
 		List<ActOrd> list = query.list();
 		return list;
-
+		}
 	}
 	
 	// 查詢該會員報名列表+分頁
@@ -180,13 +189,22 @@ public class ActOrdDAO {
 //		InvoiceObj invoice = new InvoiceObj();
 
 //		AioCheckOutOneTime obj = new AioCheckOutOneTime();
-	
-		obj.setMerchantTradeNo(tradeNo);
-		obj.setMerchantTradeDate(tradeDate);
+		
+//		String s = UUID.randomUUID().toString(); 
+		Timestamp time= new Timestamp(System.currentTimeMillis());//獲取系統當前時間 
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		String timeStr = df.format(time); 
+		String tardeDate1=tradeDate.replaceAll("-","/");
+		
+		System.out.println(timeStr+tradeNo);
+		System.out.println(tardeDate1);
+		System.out.println(tradeTotal);
+		obj.setMerchantTradeNo(timeStr+tradeNo);
+		obj.setMerchantTradeDate(tardeDate1);
 		obj.setTotalAmount(tradeTotal);
 		obj.setTradeDesc("test Description");
 		obj.setItemName(tradeItem);
-		obj.setClientBackURL("http://localhost:8080/siminar/index");
+		obj.setClientBackURL("http://localhost:8080/siminar/actFarmerHome");
 		obj.setReturnURL("https://211.23.128.214:5000");
 		obj.setNeedExtraPaidInfo("N");
 		obj.setRedeem("Y");

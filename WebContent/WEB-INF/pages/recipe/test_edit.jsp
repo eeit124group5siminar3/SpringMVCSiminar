@@ -37,48 +37,78 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/ckeditor.css">
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 
-	<div align="center">
+	<div align="center" class="form-group">
         <form:form action="./blogPostUpdate" method='post'
- 			modelAttribute="memBean" style="width: 70%"> 
+ 			modelAttribute="memBean" style="width: 60%" enctype="multipart/form-data">
+ 				<form:label for="MsgTextarea" path="introduction"
+ 				style="font-size: 30px;" class="input-group-text">自我介紹 : <span
+					style="font-size: 15px;">最多400字</span> 	
+					<br>
+			</form:label>
+			<form:textarea class="form-control" id="MsgTextarea" rows="10"
+ 				cols="40" path="introduction" style="font-size: 20px;"></form:textarea> 
 			<div>
-			<form:label path="title" style="font-size:20px;" value="${memBean.title}">標題 :   </form:label>
-			<form:input path="title" /><span style="font-size: smaller;">最多15個字</span>
+ 			<form:label path="title" style="font-size: 30px;" class="input-group-text">文章標題 :  <span style="font-size: smaller;">最多15個字</span></form:label> 
+			<form:input path="title" class="form-control"/>
 			</div>
+			
 			<div>
-			<textarea id="editor" name="content">${memBean.content}</textarea>
+				<label style="font-size: 30px;" class="input-group-text">封面圖片 :  </label>
+			</div>
+			<br>
+			<img id="image" src="<c:url value='/getBlogImage?blog_id=${memBean.blog_id}'/>"
+				style="max-height: 100%; max-width: 100%; width: auto; height: auto;zoom=1">
+			<div class="custom-file">
+				<form:input type="file" class="custom-file-input"
+					id="validatedCustomFile" path="multipartFile"
+					onchange="loadImageFile(event)" />
+				<form:label class="custom-file-label" for="validatedCustomFile"
+					path="multipartFile">Choose
+					file</form:label>
+				<div class="invalid-feedback">請上傳圖片</div>
+			</div>
+			<br>
+			
+			
+			
+			<div>
+			<form:label for="editor" path="content" style="font-size: 30px;" class="input-group-text">文章介紹 : </form:label>
+			<form:textarea id="editor" path="content" ></form:textarea>
 			</div> 
-	
+			<br>
+			<div align="center"> 
 			<button type="submit" class="btn btn-primary" id="btn">送出</button>
+			</div>
 
 		</form:form>
 </div>
 
 <jsp:include page="../footer.jsp" />
 	
-<script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
-
+	<script src="js/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript">
+		function loadImageFile(event) {
+			var image = document.getElementById('image');
+			image.src = URL.createObjectURL(event.target.files[0]);
+		};
+	</script>
 
 	<script type="text/javascript">  
-var myEditor = null;
-window.onload = function(){
-     ClassicEditor
-    .create(document.querySelector("#editor"))
-    .then(editor => { 
-        myEditor = editor; 
-    }) 
-    .catch(error => {
-        console.error(error);
-    });
-}
+	window.onload = function()
+	{
+	    CKEDITOR.replace( 'editor');
+	    extraAllowedContent: "img[src,alt,width,height]";
+	        
+	        
+	};
 
  </script>
 		 <script>
-//    function processData(){
+//     function processData(){
 //    // getting data
 //    var data = $("#editor").val();
 //    alert(data);

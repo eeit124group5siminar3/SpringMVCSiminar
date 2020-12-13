@@ -60,6 +60,7 @@
                 <th>數量</th>
 <!--                 <th>單位</th> -->
                 <th>價格</th>
+                <th>預購期間</th>
                 <th>商品狀態</th>
                <th>圖片</th> 
                 <th>修改 </th>
@@ -77,6 +78,12 @@
                     <td><c:out value="${IBean.quantity}"/></td>      
 <%--                     <td>1<c:out value="${IBean.unit}"/></td> --%>
                     <td><c:out value="${IBean.price}"/>元</td>
+                    <td>開始時間:<c:out value="${IBean.openDay}"/>
+                         <c:out value="${IBean.openDayTime}"/>
+                         <br>
+                                                                        結束時間:<c:out value="${IBean.closeDay}"/>
+                        <c:out value="${IBean.closeDayTime}"/>                                                
+                    </td>
                     <td><c:out value="${IBean.marketPutOutBean.status}"/></td>
                 <td>  
 				<img  height='80' width='80'
