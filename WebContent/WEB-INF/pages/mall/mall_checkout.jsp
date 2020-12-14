@@ -65,34 +65,34 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-7 ftco-animate">
-					<form:form action='ProcessOrder' method="post" class="billing-form"
+					<form:form action='ProcessOrder' method="post" class="billing-form2"
 						id="orderform" modelAttribute="pob">
 						<h3 class="mb-4 billing-heading">結帳資訊&nbsp;<font style="font-size:12px"><a href="#checkoutContent" onclick="fastInput()">一鍵輸入</a>&nbsp;<a href="#checkoutContent" onclick="fastReset()">一鍵還原</a></font></h3>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="firstname">收件人姓名</label>
+									<label for="firstname">收件人姓名<sup style="color:red">*必填</sup></label>
 									<form:input type="text" id="buyerName" name="buyerName"
-										class="form-control" placeholder="${login_ok.member_name}"
-										value="${login_ok.member_name}" path="buyerName" />
+										class="form-control" style="opacity:1;color:black	" placeholder="請輸入"
+										value="${login_ok.member_name}" path="buyerName" required="required"/>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="phone">聯絡電話</label>
+									<label for="phone">聯絡電話<sup style="color:red">*必填</sup></label>
 									<form:input type="text" id="tel" name="tel"
 										class="form-control"
-										placeholder="${login_ok.member_cellphone}"
-										value="${login_ok.member_cellphone}" path="tel" />
+										placeholder="請輸入"
+										value="${login_ok.member_cellphone}" path="tel" required="required"/>
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="country">收件地址</label>
+									<label for="country">收件地址<sup style="color:red">*必填</sup></label>
 									<form:input type="text" id="address" name="address"
-										class="form-control" placeholder="${login_ok.member_address}"
-										value="${login_ok.member_address}" path="address" />
+										class="form-control" placeholder="請輸入"
+										value="${login_ok.member_address}" path="address" required="required"/>
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -120,7 +120,7 @@
 									<label for="emailaddress">統一編號</label>
 									<form:input type="text" id="bNo" name="bNo"
 										class="form-control"
-										placeholder="${login_ok.member_gui_number}"
+										placeholder="選填"
 										value="${login_ok.member_gui_number}" path="bNo" />
 								</div>
 							</div>
@@ -147,14 +147,14 @@
 							<div class="cart-detail cart-total p-3 p-md-4">
 								<h3 class="billing-heading mb-4">總價</h3>
 								<p class="d-flex">
-									<span>小計</span> <span>${ShoppingCart.subtotal}</span>
+									<span>小計</span> <span>${ShoppingCart.subtotal}元</span>
 								</p>
 								<p class="d-flex">
-									<span>折扣</span> <span>${ShoppingCart.subtotal-ShoppingCart.total}</span>
+									<span>折扣</span> <span>${ShoppingCart.subtotal-ShoppingCart.total}元</span>
 								</p>
 								<hr>
 								<p class="d-flex total-price">
-									<span>總計</span> <span>${ShoppingCart.total}</span>
+									<span>總計</span> <span>${ShoppingCart.total}元</span>
 								</p>
 								<c:choose>
 									<c:when test="${empty errmsg}">

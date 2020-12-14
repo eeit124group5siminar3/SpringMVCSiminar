@@ -9,46 +9,46 @@
 	<table style="width: 640px">
 		<tr>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">產品名稱</td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">產品名稱<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="product" type="text" id="product" path="product" size='4' />
+					name="product" type="text" id="product" path="product" size='4' required="required"/>
 				<font color='red' size='-1'> ${ErrMsg.errProduct} </font></td>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">價格</td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">價格<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="price" type="text" id="price" path="price" size='4' /> <font
+					name="price" type="text" id="price" path="price" size='4' required="required"/> <font
 				color='red' size='-1'> ${ErrMsg.errPrice} </font></td>
 		</tr>
 		<tr>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">保質期</td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">保質期<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
 					name="shelfTime" type="text" id="shelfTime" path="shelfTime"
-					size='4' />天 <font color='red' size='-1'>
+					size='3' required="required"/>天 <font color='red' size='-1'>
 					${ErrMsg.errShelfTime} </font></td>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">庫存</td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">庫存<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="stock" type="text" id="stock" path="stock" size='4' /> <font
+					name="stock" type="text" id="stock" path="stock" size='4' required="required"/> <font
 				color='red' size='-1'> ${ErrMsg.errStock} </font></td>
 		</tr>
 		<tr>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">內含數量</td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">內含數量<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="content" type="text" id="content" path="content" size='4' />
+					name="content" type="text" id="content" path="content" size='4' required="required"/>
 				<Font color='red' size='-1'> ${ErrMsg.errContent} </Font></td>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">數量單位</td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">數量單位<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="unit" type="text" id="unit" path="unit" size='4' /> <font
+					name="unit" type="text" id="unit" path="unit" size='4' required="required"/> <font
 				color='red' size='-1'> ${ErrMsg.errUnit} </font></td>
 		</tr>
 		<tr>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">折扣</td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">折扣<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="discount" type="text" id="discount" path="discount" size='4' />
+					name="discount" type="text" id="discount" path="discount" size='4' required="required"/>
 				<Font color='red' size='-1'> ${ErrMsg.errDiscount} </Font></td>
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">類型</td>
@@ -76,10 +76,10 @@
 
 		<tr>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5; width: 120px">描述</td>
+				style="padding-top: 0; padding-bottom: 5; width: 120px">描述<sup style="color:red">*必填</sup></td>
 			<td height="61" colspan="3" 
 				style="padding-top: 0; padding-bottom: 5"><form:textarea
-					name="description" path="description" cols="50" rows="4"></form:textarea>
+					name="description" path="description" cols="50" rows="4" required="required"></form:textarea>
 				<font color='red' size='-1'> ${ErrMsg.errDescription} </font></td>
 		</tr>
 		<!-- 	<div id="deleteMsg"> -->
