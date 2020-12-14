@@ -16,7 +16,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="<c:url value='goManageMembers.controller'/>">會員管理</a>
               	<a class="dropdown-item" href="#">商城管理</a>
-                <a class="dropdown-item" href="#">活動管理</a>
+                <a class="dropdown-item" href="<c:url value='goActAdmin'/>">活動管理</a>
                 <a class="dropdown-item" href="#">食譜管理</a>
                 <a class="dropdown-item" href="#">市集管理</a>
               </div>

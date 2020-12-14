@@ -22,10 +22,15 @@ public class ActPageTo {
 	//活動報名頁面
 	@RequestMapping(value = "/actSignFormPage")
 	public String actSignFormPage() {
-		return "/actFarmerHome";
+		return "/active/actFarmerHome";
 	}
 	
 	
+	//去活動管理員頁面
+	@RequestMapping(value = "/goActAdmin")
+	public String goActAdmin() {
+		return "/active/actAdminHome";
+	}
 
 
 }

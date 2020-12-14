@@ -22,6 +22,7 @@ public class Msg_Blog_Bean {
 	private Integer blog_id;
 	private String content;	
 	private String date;
+	private String name;
 	private Blog_Bean blog_Bean;
 	
 	@Id@Column(name="id")
@@ -57,8 +58,15 @@ public class Msg_Blog_Bean {
 		this.date = date;
 	}
 	
+	@Column(name="member_name")
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	@Transient
-	@Column(name="blog_id")
 	public Integer getBlog_id() {
 		return blog_id;
 	}

@@ -46,6 +46,14 @@
   src="https://code.jquery.com/jquery-3.5.1.js"
   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
   crossorigin="anonymous"></script>
+  <script>
+$(document).ready(function(){
+	alert("請至電子信箱收取認證碼");
+	$.ajax({
+		url:"sendMail.controller",
+	});
+})
+</script>
  <script>
 $(function(){
 $("#check_signup").on("submit",function(ev){

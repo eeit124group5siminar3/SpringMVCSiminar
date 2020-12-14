@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<section class="ftco-section carousel" id="top_singleProduct">
        <div align="center">
       <h1>歡迎來到 ${seller.mallName}</h1>
       </div>
        <div align="center">
-      <h1>取貨時間為${seller.pickupTime}</h1>
+      <h1>自行取貨時間為${seller.pickupTime}</h1>
       </div>
       <div align="center">
       	<p><a href="#" data-toggle="modal" data-target="#showMap" 
@@ -13,14 +14,17 @@
 		    class="btn btn-primary py-2 px-3">店面在這裡</a></p>
 	   </div>
       <hr>
-    <div>
-    		<div class="row">
+    <div>  
+    
+    	<div  class="row ftco-animate">
+    	
     		<c:forEach var="item" items="${totalProducts}">
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-3 col-lg-2 ftco-animate">
     				<div class="product" >
     					<a href="#" onclick='goProduct(${item.productId})' class="img-prod"><img class="img-fluid" 
     					 src=<c:url value='MarketImageServlet?id=${item.marketProductImgBean.productId}&type=PRODUCT' />
-    					  alt="Colorlib Template">					
+    					  alt="Colorlib Template">
+    					  <span class='status'>預購結束日${item.closeDay}</span>					
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
@@ -45,7 +49,9 @@
     				</div>
     			</div>
     		</c:forEach>
+    		 
     		</div>
+    	
     		<div align="center">
     		<p>
 			 <a href="#" onclick="goback()" class="btn btn-black py-3 px-5">返回</a>
@@ -76,6 +82,7 @@
 			</div>
 		</div>
 	</div>
+   </section>
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>

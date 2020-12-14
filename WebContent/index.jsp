@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -41,6 +41,8 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="goto-here">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+
 <!-- 	<div class="py-1 bg-primary"> -->
 <!-- 		<div class="container"> -->
 <!-- 			<div -->

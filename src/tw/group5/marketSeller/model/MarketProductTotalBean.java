@@ -1,5 +1,8 @@
  package tw.group5.marketSeller.model;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +19,14 @@ import javax.persistence.Transient;
 import org.springframework.stereotype.Component;
 
 
+
+
 @Entity
 @Table(name = "market_Product_Total")
 @Component
 //("market_Product_Total")
 public class MarketProductTotalBean {
 	private int productId;
-	private String email;
 	private String productName;
 	private String productArea;
 	private String productCatgory;
@@ -33,11 +37,16 @@ public class MarketProductTotalBean {
 	private Integer putOut;
 	private Integer quantity;
 	private Integer memberNo;
-	
+	private String openDayString;
+	private Date openDay;
+	private String openDayTime;
+	private Date closeDay;
+	private String closeDayTime;
 	private MarketMallBean marketMallBean;
 	private MarketProductImgBean marketProductImgBean;
 	private MarketPutOutBean marketPutOutBean;//設計單向
-
+    
+	
 	public MarketProductTotalBean(int productId, String productName, String productArea, String productCatgory,
 			Integer price, String unit, String discount, Integer quantity, MarketProductImgBean marketProductImgBean) {
 		super();
@@ -68,12 +77,11 @@ public class MarketProductTotalBean {
 	
 
 	
-	public MarketProductTotalBean(int productId, String email, String productName,
+	public MarketProductTotalBean(int productId, String productName,
 			String productArea, String productCatgory, Integer price, Integer report, String unit, String discount,
 			Integer  putOut, Integer quantity, MarketProductImgBean marketProductImgBean) {
 		super();
 		this.productId = productId;
-		this.email = email;
 		this.productName = productName;
 		this.productArea = productArea;
 		this.productCatgory = productCatgory;
@@ -94,14 +102,7 @@ public class MarketProductTotalBean {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-	
-	@Column(name = "EMAIL")
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 
 	@Column(name = "PRODUCT_NAME")
 	public String getProductName() {
@@ -184,6 +185,56 @@ public class MarketProductTotalBean {
 		this.memberNo = memberNo;
 	}
 	
+	
+	@Column(name = "CLOSE_DAY")
+	public Date getCloseDay() {
+		return closeDay;
+	}
+
+	public void setCloseDay(Date closeDay) {
+		this.closeDay = closeDay;
+	}
+	@Transient
+	public String getOpenDayString() {
+		return openDayString;
+	}
+	
+	public void setOpenDayString(String openDayString) {
+		if(openDayString!=null&&openDayString.length()!=0) {
+			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+			String dayString=dateFormat.format(openDayString);
+			Date openDay= Date.valueOf(dayString);
+			setOpenDay(openDay);
+		}
+	}
+	
+	@Column(name = "OPEN_DAY")
+	public Date getOpenDay() {
+		return openDay;
+	}
+
+	public void setOpenDay(Date openDay) {
+		this.openDay = openDay;
+	}
+	
+	@Column(name = "OPEN_DAY_TIME")
+	public String getOpenDayTime() {
+		return openDayTime;
+	}
+
+	public void setOpenDayTime(String openDayTime) {
+		this.openDayTime = openDayTime;
+	}
+
+	@Column(name = "CLOSE_DAY_TIME")
+	public String getCloseDayTime() {
+		return closeDayTime;
+	}
+
+	public void setCloseDayTime(String closeDayTime) {
+		this.closeDayTime = closeDayTime;
+	}
+
 	@OneToOne(fetch = FetchType.LAZY,mappedBy ="marketProductTotalBean", cascade = CascadeType.ALL)
 	public MarketProductImgBean getMarketProductImgBean() {
 		return marketProductImgBean;
@@ -212,8 +263,8 @@ public class MarketProductTotalBean {
 	public void setMarketMallBean(MarketMallBean marketMallBean) {
 		this.marketMallBean = marketMallBean;
 	}
+
 	
-	
-	
+
 
 }

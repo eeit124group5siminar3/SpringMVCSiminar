@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="container">
 	<div class="row">
@@ -14,7 +15,7 @@
 							<th>&nbsp;</th>
 							<th>&nbsp;</th>
 							<th>商品名稱</th>
-							<th>生產者</th>
+							<th>商店名稱</th>
 							<th>單價</th>
 							<th>數量</th>
 							<th>價格</th>
@@ -25,35 +26,32 @@
 							items="${marketCart.content}">
 							<tr class="text-center">
 								<td class="product-remove"><a href="#"
-									onclick="reduceItem(${anEntry.value.productId})"><span
+									onclick="removeItem(${item.value.productId})"><span
 										class="ion-ios-close"></span></a></td>
 
 								<td class="image-prod"><div class="img"
-										style="background-image: url(<c:url value='retrieveImageServlet?id=${anEntry.value.productId}&type=PRODUCT' />);">
-										<c:if test="${anEntry.value.discount!=1}">
-											<span class='status'>-${Math.round((1 - anEntry.value.discount) * 100)}%</span>
-										</c:if>
+										style="background-image: url(<c:url value='MarketImageServlet?id=${item.value.productId}&type=PRODUCT' />);">
 									</div></td>
 
 								<td>
-									<h3>${anEntry.value.product}</h3>
-									<p>${anEntry.value.content}${anEntry.value.unit}</p>
+									<h3>${item.value.product}</h3>
+								
 								</td>
 
-								<td class="price">${anEntry.value.producterName}</td>
-								<td class="price">${Math.round(anEntry.value.price*anEntry.value.discount)}元</td>
+								<td class="price">${item.value.producterName}</td>
+								<td class="price">${item.value.price}元</td>
 
 								<td class="quantity">
 									<div class="input-group mb-3">
 										<input type="text" name="quantity"
 											class="quantity form-control input-number"
-											value="${anEntry.value.qty}"
-											onblur="changeQty(event,${anEntry.value.productId},${anEntry.value.stock},${anEntry.value.qty})"
-											min="1" max="${anEntry.value.stock}">
+											value="${item.value.quantity}"
+											onblur="changeQty(event,${item.value.productId},${item.value.stock},${item.value.quantity})"
+											min="1" max="${item.value.stock}">
 									</div>
 								</td>
 
-								<td class="total">${Math.round(anEntry.value.price*anEntry.value.qty*anEntry.value.discount)}元</td>
+								<td class="total">${item.value.price*item.value.quantity}元</td>
 							</tr>
 							<!-- END TR-->
 						</c:forEach>
@@ -67,26 +65,21 @@
 		<div class="cart-total mb-3">
 			<h3>購買統計</h3>
 			<p class="d-flex">
-				<span>小計</span> <span>${ShoppingCart.subtotal}</span>
+				<span>小計</span> <span>${marketCart.subtotal}</span>
 			</p>
-			<!-- 			<p class="d-flex"> -->
-			<!-- 				<span>運費</span> <span>$0.00</span> -->
-			<!-- 			</p> -->
-			<p class="d-flex">
-				<span>折扣</span> <span>${ShoppingCart.subtotal-ShoppingCart.total}</span>
-			</p>
+
 			<hr>
 			<p class="d-flex total-price">
-				<span>總計</span> <span>${ShoppingCart.total}</span>
+				<span>總計</span> <span>${marketCart.total}</span>
 			</p>
-		</div>
-		<p>
-			<a href="<c:url value='/Mall_checkout' />"
+		     <p>
+			<a href="<c:url value='/Market_checkout' />"
 				class="btn btn-primary py-3 px-4">去結帳</a> <a
-				href="<c:url value='/mall_shop#mainContent' />"
-				class="btn btn-primary py-3 px-4">回商城</a>
-		</p>
-	</div>
+				href="<c:url value='/GoMarketHome' />"
+				class="btn btn-primary py-3 px-4">我要繼續買</a>
+		     </p>
+		</div>
+	</div>	
 </div>
 
 <script src="js/jquery.min.js"></script>

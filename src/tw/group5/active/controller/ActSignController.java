@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 import example.ExampleAllInOne;
+import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
 import oracle.net.aso.m;
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActOrd;
@@ -90,7 +91,8 @@ public class ActSignController {
 		//新增訂單產生時間
 		Timestamp time= new Timestamp(System.currentTimeMillis());//獲取系統當前時間 
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String timeStr = df.format(time); 
+		String timeStr = df.format(time);
+
 		time = Timestamp.valueOf(timeStr); 
 		aoInsert.setOrdTime(time);
 		
@@ -104,15 +106,16 @@ public class ActSignController {
 //		String form = all.genAioCheckOutALL();
 		
 		String tradeNo= aoInsert.getActOrdId().toString();
-		String tradeDate=aoInsert.getOrdTime().toString();
-		String tradeTotal=aoInsert.getTotalPrice().toString();
+		String tradeDate=aoInsert.getOrdTime().toString().substring(0, 19);
+		String tradeTotal=Integer.toString(aoInsert.getTotalPrice().intValue());
 		String tradeItem=aoInsert.getActFarmer().getActName();
 		String tradeDesc=aoInsert.getOrdActNum().toString()+"人";
 		
 		System.out.println("到底有沒有有沒有有沒有"+tradeNo);
+		System.out.println("印出來是什麼呢?"+tradeDate);
 		String form = actOrdService.payActSign(tradeNo,tradeDate,tradeTotal,tradeItem,tradeDesc);
 		model.addAttribute("form", form);
-		return "active/actSuccess2";
+		return "active/EcpayForTest";
 		
 	}
 	
