@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -252,8 +253,8 @@ public class ActOrdDAO {
 
 	
 //============================  分析訂單  =================================	
-	
-	public Map<String, Integer> countActType(){
+	//查詢訂單中活動種類的分布
+	public LinkedHashMap<String, Integer> countActType(){
 		Session session = sessionFactory.getCurrentSession();	
 		Query q1 = session.createSQLQuery("select COUNT(*) from actord inner join actfarmer on actord.actid = actfarmer.actid where acttype='體驗類'");
 		Query q2 = session.createSQLQuery("select COUNT(*) from actord inner join actfarmer on actord.actid = actfarmer.actid where acttype='採收類'");
@@ -266,7 +267,7 @@ public class ActOrdDAO {
 		Integer actType2 = Integer.parseInt(obj2.toString()); //採收類
 		Object obj3 = q3.uniqueResult();
 		Integer actType3 = Integer.parseInt(obj3.toString()); //文藝類
-		Object obj4 = q1.uniqueResult();
+		Object obj4 = q4.uniqueResult();
 		Integer actType4 = Integer.parseInt(obj4.toString()); //綜合類
 		
 		
@@ -277,11 +278,11 @@ public class ActOrdDAO {
 		actTypeList.add(actType4);
 		
 		
-		Map<String, Integer> actTypeMap = new HashMap<String, Integer>(); 
-		actTypeMap.put("體驗類", actType1);
-		actTypeMap.put("採收類", actType2);
-		actTypeMap.put("體驗類", actType3);
-		actTypeMap.put("文藝類", actType4);
+		LinkedHashMap<String, Integer> actTypeMap = new LinkedHashMap<String, Integer>(); 
+		actTypeMap.put("exp", actType1); //體驗類
+		actTypeMap.put("get", actType2); //採收類
+		actTypeMap.put("art", actType3); //文藝類
+		actTypeMap.put("sum", actType4); //綜合類
 		
 		return actTypeMap;
 	}

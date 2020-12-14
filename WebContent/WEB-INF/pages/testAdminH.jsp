@@ -19,6 +19,7 @@
                 <a class="dropdown-item" href="<c:url value='getAllActFarmer.do'/>">活動管理</a>
                 <a class="dropdown-item" href="#">食譜管理</a>
                 <a class="dropdown-item" href="#">市集管理</a>
+                <a class="dropdown-item" href="<c:url value='/index' />">回前台</a>
               </div>
       </li>
       <li class="nav-item dropdown">
@@ -49,6 +50,13 @@
     <a class="dropdown-item" href="#">??????</a>
   </div>
 </li>
+<!-- <li class="nav-item dropdown"> -->
+<%--   <a class="nav-link dropdown-tgogle" href="<c:url value='/index'/>" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">回前台</a> --%>
+<!--   <div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+<!--     <a class="dropdown-item" href="#">??????</a> -->
+<!--     <a class="dropdown-item" href="#">??????</a> -->
+<!--   </div> -->
+<!-- </li> -->
 			<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
 
 			  <li class="nav-item"><a href="<c:url value='adminRemoveSession.controller' />" class="nav-link">登出</a></li>

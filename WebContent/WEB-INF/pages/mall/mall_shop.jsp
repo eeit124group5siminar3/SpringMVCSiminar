@@ -125,7 +125,6 @@
 			if(${mall_pageNo!=null}){
 				pageNo=`${mall_pageNo}`;				
 					}
-			
 			$.ajax({
 				url : "MallContent",
 				type : "POST",

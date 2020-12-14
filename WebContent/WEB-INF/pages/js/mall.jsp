@@ -104,6 +104,7 @@
 		} else {
 			$.ajax({
 				url : "SingleProduct",
+				async : false,
 				type : "POST",
 				data : {
 					"qty" : qty,
@@ -117,6 +118,9 @@
 				}
 			});
 		}
+					var shoppingcartItemNum=$("#shoppingcartItemNum").val();
+					console.log(shoppingcartItemNum);	
+					$("#shoppingcartItem").html("<span class='icon-shopping_cart'></span>["+shoppingcartItemNum+"]");
 	}
 	// 在購物車中加1
 	function add_To_Cart(productId, stock, qty) {
@@ -143,6 +147,7 @@
 	function reduceItem(productId) {
 		$.ajax({
 			url : "DeleteOrder",
+			async : false,
 			type : "POST",
 			data : {
 				"productId" : productId
@@ -155,6 +160,9 @@
 				$("#cartContent").html(data);
 			}
 		});
+		var shoppingcartItemNum=$("#shoppingcartItemNum").val();
+		console.log(shoppingcartItemNum);	
+		$("#shoppingcartItem").html("<span class='icon-shopping_cart'></span>["+shoppingcartItemNum+"]");
 	}
 	// 庫存不足	
 	function notEnough() {
@@ -254,8 +262,9 @@
 	//管理訂單狀態
 	function orderManagement(event, orderStatus) {
 		event.stopPropagation();
-		var yes = confirm("狀態改變為不可逆");
 		var orderDetailId = event.path[1].id;
+		if(orderStatus==-1){
+		var yes = confirm("一旦拒絕接單，就無法再次接單");		
 		if (yes) {
 			$.ajax({
 				url : "OrderManagement",
@@ -271,7 +280,6 @@
 					event.path[1].innerHTML = data;
 				}
 			});
-
 		} else {
 			$.ajax({
 				url : "OrderManagement",
@@ -287,6 +295,22 @@
 				}
 			});
 		}
+		}else{
+			$.ajax({
+				url : "OrderManagement",
+				type : "POST",
+				data : {
+					"orderDetailId" : orderDetailId,
+					"status" : orderStatus
+				},
+				success : function(data, status) {
+					event.path[1].innerHTML = data;
+				},
+				error : function(data, status) {
+					event.path[1].innerHTML = data;
+				}
+			});
+			}
 	}
 	//新增上傳圖片預覽
 	function loadImageFile(event) {
