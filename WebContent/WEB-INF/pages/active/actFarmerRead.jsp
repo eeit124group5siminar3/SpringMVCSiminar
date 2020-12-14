@@ -160,7 +160,7 @@
 <%-- </form:form> --%>
 <section class="ftco-section ftco-degree-bg">
 <div>	
-<h3 align="center">一日農夫活動修改</h3>
+<h3 align="center">一日農夫活動檢視</h3>
 <form:form action="actFarmerPreUpdate.do" modelAttribute="afBean" method="GET" enctype="multipart/form-data" name="act">
 <table align="center">
 	<tr>
@@ -173,7 +173,7 @@
 	</tr>
 	<tr>
 		<td><form:label path="actType">活動類型:</form:label></td>
-		<td><form:select path="actType" type="text" readonly="true">		
+		<td><form:select path="actType" type="text" disabled="true">		
 				<form:option value="體驗類">體驗類</form:option>
 				<form:option value="採收類">採收類</form:option>
 				<form:option value="文藝類">文藝類</form:option>
@@ -236,9 +236,9 @@
 	<tr>
 		<td><form:label path="sigStat">報名狀態:</form:label></td>
 		<td>
-			<form:radiobutton path="sigStat" value="0" id="sigStat" readonly="true"/>未開放
-			<form:radiobutton path="sigStat" value="1" id="sigStat" readonly="true"/>開放中
-			<form:radiobutton path="sigStat" value="2" id="sigStat" readonly="true"/>已截止			
+			<form:radiobutton path="sigStat" value="0" id="sigStat" disabled="true"/>未開放
+			<form:radiobutton path="sigStat" value="1" id="sigStat" disabled="true"/>開放中
+			<form:radiobutton path="sigStat" value="2" id="sigStat" disabled="true"/>已截止			
 		</td>
 	</tr>
 	<tr>

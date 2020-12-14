@@ -142,7 +142,7 @@ a{
         <tbody>
         <c:forEach var="actFarmer" items="${collFarmer}">
 			<tr>
-				<td>${actFarmer.actStatusWord}<br>${actFarmer.actRemarks}</td>
+				<td>${actFarmer.actStatusWord}</td>
 				<td>${actFarmer.actId}</td>						
 				<td><a href="<c:url value='/actFarmerPreRead.do?actId=${actFarmer.actId}'/>" >${actFarmer.actName}</a></td>
 				<td>${actFarmer.actType}</td>
