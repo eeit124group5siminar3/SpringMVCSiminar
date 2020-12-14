@@ -208,9 +208,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
 	<script>
 		$(function() {
-			var buyer_account = "123@222";
+			var buyer_account = "buyer@gmail.com";
 			var buyer_password = "123456aA"
-			var seller_account = "test@yahoo.com.tw";
+			var seller_account = "seller@gmail.com";
 			var seller_password = "123456aA";
 			$("#buyer_button").click(function() {
 				$("#exampleInputEmail1").val(buyer_account);
@@ -267,8 +267,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" name="remember" class="form-check-input"
-						id="exampleCheck1">
-					<%-- 						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if> > --%>
+						id="exampleCheck1"
+					<c:if test='${requestScope.remember==true}'>checked='checked'</c:if> >
 					<label class="form-check-label" for="exampleCheck1">記住我</label>
 					<hr>
 
