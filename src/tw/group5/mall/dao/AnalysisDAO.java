@@ -100,7 +100,7 @@ public String getProduct() {
 		return count;
 	}
 
-// 取得賣家售出產品清單
+// 取得個人售出產品清單
 	public List<String> getUserProductList(Date last, Date start){
 		Session session = sessionFactory.getCurrentSession();
 		String sql="select REGEXP_SUBSTR(description,'[^ - ]+',1,1) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and status in (2,3) group by REGEXP_SUBSTR(description,'[^ - ]+',1,1)";
@@ -111,4 +111,16 @@ public String getProduct() {
 		List <String> list =query.list();
 		return list;
 	}
+	
+// 獲得個人各產品的訂單數
+		public List<Long> getMonthlyProductOrder(Date last, Date start) {
+			Session session = sessionFactory.getCurrentSession();
+			String sql="select count(*) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and status in (2,3) group by REGEXP_SUBSTR(description,'[^ - ]+',1,1)";
+			Query<Long>query = session.createSQLQuery(sql);
+			query.setParameter("producterId", userId);
+			query.setParameter("start", start);
+			query.setParameter("last", last);
+			List<Long> list =  query.list();
+			return list;
+		}
 }

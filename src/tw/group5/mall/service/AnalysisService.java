@@ -1,8 +1,6 @@
 package tw.group5.mall.service;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,11 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
-
 import tw.group5.mall.dao.AnalysisDAO;
-import tw.group5.mall.dao.OrderDAO;
-import tw.group5.mall.model.CategoryClass;
 
 @Service
 @Transactional
@@ -48,10 +42,10 @@ public class AnalysisService {
 		List<BigDecimal> list = new ArrayList<BigDecimal>();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
 		calendar.add(Calendar.MONTH, 1);
 		for (int i = 0; i <= 5; i++) {
@@ -73,10 +67,10 @@ public class AnalysisService {
 		List<BigDecimal> list = new ArrayList<BigDecimal>();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
 		calendar.add(Calendar.MONTH, 1);
 		for (int i = 0; i <= 5; i++) {
@@ -97,10 +91,10 @@ public class AnalysisService {
 	public String getUserProductListLastHalfYear() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
 		calendar.add(Calendar.MONTH, 1);
 		Date start = calendar.getTime();
@@ -127,10 +121,10 @@ public class AnalysisService {
 		List<BigDecimal> list = new ArrayList<BigDecimal>();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
 		calendar.add(Calendar.MONTH, 1);
 		for (int i = 0; i <= 5; i++) {
@@ -162,72 +156,98 @@ public class AnalysisService {
 	}
 
 // 取得個人某單一月份各商品的營業額
-	public List<BigDecimal> getUserProductSalesOneMonth(Integer lastMonthOf){
-		List<BigDecimal> list=new ArrayList<BigDecimal>();
-		List<String> productList=getUserProductListOneMonth(lastMonthOf);
+	public List<BigDecimal> getUserProductSalesOneMonth(Integer lastMonthOf) {
+		List<BigDecimal> list = new ArrayList<BigDecimal>();
+		List<String> productList = getUserProductListOneMonth(lastMonthOf);
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
-		calendar.add(Calendar.MONTH, 1-lastMonthOf);
+		calendar.add(Calendar.MONTH, 1 - lastMonthOf);
 		Date start = calendar.getTime();
 		calendar.add(Calendar.MONTH, -1);
 		Date last = calendar.getTime();
-		if(productList.size()>10) {
-			BigDecimal otherSales=new BigDecimal(0);
-			for(int i=0;i<10;i++) {
+		if (productList.size() > 10) {
+			BigDecimal otherSales = new BigDecimal(0);
+			for (int i = 0; i < 10; i++) {
 				adao.setProduct(productList.get(i));
-				list.add(adao.getMonthlyProductSales(last, start));	
-			}	
-			for(int i=10;i<productList.size();i++) {
+				list.add(adao.getMonthlyProductSales(last, start));
+			}
+			for (int i = 10; i < productList.size(); i++) {
 				adao.setProduct(productList.get(i));
-				otherSales=otherSales.add(adao.getMonthlyProductSales(last, start));
+				otherSales = otherSales.add(adao.getMonthlyProductSales(last, start));
 			}
 			list.add(otherSales);
-		}else {
-		for(int i=0;i<productList.size();i++) {
-			adao.setProduct(productList.get(i));
-			list.add(adao.getMonthlyProductSales(last, start));	
-		}
+		} else {
+			for (int i = 0; i < productList.size(); i++) {
+				adao.setProduct(productList.get(i));
+				list.add(adao.getMonthlyProductSales(last, start));
+			}
 		}
 		return list;
 	}
+
 // 取得個人某單一月份的產品售出清單
 	public List<String> getUserProductListOneMonth(Integer lastMonthOf) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
-		calendar.add(Calendar.MONTH, 1-lastMonthOf);
+		calendar.add(Calendar.MONTH, 1 - lastMonthOf);
 		Date start = calendar.getTime();
 		calendar.add(Calendar.MONTH, -1);
 		Date last = calendar.getTime();
 		List<String> list = adao.getUserProductList(last, start);
-		if(list.size()>10) {
+		if (list.size() > 10) {
 			do {
 				list.remove(10);
-			}while(list.size()>10);
+			} while (list.size() > 10);
 			list.add("其他");
 		}
 		return list;
 	}
-	
+
 // 取的前半年月份下拉式選單
 	public String getMonthSelectTag() {
-		List<String> list=getMonthNameLastHalfYear();
+		List<String> list = getMonthNameLastHalfYear();
 		String ans = "";
 		ans += "<select id='lastMonthOf' onchange='monthlyProduct()'>";
-		for (int i=0;i<6;i++) {
+		for (int i = 0; i < 6; i++) {
 			ans += "<option value='" + i + "'>" + list.get(i) + "</option>";
 		}
 		ans += "</select>";
 		return ans;
+	}
+
+// 取得個人某單一月份各商品的訂單數
+	public List<Long> getUserProductOrdersOneMonth(Integer lastMonthOf) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1 - lastMonthOf);
+		Date start = calendar.getTime();
+		calendar.add(Calendar.MONTH, -1);
+		Date last = calendar.getTime();
+		List<Long> list=adao.getMonthlyProductOrder(last, start);
+		if (list.size() > 10) {
+			Long other=(long)0;
+			do {
+				other+=list.get(10);
+				list.remove(10);
+			} while (list.size() > 10);
+			list.add(other);
+		}
+		return list;
 	}
 
 	public void setUserId(Integer member_no) {

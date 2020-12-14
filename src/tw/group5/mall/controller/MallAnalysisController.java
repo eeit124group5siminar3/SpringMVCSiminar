@@ -78,7 +78,8 @@ public class MallAnalysisController {
 
 // 顯示單月各產品營業額圖表
 	@PostMapping(value = "/ProductSales")
-	public @ResponseBody Map<String, Object> showProductSalesCharts(HttpServletRequest request,@RequestParam(value = "lastMonthOf")Integer lastMonthOf) {
+	public @ResponseBody Map<String, Object> showProductSalesCharts(HttpServletRequest request,
+			@RequestParam(value = "lastMonthOf") Integer lastMonthOf) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpSession session = request.getSession(false);
 		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
@@ -88,6 +89,31 @@ public class MallAnalysisController {
 		List<String> userProductListOneMonth = analysisService.getUserProductListOneMonth(lastMonthOf);
 		map.put("productList", userProductListOneMonth);
 		map.put("sales", userProductSalesOneMonth);
+		map.put("monthTag", monthTag);
+		return map;
+	}
+
+// 顯示產品訂單數分析內容
+	@PostMapping(value = "/ProductOrdersContent")
+	public ModelAndView showProductOrdersContent(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/quantityOfOrder");
+		return mav;
+	}
+
+// 顯示單月各產品訂單數圖表
+	@PostMapping(value = "/ProductOrders")
+	public @ResponseBody Map<String, Object> showProductOrdersCharts(HttpServletRequest request,
+			@RequestParam(value = "lastMonthOf") Integer lastMonthOf) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpSession session = request.getSession(false);
+		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
+		analysisService.setUserId(mb.getMember_no());
+		String monthTag = analysisService.getMonthSelectTag();
+		List<Long> userProductOrdersOneMonth = analysisService.getUserProductOrdersOneMonth(lastMonthOf);
+		List<String> userProductListOneMonth = analysisService.getUserProductListOneMonth(lastMonthOf);
+		map.put("productList", userProductListOneMonth);
+		map.put("orders", userProductOrdersOneMonth);
 		map.put("monthTag", monthTag);
 		return map;
 	}

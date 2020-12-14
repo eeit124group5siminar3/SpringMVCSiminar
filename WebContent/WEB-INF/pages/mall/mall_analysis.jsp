@@ -51,7 +51,8 @@
 										class="far fa-circle nav-icon"></i>
 										<p>月營業額</p>
 								</a></li>
-								<li class="nav-item"><a href="" class="nav-link"> <i
+								<li class="nav-item" onclick="monthlyOrder()"><a
+									class="nav-link" id="productOrdersA"> <i
 										class="far fa-circle nav-icon"></i>
 										<p>訂單數量</p>
 								</a></li>
@@ -141,6 +142,24 @@
 				error : function(data, status) {
 					$("#chooseAnalysis").find("a").removeClass("active");
 					$("#monthlySalesA").addClass("active")
+					$("#analysisContent").html(data);
+				}
+			});
+		}
+		function monthlyOrder() {
+			$.ajax({
+				url : "ProductOrdersContent",
+				async : false,
+				type : "POST",
+				datatype : "html",
+				success : function(data, status) {
+					$("#chooseAnalysis").find("a").removeClass("active");
+					$("#productOrdersA").addClass("active")
+					$("#analysisContent").html(data);
+				},
+				error : function(data, status) {
+					$("#chooseAnalysis").find("a").removeClass("active");
+					$("#productOrdersA").addClass("active")
 					$("#analysisContent").html(data);
 				}
 			});
