@@ -66,7 +66,7 @@
 </head>
 <body class="goto-here">
 	<jsp:include page="../header.jsp" />
-	<c:if test="${memDetail!=null}">
+	<c:if test="${!empty memDetail}">
 	<form:form action="./updateDetail" method='post' class="formform" 
 				modelAttribute="memDetail" enctype="multipart/form-data">
 
