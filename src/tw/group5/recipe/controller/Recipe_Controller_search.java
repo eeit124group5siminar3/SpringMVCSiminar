@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
+import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
@@ -61,39 +62,42 @@ public class Recipe_Controller_search {
 		System.err.println("getViews(): " + bean.getViews());
 		bean.setViews(bean.getViews() + 1);
 		service.update(rec_id, bean);
-
+		Integer mem_no=bean.getMember_no();
+		
 		if (session.getAttribute("login_ok") != null) {
-			Member_SignUp OK = (Member_SignUp) session.getAttribute("login_ok");
-			Integer mem_no = OK.getMember_no();
 			System.out.println("rec_id:" + rec_id);
 			System.out.println("mem_no: " + mem_no);
 			boolean flag = service.bookmarkExist(rec_id, mem_no);
+			
+			//搜尋會員資料
+			Member_Detail detailBean=service.detailBean(mem_no);
 			System.err.println("flag: " + flag);
 			m.addAttribute("flag", flag);
 			if (flag == true) {
 				System.out.println("flag=true");
-
-				List<Recipe_Bean> list = service.partSearch(rec_id);
-				m.addAttribute("list", list);
+				Recipe_Bean partSearch=service.recipeBean(rec_id);
+				m.addAttribute("list", partSearch);
+				m.addAttribute("detailBean",detailBean);
 				return "recipe/recipe_search_display";
 			}
 			if (flag != true) {
 				System.out.println("flag=false");
-				List<Recipe_Bean> list = service.partSearch(rec_id);
-				m.addAttribute("list", list);
-				System.out.println("list: " + list);
+				Recipe_Bean partSearch=service.recipeBean(rec_id);
+				m.addAttribute("list", partSearch);
+				m.addAttribute("detailBean",detailBean);
 				return "recipe/recipe_search_display";
 			}
 		}
 		if (session.getAttribute("login_ok") == null) {
 			if (rec_id != null) {
-				List<Recipe_Bean> list = service.partSearch(rec_id);
-				System.err.println(list);
-				m.addAttribute("List", list);
+				Recipe_Bean partSearch=service.recipeBean(rec_id);
+				Member_Detail detailBean=service.detailBean(mem_no);
+				m.addAttribute("detailBean",detailBean);
+				m.addAttribute("list", partSearch);
 				return "recipe/recipe_search_display";
 			}
 		}
-		return null;
+		return "recipe/recipe_workpage";
 	}
 
 	// add bookmark

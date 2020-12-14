@@ -137,6 +137,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<li align="left"><a href="<c:url value='updatePage.controller'/>" class="hyperlink">我的食譜</a></li>
 			<li align="left"><a href="<c:url value='myRecipe'/>" class="hyperlink">我的最愛</a></li>
 			<li align="left"><a href="<c:url value='blog_personal'/>" class="hyperlink">文章管理</a></li>
+			<li align="left"><a href="<c:url value='completeDetail?mem_no=${login_ok.member_no}'/>" class="hyperlink">修改資料</a></li>
+			
 				
 
 			</div>

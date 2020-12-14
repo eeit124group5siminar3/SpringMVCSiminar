@@ -2,12 +2,14 @@ package tw.group5.recipe.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.group5.recipe.DAO.Recipe_DAO_spring;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
+import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 //import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
@@ -90,6 +92,28 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.recipeBean(rec_id);
 	}
 	
+	
+	//個人資料
+	@Override
+	public Member_Detail insertDetail(Member_Detail bean) {
+		return rDAO.insertDetail(bean);
+
+	}
+
+	@Override
+	public Member_Detail updateDetail(Member_Detail bean) {
+		return rDAO.updateDetail(bean);
+	}
+
+	@Override
+	public boolean deleteDetail(Integer mem_no) {
+		return rDAO.deleteDetail(mem_no);
+	}
+
+	@Override
+	public Member_Detail detailBean(Integer mem_no) {
+		return rDAO.detailBean(mem_no);
+	}
 
 	
 	//--------------blog------------------------------
