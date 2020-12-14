@@ -15,6 +15,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -118,8 +119,8 @@ public class ActSignController {
 		String form = actOrdService.payActSign(tradeNo,tradeDate,tradeTotal,tradeItem,tradeDesc);
 		model.addAttribute("actOrdId",tradeNo);
 		model.addAttribute("form", form);
-//		return "active/EcpayForTest";
-		return "redirect:/actOrdSelect.do";  //新增DB用
+		return "active/EcpayForTest";
+//		return "redirect:/actOrdSelect.do";  //新增DB用
 
 		
 	}
@@ -181,16 +182,23 @@ public class ActSignController {
 		) {
 		if(mb == null) {
 			return "Member_SignUp/Member_Login";
-		}else {
-//		if(pageNo == null) {
-//			if(model.getAttribute("pageNo") != null)
-//		}
+		}
+		
+		if(pageNo == null) {
+			if(model.getAttribute("pageNo") != null) {
+				pageNo = (Integer) model.getAttribute("pageNo");
+			}else {
+				pageNo = 1;
+			}
+		}	
 		Integer memNo=mb.getMember_no();
-		Collection<ActOrd> collActOrds = actOrdService.getActOrds(memNo);
+//		Collection<ActOrd> collActOrds = actOrdService.getActOrds(memNo);
+		Collection<ActOrd> collActOrds = actOrdService.getPageActOrds(memNo);
+		model.addAttribute("totalPages", actOrdService.getTotalPages(memNo));
+		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("collActOrds", collActOrds);
 		return "/active/actSignOrd";
 		}
-	}
 	
 	//======================================廠商CRUD=============================================	
 	

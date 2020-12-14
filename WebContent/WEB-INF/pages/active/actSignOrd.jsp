@@ -99,48 +99,50 @@
 						        </td>
 						        <td class="quantity">${collActOrds.ordActNum}</td>
 						    			        
-						        <td class="total">$${collActOrds.totalPrice}</td>
+						        <td class="total">${collActOrds.totalPrice}</td>
 						      </tr><!-- END TR-->
 						     </c:forEach>
-								<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
-								<form>
+					     
+						     
+						     
+						    </tbody>
+						  </table>
+					  </div>
+			<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
+					  
+							<form>
 								<div id="bpaging">
 								<table border="1" style="margin-right: 0px;">
 								<tr align="center">
 									<td width='80' height='20'><c:if test="${pageNo > 1}">
 										<div id="blfirst"><a
-											href="<c:url value='maintainActFarmer.do?pageNo=1' />">maintainActFarmer.do?pageNo=1 
+											href="<c:url value='actOrdSelect.do?pageNo=1' />">
 											<img border='0' alt='第一頁' height='30' width='30'
 											src='./images/first-icon.png' /> </a></div>
 									</c:if></td>
 									<td width='80'><c:if test="${pageNo > 1}">
 										<div id="blprev"><a
-											href="<c:url value='maintainActFarmer.do?pageNo=${pageNo-1}' />">
+											href="<c:url value='actOrdSelect.do?pageNo=${pageNo-1}' />">
 										<img border='0' alt='前一頁' height='30' width='30'
 											src='./images/prev-icon.png' /></a></div>
 									</c:if></td>
 									<td width='76'>${pageNo} / ${totalPages}</td>
 									<td width='80'><c:if test="${pageNo != totalPages}">
 										<div id="blnext"><a
-											href="<c:url value='maintainActFarmer.do?pageNo=${pageNo+1}' />">
+											href="<c:url value='actOrdSelect.do?pageNo=${pageNo+1}' />">
 										<img border='0' alt='最末頁' height='30' width='30'
 											src='./images/next-icon.png'/> </a></div>
 									</c:if></td>
 									<td width='80'><c:if test="${pageNo != totalPages}">
 										<div id="bllast"><a
-											href="<c:url value='maintainActFarmer.do?pageNo=${totalPages}' />">
+											href="<c:url value='actFarmerList.do?pageNo=${totalPages}' />">
 										<img border='0' alt='最末頁' height='30' width='30'
 											src='./images/last-icon.png' /> </a></div>
 									</c:if></td>
 								</tr>
 							</table>
 							</div>
-							</form>						     
-						     
-						     
-						    </tbody>
-						  </table>
-					  </div>
+						</form>	
     			</div>
     		</div>
     		</div>

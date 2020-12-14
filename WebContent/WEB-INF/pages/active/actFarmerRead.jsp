@@ -241,7 +241,10 @@
 			<form:radiobutton path="sigStat" value="2" id="sigStat" readonly="true"/>已截止			
 		</td>
 	</tr>
-	
+	<tr>
+		<td><form:label path="actRemarks">備註:</form:label></td>
+		<td><form:textarea cols="50" rows="3" path="actRemarks" readonly="true"></form:textarea></td>
+	</tr>
 	<tr>
 		<td colspan="3" align="center">	
 			<input type="hidden" id="actId" name="actId" value="${afBean.actId}"/>

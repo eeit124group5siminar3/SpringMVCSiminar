@@ -79,10 +79,14 @@ public class LoginController {
 		String password = request.getParameter("password").trim();
 		String code = request.getParameter("code").trim();
 		
-		boolean login = member_Service.login_check(email, password);
-		Member_SignUp login_bean = member_Service.login_bean(email);
-		String member_lock_acc = login_bean.getMember_lock_acc();
+		Member_SignUp login_bean=null;
+		String member_lock_acc=null;
 		
+		boolean login = member_Service.login_check(email, password);
+		if(login) {
+		login_bean = member_Service.login_bean(email);
+		member_lock_acc = login_bean.getMember_lock_acc();
+		}
 		if (!codeSession.equalsIgnoreCase(code)) {
 			check[1] = "1";
 			return check ;
@@ -125,7 +129,7 @@ public class LoginController {
 				cookieRemember.setMaxAge(0);
 				cookieRemember.setPath(request.getContextPath());
 			}
-			
+		
 			response.addCookie(cookieUser);
 			response.addCookie(cookiePassword);			
 			response.addCookie(cookieRemember);
