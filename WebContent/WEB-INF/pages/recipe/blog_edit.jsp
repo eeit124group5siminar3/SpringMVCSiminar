@@ -47,13 +47,6 @@
 
 		<form:form action="./blogContent" method='post'
 			modelAttribute="editBean" style="width: 60%" enctype="multipart/form-data">
-			<form:label for="MsgTextarea" path="introduction"
-				style="font-size: 30px;" class="input-group-text">自我介紹 : <span
-					style="font-size: 15px;"> 最多400字</span>
-				<br>
-			</form:label>
-			<form:textarea class="form-control" id="MsgTextarea" rows="10"
-				cols="40" path="introduction" placeholder="請輸入.."></form:textarea>
 
 			<div>
 				<form:label for="title" path="title" style="font-size: 30px;"
