@@ -23,9 +23,9 @@ import org.springframework.stereotype.Component;
 public class MarketOrderBean {
 	private Integer oid;
 	private String cellphone;	
-	private Integer totalPrice;
 	private String buyer;
 	private Date buyTime;
+	private Integer buyerId;
 	private String address;
     private Set<MarketOrderDetailBean> marketOrderDetailBean =
             new HashSet<MarketOrderDetailBean>(0);
@@ -47,13 +47,6 @@ public class MarketOrderBean {
 		this.cellphone = cellphone;
 	}
 	
-	@Column(name = "TOTAL_PRICE")
-	public Integer getTotalPrice() {
-		return totalPrice;
-	}
-	public void setTotalPrice(Integer totalPrice) {
-		this.totalPrice = totalPrice;
-	}
 	
 	@Column(name = "BUYER")
 	public String getBuyer() {
@@ -79,6 +72,13 @@ public class MarketOrderBean {
 		this.address = address;
 	}
 	
+	@Column(name = "BUYERID")
+	public Integer getBuyerId() {
+		return buyerId;
+	}
+	public void setBuyerId(Integer buyerId) {
+		this.buyerId = buyerId;
+	}
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "marketOrderBean", cascade = CascadeType.ALL)
 	public Set<MarketOrderDetailBean> getMarketOrderDetailBean() {
 		return marketOrderDetailBean;

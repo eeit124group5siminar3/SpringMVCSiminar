@@ -5,9 +5,9 @@
 			<form class="product-category" action="javascript:void(0)"
 				method="GET">
 				<input type="search" name="searchString" id="searchString"
-					value="${mall_searchString}" />
+					value="${Market_searchString}" />
 				<button name="searchButton" style="border-radius: 5px;"
-					onclick="searchProduct()">查詢</button>
+					onclick="searchSeller()">查詢</button>
 			</form>
 		</div>
  
