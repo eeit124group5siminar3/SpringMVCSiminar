@@ -209,7 +209,7 @@ public class ProductOrderItemBean implements Serializable {
 	public String getStatusTag() {
 		String statusTag = "";
 		if (status == 0) {
-			for (int i = -1; i <= 2; i++) {
+			for (int i = -1; i <= 1; i++) {
 				if (i == status) {
 					statusTag += "<input type='radio' checked='checked' name='" + itemId + "' value='" + i + "'/>"
 							+ StatusClass.getStatus(i);
@@ -219,7 +219,7 @@ public class ProductOrderItemBean implements Serializable {
 				}
 			}
 		} else if (status == -1) {
-			for (int i = -1; i <= 2; i++) {
+			for (int i = -1; i <= 1; i++) {
 				if (i == -1) {
 					statusTag += "<input type='radio' checked='checked' name='" + itemId + "' value='" + i + "'/>"
 							+ StatusClass.getStatus(i);
@@ -233,7 +233,7 @@ public class ProductOrderItemBean implements Serializable {
 		} else if (status == 3) {
 			statusTag = "<p>商品已送達</p>";
 		} else {
-			for (int i = -1; i <= 2; i++) {
+			for (int i = -1; i <= 1; i++) {
 				if (i == status) {
 					statusTag += "<input type='radio' checked='checked' name='" + itemId + "' value='" + i + "'/>"
 							+ StatusClass.getStatus(i);
@@ -252,7 +252,7 @@ public class ProductOrderItemBean implements Serializable {
 	@Transient
 	public String getStatusTagForUser() {
 		String statusTagForUser="";
-		if(status==2) {
+		if(status==1) {
 			statusTagForUser="<button type='button' class='btn btn-primary' data-toggle='modal'" + 
 					"data-target='#scoreOrder' data-whatever="+itemId+">已收到</button>";
 		}else if (status==3) {

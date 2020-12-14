@@ -43,7 +43,12 @@ public class MallShoppingController {
 			@RequestParam(value = "mall_pageNo", required = false) Integer pageNoP,
 			@RequestParam(value = "mall_searchString", required = false) String searchStringP,
 			@RequestParam(value = "mall_categoryId", required = false) Integer categoryIdP,
-			@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb) {
+			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb,
+			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
+		if (cart == null) {
+			cart = new ShoppingCart();
+			model.addAttribute("ShoppingCart", cart);
+		}
 		HttpSession session = request.getSession(false);
 		Integer pageNo = (Integer) session.getAttribute("mall_pageNo");
 		if (pageNoP != null) {
@@ -86,7 +91,7 @@ public class MallShoppingController {
 			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb,
 			@RequestParam(value = "qty", required = false) Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
-		ProductBean selectedProduct = service.getProduct(productId,mb);
+		ProductBean selectedProduct = service.getProduct(productId, mb);
 		selectedProduct.setViews(selectedProduct.getViews() + 1);
 		OrderItem oi = new OrderItem();
 		oi.setProductId(selectedProduct.getProductId());
@@ -109,25 +114,28 @@ public class MallShoppingController {
 			cart.addToCart(productId, oi);
 		}
 		oi = cart.getContent().get(productId);
+		Integer shoppingcartItemNum=cart.getItemNumber();
+		System.err.println(shoppingcartItemNum);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/singleProduct");
 		mav.addObject("selectedProduct", selectedProduct);
 		mav.addObject("oi", oi);
+		mav.addObject("ShoppingCartItemNum", shoppingcartItemNum);
 		mav.setStatus(HttpStatus.OK);
 		return mav;
 	}
-	
+
 // 取的上一筆商品ID
 	@PostMapping(value = "/preProduct")
-	public @ResponseBody Integer getPreId(@RequestParam(value = "productId")Integer productId) {
-		Integer preProductId=service.getPreProductId(productId);
+	public @ResponseBody Integer getPreId(@RequestParam(value = "productId") Integer productId) {
+		Integer preProductId = service.getPreProductId(productId);
 		return preProductId;
 	}
-	
+
 // 取的下一筆商品ID
 	@PostMapping(value = "/nextProduct")
-	public @ResponseBody Integer getNextId(@RequestParam(value = "productId")Integer productId) {
-		Integer nextProductId=service.getNextProductId(productId);
+	public @ResponseBody Integer getNextId(@RequestParam(value = "productId") Integer productId) {
+		Integer nextProductId = service.getNextProductId(productId);
 		return nextProductId;
 	}
 
@@ -137,7 +145,7 @@ public class MallShoppingController {
 			@RequestParam(value = "qty", required = false) Integer qty,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		if (productId != null) {
-			ProductBean selectedProduct = service.getProduct(productId,null);
+			ProductBean selectedProduct = service.getProduct(productId, null);
 			selectedProduct.setViews(selectedProduct.getViews() + 1);
 			OrderItem oi = new OrderItem();
 			oi.setProductId(selectedProduct.getProductId());
@@ -194,16 +202,16 @@ public class MallShoppingController {
 			return false;
 		}
 	}
-	
+
 // 顯示願望清單
 	@PostMapping(value = "/WishListContent")
 	public ModelAndView showWishListContent(@SessionAttribute(value = "login_ok") Member_SignUp mb,
-			@RequestParam(value = "productId",required = false)Integer productId) {	
-		Integer userId= mb.getMember_no();
-		if(productId!=null) {
-		service.cancelFavorite(userId,productId);
+			@RequestParam(value = "productId", required = false) Integer productId) {
+		Integer userId = mb.getMember_no();
+		if (productId != null) {
+			service.cancelFavorite(userId, productId);
 		}
-		List<ProductBean> list =service.getFavoriteList(userId);
+		List<ProductBean> list = service.getFavoriteList(userId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/wishListContent");
 		mav.addObject("productWishList", list);

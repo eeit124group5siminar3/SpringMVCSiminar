@@ -47,8 +47,10 @@ public class MallOrderController {
 			@RequestParam(value = "productId") Integer productId) {
 		cart.deleteOrder(productId);
 		ModelAndView mav = new ModelAndView();
+		Integer shoppingcartItemNum=cart.getItemNumber();
 		mav.setViewName("/mall/shoppingcartContent");
 		mav.addObject("ShoppingCart", cart);
+		mav.addObject("ShoppingCartItemNum", shoppingcartItemNum);
 		mav.setStatus(HttpStatus.OK);
 		return mav;
 	}
