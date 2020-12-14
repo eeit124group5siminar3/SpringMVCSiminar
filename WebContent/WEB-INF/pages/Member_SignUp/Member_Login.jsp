@@ -48,164 +48,187 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 </head>
 <body class="goto-here body-hegiht">
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+		crossorigin="anonymous"></script>
 	<script>
-	$(function() {
-		$("#exampleCheck1").on("click",function(){
-			console.log($("#exampleCheck1").val());
+		$(function() {
+			$("#exampleCheck1").on("click", function() {
+				console.log($("#exampleCheck1").val());
+			})
 		})
-	})
 	</script>
-<script>
-	$(function() {
-		$("#form_submit").on("submit",function(ev) {
-			$.ajax({
-				url : "checkLogin.controller",
-				data : {
-					email : $("#exampleInputEmail1").val(),
-					password : $("#exampleInputPassword1").val(),
-					remember : $("#exampleCheck1").prop('checked'),
-					code : $("#check_code").val()
-				},
-				type : "POST",
-				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-				success : function(data) {
-					if(data[2] == "2"){
-						self.location = document.referrer;
-					}if(data[1] == "1"){
-						$("#check_email").html("驗證碼輸入錯誤");
-					}if(data[0] == "0"){
-						$("#check_email").html("帳號或密碼錯誤，請重新輸入");
-					}if(data[3] == "3"){
-						$("#check_email").html("帳號已停權");
-					}
-		}
-	})
-							ev.preventDefault();
-						})
-	})
-</script>
-	
-<script>
-<!--FaceBook-->
-
-
-window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '857264848365975',
-    cookie     : true,
-    xfbml      : true,
-    version    : 'v9.0'
-  });
-    
-  FB.AppEvents.logPageView();   
-    
-};
-
-(function(d, s, id){
-   var js, fjs = d.getElementsByTagName(s)[0];
-   if (d.getElementById(id)) {return;}
-   js = d.createElement(s); js.id = id;
-   js.src = "https://connect.facebook.net/zh_TW/sdk.js";
-   fjs.parentNode.insertBefore(js, fjs);
- }(document, 'script', 'facebook-jssdk'));
-
-
-function GetProfile() {
-  //document.getElementById('content').innerHTML = "";//先清空顯示結果
-
-  //FB.api()使用說明：https://developers.facebook.com/docs/javascript/reference/FB.api
-  //取得用戶個資
-  FB.api("/me", "GET", { fields: 'last_name,first_name,name,email' }, function (user) {
-      //user物件的欄位：https://developers.facebook.com/docs/graph-api/reference/user
-      if (user.error) {
-          console.log(response);
-      } else {      
-          console.log(user);
-          console.log(user.email);
-          console.log(user.name);
-          var fb_name = user.name;
-          var fb_email = user.email; 
-   $.ajax({
-        url: "fbMemberSignUp.controller",
-        method: "post",
-        data: { 
-             member_name: fb_name,
-             member_email: fb_email
-             },
-        success: function (data) {
-            if(data){//跳轉填寫資料
-				self.location = document.referrer;
-            }if(!data){//跳轉首頁
-             $("#check_email").html("帳號已停權");
-      		}
-                  
-        }
-    });//end $.ajax                    
-      }
-  });
-
-}
-function FBLogin(){
-FB.getLoginStatus(function(res) {//
-    console.log('status:'+res.status);//Debug
-
-    if (res.status === "connected") { 
-        let userID = res["authResponse"]["userID"];
-        console.log("用戶已授權您的App，用戶須先revoke撤除App後才能再重新授權你的App");
-        console.log(`已授權App登入FB 的 userID:${userID}`);
-        GetProfile();
-       
-    } else if (res.status === 'not_authorized' || res.status === "unknown") {
-        //App未授權或用戶登出FB網站才讓用戶執行登入動作
-        FB.login(function (response) {
-            //console.log(response); //debug用
-            if (response.status === 'connected') {
-                //user已登入FB
-                //抓userID
-                let userID = response.authResponse.userID;
-                console.log('已授權App登入FB 的 userID:'+userID);
-                GetProfile();
-                
-
-            } else {
-                // user FB取消授權
-                alert("Facebook帳號無法登入");
-            }
-            //"public_profile"可省略，仍然可以取得name、userID
-        }, { scope: 'email' }); 
-    }
-  
-});
-
-}
- </script>
+	<script>
+		$(function() {
+			$("#form_submit")
+					.on(
+							"submit",
+							function(ev) {
+								$
+										.ajax({
+											url : "checkLogin.controller",
+											data : {
+												email : $("#exampleInputEmail1")
+														.val(),
+												password : $(
+														"#exampleInputPassword1")
+														.val(),
+												remember : $("#exampleCheck1")
+														.prop('checked'),
+												code : $("#check_code").val()
+											},
+											type : "POST",
+											contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+											success : function(data) {
+												if (data[2] == "2") {
+													if (document.referrer == "http://localhost:8080/siminar/login.controller") {
+														window.location = "http://localhost:8080/siminar/index.controller";
+													} else {
+														self.location = document.referrer;
+													}
+												}
+												if (data[1] == "1") {
+													$("#check_email").html(
+															"驗證碼輸入錯誤");
+												}
+												if (data[0] == "0") {
+													$("#check_email").html(
+															"帳號或密碼錯誤，請重新輸入");
+												}
+												if (data[3] == "3") {
+													$("#check_email").html(
+															"帳號已停權");
+												}
+											}
+										})
+								ev.preventDefault();
+							})
+		})
+	</script>
 
 	<script>
-$(function(){
-	var buyer_account="123@222";
-	var buyer_password="123456aA"
-	var seller_account="test@yahoo.com.tw";
-	var seller_password="123456aA";
-	$("#buyer_button").click(function(){
-		$("#exampleInputEmail1").val(buyer_account);
-		$("#exampleInputPassword1").val(buyer_password);
-});
-	$("#seller_button").click(function(){
-		$("#exampleInputEmail1").val(seller_account);
-		$("#exampleInputPassword1").val(seller_password);
-});
-})
-</script>
-<script>
-function refresh(){
-	  //$("#basePath").val()+
-	  var url="createCode?number="+Math.random();//這裡沒有隨機引數的話就只進兩次後臺就再也不進了，這個現在還不太明白為什麼
-	  $("#img").attr("src",url);  
-}
-</script>
+	<!--FaceBook-->
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '857264848365975',
+				cookie : true,
+				xfbml : true,
+				version : 'v9.0'
+			});
+
+			FB.AppEvents.logPageView();
+
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function GetProfile() {
+			//document.getElementById('content').innerHTML = "";//先清空顯示結果
+
+			//FB.api()使用說明：https://developers.facebook.com/docs/javascript/reference/FB.api
+			//取得用戶個資
+			FB.api("/me", "GET", {
+				fields : 'last_name,first_name,name,email'
+			}, function(user) {
+				//user物件的欄位：https://developers.facebook.com/docs/graph-api/reference/user
+				if (user.error) {
+					console.log(response);
+				} else {
+					console.log(user);
+					console.log(user.email);
+					console.log(user.name);
+					var fb_name = user.name;
+					var fb_email = user.email;
+					$.ajax({
+						url : "fbMemberSignUp.controller",
+						method : "post",
+						data : {
+							member_name : fb_name,
+							member_email : fb_email
+						},
+						success : function(data) {
+							if (data) {//跳轉填寫資料
+								self.location = document.referrer;
+							}
+							if (!data) {//跳轉首頁
+								$("#check_email").html("帳號已停權");
+							}
+
+						}
+					});//end $.ajax                    
+				}
+			});
+
+		}
+		function FBLogin() {
+			FB.getLoginStatus(function(res) {//
+				console.log('status:' + res.status);//Debug
+
+				if (res.status === "connected") {
+					let userID = res["authResponse"]["userID"];
+					console.log("用戶已授權您的App，用戶須先revoke撤除App後才能再重新授權你的App");
+					console.log(`已授權App登入FB 的 userID:${userID}`);
+					GetProfile();
+
+				} else if (res.status === 'not_authorized'
+						|| res.status === "unknown") {
+					//App未授權或用戶登出FB網站才讓用戶執行登入動作
+					FB.login(function(response) {
+						//console.log(response); //debug用
+						if (response.status === 'connected') {
+							//user已登入FB
+							//抓userID
+							let userID = response.authResponse.userID;
+							console.log('已授權App登入FB 的 userID:' + userID);
+							GetProfile();
+
+						} else {
+							// user FB取消授權
+							alert("Facebook帳號無法登入");
+						}
+						//"public_profile"可省略，仍然可以取得name、userID
+					}, {
+						scope : 'email'
+					});
+				}
+
+			});
+
+		}
+	</script>
+
+	<script>
+		$(function() {
+			var buyer_account = "123@222";
+			var buyer_password = "123456aA"
+			var seller_account = "test@yahoo.com.tw";
+			var seller_password = "123456aA";
+			$("#buyer_button").click(function() {
+				$("#exampleInputEmail1").val(buyer_account);
+				$("#exampleInputPassword1").val(buyer_password);
+			});
+			$("#seller_button").click(function() {
+				$("#exampleInputEmail1").val(seller_account);
+				$("#exampleInputPassword1").val(seller_password);
+			});
+		})
+	</script>
+	<script>
+		function refresh() {
+			//$("#basePath").val()+
+			var url = "createCode?number=" + Math.random();//這裡沒有隨機引數的話就只進兩次後臺就再也不進了，這個現在還不太明白為什麼
+			$("#img").attr("src", url);
+		}
+	</script>
 
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 
@@ -232,24 +255,28 @@ function refresh(){
 						placeholder="請輸入密碼">
 				</div>
 				<div class="form-group">
-				<label for="check_code">驗證碼</label>
-				     <p><img id="img" src="<c:url value='createCode'/>" onclick="refresh()"> </p>
+					<label for="check_code">驗證碼</label>
+					<p>
+						<img id="img" src="<c:url value='createCode'/>"
+							onclick="refresh()">
+					</p>
 				</div>
 				<div class="form-group">
-				     <!--跳到Controller層createCode方法裡獲取隨機數和圖片-->
-				     <input type="code" name="code" class="form-control" id="check_code"/>
+					<!--跳到Controller層createCode方法裡獲取隨機數和圖片-->
+					<input type="code" name="code" class="form-control" id="check_code" />
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" name="remember" class="form-check-input"
-						id="exampleCheck1" >
-<%-- 						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if> > --%>
-						 <label class="form-check-label"
-						for="exampleCheck1">記住我</label><hr>
-						
-						
-    <div>
-        Facebook登入：<input type="button"  value="Facebook登入" onclick="FBLogin();"/>
-    </div>						
+						id="exampleCheck1">
+					<%-- 						<c:if test='${requestScope.remember==true}'>checked='checked'</c:if> > --%>
+					<label class="form-check-label" for="exampleCheck1">記住我</label>
+					<hr>
+
+
+					<div>
+						Facebook登入：<input type="button" value="Facebook登入"
+							onclick="FBLogin();" />
+					</div>
 				</div>
 				<a class="btn btn-primary" href="goMemberSignUp.controller"
 					style="float: counter">註冊</a> <a class="btn btn-primary"
@@ -337,9 +364,7 @@ function refresh(){
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<p>
-					Copyright &copy;
-
-					All rights reserved | This template is made with <i
+					Copyright &copy; All rights reserved | This template is made with <i
 						class="icon-heart color-danger" aria-hidden="true"></i> by <a
 						href="https://colorlib.com" target="_blank">Colorlib</a>.
 					Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>

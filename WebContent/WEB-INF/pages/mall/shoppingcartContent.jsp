@@ -24,7 +24,7 @@
 						<c:forEach varStatus="stVar" var="anEntry"
 							items="${ShoppingCart.content}">
 							<tr class="text-center">
-								<td class="product-remove"><a href="#"
+								<td class="product-remove"><a href="##"
 									onclick="reduceItem(${anEntry.value.productId})"><span
 										class="ion-ios-close"></span></a></td>
 
@@ -67,17 +67,17 @@
 		<div class="cart-total mb-3">
 			<h3>購買統計</h3>
 			<p class="d-flex">
-				<span>小計</span> <span>${ShoppingCart.subtotal}</span>
+				<span>小計</span> <span>${ShoppingCart.subtotal}元</span>
 			</p>
 			<!-- 			<p class="d-flex"> -->
 			<!-- 				<span>運費</span> <span>$0.00</span> -->
 			<!-- 			</p> -->
 			<p class="d-flex">
-				<span>折扣</span> <span>${ShoppingCart.subtotal-ShoppingCart.total}</span>
+				<span>折扣</span> <span>${ShoppingCart.subtotal-ShoppingCart.total}元</span>
 			</p>
 			<hr>
 			<p class="d-flex total-price">
-				<span>總計</span> <span>${ShoppingCart.total}</span>
+				<span>總計</span> <span>${ShoppingCart.total}元</span>
 			</p>
 		</div>
 		<p>
@@ -88,7 +88,7 @@
 		</p>
 	</div>
 </div>
-
+<input type="hidden" id="shoppingcartItemNum" value="${ShoppingCartItemNum}" />
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>

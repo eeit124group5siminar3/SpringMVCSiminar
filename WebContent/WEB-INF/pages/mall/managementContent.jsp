@@ -20,7 +20,7 @@
 							<th>內容</th>
 							<th>庫存</th>
 							<th>上架時間</th>
-							<th>保質期</th>
+							<th>到期日</th>
 						</tr>
 					</thead>
 					<c:forEach var="item" items="${management_DPP}">
@@ -50,7 +50,7 @@
 							<td>${item.content}${item.unit}</td>
 							<td>${item.stock}</td>
 							<td>${item.addedDate}</td>
-							<td>${item.shelfTime}</td>
+							<td>${item.expiryDate}</td>
 						</tr>
 					</c:forEach>
 				</table>
