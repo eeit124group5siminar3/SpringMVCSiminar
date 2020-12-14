@@ -450,7 +450,7 @@
 		function funLogin(login_ok, rec_id) {
 			console.log('login_okval: ' + login_ok);
 			console.log('rec_id: ' + rec_id);
-			if (login_ok != null) {
+			if (login_ok == null) {
 				$.ajax({
 					type : "GET",
 					url : "./login.controller",
