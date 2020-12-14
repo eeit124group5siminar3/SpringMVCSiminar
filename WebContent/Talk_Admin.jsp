@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script>
-
+	var member_name = null;
 	var websocket = null;
 		//判断当前浏览器是否支持WebSocket
 		if ('WebSocket' in window) {
@@ -28,6 +28,9 @@
 		}
 		//接收到消息的回调方法
 		websocket.onmessage = function(event) {
+			let data_split = event.data.split("說：");
+			member_name = data_split[0];
+			console.log(member_name)
 			console.log("回调信息",event.data)
 			setMessageInnerHTML(event.data);
 		}
@@ -51,8 +54,9 @@
 		function send() {
 			var message = document.getElementById('text').value;
 			console.log(message);
+			console.log(member_name);
 			//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
-			websocket.send(JSON.stringify({'message':message,'role':'耶耶','socketId':"A"}));
+			websocket.send(JSON.stringify({'message':message,'role':member_name,'socketId':"A"}));
 		}
 	</script>
 
