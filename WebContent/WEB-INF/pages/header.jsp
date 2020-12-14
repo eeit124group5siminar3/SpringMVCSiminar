@@ -61,9 +61,10 @@
 						<a class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">預購</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="<c:url value='GoMarketHome'/>">市場</a>
+							<a class="dropdown-item" href="<c:url value='GoMarketHome'/>">店家</a>
 						    <a class="dropdown-item" href="<c:url value='/GoMarketShoppingcart' />">我的訂購商品清單</a> 
-						    <a class="dropdown-item" href="<c:url value='/' />">查看預購單</a>
+						    <a class="dropdown-item" href="<c:url value='/MarketBuyerOrder' />">查看預購單</a>
+							<a class="dropdown-item" href="<c:url value='GoMarketHome'/>">補貨通知</a>
 						</div></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
@@ -104,7 +105,7 @@
 					</c:if><c:if test="${!empty login_ok}">
 						<a class="nav-link" href="<c:url value='removeSession.controller' />">登出</a>
 					</c:if></li>
-				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />"
+				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />" id="shoppingcartItem"
 					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
 					
 				<li class="nav-item cta cta-colored"><a href="<c:url value='' />"

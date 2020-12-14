@@ -2,6 +2,7 @@ package tw.group5.active.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,7 +90,7 @@ public class ActOrdService {
 // =========================訂單分析資料=========================================
 	
 	//活動類型的圓餅圖
-	public Map<String, Integer> countActType(){
+	public LinkedHashMap<String, Integer> countActType(){
 		return actOrdDAO.countActType();
 	}
 	

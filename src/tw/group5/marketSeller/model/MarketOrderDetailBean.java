@@ -1,5 +1,6 @@
 package tw.group5.marketSeller.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,7 +23,9 @@ public class MarketOrderDetailBean {
 	private Integer oid;
 	private Integer productId;
 	private Integer quantity;
+	private Integer totalPrice;
 	private MarketOrderBean marketOrderBean;
+	private MarketProductTotalBean marketProductTotalBean;
 	
 	@Id @Column(name = "DETAIL_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +37,7 @@ public class MarketOrderDetailBean {
 	}
 	
 	@Transient
-	@Column(name = "OID")
+//	@Column(name = "OID")
 	public Integer getOid() {
 		return oid;
 	}
@@ -41,6 +45,7 @@ public class MarketOrderDetailBean {
 		this.oid = oid;
 	}
 	
+	@Transient
 	@Column(name = "PRODUCTID")
 	public Integer getProductId() {
 		return productId;
@@ -57,13 +62,32 @@ public class MarketOrderDetailBean {
 		this.quantity = quantity;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "OID")
+	@Column(name = "TOTAL_PRICE")
+	public Integer getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "OID" ,referencedColumnName = "OID")
 	public MarketOrderBean getMarketOrderBean() {
 		return marketOrderBean;
 	}
 	public void setMarketOrderBean(MarketOrderBean marketOrderBean) {
 		this.marketOrderBean = marketOrderBean;
 	}
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "PRODUCT_ID")
+	public MarketProductTotalBean getMarketProductTotalBean() {
+		return marketProductTotalBean;
+	}
+	public void setMarketProductTotalBean(MarketProductTotalBean marketProductTotalBean) {
+		this.marketProductTotalBean = marketProductTotalBean;
+	}
+	
+	
 	
 }

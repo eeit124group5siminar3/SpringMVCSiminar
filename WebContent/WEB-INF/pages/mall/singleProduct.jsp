@@ -87,11 +87,13 @@
 						</p>
 					</c:otherwise>
 				</c:choose>
+				<div style="font-size=16px;font-weight: bold;">
 				<p>生產者:${selectedProduct.producterName}</p>
 				<p>上架日期:${selectedProduct.addedDate}</p>
-				<p>保質期:${selectedProduct.shelfTime}</p>
+				<p>保質期:${selectedProduct.shelfTime}天</p>
 				<p>${selectedProduct.content}${selectedProduct.unit}</p>
 				<p>${selectedProduct.description}</p>
+				</div>
 				<div class="row mt-4">
 					<div class="col-md-6">
 						<div class="form-group d-flex">
@@ -113,10 +115,10 @@
 				<p>
 					<c:choose>
 						<c:when test="${selectedProduct.stock<=oi.qty}">
-							<a href="#" onclick="notEnough()" class="btn btn-black py-3 px-5">加入購物車</a>
+							<a href="##" onclick="notEnough()" class="btn btn-black py-3 px-5">加入購物車</a>
 						</c:when>
 						<c:otherwise>
-							<a href="#" onclick="addToCart(${selectedProduct.stock-oi.qty})"
+							<a href="##" onclick="addToCart(${selectedProduct.stock-oi.qty})"
 								class="btn btn-black py-3 px-5">加入購物車</a>
 						</c:otherwise>
 					</c:choose>
@@ -128,7 +130,7 @@
 		</div>
 	</div>
 </section>
-
+<input type="hidden" id="shoppingcartItemNum" value="${ShoppingCartItemNum}" />
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>
