@@ -41,7 +41,8 @@ public class Act_DBService_for_Oracle {
 			+"SIGNTIMEEND VARCHAR2(20 BYTE)," 
 			+"ACTNUM NUMBER(4,0)," 
 			+"SIGSTAT NUMBER(3,0),"
-			+"ACTDESCRI CLOB" 
+			+"ACTDESCRI CLOB,"
+			+"ACTREMARKS CLOB"
 			+")";
 
 	// 新增活動訂單ACTORD
@@ -56,7 +57,8 @@ public class Act_DBService_for_Oracle {
 			+"ORDSTATE NUMBER(2,0)," 
 			+"ORDTIME TIMESTAMP (6)," 
 			+"MEMNO NUMBER(10,0),"
-			+"PAYWAY VARCHAR2(200 BYTE)" 
+			+"PAYWAY VARCHAR2(200 BYTE),"
+			+"ACTORDREMARKS CLOB"
 			+" ) ";
 
 	

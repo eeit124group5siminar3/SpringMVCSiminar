@@ -65,7 +65,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-10 mb-5 text-center">
 					<ul class="act-type" id="product-category"></ul>
-					<form class="product-category" action="?????????" method="GET">
+					<form class="product-category" action="?????????" method="POST">
 						<input type="search" name="searchString" id="searchString"
 							value="${searchString}"/>
 						<button name="searchButton" style="border-radius: 5px;" onclick="????">查詢</button>

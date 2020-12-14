@@ -75,6 +75,17 @@
 .heart:hover {
 	color: red;
 }
+.hero-wrap hero-bread{
+	position: absolute;
+}
+
+.hero-wrap hero-bread:searchPosition{
+position:relative;
+left:50%;
+top:50%;
+margin-top:-50px;
+margin-left:-100px;
+}
 </style>
 
 
@@ -84,22 +95,38 @@
 
 
 	<jsp:include page="../header.jsp" />
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_1.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Recipe</span>
-					</p>
-					<h1 class="mb-0 bread">Recipe</h1>
+	 
+
+		<div class="hero-wrap hero-bread"
+			style="background-image: url('images/食譜封面.jpg');">
+			<div class="container">
+				<div
+					class="row no-gutters slider-text align-items-center justify-content-center">
+					<div class="col-md-9 ftco-animate text-center">
+						<p class="breadcrumbs">
+							<span class="mr-2"><a href="index.html">Home</a></span> <span>Recipe</span>
+						</p>
+						<h1 class="mb-0 bread">食譜</h1>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+<!-- 	<div class="hero-wrap hero-bread" -->
+<!-- 		style="background-image: url('images/bg_1.jpg');"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div -->
+<!-- 				class="row no-gutters slider-text align-items-center justify-content-center"> -->
+<!-- 				<div class="col-md-9 ftco-animate text-center"> -->
+<!-- 					<p class="breadcrumbs"> -->
+<!-- 						<span class="mr-2"><a href="index.html">Home</a></span> <span>Recipe</span> -->
+<!-- 					</p> -->
+<!-- 					<h1 class="mb-0 bread">Recipe</h1> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	<br>
-					<div style="margin-left: 800px;">
+					<div class="searchPosition" style="float: right;">
 						<div> 
 						<form class="form-inline my-2 my-lg-0" id="search"
 							action="javascript:void(0);" method="post">
@@ -222,28 +249,30 @@
 						
        			    var html = "";
        			    var str=" ";
-                    for(var i=0;i<data.length;i++){    //遍歷data數組
-                         var ls = data[i];   
-                         var ingredients_A=ls.ingredients_A;
+                    for(var i=0;i<data.length;i++){  
+                    	var val=data[i]; 
+                         var ingredients_A=val.ingredients_A; 
                          html +=
-		           ` <div style="margin:auto;width:1500px"><div class="blog-entry align-self-stretch d-md-flex">
-		              <a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" class="block-20" target="_blank"
-			              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${ls.rec_id}'/>');">
-		              </a>
-		              <div class="text d-block pl-md-4">
-
-		                <h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" target="_blank">\${ls.name}</a></h3>
-		                <p>累積人氣: \${ls.views}</p>
-		                <p>\${ls.desc}</p>
-		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${ls.rec_id}'/>" target="_blank" class="btn btn-primary py-2 px-3">Read more</a></p>
-		              </div>
-		            </div>
-		          </div></div>`;
+                        	 `<div class="col-sm-6 col-md-4 col-lg-4 mix filter-launch">
+     						<div class="menu-item" style="width:80%;margin:50px">
+     							<div class="menu__item-img" >
+     							 <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
+     				            	  style="background-image: url('<c:url value='/getImageA?rec_id=\${val.rec_id}'/>');">
+     			              	</a>
+     							</div>
+     							<div class="menu__item-content">
+     								<h4 class="menu__item-title">\${val.name}</h4>
+     								<p class="menu__item-desc">\${val.desc}</p>
+     								<span class="menu__item-price">累積人氣: \${val.views}</span>
+     								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >Read more</a>            
+     			                    </p>
+     							</div>
+     						</div>
+     					</div>`;
 						
-                		console.log('ls.ingredients_A: '+ls.ingredients_A);
+                		console.log('val.ingredients_A: '+val.ingredients_A);
                     	}
-                  		console.log(html);
-                        $("#searchSuccess").html(html); 
+                        $("#searchSuccess").html(`<div class="row filtered-items-wrap" >`+html+`</div>`); 
 						},
 				error:function(){
 					}	
@@ -271,44 +300,25 @@
 				for(var i=0;i<data.length;i++){
 				var val=data[i];
 					content+=
-// 						`<div class="row">
-// 			    			<div class="col-md-6 col-lg-3 ftco-animate">
-			    
-// 			    				<div>							                                                                           
-// 					              <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
-// 						              style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${val.rec_id}'/>');">
-// 					              </a>
-			    						
-// 			    					<div class="text py-3 pb-4 px-3 text-center">
-// 			    							<a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>">\${val.name}</a>
-// 				    					<div style="float: right;"
-// 				    							<a href="<c:url value='/bookmark?rec_id=\${val.rec_id}'/>" class="heart d-flex justify-content-center align-items-center " id="heart" >
-// 				    								<span><i class="ion-ios-heart"></i></span>
-// 				    							</a>
-// 			    						</div>
-// 			    					</div>
-// 			    				</div>
-// 			    			</div>  					    		
-// 			    		</div>`;
-
-		           `<div style="margin:auto;width:1500px"><div class="blog-entry align-self-stretch d-md-flex"> 
-		           	
-		             	 <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
-			            	  style="background-image: url('<c:url value='/getALLImage.controller?rec_id=\${val.rec_id}'/>');">
-		              	</a>
-		           
-		            <div class="text d-block pl-md-4">
-						<h3 class="heading"><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>">\${val.name}</a></h3>
-						<p>累積人氣: \${val.views}</p>
-		                <p>\${val.desc}</p>
-		                <p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >Read more</a>            
-	                    </p>
-		             </div>
-		            </div>
-		            </div><br>`;
+					`<div class="col-sm-6 col-md-4 col-lg-4 mix filter-launch">
+						<div class="menu-item" style="width:80%;margin:50px">
+							<div class="menu__item-img" >
+							 <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
+				            	  style="background-image: url('<c:url value='/getImageA?rec_id=\${val.rec_id}'/>');">
+			              	</a>
+							</div>
+							<div class="menu__item-content">
+								<h4 class="menu__item-title">\${val.name}</h4>
+								<p class="menu__item-desc">\${val.desc}</p>
+								<span class="menu__item-price">累積人氣: \${val.views}</span>
+								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >Read more</a>            
+			                    </p>
+							</div>
+						</div>
+					</div>`;
 				console.log('val.rec_id: '+val.rec_id);
 					}
-				$("#Success").html(content);
+				$("#Success").html(`<div class="row filtered-items-wrap" >`+content+`</div>`);
 		
 
 

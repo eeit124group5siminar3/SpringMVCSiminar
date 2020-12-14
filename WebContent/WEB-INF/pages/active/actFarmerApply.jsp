@@ -80,7 +80,7 @@ border: #82ae46 2px solid;
 //============================返回頁面=====================================================//
 
 function backHome(){
-	document.act.action="maintainActFarmer.do";
+	document.act.action="allActFarmer.do";
     document.act.submit();
 	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
 }
@@ -100,7 +100,7 @@ function fastinsert(){
 	var price="1150";
 	var actDescri="12月番茄成熟的季節來來往往的人呀!走在鄉間小路!旁邊就是滿滿的小番茄!不摘下來吃就是對不起自己啊!!!!這次除了摘番茄體驗之外呢!還要帶著大家一起體驗另一項的手工藝坊竹編!!用竹片編織成桌墊 自己做的絕對是最珍貴的!再動手做的過程中，也會讓自己更加的專注，以及放鬆！趕快來參加吧！！！";
 	var signDateSta="2020-10-28";
-	var signTimeSta="00:00";
+	var signTimeSta="12:01";
 	var signDateEnd="2021-12-02";
 	var signTimeEnd="23:59";
 	
@@ -134,7 +134,7 @@ function fastinsert2(){
 	var price="250";
 	var actDescri="薑麻園休閒農業區最大的特點，除了欣賞美麗的山色景觀之外，更適合全家同遊、摘採桃李，或是享用這裡才有的桃李大餐。有機會遇到薑麻園節慶時，還可參與趣味的草編DIY、搗麻糬DIY等，都是小朋友喜愛的活動呢！這裡結合各種客家傳統及現代文化的活動，都令人感到趣味、有活力；而充分利用「薑」所研發出來的特色產品，如薑母糖、薑餅、薑麻養身茶等，更為傳統農業創造新生機。也正因為這份農村特色的魅力，96年時還曾經獲選為「農情萬種」的十大經典農村；由此可知，薑麻園休閒農業區不只有完善的建設，更有客家傳統文化以及溫馨的人情味。入選十大經典農漁村的苗栗縣大湖鄉薑麻園休閒農業區，及三義鄉雙潭休閒農業區，擁有鄉土田園的自然風光，以及風土人文的藝術體驗，能滿足多種旅遊需求的兩處休閒農業區。薑麻園特產當然就是「薑」，可以到薑園裡去找看看，平日作菜時少不了的薑，到底是生長在哪裡？薑麻園的許多特產與特色小吃都與薑脫不了關係，從薑母茶、薑糖、老薑泡澡粉到加入地瓜改良口感的薑母軟糖都是不錯的伴手禮。還可以來一杯香醇好喝的薑汁撞奶，在冬天時喝一杯暖身俱有十足的驅寒效果，搭配幾片薑汁渣做成的薑餅，便是一份薑麻園特有的下午茶組合。沿著苗130線往西走，就到了三義鄉的雙潭休閒農業區，受到三義木雕工藝的影響，這裡有獨一無二的臉譜推廣協會，以彩筆代替雕刻刀彩繪木雕臉譜，是項老少咸宜的DIY 活動，另也可體驗拉坯製作陶藝用品的樂趣、有機植物的客家藍染。在薑麻園和雙潭休閒農業區裡還有更多的體驗等著您，歡迎親自來一趟，才能把真正的樂活帶回家。";
 	var signDateSta="2020-12-01";
-	var signTimeSta="0017:00";
+	var signTimeSta="17:00";
 	var signDateEnd="2021-01-10";
 	var signTimeEnd="23:59";
 	
@@ -201,20 +201,20 @@ function fastinsert3(){
 <body class="goto-here">
 <!-- --------Header------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
-<section class="ftco-section ftco-degree-bg">
 <!-- --------管理左邊bar-------------------------------- -->
+<div class="nav">
 	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
-	
-
-<div class="form-inline row justify-content-center" >
+</div>	
+<section class="content-wrapper row justify-content-center">
+<div>
+<div class="form-inline" >
 <h3>一日農夫申請活動</h3>&emsp;&emsp;&emsp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">活動1</button>&ensp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert2()">活動2</button>&ensp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert3()">活動3</button>&ensp;
-</div>
-	
+</div>	
 <form:form action="actFarmerInsert.do" modelAttribute="farmerinsert" method="POST" enctype="multipart/form-data" name="act"  >
-<table align="center">
+<table class="justify-content-right">
 	<tr>
 <%-- 		<td><form:label path="actId" type="hidden">活動編號</form:label></td> --%>
 		<td><form:input path="actId" type="hidden" ></form:input></td>
@@ -301,6 +301,8 @@ function fastinsert3(){
 </table>
 </form:form>
 </div>
+</div>
+
 <!-- --------------footer----------------------------------------------------------- -->
 </section>
 	
