@@ -134,7 +134,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				data-target="#demo3">食譜管理</button>
 			<div id="demo3" class="collapse">
 			<c:if test="${empty memDetail}">
-			<input type="text"/>
+
+			
+
 			<li align="left"><a href="<c:url value='completeDetail?mem_no=${login_ok.member_no}'/>" class="hyperlink">上傳食譜</a></li>
 				<li align="left"><a href="<c:url value='completeDetail?mem_no=${login_ok.member_no}'/>" class="hyperlink">我的食譜</a></li>
 				<li align="left"><a href="<c:url value='myRecipe'/>" class="hyperlink">我的最愛</a></li>

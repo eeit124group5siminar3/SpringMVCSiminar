@@ -18,6 +18,9 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import tw.group5.member_SignUp.model.Member_Service;
 import tw.group5.member_SignUp.model.Member_SignUp;
+import tw.group5.recipe.recipe_Bean.Member_Detail;
+import tw.group5.recipe.service.Recipe_Service;
+import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
 @SessionAttributes(names = { "reg_buyer", "login_ok" })
@@ -25,9 +28,17 @@ public class BackstageController {
 
 	@Autowired
 	private Member_Service member_Service;
+	@Autowired
+	private Recipe_Service recipe_Service;
 
 	@RequestMapping(path = "/backstage.controller", method = RequestMethod.GET)
-	public String MemberBackstage() {
+	public String MemberBackstage(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		Integer member_no=((Member_SignUp)session.getAttribute("login_ok")).getMember_no();
+		Member_Detail bean = recipe_Service.detailBean(member_no);
+		if(bean!=null) {
+			session.setAttribute("memDetail", bean);
+		}
 		return "Member_Backstage/Member_Backstage";
 	}
 
