@@ -52,9 +52,17 @@
 	border: 1px double;
 }
 
+
 .btn-primary{
 	background-color: #b8cdd4;
 	border-color:#b8cdd4;
+	hover :#ccc6ad;
+	font-weight:bold
+}
+.btn:hover{
+	background-color:#79a6ad;
+	border-color:#79a6ad;
+	
 }
 </style>
 
@@ -63,14 +71,14 @@
 </head>
 <body class="goto-here">
 
-	<jsp:include page="/WEB-INF/pages/admin_header.jsp" />
+	<jsp:include page="/WEB-INF/pages/testAdminH.jsp" />
 	
 <!-------------------------內容區--------------------------------->
 <section class="content-wrapper d-flex justify-content-center">
   <form:form action="actAdminPreUpdate.do" modelAttribute="afBean" method="POST" enctype="multipart/form-data" name="actAdmin">
     <div class="card card-info" style="width: 50rem; ">
       <div class="card-header" style="background-color:#b8cdd4;">
-        <span class="card-title" style="font-size: 40px; color:#FFFFFF">活動修改    </span><span style="font-size: 20px;color:#a63a00 ;font-weight:bold">${afBean.actStatusWord }</span>
+        <span class="card-title" style="font-size: 40px; color:#003440">活動檢視    </span><span style="font-size: 20px;color:#a63a00 ;font-weight:bold">${afBean.actStatusWord }</span>
       </div>
       <div class="card-body">
       <div class="form-group">
@@ -90,8 +98,8 @@
         <!-- /.form group -->
         <div class="form-group">
           <form:label path="actType">活動類型:</form:label>
-          <form:select path="actType" type="text" class="form-control" readonly="true">		
-				<form:option value="體驗類">體驗類</form:option>
+          <form:select path="actType" type="text" class="form-control" disabled="true">		
+				<form:option value="體驗類"  >體驗類</form:option>
 				<form:option value="採收類">採收類</form:option>
 				<form:option value="文藝類">文藝類</form:option>
 				<form:option value="綜合類">綜合類</form:option>			
@@ -178,6 +186,21 @@
 			<form:radiobutton path="sigStat" value="1" id="sigStat" disabled="true"/>活動報名中&emsp;&emsp;
 			<form:radiobutton path="sigStat" value="2" id="sigStat" disabled="true"/>報名已截止
           </div>
+        </div>
+        <!-- /.form group -->
+<!--         <div class="form-group"> -->
+<%--           <form:label path="actLock">活動狀態:</form:label> --%>
+<!--           <div class="form-inline" > -->
+<%--             <form:radiobutton path="actLock" value="0" id="actLock" disabled="true"/>待審核&emsp;&emsp;&emsp;&emsp; --%>
+<%-- 			<form:radiobutton path="actLock" value="1" id="actLock" disabled="true"/>申請通過&emsp;&emsp;&emsp;&ensp; --%>
+<%-- 			<form:radiobutton path="actLock" value="2" id="actLock" disabled="true"/>申請未通過&emsp;&emsp;&emsp; --%>
+<%-- 			<form:radiobutton path="actLock" value="3" id="actLock" disabled="true"/>活動封鎖 --%>
+<!--           </div> -->
+<!--         </div> -->
+<!--         /.form group -->
+        <div class="form-group">
+          <form:label path="actRemarks">備註:</form:label>
+          <form:textarea path="actRemarks" class="form-control" style="height:50px" readonly="true"></form:textarea>
         </div>
         <!-- /.form group -->
         <div class="form-group form-inline">&emsp;&emsp;&emsp;

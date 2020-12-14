@@ -131,12 +131,12 @@
 								<input name="update" type="submit" value="修改">
 							</form>
 						</td>
-<!-- 						<td> -->
-<%-- 							<form action="<c:url value='/actOrdDelet.do'/>" method="post"> --%>
-<%-- 								<input type="hidden" id="actOrdId" name="actOrdId" value="${actOrd.actOrdId}">   --%>
-<!-- 								<input name="delete" type="submit" value="刪除"> -->
-<%-- 							</form> --%>
-<!-- 						</td> -->
+						<td>
+							<form action="<c:url value='/actOrdDelet.do'/>" method="post">
+								<input type="hidden" id="actOrdId" name="actOrdId" value="${actOrd.actOrdId}">  
+								<input name="delete" type="submit" value="刪除">
+							</form>
+						</td>
 					</tr>
 				</c:forEach>
 

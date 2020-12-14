@@ -42,6 +42,7 @@ public class MarketProductTotalBean {
 	private String openDayTime;
 	private Date closeDay;
 	private String closeDayTime;
+	private long days;
 	private MarketMallBean marketMallBean;
 	private MarketProductImgBean marketProductImgBean;
 	private MarketPutOutBean marketPutOutBean;//設計單向
@@ -92,6 +93,20 @@ public class MarketProductTotalBean {
 		this.putOut = putOut;
 		this.quantity = quantity;
 		this.marketProductImgBean = marketProductImgBean;
+	}
+	
+	
+	
+//
+//	public long getDays() {
+//		java.util.Date date = new java.util.Date();
+//		long days = 
+//		return days;
+//	}
+
+	public void setDays(long days) {
+		this.days = days;
+		
 	}
 
 	@Id @Column(name = "PRODUCT_ID")

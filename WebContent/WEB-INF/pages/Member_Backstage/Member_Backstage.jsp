@@ -147,7 +147,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				data-target="#demo4">活動管理</button>
 			<div id="demo4" class="collapse">
 				<c:if test="${login_ok.member_permissions==1}">
-				<li align="left"><a href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>" class="hyperlink">一日農夫</a></li>
+				<li align="left"><a href="<c:url value='/allActFarmer.do'/>" class="hyperlink">一日農夫</a></li>
 				<li align="left"><a href="<c:url value='/actOrdSelect.do'/>">已報名活動</a></li>	
 				
 				</c:if>

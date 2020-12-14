@@ -21,9 +21,29 @@ $(document).ready(function(){
     
 })
 </script>
+<script>
+$(function(){
+	$("#send_message").on("click",function(){
+		var message = $("#text").val();
+		var date = new Date();
+		var h = date.getHours();  //時
+		var minute = date.getMinutes()  //分
+		if(minute<10){
+			minute = "0"+minute;
+		}
+		$("#message1").append("<div style='text-align:right';>"+message+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>");
+	});
+})
+</script>
 	<script>
 
 	var websocket = null;
+	var date = new Date();
+	var h = date.getHours();  //時
+	var minute = date.getMinutes()  //分
+	if(minute<10){
+		minute = "0"+minute;
+	}
 		//判断当前浏览器是否支持WebSocket
 		if ('WebSocket' in window) {
 			//耶耶=自己，A等於房間通道
@@ -55,7 +75,7 @@ $(document).ready(function(){
 		}
 		//将消息显示在网页上
 		function setMessageInnerHTML(innerHTML) {
-			document.getElementById('message1').innerHTML += innerHTML + '<br/>';
+			document.getElementById('message1').innerHTML += innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>";
 		}
 		//关闭WebSocket连接
 		function closeWebSocket() {
@@ -64,7 +84,6 @@ $(document).ready(function(){
 		//发送消息
 		function send() {
 			var message = document.getElementById('text').value;
-			console.log(message);
 			//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
 			websocket.send(JSON.stringify({'message':message,'role':'管理員','socketId':"A"}));
 		}
@@ -81,7 +100,10 @@ $(document).ready(function(){
         
         
           <div class="Messages">
-            <div class="Messages_list" id="message1" style="color:black"></div>
+            <div class="Messages_list" style="color:black"></div>
+            <div id="message1" style="color:black">
+            <div id="message_me" style="color:black;text-align:right"></div>
+            </div>
           </div>
           
           <div class="Input Input-blank">
@@ -89,7 +111,7 @@ $(document).ready(function(){
           
 <!--             <textarea class="Input_field" placeholder="Send a message..." style="height: 20px;"></textarea> -->
            
-            <button class="Input_button Input_button-send" onclick="send()">
+            <button class="Input_button Input_button-send" id="send_message" onclick="send()">
               <div class="Icon" style="width: 18px; height: 18px;">
                 <svg width="57px" height="54px" viewBox="1496 193 57 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 18px; height: 18px;">
                   <g id="Group-9-Copy-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1523.000000, 220.000000) rotate(-270.000000) translate(-1523.000000, -220.000000) translate(1499.000000, 193.000000)">

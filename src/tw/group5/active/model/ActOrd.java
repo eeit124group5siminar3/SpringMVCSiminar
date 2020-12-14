@@ -39,14 +39,19 @@ public class ActOrd {
 	private Double totalPrice;
 	private Integer ordState;
 	private Timestamp ordTime;
+	private Integer payWay;
+	private String actOrdRemarks;
 
 	private ActFarmer actFarmer;
 
 	public ActOrd() {
 	}
 
+
+
 	public ActOrd(Integer actOrdId, Integer memNo, String memName, String memTel, String memEmail, Integer actId,
-			Integer ordActNum, Double totalPrice, Integer ordState, Timestamp ordTime, ActFarmer actFarmer) {
+			Integer ordActNum, Double totalPrice, Integer ordState, Timestamp ordTime, Integer payWay,
+			String actOrdRemarks, ActFarmer actFarmer) {
 		super();
 		this.actOrdId = actOrdId;
 		this.memNo = memNo;
@@ -58,8 +63,11 @@ public class ActOrd {
 		this.totalPrice = totalPrice;
 		this.ordState = ordState;
 		this.ordTime = ordTime;
+		this.payWay = payWay;
+		this.actOrdRemarks = actOrdRemarks;
 		this.actFarmer = actFarmer;
 	}
+
 
 	@Id
 	@Column(name = "actOrdId")
@@ -161,6 +169,29 @@ public class ActOrd {
 	public void setOrdTime(Timestamp ordTime) {
 		this.ordTime = ordTime;
 	}
+	
+	
+	@Column(name = "payWay")	
+	public Integer getPayWay() {
+		return payWay;
+	}
+
+	public void setPayWay(Integer payWay) {
+		this.payWay = payWay;
+	}
+
+	
+	@Column(name = "actOrdRemarks")
+	public String getActOrdRemarks() {
+		return actOrdRemarks;
+	}
+
+
+	public void setActOrdRemarks(String actOrdRemarks) {
+		this.actOrdRemarks = actOrdRemarks;
+	}
+
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "actId",referencedColumnName = "actId")
 	public ActFarmer getActFarmer() {
@@ -169,6 +200,20 @@ public class ActOrd {
 
 	public void setActFarmer(ActFarmer actFarmer) {
 		this.actFarmer = actFarmer;
+	}
+	
+	
+	//取得定單狀態中文
+	@Transient
+	public String getActOrdStatusWord() {
+		return ActOrdStatusClass.getActOrdStatus(ordState);
+	}
+	
+
+	//取得付款方式狀態中文
+	@Transient
+	public String getActPayWayStatusWord() {
+		return ActOrdStatusClass.getActPayWay(payWay);
 	}
 
 }

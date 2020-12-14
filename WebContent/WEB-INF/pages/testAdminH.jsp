@@ -22,31 +22,31 @@
               </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">電子簽核</a>
+        <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城管理</a>
         <div class="dropdown-menu" aria-labelledby="dropdown04">
-          <a class="dropdown-item" href="#">簽核管理</a>
+          <a class="dropdown-item" href="#">??????</a>
         </div>
 </li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-tgogle" href="123.html" id="dropdown04" aria-haspopup="true" aria-expanded="false">出勤管理</a>
+  <a class="nav-link dropdown-tgogle" href="<c:url value='getAllActFarmer.do'/>" id="dropdown04" aria-haspopup="true" aria-expanded="false">活動管理</a>
   <div class="dropdown-menu" aria-labelledby="dropdown04">
-    <a class="dropdown-item" href="#">打卡作業</a>
-    <a class="dropdown-item" href="#">補卡作業</a>
-    <a class="dropdown-item" href="#">請假登錄</a>
-    <a class="dropdown-item" href="#">加班登錄</a>
+    <a class="dropdown-item" href="<c:url value='getAllActFarmer.do'/>">活動總覽</a>
+    <a class="dropdown-item" href="<c:url value='actAdminSign.do'/>">報名管理</a>
+    <a class="dropdown-item" href="<c:url value='/goActAdminAnalysis'/>">活動分析</a>
+
   </div>
 </li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">部門管理</a>
+  <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜管理</a>
   <div class="dropdown-menu" aria-labelledby="dropdown04">
-    <a class="dropdown-item" href="#">公佈欄</a>
+    <a class="dropdown-item" href="#">??????</a>
   </div>
 </li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">人事管理</a>
+  <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市集管理</a>
   <div class="dropdown-menu" aria-labelledby="dropdown04">
-    <a class="dropdown-item" href="#">員工基本資料</a>
-    <a class="dropdown-item" href="#">考勤紀錄</a>
+    <a class="dropdown-item" href="#">??????</a>
+    <a class="dropdown-item" href="#">??????</a>
   </div>
 </li>
 			<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->

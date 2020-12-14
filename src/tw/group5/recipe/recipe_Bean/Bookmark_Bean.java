@@ -19,9 +19,9 @@ import tw.group5.recipe.DAO.Recipe_DAO_spring;
 @Table(name="bookmark")
 @Component
 public class Bookmark_Bean {
-	private String id;
+	private Integer id;
 	private Integer member_no;
-	private String rec_id;
+	private Integer rec_id;
 //	private boolean value;
 	
 	@Autowired @JsonIgnore
@@ -29,10 +29,10 @@ public class Bookmark_Bean {
 	
 	@Id @Column(name="id")
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -45,10 +45,10 @@ public class Bookmark_Bean {
 	}
 	
 	@Column(name="recipe_id")
-	public String getRec_id() {
+	public Integer getRec_id() {
 		return rec_id;
 	}
-	public void setRec_id(String rec_id) {
+	public void setRec_id(Integer rec_id) {
 		this.rec_id = rec_id;
 	}
 	

@@ -29,7 +29,15 @@ public class ActPageTo {
 	//去活動管理員頁面
 	@RequestMapping(value = "/goActAdmin")
 	public String goActAdmin() {
-		return "/active/actAdminHome";
+		return "/activeAdmin/actAdminHome";
+	}
+	
+	
+	//go管理員分析頁面
+	@RequestMapping(value = "/goActAdminAnalysis")
+	public String goActAdminAnalysis() {
+		return "/activeAdmin/actAdminAnalysis";
+
 	}
 
 
