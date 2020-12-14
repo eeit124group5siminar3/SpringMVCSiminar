@@ -171,7 +171,7 @@ public class MallMaintainController {
 		ProductOrderItemBean poib = orderService.getOrderItem(orderDetailId);
 		if (status != null) {
 			poib.setStatus(status);
-			if (status == 2) {
+			if (status == 1) {
 				Date today = new Date();
 				poib.setShippingDate(today);
 			}

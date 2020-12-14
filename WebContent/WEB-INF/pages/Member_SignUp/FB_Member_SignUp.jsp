@@ -147,13 +147,13 @@ $("#signup_form").on("submit",function(ev){
 </script>
 	<script>
 $(function(){
-	var member_id="待輸入";
-	var member_password="待輸入";
-	var member_password1="待輸入";
-	var member_bank_code="待輸入";
-	var member_bank_account="待輸入";
-	var member_cellphone="待輸入";
-	var member_address="待輸入";
+	var member_id="F128862022";
+	var member_password="123456aA";
+	var member_password1="123456aA";
+	var member_bank_code="013";
+	var member_bank_account="018746932267";
+	var member_cellphone="0918667445";
+	var member_address="屏東縣恆春鎮鵝鑾里燈塔路90號";
 
 	$("#buyersignup_button").click(function(){
 		$("#member_id").val(member_id);

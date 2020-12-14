@@ -62,8 +62,12 @@ public class ShoppingCart {
 	}
 	
 // 獲得購物車內商品種類數量
-	public int getItemNumber(){   // ShoppingCart.itemNumber
+	public int getItemNumber(){ // ShoppingCart.itemNumber
+		if(cart.isEmpty()) {
+			return 0;
+		}else {
 		return cart.size();
+		}
 	}
 	
 //計算購物車內所有商品的總計(每項商品的單價*數量的總和)

@@ -57,7 +57,7 @@
  <section class="ftco-section ftco-degree-bg">
 <div>
 <h2 align="center">
-結帳資訊 
+結帳資訊  <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">收件人</button>
 </h2>
 
 <form:form action="MarketSendOrder"  method="post" modelAttribute="order" >
@@ -73,15 +73,15 @@
 
 <tr>
     <td>收件地址:</td>
-    <td><form:input type="text" name="address" id="address" size="20" maxlength="10"
+    <td><form:input type="text" name="address" id="address" size="30" 
           path="address"/>
 
     </td>
 </tr>
 <tr>
     <td>聯絡電話:</td>
-    <td><form:input type="text" name="cellphone" id="cellphone" maxlength="10"
-       path="cellphone" size="5" />
+    <td><form:input type="text" name="cellphone" id="cellphone" maxlength="15"
+       path="cellphone" size="20" />
       
     </td>
 </tr> 
@@ -104,5 +104,19 @@
 <p>&nbsp;</p>
 <c:remove var="ErrMsg" scope='session'/>
 <jsp:include page="/WEB-INF/pages/footer.jsp" />
+<script>
+function fastinsert(){
+	var buyer="路人炳";
+	var address="320桃園市中壢區中大路300號國立中央大學 (工程二館側面 / 資策會大樓";
+	var cellphone="0983006738";
+
+	
+		$("#buyer").val(buyer);
+		$("#address").val(address);
+		$("#cellphone").val(cellphone);
+
+}
+
+</script>
 </body>
 </html>

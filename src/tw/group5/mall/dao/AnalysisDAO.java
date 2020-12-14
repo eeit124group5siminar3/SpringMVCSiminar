@@ -40,7 +40,7 @@ public String getProduct() {
 // 獲得個人的月銷售額
 	public BigDecimal getMonthlySales(Date last, Date start) {
 		Session session = sessionFactory.getCurrentSession();
-		String sql="select sum(amount*round(unitprice*discount)) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and status in (2,3)";
+		String sql="select sum(amount*round(unitprice*discount)) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and status in (1,3)";
 //		String sql="select s from(select sum(d.amount*round(d.unitprice*d.discount)) s,to_char(f.orderdate,'YYYY-MM') from orderdetails d left join orderform f on d.orderId=f.orderId where d.producterId= :producterId and f.orderdate BETWEEN :last and :start group by to_char(f.orderdate,'YYYY-MM') ORDER BY to_char(f.orderdate,'YYYY-MM') desc)";
 		Query<?>query = session.createSQLQuery(sql);
 		query.setParameter("producterId", userId);
@@ -53,7 +53,7 @@ public String getProduct() {
 // 獲得個人單一產品的月銷售額
 	public BigDecimal getMonthlyProductSales(Date last, Date start) {
 		Session session = sessionFactory.getCurrentSession();
-		String sql="select sum(amount*round(unitprice*discount)) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and REGEXP_SUBSTR(description,'[^ - ]+',1,1)= :product and status in (2,3)";
+		String sql="select sum(amount*round(unitprice*discount)) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and REGEXP_SUBSTR(description,'[^ - ]+',1,1)= :product and status in (1,3)";
 //		String sql="select s from(select sum(d.amount*round(d.unitprice*d.discount)) s,to_char(f.orderdate,'YYYY-MM') from orderdetails d left join orderform f on d.orderId=f.orderId where d.producterId= :producterId and f.orderdate BETWEEN :last and :start group by to_char(f.orderdate,'YYYY-MM') ORDER BY to_char(f.orderdate,'YYYY-MM') desc)";
 		Query<?>query = session.createSQLQuery(sql);
 		query.setParameter("producterId", userId);
@@ -67,7 +67,7 @@ public String getProduct() {
 // 獲得全站平均的月銷售額
 	public BigDecimal getMonthlySalesForAll(Date last, Date start) {
 		Session session = sessionFactory.getCurrentSession();
-		String sql="select sum(amount*round(unitprice*discount)) from orderdetails where orderId in (select orderId from orderform where orderdate between :last and :start) and status in (2,3)";
+		String sql="select sum(amount*round(unitprice*discount)) from orderdetails where orderId in (select orderId from orderform where orderdate between :last and :start) and status in (1,3)";
 		Integer count=getSalerNum();
 //		String sql="select s from(select sum(d.amount*round(d.unitprice*d.discount)) s,to_char(f.orderdate,'YYYY-MM') from orderdetails d left join orderform f on d.orderId=f.orderId where d.producterId= :producterId and f.orderdate BETWEEN :last and :start group by to_char(f.orderdate,'YYYY-MM') ORDER BY to_char(f.orderdate,'YYYY-MM') desc)";
 		Query<?>query = session.createSQLQuery(sql);
@@ -103,7 +103,7 @@ public String getProduct() {
 // 取得個人售出產品清單
 	public List<String> getUserProductList(Date last, Date start){
 		Session session = sessionFactory.getCurrentSession();
-		String sql="select REGEXP_SUBSTR(description,'[^ - ]+',1,1) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and status in (2,3) group by REGEXP_SUBSTR(description,'[^ - ]+',1,1)";
+		String sql="select REGEXP_SUBSTR(description,'[^ - ]+',1,1) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and status in (1,3) group by REGEXP_SUBSTR(description,'[^ - ]+',1,1)";
 		Query<String>query = session.createSQLQuery(sql);
 		query.setParameter("producterId", userId);
 		query.setParameter("start", start);
@@ -115,7 +115,7 @@ public String getProduct() {
 // 獲得個人各產品的訂單數
 		public List<Long> getMonthlyProductOrder(Date last, Date start) {
 			Session session = sessionFactory.getCurrentSession();
-			String sql="select count(*) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and status in (2,3) group by REGEXP_SUBSTR(description,'[^ - ]+',1,1)";
+			String sql="select count(*) from orderdetails where producterId= :producterId and orderId in (select orderId from orderform where orderdate between :last and :start) and status in (1,3) group by REGEXP_SUBSTR(description,'[^ - ]+',1,1)";
 			Query<Long>query = session.createSQLQuery(sql);
 			query.setParameter("producterId", userId);
 			query.setParameter("start", start);

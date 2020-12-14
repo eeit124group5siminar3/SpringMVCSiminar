@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
+import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 //import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
@@ -100,6 +101,41 @@ public class Recipe_DAO_spring {
 		return list;
 
 	}
+	
+	//------------------------個人資料---------------------------
+	
+		public Member_Detail insertDetail(Member_Detail bean) {
+			Session session = sessionFactory.getCurrentSession();
+			session.save(bean);
+			return bean;
+
+		}
+
+		public Member_Detail updateDetail(Member_Detail bean) {
+			Session session = sessionFactory.getCurrentSession();
+			session.update(bean);
+			return bean;
+
+		}
+
+		public boolean deleteDetail(Integer mem_no) {
+			Session session = sessionFactory.getCurrentSession();
+			Member_Detail result = session.get(Member_Detail.class, mem_no);
+			if (result != null) {
+				session.delete(result);
+				return true;
+			}
+			return false;
+		}
+	
+		// 搜尋個人資料
+		public Member_Detail detailBean(Integer mem_no) {
+			Session session = sessionFactory.getCurrentSession();
+			System.out.println("enter blogbean");
+			Member_Detail bean = session.get(Member_Detail.class, mem_no);
+			return bean;
+		}
+	
 
 	// -----------------------Bookmark------------------------
 	
@@ -348,11 +384,11 @@ public class Recipe_DAO_spring {
 			page = 1;
 		}
 		if (showData == null) {
-			showData = 2;
+			showData = 6;
 		}
 		Session session = sessionFactory.getCurrentSession();
 		Integer startPosition = (page - 1) * showData;
-		Query<Recipe_Bean> query = session.createQuery("from Recipe_Bean", Recipe_Bean.class);
+		Query<Recipe_Bean> query = session.createQuery("from Recipe_Bean order by recipe_id desc", Recipe_Bean.class);
 		List<Recipe_Bean> list = query.setFirstResult(startPosition).setMaxResults(showData).setReadOnly(true)
 				.getResultList();
 		return list;

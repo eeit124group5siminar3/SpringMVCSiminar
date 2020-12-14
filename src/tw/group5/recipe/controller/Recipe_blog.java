@@ -32,6 +32,7 @@ import org.springframework.http.HttpStatus;
 import oracle.net.aso.m;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
+import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
@@ -107,6 +108,9 @@ public class Recipe_blog {
 		// 回文資料
 		List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
 		m.addAttribute("searchMsg", searchMsg);
+		
+		//作者資料
+//		Member_Detail detailBean=service.detailBean(mem_no);
 		return "recipe/blog_single";
 	}
 

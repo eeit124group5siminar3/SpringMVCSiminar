@@ -1500,15 +1500,15 @@ $("#signup_form").on("submit",function(ev){
 <!-- 會員新增一鍵 -->
 	<script>
 $(function(){
-	var member_email="待輸入";
-	var member_id="待輸入";
-	var member_password="待輸入";
-	var member_password1="待輸入";
-	var member_bank_code="待輸入";
-	var member_bank_account="待輸入";
-	var member_name="待輸入";
-	var member_cellphone="待輸入";
-	var member_address="待輸入";
+	var member_email="admin_account@gmail.com";
+	var member_id="F104418148";
+	var member_password="123456aA";
+	var member_password1="123456aA";
+	var member_bank_code="013";
+	var member_bank_account="018746932267";
+	var member_name="我是Admin新會員";
+	var member_cellphone="0918667445";
+	var member_address="屏東縣恆春鎮鵝鑾里燈塔路90號";
 
 	$("#signup_form").on("click","#buyersignup_button",function(){
 		console.log("111111");
@@ -1627,8 +1627,7 @@ $(function(){
 														style="color: red">*</a></label> <span style="color: red"><small
 														id="span_name"></small></span> <input type="text"
 														name="member_name" id="member_name" class="form-control"
-														placeholder="請填入姓名或商家名稱" pattern="^[\u4e00-\u9fa5]{0,}$"
-														title="只接受中文字" required>
+														placeholder="請填入姓名或商家名稱" required>
 													<p></p>
 
 													<label for="inputPassword4" style="float: left">生日<a

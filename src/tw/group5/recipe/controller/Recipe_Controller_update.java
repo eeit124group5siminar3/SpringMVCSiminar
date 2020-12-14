@@ -135,7 +135,7 @@ public class Recipe_Controller_update {
 
 	}
 	
-	@GetMapping("/getImageA")
+	@GetMapping(value="/getImageA")
 	@ResponseBody
 	public ResponseEntity<byte[]> getImageA(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
 		ResponseEntity<byte[]> re = null;
@@ -144,7 +144,7 @@ public class Recipe_Controller_update {
 		List<Recipe_Bean> list=service.getAllImage();
 		if (rec_id != null) {
 			for (Recipe_Bean b : list) {
-				if (b.getRec_id() == rec_id) {
+				if (b.getRec_id().equals(rec_id)) {
 					blob = b.getData_A();
 					fileName = b.getFileName_A();
 				}
@@ -181,7 +181,7 @@ public class Recipe_Controller_update {
 
 	}
 	
-	@GetMapping("/getImageB")
+	@GetMapping(value="/getImageB")
 	@ResponseBody
 	public ResponseEntity<byte[]> getImageB(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
 		ResponseEntity<byte[]> re = null;
@@ -190,7 +190,7 @@ public class Recipe_Controller_update {
 		List<Recipe_Bean> list=service.getAllImage();
 		if (rec_id != null) {
 			for (Recipe_Bean b : list) {
-				if (b.getRec_id() == rec_id) {
+				if (b.getRec_id().equals(rec_id)) {
 					blob = b.getData_B();
 					fileName = b.getFileName_B();
 				}
@@ -227,7 +227,7 @@ public class Recipe_Controller_update {
 
 	}
 	
-	@GetMapping("/getImageC")
+	@GetMapping(value="/getImageC")
 	@ResponseBody
 	public ResponseEntity<byte[]> getImageC(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
 		ResponseEntity<byte[]> re = null;
@@ -236,7 +236,7 @@ public class Recipe_Controller_update {
 		List<Recipe_Bean> list=service.getAllImage();
 		if (rec_id != null) {
 			for (Recipe_Bean b : list) {
-				if (b.getRec_id() == rec_id) {
+				if (b.getRec_id().equals(rec_id)) {
 					blob = b.getData_C();
 					fileName = b.getFileName_C();
 				}
@@ -273,7 +273,7 @@ public class Recipe_Controller_update {
 
 	}
 	
-	@GetMapping("/getImageD")
+	@GetMapping(value="/getImageD")
 	@ResponseBody
 	public ResponseEntity<byte[]> getImageD(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
 		ResponseEntity<byte[]> re = null;
@@ -282,7 +282,7 @@ public class Recipe_Controller_update {
 		List<Recipe_Bean> list=service.getAllImage();
 		if (rec_id != null) {
 			for (Recipe_Bean b : list) {
-				if (b.getRec_id() == rec_id) {
+				if (b.getRec_id().equals(rec_id)) {
 					blob = b.getData_D();
 					fileName = b.getFileName_D();
 				}
@@ -319,7 +319,7 @@ public class Recipe_Controller_update {
 
 	}
 	
-	@GetMapping("/getImageE")
+	@GetMapping(value="/getImageE")
 	@ResponseBody
 	public ResponseEntity<byte[]> getImageE(@RequestParam(name="rec_id", required = false)Integer rec_id) throws IOException, SQLException {
 		ResponseEntity<byte[]> re = null;
@@ -328,7 +328,7 @@ public class Recipe_Controller_update {
 		List<Recipe_Bean> list=service.getAllImage();
 		if (rec_id != null) {
 			for (Recipe_Bean b : list) {
-				if (b.getRec_id() == rec_id) {
+				if (b.getRec_id().equals(rec_id)) {
 					blob = b.getData_E();
 					fileName = b.getFileName_E();
 				}
