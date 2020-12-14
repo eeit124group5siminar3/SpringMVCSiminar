@@ -53,7 +53,7 @@ public class MarketHome {
 	@ResponseBody
 	public ModelAndView showAllSeller(HttpServletRequest request,
 			@RequestParam(value = "marketPageNo", required = false) Integer pageNoP,
-			@RequestParam(value = "searchString", required = false) String searchStringP
+			@RequestParam(value = "Market_searchString", required = false) String searchStringM
 			){
 		
 		HttpSession session = request.getSession(false);
@@ -63,6 +63,14 @@ public class MarketHome {
 			pageNo=pageNoP;
 			session.setAttribute("marketPageNo", pageNo);
 		}
+		
+//		String searchString =(String) session.getAttribute("Market_searchString");
+//		if (searchStringM !=null) {
+//			searchString =searchStringM;
+//			session.setAttribute("Market_searchString",searchString);
+//			sellerService.setSearchString(searchString.toUpperCase());
+//		}
+		
 		List<MarketMallBean> list = sellerService.selectAllmall(pageNo,null);
 		int totalPage =(int) Math.ceil(totalPages*1.0 /2);//總頁數
 		ModelAndView mav = new ModelAndView();
@@ -134,13 +142,17 @@ public class MarketHome {
         java.util.Date date = new java.util.Date();      
         System.out.println("1232132日期"+date);
         Date date1=pBean.getCloseDay();
-//        long days = date1.getT;
+        long d1 = date1.getTime()-date.getTime();
+        long days=(d1/1000/60/60/24);
         
+        System.out.println("天數"+days);
+               
         marketOrder =cart.getContent().get(productId);
 		ModelAndView mav =new ModelAndView();
         mav.setViewName("/marketSeller/MarketMallOneProduct");
         mav.addObject("oneProduct",pBean);
         mav.addObject("marketOrder",marketOrder);
+        mav.addObject("days",days);
         mav.setStatus(HttpStatus.OK);
 		return mav;
 	}
