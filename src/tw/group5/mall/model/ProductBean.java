@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -263,6 +265,16 @@ public class ProductBean implements Serializable {
 	public void setProducterName(String producterName) {
 		this.producterName = producterName;
 	}
+	
+	@Transient
+	public java.util.Date getExpiryDate(){
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(addedDate);
+		calendar.add(Calendar.DATE, shelfTime);
+		java.util.Date date =calendar.getTime();
+		return date;
+	}
+	
 
 //	@JsonIgnore
 //	@ManyToOne(fetch = FetchType.LAZY)
