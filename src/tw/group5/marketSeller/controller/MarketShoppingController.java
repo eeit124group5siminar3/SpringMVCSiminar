@@ -81,11 +81,10 @@ public class MarketShoppingController {
 			MarketOrderDetailBean oid =new MarketOrderDetailBean();
 			MarketOrder oi =carts.get(k);
 			oid.setProductId(oi.getProductId());
+			System.out.println("你不見了"+oi.getProductId()+"單價"+oi.getPrice());
 			oid.setQuantity(oi.getQuantity());
-			oid.setProductId(oi.getProductId());
 			oid.setTotalPrice(oi.getPrice());
 			oid.setMarketOrderBean(order);
-
 			items.add(oid);
 		}
 		order.setMarketOrderDetailBean(items);

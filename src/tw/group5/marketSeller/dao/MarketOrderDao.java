@@ -31,7 +31,11 @@ public class MarketOrderDao implements IMarketOrderBeanService  {
 		List<MarketOrderBean> list =query.list();
 		return list;
 	}
-
+	
+	@Override
+	public MarketOrderBean selectOneOrder(int oid) {
+		return getSession().get(MarketOrderBean.class, oid);
+	}
 
 	public MarketProductTotalBean updateStock(MarketOrderDetailBean mib) {
 		Session session = sessionFactory.getCurrentSession();
@@ -48,5 +52,12 @@ public class MarketOrderDao implements IMarketOrderBeanService  {
 	public void insert(MarketOrderBean bean) {
 		getSession().save(bean);
 	}
+
+	@Override
+	public MarketOrderDetailBean selectOneOrderDetail(int oid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

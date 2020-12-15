@@ -25,7 +25,6 @@ public class MarketOrderDetailBean {
 	private Integer quantity;
 	private Integer totalPrice;
 	private MarketOrderBean marketOrderBean;
-	private MarketProductTotalBean marketProductTotalBean;
 	
 	@Id @Column(name = "DETAIL_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +36,7 @@ public class MarketOrderDetailBean {
 	}
 	
 	@Transient
-//	@Column(name = "OID")
+	@Column(name = "OID")
 	public Integer getOid() {
 		return oid;
 	}
@@ -45,7 +44,7 @@ public class MarketOrderDetailBean {
 		this.oid = oid;
 	}
 	
-	@Transient
+	
 	@Column(name = "PRODUCTID")
 	public Integer getProductId() {
 		return productId;
@@ -79,15 +78,6 @@ public class MarketOrderDetailBean {
 		this.marketOrderBean = marketOrderBean;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "PRODUCT_ID")
-	public MarketProductTotalBean getMarketProductTotalBean() {
-		return marketProductTotalBean;
-	}
-	public void setMarketProductTotalBean(MarketProductTotalBean marketProductTotalBean) {
-		this.marketProductTotalBean = marketProductTotalBean;
-	}
-	
-	
+
 	
 }

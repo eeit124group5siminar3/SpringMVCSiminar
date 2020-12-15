@@ -33,4 +33,16 @@ public class MarketOrderBeanService implements IMarketOrderBeanService {
 		return mDao.selectBuyerOrder(mid);
 	}
 
+	@Override
+	public MarketOrderBean selectOneOrder(int oid) {
+		// TODO Auto-generated method stub
+		return mDao.selectOneOrder(oid);
+	}
+
+	@Override
+	public MarketOrderDetailBean selectOneOrderDetail(int oid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
