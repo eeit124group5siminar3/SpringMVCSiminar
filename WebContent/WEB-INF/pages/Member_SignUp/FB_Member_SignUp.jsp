@@ -147,7 +147,7 @@ $("#signup_form").on("submit",function(ev){
 </script>
 	<script>
 $(function(){
-	var member_id="F128862022";
+	var member_id="E186745767";
 	var member_password="123456aA";
 	var member_password1="123456aA";
 	var member_bank_code="013";

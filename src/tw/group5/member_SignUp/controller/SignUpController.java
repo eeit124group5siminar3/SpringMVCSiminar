@@ -303,9 +303,7 @@ public class SignUpController {
 	@RequestMapping(value = "/fbCheckMemberSignUp.controller", method = RequestMethod.POST)
 	public String processfbCheckMemberSignUp(HttpSession session, Model m) throws ParseException {
 
-		System.err.println("1111111111111");
 		Member_SignUp member_data = (Member_SignUp) m.getAttribute("reg_buyer");
-		System.err.println("2222222222");
 
 		String member_email = member_data.getMember_email();
 		String member_permissions = member_data.getMember_permissions();
@@ -321,15 +319,14 @@ public class SignUpController {
 
 		String member_gg = "0";
 		String member_lock_acc = "0";
-		System.err.println("3333333333333");
-
-		System.err.println(member_cellphone);
 
 		member_Service.Fb_Updata_Member_Data(member_email, member_permissions, member_password, member_birthday,
 				member_cellphone, member_id, member_address, member_gui_number, e_paper, member_gg, member_lock_acc,
 				member_bank_code, member_bank_account);
-
-		m.addAttribute("login_ok", member_data);
+		
+		Member_SignUp login_bean = member_Service.login_bean(member_email);
+		
+		m.addAttribute("login_ok", login_bean);
 
 		session.removeAttribute("reg_buyer");
 
