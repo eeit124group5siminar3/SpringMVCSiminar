@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -31,6 +32,18 @@ public class LoginController {
 	
 	@Autowired
 	private Member_Service member_Service;
+	
+	//一鍵登錄包Bean
+	@RequestMapping(path = "/oneButton.controller", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean OneButton(@RequestParam(name = "member_email") String member_email,Model m) {
+
+		Member_SignUp login_bean = member_Service.login_bean(member_email);
+		m.addAttribute("login_ok", login_bean);
+
+		return true;
+	}	
+	
 	
 	@RequestMapping(path = "/index.controller", method = RequestMethod.GET)
 	public String processIndex() {
