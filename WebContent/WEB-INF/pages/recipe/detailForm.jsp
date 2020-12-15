@@ -66,16 +66,15 @@
 </head>
 <body class="goto-here">
 	<jsp:include page="../header.jsp" />
-	<c:if test="${memDetail!=null}">
+	<c:if test="${!empty memDetail}">
 	<form:form action="./updateDetail" method='post' class="formform" 
 				modelAttribute="memDetail" enctype="multipart/form-data">
-
 		<div align="center" class="wrap">
-
+		
 			<div class="txt">
-				<form:label for="exampleFormControlTextarea1" path="name"
+				<form:label for="inputName" path="name"
 					style="font-size:20px;" class="input-group-text">暱稱:</form:label>
-				<form:input class="form-control" id="exampleFormControlTextarea1"
+				<form:input class="form-control" id="inputName"
 					path="name" value="${memDetail.name}"></form:input>
 			</div>
 			
@@ -103,12 +102,12 @@
 		</div>
 
 <br>
-		<form:label for="MsgTextarea" path="introduction"
+		<form:label for="inputIntroduction" path="introduction"
 			style="font-size: 30px;" class="input-group-text">自我介紹 : <span
 				style="font-size: 15px;"> 最多400字</span>
 			<br>
 		</form:label>
-		<form:textarea class="form-control" id="MsgTextarea" rows="8"
+		<form:textarea class="form-control" id="inputIntroduction" rows="8"
 			cols="40" path="introduction" value="${memDetail.introduction}" placeholder="請輸入.."></form:textarea>
 
 		<br>
@@ -125,12 +124,12 @@
 	
 	<form:form action="./insertDetail" method='post' class="formform" 
 			modelAttribute="bean" enctype="multipart/form-data">
-			<h4 align="center">請先完成基本資料</h4>
+			<h4 align="center">請先完成基本資料</h4><a href="#" onclick="input()">一鍵輸入</a>
 		<div align="center" class="wrap">
 			<div class="txt">
-				<form:label for="exampleFormControlTextarea1" path="name"
+				<form:label for="inputName" path="name"
 					style="font-size:20px;" class="input-group-text">暱稱:</form:label>
-				<form:input class="form-control" id="exampleFormControlTextarea1"
+				<form:input class="form-control" id="inputName"
 					path="name"></form:input>
 			</div>
 			
@@ -156,12 +155,12 @@
 		</div>
 
 <br>
-		<form:label for="MsgTextarea" path="introduction"
+		<form:label for="inputIntroduction" path="introduction"
 			style="font-size: 30px;" class="input-group-text">自我介紹 : <span
 				style="font-size: 15px;"> 最多400字</span>
 			<br>
 		</form:label>
-		<form:textarea class="form-control" id="MsgTextarea" rows="8"
+		<form:textarea class="form-control" id="inputIntroduction" rows="8"
 			cols="40" path="introduction" placeholder="請輸入.."></form:textarea>
 
 		<br>
@@ -187,6 +186,12 @@ function funUpdate(){
 	alert('修改成功');
 	
 }
+function input(){
+	$("#inputName").val("Oceanmommy Chen");
+	$("#inputIntroduction").val("一直以來深信【餐桌不僅僅是吃飯而已】，每天為家人準備熱氣騰騰的飯菜，除了傳達對家人的情感，更守護家人的健康，餐桌上的氛圍，藏著家庭幸福的溫度。");
+	
+
+	}
 
 </script>
 </body>

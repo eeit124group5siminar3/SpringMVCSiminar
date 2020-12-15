@@ -71,31 +71,30 @@ public class ActHomeController {
 	}
 	
 	
-//	@RequestParam(name="searchString", required = false)String searchString,
-	
-//	public Map<String, Object> actFarmerListSearch(
-//			@PathVariable(name = "pageNo", required = false) Integer pageNo, Model model,
-//			HttpServletRequest rq){
-//		List<ActFarmer> list = null;
-//		String searchString = (String) rq.getAttribute("searchString");
-//		if(pageNo == null) {
-//			if(model.getAttribute("pageNO") != null) {
-//				pageNo = (Integer) model.getAttribute("pageNo");
-//			}else {
-//				pageNo = 1;
-//			}
-//		}
-//		actFarmerService.setPageNo(pageNo);
-//		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
-//		list = actFarmerService.selectName(actName);
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("data", list);
-//		map.put("totalPages", actFarmerService.getTotalPages());
-//		map.put("pageNo", pageNo);
-//		
-//		return map;
-//	}
+	@RequestMapping(value = "actFarmerListSearch.do")
+	@ResponseBody
+	public Map<String, Object> actFarmerListSearch(Model model,
+			@PathVariable(name = "pageNo", required = false) Integer pageNo,
+			HttpServletRequest rq){
+		List<ActFarmer> list = null;
+		String searchString = (String) rq.getAttribute("searchString");
+		if(pageNo == null) {
+			if(model.getAttribute("pageNO") != null) {
+				pageNo = (Integer) model.getAttribute("pageNo");
+			}else {
+				pageNo = 1;
+			}
+		}
+		actFarmerService.setPageNo(pageNo);
+		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
+		list = actFarmerService.selectNamePage(searchString);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", list);
+		map.put("totalPages", actFarmerService.getTotalPages(searchString));
+		map.put("pageNo", pageNo);
+		
+		return map;
+	}
 	
 	//取得所有頁面數
 	@RequestMapping(value = "/actFarmerPage.do/{pageNo}", produces = {"text/html;charset=UTF-8" })

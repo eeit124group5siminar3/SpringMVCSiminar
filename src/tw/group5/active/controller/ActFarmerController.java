@@ -96,6 +96,7 @@ public class ActFarmerController {
 		Collection<ActFarmer> collFarmer = actFarmerService.getPageActFarmers(sellerId);
 		model.addAttribute("MaintainPageNo",maintainPageNo);
 		model.addAttribute("collFarmer", collFarmer);
+		
 		return "/active/actFarmerMaintain2";
 	}
 	
@@ -224,7 +225,7 @@ public class ActFarmerController {
 			e.printStackTrace();
 		}
 	
-		originActFarmer.setActLock(3);
+		originActFarmer.setActLock(4);
 		originActFarmer.setActRemarks("賣家會員刪除活動");
 		actFarmerService.updateActFarmer(originActFarmer);
 		return "redirect:/allActFarmer.do";

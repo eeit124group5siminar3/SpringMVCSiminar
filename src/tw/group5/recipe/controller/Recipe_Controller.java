@@ -99,8 +99,9 @@ public class Recipe_Controller {
 	}
 
 	@PostMapping(value = "/insertDetail")
-	public String insertDetail(@ModelAttribute("bean") Member_Detail bean) {
+	public String insertDetail(@ModelAttribute("bean") Member_Detail bean,Model m) {
 		service.insertDetail(bean);
+		m.addAttribute("memDetail",bean);
 		return "Member_Backstage/Member_Backstage";
 	}
 

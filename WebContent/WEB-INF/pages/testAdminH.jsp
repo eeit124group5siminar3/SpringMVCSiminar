@@ -12,59 +12,64 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="<c:url value='adminBackstage.controller' />" class="nav-link">回首頁</a></li>
 	          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">平台管理</a>
+              <a class="nav-link dropdown-tgogle" href="<c:url value='goManageMembers.controller'/>" id="dropdown04" aria-haspopup="true" aria-expanded="false">會員管理</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="<c:url value='goManageMembers.controller'/>">會員管理</a>
-              	<a class="dropdown-item" href="#">商城管理</a>
-                <a class="dropdown-item" href="<c:url value='getAllActFarmer.do'/>">活動管理</a>
-                <a class="dropdown-item" href="#">食譜管理</a>
-                <a class="dropdown-item" href="#">市集管理</a>
-                <a class="dropdown-item" href="<c:url value='/index' />">回前台</a>
+              	<a class="dropdown-item" href="#">會員分析</a>
               </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城管理</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown04">
-          <a class="dropdown-item" href="#">??????</a>
-        </div>
-</li>
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-tgogle" href="<c:url value='getAllActFarmer.do'/>" id="dropdown04" aria-haspopup="true" aria-expanded="false">活動管理</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown04">
-    <a class="dropdown-item" href="<c:url value='getAllActFarmer.do'/>">活動總覽</a>
-    <a class="dropdown-item" href="<c:url value='actAdminSign.do'/>">報名管理</a>
-    <a class="dropdown-item" href="<c:url value='/goActAdminAnalysis'/>">活動分析</a>
-
-  </div>
-</li>
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜管理</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown04">
-    <a class="dropdown-item" href="#">??????</a>
-  </div>
-</li>
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市集管理</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown04">
-    <a class="dropdown-item" href="#">??????</a>
-    <a class="dropdown-item" href="#">??????</a>
-  </div>
-</li>
-<!-- <li class="nav-item dropdown"> -->
-<%--   <a class="nav-link dropdown-tgogle" href="<c:url value='/index'/>" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">回前台</a> --%>
-<!--   <div class="dropdown-menu" aria-labelledby="dropdown04"> -->
-<!--     <a class="dropdown-item" href="#">??????</a> -->
-<!--     <a class="dropdown-item" href="#">??????</a> -->
-<!--   </div> -->
-<!-- </li> -->
-			<!-- <li class="nav-item"><a href="product-single.html" class="nav-link">商城</a></li> -->
-
-			  <li class="nav-item"><a href="<c:url value='adminRemoveSession.controller' />" class="nav-link">登出</a></li>
+<!--         <div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+<!--           <a class="dropdown-item" href="#">??????</a> -->
+<!--         </div> -->
+		</li>
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-tgogle" href="<c:url value='getAllActFarmer.do'/>" id="dropdown04" aria-haspopup="true" aria-expanded="false">活動管理</a>
+		  <div class="dropdown-menu" aria-labelledby="dropdown04">
+		    <a class="dropdown-item" href="<c:url value='getAllActFarmer.do'/>">活動總覽</a>
+		    <a class="dropdown-item" href="<c:url value='actAdminSign.do'/>">報名管理</a>
+		    <a class="dropdown-item" href="<c:url value='goActAdminAnalysis'/>">活動分析</a>
+		
+		  </div>
+		</li>
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜管理</a>
+		<!--   <div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+		<!--     <a class="dropdown-item" href="#">??????</a> -->
+		<!--   </div> -->
+		</li>
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">市集管理</a>
+		<!--   <div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+		<!--     <a class="dropdown-item" href="#">??????</a> -->
+		<!--     <a class="dropdown-item" href="#">??????</a> -->
+		<!--   </div> -->
+		</li>
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-tgogle" href="<c:url value='/index'/>" id="dropdown041" aria-haspopup="true" aria-expanded="false">回前台</a>
+		<!--   <div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+		<!--     <a class="dropdown-item" href="#">??????</a> -->
+		<!--     <a class="dropdown-item" href="#">??????</a> -->
+		<!--   </div> -->
+		</li>
+	
+		<li class="nav-item"><a href="<c:url value='adminRemoveSession.controller' />" class="nav-link">登出</a></li>
 	        </ul>
 	      </div>
 	    </div>
     </nav>
     <hr>
+    		<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <script>
+$(function(){
+	$("#dropdown041").on("click",function(){
+		console.log("11111111111");
+	})
+})
+    </script>
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>

@@ -150,7 +150,7 @@ $("#signup_form").on("submit",function(ev){
 </script>
 	<script>
 $(function(){
-	var member_email="lincoln_bah@yahoo.com.tw";
+	var member_email="test.iiiseminar5@gmail.com";
 	var member_id="F128862022";
 	var member_password="123456aA";
 	var member_password1="123456aA";

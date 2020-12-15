@@ -79,7 +79,9 @@
 				<div class="col-lg-8 ftco-animate">
 						<div class="row">
 					<div id="searchSuccess">
-							<c:forEach begin="0" end="${searchAll.size()}" step="1" var="i">
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${searchAll!=null}"> --%>
+							<c:forEach begin="0" end="${searchAll.size()-1}" step="1" var="i">
 								<div class="col-md-12 d-flex ftco-animate">
 									<div class="blog-entry align-self-stretch d-md-flex">
 									<c:if test="${searchAll[i].fileName!=null}">
@@ -125,7 +127,12 @@
 								</div>
 
 							</c:forEach>
-
+<%-- 							</c:when> --%>
+<%-- 							<c:otherwise> --%>
+<!-- 								<div>123</div> -->
+<%-- 							</c:otherwise> --%>
+<%-- 						</c:choose> --%>
+						
 						</div>
 					</div>
 				</div>

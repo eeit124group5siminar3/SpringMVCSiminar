@@ -76,12 +76,14 @@ public class Member_DAO {
 		// HQL語法搜尋
 		Session session = sessionFactory.getCurrentSession();
 		Query<?> query_email = session.createQuery("From Member_SignUp Where Member_email=?0");
-		Query<?> result = query_email.setParameter(0, member_email);
-
+		query_email.setParameter(0, member_email);
+		
+		Member_SignUp result = (Member_SignUp) query_email.uniqueResult(); 
+		
+System.err.println(result);
 		// 有資料就做判斷
-		if (result.uniqueResult() != null) {
-			Member_SignUp email_bean = (Member_SignUp) result.uniqueResult();
-			String password = email_bean.getMember_password();
+		if (result != null) {
+			String password = result.getMember_password();
 			if (member_password.equals(password)) {
 				return true;
 			}

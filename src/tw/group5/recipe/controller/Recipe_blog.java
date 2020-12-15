@@ -110,7 +110,8 @@ public class Recipe_blog {
 		m.addAttribute("searchMsg", searchMsg);
 		
 		//作者資料
-//		Member_Detail detailBean=service.detailBean(mem_no);
+		Member_Detail detailBean=service.detailBean(partSearch.getMem_no());
+		m.addAttribute("detailBean",detailBean);
 		return "recipe/blog_single";
 	}
 

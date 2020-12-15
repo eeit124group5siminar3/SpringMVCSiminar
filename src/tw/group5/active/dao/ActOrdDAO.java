@@ -34,6 +34,7 @@ public class ActOrdDAO {
 	private SessionFactory sessionFactory;
 	private Integer memNo = null;
 	private Integer pageNo = 1;
+	private Integer memPageNo = 1;
 	private Integer recordsPerPage = 3;
 	private Integer totalPages = -1;
 
@@ -43,6 +44,15 @@ public class ActOrdDAO {
 
 	public void setPageNo(Integer pageNo) {
 		this.pageNo = pageNo;
+	}
+	
+	
+	public Integer getMemPageNo() {
+		return memPageNo;
+	}
+
+	public void setMemPageNo(Integer memPageNo) {
+		this.memPageNo = memPageNo;
 	}
 
 	public Integer getRecordsPerPage() {
@@ -54,21 +64,35 @@ public class ActOrdDAO {
 	}
 
 	public Integer getTotalPages() {
+		totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
 		return totalPages;
 	}
 
 	//計算該會員總共有幾頁
-	public Integer getTotalPages(Integer memNO) {
-		totalPages = (int) (Math.ceil(getRecordCounts(memNO) / (double) recordsPerPage));
+	public Integer getTotalPages(Integer memNo) {
+		totalPages = (int) (Math.ceil(getRecordCounts(memNo) / (double) recordsPerPage));
 		return totalPages;
 	}
 	
-
+	// 計算所有參與的活動筆數
+		public long getRecordCounts() {
+			Session session = sessionFactory.getCurrentSession();
+			Integer count = 0;
+			String hql = "select count(*) from ActOrd";
+			Query<Long> query = session.createQuery(hql, java.lang.Long.class);
+			query.setParameter(0, memNo);
+			Object objectNumber = query.uniqueResult();
+			long longNumber = (long) objectNumber;
+			count = (int) longNumber;
+			return count;
+		}
+		
+		
 	// 計算該會員參與的活動筆數
 	public long getRecordCounts(Integer memNo) {
 		Session session = sessionFactory.getCurrentSession();
 		Integer count = 0;
-		String hql = "select count(*) from ActOrd where memNO=0?";
+		String hql = "select count(*) from ActOrd where memNo=?0";
 		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
 		query.setParameter(0, memNo);
 		Object objectNumber = query.uniqueResult();
@@ -99,7 +123,7 @@ public class ActOrdDAO {
 	public List<ActOrd> getPageActOrds(Integer memNo) {
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ActOrd where memNO =?0 ORDER BY ordId";
+		String hql = "from ActOrd where memNO =?0 ORDER BY actOrdId";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, memNo);
 		query.setFirstResult(startRecordNo);
