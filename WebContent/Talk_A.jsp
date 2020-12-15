@@ -105,19 +105,19 @@ if(minute<10){
 		`<div class="chat_list active_chat">
         <div class="chat_people">
           <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-          <div class="chat_ib" id="tttt">
+          <div class="chat_ib \${member_name}">
             <h5>\${member_name}</h5>
-            <input type="text" id="\${member_name}" value="\${member_name}">
+            <input type="hidden" id="\${member_name}" value="\${member_name}">
             <p>\${content}</p>
           </div>
         </div>
       </div>`)
 	}
 	if(member_name == new_name){
-		$("#tttt").html(
+		$("."+member_name).html(
 				`
 		            <h5>\${member_name}</h5>
-		            <input type="text" id="\${member_name}" value="\${member_name}">
+		            <input type="hidden" id="\${member_name}" value="\${member_name}">
 		            <p>\${content}</p>
 		         `)
 	}

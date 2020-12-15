@@ -191,7 +191,7 @@ $(function(){
 			<fieldset class="border signup-form-fieldset">
 				<legend>會員註冊</legend>
 				<button type="button" id="buyersignup_button">買家</button>
-				<button type="button" id="sellersignup_button">買家</button>
+				<button type="button" id="sellersignup_button">賣家</button>
 				<hr>
 				<div id="member_permissions0"
 					class="custom-control custom-radio custom-control-inline">
