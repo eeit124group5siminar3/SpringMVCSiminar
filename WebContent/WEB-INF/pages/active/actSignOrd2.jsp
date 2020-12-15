@@ -57,57 +57,7 @@
     <section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
-    			<div class="col-md-12 ftco-animate">
-    				<div class="cart-list">
-	    				<table class="table">
-						    <thead class="thead-primary">
-						      <tr class="text-center">
-						        <th>&nbsp;</th>
-						        <th>活動名稱</th>
-						        <th>活動開始時間</th>
-						        <th>活動結束時間</th>						        
-						        <th>連絡電話</th>
-						        <th>報名人數</th>
-						        <th>總金額</th>
-						      </tr>
-						    </thead>
-						    
-						    <tbody>
-						   	<c:forEach var="collActOrds" items="${collActOrds}">
-						    
-						      <tr class="text-center">						        
-						        <td class="image-prod">
-						        <img class="img" src="<c:url value='ActImageController?id=${collActOrds.actFarmer.actId}&type=ACTFARMER'/>"/>
-						        </td>
-						        
-						        <td class="product-name">
-						        <h3>
-						        <a href="<c:url value='getSingleAct.do?id=${collActOrds.actFarmer.actId}'/>">${collActOrds.actFarmer.actName}</a>
-						        </h3>
-						        	<p>${collActOrds.actFarmer.actAddr}</p>
-						        </td>
-						        <td class="product-name">
-						        	<h3>${collActOrds.actFarmer.actDateSta}</h3>
-						        	<p>${collActOrds.actFarmer.actTimeSta}</p>
-						        </td>
-						        <td class="product-name">
-						        	<h3>${collActOrds.actFarmer.actDateEnd}</h3>
-						        	<p>${collActOrds.actFarmer.actTimeEnd}</p>
-						        </td>
-						        <td class="product-name">
-						        	<h3>${collActOrds.actFarmer.tel}</h3>
-						        </td>
-						        <td class="quantity">${collActOrds.ordActNum}</td>
-						    			        
-						        <td class="total">${collActOrds.totalPrice}</td>
-						      </tr><!-- END TR-->
-						     </c:forEach>
-					     
-						     
-						     
-						    </tbody>
-						  </table>
-					  </div>
+    			
 			<!-- 以下為控制第一頁、前一頁、下一頁、最末頁 等超連結-->
 					  
 							<form>
@@ -187,10 +137,118 @@
 	  }
   
 window.onload = getNum();
-
-
-	  
+  
 </script>	
+<script>
+$.get({
+	url:"${pageContext.request.contextPath}/actOrdSelect.do/"+currentPage,
+	success:function(response){
+		let data = response.data;
+		let content="";
+		content=
+		`<div class="col-md-12 ftco-animate">
+			<div class="cart-list">
+				<table class="table">
+				    <thead class="thead-primary">
+				      <tr class="text-center">
+				        <th>&nbsp;</th>
+				        <th>活動名稱</th>
+				        <th>活動開始時間</th>
+				        <th>活動結束時間</th>						        
+				        <th>連絡電話</th>
+				        <th>報名人數</th>
+				        <th>總金額</th>
+				      </tr>
+				    </thead>
+				    <tbody>`;
+		for(var i = 0; i<data.length; i++){
+			content+=
+			`<tr class="text-center">						        
+		        <td class="image-prod">
+		        <img class="img" src="<c:url value='ActImageController?id=${data[i].actFarmer.actId}&type=ACTFARMER'/>"/>
+		        </td>
+		        
+		        <td class="product-name">
+		        <h3>
+		        <a href="<c:url value='getSingleAct.do?id=${data[i].actFarmer.actId}'/>">\${data[i].actFarmer.actName}</a>
+		        </h3>
+		        	<p>\${data[i].actFarmer.actAddr}</p>
+		        </td>
+		        <td class="product-name">
+		        	<h3>\${data[i].actFarmer.actDateSta}</h3>
+		        	<p>\${data[i].actFarmer.actTimeSta}</p>
+		        </td>
+		        <td class="product-name">
+		        	<h3>\${data[i].actFarmer.actDateEnd}</h3>
+		        	<p>\${data[i].actFarmer.actTimeEnd}</p>
+		        </td>
+		        <td class="product-name">
+		        	<h3>\${data[i].actFarmer.tel}</h3>
+		        </td>
+		        <td class="quantity">\${data[i].ordActNum}</td>
+		    			        
+		        <td class="total">\${data[i].totalPrice}</td>
+		      </tr>`<!-- END TR-->;
+			}
+		content=` </tbody>
+			  </table>
+			  </div>`
+		}	
+})
+
+<div class="col-md-12 ftco-animate">
+<div class="cart-list">
+	<table class="table">
+	    <thead class="thead-primary">
+	      <tr class="text-center">
+	        <th>&nbsp;</th>
+	        <th>活動名稱</th>
+	        <th>活動開始時間</th>
+	        <th>活動結束時間</th>						        
+	        <th>連絡電話</th>
+	        <th>報名人數</th>
+	        <th>總金額</th>
+	      </tr>
+	    </thead>
+	    
+	    <tbody>
+	   	<c:forEach var="collActOrds" items="${collActOrds}">
+	    
+	      <tr class="text-center">						        
+	        <td class="image-prod">
+	        <img class="img" src="<c:url value='ActImageController?id=${collActOrds.actFarmer.actId}&type=ACTFARMER'/>"/>
+	        </td>
+	        
+	        <td class="product-name">
+	        <h3>
+	        <a href="<c:url value='getSingleAct.do?id=${collActOrds.actFarmer.actId}'/>">${collActOrds.actFarmer.actName}</a>
+	        </h3>
+	        	<p>${collActOrds.actFarmer.actAddr}</p>
+	        </td>
+	        <td class="product-name">
+	        	<h3>${collActOrds.actFarmer.actDateSta}</h3>
+	        	<p>${collActOrds.actFarmer.actTimeSta}</p>
+	        </td>
+	        <td class="product-name">
+	        	<h3>${collActOrds.actFarmer.actDateEnd}</h3>
+	        	<p>${collActOrds.actFarmer.actTimeEnd}</p>
+	        </td>
+	        <td class="product-name">
+	        	<h3>${collActOrds.actFarmer.tel}</h3>
+	        </td>
+	        <td class="quantity">${collActOrds.ordActNum}</td>
+	    			        
+	        <td class="total">${collActOrds.totalPrice}</td>
+	      </tr><!-- END TR-->
+	     </c:forEach>
+     
+	     
+	     
+	    </tbody>
+	  </table>
+  </div>
+
+</script>
 	
 </body>
 </html>

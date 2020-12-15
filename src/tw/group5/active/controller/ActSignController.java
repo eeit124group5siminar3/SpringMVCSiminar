@@ -6,8 +6,11 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.From;
+import javax.servlet.http.HttpServletRequest;
 import javax.sound.midi.Soundbank;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +18,15 @@ import org.springframework.http.HttpRequest;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -40,6 +46,9 @@ import tw.group5.util.SendMail;
 @Controller
 @SessionAttributes(names= {"pageNo","login_ok","actFarmer","actOrd","aoBean","collOrd"})
 public class ActSignController {
+	
+	public final int RECORDS_PER_PAGE = 5;
+
 	
 	@Autowired
 	private ActFarmerService actFarmerService;
@@ -191,7 +200,9 @@ public class ActSignController {
 			}else {
 				pageNo = 1;
 			}
-		}	
+		}
+		actOrdService.setPageNo(pageNo);
+		actOrdService.setRecordsPerPage(RECORDS_PER_PAGE);
 		Integer memNo=mb.getMember_no();
 //		Collection<ActOrd> collActOrds = actOrdService.getActOrds(memNo);
 		Collection<ActOrd> collActOrds = actOrdService.getPageActOrds(memNo);
@@ -201,6 +212,48 @@ public class ActSignController {
 		return "/active/actSignOrd";
 		}
 	
+	
+	
+//	@RequestMapping(value = "actOrdSelectAjax.do/{pageNo}")
+//	@ResponseBody
+//	public Map<String, Object> actOrdSelect(
+//			@PathVariable(name = "pageNo", required = false) Integer pageNo, Model model,
+//			HttpServletRequest rq){
+//		List<ActOrd> list = null;
+//		if(pageNo == null) {
+//			if(model.getAttribute("pageNO") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			}else {
+//				pageNo = 1;
+//			}
+//		}
+//		
+//	}
+//	
+//	public String actOrdSelect( Model model,
+//		@RequestParam(value = "pageNo", required = false) Integer pageNo,
+//		@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb
+//		) {
+//		if(mb == null) {
+//			return "Member_SignUp/Member_Login";
+//		}
+//		System.out.println(pageNo);
+//		
+//		if(pageNo == null) {
+//			if(model.getAttribute("pageNo") != null) {
+//				pageNo = (Integer) model.getAttribute("pageNo");
+//			}else {
+//				pageNo = 1;
+//			}
+//		}	
+//		Integer memNo=mb.getMember_no();
+////		Collection<ActOrd> collActOrds = actOrdService.getActOrds(memNo);
+//		Collection<ActOrd> collActOrds = actOrdService.getPageActOrds(memNo);
+//		model.addAttribute("totalPages", actOrdService.getTotalPages(memNo));
+//		model.addAttribute("pageNo", pageNo);
+//		model.addAttribute("collActOrds", collActOrds);
+//		return "/active/actSignOrd";
+//		}
 	//======================================廠商CRUD=============================================	
 	
 

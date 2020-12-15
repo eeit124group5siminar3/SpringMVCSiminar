@@ -128,4 +128,7 @@ public class ActOrdService {
 		actOrdDAO.setMemPageNo(memPageNo);
 	}
 	
+	public void setRecordsPerPage(Integer recordsPerPage) {
+		actOrdDAO.setRecordsPerPage(recordsPerPage);
+	}
 }
