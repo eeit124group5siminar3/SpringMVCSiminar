@@ -135,7 +135,7 @@
 									</c:if></td>
 									<td width='80'><c:if test="${pageNo != totalPages}">
 										<div id="bllast"><a
-											href="<c:url value='actFarmerList.do?pageNo=${totalPages}' />">
+											href="<c:url value='actOrdSelect.do?pageNo=${totalPages}' />">
 										<img border='0' alt='最末頁' height='30' width='30'
 											src='./images/last-icon.png' /> </a></div>
 									</c:if></td>

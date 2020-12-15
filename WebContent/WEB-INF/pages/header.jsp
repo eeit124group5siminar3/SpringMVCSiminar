@@ -72,7 +72,7 @@
 						<a class="dropdown-item" href="<c:url value='/actFarmerHome'/>">一日農夫</a>
 <%-- 						<a class="dropdown-item" href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>">一日農夫管理頁面</a> --%>
 <%-- 						<a class="dropdown-item" href="<c:url value='        '/>">農農市集</a> --%>
-						<a class="dropdown-item" href="<c:url value='/actOrdSelect.do'/>">報名活動管理</a>
+						<a class="dropdown-item" href="<c:url value='/actOrdSelect.do'/>">查詢報名</a>
 					</div>
 				</li>
 

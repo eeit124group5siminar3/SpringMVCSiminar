@@ -126,7 +126,7 @@ margin-left:-100px;
 <!-- 		</div> -->
 <!-- 	</div> -->
 	<br>
-					<div class="searchPosition" style="float: right;">
+					<div class="searchPosition" >
 						<div> 
 						<form class="form-inline my-2 my-lg-0" id="search"
 							action="javascript:void(0);" method="post">
