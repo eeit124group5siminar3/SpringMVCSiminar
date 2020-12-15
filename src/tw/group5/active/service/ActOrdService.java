@@ -2,6 +2,7 @@ package tw.group5.active.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,8 @@ public class ActOrdService {
 	
 	@Autowired
 	private ActOrdDAO actOrdDAO;
+	
+	
 	
 	
 	//查詢報名資料
@@ -39,9 +42,14 @@ public class ActOrdService {
 	
 	
 	//查詢某一會員的訂單
-		public List<ActOrd> getActOrdsByMember(Integer memNo){
+	public List<ActOrd> getActOrdsByMember(Integer memNo){
 			return actOrdDAO.getActOrdsByMember(memNo);
-		}
+	}
+
+	//查詢某一會員的訂單+分頁
+	public List<ActOrd> getPageActOrds(Integer memNo) {
+		return actOrdDAO.getPageActOrds(memNo);
+	}
 		
 		
 	//訂單信用卡結帳頁面生成
@@ -89,12 +97,35 @@ public class ActOrdService {
 // =========================訂單分析資料=========================================
 	
 	//活動類型的圓餅圖
-	public Map<String, Integer> countActType(){
+	public LinkedHashMap<String, Integer> countActType(){
 		return actOrdDAO.countActType();
 	}
 	
 	
 	
+// =========================分頁=========================================
 	
+	//計算該訂單總共有幾頁
+	public Integer getTotalPages() {
+		return actOrdDAO.getTotalPages();
+	}
+
+	//計算該會員訂單總共有幾頁
+	public Integer getTotalPages(Integer memNo) {
+		return actOrdDAO.getTotalPages(memNo);
+	}
+	
+	//獲得頁數
+	public Integer getPageNo() {
+		return actOrdDAO.getPageNo();
+	}
+	
+	public void setPageNo(Integer pageNo) {
+		actOrdDAO.setPageNo(pageNo);
+	}
+	
+	public void setMemPageNo(Integer memPageNo) {
+		actOrdDAO.setMemPageNo(memPageNo);
+	}
 	
 }

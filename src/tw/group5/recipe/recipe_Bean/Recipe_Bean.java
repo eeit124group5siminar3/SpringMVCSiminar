@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Recipe_Bean {
 	private Integer rec_id;
 	private Integer member_no;
+	private String mem_name;
 	private String name;
 	private String desc;
 	private String cate;
@@ -83,6 +84,17 @@ public class Recipe_Bean {
 		this.name = name;
 	}
 	
+	
+	@Transient
+	public String getMem_name() {
+		return mem_name;
+	}
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
+	
+
 	@Column(name = "method_A")
 	public String getMethod_A() {
 		return method_A;

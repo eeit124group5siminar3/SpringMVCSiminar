@@ -92,7 +92,7 @@
                	 <div class="col-md-12">
 	                <div class="form-group">
 	                	<label for="actId">活動編號</label>
-	                  	<input type="text" class="form-control" value="${actFarmer.actId}" name="actId"/>
+	                  	<input type="text" class="form-control" value="${actFarmer.actId}" name="actId" readOnly/>
 	                </div>
 	              </div>
 	            <div class="w-100"></div>

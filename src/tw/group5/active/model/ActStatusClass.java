@@ -9,6 +9,7 @@ public class ActStatusClass {
 	private static final String ACTSTATUS_1 = "申請通過";
 	private static final String ACTSTATUS_2 = "申請未通過";
 	private static final String ACTSTATUS_3 = "活動封鎖";
+	private static final String ACTSTATUS_4 = "賣家刪除活動";
 	
 	public static final Map<Integer, String> ACTSTATUS_MAP = getActStatusListMap();
 
@@ -18,6 +19,7 @@ public class ActStatusClass {
 		actStatusListMap.put(1, ACTSTATUS_1);
 		actStatusListMap.put(2, ACTSTATUS_2);
 		actStatusListMap.put(3, ACTSTATUS_3);
+		actStatusListMap.put(4, ACTSTATUS_4);
 		return actStatusListMap;
 	}
 	

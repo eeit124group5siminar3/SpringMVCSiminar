@@ -134,7 +134,7 @@
 			<div style="width: 50%" class="wrap1">
 				<div>
 					<img id="imageA"
-						src="<c:url value='/getImageA?rec_id=${updateBean.rec_id}'/>"
+						src="<c:url value='getImageA?rec_id=${updateBean.rec_id}'/>"
 						width="400px">
 				</div>
 				<br>
@@ -164,7 +164,7 @@
 			<div style="width: 50%" class="wrap1">
 				<div>
 					<img id="imageB"
-						src="<c:url value='/getImageB?rec_id=${updateBean.rec_id}'/>"
+						src="<c:url value='getImageB?rec_id=${updateBean.rec_id}'/>"
 						width="400px">
 				</div>
 				<br>
@@ -194,7 +194,7 @@
 			<div style="width: 50%" class="wrap1">
 				<div>
 					<img id="imageC"
-						src="<c:url value='/getImageC?rec_id=${updateBean.rec_id}'/>"
+						src="<c:url value='getImageC?rec_id=${updateBean.rec_id}'/>"
 						width="400px">
 				</div>
 				<br>
@@ -225,7 +225,7 @@
 			<div style="width: 50%" class="wrap1">
 				<div>
 					<img id="imageD"
-						src="<c:url value='/getImageD?rec_id=${updateBean.rec_id}'/>"
+						src="<c:url value='getImageD?rec_id=${updateBean.rec_id}'/>"
 						width="400px">
 				</div>
 				<br>
@@ -255,7 +255,7 @@
 			<div style="width: 50%" class="wrap1">
 				<div>
 					<img id="imageE"
-						src="<c:url value='/getImageE?rec_id=${updateBean.rec_id}'/>"
+						src="<c:url value='getImageE?rec_id=${updateBean.rec_id}'/>"
 						width="400px">
 				</div>
 				<br>

@@ -22,7 +22,6 @@ public class Bookmark_Bean {
 	private Integer id;
 	private Integer member_no;
 	private Integer rec_id;
-//	private boolean value;
 	
 	@Autowired @JsonIgnore
 	private Recipe_DAO_spring rDAO;

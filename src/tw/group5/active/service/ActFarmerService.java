@@ -40,6 +40,12 @@ public class ActFarmerService {
 		return actFarmerDAO.selectName(actName);	
 	}
 	
+	
+	// 查詢單筆資料ByName+分頁
+	public List<ActFarmer> selectNamePage(String actName){
+		return actFarmerDAO.selectNamePage(actName);		
+	}
+	
 	//查詢單筆資料ByName seller
 	public List<ActFarmer> selectNameSeller(String actName,Integer sellerId){
 		return actFarmerDAO.selectName(actName);	
@@ -96,6 +102,11 @@ public class ActFarmerService {
 	//廠商總頁數
 	public int getTotalPages(Integer sellerId) {
 		return actFarmerDAO.getTotalPages(sellerId);
+	}
+	
+	//計算符合搜尋結果的有幾頁
+	public Integer getTotalPages(String actName) {
+		return actFarmerDAO.getTotalPageWithSearch();
 	}
 	
 	//獲得頁數

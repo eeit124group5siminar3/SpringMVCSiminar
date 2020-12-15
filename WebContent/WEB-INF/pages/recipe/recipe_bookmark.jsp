@@ -133,7 +133,7 @@
 									</div>									
 									<a href="<c:url value='/recipeDetail.controller?rec_id=${BeanToken.rec_id}'/>"
 										class="img-prod"><img class="img-fluid"
-										src="<c:url value='/getALLImage.controller?rec_id=${BeanToken.rec_id}'/>"
+										src="<c:url value='/getImageA?rec_id=${BeanToken.rec_id}'/>"
 										alt=""> </a>
 									</div>
 								<div class="text py-3 pb-4 px-3 text-center">

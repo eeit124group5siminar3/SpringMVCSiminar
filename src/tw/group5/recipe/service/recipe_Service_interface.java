@@ -4,6 +4,7 @@ import java.util.List;
 
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
+import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 
@@ -66,5 +67,13 @@ public interface recipe_Service_interface {
 	List<Blog_Bean> searchPopular();
 
 	List<Blog_Bean> searchPartOfBlog(String title);
+
+	Member_Detail insertDetail(Member_Detail bean);
+
+	Member_Detail updateDetail(Member_Detail bean);
+
+	boolean deleteDetail(Integer mem_no);
+
+	Member_Detail detailBean(Integer mem_no);
 
 }

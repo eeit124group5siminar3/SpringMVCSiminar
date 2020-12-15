@@ -41,7 +41,6 @@ public class Recipe_Controller_upload {
 			Recipe_Bean bean = new Recipe_Bean();
 			bean.setMember_no(mem_no);
 			m.addAttribute("details", bean);
-			
 			return "recipe/recipe_upload";
 		} else
 			return "Member_SignUp/Member_Login";

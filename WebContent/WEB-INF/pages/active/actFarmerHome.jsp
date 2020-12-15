@@ -61,18 +61,18 @@
 
 <!-- 	搜尋bar -->
 	<section class="ftco-section ftco-degree-bg">
-		<div class="container" >
-			<div class="row justify-content-center">
-				<div class="col-md-10 mb-5 text-center">
-					<ul class="act-type" id="product-category"></ul>
-					<form class="product-category" action="?????????" method="POST">
-						<input type="search" name="searchString" id="searchString"
-							value="${searchString}"/>
-						<button name="searchButton" style="border-radius: 5px;" onclick="????">查詢</button>
-					</form>
-				</div>
-			</div>
-		</div>		
+<!-- 		<div class="container" > -->
+<!-- 			<div class="row justify-content-center"> -->
+<!-- 				<div class="col-md-10 mb-5 text-center"> -->
+<!-- 					<ul class="act-type" id="product-category"></ul> -->
+<!-- 					<form class="product-category" action="actFarmerListSearch.do"" method="POST"> -->
+<!-- 						<input type="search" name="searchString" id="searchString" -->
+<%-- 							value="${searchString}"/> --%>
+<!-- 						<button name="searchButton" style="border-radius: 5px;" onclick="list()">查詢</button> -->
+<!-- 					</form> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div>		 -->
 <!-- 活動列表 -->
 	 <div class="container ftco-animate col-md-8 mb-5" id="actfarmerlist"></div>
 

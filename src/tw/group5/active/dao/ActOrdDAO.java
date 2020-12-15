@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -33,6 +34,7 @@ public class ActOrdDAO {
 	private SessionFactory sessionFactory;
 	private Integer memNo = null;
 	private Integer pageNo = 1;
+	private Integer memPageNo = 1;
 	private Integer recordsPerPage = 3;
 	private Integer totalPages = -1;
 
@@ -42,6 +44,15 @@ public class ActOrdDAO {
 
 	public void setPageNo(Integer pageNo) {
 		this.pageNo = pageNo;
+	}
+	
+	
+	public Integer getMemPageNo() {
+		return memPageNo;
+	}
+
+	public void setMemPageNo(Integer memPageNo) {
+		this.memPageNo = memPageNo;
 	}
 
 	public Integer getRecordsPerPage() {
@@ -53,21 +64,35 @@ public class ActOrdDAO {
 	}
 
 	public Integer getTotalPages() {
+		totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
 		return totalPages;
 	}
 
 	//計算該會員總共有幾頁
-	public Integer getTotalPages(Integer memNO) {
-		totalPages = (int) (Math.ceil(getRecordCounts(memNO) / (double) recordsPerPage));
+	public Integer getTotalPages(Integer memNo) {
+		totalPages = (int) (Math.ceil(getRecordCounts(memNo) / (double) recordsPerPage));
 		return totalPages;
 	}
 	
-
+	// 計算所有參與的活動筆數
+		public long getRecordCounts() {
+			Session session = sessionFactory.getCurrentSession();
+			Integer count = 0;
+			String hql = "select count(*) from ActOrd";
+			Query<Long> query = session.createQuery(hql, java.lang.Long.class);
+			query.setParameter(0, memNo);
+			Object objectNumber = query.uniqueResult();
+			long longNumber = (long) objectNumber;
+			count = (int) longNumber;
+			return count;
+		}
+		
+		
 	// 計算該會員參與的活動筆數
 	public long getRecordCounts(Integer memNo) {
 		Session session = sessionFactory.getCurrentSession();
 		Integer count = 0;
-		String hql = "select count(*) from ActOrd where memNO=0?";
+		String hql = "select count(*) from ActOrd where memNo=?0";
 		Query<Long> query = session.createQuery(hql, java.lang.Long.class);
 		query.setParameter(0, memNo);
 		Object objectNumber = query.uniqueResult();
@@ -98,7 +123,7 @@ public class ActOrdDAO {
 	public List<ActOrd> getPageActOrds(Integer memNo) {
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ActOrd where memNO =?0 ORDER BY ordId";
+		String hql = "from ActOrd where memNO =?0 ORDER BY actOrdId";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, memNo);
 		query.setFirstResult(startRecordNo);
@@ -252,8 +277,8 @@ public class ActOrdDAO {
 
 	
 //============================  分析訂單  =================================	
-	
-	public Map<String, Integer> countActType(){
+	//查詢訂單中活動種類的分布
+	public LinkedHashMap<String, Integer> countActType(){
 		Session session = sessionFactory.getCurrentSession();	
 		Query q1 = session.createSQLQuery("select COUNT(*) from actord inner join actfarmer on actord.actid = actfarmer.actid where acttype='體驗類'");
 		Query q2 = session.createSQLQuery("select COUNT(*) from actord inner join actfarmer on actord.actid = actfarmer.actid where acttype='採收類'");
@@ -266,7 +291,7 @@ public class ActOrdDAO {
 		Integer actType2 = Integer.parseInt(obj2.toString()); //採收類
 		Object obj3 = q3.uniqueResult();
 		Integer actType3 = Integer.parseInt(obj3.toString()); //文藝類
-		Object obj4 = q1.uniqueResult();
+		Object obj4 = q4.uniqueResult();
 		Integer actType4 = Integer.parseInt(obj4.toString()); //綜合類
 		
 		
@@ -277,11 +302,11 @@ public class ActOrdDAO {
 		actTypeList.add(actType4);
 		
 		
-		Map<String, Integer> actTypeMap = new HashMap<String, Integer>(); 
-		actTypeMap.put("體驗類", actType1);
-		actTypeMap.put("採收類", actType2);
-		actTypeMap.put("體驗類", actType3);
-		actTypeMap.put("文藝類", actType4);
+		LinkedHashMap<String, Integer> actTypeMap = new LinkedHashMap<String, Integer>(); 
+		actTypeMap.put("exp", actType1); //體驗類
+		actTypeMap.put("get", actType2); //採收類
+		actTypeMap.put("art", actType3); //文藝類
+		actTypeMap.put("sum", actType4); //綜合類
 		
 		return actTypeMap;
 	}

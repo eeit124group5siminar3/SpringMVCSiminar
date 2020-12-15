@@ -4,6 +4,7 @@ package tw.group5.active.controller;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -165,14 +166,15 @@ public class ActAdminController {
 	
 //======================================  報名訂單分析  =============================================================
 	
-	@RequestMapping(value = "actAnalysisType.do")
+	@PostMapping(value = "/actAnalysisType.do")
 	@ResponseBody
-	public Map<String, Object> actAnalysisType() {
+	public LinkedHashMap<String, Object> actAnalysisType() {
 		
-		Map<String, Integer> list = null;
+		LinkedHashMap<String, Integer> list = null;
 		list = actOrdService.countActType();
-		Map<String, Object> map = new HashedMap();
+		LinkedHashMap<String, Object> map = new LinkedHashMap();
 		map.put("actTypeData", list);
+		System.out.println(map);
 		
 		return map;
 	}

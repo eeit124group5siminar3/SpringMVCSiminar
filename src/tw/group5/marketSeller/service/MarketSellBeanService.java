@@ -47,7 +47,5 @@ public class MarketSellBeanService implements IMarketSellBeanService {
 		// TODO Auto-generated method stub
 		return sDao.sellerPages();
 	}
-	
-	
 
 }
