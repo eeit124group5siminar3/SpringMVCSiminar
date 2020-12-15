@@ -97,11 +97,6 @@ public class Recipe_Controller {
 		return "mall/mall_shop";
 
 	}
-	@GetMapping(value = "/textttt")
-	public String insertDetailttt() {
-		System.err.println("111111111");
-		return "Member_Backstage/Member_Backstage";
-	}
 
 	@PostMapping(value = "/insertDetail")
 	public String insertDetail(@ModelAttribute("bean") Member_Detail bean,Model m) {
@@ -124,8 +119,7 @@ public class Recipe_Controller {
 		bean.setMem_no(mem_no);
 		m.addAttribute("memDetail", memDetail);
 		m.addAttribute("bean", bean);
-//		return "recipe/detailForm";
-		return "redirect:/textttt";
+		return "recipe/detailForm";
 
 	}
 	

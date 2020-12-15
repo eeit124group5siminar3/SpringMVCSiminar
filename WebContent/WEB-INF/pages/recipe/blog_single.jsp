@@ -95,8 +95,8 @@
 <!-- 								class="img-fluid mb-4"> -->
 						</div>
 						<div class="desc align-self-md-center">
-							<h3>${partSearch.name}</h3>
-							<p>${partSearch.introduction}</p>
+							<h3>${detailBean.name}</h3>
+							<p>${detailBean.introduction}</p>
 
 						</div>
 					</div>
@@ -310,7 +310,7 @@
 
 					<div class="sidebar-box ftco-animate">
 						<h3 class="heading">Paragraph</h3>
-						<p>${partSearch.introduction}</p>
+						<p>${detailBean.introduction}</p>
 					</div>
 				</div>
 

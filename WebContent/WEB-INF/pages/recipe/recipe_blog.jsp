@@ -81,7 +81,7 @@
 					<div id="searchSuccess">
 <%-- 					<c:choose> --%>
 <%-- 						<c:when test="${searchAll!=null}"> --%>
-							<c:forEach begin="0" end="${searchAll.size()}" step="1" var="i">
+							<c:forEach begin="0" end="${searchAll.size()-1}" step="1" var="i">
 								<div class="col-md-12 d-flex ftco-animate">
 									<div class="blog-entry align-self-stretch d-md-flex">
 									<c:if test="${searchAll[i].fileName!=null}">

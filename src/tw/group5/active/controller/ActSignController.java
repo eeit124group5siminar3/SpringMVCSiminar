@@ -183,6 +183,7 @@ public class ActSignController {
 		if(mb == null) {
 			return "Member_SignUp/Member_Login";
 		}
+		System.out.println(pageNo);
 		
 		if(pageNo == null) {
 			if(model.getAttribute("pageNo") != null) {

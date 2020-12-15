@@ -44,13 +44,13 @@
 	<div align="center" class="form-group">
         <form:form action="./blogPostUpdate" method='post'
  			modelAttribute="memBean" style="width: 60%" enctype="multipart/form-data">
- 				<form:label for="MsgTextarea" path="introduction"
- 				style="font-size: 30px;" class="input-group-text">自我介紹 : <span
-					style="font-size: 15px;">最多400字</span> 	
-					<br>
-			</form:label>
-			<form:textarea class="form-control" id="MsgTextarea" rows="10"
- 				cols="40" path="introduction" style="font-size: 20px;"></form:textarea> 
+<%--  				<form:label for="MsgTextarea" path="introduction" --%>
+<%--  				style="font-size: 30px;" class="input-group-text">自我介紹 : <span --%>
+<!-- 					style="font-size: 15px;">最多400字</span> 	 -->
+<!-- 					<br> -->
+<%-- 			</form:label> --%>
+<%-- 			<form:textarea class="form-control" id="MsgTextarea" rows="10" --%>
+<%--  				cols="40" path="introduction" style="font-size: 20px;"></form:textarea>  --%>
 			<div>
  			<form:label path="title" style="font-size: 30px;" class="input-group-text">文章標題 :  <span style="font-size: smaller;">最多15個字</span></form:label> 
 			<form:input path="title" class="form-control"/>
