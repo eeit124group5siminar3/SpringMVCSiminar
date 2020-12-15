@@ -63,6 +63,7 @@ public class Recipe_Bean {
 	private String date;
 	private String update_date;
 	private Integer views=0;
+	private Integer counts;
 	
 	public Recipe_Bean() {
 	}
@@ -439,6 +440,13 @@ public class Recipe_Bean {
 		this.data_E = data_E;
 	}
 
-	
+	@Transient
+	@JsonIgnore
+	public int getCounts() {
+		return counts;
+	}
+	public void setCounts(int counts) {
+		this.counts = counts;
+	}
 	
 }
