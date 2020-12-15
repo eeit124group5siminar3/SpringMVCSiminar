@@ -35,7 +35,7 @@
 	class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 	id="ftco-navbar">
 	<div class="container">
-		<a class="navbar-brand" href="index.html">農郁</a>
+		<a class="navbar-brand" href="index.html" style="font-size: 35px">農郁</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#ftco-nav" aria-controls="ftco-nav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -44,11 +44,11 @@
 
 		<div class="collapse navbar-collapse" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a href="<c:url value='/index' />"
-					class="nav-link" >首頁</a></li>
+				<li class="nav-item active" ><a href="<c:url value='/index' />"
+					class="nav-link"  style="font-size: 20px">首頁</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城</a>
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 20px">商城</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item" href="<c:url value='/mall_shop' />">商城</a> 
 						<a class="dropdown-item" href="<c:url value='/mall_shoppingcart' />">購物車</a> 
@@ -59,7 +59,7 @@
 				
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">預購</a>
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 20px">預購</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="<c:url value='GoMarketHome'/>">店家</a>
 						    <a class="dropdown-item" href="<c:url value='/GoMarketShoppingcart' />">我的訂購商品清單</a> 
@@ -67,7 +67,7 @@
 							<a class="dropdown-item" href="<c:url value='GoMarketHome'/>">補貨通知</a>
 						</div></li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">活動</a>
+					<a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 20px">活動</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item" href="<c:url value='/actFarmerHome'/>">一日農夫</a>
 <%-- 						<a class="dropdown-item" href="<c:url value='/maintainActFarmer.do?MaintainPageNo=1'/>">一日農夫管理頁面</a> --%>
@@ -78,7 +78,7 @@
 
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">食譜</a>
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 20px">食譜</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<a class="dropdown-item"
 							href="<c:url value='frontPage.controller'/>">食譜</a> 
@@ -96,14 +96,14 @@
 					</div></li>
 
 				<li class="nav-item"><c:if test="${empty login_ok}">
-						<a class="nav-link" href="<c:url value='login.controller' />">會員</a>
+						<a class="nav-link" href="<c:url value='login.controller' />" style="font-size: 20px">會員</a>
 					</c:if> <c:if test="${!empty login_ok}">
-						<a class="nav-link" href="<c:url value='backstage.controller' />">會員</a>
+						<a class="nav-link" href="<c:url value='backstage.controller' />" style="font-size: 20px">會員</a>
 					</c:if></li>
 				<li class="nav-item"><c:if test="${empty login_ok}">
-						<a class="nav-link" href="<c:url value='login.controller' />">登錄</a>
+						<a class="nav-link" href="<c:url value='login.controller' />" style="font-size: 20px">登錄</a>
 					</c:if><c:if test="${!empty login_ok}">
-						<a class="nav-link" href="<c:url value='removeSession.controller' />">登出</a>
+						<a class="nav-link" href="<c:url value='removeSession.controller' />" style="font-size: 20px">登出</a>
 					</c:if></li>
 				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />" id="shoppingcartItem"
 					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
