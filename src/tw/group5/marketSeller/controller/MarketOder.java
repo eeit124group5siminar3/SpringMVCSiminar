@@ -49,20 +49,25 @@ public class MarketOder {
 	
 //	顯示訂單詳細資料
 	@PostMapping(value = "/showOrderDetail")
-	public ModelAndView showMap(HttpServletRequest request,
+	public ModelAndView showBuyerOrderDetail(HttpServletRequest request,
 			@RequestParam(value = "oId", required = false) Integer oId){
-        MarketOrderBean order = service.selectOneOrder(oId);
-        MarketOrderDetailBean orderDetail = (MarketOrderDetailBean) order.getMarketOrderDetailBean();
-        int productId = orderDetail.getProductId();
-        MarketProductTotalBean product =productService.select(productId); 
-        int sellerId = product.getMemberNo();
-        MarketMallBean seller = sellerService.selectid(sellerId);
+        List<MarketOrderDetailBean> order = service.selectBuyerOrderDetail(oId);
         ModelAndView mav =new ModelAndView();
-		mav.setViewName("/marketSeller/MarketShowOrder");
+		mav.setViewName("/marketSeller/MarketShowBuyerOrderDetail");
 		mav.addObject("order",order);
-		mav.addObject("product",product);
-		mav.addObject("seller",seller);
 		return mav;
 	}
-
+	
+	@RequestMapping(path = "/MarketSellerOrder", method = RequestMethod.GET)
+	public String selectSellerOrder(
+			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model m
+			) {
+		if (mb == null) {
+			return "Member_SignUp/Member_Login";
+		}
+		Integer mid  = mb.getMember_no();
+		List<MarketOrderDetailBean> bean = service.selectSellerOrder(mid);
+		m.addAttribute("list",bean);
+		return "marketSeller/MarketSellerOrder";
+	}
 }

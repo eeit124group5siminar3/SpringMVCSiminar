@@ -120,8 +120,10 @@ public class MarketHome {
 			) {
 		//商品詳細資訊	
 		MarketProductTotalBean pBean = productService.select(productId);
+		System.out.println("商品名稱:" + pBean.getProductName());
 		MarketOrder marketOrder =new MarketOrder();
-		marketOrder.setMemberNo(pBean.getMemberNo());
+		marketOrder.setMemberNo(pBean.getMarketMallBean().getMemberNo());
+		System.out.println("哭阿 你在阿"+pBean.getMarketMallBean().getMemberNo());
 		marketOrder.setProductId(pBean.getProductId());
 		marketOrder.setProducterName(pBean.getMarketMallBean().getMallName());
 		marketOrder.setProduct(pBean.getProductName());

@@ -27,6 +27,7 @@ public class MarketOrderBean {
 	private Date buyTime;
 	private Integer buyerId;
 	private String address;
+	private Integer allPrice;
     private Set<MarketOrderDetailBean> marketOrderDetailBean =
             new HashSet<MarketOrderDetailBean>(0);
 	
@@ -78,6 +79,14 @@ public class MarketOrderBean {
 	}
 	public void setBuyerId(Integer buyerId) {
 		this.buyerId = buyerId;
+	}
+	
+	@Column(name = "ALLPRICE")
+	public Integer getAllPrice() {
+		return allPrice;
+	}
+	public void setAllPrice(Integer allPrice) {
+		this.allPrice = allPrice;
 	}
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "marketOrderBean", cascade = CascadeType.ALL)
 	public Set<MarketOrderDetailBean> getMarketOrderDetailBean() {

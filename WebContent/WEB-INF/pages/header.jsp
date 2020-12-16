@@ -108,9 +108,9 @@
 				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />" id="shoppingcartItem"
 					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
 					
-				<li class="nav-item cta cta-colored"><a href="<c:url value='' />"
+				<li class="nav-item cta cta-colored"><a href="<c:url value='/GoMarketShoppingcart' />"
 					class="nav-link"><img height='15' width='15'
-					 src="images/MarketBasket.jpg">[0]</a></li>
+					 src="images/MarketBasket.jpg">[${MarketCart.itemNumber}]</a></li>
 			</ul>
 			<c:if test="${!empty login_ok}">
 			<ul class="navbar-nav">

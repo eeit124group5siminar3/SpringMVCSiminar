@@ -33,10 +33,33 @@ public class MarketOrderDao implements IMarketOrderBeanService  {
 	}
 	
 	@Override
+	public List<MarketOrderDetailBean> selectSellerOrder(Integer mid){
+		Query<MarketOrderDetailBean> query =getSession().createQuery("From MarketOrderDetailBean where SELLERID=" + mid,MarketOrderDetailBean.class);
+		List<MarketOrderDetailBean> list =query.list();
+		return list;
+	}
+	
+	@Override
+	public List<MarketOrderDetailBean> selectBuyerOrderDetail(Integer oid){
+		String hql ="From MarketOrderDetailBean where OID=?0 order by OID";
+		Query<MarketOrderDetailBean> query =getSession().createQuery(hql, MarketOrderDetailBean.class);
+		query.setParameter(0,oid);
+		List<MarketOrderDetailBean> list =query.list();
+		return list;
+	}
+	
+	@Override
 	public MarketOrderBean selectOneOrder(int oid) {
 		return getSession().get(MarketOrderBean.class, oid);
 	}
 
+//	public List<MarketOrderBean> selectsellerOneOrder(int oid) {
+//		Query<MarketOrderBean> query =getSession().createQuery("From MarketOrderBean where OID=" + oid, MarketOrderBean.class);
+//		List<MarketOrderBean> list =query.list();
+//		return list;
+//	}
+	
+	
 	public MarketProductTotalBean updateStock(MarketOrderDetailBean mib) {
 		Session session = sessionFactory.getCurrentSession();
 		MarketProductTotalBean pBean=(MarketProductTotalBean) session.get(MarketProductTotalBean.class, mib.getProductId());
