@@ -73,7 +73,7 @@
 						    </thead>
 						    
 						    <tbody>
-						   	<c:forEach var="popActFarmer" items="${popActFarmer}">
+						   	<c:forEach var="collActOrds" items="${collActOrds}">
 						    
 						      <tr class="text-center">						        
 						        <td class="image-prod">

@@ -247,7 +247,7 @@ $.get({
 	    </tbody>
 	  </table>
   </div>
-
+</div>
 </script>
 	
 </body>

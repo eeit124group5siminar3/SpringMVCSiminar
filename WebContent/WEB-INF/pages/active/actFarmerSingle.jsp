@@ -101,17 +101,32 @@
               </ul>
             </div>
       </form:form>
+         <div class="sidebar-box ftco-animate">
       <form:form action="actShowPopular.do" modelAttribute="popActFarmer" method="GET" enctype="multipart/form-data" name="act">     
-            <div class="col-lg-12 sidebar-box ftco-animate">
-              <h3 class="heading" style="color: #82ae46">熱門活動</h3>
-              <div class="row">
-              	<h6 class="col-lg-8">活動名稱</h6> <h6 class="col-lg-4">已報名人數</h6>
+              <h3 class="heading">熱門活動</h3>
+              <div id="showp"></div>
+              <div class="block-21 mb-4 d-flex" >
+<!--                 <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a> -->
+<!--                 <div class="text"> -->
+<!--                   <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3> -->
+<!--                   <div class="meta"> -->
+<!--                     <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div> -->
+<!--                     <div><a href="#"><span class="icon-person"></span> Admin</a></div> -->
+<!--                     <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+<!--                   </div> -->
+<!--                 </div> -->
               </div>
+            
+<!--             <div class="col-lg-12 sidebar-box ftco-animate"> -->
+<!--               <h3 class="heading" style="color: #82ae46">熱門活動</h3> -->
+<!--               <div class="row"> -->
+<!--               	<h6 class="col-lg-8">活動名稱</h6> <h6 class="col-lg-4">已報名人數</h6> -->
+<!--               </div> -->
              
-              <div id="showp"></div>  
+<!--               <div id="showp"></div>   -->
               
-		</form:form>		
           </div>
+		</form:form>		
     </section> <!-- .section -->
     
 <!-- ------Header--------------------------------------------------------------- -->
@@ -151,20 +166,44 @@ $(document).ready(function(){
 		let data = response.data;
 		let content = "";
 		console.log(data)
-		for(var i = 0;i<data.length; i++){
-			content+=
-			`<ul class="categories" >
-				<tr>		
-				<td class="post-title" width="50px"><a href="<c:url value='getSingleAct.do?id=\${data[i].ACTID}'/>">\${data[i].ACTNAME}</a></td>				
-				<td><span>\${data[i].ORDACTSUM}</span></td>				
-				 </tr>
-
-			</ul>`;
+			for(var i = 0;i<data.length; i++){
+				content+=
+			 	` <div class="block-21 mb-4 d-flex" >
+			 	<a class="blog-img mr-4" style="background-image: url('<c:url value='ActImageController?id=\${data[i].ACTID}&type=ACTFARMER'/>');"></a>
+	               <div class="text">
+	               <h3 class="heading-1"><a href="<c:url value='getSingleAct.do?id=\${data[i].ACTID}'/>">\${data[i].ACTNAME}</a></h3>
+		               <div class="meta">
+		                 <div><a href="<c:url value='getSingleAct.do?id=\${data[i].ACTID}'/>"><span class="icon-person"></span>\${data[i].ORDACTSUM}</span></a></div>
+		               </div>
+	               </div>
+	               </div>`;
 			}
 		$('#showp').html(content);
 		}
 	})		
 })
+// $(document).ready(function(){
+// 	$.get({
+// 		url:"${pageContext.request.contextPath}/actShowPopular.do",
+// 		contentType:"application/json",
+// 		success:function(response,status){
+// 		let data = response.data;
+// 		let content = "";
+// 		console.log(data)
+// 		for(var i = 0;i<data.length; i++){
+// 			content+=
+// 			`<ul class="categories" >
+// 				<tr>		
+// 				<td class="post-title" width="50px"><a href="<c:url value='getSingleAct.do?id=\${data[i].ACTID}'/>">\${data[i].ACTNAME}</a></td>				
+// 				<td><span>\${data[i].ORDACTSUM}</span></td>				
+// 				 </tr>
+
+// 			</ul>`;
+// 			}
+// 		$('#showp').html(content);
+// 		}
+// 	})		
+// })
 
 	
 </script>
