@@ -5,9 +5,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.json.JsonArray;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,14 +27,17 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import oracle.net.aso.m;
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.service.ActFarmerService;
+import tw.group5.active.service.ActOrdService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
 @SessionAttributes(value = {"pageNo", "login_ok"})
 public class ActHomeController {
 	
+
 	public final int RECORDS_PER_PAGE = 3;
 	
 	@Autowired
@@ -40,6 +45,9 @@ public class ActHomeController {
 	
 	@Autowired
 	private ActFarmerService actFarmerService;
+	
+	@Autowired
+	private ActOrdService actOrdService;
 
 //===================================一日農夫===================================
 	
@@ -108,16 +116,28 @@ public class ActHomeController {
 	}
 	
 	
-	//顯示單一活動的資訊
+	//顯示單一活動的資訊(計算報名人數最多的活動前五筆)
 	@RequestMapping(path = "/getSingleAct.do", produces = {"text/html;charset=UTF-8" })
 	public String getSingleAct(@RequestParam("id") Integer actId, Model m) {	
 		ActFarmer collFarmer = actFarmerService.getActFarmer(actId);
+//		List<ActFarmer> popActFarmer =actOrdService.getPopularAct();
+//		m.addAttribute("popActFarmer",popActFarmer);
 		m.addAttribute("collFarmer", collFarmer);
 		return "active/actFarmerSingle";
 	} 
 	
-	//查詢單一活動
-	
+	//計算報名人數最多的活動前五筆
+	@RequestMapping(path = "/actShowPopular.do", produces = {"application/json;charset=UTF-8" })
+	@ResponseBody
+	public Map<String, Object> actShowPopular(Model m,HttpServletRequest rq) {
+		List<ActFarmer>popActFarmer =actOrdService.getPopularAct();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", popActFarmer);
+		System.out.println("who are you !!!!!!"+map);
+		
+		return map;
+	}
 	
 	
 }

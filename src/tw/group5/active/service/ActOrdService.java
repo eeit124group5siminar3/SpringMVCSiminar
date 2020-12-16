@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.active.dao.ActOrdDAO;
+import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActOrd;
 @Transactional
 @Service
@@ -80,6 +81,11 @@ public class ActOrdService {
 	public ActOrd updateActOrd(ActOrd actOrd) {
 		return actOrdDAO.updateActOrd(actOrd);
 	}	
+	
+	//計算報名人數做多的活動前五筆
+	public List<ActFarmer> getPopularAct(){
+		return actOrdDAO.getPopularAct();
+	}
 	
 // =========================管理員==========================================
 
