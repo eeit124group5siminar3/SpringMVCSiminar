@@ -27,10 +27,10 @@
             
           </div>
         </div>
+        <div id="test_div"></div>
         <div class="mesgs">
           <div class="msg_history">
-              <div class="received_msg" id="message1">
-              </div>
+              <div class="received_msg" id="message1"></div>
 
             
             
@@ -49,24 +49,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
-<script>
-$(function(){
-	$("#send_message").on("click",function(){
-		var message = $("#text").val();
-		var date = new Date();
-		var h = date.getHours();  //時
-		var minute = date.getMinutes()  //分
-		if(minute<10){
-			minute = "0"+minute;
-		}
-		$("#message1").append("<div style='text-align:right';>"+message+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>");
-	});
-})
-</script>
+
 <script>
 var member_name = null;
 var content = null;
 var websocket = null;
+
+var click_member_name = null;
 
 var date = new Date();
 var h = date.getHours();  //時
@@ -92,6 +81,8 @@ if(minute<10){
 	}
 	//接收到消息的回调方法
 	websocket.onmessage = function(event) {
+		var event_data = event.data;
+		
 		let data_split = event.data.split("說：");
 		member_name = data_split[0];
 		let new_name = $("#"+member_name).val();
@@ -99,6 +90,7 @@ if(minute<10){
 		console.log("新的名稱"+new_name)
 		console.log(member_name)
 		console.log("回调信息",event.data)
+		
 		
 	if(event.data != null && member_name != new_name){
 		$("#member_content").append(
@@ -112,6 +104,10 @@ if(minute<10){
           </div>
         </div>
       </div>`)
+
+      $("#test_div").append("<div style='display:none' class='received_msg' id=abc"+member_name+"></div>");
+	      
+      
 	}
 	if(member_name == new_name){
 		$("."+member_name).html(
@@ -122,9 +118,31 @@ if(minute<10){
 		         `)
 	}
 
+	$("."+member_name).on("click",function(){
+		click_member_name = $(this).find("input").val();
+		console.log($("#abc"+click_member_name).children());
+		console.log($("#abc"+click_member_name).find("*").html());
+		$("#message1").html($("#abc"+click_member_name).children());
 		
+		console.log("click_member_name"+click_member_name);
+	})
+	
 		setMessageInnerHTML(event.data);
 	}
+
+
+	$("#send_message").on("click",function(){
+		var message_content = $("#text").val();
+
+		$("#message1").append("<div style='text-align:right';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>"+"<br>");
+		$("#"+click_member_name).append("<div style='text-align:right';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>"+"<br>");
+
+		$("."+click_member_name).find("p").html(message_content);
+		
+	});
+
+
+	
 	//连接关闭的回调方法
 	websocket.onclose = function() {
 		setMessageInnerHTML("WebSocket连接关闭");
@@ -135,7 +153,10 @@ if(minute<10){
 	}
 	//将消息显示在网页上
 	function setMessageInnerHTML(innerHTML) {
-		document.getElementById('message1').innerHTML += innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+ '<br/>';
+		$("#abc"+member_name).append(innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+ '<br/>');
+		if(member_name == click_member_name){
+			$("#message1").append(innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+ '<br/>');
+		}
 	}
 	//关闭WebSocket连接
 	function closeWebSocket() {
@@ -147,7 +168,7 @@ if(minute<10){
 		console.log(message);
 		console.log(member_name);
 		//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
-		websocket.send(JSON.stringify({'message':message,'role':member_name,'socketId':"A"}));
+		websocket.send(JSON.stringify({'message':message,'role':click_member_name,'socketId':"A"}));
 	}
 </script>
     
