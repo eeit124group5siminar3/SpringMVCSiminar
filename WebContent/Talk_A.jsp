@@ -23,19 +23,10 @@
             </div>
             <div class="srch_bar"></div>
           </div>
-          <div class="inbox_chat" id="member_content">
-            
-          </div>
+          <div class="inbox_chat" id="member_content"></div><!-- 左邊列表 -->
         </div>
-        <div id="test_div"></div>
         <div class="mesgs">
-          <div class="msg_history">
-              <div class="received_msg" id="message1"></div>
-
-            
-            
-            
-          </div>
+          <div class="msg_history"></div><!-- 對話視窗 -->
           <div class="type_msg">
             <div class="input_msg_write">
               <input type="text" id="text" class="write_msg" placeholder="請輸入訊息..." />
@@ -51,47 +42,45 @@
 		crossorigin="anonymous"></script>
 
 <script>
-var member_name = null;
-var content = null;
 var websocket = null;
-
-var click_member_name = null;
-
-var date = new Date();
+var member_name = null;  //使用者名稱
+var content = null;  //使用者訊息內容
+var previous_name = "";  //前次使用者名稱
+var click_member_name = null;  //點擊左邊列表的當前使用者名稱
+var date = new Date();  //時間
 var h = date.getHours();  //時
 var minute = date.getMinutes()  //分
-if(minute<10){
+if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 	minute = "0"+minute;
 }
-	//判断当前浏览器是否支持WebSocket
+	//判斷當前瀏覽器能不能使用WebSocket
 	if ('WebSocket' in window) {
-		//耶耶=自己，A等於房間通道
+		//管理員=自己，A等於房間通道
 		var url = "ws://" + window.location.host +"/siminar/webSocketOneToOne/管理員,A"
 		websocket = new WebSocket(url);
 	} else {
-		alert('当前浏览器 Not support websocket')
+		alert("當前瀏覽器無法使用此功能")
 	}
-	//连接发生错误的回调方法
+	//連接錯誤方法
 	websocket.onerror = function() {
-		setMessageInnerHTML("WebSocket连接发生错误");
+		setMessageInnerHTML("");
 	};
-	//连接成功建立的回调方法
+	//連接成功方法
 	websocket.onopen = function() {
-		setMessageInnerHTML("WebSocket连接成功");
+		setMessageInnerHTML("客服系統連線成功！");
 	}
-	//接收到消息的回调方法
+	//接收後端傳訊息的方法
 	websocket.onmessage = function(event) {
+		//取訊息的資料
 		var event_data = event.data;
-		
+		//切割資料
 		let data_split = event.data.split("說：");
 		member_name = data_split[0];
 		let new_name = $("#"+member_name).val();
 		content = data_split[1];
-		console.log("新的名稱"+new_name)
-		console.log(member_name)
-		console.log("回调信息",event.data)
+
 		
-		
+		//創建左邊列表
 	if(event.data != null && member_name != new_name){
 		$("#member_content").append(
 		`<div class="chat_list active_chat">
@@ -105,10 +94,12 @@ if(minute<10){
         </div>
       </div>`)
 
-      $("#test_div").append("<div style='display:none' class='received_msg' id=abc"+member_name+"></div>");
+      //動態新增每個使用者的DIV
+      $(".msg_history").append("<div style='display:none' class='received_msg' id=abc"+member_name+"></div>");
 	      
       
 	}
+	//當前使用者的訊息有在左邊列表就html替換
 	if(member_name == new_name){
 		$("."+member_name).html(
 				`
@@ -117,25 +108,33 @@ if(minute<10){
 		            <p>\${content}</p>
 		         `)
 	}
-
-	$("."+member_name).on("click",function(){
-		click_member_name = $(this).find("input").val();
-		console.log($("#abc"+click_member_name).children());
-		console.log($("#abc"+click_member_name).find("*").html());
-		$("#message1").html($("#abc"+click_member_name).children());
-		
-		console.log("click_member_name"+click_member_name);
-	})
-	
 		setMessageInnerHTML(event.data);
+
+		//點擊左邊列表
+	$("."+member_name).on("click",function(){
+		//取列表內隱藏input的值
+		click_member_name = $(this).find("input").val();
+		//顯示當前點擊的訊息
+		$("#abc"+click_member_name).css("display","");
+
+		//第一次點擊左邊列表 創建此次點擊的變數值
+		if(previous_name == ""){
+			previous_name=click_member_name;
+		}
+		//點擊後隱藏前一次對話窗的div內容
+		if(previous_name != click_member_name){
+			$("#abc"+previous_name).css("display","none");
+		}
+		//更新上一次點擊的變數值為此次點擊的變數值
+		previous_name=click_member_name;
+		})
+	
 	}
 
-
+	//訊息送出新增我方訊息
 	$("#send_message").on("click",function(){
 		var message_content = $("#text").val();
-
-		$("#message1").append("<div style='text-align:right';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>"+"<br>");
-		$("#"+click_member_name).append("<div style='text-align:right';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>"+"<br>");
+		$("#abc"+click_member_name).append("<div style='text-align:right';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>"+"<br>");
 
 		$("."+click_member_name).find("p").html(message_content);
 		
@@ -143,26 +142,26 @@ if(minute<10){
 
 
 	
-	//连接关闭的回调方法
+	//關閉WebSocket
 	websocket.onclose = function() {
-		setMessageInnerHTML("WebSocket连接关闭");
+		setMessageInnerHTML("");
 	}
-	//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+	//當使用者關閉網站，主動去關閉WebSocket連線，防止server拋出Error
 	window.onbeforeunload = function() {
 		closeWebSocket();
 	}
-	//将消息显示在网页上
+	//將訊息放在網頁上
 	function setMessageInnerHTML(innerHTML) {
 		$("#abc"+member_name).append(innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+ '<br/>');
 		if(member_name == click_member_name){
 			$("#message1").append(innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+ '<br/>');
 		}
 	}
-	//关闭WebSocket连接
+	//關閉WebSocket連線
 	function closeWebSocket() {
 		websocket.close();
 	}
-	//发送消息
+	//將訊息送至後端
 	function send() {
 		var message = document.getElementById('text').value;
 		console.log(message);
