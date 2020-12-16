@@ -17,7 +17,6 @@
     <div>  
     
     	<div  class="row ftco-animate">
-    	
     		<c:forEach var="item" items="${totalProducts}">
     			<div class="col-md-3 col-lg-2 ftco-animate">
     				<div class="product" >

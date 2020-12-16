@@ -107,7 +107,7 @@
 <script>
 function fastinsert(){
 	var buyer="路人炳";
-	var address="320桃園市中壢區中大路300號國立中央大學 (工程二館側面 / 資策會大樓";
+	var address="320桃園市中壢區中大路300號國立中央大學 ";
 	var cellphone="0983006738";
 
 	
