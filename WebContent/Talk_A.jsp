@@ -16,6 +16,15 @@
 
 </head>
 <body>
+
+      
+      
+      
+      <div class="container">
+	<div class="row">
+	 <div id="Smallchat">
+
+
       <div class="inbox_msg">
         <div class="inbox_people">
           <div class="headind_srch">
@@ -35,7 +44,16 @@
           </div>
         </div>
       </div>
+
+
+    <!--===============CHAT ON BUTTON STRART===============-->
+    <div class="chat_on"> <span class="chat_on_icon"><i class="fa fa-comments" aria-hidden="true"></i></span> </div>
+    <!--===============CHAT ON BUTTON END===============-->
+  </div>
+	</div>
+</div>
       
+      			<script src="https://kit.fontawesome.com/4a5fa9ba76.js" crossorigin="anonymous"></script>
       
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -172,6 +190,19 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 		//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
 		websocket.send(JSON.stringify({'message':message,'role':click_member_name,'socketId':"A"}));
 	}
+</script>
+<script>
+$(document).ready(function(){
+    $(".chat_on").click(function(){
+        $(".inbox_msg").toggle();
+        $(".chat_on").hide(300);
+    });
+    
+       $(".chat_close_icon").click(function(){
+        $(".inbox_msg").hide();
+           $(".chat_on").show(300);
+    });
+})
 </script>
     
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

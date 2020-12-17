@@ -86,7 +86,9 @@ $("#check_signup").on("submit",function(ev){
 	<jsp:useBean id="reg_buyer"
 		class="tw.group5.member_SignUp.model.Member_SignUp" scope="session" />
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
-
+	<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 	<!-------------------------內容區--------------------------------->
 

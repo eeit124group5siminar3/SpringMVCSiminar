@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 
 <!DOCTYPE html>
 <html lang="zh">
@@ -90,7 +92,9 @@ $(function(){
 	<jsp:useBean id="reg_buyer"
 		class="tw.group5.member_SignUp.model.Member_SignUp" scope="session" />
 		<jsp:include page="/WEB-INF/pages/header.jsp" />
-	
+	<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 	<!-------------------------內容區--------------------------------->
 
 	<form method="post" id="form_submit">
