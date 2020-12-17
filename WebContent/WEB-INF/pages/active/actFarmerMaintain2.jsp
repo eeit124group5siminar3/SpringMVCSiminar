@@ -60,6 +60,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 
+<!-- -------------------Sweetalert引入的CDN---------------------------------------------------------- -->
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+
 <style>
 
 #project_backstage {
@@ -168,7 +171,7 @@ a{
 					&emsp;		
 					<form action="<c:url value='/actFarmerDeleteF.do'/>" method="post">
 						<input type="hidden" id="actId" name="actId" value="${actFarmer.actId}"> 
-						<input class="btn btn-primary py-2 px-3 "name="delete" type="submit" value="刪除" > 
+						<input class="btn btn-primary py-2 px-3 "name="delete" type="button" value="刪除" > 
 					</form>
 					&emsp;
 					<form action="<c:url value='/actOrdList.do'/>" method="post">
@@ -215,12 +218,39 @@ a{
 <!-- 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- -------------------SweetAlert引入的js---------------------------------------------------------------------- -->	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>		
+	
+
 	
 <!-- -------------------DataTable的javascript---------------------------------------------------------------------- -->
 	<script>
 	$(document).ready(function() {
 	    $('#actFarmer').DataTable();
 	} );
+	</script>
+	
+<!-- -------------------SweetAlert引入的javascript---------------------------------------------------------------------- -->	
+	<script>
+	//foreach 寫法 //按鈕形態要改button 不可以是sumbit
+		$('input[name=delete]').click(function() {
+		console.log("why you are not here!");
+		Swal.fire({
+			  title: '確定要刪除此筆資料嗎?',
+			  text: "提醒您，一旦刪除無法復原喔!",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '確定刪除!',
+			  cancelButtonText: '取消'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			    $(this).parent().submit();
+			  }
+			})
+	});
 	</script>
 </body>
 
