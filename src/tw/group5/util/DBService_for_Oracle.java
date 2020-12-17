@@ -42,7 +42,8 @@ public class DBService_for_Oracle {
 			+"SOLD NUMBER(20),"
 			+"STATUS NUMBER(2),"
 			+"SCORE NUMBER(3,2),"
-			+"SCORENUM NUMBER(20)"
+			+"SCORENUM NUMBER(20),"
+			+"EXPIREDDATE DATE"
 			+ " ) ";
 
 //	private static final String CREATE_ProductCategory_Oracle = "CREATE TABLE PRODUCTCATEGORY (	"

@@ -180,16 +180,19 @@ public class MallOrderController {
 	}
 
 
-// 取消訂單
-	@PostMapping(value = "/CancelOrder")
-	public @ResponseBody Map<String, String> cancelOrder(@RequestParam(value = "itemId")Integer itemId){
-		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
-		orderItem.setStatus(-2);
-		Map<String, String> map=new HashMap<String, String>();
-		map.put("statusWord", orderItem.getStatusWord());
-		map.put("statusTagForUser", orderItem.getStatusTagForUser());
-		return map;
-	}
+//// 取消訂單
+//	@PostMapping(value = "/CancelOrder")
+//	public @ResponseBody Map<String, String> cancelOrder(@RequestParam(value = "itemId")Integer itemId){
+//		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
+//		Integer productId= orderItem.getProductId();
+//		Integer amount=orderItem.getAmount();
+//		
+//		orderItem.setStatus(-2);
+//		Map<String, String> map=new HashMap<String, String>();
+//		map.put("statusWord", orderItem.getStatusWord());
+//		map.put("statusTagForUser", orderItem.getStatusTagForUser());
+//		return map;
+//	}
 }
 
 //

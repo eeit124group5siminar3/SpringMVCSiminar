@@ -115,7 +115,8 @@
 			</div>
 		</div>
 	</div>
-	<section class="ftco-section" id="managementContent"></section>
+			<p style="text-align:center;height:90px" ><font color='red' size='3' id="errMsgs"> ${ErrMsg} </font></p>
+	<section class="ftco-section" id="managementContent" style="padding-top:0"></section>
 	<jsp:include page="../footer.jsp" />
 
 
