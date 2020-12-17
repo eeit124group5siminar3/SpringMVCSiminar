@@ -81,7 +81,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 </head>
 <body class="goto-here">
 			<jsp:include page="/WEB-INF/pages/header.jsp" />
-	
+		<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 	<!-------------------------內容區--------------------------------->
 

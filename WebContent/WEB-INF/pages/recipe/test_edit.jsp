@@ -55,6 +55,22 @@
  			<form:label path="title" style="font-size: 30px;" class="input-group-text">文章標題 :  <span style="font-size: smaller;">最多15個字</span></form:label> 
 			<form:input path="title" class="form-control"/>
 			</div>
+			<div>
+				<form:label for="inputCate" path="cate" style="font-size: 30px;"
+					class="input-group-text">種類: ${memBean.cate}</form:label>
+				<select class="form-control" required name="cate">
+					<option value="">Open this select menu</option>
+					<option value="米食">米食</option>
+					<option value="麵食">麵食</option>
+					<option value="素食/蔬食">素食/蔬食</option>
+					<option value="炸物">炸物</option>
+					<option value="焗烤">焗烤</option>	
+					<option value="沙拉">沙拉</option>
+					<option value="焗烤">焗烤</option>
+					<option value="家常菜">家常菜</option>
+					<option value="湯">湯</option>
+				</select>
+			</div>
 			
 			<div>
 				<label style="font-size: 30px;" class="input-group-text">封面圖片 :  </label>
@@ -82,6 +98,8 @@
 			<br>
 			<div align="center"> 
 			<button type="submit" class="btn btn-primary" id="btn">送出</button>
+			<button type="submit" class="btn btn-primary" 
+			onclick="javascript:location.href='<c:url value='blog_personal'/>'">取消</button>
 			</div>
 
 		</form:form>

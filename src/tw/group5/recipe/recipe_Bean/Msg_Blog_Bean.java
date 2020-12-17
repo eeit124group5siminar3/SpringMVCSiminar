@@ -1,5 +1,7 @@
 package tw.group5.recipe.recipe_Bean;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name="Msg_Blog")
@@ -21,7 +27,8 @@ public class Msg_Blog_Bean {
 	private Integer mem_no;
 	private Integer blog_id;
 	private String content;	
-	private String date;
+	private Date date;
+	private String stringDate;
 	private String name;
 	private Blog_Bean blog_Bean;
 	
@@ -51,11 +58,19 @@ public class Msg_Blog_Bean {
 	}
 	
 	@Column(name="msg_date", updatable = false)
-	public String getDate() {
+	public Date getDate() {		
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	@Transient
+	public String getStringDate() {
+		return stringDate;
+	}
+	public void setStringDate(String stringDate) {
+		this.stringDate = stringDate;
 	}
 	
 	@Column(name="member_name")

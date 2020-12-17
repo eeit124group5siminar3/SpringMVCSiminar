@@ -16,27 +16,27 @@
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">價格<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="price" type="text" id="price" path="price" size='4' required="required"/> <font
+					name="priceS" type="text" id="priceS" path="priceS" size='4' required="required"/> <font
 				color='red' size='-1'> ${ErrMsg.errPrice} </font></td>
 		</tr>
 		<tr>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">保質期<sup style="color:red">*必填</sup></td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">上架期<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="shelfTime" type="text" id="shelfTime" path="shelfTime"
+					name="shelfTimeS" type="text" id="shelfTimeS" path="shelfTimeS"
 					size='3' required="required"/>天 <font color='red' size='-1'>
 					${ErrMsg.errShelfTime} </font></td>
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">庫存<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="stock" type="text" id="stock" path="stock" size='4' required="required"/> <font
+					name="stockS" type="text" id="stockS" path="stockS" size='4' required="required"/> <font
 				color='red' size='-1'> ${ErrMsg.errStock} </font></td>
 		</tr>
 		<tr>
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">內含數量<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="content" type="text" id="content" path="content" size='4' required="required"/>
+					name="contentS" type="text" id="contentS" path="contentS" size='4' required="required"/>
 				<Font color='red' size='-1'> ${ErrMsg.errContent} </Font></td>
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">數量單位<sup style="color:red">*必填</sup></td>
@@ -46,9 +46,9 @@
 		</tr>
 		<tr>
 			<td align="center"
-				style="padding-top: 0; padding-bottom: 5px; width: 120px">折扣<sup style="color:red">*必填</sup></td>
+				style="padding-top: 0; padding-bottom: 5px; width: 120px">打折<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="discount" type="text" id="discount" path="discount" size='4' required="required"/>
+					name="discountS" type="text" id="discountS" path="discountS" size='4' required="required" placeholder="0~1"/>
 				<Font color='red' size='-1'> ${ErrMsg.errDiscount} </Font></td>
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">類型</td>
@@ -90,4 +90,5 @@
 		<!-- 	</div> -->
 
 	</table>
+<%-- 	<form:input name="expiryDate" type="hidden" id="expiryDate" path="expiryDate" size='4'/> --%>
 </form:form>

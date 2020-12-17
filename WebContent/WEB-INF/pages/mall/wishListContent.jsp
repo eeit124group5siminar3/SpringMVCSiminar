@@ -37,7 +37,7 @@
 								<td class="quantity">${list.stock}</div>
 								</td>
 
-								<td class="total">${list.addedDate}</td>
+								<td class="total">${list.expiredDateString}</td>
 							</tr>
 							<!-- END TR-->
 						</c:forEach>

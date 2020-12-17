@@ -14,7 +14,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <head>
 <title>我的最愛</title>
 <meta charset="utf-8">
-
+<!-- -------------------DataTable引入的CDN---------------------------------------------------------------------- -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
 	rel="stylesheet">
@@ -43,9 +45,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
-<!-- -------------------DataTable引入的CDN---------------------------------------------------------------------- -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+
 
 <style>
 
@@ -123,7 +123,7 @@ a{
 				<td>${bean.views}</td>
 				<td>
 				<div class="form-inline justify-content-center">
-						<a href="#" class="btn btn-primary py-2 px-3 " onclick="fun(${bean.rec_id})">刪除</a> 
+						<a href="#" class="btn btn-primary py-2 px-3 " onclick="fun(${bean.rec_id})">移除</a> 
 					&emsp;
 						<a href="<c:url value='/recipeDetail.controller?rec_id=${bean.rec_id}'/>" class="btn btn-primary py-2 px-3 ">查詢</a> 
 				</div>
