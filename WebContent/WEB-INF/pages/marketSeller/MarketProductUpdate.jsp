@@ -109,7 +109,7 @@ fieldset {
            </font> 
 	        </div>
 	        <div>
-	       <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="2" />開放預購
+	       <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="1" />上架
            <form:radiobutton path="marketPutOutBean.putOut" name="marketPutOutBean.putOut" value="0" />下架
 	        </div>
 
