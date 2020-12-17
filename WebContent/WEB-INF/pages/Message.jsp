@@ -55,6 +55,9 @@
 				<input id="member_name" type="hidden" value="${login_ok.member_name}">
 			</c:if>
 			
+			<input id="user_session_id" type="hidden">
+			<input id="session_id" type="hidden">
+			
 			
 			
 			<script src="https://kit.fontawesome.com/4a5fa9ba76.js" crossorigin="anonymous"></script>
@@ -191,19 +194,18 @@ $(document).ready(function(){
 			},
 			type : "POST",
 			success : function(data) {
+				let user_session_id = data["user_session_id"]
+				let session_id = data["session_id"];
 				let history_content = data[name];
 					$("#message1").html(history_content)
 
-					var rand="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789";
-					var user_rand='';
-					for (var i=0;i<5;i++){
-						user_rand += rand.charAt(Math.floor(Math.random()*rand.length))
-					}
-
-					if(member_name == "訪問者"){
-						$("#member_name").val(data[name]);
-					}
+// 					$("#user_session_id").val(user_session_id);
+// 					$("#session_id").val(session_id);
 					
+// 					if(user_session_id != session_id){
+// 						$("#member_name").val(name+user_rand);
+// 					}
+
 			}
 		});
     

@@ -127,6 +127,9 @@
 <!-- 	</nav> -->
 	<jsp:include page="./header.jsp" />
 	<!-- END nav -->
+		<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 	<section id="home-section" class="hero">
 		<div class="home-slider owl-carousel">

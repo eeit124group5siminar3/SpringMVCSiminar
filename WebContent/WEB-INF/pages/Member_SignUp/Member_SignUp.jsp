@@ -182,7 +182,9 @@ $(function(){
 })
 </script>
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
-
+	<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 	<!-------------------------內容區--------------------------------->
 
