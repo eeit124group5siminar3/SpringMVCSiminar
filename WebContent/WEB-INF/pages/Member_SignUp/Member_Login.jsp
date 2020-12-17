@@ -255,6 +255,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	</script>
 
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
 
 
 	<form id="form_submit" method="post">

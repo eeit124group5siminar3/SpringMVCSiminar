@@ -48,8 +48,11 @@ var content = null;  //使用者訊息內容
 var previous_name = "";  //前次使用者名稱
 var click_member_name = null;  //點擊左邊列表的當前使用者名稱
 var date = new Date();  //時間
+var year = date.getFullYear();  //年
+var m = date.getMonth()+1;  //月
+var day = date.getDate();  //日
 var h = date.getHours();  //時
-var minute = date.getMinutes()  //分
+var minute = date.getMinutes();  //分
 if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 	minute = "0"+minute;
 }
@@ -134,7 +137,7 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 	//訊息送出新增我方訊息
 	$("#send_message").on("click",function(){
 		var message_content = $("#text").val();
-		$("#abc"+click_member_name).append("<div style='text-align:right';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>"+"<br>");
+		$("#abc"+click_member_name).append("<div style='text-align:right';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>"+"<br>");
 
 		$("."+click_member_name).find("p").html(message_content);
 		
@@ -152,9 +155,9 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 	}
 	//將訊息放在網頁上
 	function setMessageInnerHTML(innerHTML) {
-		$("#abc"+member_name).append(innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+ '<br/>');
+		$("#abc"+member_name).append(innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+ '<br/>');
 		if(member_name == click_member_name){
-			$("#message1").append(innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+ '<br/>');
+			$("#message1").append(innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+ '<br/>');
 		}
 	}
 	//關閉WebSocket連線
