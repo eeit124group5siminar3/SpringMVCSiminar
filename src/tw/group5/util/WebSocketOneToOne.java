@@ -4,10 +4,13 @@ package tw.group5.util;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
- 
+
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import net.sf.json.JSONObject;
  
 /**
@@ -15,6 +18,7 @@ import net.sf.json.JSONObject;
  *                 注解的值将被用于监听用户连接的终端访问URL地址,客户端可以通过这个URL来连接到WebSocket服务器端
  */
 @ServerEndpoint(value = "/webSocketOneToOne/{param}")
+@SessionAttributes(names =  "login_ok")
 public class WebSocketOneToOne {
 	// 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
 	private static int onlineCount;
@@ -24,6 +28,7 @@ public class WebSocketOneToOne {
 	private Session session;
 	private String role;
 	private String socketId;
+	
  
 	/**
 	 * 连接建立成功调用的方法
