@@ -115,7 +115,6 @@ public class MallShoppingController {
 		}
 		oi = cart.getContent().get(productId);
 		Integer shoppingcartItemNum=cart.getItemNumber();
-		System.err.println(shoppingcartItemNum);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/singleProduct");
 		mav.addObject("selectedProduct", selectedProduct);

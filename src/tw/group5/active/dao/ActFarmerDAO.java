@@ -50,6 +50,12 @@ public class ActFarmerDAO {
 		return totalPages;
 	}
 	
+	//計算符合搜尋結果的有幾頁
+	public Integer getTotalPages(String actName) {
+		totalPages = (int) (Math.ceil(getRecordCountScarch(actName) / (double) recordsPerPage));
+		return totalPages;
+	}
+	
 	//計算Search的總page
 	public Integer getTotalPageWithSearch() {
 		totalPageWithSearch = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
@@ -80,6 +86,8 @@ public class ActFarmerDAO {
 		this.recordsPerPage = recordsPerPage;
 	}
 
+	
+	
 
 	public Integer getActId() {
 		return actId;
@@ -125,28 +133,21 @@ public class ActFarmerDAO {
 		return count;
 	}
 	
-//	public long getRecordCountScarch() {
-//		Session session = sessionFactory.getCurrentSession();
-//		Integer count = 0;
-//		String hql = "select count(*) from ActFarmer";
-//		Query<Long> query = null;
-//		if(searchString == null) {
-//			if(actName== null) {
-//				query = session.createQuery(hql, java.lang.Long.class);
-//			}else {
-//				hql += " where actType=?0";
-//				query = session.createQuery(hql, java.lang.Long.class);
-//				query.setParameter(0, actType);
-//			}
-//		}else {
-//			if(actType == null) {
-//				hql += " where actType like ?0";
-//				query = session.createQuery(hql, java.lang.Long.class);
-//				query.setParameter(0, actType);
-//			}
-//		}
-//		
-//	}
+	
+	//計算搜尋bar的總數
+	public long getRecordCountScarch(String actName) {
+		Session session = sessionFactory.getCurrentSession();
+		Integer count = 0;
+		String hql = "select count(*) from ActFarmer where actName like?1";
+		Query<Long> query = null;
+		query = session.createQuery(hql, java.lang.Long.class);
+		query.setParameter(1, "%"+actName+"%");
+		Object objectNumber = query.uniqueResult();
+		long longNumber = (long) objectNumber;
+		count = (int) longNumber;
+		return count;
+		
+	}
 	
 	
 	
@@ -170,7 +171,7 @@ public class ActFarmerDAO {
 	public List<ActFarmer> getPageActFarmers(Integer sellerId){
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (maintainPageNo - 1) * recordsPerPage;
-		String hql = "from ActFarmer where sellerId =?0 and actLock !=3 ORDER BY actId";
+		String hql = "from ActFarmer where sellerId =?0 and actLock !=4 ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(0, sellerId);
 		query.setFirstResult(startRecordNo);
@@ -188,7 +189,7 @@ public class ActFarmerDAO {
 	//查詢該廠商的所有列表
 	public List<ActFarmer> getActFarmers(Integer sellerId){
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from ActFarmer where sellerId =?0 ORDER BY actId";
+		String hql = "from ActFarmer where sellerId =?0 and actLock !=4 ORDER BY actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(0, sellerId);
 		List<ActFarmer> list = query.list();
@@ -203,6 +204,19 @@ public class ActFarmerDAO {
 		String hql = "from ActFarmer where actName like?1";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(1, "%"+actName+"%");
+		List<ActFarmer> list = query.getResultList();
+		return list;		
+	}
+	
+	// 查詢單筆資料ByName+分頁
+	public List<ActFarmer> selectNamePage(String actName){
+		Session session = sessionFactory.getCurrentSession();
+		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
+		String hql = "from ActFarmer where actName like?1";
+		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
+		query.setParameter(1, "%"+actName+"%");
+		query.setFirstResult(startRecordNo);
+		query.setMaxResults(recordsPerPage);
 		List<ActFarmer> list = query.getResultList();
 		return list;		
 	}

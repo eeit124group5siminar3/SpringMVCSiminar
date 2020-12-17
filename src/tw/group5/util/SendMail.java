@@ -19,7 +19,7 @@ public class SendMail {
 		String host = "smtp.gmail.com";
 		int port = 587;
 		final String username = "iii.seminar5@gmail.com";
-		final String password = "seminar5";
+		final String password = "seminar5!";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);

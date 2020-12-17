@@ -280,11 +280,7 @@ public class ProductDAO {
 		java.util.Date now = new java.util.Date();
 		Date date = new Date(now.getTime());
 		bean.setAddedDate(date);
-		System.err.println(bean);
-		System.err.println(bean.getProductId());
-		System.err.println(bean.getProduct());
-		System.err.println(bean.getStock());
-		if (bean.getStock() <= 0) {
+		if (bean.getStock()<= 0) {
 			bean.setStatus(0);
 		}
 		session.save(bean);
@@ -421,6 +417,14 @@ public class ProductDAO {
 			preProductId = uniqueResult.intValue();
 		}
 		return preProductId;
+	}
+
+	public List<ProductBean> getExpiredProduct() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql="from ProductBean where status !=2 and expiredDate < sysdate";
+		Query<ProductBean> query=session.createQuery(hql,ProductBean.class);
+		List<ProductBean> list =query.list();
+		return list;
 	}
 
 }

@@ -109,7 +109,7 @@ $(function(){
 						class="form-control"
 						placeholder="<jsp:getProperty name="reg_buyer"
 						property="member_password" />"
-						disabled>
+						readonly>
 					<p></p>
 					<label for="inputPassword4">設定新密碼<a style="color:red">*</a></label> <input type="password"
 						name="member_password" id="member_password1" class="form-control"

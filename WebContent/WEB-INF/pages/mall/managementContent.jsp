@@ -50,7 +50,7 @@
 							<td>${item.content}${item.unit}</td>
 							<td>${item.stock}</td>
 							<td>${item.addedDate}</td>
-							<td>${item.expiryDate}</td>
+							<td>${item.expiredDateString}</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -217,7 +217,6 @@ function fastInput1(){
 	document.forms[0][7].value=1;
 // 	document.forms[0][8].src="<c:url value='/images/波菜.jpg' />";
 	document.forms[0][9].value="新鮮美味的波菜，產地直銷";
-	console.log(document.forms[0][8].src);
 	}
 function fastInput2(){
 	document.forms[0][0].value="地瓜";

@@ -25,7 +25,7 @@
     					 src=<c:url value='MarketImageServlet?id=${item.marketProductImgBean.productId}&type=PRODUCT' />
     					  alt="Colorlib Template">
     					  <span class='status'>預購結束日${item.closeDay}</span>					
-    						<div class="overlay"></div>
+    						
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
     						<h3><a href="#">${item.productName}</a></h3>

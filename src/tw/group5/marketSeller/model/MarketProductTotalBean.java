@@ -46,6 +46,7 @@ public class MarketProductTotalBean {
 	private MarketMallBean marketMallBean;
 	private MarketProductImgBean marketProductImgBean;
 	private MarketPutOutBean marketPutOutBean;//設計單向
+	private MarketOrderDetailBean marketOrderDetailBean;
     
 	
 	public MarketProductTotalBean(int productId, String productName, String productArea, String productCatgory,
@@ -277,6 +278,15 @@ public class MarketProductTotalBean {
 
 	public void setMarketMallBean(MarketMallBean marketMallBean) {
 		this.marketMallBean = marketMallBean;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY,mappedBy ="marketProductTotalBean", cascade = CascadeType.ALL)
+	public MarketOrderDetailBean getMarketOrderDetailBean() {
+		return marketOrderDetailBean;
+	}
+
+	public void setMarketOrderDetailBean(MarketOrderDetailBean marketOrderDetailBean) {
+		this.marketOrderDetailBean = marketOrderDetailBean;
 	}
 
 	

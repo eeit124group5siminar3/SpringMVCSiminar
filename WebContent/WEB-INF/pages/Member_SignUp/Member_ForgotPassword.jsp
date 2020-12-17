@@ -91,10 +91,10 @@ $(function(){
 </script>
 	<script>
 $(function(){
-	var member_email="待輸入";
-	var member_id="待輸入"
-	var member_name="待輸入";
-	var member_cellphone="待輸入";
+	var member_email="lincoln_bah@yahoo.com.tw";
+	var member_id="F128862022"
+	var member_name="我是新會員";
+	var member_cellphone="0918667445";
 	$("#ForPwd_button").click(function(){
 		$("#member_email").val(member_email);
 		$("#member_id").val(member_id);

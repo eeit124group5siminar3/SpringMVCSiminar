@@ -7,7 +7,8 @@
     			<div  class="col-lg-6 mb-5 ftco-animate">
     				<a href="#"  class="image-popup" >
     				<img src=<c:url value='MarketImageServlet?id=${oneProduct.marketProductImgBean.productId}&type=PRODUCT' />
-    				 class="img-fluid" alt="Colorlib Template"></a>
+    				 class="img-fluid" alt="Colorlib Template">
+    				 <span class='status'>預購倒數${days}天</span></a>
     			</div>
     			
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">

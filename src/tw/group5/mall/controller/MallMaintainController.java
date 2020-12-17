@@ -66,8 +66,9 @@ public class MallMaintainController {
 
 // 修改資料前置
 	@PostMapping(value = "/Preupdate")
-	public ModelAndView preupdate(HttpServletRequest request, @RequestParam(value = "productId") Integer productId,Model model) {
-		ProductBean updateBean = service.getProduct(productId,null);
+	public ModelAndView preupdate(HttpServletRequest request, @RequestParam(value = "productId") Integer productId,
+			Model model) {
+		ProductBean updateBean = service.getProduct(productId, null);
 		service.setSelected(updateBean.getCategory());
 		service.setTagName("categoryId");
 		String categoryTag = service.getSelectTag();
@@ -85,17 +86,34 @@ public class MallMaintainController {
 			@RequestParam(value = "categoryId") Integer category,
 			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
 		updateBean.setCategory(category);
-//		Map<String, String> errorMsgs = new HashMap<String, String>();
-//		Map<String, String> successMsgs = new HashMap<String, String>();
-//		model.addAttribute("ErrMsg", errorMsgs);
+		List<String> errorMsgs = updateBean.getErrMsg();
+		String discountErr = updateBean.getDiscountErr();
+		String errMsg = "";
+		if (!errorMsgs.isEmpty() || discountErr != null) {
+			if (discountErr != null) {
+				errMsg += discountErr += "<br/>";
+			}
+			if (!errorMsgs.isEmpty()) {
+				for (int i = 0; i < errorMsgs.size(); i++) {
+					errMsg += errorMsgs.get(i);
+					if (i != errorMsgs.size() - 1) {
+						errMsg += "、";
+					}
+				}
+				errorMsgs.clear();
+				errMsg += "必須為數字!";
+			}
+			model.addAttribute("ErrMsg", errMsg);
+		} else {
+			service.updateProduct(updateBean);
+		}
 //		model.addAttribute("successMsg", successMsgs);
-		service.updateProduct(updateBean);
 		return "/mall/mall_management";
 	}
 
 // 新增資料前置
 	@PostMapping(value = "/Preinsert")
-	public ModelAndView preinsert(HttpServletRequest request,Model model) {
+	public ModelAndView preinsert(HttpServletRequest request, Model model) {
 		ProductBean insertBean = new ProductBean();
 		service.setSelected(1);
 		service.setTagName("categoryId");
@@ -115,15 +133,35 @@ public class MallMaintainController {
 			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
 		insertBean.setCategory(category);
 //			Integer producterId=mb.getMember_no();
-		ProducterBean producterBean = new ProducterBean();
-		producterBean.setMember_no(mb.getMember_no());
-		producterBean.setMember_name(mb.getMember_name());
-		insertBean.setProducterBean(producterBean);
+		List<String> errorMsgs = insertBean.getErrMsg();
+		String discountErr = insertBean.getDiscountErr();
+		String errMsg = "";
+		if (!errorMsgs.isEmpty() || discountErr != null) {
+			if (discountErr != null) {
+				errMsg += discountErr += "<br/>";
+			}
+			if (!errorMsgs.isEmpty()) {
+				for (int i = 0; i < errorMsgs.size(); i++) {
+					errMsg += errorMsgs.get(i);
+					if (i != errorMsgs.size() - 1) {
+						errMsg += "、";
+					}
+				}
+				errorMsgs.clear();
+				errMsg += "必須為數字!";
+			}
+			model.addAttribute("ErrMsg", errMsg);
+		} else {
+			ProducterBean producterBean = new ProducterBean();
+			producterBean.setMember_no(mb.getMember_no());
+			producterBean.setMember_name(mb.getMember_name());
+			insertBean.setProducterBean(producterBean);
+			service.saveProduct(insertBean);
+		}
 //			Map<String, String> errorMsgs = new HashMap<String, String>();
 //			Map<String, String> successMsgs = new HashMap<String, String>();
 //			model.addAttribute("ErrMsg", errorMsgs);
 //			model.addAttribute("successMsg", successMsgs);
-		service.saveProduct(insertBean);
 		return "/mall/mall_management";
 	}
 
@@ -131,7 +169,7 @@ public class MallMaintainController {
 	@PostMapping(value = "/Shelf")
 	public @ResponseBody Integer shelf(@RequestParam(value = "productId") Integer productId,
 			@RequestParam(value = "status") Integer status) {
-		ProductBean product = service.getProduct(productId,null);
+		ProductBean product = service.getProduct(productId, null);
 		if (status == 1) {
 			product.setStatus(1);
 			return 1;
@@ -174,36 +212,56 @@ public class MallMaintainController {
 			if (status == 1) {
 				Date today = new Date();
 				poib.setShippingDate(today);
+			} else if (status == -1) {
+				ProductBean bean = service.getProduct(poib.getProductId(), null);
+				bean.setStock(bean.getStock() + poib.getAmount());
+				bean.setSold(bean.getSold() - poib.getAmount());
 			}
 		}
 		String statusTag = poib.getStatusTag();
 		return statusTag;
 	}
-	
+
 // 顯示單筆訂單詳細資料
 	@PostMapping(value = "/OrderForm")
-	public ModelAndView showOrderForm(@RequestParam(value = "itemId", required = false) Integer itemId) {	
+	public ModelAndView showOrderForm(@RequestParam(value = "itemId", required = false) Integer itemId) {
 		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/orderForm");
 		mav.addObject("orderItem", orderItem);
 		return mav;
 	}
-	
-// 商品評價
-	@PostMapping(value = "/ThankForScore")
-	public @ResponseBody Map<String, String> thankForScore(@RequestParam Integer itemId,@RequestParam Double score) {
-		Map<String, String>map=new HashMap<String, String>();
+
+// 取消訂單
+	@PostMapping(value = "/CancelOrder")
+	public @ResponseBody Map<String, String> cancelOrder(@RequestParam(value = "itemId") Integer itemId) {
 		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
 		Integer productId = orderItem.getProductId();
-		ProductBean product = service.getProduct(productId,null);
+		Integer amount = orderItem.getAmount();
+		ProductBean productBean = service.getProduct(productId, null);
+		productBean.setStock(productBean.getStock() + amount);
+		productBean.setSold(productBean.getSold() - amount);
+		orderItem.setStatus(-2);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("statusWord", orderItem.getStatusWord());
+		map.put("statusTagForUser", orderItem.getStatusTagForUser());
+		return map;
+	}
+
+// 商品評價
+	@PostMapping(value = "/ThankForScore")
+	public @ResponseBody Map<String, String> thankForScore(@RequestParam Integer itemId, @RequestParam Double score) {
+		Map<String, String> map = new HashMap<String, String>();
+		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
+		Integer productId = orderItem.getProductId();
+		ProductBean product = service.getProduct(productId, null);
 		product.setScore(score);
-		product.setScorenum(product.getScorenum()+1);
+		product.setScorenum(product.getScorenum() + 1);
 		orderItem.setStatus(3);
 		map.put("thankyou", "<h1>感謝你的評分</h1>");
-		map.put("statusTagForUser",orderItem.getStatusTagForUser());
-		map.put("statusWord",orderItem.getStatusWord());		
-		return map;		
+		map.put("statusTagForUser", orderItem.getStatusTagForUser());
+		map.put("statusWord", orderItem.getStatusWord());
+		return map;
 	}
 
 // 下載訂單資料
@@ -211,24 +269,24 @@ public class MallMaintainController {
 	public String downloadOrder(HttpServletRequest request) {
 //		GregorianCalendar calender = new GregorianCalendar();
 //		Date date = new Date(calender.getTimeInMillis());
-		int v=1;
-		String filePath="c:/data/v" + v + ".xml";
+		int v = 1;
+		String filePath = "c:/data/v" + v + ".xml";
 		File file = new File(filePath);
 		while (file.exists()) {
 			v++;
-			filePath="c:/data/v" + v + ".xml";
+			filePath = "c:/data/v" + v + ".xml";
 			file = new File(filePath);
 		}
-		ProductOrderItemBean poibBean=orderService.getOrderItem(49);
+		ProductOrderItemBean poibBean = orderService.getOrderItem(49);
 		try {
-		JAXBContext ctx = JAXBContext.newInstance(ProductOrderItemBean.class);
-		Marshaller marchaller = ctx.createMarshaller() ;
-		System.err.println(file);
-		System.err.println(file.length());
-		marchaller.marshal(poibBean, file);
-	} catch (JAXBException e) {
-		e.printStackTrace();
-	}
+			JAXBContext ctx = JAXBContext.newInstance(ProductOrderItemBean.class);
+			Marshaller marchaller = ctx.createMarshaller();
+			System.err.println(file);
+			System.err.println(file.length());
+			marchaller.marshal(poibBean, file);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 		return "/index";
 	}
 }
