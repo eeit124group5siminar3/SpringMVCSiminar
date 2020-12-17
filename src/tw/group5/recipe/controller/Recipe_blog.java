@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,19 +27,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
+import oracle.jdbc.internal.OracleDate;
 import oracle.net.aso.m;
+import oracle.sql.DATE;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
+import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
-@SessionAttributes({ "login_ok", "blogBean", "editBean", "memBean", "msgBean" })
+@SessionAttributes({ "login_ok", "blogBean", "editBean", "memBean", "msgBean", "bean" })
 public class Recipe_blog {
 
 	@Autowired
@@ -55,7 +63,7 @@ public class Recipe_blog {
 	// 連到首頁
 	@GetMapping(value = "/blogPage")
 	public String blogPage(Model m) {
-		List<Blog_Bean> searchAll = service.searchPopular();
+		List<Blog_Bean> searchAll = service.searchPopular(); // status
 		List<Blog_Bean> searchOpen = new ArrayList<Blog_Bean>();
 		List<Integer> counts = new ArrayList<Integer>();
 
@@ -69,12 +77,20 @@ public class Recipe_blog {
 		m.addAttribute("searchAll", searchOpen);
 		m.addAttribute("counts", counts);
 
+		// 分類 類別總數
+		List<String> cateList = service.cateList();
+		List<Long> cateCounts = new ArrayList<Long>();
+		for (String b : cateList) {
+			cateCounts.add(service.blogCateCounts(b));
+		}
+		m.addAttribute("cateList", cateList);
+		m.addAttribute("cateCounts", cateCounts);
 		return "recipe/recipe_blog";
 	}
 
 	// 連到詳細頁面
 	@GetMapping(value = "/SinglePage")
-	public String SinglePage(Model m, @RequestParam(name = "blog_id") Integer blog_id) {
+	public String SinglePage(Model m, @RequestParam(name = "blog_id") Integer blog_id) throws SQLException {
 		Blog_Bean bean = service.blogBean(blog_id);
 		System.out.println(bean.getViews());
 		bean.setViews(bean.getViews() + 1);
@@ -108,11 +124,31 @@ public class Recipe_blog {
 		// 回文資料
 		List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
 		m.addAttribute("searchMsg", searchMsg);
-		
-		//作者資料
-		Member_Detail detailBean=service.detailBean(partSearch.getMem_no());
-		m.addAttribute("detailBean",detailBean);
+
+		// 作者資料
+		Member_Detail detailBean = service.detailBean(partSearch.getMem_no());
+		m.addAttribute("detailBean", detailBean);
+
+		// 分類 類別總數
+		List<String> cateList = service.cateList();
+		List<Long> cateCounts = new ArrayList<Long>();
+		for (String b : cateList) {
+			cateCounts.add(service.blogCateCounts(b));
+		}
+		m.addAttribute("cateList", cateList);
+		m.addAttribute("cateCounts", cateCounts);
 		return "recipe/blog_single";
+	}
+	
+	//查詢分類
+	@PostMapping(value = "/chooseBlogCate")
+	public String chooseBlogCate(@RequestParam(name="cate")String cate,Model m){
+		System.out.println("======================================");
+		System.out.println("cate: "+cate);
+		List<Blog_Bean> cateList=service.categoryBlogList(cate);
+		System.out.println("succccccccccccccces");
+		m.addAttribute("cateList",cateList);
+		return "recipe/blog_catePage";
 	}
 
 	// member BlogPage
@@ -157,10 +193,8 @@ public class Recipe_blog {
 		Member_SignUp OK = (Member_SignUp) session.getAttribute("login_ok");
 		Integer mem_no = OK.getMember_no();
 		editBean.setMem_no(mem_no);
-		System.out.println(editBean.getMem_no());
 		String name = OK.getMember_name();
 		editBean.setName(name);
-		System.out.println("bean.getName(): " + editBean.getName());
 		m.addAttribute("editBean", editBean);
 		return "recipe/blog_edit";
 	}
@@ -177,6 +211,8 @@ public class Recipe_blog {
 		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String date = year + "-" + month + "-" + day;
+		
+		
 		bean.setDate(date);
 		System.out.println(bean.getDate());
 
@@ -214,7 +250,6 @@ public class Recipe_blog {
 	public String getIdContent(Model m, @RequestParam(name = "blog_id") Integer blog_id) {
 		System.out.println(blog_id);
 		Blog_Bean memBean = service.blogBean(blog_id);
-		System.out.println("----------------------");
 		m.addAttribute("memBean", memBean);
 		return "recipe/test_edit";
 	}
@@ -222,15 +257,21 @@ public class Recipe_blog {
 	// 文章回文
 	@PostMapping(value = "/msgContent")
 	public String msgContent(@RequestParam(name = "content") String content,
-			@RequestParam(name = "blog_id") Integer blog_id, Model m) {
+			@RequestParam(name = "blog_id") Integer blog_id, Model m) throws ParseException {
 		Msg_Blog_Bean bean = new Msg_Blog_Bean();
+		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String date = year + "-" + month + "-" + day;
-		bean.setDate(date);
+//		Date date=new Date();		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		Date today=sdf.parse(date);
+		bean.setDate(today);
+		
+		System.err.println("bean.getDate(): "+bean.getDate());
 		Blog_Bean partSearch = service.blogBean(blog_id);
 		bean.setBlog_Bean(partSearch);
 
@@ -274,7 +315,6 @@ public class Recipe_blog {
 	@PostMapping(value = "/searchPartOfBlog")
 	@ResponseBody
 	public ModelAndView searchPartOfBlog(@RequestParam(name = "searchInput") String title, Model m) {
-		System.err.println("-------------------------------------");
 		String search = "%" + title.trim() + "%";
 		System.out.println(search);
 		List<Blog_Bean> list = service.searchPartOfBlog(search);
@@ -297,29 +337,32 @@ public class Recipe_blog {
 //		return "recipe/searchForm";
 	}
 
+	// 部落格分類
+	@PostMapping(value = "/categoryBlogList")
+	public String categoryBlogList(@RequestParam(name = "cate") String cate, Model m) {
+		List<Blog_Bean> categoryList = service.categoryBlogList(cate);
+		List<Integer> counts = new ArrayList<Integer>();
+		for (Blog_Bean b : categoryList) {
+			int count = (int) service.blogCateCounts(b.getCate());
+			counts.add(count);
+		}
+
+		m.addAttribute("categoryList", categoryList);
+		m.addAttribute("counts", counts);
+		return "recipe/blog_catePage";
+	}
+
 	// 取得圖片
-	@GetMapping(value = "/getBlogImage")
+	@GetMapping(value = "/getImage")
 	@ResponseBody
-	public ResponseEntity<byte[]> getBlogImage(@RequestParam(name = "blog_id", required = false) Integer blog_id)
+	public ResponseEntity<byte[]> getImage(@RequestParam(name = "mem_no") Integer mem_no)
 			throws SQLException, IOException {
 		ResponseEntity<byte[]> re = null;
 		Blob blob = null;
 		String fileName = null;
-		List<Blog_Bean> list = service.searchAllOfBlog();
-		if (blog_id != null) {
-			for (Blog_Bean b : list) {
-				if (b.getBlog_id() == blog_id) {
-					blob = b.getData();
-					fileName = b.getFileName();
-				}
-			}
-		} else {
-			for (Blog_Bean b : list) {
-				blob = b.getData();
-				fileName = b.getFileName();
-			}
-		}
-		System.out.println(blob);
+		Member_Detail bean = service.detailBean(mem_no);
+		blob = bean.getData();
+		fileName = bean.getFileName();
 
 		String mimeType = ctx.getMimeType(fileName);
 		MediaType mediaType = MediaType.valueOf(mimeType);
@@ -338,6 +381,44 @@ public class Recipe_blog {
 		headers.setContentType(mediaType);
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+		return re;
+
+	}
+
+	@GetMapping(value = "/getBlogImage")
+	@ResponseBody
+	public ResponseEntity<byte[]> getBlogImage(@RequestParam(name = "blog_id", required = false) Integer blog_id)
+			throws IOException, SQLException {
+		ResponseEntity<byte[]> re = null;
+		Blob blob = null;
+		String fileName = null;
+		Blog_Bean bean = service.blogBean(blog_id);
+		if (blog_id != null) {
+			blob = bean.getData();
+			fileName = bean.getFileName();
+		}
+
+		String mimeType = ctx.getMimeType(fileName);
+		MediaType mediaType = MediaType.valueOf(mimeType);
+		HttpHeaders headers = new HttpHeaders();
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//				
+		InputStream is = blob.getBinaryStream();
+
+		byte[] b = new byte[81920];
+		int len = 0;
+		while ((len = is.read(b)) != -1) {
+			baos.write(b, 0, len);
+		}
+		is.close();
+		// 放入header,告知瀏覽器
+		headers.setContentType(mediaType);
+		// 避免資料顯示錯誤.noCache()
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+//				byte[] bytes = baos.toByteArray();
+		re = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+
 		return re;
 
 	}

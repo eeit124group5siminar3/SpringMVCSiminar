@@ -43,6 +43,7 @@ public class Blog_Bean {
 	private int status=1;
 	private int counts;
 	private String introduction;
+	private String cate;
 	private Set<Msg_Blog_Bean> msg_Blog_Bean=
 			new HashSet<Msg_Blog_Bean>(0);
 	
@@ -173,6 +174,13 @@ public class Blog_Bean {
 		this.introduction = introduction;
 	}
 	
+	@Column(name="category")
+	public String getCate() {
+		return cate;
+	}
+	public void setCate(String cate) {
+		this.cate = cate;
+	}
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "blog_Bean",cascade = CascadeType.ALL)
 	@JsonIgnore
