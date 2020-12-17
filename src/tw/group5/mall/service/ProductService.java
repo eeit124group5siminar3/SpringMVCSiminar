@@ -185,4 +185,8 @@ public class ProductService {
 		return dao.getNextProductId(productId);
 	}
 
+	public List<ProductBean> getExpiredProduct() {
+		return dao.getExpiredProduct();
+	}
+
 }

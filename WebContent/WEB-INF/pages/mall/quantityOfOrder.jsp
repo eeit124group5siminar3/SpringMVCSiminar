@@ -73,19 +73,21 @@
 								},
 								legend : { // 資料標籤的位置
 									display : true,
-									position : 'bottom'
+									position : 'bottom',
 								},
-								 scales: {
-								        xAxes: [{
-								            ticks: {
-								                beginAtZero:true
-								            }
-								        }]
-								    },
+								scales : {
+									xAxes : [ {
+										ticks : {
+											beginAtZero : true,
+											 stepSize: 1,
+											 responsive: true
+										}
+									} ]
+								},
 								animation : {
 									duration : 1000,
 									easing : 'easeOutQuart'
-								}
+								}						
 							}
 						});
 					},
@@ -124,13 +126,14 @@
 									display : true,
 									position : 'bottom'
 								},
-								 scales: {
-								        xAxes: [{
-								            ticks: {
-								                beginAtZero:true
-								            }
-								        }]
-								    },
+								scales : {
+									xAxes : [ {
+										ticks : {
+											beginAtZero : true,
+											stepSize: 1
+										}
+									} ]
+								},
 								animation : {
 									duration : 1000,
 									easing : 'easeOutQuart'
@@ -141,29 +144,29 @@
 				})
 			})
 
-// 	function monthlyProduct() {
-// 		var lastMonthOf = $('#lastMonthOf').val();
-// 		var monthName=$('#lastMonthOf').find(':selected').text();
-// 		$.ajax({
-// 			url : "ProductOrders",
-// 			type : "POST",
-// 			data : {
-// 				"lastMonthOf" : lastMonthOf
-// 			},
-// 			datatype : "html",
-// 			success : function(data, status) {
-// 				console.log(data);
-// 				chart.data.labels=data.productList
-// 				chart.data.datasets[0].label = monthName+'各項商品的訂單數'
-// 				chart.data.datasets[0].data = data.orders;
-// 				chart.update();
-// 			},
-// 			error : function(data, status) {
-// 				chart.data.labels=data.productList
-// 				chart.data.datasets[0].label = monthName+'各項商品的訂單數'
-// 				chart.data.datasets[0].data = data.orders;
-// 				chart.update();
-// 			}
-// 		});
-// 	}
+	// 	function monthlyProduct() {
+	// 		var lastMonthOf = $('#lastMonthOf').val();
+	// 		var monthName=$('#lastMonthOf').find(':selected').text();
+	// 		$.ajax({
+	// 			url : "ProductOrders",
+	// 			type : "POST",
+	// 			data : {
+	// 				"lastMonthOf" : lastMonthOf
+	// 			},
+	// 			datatype : "html",
+	// 			success : function(data, status) {
+	// 				console.log(data);
+	// 				chart.data.labels=data.productList
+	// 				chart.data.datasets[0].label = monthName+'各項商品的訂單數'
+	// 				chart.data.datasets[0].data = data.orders;
+	// 				chart.update();
+	// 			},
+	// 			error : function(data, status) {
+	// 				chart.data.labels=data.productList
+	// 				chart.data.datasets[0].label = monthName+'各項商品的訂單數'
+	// 				chart.data.datasets[0].data = data.orders;
+	// 				chart.update();
+	// 			}
+	// 		});
+	// 	}
 </script>
