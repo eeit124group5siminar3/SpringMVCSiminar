@@ -146,6 +146,7 @@ public class ActFarmerController {
 		successMsgs.put("sucess", "資料新增成功");
 		return "redirect:/allActFarmer.do";
 		
+		
 	}
 	//檢視活動準備(找到該筆物件)
 	@RequestMapping(path="/actFarmerPreRead.do")

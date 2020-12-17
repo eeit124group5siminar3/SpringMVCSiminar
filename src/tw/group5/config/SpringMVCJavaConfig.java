@@ -1,29 +1,21 @@
 package tw.group5.config;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import tw.group5.mall.MyControllerAspect;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "tw.group5")
-
+@EnableAspectJAutoProxy
 //@EnableTransactionManagement
 
 //@PropertySource("classpath:jdbc.properties")
@@ -43,7 +35,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 		
 	}
 
-	// 設定view處理者
+	// 閮剖�iew�����
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -53,7 +45,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 		return viewResolver;
 	}
 
-//	 獲得DataSource
+//	 �敺ataSource
 //	@Bean
 //	public DataSource getJndiObjectFactoryBean() {
 //		JndiObjectFactoryBean factoryBean = new JndiObjectFactoryBean();
@@ -62,7 +54,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //		return ds;
 //	}
 
-//	// 獲得SessionFactory
+//	// �敺essionFactory
 //	@Bean(destroyMethod = "destroy")
 //	public LocalSessionFactoryBean sessionFactory() {
 //		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -77,7 +69,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //		return sessionFactory;
 //	}
 
-	// 增加屬性
+	// 憓�惇��
 //	public void addProperties() {
 //		String driverClassName = env.getRequiredProperty("datasource.driverClassName");
 //		String url = env.getRequiredProperty("datasource.url");
@@ -89,7 +81,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //		System.out.println("password = " + password);
 //	}
 
-	// 獲得multipart處理者
+	// �敺ultipart�����
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
@@ -97,7 +89,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 		return commonsMultipartResolver;
 	}
 	
-	//獲得jsonView
+	//�敺sonView
 //	@Bean
 //	public MappingJackson2JsonView jsonView() {
 //		MappingJackson2JsonView mj2jv=new MappingJackson2JsonView();
@@ -105,7 +97,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //		return mj2jv;
 //	}
 	
-	//註冊用Json顯示的類別
+	//閮餃�Json憿舐內���
 //	@Bean
 //	 public Jaxb2Marshaller jaxbMarshaller() {
 //		Jaxb2Marshaller jaxb2Marshaller=new Jaxb2Marshaller();
@@ -113,7 +105,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //		return jaxb2Marshaller;
 //	 }
 	
-	//註冊JsonView
+	//閮餃�sonView
 //	@Bean
 //	public ContentNegotiatingViewResolver getContentNegotiatingViewResolver() {
 //		ContentNegotiatingViewResolver contentNegotiatingViewResolver=new ContentNegotiatingViewResolver();
@@ -123,7 +115,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //		return contentNegotiatingViewResolver;
 //	}
 
-//註冊View
+//閮餃�iew
 //	@Override
 //	public void addViewControllers(ViewControllerRegistry registry) {
 //		registry.addRedirectViewController("/", "/FrontPage");
@@ -132,7 +124,7 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 //		WebMvcConfigurer.super.addViewControllers(registry);
 //		return "/FrontPage";
 //	}
-	// 增加資源處理者
+	// 憓�������
 		@Override
 		public void addResourceHandlers(ResourceHandlerRegistry registry) {
 			registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/pages/images/");
@@ -141,6 +133,11 @@ public class SpringMVCJavaConfig implements WebMvcConfigurer {
 			registry.addResourceHandler("/fonts/**").addResourceLocations("/WEB-INF/pages/fonts/");
 			registry.addResourceHandler("/files/**").addResourceLocations("/WEB-INF/pages/files/");
 		}
-
+		
+		@Bean
+		public MyControllerAspect myControllerAspect() {
+			MyControllerAspect myControllerAspect=new MyControllerAspect();
+			return myControllerAspect;
+		}
 
 }

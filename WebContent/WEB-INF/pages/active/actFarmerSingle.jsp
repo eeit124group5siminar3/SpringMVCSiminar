@@ -34,7 +34,16 @@
     
 <!--     外掛icon link -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    
+
+<style type="text/css">
+
+.post-title {
+	width:50px; 
+	overflow: hidden; 
+	white-space: nowrap; 
+	text-overflow: ellipsis;
+}
+</style>
 </head>
 
 <body class="goto-here">
@@ -58,7 +67,7 @@
       <div class="container">
       <form:form action="getSingleAct.do" modelAttribute="collFarmer" method="GET" enctype="multipart/form-data" name="act">     
         <div class="row">
-          <div class="icon col-lg-7 ftco-animate ">
+          <div class="icon col-lg-8 ftco-animate ">
 			<h2 class="mb-3"><span class="icon ion-ios-search"></span><form:label path="actId">${collFarmer.actName}</form:label></h2>
 			<p>${collFarmer.actType }</p>
            	活動日期 ${collFarmer.actDateSta} ${collFarmer.actTimeSta}~${collFarmer.actDateEnd} ${collFarmer.actTimeEnd}<br>
@@ -73,7 +82,7 @@
             <h6>活動簡介 </h6>
             <p>${collFarmer.actDescri}</p>
           </div>
-          <div class="col-lg-5 sidebar ftco-animate ">
+          <div class="col-lg-4 sidebar ftco-animate ">
 <!--             <div class="sidebar-box"> -->
 <%--               <form action="#" class="search-form"> --%>
 <!--                 <div class="form-group"> -->
@@ -82,7 +91,7 @@
 <!--                 </div> -->
 <%--               </form> --%>
 <!--             </div> -->
-            <div class="col-md-8 sidebar-box ftco-animate">
+            <div class="col-md-12 sidebar-box ftco-animate">
             	<h3 class="heading" style="color: #82ae46">報名資訊</h3>
               <ul class="categories">
                 <li><a href="#">報名開始時間 <span>${collFarmer.signDateSta} ${collFarmer.signTimeSta}</span></a></li>
@@ -91,11 +100,33 @@
                 <li><a href="<c:url value='actSignPreInsert.do?id=${collFarmer.actId}'/>" class="btn btn-primary py-2 px-3">我要報名</a></li>
               </ul>
             </div>
-           </div>
-        
-       </div>
       </form:form>
-     </div>
+         <div class="sidebar-box ftco-animate">
+      <form:form action="actShowPopular.do" modelAttribute="popActFarmer" method="GET" enctype="multipart/form-data" name="act">     
+              <h3 class="heading">熱門活動</h3>
+              <div id="showp"></div>
+              <div class="block-21 mb-4 d-flex" >
+<!--                 <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a> -->
+<!--                 <div class="text"> -->
+<!--                   <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3> -->
+<!--                   <div class="meta"> -->
+<!--                     <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div> -->
+<!--                     <div><a href="#"><span class="icon-person"></span> Admin</a></div> -->
+<!--                     <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+<!--                   </div> -->
+<!--                 </div> -->
+              </div>
+            
+<!--             <div class="col-lg-12 sidebar-box ftco-animate"> -->
+<!--               <h3 class="heading" style="color: #82ae46">熱門活動</h3> -->
+<!--               <div class="row"> -->
+<!--               	<h6 class="col-lg-8">活動名稱</h6> <h6 class="col-lg-4">已報名人數</h6> -->
+<!--               </div> -->
+             
+<!--               <div id="showp"></div>   -->
+              
+          </div>
+		</form:form>		
     </section> <!-- .section -->
     
 <!-- ------Header--------------------------------------------------------------- -->
@@ -126,32 +157,55 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-<script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.get({
+		url:"${pageContext.request.contextPath}/actShowPopular.do",
+		contentType:"application/json",
+		success:function(response,status){
+		let data = response.data;
+		let content = "";
+		console.log(data)
+			for(var i = 0;i<data.length; i++){
+				content+=
+			 	` <div class="block-21 mb-4 d-flex" >
+			 	<a class="blog-img mr-4" style="background-image: url('<c:url value='ActImageController?id=\${data[i].ACTID}&type=ACTFARMER'/>');"></a>
+	               <div class="text">
+	               <h3 class="heading-1"><a href="<c:url value='getSingleAct.do?id=\${data[i].ACTID}'/>">\${data[i].ACTNAME}</a></h3>
+		               <div class="meta">
+		                 <div><a href="<c:url value='getSingleAct.do?id=\${data[i].ACTID}'/>"><span class="icon-person"></span>\${data[i].ORDACTSUM}</span></a></div>
+		               </div>
+	               </div>
+	               </div>`;
+			}
+		$('#showp').html(content);
+		}
+	})		
+})
 // $(document).ready(function(){
-// 	var $window = $(window), //視窗物件
-// 		$ad = $("#signbar").css('opacity',0).show(), //讓物件透明，並顯示出來，目地是一開始移動到定位時使用者看不到
-// 		width = $ad.width(), //取得advertisement寬度
-// 		height = $ad.height(), //取得advertisement長度
-// 		diffX = 50, //廣告與右方邊距
-// 		diffY = 50, //廣告與下方邊距
-// 		speed = 800; //移動速度，花多少ms完成移動，越小越快
-	
-// 	//先將廣告移到定點
-// 	$ad.css({
-// 		top 	: $(document).height() , //移到最下面
-// 		left	: $window.width() - width - diffX , //移到右邊定點
-// 		opacity : 1 //解除透明
-// 	});
-	
-// 	//加上scroll和resize事件
-// 	$window.on("scroll resize", function(){
-// 		//控制廣告移動
-// 		$ad.stop().animate({
-// 			top: $(this).scrollTop() + $(this).height() - height - diffY,
-// 			left: $(this).scrollLeft() + $(this).width() - width - diffX
-// 		},speed);
-// 	}).scroll();//啟動scroll
+// 	$.get({
+// 		url:"${pageContext.request.contextPath}/actShowPopular.do",
+// 		contentType:"application/json",
+// 		success:function(response,status){
+// 		let data = response.data;
+// 		let content = "";
+// 		console.log(data)
+// 		for(var i = 0;i<data.length; i++){
+// 			content+=
+// 			`<ul class="categories" >
+// 				<tr>		
+// 				<td class="post-title" width="50px"><a href="<c:url value='getSingleAct.do?id=\${data[i].ACTID}'/>">\${data[i].ACTNAME}</a></td>				
+// 				<td><span>\${data[i].ORDACTSUM}</span></td>				
+// 				 </tr>
 
+// 			</ul>`;
+// 			}
+// 		$('#showp').html(content);
+// 		}
+// 	})		
+// })
+
+	
 </script>
 </body>
 </html>

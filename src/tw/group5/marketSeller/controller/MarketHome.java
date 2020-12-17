@@ -21,8 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import tw.group5.mall.ShoppingCart;
 import tw.group5.marketSeller.MarketCart;
 import tw.group5.marketSeller.model.MarketMallBean;
+import tw.group5.marketSeller.model.MarketNotice;
 import tw.group5.marketSeller.model.MarketOrder;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
+import tw.group5.marketSeller.service.MarketNoticeService;
 import tw.group5.marketSeller.service.MarketProductBeanService;
 import tw.group5.marketSeller.service.MarketSellBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
@@ -37,6 +39,9 @@ public class MarketHome {
 
 	@Autowired
 	private MarketProductBeanService productService;
+	
+	@Autowired
+	private MarketNoticeService noticeService;
 	
 	@GetMapping(value = "/GoMarketHome")
 	public String goMarketHome(
@@ -85,7 +90,6 @@ public class MarketHome {
 	public ModelAndView showMap(HttpServletRequest request,
 			@RequestParam(value = "memberNo", required = false) Integer memberNo){
 		MarketMallBean map =sellerService.selectid(memberNo);
-		System.out.println("地址在這 :"+ map.getAddress());
 		ModelAndView mav =new ModelAndView();
 		mav.setViewName("/marketSeller/MarketMallMap");
 		mav.addObject("map",map);
@@ -99,14 +103,10 @@ public class MarketHome {
 			@RequestParam(value = "memberNo", required = false) Integer memberNo
 			) {
            List<MarketProductTotalBean> list = productService.selectBuyerAll(memberNo);
-           MarketMallBean seller =sellerService.selectid(memberNo);
-           
-
-           
+           MarketMallBean seller =sellerService.selectid(memberNo);                 
            ModelAndView mav =new ModelAndView();
            mav.setViewName("/marketSeller/MarketMallProduct");
            mav.addObject("totalProducts",list);
-
            mav.addObject("seller",seller);
 		   return mav;
 	}
@@ -116,12 +116,13 @@ public class MarketHome {
 	public ModelAndView productNews(
 			@RequestParam(value = "productId", required = false) Integer productId,
 			@RequestParam(value = "qty", required = false) Integer qty,
+			@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb,
 			@SessionAttribute(value = "MarketCart", required = false) MarketCart cart, Model model
 			) {
 		//商品詳細資訊	
 		MarketProductTotalBean pBean = productService.select(productId);
 		MarketOrder marketOrder =new MarketOrder();
-		marketOrder.setMemberNo(pBean.getMemberNo());
+		marketOrder.setMemberNo(pBean.getMarketMallBean().getMemberNo());
 		marketOrder.setProductId(pBean.getProductId());
 		marketOrder.setProducterName(pBean.getMarketMallBean().getMallName());
 		marketOrder.setProduct(pBean.getProductName());
@@ -137,15 +138,11 @@ public class MarketHome {
 			marketOrder.setQuantity(qty);
 			cart.addToCart(productId, marketOrder);
 		}
-        
-        System.out.println("商品日期");          
+                 
         java.util.Date date = new java.util.Date();      
-        System.out.println("1232132日期"+date);
         Date date1=pBean.getCloseDay();
         long d1 = date1.getTime()-date.getTime();
         long days=(d1/1000/60/60/24);
-        
-        System.out.println("天數"+days);
                
         marketOrder =cart.getContent().get(productId);
 		ModelAndView mav =new ModelAndView();
@@ -154,6 +151,22 @@ public class MarketHome {
         mav.addObject("marketOrder",marketOrder);
         mav.addObject("days",days);
         mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+	
+	@PostMapping(value = "/addToMarketNotice")
+	@ResponseBody
+	public ModelAndView addToMarketNotice(@RequestParam(value = "productId", required = false) Integer productId,
+			@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb) {
+		MarketProductTotalBean pBean = productService.select(productId);	
+		MarketNotice notice =new MarketNotice();
+		notice.setBuyerId(mb.getMember_no());
+		notice.setMarketProductTotalBean(pBean);;
+		noticeService.insert(notice);
+		ModelAndView mav =new ModelAndView();
+		mav.setViewName("/marketSeller/MarketMallOneProduct");
+		mav.addObject("notice",notice);
+		mav.setStatus(HttpStatus.OK);
 		return mav;
 	}
 }

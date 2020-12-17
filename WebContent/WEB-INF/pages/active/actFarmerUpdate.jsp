@@ -64,7 +64,7 @@
 
 <script>
 function backHome(){
-	document.act.action="allActFarmer.do";
+	document.act.action=new ModelAndView("allActFarmer.do");
     document.act.submit();
 }
 </script>

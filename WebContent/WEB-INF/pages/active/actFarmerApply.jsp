@@ -80,7 +80,7 @@ border: #82ae46 2px solid;
 //============================返回頁面=====================================================//
 
 function backHome(){
-	document.act.action="allActFarmer.do";
+	document.act.action= "allActFarmer.do";
     document.act.submit();
 	//window.location.herf="${pageContext.request.contextPath}/allActFarmer.do";
 }

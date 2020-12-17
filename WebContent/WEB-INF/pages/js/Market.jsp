@@ -141,4 +141,37 @@
 				}
 			});
 	}
+
+	
+
+	//加入補貨清單
+	function addToMarketNotice(productId) {
+
+			alert("加入補貨通知");
+		$.ajax({
+			url : "addToMarketNotice",
+			type : "POST",
+			data : {
+				"productId" : productId
+			}
+		});
+	}
+
+   //移除補貨清單
+	function removeNotice(noticeId) {
+		$.ajax({
+			url : "deleteNotice",
+			type : "POST",
+			data : {
+				"noticeId" : noticeId
+			},
+			datatype : "html",
+			success : function(data, status) {
+				$("#mainContent").html(data);
+			},
+			error : function(data, status) {
+				$("#mainContent").html(data);
+			}
+		});
+	}
 </script>

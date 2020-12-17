@@ -52,6 +52,9 @@ public class WebSocketOneToOne {
 		connections.remove(role);  // 从map中移除
 		subOnlineCount();          // 在线数减
 		System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
+		String string = "<font style='color:red'>使用者已離開。</font>";
+		send(string,role,"管理員",socketId);
+
 	}
  
 	/**

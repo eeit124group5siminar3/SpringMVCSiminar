@@ -1,54 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 ftco-animate">
 			<div class="cart-list">
+<%-- 				<a href="#" onclick="reduceItem(${anEntry.value.productId})"><span --%>
+<!-- 					class="ion-ios-close"></span></a> -->
 				<table class="table">
 					<thead class="thead-primary">
 						<tr class="text-center">
-							<th>&nbsp;</th>
-							<th>願望清單</th>
-							<th>&nbsp;</th>
+						    <th>&nbsp;</th>
+							<th>商品</th>
+							<th>店家名稱</th>				
 							<th>單價</th>
-							<th>尚餘</th>
-							<th>購買期限</th>
+							<th>數量</th>
+							<th>總價錢</th>
+							<th>&nbsp;</th>
+
 						</tr>
 					</thead>
+					
 					<tbody>
-						<c:forEach varStatus="stVar" var="list" items="${productWishList}">
+                           <c:forEach var="item" items="${order}">
 							<tr class="text-center">
-								<td class="product-remove"><a onclick="reduceFavorite(${list.productId})"><span
-										class="ion-ios-close"></span></a></span></a></td>
-
 								<td class="image-prod"><div class="img"
-										style="background-image: url(<c:url value='retrieveImageServlet?id=${list.productId}&type=PRODUCT' />);" onclick="goToProduct(${list.productId})"></div></td>
-
+										style="background-image: url(<c:url value='MarketImageServlet?id=${item.productId}&type=PRODUCT' />);">
+									</div></td>
+									
 								<td class="product-name">
-									<h3>${list.product}</h3>
-									<p>${list.content}${list.unit}</p>
-									<p>${list.description}</p>
+									<p>${item.productName}</p>
 								</td>
-
-								<td class="price">${Math.round(list.price*list.discount)}元</td>
-
-								<td class="quantity">${list.stock}</div>
+								<td class="product-name">
+									<p>${item.sellerName}</p>
 								</td>
-
-								<td class="total">${list.expiredDateString}</td>
+								<td class="product-name">
+									<p>${item.totalPrice}元</p>
+								</td>
+								<td class="product-name">
+									<p>${item.quantity}</p>
+								</td>
+								<td class="product-name">
+									<p>${item.totalPrice*item.quantity}元</p>
+								</td>
 							</tr>
 							<!-- END TR-->
-						</c:forEach>
-
+						<!-- END TR-->
+                         	</c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
+
 	</div>
+<!-- 	<div class="col-lg-4 mt-5 cart-wrap ftco-animate"> -->
+<!-- 		<div class="cart-total mb-3"> -->
+<!-- 		     <p> -->
+<%-- 			<a href="<c:url value='/' />" --%>
+<!-- 				class="btn btn-primary py-3 px-4">回首頁</a> <a -->
+<%-- 				href="<c:url value='/GoMarketHome' />" --%>
+<!-- 				class="btn btn-primary py-3 px-4">我要繼續買</a> -->
+<!-- 		     </p> -->
+<!-- 		</div> -->
+<!-- 	</div>	 -->
 </div>
 
+
+
+ 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery-migrate-3.0.1.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -66,27 +85,5 @@
 <!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <!-- <script src="js/google-map.js"></script> -->
 <script src="js/main.js"></script>
-<jsp:include page="../js/mall.jsp" />
-<script>
-	//取消商品訂購
-	function reduceFavorite(productId) {
-		$.ajax({
-			url : "WishListContent",
-			type : "POST",
-			data : {
-				"productId" : productId
-			},
-			datatype : "html",
-			success : function(data, status) {
-				$("#wishListContent").html(data);
-			},
-			error : function(data, status) {
-				$("#wishListContent").html(data);
-			}
-		});
-	}
+<jsp:include page="../js/Market.jsp" />
 
-	function goToProduct(productId){
-		window.location.replace("../siminar/mall_shop?flag=true&productId="+productId);
-		}
-</script>
