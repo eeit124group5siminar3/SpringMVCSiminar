@@ -70,11 +70,12 @@ public class MarketShoppingController {
 			 @SessionAttribute(value = "login_ok") Member_SignUp mb,
 			Model model
 			) {
+		int allPrice=marketCart.getTotal();
 		Date today = new Date();
 		order.setBuyTime(today);
 		order.setBuyerId(mb.getMember_no());
+		order.setAllPrice(allPrice);
 		Set<MarketOrderDetailBean> items =new HashSet<MarketOrderDetailBean>();
-		System.out.println("商品    :"+marketCart.getContent());
 		Map<Integer,MarketOrder> carts =marketCart.getContent();
 		Set<Integer> set =carts.keySet();
 		for (Integer k : set) {
@@ -82,10 +83,12 @@ public class MarketShoppingController {
 			MarketOrder oi =carts.get(k);
 			oid.setProductId(oi.getProductId());
 			oid.setQuantity(oi.getQuantity());
-			oid.setProductId(oi.getProductId());
 			oid.setTotalPrice(oi.getPrice());
+			oid.setProductName(oi.getProduct());	
 			oid.setMarketOrderBean(order);
-
+			oid.setSellerName(oi.getProducterName());
+			oid.setSellerId(oi.getMemberNo());
+			System.out.println("賣家的編號呢   :"+oi.getMemberNo());
 			items.add(oid);
 		}
 		order.setMarketOrderDetailBean(items);

@@ -58,52 +58,38 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			})
 		})
 	</script>
-	<script>
-		$(function() {
-			$("#form_submit")
-					.on(
-							"submit",
-							function(ev) {
-								$
-										.ajax({
-											url : "checkLogin.controller",
-											data : {
-												email : $("#exampleInputEmail1")
-														.val(),
-												password : $(
-														"#exampleInputPassword1")
-														.val(),
-												remember : $("#exampleCheck1")
-														.prop('checked'),
-												code : $("#check_code").val()
-											},
-											type : "POST",
-											contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-											success : function(data) {
-												if (data[2] == "2") {
-													if (document.referrer == "http://localhost:8080/siminar/login.controller") {
-														window.location = "http://localhost:8080/siminar/index.controller";
-													} else {
-														self.location = document.referrer;
-													}
-												}
-												if (data[1] == "1") {
-													$("#check_email").html(
-															"驗證碼輸入錯誤");
-												}
-												if (data[0] == "0") {
-													$("#check_email").html(
-															"帳號或密碼錯誤，請重新輸入");
-												}
-												if (data[3] == "3") {
-													$("#check_email").html(
-															"帳號已停權");
-												}
-											}
-										})
-								ev.preventDefault();
-							})
+<script>
+	$(function() {
+		$("#form_submit").on("submit",function(ev) {
+			$.ajax({
+				url : "checkLogin.controller",
+				data : {
+					email : $("#exampleInputEmail1").val(),
+					password : $("#exampleInputPassword1").val(),
+					remember : $("#exampleCheck1").prop('checked'),
+					code : $("#check_code").val()
+				},
+				type : "POST",
+				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+					if (data[2] == "2") {
+						if (document.referrer == "http://localhost:8080/siminar/login.controller") {
+							window.location = "http://localhost:8080/siminar/index.controller";
+						} else {
+							self.location = document.referrer;
+						}
+					}if (data[1] == "1") {
+						$("#check_email").html("驗證碼輸入錯誤");
+					}if (data[0] == "0") {
+						$("#check_email").html("帳號或密碼錯誤，請重新輸入");
+					}if (data[3] == "3") {
+						$("#check_email").html("帳號已停權");
+					}
+				}
+			})
+			ev.preventDefault();
 		})
+	})
 	</script>
 
 	<script>
@@ -220,7 +206,45 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				$("#exampleInputEmail1").val(seller_account);
 				$("#exampleInputPassword1").val(seller_password);
 			});
-		})
+			$("#buyer_onebutton").click(function() {
+				$.ajax({
+					url :"oneButton.controller",
+					data : {
+						member_email : buyer_account,
+					},
+					type : "POST",
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(data) {
+						if (data) {
+							if (document.referrer == "http://localhost:8080/siminar/login.controller") {
+								window.location = "http://localhost:8080/siminar/index.controller";
+							} else {
+								self.location = document.referrer;
+							}
+						}
+					}
+				});
+			});
+			$("#seller_onebutton").click(function() {
+				$.ajax({
+					url :"oneButton.controller",
+					data : {
+						member_email : seller_account,
+					},
+					type : "POST",
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(data) {
+						if (data) {
+							if (document.referrer == "http://localhost:8080/siminar/login.controller") {
+								window.location = "http://localhost:8080/siminar/index.controller";
+							} else {
+								self.location = document.referrer;
+							}
+						}	
+					}	
+			});
+		});
+	})
 	</script>
 	<script>
 		function refresh() {
@@ -237,6 +261,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div class="login-form">
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
+				<button type="button" id="buyer_onebutton">買家session</button>
+				<button type="button" id="seller_onebutton">賣家beansession</button>
+				<br>
 				<button type="button" id="buyer_button">買家</button>
 				<button type="button" id="seller_button">賣家</button>
 				<div id="check_email" class="center"

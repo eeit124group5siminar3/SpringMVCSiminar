@@ -150,7 +150,7 @@ $("#signup_form").on("submit",function(ev){
 </script>
 	<script>
 $(function(){
-	var member_email="lincoln_bah@yahoo.com.tw";
+	var member_email="test.iiiseminar5@gmail.com";
 	var member_id="F128862022";
 	var member_password="123456aA";
 	var member_password1="123456aA";
@@ -191,7 +191,7 @@ $(function(){
 			<fieldset class="border signup-form-fieldset">
 				<legend>會員註冊</legend>
 				<button type="button" id="buyersignup_button">買家</button>
-				<button type="button" id="sellersignup_button">買家</button>
+				<button type="button" id="sellersignup_button">賣家</button>
 				<hr>
 				<div id="member_permissions0"
 					class="custom-control custom-radio custom-control-inline">

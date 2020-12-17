@@ -70,11 +70,12 @@
 				<table class="table">
 					<thead class="thead-primary">
 						<tr class="text-center">
-							<th>訂購日期</th>
+							<th>購買日期</th>
 							<th>收件者姓名</th>
 							<th>收件地址</th>
 							<th>連絡電話</th>
-							<th>總價格</th>
+							<th>購買商品</th>
+							<th>數量</th>
 							<th></th>
 
 						</tr>
@@ -84,21 +85,16 @@
 						<c:forEach var="item"
 							items="${list}">
 							<tr class="text-center">
-								<td class="product-remove">${item.buyTime}"</td>
+								<td class="product-remove">${item.marketOrderBean.buyTime}"</td>
 								<td>
-									<h3>${item.buyer}</h3>
+									<h3>${item.marketOrderBean.buyer}</h3>
 								
 								</td>
 
-								<td class="price">${item.address}</td>
-								<td class="price">${item.cellphone}</td>
-								<td class="price">${item.allPrice}元</td>
-								<td class="price">
-                                <a href="#" data-toggle="modal" data-target="#orderDetail" 
-		                        data-whatever="${item.oid}"
-		                        class="btn btn-primary py-2 px-3">詳細資料</a>
-				                </td>
-
+								<td class="price">${item.marketOrderBean.address}</td>
+								<td class="price">${item.marketOrderBean.cellphone}</td>
+								<td class="price">${item.productName}</td>
+								<td class="price">${item.quantity}</td>
 							</tr>
 							<!-- END TR-->
 						</c:forEach>
@@ -114,39 +110,12 @@
 		     <p>
 			<a href="<c:url value='/' />"
 				class="btn btn-primary py-3 px-4">回首頁</a> <a
-				href="<c:url value='/GoMarketHome' />"
-				class="btn btn-primary py-3 px-4">我要繼續買</a>
+				href="<c:url value='/MarketProduct.selectAll' />"
+				class="btn btn-primary py-3 px-4">商品管理</a>
 		     </p>
 		</div>
 	</div>	
 </div>
-
-
-
-
-<div class="modal fade" id="orderDetail" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true" >
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content" style="width:1000px">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">詳細資料</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id="showOrderDetail" style="width: 1000px">
-
-				</div>
-				<div class="modal-footer">
-					
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">關閉</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
 
 	<jsp:include page="../footer.jsp" />
 
@@ -179,28 +148,7 @@
 	<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
 	<jsp:include page="../js/Market.jsp" />
-	
-	<script>
 
-$('#orderDetail').on('show.bs.modal', function (event) {
-	var aHref = $(event.relatedTarget);
-	var oId = aHref.data('whatever');
-	$.ajax({
-		url : "showOrderDetail",
-		type : "POST",
-		data : {
-			"oId":oId	
-		},
-		datatype : "html",
-		success : function(data, status) {
-			$("#showOrderDetail").html(data);
-		},
-		error : function(data, status) {
-			$("#showOrderDetail").html(data);
-		}
-	});			
-	})
-</script>
 
 </body>
 </html>

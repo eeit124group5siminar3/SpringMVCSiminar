@@ -136,16 +136,17 @@ public class Recipe_Controller_search {
 	// search my bookmark
 	@GetMapping(value = "/myRecipe")
 	public String myRecipe(Model m) {
-		List<Recipe_Bean> searchLove = new ArrayList<Recipe_Bean>();
 		if (session.getAttribute("login_ok") != null) {
 			Member_SignUp mbean = (Member_SignUp) session.getAttribute("login_ok");
 			Integer mem_no = mbean.getMember_no();
 			List<Recipe_Bean> searchAll = service.listOfJavaBean();
 			List<Bookmark_Bean> bookmark = service.listOfBookmark(mem_no);
 			List<Recipe_Bean> allRecipe = new ArrayList<Recipe_Bean>();
+			
 			for (Bookmark_Bean bBean : bookmark) {
 				for (Recipe_Bean rBean : searchAll) {
 					if (bBean.getRec_id().equals(rBean.getRec_id())) {
+						rBean.setMem_name(service.detailBean(rBean.getMember_no()).getName());
 						allRecipe.add(rBean);
 					}
 				}

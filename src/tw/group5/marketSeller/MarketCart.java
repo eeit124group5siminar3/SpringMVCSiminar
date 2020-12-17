@@ -66,8 +66,8 @@ public class MarketCart {
  	}
  	
  //計算購物車內所有商品的小計(每項商品的單價*數量的總和)
- 	public double getTotal(){
- 		double subTotal = 0 ;
+ 	public int getTotal(){
+ 		int subTotal = 0 ;
  		Set<Integer> set = cart.keySet();
  		for(int n : set){
  			int price    = cart.get(n).getPrice();		

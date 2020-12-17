@@ -96,9 +96,7 @@ public class MarketSellerProduct {
 	public String insert(Model model, @ModelAttribute(value = "Insert1") MarketProductTotalBean bean1,
 			
 			@SessionAttribute(value = "login_ok") Member_SignUp mb
-			)throws IllegalStateException, IOException{
-
-		   System.out.println("我要新增 拜託:"+ bean1.getOpenDay());	   
+			)throws IllegalStateException, IOException{   
 		   productService.insert(bean1);
 		return "marketSeller/MarketProductSuccess";
 		}

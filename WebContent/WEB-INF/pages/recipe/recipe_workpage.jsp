@@ -126,7 +126,7 @@ margin-left:-100px;
 <!-- 		</div> -->
 <!-- 	</div> -->
 	<br>
-					<div class="searchPosition" style="float: right;">
+					<div class="searchPosition" >
 						<div> 
 						<form class="form-inline my-2 my-lg-0" id="search"
 							action="javascript:void(0);" method="post">
@@ -253,7 +253,7 @@ margin-left:-100px;
                     	var val=data[i]; 
                          var ingredients_A=val.ingredients_A; 
                          html +=
-                        	 `<div class="col-sm-6 col-md-4 col-lg-4 mix filter-launch">
+                        	 `<div class="col-sm-6 col-md-4 col-lg-4 mix filter-launch"> 
      						<div class="menu-item" style="width:80%;margin:50px">
      							<div class="menu__item-img" >
      							 <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
