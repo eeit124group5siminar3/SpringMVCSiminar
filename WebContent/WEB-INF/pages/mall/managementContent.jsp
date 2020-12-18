@@ -195,12 +195,10 @@ function shelf(event,productStatus){
 			event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
 					}
 		},
-		error : function(data, status) {
-			if(data==1){
-				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm disabled' onclick='shelf(event,0)'>下架</button>";		
-					}else{
-				event.path[1].innerHTML="<button type='button' class='btn btn-primary btn-sm' onclick='shelf(event,1)'>上架</button>";
-						}
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest.status);
+			alert(XMLHttpRequest.readyState);
+			alert(textStatus);
 		}
 	});
 	

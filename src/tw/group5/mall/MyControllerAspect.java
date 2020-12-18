@@ -24,7 +24,7 @@ import tw.group5.mall.service.ProductService;
 public class MyControllerAspect {
 	@Autowired
 	private ProductService service;
-//	
+	
 	@Pointcut(value="execution(* tw.group5.mall.controller.MallShoppingController.showMallContent(..))") 
 	public void pointcutPageProduct() {}  
 	@Pointcut(value="execution(* tw.group5.mall.controller.MallShoppingController.showSingleProduct(..))") 
@@ -41,6 +41,7 @@ public class MyControllerAspect {
 
 	@Before(value = "pointcutPageProduct() || pointcutSingleProduct()||pointcutWishList()")
 	public void changeExpiredProductStatus (JoinPoint joinPoint) {
+		System.err.println("我是路人乙");
 		List<ProductBean> list=service.getExpiredProduct();
 		for(ProductBean bean:list) {
 			bean.setStatus(2);

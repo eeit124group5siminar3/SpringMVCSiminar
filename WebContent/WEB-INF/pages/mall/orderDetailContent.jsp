@@ -100,9 +100,10 @@ function cancelOrder(itemId){
 				$("#statusWord"+itemId).html(data.statusWord);
 				$("#statusTag"+itemId).html(data.statusTagForUser);
 			},
-			error : function(data, status) {
-				$("#statusWord"+itemId).html(data.statusWord);
-				$("#statusTag"+itemId).html(data.statusTagForUser);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 		}

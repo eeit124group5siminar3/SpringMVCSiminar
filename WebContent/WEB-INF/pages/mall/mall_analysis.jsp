@@ -121,10 +121,10 @@
 					$("#productSalesA").addClass("active")
 					$("#analysisContent").html(data);
 				},
-				error : function(data, status) {
-					$("#chooseAnalysis").find("a").removeClass("active");
-					$("#productSalesA").addClass("active")
-					$("#analysisContent").html(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		}
@@ -139,10 +139,10 @@
 					$("#monthlySalesA").addClass("active")
 					$("#analysisContent").html(data);
 				},
-				error : function(data, status) {
-					$("#chooseAnalysis").find("a").removeClass("active");
-					$("#monthlySalesA").addClass("active")
-					$("#analysisContent").html(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		}
@@ -157,10 +157,10 @@
 					$("#productOrdersA").addClass("active")
 					$("#analysisContent").html(data);
 				},
-				error : function(data, status) {
-					$("#chooseAnalysis").find("a").removeClass("active");
-					$("#productOrdersA").addClass("active")
-					$("#analysisContent").html(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		}
