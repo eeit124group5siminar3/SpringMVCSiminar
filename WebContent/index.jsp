@@ -41,8 +41,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="goto-here">
-<<<<<<< HEAD
-=======
+
 	<c:if test="${!empty login_ok}">
 	<jsp:include page="/WEB-INF/pages/Message.jsp" />
 	</c:if>
@@ -82,7 +81,6 @@
 <!-- 				aria-expanded="false" aria-label="Toggle navigation"> -->
 <!-- 				<span class="oi oi-menu"></span> 列表 -->
 <!-- 			</button> -->
->>>>>>> 5743d16b5b5452b92aa6ca8342bbc579f87fc953
 
 <%-- 	<jsp:include page="./header.jsp" /> --%>
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
