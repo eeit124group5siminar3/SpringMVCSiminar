@@ -22,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 import tw.group5.marketSeller.MarketCart;
 import tw.group5.marketSeller.model.MarketOrderBean;
 import tw.group5.marketSeller.model.MarketOrderDetailBean;
+import tw.group5.marketSeller.model.MarketProductTotalBean;
 import tw.group5.marketSeller.service.MarketOrderBeanService;
+import tw.group5.marketSeller.service.MarketProductBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 import tw.group5.marketSeller.model.MarketOrder;
 @Controller
@@ -30,6 +32,8 @@ import tw.group5.marketSeller.model.MarketOrder;
 public class MarketShoppingController {
 	@Autowired
 	private MarketOrderBeanService orderService;
+	@Autowired
+	private MarketProductBeanService productService;
 	
 	//跳轉購物車介面
  @GetMapping(value = "/GoMarketShoppingcart")
@@ -81,14 +85,10 @@ public class MarketShoppingController {
 		for (Integer k : set) {
 			MarketOrderDetailBean oid =new MarketOrderDetailBean();
 			MarketOrder oi =carts.get(k);
-			oid.setProductId(oi.getProductId());
+			MarketProductTotalBean bean = productService.select(oi.getProductId());
+			oid.setMarketProductTotalBean(bean);;
 			oid.setQuantity(oi.getQuantity());
-			oid.setTotalPrice(oi.getPrice());
-			oid.setProductName(oi.getProduct());	
 			oid.setMarketOrderBean(order);
-			oid.setSellerName(oi.getProducterName());
-			oid.setSellerId(oi.getMemberNo());
-			System.out.println("賣家的編號呢   :"+oi.getMemberNo());
 			items.add(oid);
 		}
 		order.setMarketOrderDetailBean(items);

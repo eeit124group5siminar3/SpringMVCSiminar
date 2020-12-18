@@ -34,9 +34,11 @@ public class MarketSellerMall {
 		}
 		String name =mb.getMember_name();
 		String addres =mb.getMember_address();
+		String mail =mb.getMember_email();
 		MarketMallBean insertBean =new MarketMallBean();
 		insertBean.setMallName(name);
 		insertBean.setAddress(addres);
+		insertBean.setMail(mail);
         model.addAttribute("Insert",insertBean);
         
 		return "marketSeller/MarketMallInsert";
