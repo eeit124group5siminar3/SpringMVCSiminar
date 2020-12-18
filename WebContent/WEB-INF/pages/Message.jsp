@@ -198,14 +198,6 @@ $(document).ready(function(){
 				let session_id = data["session_id"];
 				let history_content = data[name];
 					$("#message1").html(history_content)
-
-// 					$("#user_session_id").val(user_session_id);
-// 					$("#session_id").val(session_id);
-					
-// 					if(user_session_id != session_id){
-// 						$("#member_name").val(name+user_rand);
-// 					}
-
 			}
 		});
     

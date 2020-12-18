@@ -18,10 +18,10 @@ public class AnalysisBlog_Controller {
 	private AnalysisBLOG_DAO analysisService;
 	
 	
-	@PostMapping(value = "/testAna")
-	public int testAna() {
-		int count=(int) analysisService.Pageviews("2020-12-17", 30);
-		System.out.println(count);
-		return count;
-	}
+//	@PostMapping(value = "/testAna")
+//	public int testAna() {
+//		int count=(int) analysisService.Pageviews("2020-12-17", 30);
+//		System.out.println(count);
+//		return count;
+//	}
 }

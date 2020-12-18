@@ -38,6 +38,7 @@ import oracle.jdbc.internal.OracleDate;
 import oracle.net.aso.m;
 import oracle.sql.DATE;
 import tw.group5.member_SignUp.model.Member_SignUp;
+import tw.group5.recipe.DAO.AnalysisBLOG_DAO;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
@@ -59,10 +60,13 @@ public class Recipe_blog {
 
 	@Autowired
 	private ServletContext ctx;
+	
+	@Autowired
+	private AnalysisBLOG_DAO analysisService;
 
 	// 連到首頁
 	@GetMapping(value = "/blogPage")
-	public String blogPage(Model m) {
+	public String blogPage(Model m) throws ParseException {
 		List<Blog_Bean> searchAll = service.searchPopular(); // status
 		List<Blog_Bean> searchOpen = new ArrayList<Blog_Bean>();
 		List<Integer> counts = new ArrayList<Integer>();
@@ -85,6 +89,43 @@ public class Recipe_blog {
 		}
 		m.addAttribute("cateList", cateList);
 		m.addAttribute("cateCounts", cateCounts);
+		
+//		int count=(int) analysisService.PageviewsbyDate(5,"2020/12/1","2020/12/31");
+		System.out.println("----------------------------------------------------5555555555555555555");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		Date start = calendar.getTime();
+		System.out.println("start: "+start);
+		Calendar calendarEnd = Calendar.getInstance();
+		calendarEnd.setTime(new Date());
+		calendarEnd.set(Calendar.DAY_OF_MONTH, calendarEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
+//		calendarEnd.set(Calendar.HOUR_OF_DAY, 0);
+//		calendarEnd.set(Calendar.MINUTE, 0);
+//		calendarEnd.set(Calendar.SECOND, 0);
+//		calendarEnd.set(Calendar.MILLISECOND, 0);
+//		calendarEnd.set(Calendar.DAY_OF_MONTH, 30);
+		Date end = calendarEnd.getTime();
+		System.out.println("end: "+end);
+
+		
+//		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd");
+//		Date start=sdf.parse("2020/12/1");
+//		
+//		Date end=sdf.parse("2020/12/31");
+		
+		
+		List<Msg_Blog_Bean> viewsList= analysisService.PageviewsbyDate(30,start,end);
+//		System.out.println(count);
+		for(Msg_Blog_Bean msgBean:viewsList) {
+			System.out.println(msgBean.getName());
+		}
+		System.out.println("--------------------------------------6666666666666666666666666666");
+		
 		return "recipe/recipe_blog";
 	}
 
