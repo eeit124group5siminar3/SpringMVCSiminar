@@ -52,8 +52,8 @@ public class MarketBuyerNotice {
 		@PostMapping(value = "/deleteNotice")
 		public ModelAndView deleteNotice(@RequestParam(value = "noticeId") Integer noticeId,
 				@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb) {
+			noticeService.delete(noticeId);
 			List<MarketNotice> notice = noticeService.selectBuyerNotice(mb.getMember_no());
-            noticeService.delete(noticeId);
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("/marketSeller/MarketProductNotice");
 			mav.addObject("notice",notice);

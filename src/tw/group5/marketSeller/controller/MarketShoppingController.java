@@ -25,7 +25,9 @@ import tw.group5.marketSeller.model.MarketOrderDetailBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
 import tw.group5.marketSeller.service.MarketOrderBeanService;
 import tw.group5.marketSeller.service.MarketProductBeanService;
+import tw.group5.marketSeller.service.MarketSellBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
+import tw.group5.marketSeller.model.MarketMallBean;
 import tw.group5.marketSeller.model.MarketOrder;
 @Controller
 @SessionAttributes(value = {"login_ok","MarketCart"} )
@@ -34,6 +36,8 @@ public class MarketShoppingController {
 	private MarketOrderBeanService orderService;
 	@Autowired
 	private MarketProductBeanService productService;
+	@Autowired
+	private MarketSellBeanService mallService;
 	
 	//跳轉購物車介面
  @GetMapping(value = "/GoMarketShoppingcart")
@@ -86,7 +90,10 @@ public class MarketShoppingController {
 			MarketOrderDetailBean oid =new MarketOrderDetailBean();
 			MarketOrder oi =carts.get(k);
 			MarketProductTotalBean bean = productService.select(oi.getProductId());
-			oid.setMarketProductTotalBean(bean);;
+			System.out.println("a賣家ID出來:"+oi.getSellerId());
+			MarketMallBean bean2 =  mallService.selectid(oi.getSellerId());
+			oid.setMarketProductTotalBean(bean);
+			oid.setMarketMallBean(bean2);
 			oid.setQuantity(oi.getQuantity());
 			oid.setMarketOrderBean(order);
 			items.add(oid);

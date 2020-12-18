@@ -23,8 +23,10 @@ public class MarketOrderDetailBean {
 	private Integer oid;
 	private Integer productId;
 	private Integer quantity;
+	private Integer sellerId;
 	private MarketOrderBean marketOrderBean;
 	private MarketProductTotalBean marketProductTotalBean;
+	private MarketMallBean marketMallBean;
 	
 	@Id @Column(name = "DETAIL_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +62,15 @@ public class MarketOrderDetailBean {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-
+	
+	@Transient
+	@Column(name = "SELLERID")
+	public Integer getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(Integer sellerId) {
+		this.sellerId = sellerId;
+	}
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "OID" ,referencedColumnName = "OID")
 	public MarketOrderBean getMarketOrderBean() {
@@ -77,6 +87,14 @@ public class MarketOrderDetailBean {
 	}
 	public void setMarketProductTotalBean(MarketProductTotalBean marketProductTotalBean) {
 		this.marketProductTotalBean = marketProductTotalBean;
+	}
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "SELLERID" ,referencedColumnName = "MEMBER_NO")
+	public MarketMallBean getMarketMallBean() {
+		return marketMallBean;
+	}
+	public void setMarketMallBean(MarketMallBean marketMallBean) {
+		this.marketMallBean = marketMallBean;
 	}
 	
     
