@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 
+<!-- -------------------Sweetalert引入的CDN---------------------------------------------------------- -->
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+
 <style>
   .billboard{
 
@@ -208,8 +211,9 @@
         </div>
         <!-- /.form group -->
         <div class="form-group form-inline">&emsp;&emsp;&emsp;
-          <form:button readonly="true" class="btn btn-primary py-2 px-3 col-5" value="edit">修改</form:button>&emsp;&emsp;
-          <form:button readonly="true" class="btn btn-primary py-2 px-3 col-5" value="back" onclick="backHome()">回活動管理首頁</form:button>
+          <form:button readonly="true" class="btn btn-primary py-2 px-3 col-5" value="edit" id="update" name ="update">修改</form:button>&emsp;&emsp;
+<!--           <input type="button" class="btn btn-primary py-2 px-3 col-5" value="修改" id="update" name ="update"/>&emsp;&emsp; -->
+          <form:button class="btn btn-primary py-2 px-3 col-5" value="back" onclick="backHome()">回活動管理首頁</form:button>
         </div>
         <!-- /.form group -->        
        </div>
@@ -227,9 +231,13 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- -------------------SweetAlert引入的js---------------------------------------------------------------------- -->	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>			
+
 	
-	<script>
 <!-- -------------------DataTable的javascript---------------------------------------------------------------------- -->
+	<script>
 	$(document).ready(function() {
 	    $('#actFarmer').DataTable();
 	} );
@@ -252,6 +260,8 @@
 	    document.actAdmin.submit();
 	}
 	</script>
+
+
 
 </body>
 </html>

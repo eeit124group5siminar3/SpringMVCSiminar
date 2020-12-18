@@ -41,7 +41,9 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="goto-here">
+	<c:if test="${!empty login_ok}">
 	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 <!-- 	<div class="py-1 bg-primary"> -->
 <!-- 		<div class="container"> -->
