@@ -314,48 +314,48 @@ public class ActOrdDAO {
 	public LinkedHashMap<String, Integer> countTotal(){
 		Session session = sessionFactory.getCurrentSession();	
 		Query q1 = session.createSQLQuery("select sum(totalprice) from actord");
-		Query q2 = session.createSQLQuery("select sum(totalprice) from actord where to_char(to_date(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+		Query q2 = session.createSQLQuery("select sum(totalprice) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
 		Query q3 = session.createSQLQuery("select count(*) from actord");
-		Query q4 = session.createSQLQuery("select count(*) from actord where to_char(to_date(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+		Query q4 = session.createSQLQuery("select count(*) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
 		Query q5 = session.createSQLQuery("select count(*) from actfarmer");
-		Query q6 = session.createSQLQuery("select count(*) from actfarmer where to_char(to_date(actdatesta,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+		Query q6 = session.createSQLQuery("select count(*) from actfarmer where to_date(to_char(actdatesta,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
 		Query q7 = session.createSQLQuery("select sum(ordactnum) from actord");
 		
 		
 		Object obj1 = q1.uniqueResult();
 		Integer ordpriceTP = Integer.parseInt(obj1.toString()); //訂單總金額
 		System.out.println("說一下你後面那一位為什麼不行"+ordpriceTP);
-//		Object obj2 = q2.uniqueResult();
-//		Integer ordpriceMonP = Integer.parseInt(obj2.toString()); //當月訂單總金額
+		Object obj2 = q2.uniqueResult();
+		Integer ordpriceMonP = Integer.parseInt(obj2.toString()); //當月訂單總金額
 		
 		Object obj3 = q3.uniqueResult();
 		Integer ordpriceTC = Integer.parseInt(obj3.toString()); //總訂單數數
-//		Object obj4 = q4.uniqueResult();
-//		Integer ordpriceMonC = Integer.parseInt(obj4.toString()); //當月總訂單數
+		Object obj4 = q4.uniqueResult();
+		Integer ordpriceMonC = Integer.parseInt(obj4.toString()); //當月總訂單數
 		Object obj5 = q5.uniqueResult();
 		Integer actTC = Integer.parseInt(obj5.toString()); //總活動數
-//		Object obj6 = q6.uniqueResult();
-//		Integer actMonC = Integer.parseInt(obj6.toString()); //當月舉辦的活動數
+		Object obj6 = q6.uniqueResult();
+		Integer actMonC = Integer.parseInt(obj6.toString()); //當月舉辦的活動數
 		Object obj7 = q7.uniqueResult();
 		Integer actNumT = Integer.parseInt(obj7.toString()); //總活動數
 
 		
 		ArrayList<Integer> actTotal = new ArrayList<Integer>();
 		actTotal.add(ordpriceTP);
-//		actTotal.add(ordpriceMonP);
+		actTotal.add(ordpriceMonP);
 		actTotal.add(ordpriceTC);
-//		actTotal.add(ordpriceMonC);
+		actTotal.add(ordpriceMonC);
 		actTotal.add(actTC);
-//		actTotal.add(actMonC);
+		actTotal.add(actMonC);
 		actTotal.add(actNumT);
 				
 		LinkedHashMap<String, Integer> actTypeMap = new LinkedHashMap<String, Integer>(); 
 		actTypeMap.put("ordTotalPrice", ordpriceTP);  //訂單總金額
-//		actTypeMap.put("ordMonTolPrice", ordpriceMonP); //當月訂單總金額
+		actTypeMap.put("ordMonTolPrice", ordpriceMonP); //當月訂單總金額
 		actTypeMap.put("ordCounts", ordpriceTC); //總訂單數數
-//		actTypeMap.put("ordMonCounts", ordpriceMonC); //當月總訂單數
+		actTypeMap.put("ordMonCounts", ordpriceMonC); //當月總訂單數
 		actTypeMap.put("actTol", actTC); //總活動數
-//		actTypeMap.put("actMon", actMonC); //當月舉辦的活動數
+		actTypeMap.put("actMon", actMonC); //當月舉辦的活動數
 		actTypeMap.put("actNumT", actNumT); //累積參加人數
 		
 		return actTypeMap;

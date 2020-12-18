@@ -127,8 +127,10 @@
 				success : function(data, status) {
 					$("#manageOrderContent").html(data);
 				},
-				error : function(data, status) {
-					$("#manageOrderContent").html(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		});
@@ -147,8 +149,10 @@
 				success : function(data, status) {
 					$("#orderDetail").html(data);
 				},
-				error : function(data, status) {
-					$("#orderDetail").html(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});			
 			})

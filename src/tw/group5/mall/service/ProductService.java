@@ -19,7 +19,7 @@ public class ProductService {
 
 	@Autowired
 	private ProductDAO dao;
-
+	
 	public int getTotalPages() {
 		return dao.getTotalPages();
 	}
@@ -187,6 +187,10 @@ public class ProductService {
 
 	public List<ProductBean> getExpiredProduct() {
 		return dao.getExpiredProduct();
+	}
+
+	public List<ProductBean> getRecommendedProducts() {
+		return dao.getRecommendedProducts();
 	}
 
 }
