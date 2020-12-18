@@ -20,8 +20,10 @@
 			success : function(data, status) {
 				$("#mainContent").html(data);
 			},
-			error : function(data, status) {
-				$("#mainContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -38,8 +40,10 @@
 			success : function(data, status) {
 				$("#mainContent").html(data);
 			},
-			error : function(data, status) {
-				$("#mainContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -57,8 +61,10 @@
 			success : function(data, status) {
 				$("#mainContent").html(data);
 			},
-			error : function(data, status) {
-				$("#mainContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -74,8 +80,10 @@
 			success : function(data, status) {
 				$("#mainContent").html(data);
 			},
-			error : function(data, status) {
-				$("#mainContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -91,8 +99,10 @@
 			success : function(data, status) {
 				$("#mainContent").html(data);
 			},
-			error : function(data, status) {
-				$("#mainContent").html(data);
+			error :function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -113,8 +123,10 @@
 				success : function(data, status) {
 					$("#mainContent").html(data);
 				},
-				error : function(data, status) {
-					$("#mainContent").html(data);
+				error :function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		}
@@ -156,8 +168,10 @@
 			success : function(data, status) {
 				$("#cartContent").html(data);
 			},
-			error : function(data, status) {
-				$("#cartContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 		var shoppingcartItemNum=$("#shoppingcartItemNum").val();
@@ -186,8 +200,10 @@
 				success : function(data, status) {
 					$("#cartContent").html(data);
 				},
-				error : function(data, status) {
-					$("#cartContent").html(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 	}
@@ -203,8 +219,10 @@
 			success : function(data, status) {
 				$("#orderContent").html(data);
 			},
-			error : function(data, status) {
-				$("#orderContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -220,8 +238,10 @@
 			success : function(data, status) {
 				$("#orderContent").html(data);
 			},
-			error : function(data, status) {
-				$("#orderContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -237,8 +257,10 @@
 			success : function(data, status) {
 				$("#managementContent").html(data);
 			},
-			error : function(data, status) {
-				$("#managementContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -254,8 +276,10 @@
 			success : function(data, status) {
 				$("#manageOrderContent").html(data);
 			},
-			error : function(data, status) {
-				$("#manageOrderContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -276,8 +300,10 @@
 				success : function(data, status) {
 					event.path[1].innerHTML = data;
 				},
-				error : function(data, status) {
-					event.path[1].innerHTML = data;
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		} else {
@@ -290,8 +316,10 @@
 				success : function(data, status) {
 					event.path[1].innerHTML = data;
 				},
-				error : function(data, status) {
-					event.path[1].innerHTML = data;
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		}
@@ -306,8 +334,10 @@
 				success : function(data, status) {
 					event.path[1].innerHTML = data;
 				},
-				error : function(data, status) {
-					event.path[1].innerHTML = data;
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 			}
@@ -348,16 +378,17 @@
 							$("#favorite" + productId).html("<i class='ion-ios-heart'></i>");
 						}
 					},
-					error : function(data, status) {
-						if (data) {
-							$("#favorite" + productId).html("<i class='ion-ios-heart' style='color: red'></i>");
-						} else {
-							$("#favorite" + productId).html("<i class='ion-ios-heart'></i>");			
-									
-						}
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert(XMLHttpRequest.status);
+						alert(XMLHttpRequest.readyState);
+						alert(textStatus);
 					}
 				});
 	}
+	//跳轉指定產品頁面
+		function goToProduct(productId){
+		window.location.replace("../siminar/mall_shop?flag=true&productId="+productId);
+		}
 	//取得上一筆商品
 	function preProduct(productId){
 		$.ajax({
@@ -375,11 +406,10 @@
 				singleProduct(data);
 						}
 			},
-			error : function(data, status) {
-				if(data==null||data==""){
-				}else{
-				singleProduct(data);
-						}
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
@@ -399,11 +429,10 @@
 				singleProduct(data);
 						}
 			},
-			error : function(data, status) {
-				if(data==null||data==""){
-				}else{
-				singleProduct(data);
-						}
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}

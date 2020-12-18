@@ -92,6 +92,15 @@
             </font>
       </td>
     </tr>
+   <tr height="36" >
+    <td >信箱:</td>
+      <td>         
+         <form:input size="35" name="mail" id="mail" value="" path="mail"></form:input> 
+         <font color='red' size='-1'>
+                ${errors.errDescription}
+            </font>
+      </td>
+    </tr>
     <tr height='36'>
         <td >店面圖片</td>
         <td >

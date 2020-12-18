@@ -88,53 +88,10 @@
 							}
 						});
 					},
-					error : function(data, status) {
-						var month = data.month;
-						var sales = data.sales;
-						var salesForAll = data.salesForAll;
-						var productTag = data.productTag;
-						var ctx = document.getElementById('monthlySales')
-								.getContext('2d');
-						$("#productTag").html(productTag);
-						chart = new Chart(ctx, {
-							type : 'bar',
-							data : {
-								// 要呈現的資料
-								labels : month, // 水平軸
-								datasets : [ {
-									label : '我的營業額', // 資料的標題標籤
-									data : sales,
-									maxBarThickness : 50,
-									backgroundColor : 'red',
-									borderColor : 'black',
-									borderWidth : 1
-								}, {
-									label : '全站平均營業額',
-									data : salesForAll,
-									maxBarThickness : 50,
-									backgroundColor : 'blue',
-									borderColor : 'black',
-									borderWidth : 1
-								} ]
-							},
-							options : {
-								title : {
-									display : true,
-									text : '前半年月營業額',
-									fontColor : 'blue',
-									fontSize : '24',
-									position : 'bottom',
-								},
-								legend : { // 資料標籤的位置
-									display : true,
-									position : 'bottom'
-								},
-								animation : {
-									duration : 1000,
-									easing : 'easeOutQuart'
-								}
-							}
-						});
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert(XMLHttpRequest.status);
+						alert(XMLHttpRequest.readyState);
+						alert(textStatus);
 					}
 				})
 			})

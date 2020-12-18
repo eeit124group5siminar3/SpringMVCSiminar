@@ -25,23 +25,23 @@
                            <c:forEach var="item" items="${order}">
 							<tr class="text-center">
 								<td class="image-prod"><div class="img"
-										style="background-image: url(<c:url value='MarketImageServlet?id=${item.productId}&type=PRODUCT' />);">
+										style="background-image: url(<c:url value='MarketImageServlet?id=${item.marketProductTotalBean.marketProductImgBean.productId}&type=PRODUCT' />);">
 									</div></td>
 									
 								<td class="product-name">
-									<p>${item.productName}</p>
+									<p>${item.marketProductTotalBean.productName}</p>
 								</td>
 								<td class="product-name">
-									<p>${item.sellerName}</p>
+									<p>${item.marketProductTotalBean.marketMallBean.mallName}</p>
 								</td>
 								<td class="product-name">
-									<p>${item.totalPrice}元</p>
+									<p>${item.marketProductTotalBean.price}元</p>
 								</td>
 								<td class="product-name">
 									<p>${item.quantity}</p>
 								</td>
 								<td class="product-name">
-									<p>${item.totalPrice*item.quantity}元</p>
+									<p>${item.marketProductTotalBean.price*item.quantity}元</p>
 								</td>
 							</tr>
 							<!-- END TR-->
