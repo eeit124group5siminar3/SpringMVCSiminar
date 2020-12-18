@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <section class="ftco-section carousel" id="top_singleProduct">
+       <div class="container">
        <div align="center">
       <h1>歡迎來到 ${seller.mallName}</h1>
       </div>
@@ -18,7 +19,7 @@
     
     	<div  class="row ftco-animate">
     		<c:forEach var="item" items="${totalProducts}">
-    			<div class="col-md-3 col-lg-2 ftco-animate">
+    			<div class="col-md-3 col-lg-3 ftco-animate">
     				<div class="product" >
     					<a href="#" onclick='goProduct(${item.productId})' class="img-prod"><img class="img-fluid" 
     					 src=<c:url value='MarketImageServlet?id=${item.marketProductImgBean.productId}&type=PRODUCT' />
@@ -50,7 +51,7 @@
     		</c:forEach>
     		 
     		</div>
-    	
+    	</div>
     		<div align="center">
     		<p>
 			 <a href="#" onclick="goback()" class="btn btn-black py-3 px-5">返回</a>

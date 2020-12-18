@@ -30,6 +30,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 
+<!-- -------------------Sweetalert引入的CDN---------------------------------------------------------------------- -->
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 <style>
   .billboard{
 
@@ -116,7 +118,7 @@ a{
 					<br><br>
 					<form action="<c:url value='/actAdminSignD.do'/>" method="POST">
 						<input type="hidden" id="actOrdId" name="actOrdId" value="${actord.actOrdId}"> 
-						<input class="btn btn-primary py-1 px-2 " name="delet" type="submit" value="刪除" >
+						<input class="btn btn-primary py-1 px-2 " id="delete" name="delete" type="button" value="刪除" >
 					</form>
 				</div>
                 </td>
@@ -147,12 +149,39 @@ a{
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	
-	<script>
+<!-- -------------------SweetAlert引入的js---------------------------------------------------------------------- -->	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>		
+	
 <!-- -------------------DataTable的javascript---------------------------------------------------------------------- -->
+	<script>
 	$(document).ready(function() {
 	    $('#actord').DataTable();
 	} );
 	</script>
+	
+	<script>
+	
+	<!-- -------------------SweetAlert引入的javascript---------------------------------------------------------------------- -->	
+	
+	$('input[name=delete]').click(function() {
+		console.log("why you are not here!");
+		Swal.fire({
+			  title: '確定要刪除此筆資料嗎?',
+			  text: "提醒您，一旦刪除無法復原喔!",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '確定刪除!',
+			  cancelButtonText: '取消'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			    $(this).parent().submit();
+			  }
+			})
+	});
+	</script>
+	
 </body>
 
 </html>

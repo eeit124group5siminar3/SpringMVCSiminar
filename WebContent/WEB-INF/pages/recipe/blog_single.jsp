@@ -66,9 +66,9 @@
 					<h2 class="mb-3">${partSearch.title}</h2>
 					<p>${partSearch.content}</p>
 
-<!-- 					<p> -->
-<!-- 						<img src="images/image_1.jpg" alt="" class="img-fluid"> -->
-<!-- 					</p> -->
+					<!-- 					<p> -->
+					<!-- 						<img src="images/image_1.jpg" alt="" class="img-fluid"> -->
+					<!-- 					</p> -->
 					<!--             <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p> -->
 					<!--             <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2> -->
 					<!--             <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p> -->
@@ -91,8 +91,8 @@
 
 					<div class="about-author d-flex p-4 bg-light">
 						<div class="bio align-self-md-center mr-4">
-<!-- 							<img src="images/person_1.jpg" alt="Image placeholder" -->
-<!-- 								class="img-fluid mb-4"> -->
+							<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>"
+								alt="Image placeholder" class="img-fluid mb-4">
 						</div>
 						<div class="desc align-self-md-center">
 							<h3>${detailBean.name}</h3>
@@ -159,9 +159,10 @@
 										<input type="submit" value="訪客留言"
 											class="btn py-3 px-4 btn-primary"
 											onclick="funSend(${partSearch.blog_id})" />
-									
-										<input type="submit" value="登入" onclick="javascript:location.href='<c:url value='login.controller'/>'"
-											class="btn py-3 px-4 btn-primary" /> 
+
+										<input type="submit" value="登入"
+											onclick="javascript:location.href='<c:url value='login.controller'/>'"
+											class="btn py-3 px-4 btn-primary" />
 									</c:if>
 
 									<c:if test="${login_ok!=null}">
@@ -189,10 +190,9 @@
 					<div class="sidebar-box ftco-animate">
 						<h3 class="heading">Categories</h3>
 						<ul class="categories">
-							<li><a href="#">Vegetables <span>(12)</span></a></li>
-							<li><a href="#">Fruits <span>(22)</span></a></li>
-							<li><a href="#">Juice <span>(37)</span></a></li>
-							<li><a href="#">Dries <span>(42)</span></a></li>
+							<c:forEach begin="0" end="${cateList.size()-1}" step="1" var="i">
+								<li><a href="#" onclick="category()">${cateList[i]}<span>(${cateCounts[i]})</span></a></li>
+							</c:forEach>
 						</ul>
 					</div>
 
@@ -218,75 +218,79 @@
 								</h3>
 								<div class="meta">
 									<div>
-										<a href="#"><span class="icon-calendar"></span> ${popular1.date}</a>
+										<a href="#"><span class="icon-calendar"></span>
+											${popular1.date}</a>
 									</div>
 									<div>
-										<a href="#"><span class="icon-person"></span> ${popular1.name}</a>
+										<a href="#"><span class="icon-person"></span>
+											${popular1.name}</a>
 									</div>
 									<div id="chatChange${popular1.blog_id}">
-									<div>
-										<a href="#"><span class="icon-chat"></span> ${chat[0]}</a>
-									</div>
+										<div>
+											<a href="#"><span class="icon-chat"></span> ${chat[0]}</a>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="block-21 mb-4 d-flex">
 							<c:if test="${popular2.fileName!=null}">
-										<a class="blog-img mr-4"
-										style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular2.blog_id}'/>);"></a>
-									</c:if>
-									<c:if test="${popular2.fileName==null}">
-										<a href="./SinglePage?blog_id=${popular2.blog_id}"             
-											class="blog-img mr-4"
-											style="background-image: url('images/沒有.jpg');">
-										</a>
-									</c:if>
+								<a class="blog-img mr-4"
+									style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular2.blog_id}'/>);"></a>
+							</c:if>
+							<c:if test="${popular2.fileName==null}">
+								<a href="./SinglePage?blog_id=${popular2.blog_id}"
+									class="blog-img mr-4"
+									style="background-image: url('images/沒有.jpg');"> </a>
+							</c:if>
 							<div class="text">
 								<h3 class="heading-1">
 									<a href="./SinglePage?blog_id=${popular2.blog_id}">${popular2.title}</a>
 								</h3>
 								<div class="meta">
 									<div>
-										<a href="#"><span class="icon-calendar"></span> ${popular2.date}</a>
+										<a href="#"><span class="icon-calendar"></span>
+											${popular2.date}</a>
 									</div>
 									<div>
-										<a href="#"><span class="icon-person"></span> ${popular2.name}</a>
+										<a href="#"><span class="icon-person"></span>
+											${popular2.name}</a>
 									</div>
 									<div id="chatChange${popular2.blog_id}">
-									<div>
-										<a href="#"><span class="icon-chat"></span> ${chat[1]}</a>
-									</div>
+										<div>
+											<a href="#"><span class="icon-chat"></span> ${chat[1]}</a>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="block-21 mb-4 d-flex">
 							<c:if test="${popular3.fileName!=null}">
-										<a class="blog-img mr-4"
-										style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular3.blog_id}'/>);"></a>
-									</c:if>
-									<c:if test="${popular3.fileName==null}">
-										<a href="./SinglePage?blog_id=${popular3.blog_id}"             
-											class="blog-img mr-4"
-											style="background-image: url('images/沒有.jpg');">
-										</a>
-									</c:if>
+								<a class="blog-img mr-4"
+									style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular3.blog_id}'/>);"></a>
+							</c:if>
+							<c:if test="${popular3.fileName==null}">
+								<a href="./SinglePage?blog_id=${popular3.blog_id}"
+									class="blog-img mr-4"
+									style="background-image: url('images/沒有.jpg');"> </a>
+							</c:if>
 							<div class="text">
 								<h3 class="heading-1">
 									<a href="./SinglePage?blog_id=${popular3.blog_id}">${popular3.title}</a>
 								</h3>
 								<div class="meta">
 									<div>
-										<a href="#"><span class="icon-calendar"></span> ${popular3.date}</a>
+										<a href="#"><span class="icon-calendar"></span>
+											${popular3.date}</a>
 									</div>
 									<div>
-										<a href="#"><span class="icon-person"></span> ${popular3.name}</a>
+										<a href="#"><span class="icon-person"></span>
+											${popular3.name}</a>
 									</div>
 									<div id="chatChange${popular3.blog_id}">
-									<div>
-										<a href="#"><span class="icon-chat"></span> ${chat[2]}</a>
-									</div>
+										<div>
+											<a href="#"><span class="icon-chat"></span> ${chat[2]}</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -341,7 +345,7 @@
 				dataType:"html",
 				data : {
 						"content":content,
-						"blog_id":blog_id
+						"blog_id":blog_id,
 					},
 				success : function(data) {
 					alert('送出成功!');
@@ -356,8 +360,8 @@
 		}
 	}
 		</script>
- 
-		<script type="text/javascript">
+
+	<script type="text/javascript">
 		//     $(function(){
 		//     	var event = arguments.callee.caller.arguments[0] || window.event;// 消除浏览器差异
 		$('#searchInput').keydown(function(event) {
@@ -368,7 +372,7 @@
 					url : "./searchPartOfBlog",
 					dataType : "html",
 					data : {
-						"searchInput" : searchInput
+						"searchInput" : searchInput,
 					},
 					success : function(data) {
 						$("#searchSuccess").html(data);

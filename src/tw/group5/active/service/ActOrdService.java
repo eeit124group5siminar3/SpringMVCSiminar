@@ -107,7 +107,9 @@ public class ActOrdService {
 		return actOrdDAO.countActType();
 	}
 	
-	
+	public LinkedHashMap<String, Integer> countTotal(){
+		return actOrdDAO.countTotal();
+	}
 	
 // =========================分頁=========================================
 	

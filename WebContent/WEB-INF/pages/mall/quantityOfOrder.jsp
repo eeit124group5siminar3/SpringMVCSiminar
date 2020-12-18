@@ -91,55 +91,10 @@
 							}
 						});
 					},
-					error : function(data, status) {
-						var productList = data.productList;
-						var orders = data.orders;
-						var monthTag = data.monthTag;
-						var ctx = document.getElementById('productSales')
-								.getContext('2d');
-						$("#monthTag").html(monthTag);
-						chart = new Chart(ctx, {
-							type : 'horizontalBar',
-							data : {
-								// 要呈現的資料
-								labels : productList, // 水平軸
-								datasets : [ {
-									label : '本月各項商品的訂單數', // 資料的標題標籤
-									data : orders,
-									backgroundColor : [ "#FF0000", "#46A3FF",
-											"#FF9224", "#B766AD", "#FFFF37",
-											"#4DFFFF", "#FF44FF", "#A8FF24",
-											"#B87070", "#796400", "#02C874" ],
-									borderColor : 'black',
-									borderWidth : 1
-								} ]
-							},
-							options : {
-								title : {
-									display : true,
-									text : '單月產品訂單數',
-									fontColor : 'blue',
-									fontSize : '24',
-									position : 'bottom',
-								},
-								legend : { // 資料標籤的位置
-									display : true,
-									position : 'bottom'
-								},
-								scales : {
-									xAxes : [ {
-										ticks : {
-											beginAtZero : true,
-											stepSize: 1
-										}
-									} ]
-								},
-								animation : {
-									duration : 1000,
-									easing : 'easeOutQuart'
-								}
-							}
-						});
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert(XMLHttpRequest.status);
+						alert(XMLHttpRequest.readyState);
+						alert(textStatus);
 					}
 				})
 			})

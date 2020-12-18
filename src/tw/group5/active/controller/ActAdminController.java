@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.event.PostPutFlashValueEvent;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.collections.map.HashedMap;
@@ -98,6 +99,7 @@ public class ActAdminController {
 	@PostMapping(value = "actAdminDelect.do")
 	public String actAdminDelect(@RequestParam(value = "actId")Integer actId,Model model) {
 		Integer id =Integer.valueOf(actId);
+		System.out.println("你有沒有接到參數阿!!不要不刪東西喔"+id);
 		actFarmerService.deletActFarmer(id);
 		return "redirect:/getAllActFarmer.do";
 	}
@@ -166,6 +168,7 @@ public class ActAdminController {
 	
 //======================================  報名訂單分析  =============================================================
 	
+	//訂單類型的比例圖
 	@PostMapping(value = "/actAnalysisType.do")
 	@ResponseBody
 	public LinkedHashMap<String, Object> actAnalysisType() {
@@ -178,5 +181,20 @@ public class ActAdminController {
 		
 		return map;
 	}
+	
+	//取得活動總金額等
+	@RequestMapping(value="/actTotal.do", produces = {"application/json;charset=UTF-8" })
+	@ResponseBody
+	public LinkedHashMap<String, Object> actTotal(){
+		
+		LinkedHashMap<String, Integer> list = null;
+		list = actOrdService.countTotal();
+		LinkedHashMap<String, Object> map = new LinkedHashMap();
+		map.put("list", list);
+		System.out.println(map);
+		
+		return map;
+	}
+
 	
 }
