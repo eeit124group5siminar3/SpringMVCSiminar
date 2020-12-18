@@ -58,10 +58,6 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.getAllImage();
 	}
 	
-//	public List<ProductBean> getProducts(String searchString) {
-//		return rDAO.getProducts(searchString);
-//	}
-	
 	@Override
 	public Bookmark_Bean bookmark(Bookmark_Bean bean){
 		return rDAO.bookmark(bean);
@@ -92,6 +88,15 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.recipeBean(rec_id);
 	}
 	
+	@Override
+	public List<Recipe_Bean> categoryList(String cate){
+		return rDAO.categoryList(cate);
+	}
+	
+	@Override
+	public long categoryCounts(String cate) {
+		return rDAO.categoryCounts(cate);
+	}
 	
 	//個人資料
 	@Override
@@ -175,6 +180,21 @@ public class Recipe_Service implements recipe_Service_interface {
 	@Override
 	public List<Blog_Bean> searchPopular(){
 		return rDAO.searchPopular();
+	}
+	
+	@Override
+	public List<Blog_Bean> categoryBlogList(String cate){
+		return rDAO.categoryBlogList(cate);
+	}
+	
+	@Override
+	public long blogCateCounts(String cate) {
+		return rDAO.blogCateCounts(cate);
+	}
+	
+	@Override
+	public List<String> cateList(){
+		return rDAO.cateList();
 	}
 	
 	//----------------------首頁分頁--------------------------------

@@ -55,6 +55,9 @@
 				<input id="member_name" type="hidden" value="${login_ok.member_name}">
 			</c:if>
 			
+			<input id="user_session_id" type="hidden">
+			<input id="session_id" type="hidden">
+			
 			
 			
 			<script src="https://kit.fontawesome.com/4a5fa9ba76.js" crossorigin="anonymous"></script>
@@ -63,31 +66,35 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
-<script>
-$(document).ready(function(){
-    $(".chat_on").click(function(){
-        $(".Layout").toggle();
-        $(".chat_on").hide(300);
-    });
-    
-       $(".chat_close_icon").click(function(){
-        $(".Layout").hide();
-           $(".chat_on").show(300);
-    });
-    
-})
-</script>
+
 <script>
 $(function(){
 	$("#send_message").on("click",function(){
 		var message = $("#text").val();
 		var date = new Date();
+		var year = date.getFullYear();  //年
+		var m = date.getMonth()+1;  //月
+		var day = date.getDate();  //日
 		var h = date.getHours();  //時
-		var minute = date.getMinutes()  //分
+		var minute = date.getMinutes();  //分
 		if(minute<10){
 			minute = "0"+minute;
 		}
-		$("#message1").append("<div style='text-align:right';>"+message+"<br>"+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+"</div>");
+		$("#message1").append("<div style='text-align:right';>"+message+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>");
+
+		$.ajax({
+			url :"websocket_content.controller",
+			data : {
+				name : $("#member_name").val(),
+				socket : $("#message1").html(),
+			},
+			type : "POST",
+			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+			success : function(data) {
+				console.log(data);
+			}
+		});
+		
 	});
 })
 </script>
@@ -107,8 +114,11 @@ $(function(){
 	
 	var websocket = null;
 	var date = new Date();
+	var year = date.getFullYear();  //年
+	var m = date.getMonth()+1;  //月
+	var day = date.getDate();  //日
 	var h = date.getHours();  //時
-	var minute = date.getMinutes()  //分
+	var minute = date.getMinutes();  //分
 	if(minute<10){
 		minute = "0"+minute;
 	}
@@ -122,11 +132,11 @@ $(function(){
 		}
 		//连接发生错误的回调方法
 		websocket.onerror = function() {
-			setMessageInnerHTML("WebSocket连接发生错误");
+// 			setMessageInnerHTML("WebSocket连接发生错误");
 		};
 		//连接成功建立的回调方法
 		websocket.onopen = function() {
-			setMessageInnerHTML("與客服連線成功");
+// 			setMessageInnerHTML("與客服連線成功");
 		}
 		//接收到消息的回调方法
 		websocket.onmessage = function(event) {
@@ -134,7 +144,7 @@ $(function(){
 		}
 		//连接关闭的回调方法
 		websocket.onclose = function() {
-			setMessageInnerHTML("客服系統已關閉");
+// 			setMessageInnerHTML("客服系統已關閉");
 		}
 		//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
 		window.onbeforeunload = function() {
@@ -142,7 +152,18 @@ $(function(){
 		}
 		//将消息显示在网页上
 		function setMessageInnerHTML(innerHTML) {
-			document.getElementById('message1').innerHTML += innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+h+":"+minute+"</font>"+ '<br/>';
+			document.getElementById('message1').innerHTML += innerHTML + '<br/>'+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+ '<br/>';
+			$.ajax({
+				url :"websocket_content.controller",
+				data : {
+					name : $("#member_name").val(),
+					socket : $("#message1").html(),
+				},
+				type : "POST",
+				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+				}
+			});
 		}
 		//关闭WebSocket连接
 		function closeWebSocket() {
@@ -155,7 +176,33 @@ $(function(){
 			websocket.send(JSON.stringify({'message':message,'role':'管理員','socketId':"A"}));
 		}
 	</script>
+<script>
+$(document).ready(function(){
+    $(".chat_on").click(function(){
+        $(".Layout").toggle();
+        $(".chat_on").hide(300);
+    });
+    
+       $(".chat_close_icon").click(function(){
+        $(".Layout").hide();
+           $(".chat_on").show(300);
+    });
 
+       $.ajax({
+			url :"websocket_content_windows.controller",
+			data : {
+			},
+			type : "POST",
+			success : function(data) {
+				let user_session_id = data["user_session_id"]
+				let session_id = data["session_id"];
+				let history_content = data[name];
+					$("#message1").html(history_content)
+			}
+		});
+    
+})
+</script>
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

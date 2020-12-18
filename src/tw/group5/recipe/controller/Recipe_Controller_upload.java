@@ -59,6 +59,7 @@ public class Recipe_Controller_upload {
 			int day = cal.get(Calendar.DAY_OF_MONTH);
 			String date=year + "-" + month + "-" + day;
 			System.out.println("date: "+date);
+			System.out.println(bean.getCate());
 			bean.setDate(date);
 			service.insert(bean);
 			System.out.println("done");

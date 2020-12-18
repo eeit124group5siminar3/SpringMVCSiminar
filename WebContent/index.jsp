@@ -42,6 +42,46 @@
 </head>
 <body class="goto-here">
 
+	<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
+
+<!-- 	<div class="py-1 bg-primary"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div -->
+<!-- 				class="row no-gutters d-flex align-items-start align-items-center px-md-0"> -->
+<!-- 				<div class="col-lg-12 d-block"> -->
+<!-- 					<div class="row d-flex"> -->
+<!-- 						<div class="col-md pr-4 d-flex topper align-items-center"> -->
+<!-- 							<div -->
+<!-- 								class="icon mr-2 d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-phone2"></span> -->
+<!-- 							</div> -->
+<!-- 							<span class="text">0800-092-000</span> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md pr-4 d-flex topper align-items-center"> -->
+<!-- 							<div -->
+<!-- 								class="icon mr-2 d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-paper-plane"></span> -->
+<!-- 							</div> -->
+<!-- 							<span class="text">service@nonre.com</span> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	<nav -->
+<!-- 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" -->
+<!-- 		id="ftco-navbar"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<a class="navbar-brand" href="index.html">農郁</a> -->
+<!-- 			<button class="navbar-toggler" type="button" data-toggle="collapse" -->
+<!-- 				data-target="#ftco-nav" aria-controls="ftco-nav" -->
+<!-- 				aria-expanded="false" aria-label="Toggle navigation"> -->
+<!-- 				<span class="oi oi-menu"></span> 列表 -->
+<!-- 			</button> -->
+
 <%-- 	<jsp:include page="./header.jsp" /> --%>
 	<jsp:include page="/WEB-INF/pages/header.jsp" />
 	<!-- END nav -->
@@ -141,19 +181,19 @@
 						<div class="col-md-6">
 							<div
 								class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
-								style="background-image: url(images/category-1.jpg);">
+								style="background-image: url(images/category-1.jpg);" onclick="gotoMallByCategory(1)">
 								<div class="text px-3 py-1">
 									<h2 class="mb-0">
-										<a onclick="gotoMallByCategory(1)">葉菜類</a>
+										<a>葉菜類</a>
 									</h2>
 								</div>
 							</div>
 							<div
 								class="category-wrap ftco-animate img d-flex align-items-end"
-								style="background-image: url(images/category-2.jpg);">
+								style="background-image: url(images/category-2.jpg);" onclick="gotoMallByCategory(5)">
 								<div class="text px-3 py-1">
 									<h2 class="mb-0">
-										<a onclick="gotoMallByCategory(5)">水果類</a>
+										<a>水果類</a>
 									</h2>
 								</div>
 							</div>
@@ -164,18 +204,18 @@
 				<div class="col-md-4">
 					<div
 						class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
-						style="background-image: url(images/category-3.jpg);">
+						style="background-image: url(images/category-3.jpg);" onclick="gotoMallByCategory(2)">>
 						<div class="text px-3 py-1">
 							<h2 class="mb-0">
-								<a onclick="gotoMallByCategory(2)">根莖類</a>
+								<a>根莖類</a>
 							</h2>
 						</div>
 					</div>
 					<div class="category-wrap ftco-animate img d-flex align-items-end"
-						style="background-image: url(images/category-4.jpg);">
+						style="background-image: url(images/category-4.jpg);" onclick="gotoMallByCategory(3)">
 						<div class="text px-3 py-1">
 							<h2 class="mb-0">
-								<a onclick="gotoMallByCategory(3)">瓜果類</a>
+								<a>瓜果類</a>
 							</h2>
 						</div>
 					</div>

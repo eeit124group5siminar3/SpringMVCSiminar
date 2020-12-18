@@ -40,16 +40,18 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <style type="text/css">
-#div1{
-  margin: 5px auto;
-  overflow: hidden;
+#div1 {
+	margin: 5px auto;
+	overflow: hidden;
 }
-#img1{
-  cursor: pointer;
-  transition: all 0.6s;
+
+#img1 {
+	cursor: pointer;
+	transition: all 0.6s;
 }
-#img1:hover{
-  transform: scale(1.1);
+
+#img1:hover {
+	transform: scale(1.1);
 }
 </style>
 </head>
@@ -77,31 +79,28 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 ftco-animate">
-						<div class="row">
-					<div id="searchSuccess">
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${searchAll!=null}"> --%>
+					<div class="row">
+						<div id="searchSuccess">
+						<div id="cateChange">
 							<c:forEach begin="0" end="${searchAll.size()-1}" step="1" var="i">
 								<div class="col-md-12 d-flex ftco-animate">
 									<div class="blog-entry align-self-stretch d-md-flex">
-									<c:if test="${searchAll[i].fileName!=null}">
-										<div id="div1">
-									
-										<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"             
-											class="block-20"  id="img1"
-											style="background-image: url(<c:url value='/getBlogImage?blog_id=${searchAll[i].blog_id}'/>);">
-										</a>
-										</div>
-									</c:if>
-									<c:if test="${searchAll[i].fileName==null}">
-									<div id="div1">
-										<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"             
-											class="block-20" id="img1"
-											style="background-image: url('images/沒有.jpg');">
+										<c:if test="${searchAll[i].fileName!=null}">
+											<div id="div1">
 
-										</a>
-										</div>
-									</c:if>
+												<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"
+													class="block-20" id="img1"
+													style="background-image: url(<c:url value='/getBlogImage?blog_id=${searchAll[i].blog_id}'/>);">
+												</a>
+											</div>
+										</c:if>
+										<c:if test="${searchAll[i].fileName==null}">
+											<div id="div1">
+												<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"
+													class="block-20" id="img1"
+													style="background-image: url('images/沒有.jpg');"> </a>
+											</div>
+										</c:if>
 										<div class="text d-block pl-md-4">
 											<div class="meta mb-3">
 												<div>${searchAll[i].date}</div>
@@ -117,7 +116,7 @@
 											<h3 class="heading">
 												<a href="./SinglePage?blog_id=${searchAll[i].blog_id}">${searchAll[i].title}</a>
 											</h3>
-											<p>${BeanToken.content}</p>
+											<%-- 											<p>${BeanToken.content}</p> --%>
 											<p>
 												<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"
 													class="btn btn-primary py-2 px-3">Read more</a>
@@ -127,17 +126,15 @@
 								</div>
 
 							</c:forEach>
-<%-- 							</c:when> --%>
-<%-- 							<c:otherwise> --%>
-<!-- 								<div>123</div> -->
-<%-- 							</c:otherwise> --%>
-<%-- 						</c:choose> --%>
-						
+
+						</div>
 						</div>
 					</div>
 				</div>
 				<!-- .col-md-8 -->
 				<div class="col-lg-4 sidebar ftco-animate">
+					<a class="btn btn-primary py-3 px-4"
+						href="<c:url value='blogEdit'/>">發表文章</a>
 					<div class="sidebar-box">
 						<form action="javascript:void(0);" method="post"
 							class="search-form">
@@ -151,10 +148,9 @@
 					<div class="sidebar-box ftco-animate">
 						<h3 class="heading">Categories</h3>
 						<ul class="categories">
-							<li><a href="#">Vegetables <span>(12)</span></a></li>
-							<li><a href="#">Fruits <span>(22)</span></a></li>
-							<li><a href="#">Juice <span>(37)</span></a></li>
-							<li><a href="#">Dries <span>(42)</span></a></li>
+							<c:forEach begin="0" end="${cateList.size()-1}" step="1" var="i">
+								<li><a href="#" onclick="category('${cateList[i]}')">${cateList[i]}<span>(${cateCounts[i]})</span></a></li>
+							</c:forEach>
 						</ul>
 					</div>
 
@@ -165,19 +161,17 @@
 
 							<div class="block-21 mb-4 d-flex">
 								<c:if test="${searchAll[i].fileName!=null}">
-										<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"             
-											class="blog-img mr-4"
-											style="background-image: url(<c:url value='/getBlogImage?blog_id=${searchAll[i].blog_id}'/>);">
+									<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"
+										class="blog-img mr-4"
+										style="background-image: url(<c:url value='/getBlogImage?blog_id=${searchAll[i].blog_id}'/>);">
 
-										</a>
-									</c:if>
-									<c:if test="${searchAll[i].fileName==null}">
-										<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"             
-											class="blog-img mr-4"
-											style="background-image: url('images/沒有.jpg');">
-
-										</a>
-									</c:if>
+									</a>
+								</c:if>
+								<c:if test="${searchAll[i].fileName==null}">
+									<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"
+										class="blog-img mr-4"
+										style="background-image: url('images/沒有.jpg');"> </a>
+								</c:if>
 								<div class="text">
 									<h3 class="heading-1">
 										<a href="./SinglePage?blog_id=${searchAll[i].blog_id}">${searchAll[i].title}</a>
@@ -248,6 +242,21 @@
 				})
 			}
 		})
+	</script>
+	<script type="text/javascript">
+	function category(cate){
+		console.log('cate: '+cate);
+		$.ajax({
+			type:"post",
+			url:"./chooseBlogCate",
+			data:{"cate":cate},
+			datetype:"html",
+			success:function(response){
+				$("#cateChange").html(response);
+				}
+			
+			});
+		}
 	</script>
 </body>
 </html>

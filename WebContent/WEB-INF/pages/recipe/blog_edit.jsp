@@ -55,6 +55,22 @@
 				
 			</div>
 			<div>
+				<form:label for="inputCate" path="cate" style="font-size: 30px;"
+					class="input-group-text">種類: </form:label>
+				<select class="form-control" required name="cate">
+					<option value="">Open this select menu</option>
+					<option value="米食">米食</option>
+					<option value="麵食">麵食</option>
+					<option value="素食/蔬食">素食/蔬食</option>
+					<option value="炸物">炸物</option>
+					<option value="焗烤">焗烤</option>	
+					<option value="沙拉">沙拉</option>
+					<option value="焗烤">焗烤</option>
+					<option value="家常菜">家常菜</option>
+					<option value="湯">湯</option>
+				</select>
+			</div>
+			<div>
 				<label style="font-size: 30px;" class="input-group-text">封面圖片 :  </label>
 			</div>
 			<br>

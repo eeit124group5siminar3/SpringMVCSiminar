@@ -76,4 +76,15 @@ public interface recipe_Service_interface {
 
 	Member_Detail detailBean(Integer mem_no);
 
+	List<Recipe_Bean> categoryList(String cate);
+
+	long categoryCounts(String cate);
+
+	List<Blog_Bean> categoryBlogList(String cate);
+
+	long blogCateCounts(String cate);
+
+	List<String> cateList();
+
+
 }

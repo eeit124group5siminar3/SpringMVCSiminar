@@ -43,6 +43,8 @@ public class MarketProductDao implements IMarketProductBeanService {
 	}
 	
 	
+	
+	
 	//查詢單筆
 	@Override
 	public MarketProductTotalBean select(int productId) {
