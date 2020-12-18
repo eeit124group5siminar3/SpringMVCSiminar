@@ -68,7 +68,7 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-	//取消商品訂購
+	//取消商品願望清單
 	function reduceFavorite(productId) {
 		$.ajax({
 			url : "WishListContent",
@@ -80,13 +80,15 @@
 			success : function(data, status) {
 				$("#wishListContent").html(data);
 			},
-			error : function(data, status) {
-				$("#wishListContent").html(data);
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
 			}
 		});
 	}
 
-	function goToProduct(productId){
-		window.location.replace("../siminar/mall_shop?flag=true&productId="+productId);
-		}
+// 	function goToProduct(productId){
+// 		window.location.replace("../siminar/mall_shop?flag=true&productId="+productId);
+// 		}
 </script>

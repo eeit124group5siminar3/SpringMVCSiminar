@@ -3,8 +3,12 @@ package tw.group5.mall.dao;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.persistence.Parameter;
+import javax.servlet.jsp.jstl.core.IteratedExpression;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -419,11 +423,24 @@ public class ProductDAO {
 		return preProductId;
 	}
 
+// 取得過期商品
 	public List<ProductBean> getExpiredProduct() {
 		Session session = sessionFactory.getCurrentSession();
 		String hql="from ProductBean where status !=2 and expiredDate < sysdate";
 		Query<ProductBean> query=session.createQuery(hql,ProductBean.class);
 		List<ProductBean> list =query.list();
+		return list;
+	}
+	
+// 取的推薦商品
+	public List<ProductBean> getRecommendedProducts() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql="from ProductBean where status= 1 order by views/shelfTime desc";
+		Query<ProductBean> query=session.createQuery(hql,ProductBean.class);
+		query.setFirstResult(0);
+		query.setMaxResults(8);
+		List<ProductBean> list = query.list();
+		System.err.println(list);
 		return list;
 	}
 

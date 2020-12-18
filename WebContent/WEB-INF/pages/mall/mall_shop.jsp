@@ -111,11 +111,16 @@
 	<script>
 		$(document).ready(function() {
 			var url = window.location.href;//獲取當前瀏覽器的url
-			index = url.indexOf("flag")
+			index = url.indexOf("flag");
+			categoryIndex=url.indexOf("goto");
 			if(index !=-1) {
 				var start = url.indexOf("productId");
 				var productId = url.substring(start + "productId".length+1);
 				singleProduct(productId);
+			}else if(categoryIndex!=-1){
+				var start = url.indexOf("category");
+				var category = url.substring(start + "category".length+1);
+				productCategory(category);
 			}else{
 			var	categoryId=0;
 			if(${mall_categoryId!=null}){
@@ -133,8 +138,10 @@
 				success : function(data, status) {
 					$("#mainContent").html(data);
 				},
-				error : function(data, status) {
-					$("#mainContent").html(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 			}

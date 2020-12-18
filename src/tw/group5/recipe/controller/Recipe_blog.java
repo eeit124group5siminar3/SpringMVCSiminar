@@ -38,6 +38,7 @@ import oracle.jdbc.internal.OracleDate;
 import oracle.net.aso.m;
 import oracle.sql.DATE;
 import tw.group5.member_SignUp.model.Member_SignUp;
+import tw.group5.recipe.DAO.AnalysisBLOG_DAO;
 import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
@@ -59,10 +60,13 @@ public class Recipe_blog {
 
 	@Autowired
 	private ServletContext ctx;
+	
+	@Autowired
+	private AnalysisBLOG_DAO analysisService;
 
 	// 連到首頁
 	@GetMapping(value = "/blogPage")
-	public String blogPage(Model m) {
+	public String blogPage(Model m) throws ParseException {
 		List<Blog_Bean> searchAll = service.searchPopular(); // status
 		List<Blog_Bean> searchOpen = new ArrayList<Blog_Bean>();
 		List<Integer> counts = new ArrayList<Integer>();
@@ -85,6 +89,7 @@ public class Recipe_blog {
 		}
 		m.addAttribute("cateList", cateList);
 		m.addAttribute("cateCounts", cateCounts);
+		
 		return "recipe/recipe_blog";
 	}
 
