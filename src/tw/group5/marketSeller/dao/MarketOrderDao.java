@@ -34,11 +34,22 @@ public class MarketOrderDao implements IMarketOrderBeanService  {
 	}
 	
 	@Override
-	public List<MarketOrderDetailBean> selectSellerOrder(Integer mid){
-		Query<MarketOrderDetailBean> query =getSession().createQuery("From MarketOrderDetailBean where SELLERID=" + mid,MarketOrderDetailBean.class);
-		List<MarketOrderDetailBean> list =query.list();
+	public List<MarketOrderBean> selectSellerOrder(Integer mid){
+		String sql="select * from MARKET_ORDER where  OID in (select OID from MARKET_ORDER_DETAIL where SELLERID = :sellerID)";
+//		String sql = "From MarketOrderBean where marketOrderDetailBean =" + mid + ")";
+		Query<MarketOrderBean> query =getSession().createSQLQuery(sql);
+		System.out.println("賣家的ID在這"+mid);
+		query.setParameter("sellerID", mid);
+		List<MarketOrderBean> list =query.list();
 		return list;
 	}
+	
+//	@Override
+//	public List<MarketOrderDetailBean> selectSellerOrder(Integer mid){
+//		Query<MarketOrderDetailBean> query =getSession().createQuery("From MarketOrderDetailBean where SELLERID=" + mid,MarketOrderDetailBean.class);
+//		List<MarketOrderDetailBean> list =query.list();
+//		return list;
+//	}
 	
 	@Override
 	public List<MarketOrderDetailBean> selectBuyerOrderDetail(Integer oid){
