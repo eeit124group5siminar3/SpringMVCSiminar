@@ -103,9 +103,10 @@
 				success : function(data, status) {
 					$("#cartContent").html(data);
 				},
-				error : function(data, status) {
-					$("#cartContent").html(data);
-					console.log(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		});

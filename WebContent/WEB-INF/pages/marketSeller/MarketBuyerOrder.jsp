@@ -74,6 +74,7 @@
 							<th>收件者姓名</th>
 							<th>收件地址</th>
 							<th>連絡電話</th>
+							<th>總價格</th>
 							<th></th>
 
 						</tr>
@@ -91,10 +92,12 @@
 
 								<td class="price">${item.address}</td>
 								<td class="price">${item.cellphone}</td>
+								<td class="price">${item.allPrice}元</td>
 								<td class="price">
-								<a href="<c:url value='#' />"
-				                 class="btn btn-primary py-3 px-4">詳細資料</a>
-				                    </td>
+                                <a href="#" data-toggle="modal" data-target="#orderDetail" 
+		                        data-whatever="${item.oid}"
+		                        class="btn btn-primary py-2 px-3">詳細資料</a>
+				                </td>
 
 							</tr>
 							<!-- END TR-->
@@ -117,6 +120,32 @@
 		</div>
 	</div>	
 </div>
+
+
+
+
+<div class="modal fade" id="orderDetail" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true" >
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content" style="width:1000px">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">詳細資料</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="showOrderDetail" style="width: 1000px">
+
+				</div>
+				<div class="modal-footer">
+					
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<jsp:include page="../footer.jsp" />
@@ -150,6 +179,28 @@
 	<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
 	<jsp:include page="../js/Market.jsp" />
+	
+	<script>
+
+$('#orderDetail').on('show.bs.modal', function (event) {
+	var aHref = $(event.relatedTarget);
+	var oId = aHref.data('whatever');
+	$.ajax({
+		url : "showOrderDetail",
+		type : "POST",
+		data : {
+			"oId":oId	
+		},
+		datatype : "html",
+		success : function(data, status) {
+			$("#showOrderDetail").html(data);
+		},
+		error : function(data, status) {
+			$("#showOrderDetail").html(data);
+		}
+	});			
+	})
+</script>
 
 </body>
 </html>

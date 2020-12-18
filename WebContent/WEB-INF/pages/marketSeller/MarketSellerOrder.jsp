@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> --%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-<title>農郁-訂單管理</title>
+<title>農郁-市集菜籃</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,70 +19,106 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
 	rel="stylesheet">
-
 <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="css/animate.css">
-
 <link rel="stylesheet" href="css/owl.carousel.min.css">
 <link rel="stylesheet" href="css/owl.theme.default.min.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
-
 <link rel="stylesheet" href="css/aos.css">
-
 <link rel="stylesheet" href="css/ionicons.min.css">
-
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mall.css">
+<style>
+.col-lg-4 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 100%;
+	flex: 0 0 100%;
+	max-width: 100%;
+}
+</style>
 </head>
 <body class="goto-here">
-
-	<div class="modal fade" id="manageOrder" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content" style="width: 640px">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">訂單詳細資料</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id="orderDetail" style="width: 640px">
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">關閉</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_1.jpg');" id="product_top">
+		style="background-image: url('images/bg_1.jpg');">
 		<div class="container">
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
+						<span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span>
 					</p>
-					<h1 class="mb-0 bread">訂單管理</h1>
+					<h1 class="mb-0 bread">查看預購單</h1>
 				</div>
 			</div>
 		</div>
 	</div>
-	<section class="ftco-section" id="manageOrderContent"></section>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 ftco-animate">
+			<div class="cart-list">
+<%-- 				<a href="#" onclick="reduceItem(${anEntry.value.productId})"><span --%>
+<!-- 					class="ion-ios-close"></span></a> -->
+				<table class="table">
+					<thead class="thead-primary">
+						<tr class="text-center">
+							<th>購買日期</th>
+							<th>收件者姓名</th>
+							<th>收件地址</th>
+							<th>連絡電話</th>
+							<th>購買商品</th>
+							<th>數量</th>
+							<th></th>
+
+						</tr>
+					</thead>
+					
+					<tbody>
+						<c:forEach var="item"
+							items="${list}">
+							<tr class="text-center">
+								<td class="product-remove">${item.marketOrderBean.buyTime}"</td>
+								<td>
+									<h3>${item.marketOrderBean.buyer}</h3>
+								
+								</td>
+
+								<td class="price">${item.marketOrderBean.address}</td>
+								<td class="price">${item.marketOrderBean.cellphone}</td>
+								<td class="price">${item.productName}</td>
+								<td class="price">${item.quantity}</td>
+							</tr>
+							<!-- END TR-->
+						</c:forEach>
+						<!-- END TR-->
+					</tbody>
+					
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+		<div class="cart-total mb-3">
+		     <p>
+			<a href="<c:url value='/' />"
+				class="btn btn-primary py-3 px-4">回首頁</a> <a
+				href="<c:url value='/MarketProduct.selectAll' />"
+				class="btn btn-primary py-3 px-4">商品管理</a>
+		     </p>
+		</div>
+	</div>	
+</div>
+
 	<jsp:include page="../footer.jsp" />
+
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
@@ -111,53 +147,7 @@
 	<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 	<!-- 	<script src="js/google-map.js"></script> -->
 	<script src="js/main.js"></script>
-	<jsp:include page="../js/mall.jsp" />
-
-	<script>
-		$(document).ready(function() {
-			var pageNo=1;
-			if(${manageOrder_pageNo!=null}){
-				pageNo=`${manageOrder_pageNo}`;				
-					}
-			$.ajax({
-				url : "ManageOrderContent",
-				type : "POST",
-				data : {"manageOrder_pageNo":pageNo},
-				datatype : "html",
-				success : function(data, status) {
-					$("#manageOrderContent").html(data);
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest.status);
-					alert(XMLHttpRequest.readyState);
-					alert(textStatus);
-				}
-			});
-		});
-		
-
-		$('#manageOrder').on('show.bs.modal', function (event) {
-			var tr = $(event.relatedTarget);
-			var itemId = tr.data('whatever');
-			$.ajax({
-				url : "OrderForm",
-				type : "POST",
-				data : {
-					"itemId":itemId	
-				},
-				datatype : "html",
-				success : function(data, status) {
-					$("#orderDetail").html(data);
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest.status);
-					alert(XMLHttpRequest.readyState);
-					alert(textStatus);
-				}
-			});			
-			})
-			
-	</script>
+	<jsp:include page="../js/Market.jsp" />
 
 
 </body>

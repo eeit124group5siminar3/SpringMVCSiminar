@@ -121,7 +121,7 @@
 									<form:input type="text" id="bNo" name="bNo"
 										class="form-control"
 										placeholder="選填"
-										value="${login_ok.member_gui_number}" path="bNo" />
+										value="${login_ok.member_gui_number}" path="bNo" pattern="^[0-9]{8}$"/>
 								</div>
 							</div>
 						</div>

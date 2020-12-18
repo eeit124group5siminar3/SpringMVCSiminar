@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,7 @@ import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
+//@Transactional
 @SessionAttributes(value = { "login_ok", "login_guest", "ShoppingCart" })
 public class MallShoppingController {
 
@@ -82,6 +84,7 @@ public class MallShoppingController {
 		mav.addObject("mall_totalPages", totalPages);
 		mav.addObject("products_DPP", list);
 		mav.addObject("categoryBean", map);
+		System.err.println("我是路人甲");
 		return mav;
 	}
 
@@ -214,6 +217,17 @@ public class MallShoppingController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/wishListContent");
 		mav.addObject("productWishList", list);
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+	
+// 顯示推薦商品
+	@PostMapping(value = "/RecommendedProducts")
+	public ModelAndView recommendedProducts(){
+		List<ProductBean> list=service.getRecommendedProducts();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/mall/recommendedProducts");
+		mav.addObject("recommendedProducts", list);
 		mav.setStatus(HttpStatus.OK);
 		return mav;
 	}

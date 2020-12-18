@@ -149,7 +149,7 @@ a{
 				
                	<td>
                 <div class="form-inline justify-content-center">
-                	<form action="<c:url value='/actAdminPreUpdate.do'/>" method="POST">
+                	<form action="<c:url value='/actOrdPreUpdate.do'/>" method="POST">
                 		<input type="hidden" id="actOrdId" name="actOrdId" value="${actOrd.actOrdId}"> 
 						<input type="hidden" id="actId" name="actId" value="${actOrd.actFarmer.actId}"> 
 						<input class="btn btn-primary py-2 px-3"name="update" type="submit" value="修改" >

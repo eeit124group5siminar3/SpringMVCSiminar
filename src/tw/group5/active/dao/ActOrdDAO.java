@@ -1,13 +1,18 @@
 package tw.group5.active.dao;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.sound.midi.Soundbank;
@@ -15,6 +20,7 @@ import javax.sound.midi.Soundbank;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -22,7 +28,9 @@ import org.springframework.stereotype.Repository;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
 import oracle.net.aso.q;
+import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActOrd;
+import tw.group5.active.model.ActOrdNum;
 
 @Repository
 public class ActOrdDAO {
@@ -181,6 +189,16 @@ public class ActOrdDAO {
 		return form;	
 	}
 
+	//計算報名人數做多的活動前五筆
+	public List<ActFarmer> getPopularAct(){
+		Session session = sessionFactory.getCurrentSession();
+		List list = session.createSQLQuery("select * from(" 
+				+"select f.actid, f.actname,f.actDateSta,f.actDateEnd, count(o.actordid),sum(o.ordactnum) as ordactsum from actord o ,actfarmer f where o.actid = f.actid GROUP BY f.actid, f.actname,f.actDateSta,f.actDateEnd order by count(o.actordid) DESC" 
+				+")where ROWNUM <=5").setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
+		System.out.println(list);
+		return list;
+	}
+	
 	
 // =========================  廠商CRUD  ==========================================
 	

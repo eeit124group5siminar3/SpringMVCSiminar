@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.group5.active.dao.ActOrdDAO;
+import tw.group5.active.model.ActFarmer;
 import tw.group5.active.model.ActOrd;
 @Transactional
 @Service
@@ -81,6 +82,11 @@ public class ActOrdService {
 		return actOrdDAO.updateActOrd(actOrd);
 	}	
 	
+	//計算報名人數做多的活動前五筆
+	public List<ActFarmer> getPopularAct(){
+		return actOrdDAO.getPopularAct();
+	}
+	
 // =========================管理員==========================================
 
 	//查詢所有報名訂單
@@ -128,4 +134,7 @@ public class ActOrdService {
 		actOrdDAO.setMemPageNo(memPageNo);
 	}
 	
+	public void setRecordsPerPage(Integer recordsPerPage) {
+		actOrdDAO.setRecordsPerPage(recordsPerPage);
+	}
 }

@@ -24,8 +24,10 @@ public class MarketOrderDetailBean {
 	private Integer productId;
 	private Integer quantity;
 	private Integer totalPrice;
+	private String  productName;
+	private String sellerName;
+	private Integer sellerId;
 	private MarketOrderBean marketOrderBean;
-	private MarketProductTotalBean marketProductTotalBean;
 	
 	@Id @Column(name = "DETAIL_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +39,7 @@ public class MarketOrderDetailBean {
 	}
 	
 	@Transient
-//	@Column(name = "OID")
+	@Column(name = "OID")
 	public Integer getOid() {
 		return oid;
 	}
@@ -45,7 +47,7 @@ public class MarketOrderDetailBean {
 		this.oid = oid;
 	}
 	
-	@Transient
+	
 	@Column(name = "PRODUCTID")
 	public Integer getProductId() {
 		return productId;
@@ -70,6 +72,29 @@ public class MarketOrderDetailBean {
 		this.totalPrice = totalPrice;
 	}
 	
+	@Column(name ="PRODUCT_NAME")
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	
+	@Column(name = "SELLER_NAME")
+	public String getSellerName() {
+		return sellerName;
+	}
+	
+	@Column(name = "SELLERID")
+	public Integer getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(Integer sellerId) {
+		this.sellerId = sellerId;
+	}
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "OID" ,referencedColumnName = "OID")
 	public MarketOrderBean getMarketOrderBean() {
@@ -79,15 +104,6 @@ public class MarketOrderDetailBean {
 		this.marketOrderBean = marketOrderBean;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "PRODUCT_ID")
-	public MarketProductTotalBean getMarketProductTotalBean() {
-		return marketProductTotalBean;
-	}
-	public void setMarketProductTotalBean(MarketProductTotalBean marketProductTotalBean) {
-		this.marketProductTotalBean = marketProductTotalBean;
-	}
-	
-	
+
 	
 }
