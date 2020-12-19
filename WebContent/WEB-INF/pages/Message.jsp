@@ -24,7 +24,7 @@
           </div>
           
           <div class="Input Input-blank">
-          <input id="text" type="text" class="Input_field" placeholder="請輸入訊息..." style="height: 20px;" />
+          <input id="text" type="text" class="Input_field" placeholder="請輸入訊息..." style="height: 20px;" onkeydown="_key()" />
           
 <!--             <textarea class="Input_field" placeholder="Send a message..." style="height: 20px;"></textarea> -->
            
@@ -55,6 +55,9 @@
 				<input id="member_name" type="hidden" value="${login_ok.member_name}">
 			</c:if>
 			
+			<input id="user_session_id" type="hidden">
+			<input id="session_id" type="hidden">
+			
 			
 			
 			<script src="https://kit.fontawesome.com/4a5fa9ba76.js" crossorigin="anonymous"></script>
@@ -67,6 +70,7 @@
 <script>
 $(function(){
 	$("#send_message").on("click",function(){
+			
 		var message = $("#text").val();
 		var date = new Date();
 		var year = date.getFullYear();  //年
@@ -91,7 +95,19 @@ $(function(){
 				console.log(data);
 			}
 		});
-		
+		$.ajax({
+			url :"admin_websocket_content.controller",
+			data : {
+				name : $("#member_name").val(),
+				socket : message,
+			},
+			type : "POST",
+			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+			success : function(data) {
+				console.log(data);
+			}
+		});
+		$("#text").val("");
 	});
 })
 </script>
@@ -172,6 +188,48 @@ $(function(){
 			//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
 			websocket.send(JSON.stringify({'message':message,'role':'管理員','socketId':"A"}));
 		}
+		function _key() { 
+			if(event.keyCode ==13) {
+				var message = $("#text").val();
+				var date = new Date();
+				var year = date.getFullYear();  //年
+				var m = date.getMonth()+1;  //月
+				var day = date.getDate();  //日
+				var h = date.getHours();  //時
+				var minute = date.getMinutes();  //分
+				if(minute<10){
+					minute = "0"+minute;
+				}
+				$("#message1").append("<div style='text-align:right';>"+message+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>");
+
+				$.ajax({
+					url :"websocket_content.controller",
+					data : {
+						name : $("#member_name").val(),
+						socket : $("#message1").html(),
+					},
+					type : "POST",
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(data) {
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url :"admin_websocket_content.controller",
+					data : {
+						name : $("#member_name").val(),
+						socket : message,
+					},
+					type : "POST",
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(data) {
+						console.log(data);
+					}
+				});
+				$("#text").val("");
+			send(); 
+			}
+		} 
 	</script>
 <script>
 $(document).ready(function(){
@@ -191,21 +249,13 @@ $(document).ready(function(){
 			},
 			type : "POST",
 			success : function(data) {
+				let user_session_id = data["user_session_id"]
+				let session_id = data["session_id"];
 				let history_content = data[name];
 					$("#message1").html(history_content)
-
-					var rand="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789";
-					var user_rand='';
-					for (var i=0;i<5;i++){
-						user_rand += rand.charAt(Math.floor(Math.random()*rand.length))
-					}
-
-					if(member_name == "訪問者"){
-						$("#member_name").val(data[name]);
-					}
-					
 			}
 		});
+		
     
 })
 </script>

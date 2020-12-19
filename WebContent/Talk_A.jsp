@@ -16,7 +16,21 @@
 
 </head>
 <body>
-      <div class="inbox_msg">
+
+      
+      
+      
+     <div class="container">
+	<div class="row">
+	 <div id="Smallchat" style="width:1000px;">
+    <div class="Layout Layout-open-me Layout-expand Layout-right" style="background-color: #3F51B5;color: rgb(255, 255, 255);opacity: 5;border-radius: 10px;">
+      <div class="Messenger_messenger">
+        <div class="Messenger_header" style="background-color: rgb(22, 46, 98); color: rgb(255, 255, 255);">
+          <h4 class="Messenger_prompt" style="color:white">聯絡客服</h4> <span class="chat_close_icon"><i class="fa fa-window-close" aria-hidden="true"></i></span> </div>
+        <div class="Messenger_content">
+        
+        
+              <div class="inbox_msg">
         <div class="inbox_people">
           <div class="headind_srch">
             <div class="recent_heading">
@@ -35,7 +49,19 @@
           </div>
         </div>
       </div>
+        
+
+        </div>
+      </div>
+    </div>
+    <!--===============CHAT ON BUTTON STRART===============-->
+    <div class="chat_on"> <span class="chat_on_icon"><i class="fa fa-comments" aria-hidden="true"></i></span> </div>
+    <!--===============CHAT ON BUTTON END===============-->
+  </div>
+	</div>
+</div>
       
+      			<script src="https://kit.fontawesome.com/4a5fa9ba76.js" crossorigin="anonymous"></script>
       
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -98,7 +124,7 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
       </div>`)
 
       //動態新增每個使用者的DIV
-      $(".msg_history").append("<div style='display:none' class='received_msg' id=abc"+member_name+"></div>");
+      $(".msg_history").append("<div style='display:none;color:black' class='received_msg' id=abc"+member_name+"></div>");
 	      
       
 	}
@@ -137,7 +163,7 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 	//訊息送出新增我方訊息
 	$("#send_message").on("click",function(){
 		var message_content = $("#text").val();
-		$("#abc"+click_member_name).append("<div style='text-align:right';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>"+"<br>");
+		$("#abc"+click_member_name).append("<div style='text-align:right;color:black';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>"+"<br>");
 
 		$("."+click_member_name).find("p").html(message_content);
 		
@@ -172,6 +198,19 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 		//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
 		websocket.send(JSON.stringify({'message':message,'role':click_member_name,'socketId':"A"}));
 	}
+</script>
+<script>
+$(document).ready(function(){
+    $(".chat_on").click(function(){
+        $(".Layout").toggle();
+        $(".chat_on").hide(300);
+    });
+    
+       $(".chat_close_icon").click(function(){
+        $(".Layout").hide();
+           $(".chat_on").show(300);
+    });
+})
 </script>
     
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

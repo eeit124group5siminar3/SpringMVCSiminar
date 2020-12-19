@@ -13,6 +13,7 @@ import tw.group5.marketSeller.model.MarketOrderBean;
 import tw.group5.marketSeller.model.MarketOrderDetailBean;
 import tw.group5.marketSeller.model.MarketProductTotalBean;
 import tw.group5.marketSeller.service.IMarketOrderBeanService;
+import tw.group5.util.SendMail;
 
 @Repository("MarketOrderDao")
 public class MarketOrderDao implements IMarketOrderBeanService  {
@@ -27,17 +28,28 @@ public class MarketOrderDao implements IMarketOrderBeanService  {
 	
 	@Override
 	public List<MarketOrderBean> selectBuyerOrder(Integer mid){
-		Query<MarketOrderBean> query =getSession().createQuery("From MarketOrderBean where BUYERID=" + mid, MarketOrderBean.class);
+		Query<MarketOrderBean> query =getSession().createQuery("From MarketOrderBean where BUYERID=" + mid+" ORDER BY OID DESC", MarketOrderBean.class);
 		List<MarketOrderBean> list =query.list();
 		return list;
 	}
 	
 	@Override
-	public List<MarketOrderDetailBean> selectSellerOrder(Integer mid){
-		Query<MarketOrderDetailBean> query =getSession().createQuery("From MarketOrderDetailBean where SELLERID=" + mid,MarketOrderDetailBean.class);
-		List<MarketOrderDetailBean> list =query.list();
+	public List<MarketOrderBean> selectSellerOrder(Integer mid){
+		String sql="select * from MARKET_ORDER where  OID in (select OID from MARKET_ORDER_DETAIL where SELLERID = :sellerID)";
+//		String sql = "From MarketOrderBean where marketOrderDetailBean =" + mid + ")";
+		Query<MarketOrderBean> query =getSession().createSQLQuery(sql);
+		System.out.println("賣家的ID在這"+mid);
+		query.setParameter("sellerID", mid);
+		List<MarketOrderBean> list =query.list();
 		return list;
 	}
+	
+//	@Override
+//	public List<MarketOrderDetailBean> selectSellerOrder(Integer mid){
+//		Query<MarketOrderDetailBean> query =getSession().createQuery("From MarketOrderDetailBean where SELLERID=" + mid,MarketOrderDetailBean.class);
+//		List<MarketOrderDetailBean> list =query.list();
+//		return list;
+//	}
 	
 	@Override
 	public List<MarketOrderDetailBean> selectBuyerOrderDetail(Integer oid){
@@ -62,11 +74,17 @@ public class MarketOrderDao implements IMarketOrderBeanService  {
 	
 	public MarketProductTotalBean updateStock(MarketOrderDetailBean mib) {
 		Session session = sessionFactory.getCurrentSession();
-		MarketProductTotalBean pBean=(MarketProductTotalBean) session.get(MarketProductTotalBean.class, mib.getProductId());
+		MarketProductTotalBean pBean=(MarketProductTotalBean) session.get(MarketProductTotalBean.class, mib.getMarketProductTotalBean().getProductId());
 		int stock =pBean.getQuantity();
 		pBean.setQuantity(stock-mib.getQuantity());
 		if (stock-mib.getQuantity()==0) {
-			pBean.setPutOut(3);
+			String who = pBean.getMarketMallBean().getMallName(); //會員名稱
+			String email = pBean.getMarketMallBean().getMail(); //會員E-mail
+			String productName = pBean.getProductName(); 
+			String title = "農郁預購系統通知";
+			String text= who + "您好:<br>"
+					+"您的商品" + productName + "庫存為0了<br>";
+			new SendMail(email, title, text);
 		}
 		return pBean;
 	}

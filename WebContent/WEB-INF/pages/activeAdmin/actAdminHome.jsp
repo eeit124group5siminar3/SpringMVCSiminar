@@ -31,11 +31,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 
 <!-- -------------------Sweetalert引入的CDN---------------------------------------------------------------------- -->
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.12.5/sweetalert2.css" integrity="sha512-sdBlqIXiZQy6Z6WJXrCb6sQ3v1DF0x6qQghP56taypKGGuru3ANBhSFLePvcolfP8xCzVoNvhP8Smm29EH7eMQ==" crossorigin="anonymous" /> -->
- <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
-        <script src="https://unpkg.com/promise-polyfill"></script>
-        <link rel="stylesheet" href="sweetalert2.min.css">
 <style>
   .billboard{
 
@@ -124,9 +121,9 @@ a{
 						<input class="btn btn-primary py-1 px-2"name="update" type="submit" value="修改" >
 					</form>
 					&emsp;
-					<form action="<c:url value='/actAdminDelect.do'/>" method="POST">
+					<form action="<c:url value='/actAdminDelect.do'/>" method="POST" name="de">
 						<input type="hidden" id="actId" name="actId" value="${actFarmer.actId}"> 
-						<input class="btn btn-primary py-1 px-2 " id= "delete" name="delete" type="submit" value="刪除" >
+						<input class="btn btn-primary py-1 px-2 " id="delete" name="delete" type="button" value="刪除" >
 					</form>
 				</div>
                 </td>
@@ -155,8 +152,8 @@ a{
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	
 <!-- -------------------SweetAlert引入的js---------------------------------------------------------------------- -->	
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>		
+	
 <!-- -------------------DataTable的javascript---------------------------------------------------------------------- -->
 	<script>
 	$(document).ready(function() {
@@ -165,26 +162,24 @@ a{
 	</script>
 <!-- -------------------SweetAlert引入的javascript---------------------------------------------------------------------- -->	
 	<script>
-	$("#delete").click(function() {
-		swal({
-		title: "您確定要刪除嗎？",
-		text: "您確定要刪除這條資料？",
-		type: "warning",
-		showCancelButton: true,
-		closeOnConfirm: false,
-		confirmButtonText: "是的，我要刪除",
-		confirmButtonColor: "#ec6c62"
-		}, function() {
-		$.ajax({
-		url: "do.php",
-		type: "DELETE"
-		}).done(function(data) {
-		swal("操作成功!", "已成功刪除資料！", "success");
-		}).error(function(data) {
-		swal("OMG", "刪除操作失敗了!", "error");
-		});
-		});
-		});
+	
+	$('input[name=delete]').click(function() {
+		console.log("why you are not here!");
+		Swal.fire({
+			  title: '確定要刪除此筆資料嗎?',
+			  text: "提醒您，一旦刪除無法復原喔!",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '確定刪除!',
+			  cancelButtonText: '取消'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					 $(this).parent().submit();
+				  }
+			})
+	});
 	
 	</script>
 </body>

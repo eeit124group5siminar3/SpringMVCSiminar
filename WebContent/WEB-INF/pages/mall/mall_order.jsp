@@ -126,8 +126,10 @@
 				success : function(data, status) {
 					$("#orderContent").html(data);
 				},
-				error : function(data, status) {
-					$("#orderContent").html(data);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});
 		});
@@ -169,10 +171,10 @@
 					$("#statusTag"+itemId).html(data.statusTagForUser);
 					$("#statusWord"+itemId).html(data.statusWord);
 				},
-				error : function(data, status) {
-					$("#score").html(data.thankyou);
-					$("#statusTag"+itemId).html(data.statusTagForUser);
-					$("#statusWord"+itemId).html(data.statusWord);
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
 				}
 			});	
 				}		

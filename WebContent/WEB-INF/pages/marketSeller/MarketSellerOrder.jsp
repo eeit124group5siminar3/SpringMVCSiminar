@@ -82,19 +82,18 @@
 					</thead>
 					
 					<tbody>
-						<c:forEach var="item"
-							items="${list}">
+						<c:forEach var="item" items="${list}">
 							<tr class="text-center">
-								<td class="product-remove">${item.marketOrderBean.buyTime}"</td>
+<%-- 								<td class="product-remove">${item.buyer}"</td> --%>
 								<td>
-									<h3>${item.marketOrderBean.buyer}</h3>
+									<h3>${item.buyer}</h3>
 								
 								</td>
 
-								<td class="price">${item.marketOrderBean.address}</td>
-								<td class="price">${item.marketOrderBean.cellphone}</td>
-								<td class="price">${item.productName}</td>
-								<td class="price">${item.quantity}</td>
+<%-- 								<td class="price">${item.marketOrderBean.address}</td> --%>
+<%-- 								<td class="price">${item.marketOrderBean.cellphone}</td> --%>
+<%-- 								<td class="price">${item.marketProductTotalBean.productName}</td> --%>
+<%-- 								<td class="price">${item.quantity}</td> --%>
 							</tr>
 							<!-- END TR-->
 						</c:forEach>

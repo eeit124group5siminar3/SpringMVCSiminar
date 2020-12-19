@@ -145,8 +145,7 @@ public class ActFarmerDAO {
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
 		count = (int) longNumber;
-		return count;
-		
+		return count;		
 	}
 	
 	
@@ -201,7 +200,7 @@ public class ActFarmerDAO {
 	// 查詢單筆資料ByName
 	public List<ActFarmer> selectName(String actName){
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from ActFarmer where actName like?1";
+		String hql = "from ActFarmer where actName like?1 and actLock=1 order by actId" ;
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(1, "%"+actName+"%");
 		List<ActFarmer> list = query.getResultList();
@@ -212,7 +211,7 @@ public class ActFarmerDAO {
 	public List<ActFarmer> selectNamePage(String actName){
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ActFarmer where actName like?1";
+		String hql = "from ActFarmer where actName like?1 and actLock=1 order by actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(1, "%"+actName+"%");
 		query.setFirstResult(startRecordNo);

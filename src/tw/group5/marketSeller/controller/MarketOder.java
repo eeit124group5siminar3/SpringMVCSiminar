@@ -66,7 +66,9 @@ public class MarketOder {
 			return "Member_SignUp/Member_Login";
 		}
 		Integer mid  = mb.getMember_no();
-		List<MarketOrderDetailBean> bean = service.selectSellerOrder(mid);
+		System.out.println("哭阿 數字呢"+mid);
+		List<MarketOrderBean> bean = service.selectSellerOrder(mid);
+
 		m.addAttribute("list",bean);
 		return "marketSeller/MarketSellerOrder";
 	}

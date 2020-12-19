@@ -128,6 +128,7 @@ public class MarketHome {
 		marketOrder.setProduct(pBean.getProductName());
 		marketOrder.setPrice(pBean.getPrice());
         marketOrder.setStock(pBean.getQuantity());
+        marketOrder.setSellerId(pBean.getMarketMallBean().getMemberNo());
         marketOrder.setQuantity(0);
         if (cart == null) {
 			cart =new MarketCart();

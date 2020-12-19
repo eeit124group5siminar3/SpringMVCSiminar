@@ -17,6 +17,8 @@ public interface IMarketOrderBeanService {
 
 	List<MarketOrderDetailBean> selectBuyerOrderDetail(Integer oid);
 
-	List<MarketOrderDetailBean> selectSellerOrder(Integer mid);
+	List<MarketOrderBean> selectSellerOrder(Integer mid);
+
+//	List<MarketOrderDetailBean> selectSellerOrder(Integer mid);
 
 }
