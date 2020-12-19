@@ -34,8 +34,9 @@ public class DemoDispatcherServletInitializer extends AbstractAnnotationConfigDi
 	CharacterEncodingFilter characterEncodingFilter=new CharacterEncodingFilter();
 	characterEncodingFilter.setEncoding("UTF-8");
 	characterEncodingFilter.setForceEncoding(true);
-	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
-	return new Filter[] {characterEncodingFilter,openSessionInViewFilter,new Member_Cookie()};
+//	Filter openSessionInViewFilter=new OpenSessionInViewFilter();
+//	return new Filter[] {characterEncodingFilter,openSessionInViewFilter,new Member_Cookie()};
+	return new Filter[] {characterEncodingFilter,new Member_Cookie()};
 	}
 
 	@Override

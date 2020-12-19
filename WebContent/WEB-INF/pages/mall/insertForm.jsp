@@ -16,7 +16,7 @@
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">價格<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="priceS" type="text" id="priceS" path="priceS" size='4' required="required"/> <font
+					name="priceS" type="text" id="priceS" path="priceS" size='4' required="required" pattern="^[1-9]|[1-9][0-9]*$"/> <font
 				color='red' size='-1'> ${ErrMsg.errPrice} </font></td>
 		</tr>
 		<tr>
@@ -24,19 +24,19 @@
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">上架期<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
 					name="shelfTimeS" type="text" id="shelfTimeS" path="shelfTimeS"
-					size='3' required="required"/>天 <font color='red' size='-1'>
+					size='3' required="required" pattern="^[1-9]|[1-9][0-9]*$"/>天 <font color='red' size='-1'>
 					${ErrMsg.errShelfTime} </font></td>
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">庫存<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="stockS" type="text" id="stockS" path="stockS" size='4' required="required"/> <font
+					name="stockS" type="text" id="stockS" path="stockS" size='4' required="required" pattern="^[1-9]|[1-9][0-9]*$"/> <font
 				color='red' size='-1'> ${ErrMsg.errStock} </font></td>
 		</tr>
 		<tr>
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">內含數量<sup style="color:red">*必填</sup></td>
 			<td style="padding-top: 0; padding-bottom: 5px; width: 120px"><form:input
-					name="contentS" type="text" id="contentS" path="contentS" size='4' required="required"/>
+					name="contentS" type="text" id="contentS" path="contentS" size='4' required="required" pattern="^[1-9]|[1-9][0-9]*$"/>
 				<Font color='red' size='-1'> ${ErrMsg.errContent} </Font></td>
 			<td align="center"
 				style="padding-top: 0; padding-bottom: 5px; width: 120px">數量單位<sup style="color:red">*必填</sup></td>

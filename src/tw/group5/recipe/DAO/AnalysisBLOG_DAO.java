@@ -40,12 +40,13 @@ public class AnalysisBLOG_DAO {
 		Session session = sessionFactory.getCurrentSession();
 //		String hql="select * from Msg_Blog_Bean where msg_date between :startDate and :endDate"; (select * from Msg_Blog_Bean where blog_id=:blog_id)
 //		String hql="select count(*) from Msg_Blog_Bean where msg_date in (SELECT to_char(msg_date,'YYYY/MM/DD') from Msg_Blog_Bean where blog_id=:blog_id group by msg_date)";
-		String hql2="SELECT * FROM Msg_Blog WHERE msg_date between ? AND ? AND blog_id=? ORDER BY msg_date  ";
-		Query<Msg_Blog_Bean> query=session.createSQLQuery(hql2);
-		query.setParameter(3,blog_id);
-		query.setParameter(1,startDate);
-		query.setParameter(2,endDate);
+		String hql="FROM Msg_Blog_Bean WHERE date between :start AND :end AND blog_id=:blog_id ORDER BY msg_date ";
+		Query<Msg_Blog_Bean> query=session.createQuery(hql);
+		query.setParameter("blog_id",blog_id);
+		query.setParameter("start",startDate);
+		query.setParameter("end",endDate);
 		List<Msg_Blog_Bean> list=query.list();
 		return list;
 	}
+	
 }

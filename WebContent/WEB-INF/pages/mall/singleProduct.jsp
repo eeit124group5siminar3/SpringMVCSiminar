@@ -90,7 +90,7 @@
 				<div style="font-size=16px;font-weight: bold;">
 				<p>生產者:${selectedProduct.producterName}</p>
 				<p>上架日期:${selectedProduct.addedDate}</p>
-				<p>保質期:${selectedProduct.shelfTime}天</p>
+				<p>購買期限:${selectedProduct.expiredDateString}</p>
 				<p>${selectedProduct.content}${selectedProduct.unit}</p>
 				<p>${selectedProduct.description}</p>
 				</div>

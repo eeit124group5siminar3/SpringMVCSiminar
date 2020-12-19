@@ -45,6 +45,7 @@ public class MarketMallBean {
 	private String mallDescription;
 	private Integer mallStatus;
 	private String pickupTime;
+	private String mail;
 	private MultipartFile multipartFile;
     private Set<MarketProductTotalBean> marketProductTotalBean =
             new HashSet<MarketProductTotalBean>(0);
@@ -133,6 +134,15 @@ public class MarketMallBean {
 
 	public void setMallStatus(Integer mallStatus) {
 		this.mallStatus = mallStatus;
+	}
+	
+	@Column(name = "EMAIL")
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "marketMallBean", cascade = CascadeType.ALL)
