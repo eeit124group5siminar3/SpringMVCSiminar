@@ -286,7 +286,7 @@
 
 			</div>
 			<hr>
-			<label 	>步驟五</label>
+			<label class="input-group-text" style="font-size:20px;">步驟五</label>
 			<div align="center" class="wrap">
 				<div style="width: 50%" class="wrap1">
 					<div>

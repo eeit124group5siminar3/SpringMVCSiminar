@@ -83,7 +83,7 @@
 						<a class="dropdown-item"  style="font-size: 15px"
 							href="<c:url value='frontPage.controller'/>">食譜</a> 
 <!-- 						<a class="dropdown-item" -->
-<%-- 							href="<c:url value='uploadPage.controller'/>">上傳食譜</a>  --%>
+<%-- 							href="<c:url value='analysisPage'/>">分析圖表</a>  --%>
 <!-- 							<a -->
 <!-- 							class="dropdown-item" -->
 <%-- 							href="<c:url value='updatePage.controller'/>">我的食譜</a>  --%>
