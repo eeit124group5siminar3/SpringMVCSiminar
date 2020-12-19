@@ -124,7 +124,7 @@
 <script type="text/javascript">
 var currentPage = 1;
 var totalPages;
-var searchString=$("#searchString").val();
+console.log(searchString);
 function list(){
 	$.get({
 	url:"${pageContext.request.contextPath}/actFarmerList.do/"+currentPage,
@@ -177,9 +177,12 @@ function list(){
 }
 
 function searchlist(){
+	var searchString=$("#searchString").val();
+	var currentPage = 1;
+	var totalPages;
 	$.post({
 	url:"${pageContext.request.contextPath}/actFarmerListSearch.do/"+currentPage,
-	data:{searchString:searchString},
+	data:{"searchString":searchString},
 	success:function(response){ 
 		console.log(response);
 		let data = response.data;
@@ -206,21 +209,21 @@ function searchlist(){
 		totalPages=response.totalPages;
 		content = `
         <li>
-			<div id="blfirst"><a href="javascript:pagechange('first')"> 
+			<div id="blfirst"><a href="javascript:pagechangeP('first')"> 
 			<img border='0' alt='第一頁' height='30' width='30' src='./images/first-icon.png' /> </a></div>
 	
 		</li>
         <li>
-        	<div id="blprev"><a href="javascript:pagechange('pre')">
+        	<div id="blprev"><a href="javascript:pagechangeP('pre')">
 			<img border='0' alt='前一頁' height='30' width='30' src='./images/prev-icon.png' /></a></div>
 		</li>
 		<li>\${currentPage} / \${totalPages}</li>
 		<li>
-			<div id="blnext"><a href="javascript:pagechange('next')">
+			<div id="blnext"><a href="javascript:pagechangeP('next')">
 			<img border='0' alt='下一頁' height='30' width='30' src='./images/next-icon.png'/> </a></div>
 		</li>
 		<li>
-			<div id="bllast"><a href="javascript:pagechange('last')">
+			<div id="bllast"><a href="javascript:pagechangeP('last')">
 			<img border='0' alt='最末頁' height='30' width='30' src='./images/last-icon.png' /> </a></div>
 		</li>`;
 		$('#page_id').html(content);
@@ -256,6 +259,32 @@ function pagechange(value){
 	}
 }
 
+function pagechangeP(value){	
+	if(value=='first'){
+		currentPage=1;
+		searchlist();
+	}else if(value =='pre'){
+		if(currentPage>1){
+			currentPage--;
+			searchlist();
+		}else{
+			currentPage=1;
+			searchlist();
+		}		
+	}
+	else if(value =='next'){
+		if(currentPage<totalPages){
+			currentPage++;
+			searchlist();
+		}else{
+			currentPage=totalPages;
+			searchlist();
+		}	
+	}else{
+		currentPage=totalPages;
+		searchlist();
+	}
+}
 
 </script>
 </body>
