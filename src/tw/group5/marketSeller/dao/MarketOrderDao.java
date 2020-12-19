@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,21 +36,23 @@ public class MarketOrderDao implements IMarketOrderBeanService  {
 	
 	@Override
 	public List<MarketOrderBean> selectSellerOrder(Integer mid){
-		String sql="select * from MARKET_ORDER where  OID in (select OID from MARKET_ORDER_DETAIL where SELLERID = :sellerID)";
+		Query queryOID = getSession().createSQLQuery("select OID from MARKET_ORDER_DETAIL where SELLERID = :sellerID");
+		queryOID.setParameter("sellerID", mid);
+		List resultList = queryOID.getResultList();
+		String OIDs = resultList.toString().replace("[", "").replace("]", "");
+		String sql="from MarketOrderBean where OID in ("+OIDs+")";
 //		String sql = "From MarketOrderBean where marketOrderDetailBean =" + mid + ")";
-		Query<MarketOrderBean> query =getSession().createSQLQuery(sql);
-		System.out.println("賣家的ID在這"+mid);
-		query.setParameter("sellerID", mid);
+		Query<MarketOrderBean> query =getSession().createQuery(sql);
 		List<MarketOrderBean> list =query.list();
 		return list;
 	}
 	
-//	@Override
-//	public List<MarketOrderDetailBean> selectSellerOrder(Integer mid){
-//		Query<MarketOrderDetailBean> query =getSession().createQuery("From MarketOrderDetailBean where SELLERID=" + mid,MarketOrderDetailBean.class);
-//		List<MarketOrderDetailBean> list =query.list();
-//		return list;
-//	}
+	@Override
+	public List<MarketOrderDetailBean> selectSellerOrderDetail(Integer mid){
+		Query<MarketOrderDetailBean> query =getSession().createQuery("From MarketOrderDetailBean where SELLERID=" + mid,MarketOrderDetailBean.class);
+		List<MarketOrderDetailBean> list =query.list();
+		return list;
+	}
 	
 	@Override
 	public List<MarketOrderDetailBean> selectBuyerOrderDetail(Integer oid){

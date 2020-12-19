@@ -16,6 +16,8 @@ public interface IMarketNoticeService {
 
 	MarketNotice selectOne(int mId);
 
+	List<MarketNotice> sendEmail(Integer mid);
+
 //	MarketNotice selectOne(int productId, int mid);
 
 }

@@ -9,16 +9,18 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import tw.group5.mall.ShoppingCart;
 import tw.group5.marketSeller.MarketCart;
 import tw.group5.marketSeller.model.MarketOrderBean;
 import tw.group5.marketSeller.model.MarketOrderDetailBean;
@@ -59,7 +61,22 @@ public class MarketShoppingController {
     mav.setViewName("/marketSeller/MarketBuyerCart");
     mav.addObject("marketCart",marketCart);
 	 return mav;
-  }
+ }
+// 
+//刪除購物車內物件
+	@PostMapping(value = "/DeleteCart")
+	public ModelAndView deleteOrderItem(@SessionAttribute(value = "MarketCart", required = false) MarketCart marketCart,
+			@RequestParam(value = "productId") Integer productId) {
+		marketCart.deleteOrder(productId);
+		ModelAndView mav = new ModelAndView();
+		Integer shoppingcartItemNum=marketCart.getItemNumber();
+		mav.setViewName("/marketSeller/MarketBuyerCart");
+		mav.addObject("marketCart", marketCart);
+		mav.addObject("ShoppingCartItemNum", shoppingcartItemNum);
+		mav.setStatus(HttpStatus.OK);
+		return mav;
+	}
+ 
  
 //建立新訂單
 	@GetMapping(value = "/Market_checkout")

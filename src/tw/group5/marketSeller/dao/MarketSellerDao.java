@@ -67,6 +67,9 @@ public class MarketSellerDao implements IMarketSellBeanService {
 	//所有賣家(顯示資料)
 	@Override
 	public List<MarketMallBean> selectAllmall(Integer page,Integer showData){
+		
+			
+		
 		if (page == null) {
 			page = 1;
 		}
@@ -80,7 +83,15 @@ public class MarketSellerDao implements IMarketSellBeanService {
 			.setReadOnly(true) //DB分頁
 			.getResultList();
 			return list;			
-
+		 }
+	
+	@Override
+		public List<MarketMallBean> selectmallname(String mallName){
+				
+				Query<MarketMallBean> query =getSession().createQuery("From MarketMallBean where MALL_NAME like '%"+mallName +"%'", MarketMallBean.class);
+					List<MarketMallBean> list =query.list();
+					return list;			
+	 
 	}
 	// 總共幾筆資料
 	@Override
