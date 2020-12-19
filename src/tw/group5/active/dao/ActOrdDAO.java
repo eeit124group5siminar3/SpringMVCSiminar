@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.Random;
 
 import javax.sound.midi.Soundbank;
 
@@ -314,87 +315,97 @@ public class ActOrdDAO {
 	public LinkedHashMap<String, Integer> countTotal(){
 		Session session = sessionFactory.getCurrentSession();	
 		Query q1 = session.createSQLQuery("select sum(totalprice) from actord");
-		Query q2 = session.createSQLQuery("select sum(totalprice) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+//		Query q2 = session.createSQLQuery("select sum(totalprice) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_date(sysdate,'MM')");
+//		Query q2 = session.createSQLQuery("select sum(totalPrice) from actord where ordtime between '2020-12-01' and '2020-12-31' ");
 		Query q3 = session.createSQLQuery("select count(*) from actord");
-		Query q4 = session.createSQLQuery("select count(*) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+//		Query q4 = session.createSQLQuery("select count(*) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_date(sysdate,'MM')");
 		Query q5 = session.createSQLQuery("select count(*) from actfarmer");
-		Query q6 = session.createSQLQuery("select count(*) from actfarmer where to_date(to_char(actdatesta,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+//		Query q6 = session.createSQLQuery("select count(*) from actfarmer where to_date(to_char(actdatesta,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_date(sysdate,'MM')");
 		Query q7 = session.createSQLQuery("select sum(ordactnum) from actord");
 		
-		
+//		System.out.println("=============================================="+q2);
 		Object obj1 = q1.uniqueResult();
 		Integer ordpriceTP = Integer.parseInt(obj1.toString()); //訂單總金額
 		System.out.println("說一下你後面那一位為什麼不行"+ordpriceTP);
-		Object obj2 = q2.uniqueResult();
-		Integer ordpriceMonP = Integer.parseInt(obj2.toString()); //當月訂單總金額
+//		Object obj2 = q2.uniqueResult();
+//		System.out.println("=============================================="+obj2);
+//		Integer ordpriceMonP = Integer.parseInt(obj2.toString()); //當月訂單總金額
+		
 		
 		Object obj3 = q3.uniqueResult();
 		Integer ordpriceTC = Integer.parseInt(obj3.toString()); //總訂單數數
-		Object obj4 = q4.uniqueResult();
-		Integer ordpriceMonC = Integer.parseInt(obj4.toString()); //當月總訂單數
+//		Object obj4 = q4.uniqueResult();
+//		Integer ordpriceMonC = Integer.parseInt(obj4.toString()); //當月總訂單數
 		Object obj5 = q5.uniqueResult();
 		Integer actTC = Integer.parseInt(obj5.toString()); //總活動數
-		Object obj6 = q6.uniqueResult();
-		Integer actMonC = Integer.parseInt(obj6.toString()); //當月舉辦的活動數
+//		Object obj6 = q6.uniqueResult();
+//		Integer actMonC = Integer.parseInt(obj6.toString()); //當月舉辦的活動數
 		Object obj7 = q7.uniqueResult();
 		Integer actNumT = Integer.parseInt(obj7.toString()); //總活動數
 
 		
 		ArrayList<Integer> actTotal = new ArrayList<Integer>();
 		actTotal.add(ordpriceTP);
-		actTotal.add(ordpriceMonP);
+//		actTotal.add(ordpriceMonP);
 		actTotal.add(ordpriceTC);
-		actTotal.add(ordpriceMonC);
+//		actTotal.add(ordpriceMonC);
 		actTotal.add(actTC);
-		actTotal.add(actMonC);
+//		actTotal.add(actMonC);
 		actTotal.add(actNumT);
 				
 		LinkedHashMap<String, Integer> actTypeMap = new LinkedHashMap<String, Integer>(); 
 		actTypeMap.put("ordTotalPrice", ordpriceTP);  //訂單總金額
-		actTypeMap.put("ordMonTolPrice", ordpriceMonP); //當月訂單總金額
+//		actTypeMap.put("ordMonTolPrice", ordpriceMonP); //當月訂單總金額
 		actTypeMap.put("ordCounts", ordpriceTC); //總訂單數數
-		actTypeMap.put("ordMonCounts", ordpriceMonC); //當月總訂單數
+//		actTypeMap.put("ordMonCounts", ordpriceMonC); //當月總訂單數
 		actTypeMap.put("actTol", actTC); //總活動數
-		actTypeMap.put("actMon", actMonC); //當月舉辦的活動數
+//		actTypeMap.put("actMon", actMonC); //當月舉辦的活動數
 		actTypeMap.put("actNumT", actNumT); //累積參加人數
 		
 		return actTypeMap;
 		
 	}
 	
+//	每個月
+//	public 
+	
+	
+	
+	
+	
 	
 	// =========================Random==========================================
-//	public long random(long begin,long end){ 
-//		   long rtn = begin + (long)(Math.random() * (end - begin));
-//		   if(rtn == begin || rtn == end){ 
-//		   return random(begin,end); 
-//		   } 
-//		   return rtn; 
-//		   } 
+	public long random(long begin,long end){ 
+		   long rtn = begin + (long)(Math.random() * (end - begin));
+		   if(rtn == begin || rtn == end){ 
+			   return random(begin,end); 
+		   } 
+		   	return rtn; 
+		   } 
 		  
 	//===生成指定範圍內的亂數時間(年月日)==============
 		  
-//		  public List<String> randomDate(String bgDate,String edDate) {
-//		   try {
-//		   SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//		   Date start = format.parse(bgDate);//轉換字串 開始日期 
-//		   Date end = format.parse(edDate);//轉換字串 結束日期
-//		    if(start.getTime() >= end.getTime()){ 
-//		     return null; // getTime()表示返回自 1970 年 1 月 1 日 00:00:00 GMT 以來此 Date 物件表示的毫秒數。 
-//		    }
-//		   long date = random(start.getTime(),end.getTime()); 
-//		   Date d=new Date(date);
-//		   
-//		   List<String> dateList = new ArrayList<String>();
-//		   String dateText = format.format(d);
-//		   dateList.add(dateText);
-//		   return dateList;
-//		    }catch (Exception e) {
-//		     e.printStackTrace(); 
-//		    }
-//		   return null;
-//		  }
-//	
+		  public List<String> randomDate(String bgDate,String edDate) {
+		   try {
+		   SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		   Date start = format.parse(bgDate);//轉換字串 開始日期 
+		   Date end = format.parse(edDate);//轉換字串 結束日期
+		    if(start.getTime() >= end.getTime()){ 
+		     return null; // getTime()表示返回自 1970 年 1 月 1 日 00:00:00 GMT 以來此 Date 物件表示的毫秒數。 
+		    }
+		   long date = random(start.getTime(),end.getTime()); 
+		   Date d=new Date(date);
+		   
+		   List<String> dateList = new ArrayList<String>();
+		   String dateText = format.format(d);
+		   dateList.add(dateText);
+		   return dateList;
+		    }catch (Exception e) {
+		     e.printStackTrace(); 
+		    }
+		   return null;
+		  }
+	
 	
 
 

@@ -1,6 +1,8 @@
 package tw.group5.active.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -111,6 +113,16 @@ public class ActOrdService {
 		return actOrdDAO.countTotal();
 	}
 	
+	
+// =========================隨機冠DB=========================================
+		
+	public long random(long begin,long end){ 
+		 return actOrdDAO.random(begin, end); 
+	} 
+	
+	 public List<String> randomDate(String bgDate,String edDate) {
+		 return actOrdDAO.randomDate(bgDate, edDate);
+	}
 // =========================分頁=========================================
 	
 	//計算該訂單總共有幾頁

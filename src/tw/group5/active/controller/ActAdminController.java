@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.faces.event.PostPutFlashValueEvent;
 import javax.sql.rowset.serial.SerialBlob;
@@ -196,5 +197,53 @@ public class ActAdminController {
 		return map;
 	}
 
+	//隨機灌訂單================================================================================
+//	 @GetMapping(path="/initRandomOrder")
+//	 public String randomOrder() {
+//	  
+//	  int smin = 5;  //活動最小值
+//	  int smax = 47;  //活動最大值
+//	  int priceMin = 100;  //價格
+//	  int priceMax = 2000; //價格
+////	  int rbPriceMin = 350;  //價格
+////	  int rbPriceMax = 2000; //價格
+////	  int rbmin = 271; //單車
+////	  int rbmax = 397; //單車
+//	  int mmin = 63; //會員
+//	  int mmax = 81; //會員
+//	  int countMax = 6; //數量最大
+//	  int countMin = 1; //數量最小
+//	  Random random = new Random();
+//	  
+//	  for(int i=1;i<50;i++) {
+//	   
+//	   //先創建ORDERID 
+//	   for(int s = 1005;s<=1035;s++) {
+//	   String actOrdId =; //起始店家(每家都有)
+//	   
+//	   int st1 = random.nextInt(smax)%(smax-smin+1) + smin; //隨機生成的店家數字
+//	   int st2 = random.nextInt(smax)%(smax-smin+1) + smin; //隨機生成的店家數字
+//	   int totalPrice = random.nextInt(priceMax)%(priceMax-priceMin+1) + priceMin; //隨機生成的價格
+//	   //String priceStr = String.valueOf(price);
+//	   int member = random.nextInt(mmax)%(mmax-mmin+1) + mmin; //隨機生成的會員
+//	   String memNo = String.valueOf(member);
+//	   String date = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(0); //隨機生成日期
+//	   String bgDate = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(1);
+//	   String edDate = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(1);
+//	   String selectBgTime = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(2);
+//	   String selectEdTime = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(2);
+//	   
+//	   String 
+//	   
+//	   ActOrd actOrd = actOrdService.;//篩選起始店家物件
+//	   RbOrder order = new RbOrder(memberId,bgStore,edStore,bgDate,edDate,selectBgTime,selectEdTime,totalPrice,date);
+//	   rbOrderService.insertRbOrder(order);
+//	   
+//	  
+//	   
+//	   }
+//	  }         
+//	  return "rental/orderSuccess";
+//	 }
 	
 }

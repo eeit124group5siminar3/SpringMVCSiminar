@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import oracle.net.aso.m;
 import tw.group5.active.model.ActFarmer;
 import tw.group5.active.service.ActFarmerService;
@@ -79,13 +80,31 @@ public class ActHomeController {
 	}
 	
 	
-	@RequestMapping(value = "actFarmerListSearch.do")
+	//換到搜尋頁
+	@RequestMapping(value = "actFarmerPreListSearch.do")
+	public String searchAct(Model model,HttpServletRequest rq,
+		@RequestParam(name="searchString",required = false) String searchString) {
+		
+		if(!searchString.isEmpty()) {
+			System.out.println("========================="+searchString);
+			rq.setAttribute("searchString", searchString);
+			return "active/actFarmerHomeSearch";
+		}else {
+			return "active/actFarmerHome";
+		}
+	}
+	
+	//取得搜尋活動列表
+	@RequestMapping(value = "actFarmerListSearch.do/{pageNo}")
 	@ResponseBody
 	public Map<String, Object> actFarmerListSearch(Model model,
 			@PathVariable(name = "pageNo", required = false) Integer pageNo,
+			@RequestParam(name="searchString",required = false) String searchString,
 			HttpServletRequest rq){
 		List<ActFarmer> list = null;
-		String searchString = (String) rq.getAttribute("searchString");
+//		String searchString = (String) model.getAttribute("searchString");
+
+		
 		if(pageNo == null) {
 			if(model.getAttribute("pageNO") != null) {
 				pageNo = (Integer) model.getAttribute("pageNo");
@@ -93,6 +112,10 @@ public class ActHomeController {
 				pageNo = 1;
 			}
 		}
+		String searchString1 = (String)model.getAttribute("searchString");
+		System.out.println("=========================我換頁了"+searchString1);
+		System.out.println("=========================我換頁了"+ searchString );
+
 		actFarmerService.setPageNo(pageNo);
 		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
 		list = actFarmerService.selectNamePage(searchString);
