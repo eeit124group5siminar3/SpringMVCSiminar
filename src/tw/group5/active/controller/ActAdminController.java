@@ -1,6 +1,7 @@
 package tw.group5.active.controller;
 
 
+import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -10,6 +11,8 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.faces.event.PostPutFlashValueEvent;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.collections.map.HashedMap;
@@ -194,6 +197,51 @@ public class ActAdminController {
 		map.put("list", list);
 		System.out.println(map);
 		
+		return map;
+	}
+	
+	//取得活動月銷售額
+	@RequestMapping(value="/actMonthTotalSales.do", produces = {"application/json;charset=UTF-8" })
+	@ResponseBody
+	public LinkedHashMap<String, Object> actMonthTotalSales(HttpServletRequest request){
+		LinkedHashMap<String, Object> map = new LinkedHashMap();
+		HttpSession session = request.getSession(false);
+		List<BigDecimal> actMonthlySalesYear = actOrdService.getMonthlyActSales();
+		List<String> actMonthNameYear = actOrdService.getActMonthNameYear();
+		map.put("month", actMonthNameYear);
+		map.put("actMonthlySales", actMonthlySalesYear);
+		return map;
+	}
+	
+	//取得月的總訂單
+	@RequestMapping(value="/monthlyActCounts.do", produces = {"application/json;charset=UTF-8" })
+	@ResponseBody
+	public LinkedHashMap<String, Object> monthlyActCounts(HttpServletRequest request){
+		LinkedHashMap<String, Object> map = new LinkedHashMap();
+		HttpSession session = request.getSession(false);
+		List<BigDecimal> actMonOrdCounts = actOrdService.getMonthlyActCounts();
+		List<String> actMonthNameYear = actOrdService.getActMonthNameYear();
+		map.put("month", actMonthNameYear);
+		map.put("actMonOrdCounts", actMonOrdCounts);
+		return map;
+	}
+	
+	//取得活動種類每個月的總收益
+	@RequestMapping(value="/monthlyActTypeSales.do", produces = {"application/json;charset=UTF-8" })
+	@ResponseBody
+	public LinkedHashMap<String, Object> monthlyActTypeSales(HttpServletRequest request){
+		LinkedHashMap<String, Object> map = new LinkedHashMap();
+		HttpSession session = request.getSession(false);
+		List<BigDecimal> monActTypeSalesOne = actOrdService.getMonActTypeSalesOne();
+		List<BigDecimal> monActTypeSalesTwo = actOrdService.getMonActTypeSalesTwo();
+		List<BigDecimal> monActTypeSalesThree = actOrdService.getMonActTypeSalesThree();
+		List<BigDecimal> monActTypeSalesFour = actOrdService.getMonActTypeSalesFour();
+		List<String> actMonthNameYear = actOrdService.getActMonthNameYear();
+		map.put("month", actMonthNameYear);
+		map.put("monActTypeSalesOne", monActTypeSalesOne);
+		map.put("monActTypeSalesTwo", monActTypeSalesTwo);
+		map.put("monActTypeSalesThree", monActTypeSalesThree);
+		map.put("monActTypeSalesFour", monActTypeSalesFour);
 		return map;
 	}
 
