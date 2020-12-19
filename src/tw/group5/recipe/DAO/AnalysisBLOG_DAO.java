@@ -36,6 +36,7 @@ public class AnalysisBLOG_DAO {
 	}
 	
 	
+	//找出某月份區間內的資料
 	public List<Msg_Blog_Bean> PageviewsbyDate(Integer blog_id,Date startDate,Date endDate) {
 		Session session = sessionFactory.getCurrentSession();
 //		String hql="select * from Msg_Blog_Bean where msg_date between :startDate and :endDate"; (select * from Msg_Blog_Bean where blog_id=:blog_id)
@@ -48,5 +49,6 @@ public class AnalysisBLOG_DAO {
 		List<Msg_Blog_Bean> list=query.list();
 		return list;
 	}
+	
 	
 }

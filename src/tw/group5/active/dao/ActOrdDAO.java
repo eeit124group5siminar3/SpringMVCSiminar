@@ -366,45 +366,40 @@ public class ActOrdDAO {
 		
 	}
 	
-//	每個月
-//	public 
+
 	
 	
-	
-	
-	
-	
-	// =========================Random==========================================
-	public long random(long begin,long end){ 
-		   long rtn = begin + (long)(Math.random() * (end - begin));
-		   if(rtn == begin || rtn == end){ 
-			   return random(begin,end); 
-		   } 
-		   	return rtn; 
-		   } 
-		  
-	//===生成指定範圍內的亂數時間(年月日)==============
-		  
-		  public List<String> randomDate(String bgDate,String edDate) {
-		   try {
-		   SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		   Date start = format.parse(bgDate);//轉換字串 開始日期 
-		   Date end = format.parse(edDate);//轉換字串 結束日期
-		    if(start.getTime() >= end.getTime()){ 
-		     return null; // getTime()表示返回自 1970 年 1 月 1 日 00:00:00 GMT 以來此 Date 物件表示的毫秒數。 
-		    }
-		   long date = random(start.getTime(),end.getTime()); 
-		   Date d=new Date(date);
-		   
-		   List<String> dateList = new ArrayList<String>();
-		   String dateText = format.format(d);
-		   dateList.add(dateText);
-		   return dateList;
-		    }catch (Exception e) {
-		     e.printStackTrace(); 
-		    }
-		   return null;
-		  }
+//	// =========================Random==========================================
+//	public long random(long begin,long end){ 
+//		   long rtn = begin + (long)(Math.random() * (end - begin));
+//		   if(rtn == begin || rtn == end){ 
+//			   return random(begin,end); 
+//		   } 
+//		   	return rtn; 
+//		   } 
+//		  
+//	//===生成指定範圍內的亂數時間(年月日)==============
+//		  
+//		  public List<String> randomDate(String bgDate,String edDate) {
+//		   try {
+//		   SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		   Date start = format.parse(bgDate);//轉換字串 開始日期 
+//		   Date end = format.parse(edDate);//轉換字串 結束日期
+//		    if(start.getTime() >= end.getTime()){ 
+//		     return null; // getTime()表示返回自 1970 年 1 月 1 日 00:00:00 GMT 以來此 Date 物件表示的毫秒數。 
+//		    }
+//		   long date = random(start.getTime(),end.getTime()); 
+//		   Date d=new Date(date);
+//		   
+//		   List<String> dateList = new ArrayList<String>();
+//		   String dateText = format.format(d);
+//		   dateList.add(dateText);
+//		   return dateList;
+//		    }catch (Exception e) {
+//		     e.printStackTrace(); 
+//		    }
+//		   return null;
+//		  }
 	
 	
 

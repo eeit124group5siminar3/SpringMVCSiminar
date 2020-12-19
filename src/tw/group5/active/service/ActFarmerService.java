@@ -109,6 +109,10 @@ public class ActFarmerService {
 		return actFarmerDAO.getTotalPageWithSearch();
 	}
 	
+	public Integer getTotalPageWithSearch() {
+		return actFarmerDAO.getTotalPageWithSearch();
+	}
+	
 	//獲得頁數
 	public Integer getPageNo() {
 		return actFarmerDAO.getPageNo();

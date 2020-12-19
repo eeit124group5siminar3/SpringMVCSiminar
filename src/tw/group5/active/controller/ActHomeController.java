@@ -119,9 +119,12 @@ public class ActHomeController {
 		actFarmerService.setPageNo(pageNo);
 		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
 		list = actFarmerService.selectNamePage(searchString);
+		Integer tp = actFarmerService.getTotalPageWithSearch();
+		
+		System.out.println("=====================tp::"+tp);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("data", list);
-		map.put("totalPages", actFarmerService.getTotalPages(searchString));
+		map.put("totalPages", tp);
 		map.put("pageNo", pageNo);
 		
 		return map;

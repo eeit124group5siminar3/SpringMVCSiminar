@@ -221,17 +221,13 @@ public class ActAdminController {
 //	   for(int s = 1005;s<=1035;s++) {
 //	   String actOrdId =; //起始店家(每家都有)
 //	   
-//	   int st1 = random.nextInt(smax)%(smax-smin+1) + smin; //隨機生成的店家數字
-//	   int st2 = random.nextInt(smax)%(smax-smin+1) + smin; //隨機生成的店家數字
+//	   int st1 = random.nextInt(smax)%(smax-smin+1) + smin; //隨機生成活動
 //	   int totalPrice = random.nextInt(priceMax)%(priceMax-priceMin+1) + priceMin; //隨機生成的價格
 //	   //String priceStr = String.valueOf(price);
 //	   int member = random.nextInt(mmax)%(mmax-mmin+1) + mmin; //隨機生成的會員
 //	   String memNo = String.valueOf(member);
 //	   String date = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(0); //隨機生成日期
-//	   String bgDate = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(1);
-//	   String edDate = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(1);
-//	   String selectBgTime = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(2);
-//	   String selectEdTime = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(2);
+//
 //	   
 //	   String 
 //	   
