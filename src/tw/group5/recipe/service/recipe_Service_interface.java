@@ -7,6 +7,7 @@ import tw.group5.recipe.recipe_Bean.Bookmark_Bean;
 import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
+import tw.group5.recipe.recipe_Bean.Subscribe_Bean;
 
 public interface recipe_Service_interface {
 
@@ -85,6 +86,12 @@ public interface recipe_Service_interface {
 	long blogCateCounts(String cate);
 
 	List<String> cateList();
+
+	Subscribe_Bean insertSub(Subscribe_Bean bean);
+
+	boolean deleteSub(Integer id);
+
+	List<Subscribe_Bean> searchSub(Integer mem_no);
 
 
 }

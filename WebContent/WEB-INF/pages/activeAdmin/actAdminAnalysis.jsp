@@ -140,7 +140,7 @@
 <!--             AREA CHART -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Area Chart</h3>
+                <h3 class="card-title">每個月總訂單數</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -163,7 +163,7 @@
 <!--             DONUT CHART -->
             <div class="card card-danger">
               <div class="card-header">
-                <h3 class="card-title">活動類型訂單比例</h3>
+                <h3 class="card-title">活動類型訂單比例圖</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -208,7 +208,7 @@
 <!--             LINE CHART -->
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Line Chart</h3>
+                <h3 class="card-title">活動每月總營收</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -252,29 +252,29 @@
 <!--             /.card -->
 
 <!--             STACKED BAR CHART -->
-<!--             <div class="card card-success"> -->
-<!--               <div class="card-header"> -->
-<!--                 <h3 class="card-title">Stacked Bar Chart</h3> -->
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Stacked Bar Chart</h3>
 
-<!--                 <div class="card-tools"> -->
-<!--                   <button type="button" class="btn btn-tool" data-card-widget="collapse"> -->
-<!--                     <i class="fas fa-minus"></i> -->
-<!--                   </button> -->
-<!--                   <button type="button" class="btn btn-tool" data-card-widget="remove"> -->
-<!--                     <i class="fas fa-times"></i> -->
-<!--                   </button> -->
-<!--                 </div> -->
-<!--               </div> -->
-<!--               <div class="card-body"> -->
-<!--                 <div class="chart"> -->
-<!--                   <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
-<!--                 </div> -->
-<!--               </div> -->
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
 <!--               /.card-body -->
-<!--             </div> -->
+            </div>
 <!--             /.card -->
 
-<!--           </div> -->
+          </div>
 <!--           /.col (RIGHT) -->
         </div>
         <!-- /.row -->
@@ -318,7 +318,7 @@ $(document).ready(function(){
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">Active</a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -330,7 +330,7 @@ $(document).ready(function(){
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">Active</i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -342,7 +342,7 @@ $(document).ready(function(){
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">Active</a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -354,13 +354,124 @@ $(document).ready(function(){
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">Active</a>
             </div>
           </div>`;
 		$('#count').html(content);
 		}
 		});
 
+	//訂單月總數
+	var data=[];
+	var ctx = document.getElementById("areaChart");
+	console.log(ctx);
+	$.post({
+		url:"${pageContext.request.contextPath}/monthlyActCounts.do",
+		success:function(response,status){
+			const datas= response.actMonOrdCounts
+			const options= response.month
+			console.log(datas)
+			var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+			var areaChartDataf = {
+			       labels  : options,
+			       datasets: [
+			         {
+			           label               : '每個月總訂單數',
+			           backgroundColor     : 'rgba(60,141,188,0.9)',
+			           borderColor         : 'rgba(60,141,188,0.8)',
+			           pointColor          : '#3b8bba',
+			           pointStrokeColor    : 'rgba(60,141,188,1)',
+			           pointHighlightFill  : '#fff',
+			           pointHighlightStroke: 'rgba(60,141,188,1)',
+			           data                : datas
+			         },
+			       ]
+			     }
+
+			     var areaChartOptionsf = {
+			       maintainAspectRatio : false,
+			       responsive : true,
+			       legend: {
+			         display: false
+			       },
+			       scales: {
+			         xAxes: [{
+			           gridLines : {
+			             display : false,
+			           }
+			         }],
+			         yAxes: [{
+			           gridLines : {
+			             display : false,
+			           }
+			         }]
+			       }
+			     }
+		     
+
+			     var areaChart = new Chart(areaChartCanvas, {
+			       type: 'line',
+			       data: areaChartDataf,
+			       options: areaChartOptionsf
+			     })
+		}
+		})	
+		//月總營收
+	var data=[];
+	var ctx = document.getElementById("lineChart");
+	console.log(ctx);
+	$.post({
+		url:"${pageContext.request.contextPath}/actMonthTotalSales.do",
+		success:function(response,status){
+			const data= response.actMonthlySales
+			const options= response.month
+			
+			var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+			var areaChartDatas = {
+			        labels: options,
+			        datasets: [
+			            {
+			                label: "活動月總營收",
+			                fillColor: "rgba(220,220,220,0.2)",
+			                strokeColor: "rgba(220,220,220,1)",
+			                pointColor: "rgba(220,220,220,1)",
+			                pointStrokeColor: "#fff",
+			                pointHighlightFill: "#fff",
+			                pointHighlightStroke: "rgba(220,220,220,1)",
+			                data: data
+			            }
+			            ]
+			}
+			var areaChartOptions = {
+				      maintainAspectRatio : false,
+				      responsive : true,
+				      legend: {
+				        display: false
+				      },
+				      scales: {
+				        xAxes: [{
+				          gridLines : {
+				            display : false,
+				          }
+				        }],
+				        yAxes: [{
+				          gridLines : {
+				            display : false,
+				          }
+				        }]
+				      }
+				    }
+		     var lineChart = new Chart(lineChartCanvas, {
+		       type: 'line',
+		       data: areaChartDatas,
+		       options: areaChartOptions
+		     })	
+		}
+		})
+		
+
+
+	
 	var data = [];
 	var ctx = document.getElementById("donutChart");
 	console.log(ctx);
@@ -368,12 +479,9 @@ $(document).ready(function(){
 		url: "${pageContext.request.contextPath}/actAnalysisType.do",
 // 		datatype: "json",
 		success:function(response,status){
-			console.log('123');
 			console.log(response.actTypeData.exp);
 			var length  = Object.keys(response.actTypeData).length
-// 			console.log('你到底是誰' +acttype);
 			console.log(length);
-
 			const data = Object.values(response.actTypeData);
 			
 			console.log(data)
@@ -408,6 +516,88 @@ $(document).ready(function(){
 		alert('url'+url);
 		}
 	});
+
+
+
+	var data = [];
+	var ctx = document.getElementById("stackedBarChart");
+	console.log(ctx);
+	$.post({
+		url: "${pageContext.request.contextPath}/monthlyActTypeSales.do",
+// 		datatype: "json",
+		success:function(response,status){
+			const dataOne= response.monActTypeSalesOne
+			const dataTwo= response.monActTypeSalesTwo
+			const dataThree= response.monActTypeSalesThree
+			const dataFour= response.monActTypeSalesFour
+			const options= response.month
+
+		     var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+
+
+		     var stackedBarChart = new Chart(stackedBarChartCanvas, {
+		    	 type: 'bar',
+		    	  data: {
+		    	    labels: options,
+		    	    datasets: [{
+		    	      label: '體驗類',
+		    	      backgroundColor: "#f56954",
+		    	      data: dataOne,
+		    	    }, {
+		    	      label: '採收類',
+		    	      backgroundColor: "#00a65a",
+		    	      data: dataTwo,
+		    	    }, {
+		    	      label: '文藝類',
+		    	      backgroundColor: "#f39c12",
+		    	      data: dataThree,
+		    	    }, {
+		    	      label: '綜合類',
+		    	      backgroundColor: "#00c0ef",
+		    	      data: dataFour,
+		    	    }],
+		    	  },
+		    	options: {
+		    	    tooltips: {
+		    	      displayColors: true,
+		    	      callbacks:{
+		    	        mode: 'x',
+		    	      },
+		    	    },
+		    	    scales: {
+		    	      xAxes: [{
+		    	        stacked: true,
+		    	        gridLines: {
+		    	          display: false,
+		    	        }
+		    	      }],
+		    	      yAxes: [{
+		    	        stacked: true,
+		    	        ticks: {
+		    	          beginAtZero: true,
+		    	        },
+		    	        type: 'linear',
+		    	      }]
+		    	    },
+		    	    responsive: true,
+		    	    maintainAspectRatio: false,
+		    	    legend: { position: 'bottom' },
+		    	  }
+		     })
+			}
+		})
+
+
+
+
+
+
+
+		
+
+
+
+	
 		
 })
 

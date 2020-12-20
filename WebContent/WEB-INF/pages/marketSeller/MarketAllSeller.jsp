@@ -4,9 +4,10 @@
 		<div class="col-md-10 mb-5 text-center">
 			<form class="product-category" action="javascript:void(0)"
 				method="GET">
+				
 				<input type="search" name="searchString" id="searchString"
 					value="${Market_searchString}" />
-				<button name="searchButton" style="border-radius: 5px;"
+				<button  name="searchButton" style="border-radius: 5px;"
 					onclick="searchSeller()">查詢</button>
 			</form>
 		</div>
@@ -38,7 +39,8 @@
 		                <p><a href="#" onclick='goShopping(${item.memberNo})' class="btn btn-primary py-2 px-3">來去逛逛</a></p>
 		                <p><a href="#" data-toggle="modal" data-target="#showMap" 
 		                data-whatever="${item.memberNo}"
-		                class="btn btn-primary py-2 px-3">地點</a></p>	
+		                class="btn btn-primary py-2 px-3">地點</a></p>
+		                	
 		              </div>
 		            </div>
 		          </div>

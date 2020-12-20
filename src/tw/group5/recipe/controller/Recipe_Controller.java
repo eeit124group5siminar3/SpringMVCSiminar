@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
@@ -55,19 +57,23 @@ public class Recipe_Controller {
 	public String frontPage(Model m) {
 		List<Recipe_Bean> searchAll = service.listOfJavaBean();
 		m.addAttribute("searchAll", searchAll);
-//		int count1=(int) service.categoryCounts("五穀根莖");
-//		int count2=(int) service.categoryCounts("奶類");
-//		int count3=(int) service.categoryCounts("蛋豆魚肉類");
-//		int count4=(int) service.categoryCounts("蔬菜類");
-//		int count5=(int) service.categoryCounts("水果類");
-//		int count6=(int) service.categoryCounts("油酯類");
-//		m.addAttribute("count1",count1);
-//		m.addAttribute("count2",count2);
-//		m.addAttribute("count3",count3);
-//		m.addAttribute("count4",count4);
-//		m.addAttribute("count5",count5);
-//		m.addAttribute("count6",count6);
 		return "recipe/recipe_workpage";
+	}
+	
+	@PostMapping(value = "/recipeContent")
+	public String recipeContent(Model m) {
+		List<Blog_Bean> searchAll = service.searchPopular(); // status
+		List<Blog_Bean> frontPageContent = new ArrayList<Blog_Bean>();
+		List<Integer> counts = new ArrayList<Integer>();
+
+		// 回文數
+		for (Blog_Bean b : searchAll) {
+			if (b.getStatus() == 1) {
+				frontPageContent.add(b);
+			}
+		}
+		m.addAttribute("frontPageContent", frontPageContent);
+		return "recipe/frontPageContent";
 	}
 	
 	@PostMapping(value ="/chooseCate")

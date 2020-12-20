@@ -6,9 +6,11 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
@@ -100,7 +102,7 @@ public class ActFarmerController {
 		return "/active/actFarmerMaintain2";
 	}
 	
-	//名字找活動
+	//廠商名字找活動
 	@RequestMapping(path = "/SelectNameSeller.do")
 	public String ProcessSelectName(
 			@RequestParam("selectname") String actName, 
@@ -234,23 +236,23 @@ public class ActFarmerController {
 
 	
 	//取得活動列表
-//	public @ResponseBody List<ActFarmer> actFarmerList(
-//			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, Model model,
-//			HttpServletRequest rq){
-//		List<ActFarmer> list = null;
-//		String searchString = (String) rq.getAttribute("searchString");
-//		if(pageNo == null) {
-//			if(model.getAttribute("pageNO") != null) {
-//				pageNo = (Integer) model.getAttribute("pageNo");
-//			}else {
-//				pageNo = 1;
-//			}
-//		}
-//		list = actFarmerService.getPageActFarmers();
-//		rq.setAttribute("searchString", searchString);
-//		model.addAttribute("pageNo", pageNo);
-//		return list;
-//	}
+	public @ResponseBody List<ActFarmer> actFarmerList(
+			@SessionAttribute(value = "pageNo", required = false) Integer pageNo, Model model,
+			HttpServletRequest rq){
+		List<ActFarmer> list = null;
+		String searchString = (String) rq.getAttribute("searchString");
+		if(pageNo == null) {
+			if(model.getAttribute("pageNO") != null) {
+				pageNo = (Integer) model.getAttribute("pageNo");
+			}else {
+				pageNo = 1;
+			}
+		}
+		list = actFarmerService.selectNamePage(searchString);
+		rq.setAttribute("searchString", searchString);
+		model.addAttribute("pageNo", pageNo);
+		return list;
+	}
 		
 
 	

@@ -32,6 +32,13 @@ public class MarketNoticeDao implements IMarketNoticeService {
 		return list;
 	}
 	
+	@Override
+	public List<MarketNotice> sendEmail(Integer mid){
+		Query<MarketNotice> query =getSession().createQuery("From MarketNotice where PRODUCT_ID=" + mid, MarketNotice.class);
+		List<MarketNotice> list =query.list();
+		return list;
+	}
+	
 	//查詢單筆
 	@Override
 	public MarketNotice selectOne(int mId) {

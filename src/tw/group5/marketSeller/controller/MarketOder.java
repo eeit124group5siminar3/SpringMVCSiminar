@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,7 +59,7 @@ public class MarketOder {
 		return mav;
 	}
 	
-	@RequestMapping(path = "/MarketSellerOrder", method = RequestMethod.GET)
+	@GetMapping(path = "/MarketSellerOrder")
 	public String selectSellerOrder(
 			@SessionAttribute(value = "login_ok", required = false) Member_SignUp mb, Model m
 			) {
@@ -66,8 +67,13 @@ public class MarketOder {
 			return "Member_SignUp/Member_Login";
 		}
 		Integer mid  = mb.getMember_no();
-		List<MarketOrderDetailBean> bean = service.selectSellerOrder(mid);
-		m.addAttribute("list",bean);
+		List<MarketOrderBean> bean = service.selectSellerOrder(mid);
+		List<MarketOrderDetailBean> bean2 =service.selectSellerOrderDetail(mid);
+//		for(MarketOrderBean b:bean) {
+//			System.out.println(b);
+//		}
+		m.addAttribute("order",bean);
+		m.addAttribute("orderDetail",bean2);
 		return "marketSeller/MarketSellerOrder";
 	}
 }

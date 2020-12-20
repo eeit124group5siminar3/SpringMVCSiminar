@@ -80,19 +80,19 @@
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 15px">食譜</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<a class="dropdown-item"  style="font-size: 15px"
-							href="<c:url value='frontPage.controller'/>">食譜</a> 
-<!-- 						<a class="dropdown-item" -->
-<%-- 							href="<c:url value='uploadPage.controller'/>">上傳食譜</a>  --%>
-<!-- 							<a -->
-<!-- 							class="dropdown-item" -->
-<%-- 							href="<c:url value='updatePage.controller'/>">我的食譜</a>  --%>
-<!-- 							<a -->
-<!-- 							class="dropdown-item" -->
-<%-- 							href="<c:url value='myRecipe'/>">我的最愛</a> --%>
 							<a
 							class="dropdown-item"  style="font-size: 15px"
 							href="<c:url value='blogPage'/>">討論區</a>
+						<a class="dropdown-item"  style="font-size: 15px"
+							href="<c:url value='frontPage.controller'/>">食譜</a> 
+<!-- 						<a class="dropdown-item" -->
+<%-- 							href="<c:url value='analysisPage'/>">分析圖表</a>  --%>
+<!-- 							<a -->
+<!-- 							class="dropdown-item" -->
+<%-- 							href="<c:url value='updatePage.controller'/>">我的食譜</a>  --%>
+							<a
+							class="dropdown-item"
+							href="<c:url value='myRecipe'/>">我的最愛</a>
 					</div></li>
 
 				<li class="nav-item"><c:if test="${empty login_ok}">

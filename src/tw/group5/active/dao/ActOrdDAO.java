@@ -2,6 +2,7 @@ package tw.group5.active.dao;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.Random;
 
 import javax.sound.midi.Soundbank;
 
@@ -314,48 +316,51 @@ public class ActOrdDAO {
 	public LinkedHashMap<String, Integer> countTotal(){
 		Session session = sessionFactory.getCurrentSession();	
 		Query q1 = session.createSQLQuery("select sum(totalprice) from actord");
-		Query q2 = session.createSQLQuery("select sum(totalprice) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+//		Query q2 = session.createSQLQuery("select sum(totalprice) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_date(sysdate,'MM')");
+//		Query q2 = session.createSQLQuery("select sum(totalPrice) from actord where ordtime between '2020-12-01' and '2020-12-31' ");
 		Query q3 = session.createSQLQuery("select count(*) from actord");
-		Query q4 = session.createSQLQuery("select count(*) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+//		Query q4 = session.createSQLQuery("select count(*) from actord where to_date(to_char(ordtime,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_date(sysdate,'MM')");
 		Query q5 = session.createSQLQuery("select count(*) from actfarmer");
-		Query q6 = session.createSQLQuery("select count(*) from actfarmer where to_date(to_char(actdatesta,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_char(sysdate,'MM')");
+//		Query q6 = session.createSQLQuery("select count(*) from actfarmer where to_date(to_char(actdatesta,'YYYY/MM/DDHH24:MI:SS'),'MM')=to_date(sysdate,'MM')");
 		Query q7 = session.createSQLQuery("select sum(ordactnum) from actord");
 		
-		
+//		System.out.println("=============================================="+q2);
 		Object obj1 = q1.uniqueResult();
 		Integer ordpriceTP = Integer.parseInt(obj1.toString()); //訂單總金額
 		System.out.println("說一下你後面那一位為什麼不行"+ordpriceTP);
-		Object obj2 = q2.uniqueResult();
-		Integer ordpriceMonP = Integer.parseInt(obj2.toString()); //當月訂單總金額
+//		Object obj2 = q2.uniqueResult();
+//		System.out.println("=============================================="+obj2);
+//		Integer ordpriceMonP = Integer.parseInt(obj2.toString()); //當月訂單總金額
+		
 		
 		Object obj3 = q3.uniqueResult();
 		Integer ordpriceTC = Integer.parseInt(obj3.toString()); //總訂單數數
-		Object obj4 = q4.uniqueResult();
-		Integer ordpriceMonC = Integer.parseInt(obj4.toString()); //當月總訂單數
+//		Object obj4 = q4.uniqueResult();
+//		Integer ordpriceMonC = Integer.parseInt(obj4.toString()); //當月總訂單數
 		Object obj5 = q5.uniqueResult();
 		Integer actTC = Integer.parseInt(obj5.toString()); //總活動數
-		Object obj6 = q6.uniqueResult();
-		Integer actMonC = Integer.parseInt(obj6.toString()); //當月舉辦的活動數
+//		Object obj6 = q6.uniqueResult();
+//		Integer actMonC = Integer.parseInt(obj6.toString()); //當月舉辦的活動數
 		Object obj7 = q7.uniqueResult();
 		Integer actNumT = Integer.parseInt(obj7.toString()); //總活動數
 
 		
 		ArrayList<Integer> actTotal = new ArrayList<Integer>();
 		actTotal.add(ordpriceTP);
-		actTotal.add(ordpriceMonP);
+//		actTotal.add(ordpriceMonP);
 		actTotal.add(ordpriceTC);
-		actTotal.add(ordpriceMonC);
+//		actTotal.add(ordpriceMonC);
 		actTotal.add(actTC);
-		actTotal.add(actMonC);
+//		actTotal.add(actMonC);
 		actTotal.add(actNumT);
 				
 		LinkedHashMap<String, Integer> actTypeMap = new LinkedHashMap<String, Integer>(); 
 		actTypeMap.put("ordTotalPrice", ordpriceTP);  //訂單總金額
-		actTypeMap.put("ordMonTolPrice", ordpriceMonP); //當月訂單總金額
+//		actTypeMap.put("ordMonTolPrice", ordpriceMonP); //當月訂單總金額
 		actTypeMap.put("ordCounts", ordpriceTC); //總訂單數數
-		actTypeMap.put("ordMonCounts", ordpriceMonC); //當月總訂單數
+//		actTypeMap.put("ordMonCounts", ordpriceMonC); //當月總訂單數
 		actTypeMap.put("actTol", actTC); //總活動數
-		actTypeMap.put("actMon", actMonC); //當月舉辦的活動數
+//		actTypeMap.put("actMon", actMonC); //當月舉辦的活動數
 		actTypeMap.put("actNumT", actNumT); //累積參加人數
 		
 		return actTypeMap;
@@ -363,17 +368,87 @@ public class ActOrdDAO {
 	}
 	
 	
-	// =========================Random==========================================
+	//獲得活動的月銷售額
+	public BigDecimal getMonthlyActSales(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord where ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	
+	
+	//獲得活動的月訂單數
+	public BigDecimal getMonthlyActCounts(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select count(actordid) from actord where ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	
+	//各活動類型(體驗類)每個月營收長條圖
+	public BigDecimal getMonActTypeSalesOne(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord inner JOIN actfarmer on actord.actid=actfarmer.actid where acttype='體驗類' and ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	//各活動類型(採收類)每個月營收長條圖
+	public BigDecimal getMonActTypeSalesTwo(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord inner JOIN actfarmer on actord.actid=actfarmer.actid where acttype='採收類' and ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	//各活動類型(文藝類)每個月營收長條圖
+	public BigDecimal getMonActTypeSalesThree(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord inner JOIN actfarmer on actord.actid=actfarmer.actid where acttype='文藝類' and ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	//各活動類型(綜合類)每個月營收長條圖
+	public BigDecimal getMonActTypeSalesFour(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord inner JOIN actfarmer on actord.actid=actfarmer.actid where acttype='綜合類' and ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	
+	
+	
+
+
+	
+	
+//	// =========================Random==========================================
 //	public long random(long begin,long end){ 
 //		   long rtn = begin + (long)(Math.random() * (end - begin));
 //		   if(rtn == begin || rtn == end){ 
-//		   return random(begin,end); 
+//			   return random(begin,end); 
 //		   } 
-//		   return rtn; 
+//		   	return rtn; 
 //		   } 
-		  
-	//===生成指定範圍內的亂數時間(年月日)==============
-		  
+//		  
+//	//===生成指定範圍內的亂數時間(年月日)==============
+//		  
 //		  public List<String> randomDate(String bgDate,String edDate) {
 //		   try {
 //		   SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -394,7 +469,7 @@ public class ActOrdDAO {
 //		    }
 //		   return null;
 //		  }
-//	
+	
 	
 
 

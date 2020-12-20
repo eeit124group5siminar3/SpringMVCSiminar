@@ -38,6 +38,24 @@
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<style>
+.wrap {
+	width: 700px;
+	margin: auto;
+	display: flex;
+	align-items: center;
+}
+
+#wrap1 {
+	vertical-align: middle;
+	width: 80%;
+}
+
+#subSuccess {
+	width: 10%;
+	margin-left: 200px;
+}
+</style>
 </head>
 <body class="goto-here">
 	<jsp:include page="../header.jsp" />
@@ -63,7 +81,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 ftco-animate">
-					<h2 class="mb-3">${partSearch.title}</h2>
+					<div>
+						<div class="wrap">
+							<h2 id="wrap1" class="mb-3">${partSearch.title}</h2>
+							
+<%-- 								<a href="#" onclick="subAuthor(${partSearch.blog_id})" class="btn btn-outline-info" id="subSuccess"> --%>
+<!-- 									我要訂閱</a> -->
+							
+						</div>
+					</div>
 					<p>${partSearch.content}</p>
 
 					<!-- 					<p> -->
@@ -87,6 +113,7 @@
 								class="tag-cloud-link">Tech</a> <a href="#"
 								class="tag-cloud-link">Travel</a>
 						</div>
+
 					</div>
 
 					<div class="about-author d-flex p-4 bg-light">
@@ -94,6 +121,7 @@
 							<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>"
 								alt="Image placeholder" class="img-fluid mb-4">
 						</div>
+
 						<div class="desc align-self-md-center">
 							<h3>${detailBean.name}</h3>
 							<p>${detailBean.introduction}</p>
@@ -177,6 +205,8 @@
 				</div>
 				<!-- .col-md-8 -->
 				<div class="col-lg-4 sidebar ftco-animate">
+					<a class="btn btn-primary py-3 px-4"
+						href="<c:url value='blogEdit'/>">發表文章</a>
 					<div class="sidebar-box">
 						<form action="javascript:void(0);" method="post"
 							class="search-form">
@@ -359,6 +389,31 @@
 			})
 		}
 	}
+
+
+		function subAuthor(blog_id){
+			console.log('blog_id: '+blog_id);
+			$.ajax({
+				type : "POST",
+				url : "./checkSub",
+				data : {
+						"blog_id":blog_id
+					},
+				success : function(data) {
+					if(data){	
+						alert('送出成功!');
+						console.log('data: '+data);
+						$("#subSuccess").html(`<a href="#" class="btn btn-info">已訂閱</a>`);
+						}else{
+							
+							}
+					},
+				error : function(data) {
+					alert('送出失敗');
+					}
+			})
+
+			}
 		</script>
 
 	<script type="text/javascript">
