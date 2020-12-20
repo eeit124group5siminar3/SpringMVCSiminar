@@ -198,21 +198,21 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.cateList();
 	}
 
-	@Override
-	public Subscribe_Bean insertSub(Subscribe_Bean bean) {
-		return rDAO.insertSub(bean);
-	}
-	
-	@Override
-	public boolean deleteSub(Integer id) {
-		return rDAO.deleteSub(id);
-	}
-	
-	@Override
-	public List<Subscribe_Bean> searchSub(Integer mem_no) {
-		return rDAO.searchSub(mem_no);
-	}
-	
+//	@Override
+//	public Subscribe_Bean insertSub(Subscribe_Bean bean) {
+//		return rDAO.insertSub(bean);
+//	}
+//	
+//	@Override
+//	public boolean deleteSub(Integer id) {
+//		return rDAO.deleteSub(id);
+//	}
+//	
+//	@Override
+//	public List<Subscribe_Bean> searchSub(Integer mem_no) {
+//		return rDAO.searchSub(mem_no);
+//	}
+//	
 	//----------------------首頁分頁--------------------------------
 	@Override
 	public long getRecordCounts() {
