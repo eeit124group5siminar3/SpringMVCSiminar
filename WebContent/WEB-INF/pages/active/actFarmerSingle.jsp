@@ -32,8 +32,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/actives.css">
     
-<!--     外掛icon link -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-- -------------------Sweetalert引入的CDN---------------------------------------------------------------------- -->
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 
 <style type="text/css">
 
@@ -42,6 +42,10 @@
 	overflow: hidden; 
 	white-space: nowrap; 
 	text-overflow: ellipsis;
+}
+
+.swal-wide{
+    width:800px !important;
 }
 </style>
 </head>
@@ -76,8 +80,11 @@
            	費用  ${collFarmer.price}<br>
            	活動名額 ${collFarmer.numLim}
 			<hr>
+<!--             <p> -->
+<%--               <a href="<c:url value='ActImageController?id=${collFarmer.actId}&type=ACTFARMER'/>" class="image-popup"><img src="<c:url value='ActImageController?id=${collFarmer.actId}&type=ACTFARMER'/>" alt="" class="img-fluid"></a> --%>
+<!--             </p> -->
             <p>
-              <a href="<c:url value='ActImageController?id=${collFarmer.actId}&type=ACTFARMER'/>" class="image-popup"><img src="<c:url value='ActImageController?id=${collFarmer.actId}&type=ACTFARMER'/>" alt="" class="img-fluid"></a>
+              <img src="<c:url value='ActImageController?id=${collFarmer.actId}&type=ACTFARMER'/>" alt="" class="img-fluid" id="imgs"></a>
             </p>
             <h6>活動簡介 </h6>
             <p>${collFarmer.actDescri}</p>
@@ -157,6 +164,10 @@
 <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
 <!--   <script src="js/google-map.js"></script> -->
   <script src="js/main.js"></script>
+  
+ <!-- -------------------SweetAlert引入的js---------------------------------------------------------------------- -->	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>	
+		
 <script type="text/javascript">
 $(document).ready(function(){
 	$.get({
@@ -182,30 +193,19 @@ $(document).ready(function(){
 		}
 	})		
 })
-// $(document).ready(function(){
-// 	$.get({
-// 		url:"${pageContext.request.contextPath}/actShowPopular.do",
-// 		contentType:"application/json",
-// 		success:function(response,status){
-// 		let data = response.data;
-// 		let content = "";
-// 		console.log(data)
-// 		for(var i = 0;i<data.length; i++){
-// 			content+=
-// 			`<ul class="categories" >
-// 				<tr>		
-// 				<td class="post-title" width="50px"><a href="<c:url value='getSingleAct.do?id=\${data[i].ACTID}'/>">\${data[i].ACTNAME}</a></td>				
-// 				<td><span>\${data[i].ORDACTSUM}</span></td>				
-// 				 </tr>
-
-// 			</ul>`;
-// 			}
-// 		$('#showp').html(content);
-// 		}
-// 	})		
-// })
-
 	
+</script>
+	<!-- -------------------SweetAlert引入的javascript---------------------------------------------------------------------- -->	
+<script>
+$('#imgs').click(function() {
+	Swal.fire({
+		  imageUrl: 'ActImageController?id=${collFarmer.actId}&type=ACTFARMER',
+		  imageHeight: 600,
+		  customClass: 'swal-wide',
+		  confirmButtonColor: "#82ae46",
+		  imageAlt: 'active img'
+		})
+});
 </script>
 </body>
 </html>
