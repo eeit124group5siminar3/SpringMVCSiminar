@@ -87,11 +87,11 @@ public interface recipe_Service_interface {
 
 	List<String> cateList();
 
-	Subscribe_Bean insertSub(Subscribe_Bean bean);
+//	Subscribe_Bean insertSub(Subscribe_Bean bean);
 
-	boolean deleteSub(Integer id);
+//	boolean deleteSub(Integer id);
 
-	List<Subscribe_Bean> searchSub(Integer mem_no);
+//	List<Subscribe_Bean> searchSub(Integer mem_no);
 
 
 }

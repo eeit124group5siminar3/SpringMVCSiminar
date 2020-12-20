@@ -13,7 +13,7 @@ import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 //import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
-import tw.group5.recipe.recipe_Bean.Subscribe_Bean;
+//import tw.group5.recipe.recipe_Bean.Subscribe_Bean;
 
 import java.util.List;
 
@@ -124,31 +124,31 @@ public class Recipe_DAO_spring {
 
 	// --------------------訂閱某作者--------------------------
 	
-	public Subscribe_Bean insertSub(Subscribe_Bean bean) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(bean);
-		return bean;
-	}
-
-	public boolean deleteSub(Integer id) {
-		Session session = sessionFactory.getCurrentSession();
-		Subscribe_Bean result=session.get(Subscribe_Bean.class, id);
-			if (result != null) {
-				session.delete(result);
-				return true;
-			}
-			return false;
-	}
-	
-	public List<Subscribe_Bean> searchSub(Integer mem_no) {
-		Session session = sessionFactory.getCurrentSession();
-		String hql="from Subscribe_Bean where member_no=:mem_no";
-		Query<Subscribe_Bean> query=session.createQuery(hql,Subscribe_Bean.class);
-		query.setParameter("mem_no", mem_no);
-		List<Subscribe_Bean> list=query.list();
-		return list;
-		
-	}
+//	public Subscribe_Bean insertSub(Subscribe_Bean bean) {
+//		Session session = sessionFactory.getCurrentSession();
+//		session.save(bean);
+//		return bean;
+//	}
+//
+//	public boolean deleteSub(Integer id) {
+//		Session session = sessionFactory.getCurrentSession();
+//		Subscribe_Bean result=session.get(Subscribe_Bean.class, id);
+//			if (result != null) {
+//				session.delete(result);
+//				return true;
+//			}
+//			return false;
+//	}
+//	
+//	public List<Subscribe_Bean> searchSub(Integer mem_no) {
+//		Session session = sessionFactory.getCurrentSession();
+//		String hql="from Subscribe_Bean where member_no=:mem_no";
+//		Query<Subscribe_Bean> query=session.createQuery(hql,Subscribe_Bean.class);
+//		query.setParameter("mem_no", mem_no);
+//		List<Subscribe_Bean> list=query.list();
+//		return list;
+//		
+//	}
 
 	// ------------------------個人資料---------------------------
 
