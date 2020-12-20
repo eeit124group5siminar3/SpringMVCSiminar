@@ -70,30 +70,29 @@
 				<table class="table">
 					<thead class="thead-primary">
 						<tr class="text-center">
-							<th>購買日期</th>
-							<th>收件者姓名</th>
+							<th>下單日期</th>
+							<th>收件者姓名<br>連絡電話</th>
 							<th>收件地址</th>
-							<th>連絡電話</th>
-							<th>購買商品</th>
-							<th>數量</th>
+							<th>購買商品與數量</th>
 							<th></th>
 
 						</tr>
 					</thead>
 					
 					<tbody>
-						<c:forEach var="item" items="${list}">
+						<c:forEach var="item" items="${order}">
 							<tr class="text-center">
 <%-- 								<td class="product-remove">${item.buyer}"</td> --%>
-								<td>
-									<h3>${item.buyer}</h3>
 								
+								<td class="product-remove">${item.dayTime}</td>							
+								<td class="price">${item.buyer}<br>${item.cellphone}</td>
+								<td class="price">${item.address}</td>
+								<td class="price">
+								<c:forEach var="item2" items="${orderDetail}">
+								${item2.marketProductTotalBean.productName} X ${item2.quantity} = 
+								${item2.marketProductTotalBean.price * item2.quantity} 元<br>
+								</c:forEach>
 								</td>
-
-<%-- 								<td class="price">${item.marketOrderBean.address}</td> --%>
-<%-- 								<td class="price">${item.marketOrderBean.cellphone}</td> --%>
-<%-- 								<td class="price">${item.marketProductTotalBean.productName}</td> --%>
-<%-- 								<td class="price">${item.quantity}</td> --%>
 							</tr>
 							<!-- END TR-->
 						</c:forEach>

@@ -15,7 +15,7 @@
 							<th>收件地址</th>
 							<th>連絡電話</th>
 							<th>總金額</th>
-							<th>處理狀態</th>
+<!-- 							<th>處理狀態</th> -->
 							<th>&nbsp;</th>
 						</tr>
 					</thead>
@@ -45,7 +45,7 @@
 								<td class="total">
 									<p>${list.total}元</p>
 								</td>
-								<td>&nbsp;</td>
+<!-- 								<td>&nbsp;</td> -->
 								<td>&nbsp;</td>
 							</tr>
 							<!-- END TR-->

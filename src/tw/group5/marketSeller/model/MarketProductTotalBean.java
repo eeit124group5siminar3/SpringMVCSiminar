@@ -2,6 +2,8 @@
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -46,6 +49,8 @@ public class MarketProductTotalBean {
 	private MarketMallBean marketMallBean;
 	private MarketProductImgBean marketProductImgBean;
 	private MarketPutOutBean marketPutOutBean;//設計單向
+    private Set<MarketNotice> marketNoticeBean =
+            new HashSet<MarketNotice>(0);
 
     
 	
@@ -279,6 +284,17 @@ public class MarketProductTotalBean {
 	public void setMarketMallBean(MarketMallBean marketMallBean) {
 		this.marketMallBean = marketMallBean;
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "marketProductTotalBean", cascade = CascadeType.ALL)
+	public Set<MarketNotice> getMarketNoticeBean() {
+		return marketNoticeBean;
+	}
+
+	public void setMarketNoticeBean(Set<MarketNotice> marketNoticeBean) {
+		this.marketNoticeBean = marketNoticeBean;
+	}
+	
+	
 
 
 

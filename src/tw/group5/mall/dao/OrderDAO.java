@@ -211,5 +211,15 @@ public class OrderDAO {
 		ProductOrderItemBean poib=session.load(ProductOrderItemBean.class, orderDetailId);
 		return poib;
 	}
+	
+// 取的選取的訂單內容
+	public List<ProductOrderItemBean> getOrderItemList(List<Integer> ItemIdList){
+		Session session = sessionFactory.getCurrentSession();
+		String hql="from ProductOrderItemBean where orderId in :list";
+		Query<ProductOrderItemBean> query=session.createQuery(hql,ProductOrderItemBean.class);
+		query.setParameter("list", ItemIdList);
+		List<ProductOrderItemBean> list=query.list();
+		return list;
+	}
 
 }

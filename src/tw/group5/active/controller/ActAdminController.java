@@ -1,6 +1,7 @@
 package tw.group5.active.controller;
 
 
+import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -10,6 +11,8 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.faces.event.PostPutFlashValueEvent;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.collections.map.HashedMap;
@@ -196,6 +199,51 @@ public class ActAdminController {
 		
 		return map;
 	}
+	
+	//取得活動月銷售額
+	@RequestMapping(value="/actMonthTotalSales.do", produces = {"application/json;charset=UTF-8" })
+	@ResponseBody
+	public LinkedHashMap<String, Object> actMonthTotalSales(HttpServletRequest request){
+		LinkedHashMap<String, Object> map = new LinkedHashMap();
+		HttpSession session = request.getSession(false);
+		List<BigDecimal> actMonthlySalesYear = actOrdService.getMonthlyActSales();
+		List<String> actMonthNameYear = actOrdService.getActMonthNameYear();
+		map.put("month", actMonthNameYear);
+		map.put("actMonthlySales", actMonthlySalesYear);
+		return map;
+	}
+	
+	//取得月的總訂單
+	@RequestMapping(value="/monthlyActCounts.do", produces = {"application/json;charset=UTF-8" })
+	@ResponseBody
+	public LinkedHashMap<String, Object> monthlyActCounts(HttpServletRequest request){
+		LinkedHashMap<String, Object> map = new LinkedHashMap();
+		HttpSession session = request.getSession(false);
+		List<BigDecimal> actMonOrdCounts = actOrdService.getMonthlyActCounts();
+		List<String> actMonthNameYear = actOrdService.getActMonthNameYear();
+		map.put("month", actMonthNameYear);
+		map.put("actMonOrdCounts", actMonOrdCounts);
+		return map;
+	}
+	
+	//取得活動種類每個月的總收益
+	@RequestMapping(value="/monthlyActTypeSales.do", produces = {"application/json;charset=UTF-8" })
+	@ResponseBody
+	public LinkedHashMap<String, Object> monthlyActTypeSales(HttpServletRequest request){
+		LinkedHashMap<String, Object> map = new LinkedHashMap();
+		HttpSession session = request.getSession(false);
+		List<BigDecimal> monActTypeSalesOne = actOrdService.getMonActTypeSalesOne();
+		List<BigDecimal> monActTypeSalesTwo = actOrdService.getMonActTypeSalesTwo();
+		List<BigDecimal> monActTypeSalesThree = actOrdService.getMonActTypeSalesThree();
+		List<BigDecimal> monActTypeSalesFour = actOrdService.getMonActTypeSalesFour();
+		List<String> actMonthNameYear = actOrdService.getActMonthNameYear();
+		map.put("month", actMonthNameYear);
+		map.put("monActTypeSalesOne", monActTypeSalesOne);
+		map.put("monActTypeSalesTwo", monActTypeSalesTwo);
+		map.put("monActTypeSalesThree", monActTypeSalesThree);
+		map.put("monActTypeSalesFour", monActTypeSalesFour);
+		return map;
+	}
 
 	//隨機灌訂單================================================================================
 //	 @GetMapping(path="/initRandomOrder")
@@ -221,17 +269,13 @@ public class ActAdminController {
 //	   for(int s = 1005;s<=1035;s++) {
 //	   String actOrdId =; //起始店家(每家都有)
 //	   
-//	   int st1 = random.nextInt(smax)%(smax-smin+1) + smin; //隨機生成的店家數字
-//	   int st2 = random.nextInt(smax)%(smax-smin+1) + smin; //隨機生成的店家數字
+//	   int st1 = random.nextInt(smax)%(smax-smin+1) + smin; //隨機生成活動
 //	   int totalPrice = random.nextInt(priceMax)%(priceMax-priceMin+1) + priceMin; //隨機生成的價格
 //	   //String priceStr = String.valueOf(price);
 //	   int member = random.nextInt(mmax)%(mmax-mmin+1) + mmin; //隨機生成的會員
 //	   String memNo = String.valueOf(member);
 //	   String date = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(0); //隨機生成日期
-//	   String bgDate = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(1);
-//	   String edDate = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(1);
-//	   String selectBgTime = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(2);
-//	   String selectEdTime = actOrdService.randomDate("2020-01-01 00:00:00","2020-12-08 00:00:00").get(2);
+//
 //	   
 //	   String 
 //	   

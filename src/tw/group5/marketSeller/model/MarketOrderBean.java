@@ -28,10 +28,20 @@ public class MarketOrderBean {
 	private Integer buyerId;
 	private String address;
 	private Integer allPrice;
+	private String dayTime;
     private Set<MarketOrderDetailBean> marketOrderDetailBean =
             new HashSet<MarketOrderDetailBean>(0);
 	
-	
+
+    @Transient
+	public String getDayTime() {
+    	dayTime =buyTime.toString();
+    	String timeString= dayTime.substring(0,10);
+		return timeString;
+	}
+	public void setDayTime(String dayTime) {
+		this.dayTime = dayTime;
+	}
 	@Id @Column(name = "OID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getOid() {
@@ -53,12 +63,19 @@ public class MarketOrderBean {
 	public String getBuyer() {
 		return buyer;
 	}
+	@Override
+	public String toString() {
+		return "MarketOrderBean [oid=" + oid + ", cellphone=" + cellphone + ", buyer=" + buyer + ", buyTime=" + buyTime
+				+ ", buyerId=" + buyerId + ", address=" + address + ", allPrice=" + allPrice
+				+ ", marketOrderDetailBean=" + marketOrderDetailBean + "]";
+	}
 	public void setBuyer(String buyer) {
 		this.buyer = buyer;
 	}
 	
 	@Column(name = "BUY_TIME")
 	public Date getBuyTime() {
+
 		return buyTime;
 	}
 	public void setBuyTime(Date buyTime) {

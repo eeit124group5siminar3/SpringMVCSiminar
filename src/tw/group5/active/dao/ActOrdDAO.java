@@ -2,6 +2,7 @@ package tw.group5.active.dao;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -366,45 +367,108 @@ public class ActOrdDAO {
 		
 	}
 	
-//	每個月
-//	public 
+	
+	//獲得活動的月銷售額
+	public BigDecimal getMonthlyActSales(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord where ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	
+	
+	//獲得活動的月訂單數
+	public BigDecimal getMonthlyActCounts(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select count(actordid) from actord where ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	
+	//各活動類型(體驗類)每個月營收長條圖
+	public BigDecimal getMonActTypeSalesOne(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord inner JOIN actfarmer on actord.actid=actfarmer.actid where acttype='體驗類' and ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	//各活動類型(採收類)每個月營收長條圖
+	public BigDecimal getMonActTypeSalesTwo(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord inner JOIN actfarmer on actord.actid=actfarmer.actid where acttype='採收類' and ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	//各活動類型(文藝類)每個月營收長條圖
+	public BigDecimal getMonActTypeSalesThree(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord inner JOIN actfarmer on actord.actid=actfarmer.actid where acttype='文藝類' and ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
+	//各活動類型(綜合類)每個月營收長條圖
+	public BigDecimal getMonActTypeSalesFour(Date last, Date start) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql="select sum(totalprice) from actord inner JOIN actfarmer on actord.actid=actfarmer.actid where acttype='綜合類' and ordtime between :last and :start";
+		Query<?>query = session.createSQLQuery(sql);
+		query.setParameter("start", start);
+		query.setParameter("last", last);
+		BigDecimal uniqueResult = (BigDecimal) query.uniqueResult();
+		return uniqueResult;
+	}
 	
 	
 	
+
+
 	
 	
-	
-	// =========================Random==========================================
-	public long random(long begin,long end){ 
-		   long rtn = begin + (long)(Math.random() * (end - begin));
-		   if(rtn == begin || rtn == end){ 
-			   return random(begin,end); 
-		   } 
-		   	return rtn; 
-		   } 
-		  
-	//===生成指定範圍內的亂數時間(年月日)==============
-		  
-		  public List<String> randomDate(String bgDate,String edDate) {
-		   try {
-		   SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		   Date start = format.parse(bgDate);//轉換字串 開始日期 
-		   Date end = format.parse(edDate);//轉換字串 結束日期
-		    if(start.getTime() >= end.getTime()){ 
-		     return null; // getTime()表示返回自 1970 年 1 月 1 日 00:00:00 GMT 以來此 Date 物件表示的毫秒數。 
-		    }
-		   long date = random(start.getTime(),end.getTime()); 
-		   Date d=new Date(date);
-		   
-		   List<String> dateList = new ArrayList<String>();
-		   String dateText = format.format(d);
-		   dateList.add(dateText);
-		   return dateList;
-		    }catch (Exception e) {
-		     e.printStackTrace(); 
-		    }
-		   return null;
-		  }
+//	// =========================Random==========================================
+//	public long random(long begin,long end){ 
+//		   long rtn = begin + (long)(Math.random() * (end - begin));
+//		   if(rtn == begin || rtn == end){ 
+//			   return random(begin,end); 
+//		   } 
+//		   	return rtn; 
+//		   } 
+//		  
+//	//===生成指定範圍內的亂數時間(年月日)==============
+//		  
+//		  public List<String> randomDate(String bgDate,String edDate) {
+//		   try {
+//		   SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		   Date start = format.parse(bgDate);//轉換字串 開始日期 
+//		   Date end = format.parse(edDate);//轉換字串 結束日期
+//		    if(start.getTime() >= end.getTime()){ 
+//		     return null; // getTime()表示返回自 1970 年 1 月 1 日 00:00:00 GMT 以來此 Date 物件表示的毫秒數。 
+//		    }
+//		   long date = random(start.getTime(),end.getTime()); 
+//		   Date d=new Date(date);
+//		   
+//		   List<String> dateList = new ArrayList<String>();
+//		   String dateText = format.format(d);
+//		   dateList.add(dateText);
+//		   return dateList;
+//		    }catch (Exception e) {
+//		     e.printStackTrace(); 
+//		    }
+//		   return null;
+//		  }
 	
 	
 
