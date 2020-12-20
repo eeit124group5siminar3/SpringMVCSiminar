@@ -165,16 +165,16 @@
 $(document).ready(function() {
 $('#orChecked').change(function(){	
 	if($(this).is(':checked')){
-		var box = $("input[name='download']");
+		var box = $("input[name='downloadOrder']");
 		if(box.length==box.filter(':not(:checked)').length){
-			$("input[name='download']").prop('checked',true);
+			$("input[name='downloadOrder']").prop('checked',true);
 		}else{
-			$("input[name='download']").each(function(){   
+			$("input[name='downloadOrder']").each(function(){   
 				$(this).prop('checked',$(this).is(':checked')?true:true);
 			});
 		}
 	}else{
-		$("input[name='download']").prop('checked',false);
+		$("input[name='downloadOrder']").prop('checked',false);
 		}	
 });
 })

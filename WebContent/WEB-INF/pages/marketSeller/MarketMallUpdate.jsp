@@ -123,16 +123,16 @@ body {
  
         <tr height="36" >
       <td height="61" colspan="6" align="center">
-         <form:button value="Send" >更新</form:button>
+         <form:button value="Send" class="btn btn-primary py-3 px-4" >更新</form:button>
       </td>
     </tr>
    
 </table>
 </form:form>
 
-			<form class="container" action="<c:url value='/'></c:url>" >
+			<form class="container" action="<c:url value='backstage.controller'></c:url>" >
 			<div align="center">
-			<br><br><input  type="submit" value="回首頁">
+			<input class="btn btn-primary py-3 px-4" type="submit"  value="回管理介面">
 			</div>
 			</form>
 		

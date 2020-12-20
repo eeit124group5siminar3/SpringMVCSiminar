@@ -92,7 +92,7 @@ $(function(){
 </script>
 	<script>
 $(function(){
-	var member_email="lincoln_bah@yahoo.com.tw";
+	var member_email="test.iiiseminar5@gmail.com";
 	var member_id="F128862022"
 	var member_name="我是新會員";
 	var member_cellphone="0918667445";

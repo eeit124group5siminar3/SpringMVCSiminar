@@ -144,9 +144,9 @@ public class Recipe_Controller_search {
 			List<Bookmark_Bean> bookmark = service.listOfBookmark(mem_no);
 			List<Recipe_Bean> allRecipe = new ArrayList<Recipe_Bean>();
 			
-			for (Bookmark_Bean bBean : bookmark) {
-				for (Recipe_Bean rBean : searchAll) {
-					if (bBean.getRec_id().equals(rBean.getRec_id())) {
+				for (Bookmark_Bean bBean : bookmark) {
+					for (Recipe_Bean rBean : searchAll) {
+						if (bBean.getRec_id().equals(rBean.getRec_id())) {
 						rBean.setMem_name(service.detailBean(rBean.getMember_no()).getName());
 						allRecipe.add(rBean);
 					}

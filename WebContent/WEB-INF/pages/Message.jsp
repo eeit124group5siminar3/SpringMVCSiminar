@@ -187,6 +187,8 @@ $(function(){
 			var message = document.getElementById('text').value;
 			//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
 			websocket.send(JSON.stringify({'message':message,'role':'管理員','socketId':"A"}));
+			$("#text").val("");
+			
 		}
 		function _key() { 
 			if(event.keyCode ==13) {
@@ -226,7 +228,6 @@ $(function(){
 						console.log(data);
 					}
 				});
-				$("#text").val("");
 			send(); 
 			}
 		} 

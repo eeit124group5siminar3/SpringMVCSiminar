@@ -72,10 +72,10 @@
 						<tr class="text-center">
 							<th>訂購日期</th>
 							<th>收件者姓名</th>
-							<th>收件地址</th>
-							<th>連絡電話</th>
+							<th>購買商品</th>
 							<th>總價格</th>
-							<th></th>
+							<th>連絡電話</th>
+							<th>收件地址</th>
 
 						</tr>
 					</thead>
@@ -84,20 +84,18 @@
 						<c:forEach var="item"
 							items="${list}">
 							<tr class="text-center">
-								<td class="product-remove">${item.buyTime}"</td>
+								<td class="product-remove">${item.dayTime}</td>
 								<td>
-									<h3>${item.buyer}</h3>
-								
+									<h3>${item.buyer}</h3>					
 								</td>
-
-								<td class="price">${item.address}</td>
-								<td class="price">${item.cellphone}</td>
-								<td class="price">${item.allPrice}元</td>
 								<td class="price">
                                 <a href="#" data-toggle="modal" data-target="#orderDetail" 
 		                        data-whatever="${item.oid}"
 		                        class="btn btn-primary py-2 px-3">詳細資料</a>
 				                </td>
+								<td class="price">${item.allPrice}元</td>
+								<td class="price">${item.cellphone}</td>
+								<td class="price">${item.address}</td>
 
 							</tr>
 							<!-- END TR-->

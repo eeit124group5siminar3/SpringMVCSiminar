@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-		<div class="col-md-10 mb-5 text-center">
-			<form class="product-category" action="javascript:void(0)"
-				method="GET">
-				
-				<input type="search" name="searchString" id="searchString"
-					value="${Market_searchString}" />
-				<button  name="searchButton" style="border-radius: 5px;"
-					onclick="searchSeller()">查詢</button>
-			</form>
-		</div>
+
  
  <div class="container">
   <c:forEach var="item" items="${sellerAll}">
@@ -21,16 +12,7 @@
 		            <div class="blog-entry align-self-stretch d-md-flex">
                        <img height='240' width='240'
                        src=<c:url value='MarketImageServlet?id=${item.memberNo}&type=MALLIMG' /> /> 
-		              <div class="text d-block pl-md-4">
-					<p class="text-left mr-4">
-						<a href="#" class="mr-2">5.0</a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a> <a href="#"><span
-							class="ion-ios-star-outline"></span></a>
-					</p>
-		                
+		              <div class="text d-block pl-md-4">                
 		                <h3 class="heading">
 		                <a href="#" onclick='goShopping(${item.memberNo})'>${item.mallName}</a>
 		                </h3>

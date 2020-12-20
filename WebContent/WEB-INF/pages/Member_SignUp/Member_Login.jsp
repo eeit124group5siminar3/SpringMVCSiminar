@@ -198,14 +198,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			var buyer_password = "123456aA"
 			var seller_account = "seller@gmail.com";
 			var seller_password = "123456aA";
+			var new_account = "test.iiiseminar5@gmail.com";
+			var new_password = "123456aA";
 			$("#buyer_button").click(function() {
-				$("#exampleInputEmail1").val(buyer_account);
-				$("#exampleInputPassword1").val(buyer_password);
+				$("#exampleInputEmail1").val(new_account);
+				$("#exampleInputPassword1").val(new_password);
 			});
-			$("#seller_button").click(function() {
-				$("#exampleInputEmail1").val(seller_account);
-				$("#exampleInputPassword1").val(seller_password);
-			});
+
 			$("#buyer_onebutton").click(function() {
 				$.ajax({
 					url :"oneButton.controller",
@@ -267,8 +266,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 				<button type="button" id="buyer_onebutton">買家session</button>
 				<button type="button" id="seller_onebutton">賣家beansession</button>
 				<br>
-				<button type="button" id="buyer_button">買家</button>
-				<button type="button" id="seller_button">賣家</button>
+				<button type="button" id="buyer_button">新會員</button>
 				<div id="check_email" class="center"
 					style="color: red; text-align: center; height: 20px"></div>
 				<div class="form-group">
