@@ -106,8 +106,8 @@
 	<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 		<div class="cart-total mb-3">
 		     <p>
-			<a href="<c:url value='/' />"
-				class="btn btn-primary py-3 px-4">回首頁</a> <a
+			<a href="<c:url value='backstage.controller' />"
+				class="btn btn-primary py-3 px-4">回管理介面</a> <a
 				href="<c:url value='/MarketProduct.selectAll' />"
 				class="btn btn-primary py-3 px-4">商品管理</a>
 		     </p>

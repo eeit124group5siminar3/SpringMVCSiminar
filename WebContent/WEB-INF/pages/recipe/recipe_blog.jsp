@@ -145,7 +145,7 @@
 						</form>
 					</div>
 					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">Categories</h3>
+						<h3 class="heading">分類</h3>
 						<ul class="categories">
 							<c:forEach begin="0" end="${cateList.size()-1}" step="1" var="i">
 								<li><a href="#" onclick="category('${cateList[i]}')">${cateList[i]}<span>(${cateCounts[i]})</span></a></li>
@@ -154,7 +154,7 @@
 					</div>
 
 					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">Recent Blog</h3>
+						<h3 class="heading">最新文章</h3>
 
 						<c:forEach begin="0" end="2" step="1" var="i">
 

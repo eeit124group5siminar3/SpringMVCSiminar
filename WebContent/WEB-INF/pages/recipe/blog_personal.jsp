@@ -139,7 +139,7 @@
 					<a class="btn btn-primary py-3 px-4"  
 						href="<c:url value='blogEdit'/>">發表文章</a>
 					<button type="submit" class="btn btn-primary py-3 px-4"  
-			onclick="javascript:location.href='<c:url value='backstage.controller'/>'">取消</button>
+			onclick="javascript:location.href='<c:url value='backstage.controller'/>'">回前頁</button>
 		</fieldset>
 	</div>
 
