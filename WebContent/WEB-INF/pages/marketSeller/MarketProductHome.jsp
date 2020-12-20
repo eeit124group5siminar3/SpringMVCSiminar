@@ -41,11 +41,12 @@
 <jsp:include page="../header.jsp"/>
 <c:set var="funcName" value="CHE" scope="session" />
    	 <h1 align="center">商品管理</h1>
+   	 <br><br>
      <div align="center">
      <form action="<c:url value='/MarketProduct.goInsertJsp'></c:url>" method=".GET">
-        <table  style="border:8px #FFD382 groove;"border="1" cellpadding="5">
+        <table  >
             <tr>
-            <th> <input  type="submit" value="新增商品"></th>
+            <th> <input class="btn btn-primary py-3 px-4" type="submit" value="新增商品"></th>
             </tr>
         </table>        
         </form>
@@ -58,7 +59,6 @@
                 <th>商品描述</th>
                 <th>商品出產地</th>
                 <th>數量</th>
-<!--                 <th>單位</th> -->
                 <th>價格</th>
                 <th>預購期間</th>
                 <th>商品狀態</th>
@@ -95,13 +95,13 @@
                   <form action="<c:url value='/MarketProduct.goUpdateJsp'></c:url>" method="get">
                   <input type="hidden"  id="productid" name="productid" value="${IBean.productId}">
                   
-				 <input type="submit" value="更新"> 
+				 <input type="submit"value="更新"> 
 				  	 </form>
 			     </td>
 			     <td>
 				<form action="<c:url value='/MarketProduct.delete'></c:url>" method="post">
 				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">     
-                 <input  type="submit" value="刪除">
+                 <input  type="submit"  value="刪除">
                  </form>
                  </td>
                 </tr>
