@@ -13,7 +13,7 @@ import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 //import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
-import tw.group5.recipe.recipe_Bean.Subscribe_Bean;
+//import tw.group5.recipe.recipe_Bean.Subscribe_Bean;
 
 @Service
 public class Recipe_Service implements recipe_Service_interface {
