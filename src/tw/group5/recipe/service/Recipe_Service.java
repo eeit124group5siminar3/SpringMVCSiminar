@@ -13,6 +13,7 @@ import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 //import tw.group5.recipe.recipe_Bean.Recipe_Bean_noImage;
+import tw.group5.recipe.recipe_Bean.Subscribe_Bean;
 
 @Service
 public class Recipe_Service implements recipe_Service_interface {
@@ -195,6 +196,21 @@ public class Recipe_Service implements recipe_Service_interface {
 	@Override
 	public List<String> cateList(){
 		return rDAO.cateList();
+	}
+
+	@Override
+	public Subscribe_Bean insertSub(Subscribe_Bean bean) {
+		return rDAO.insertSub(bean);
+	}
+	
+	@Override
+	public boolean deleteSub(Integer id) {
+		return rDAO.deleteSub(id);
+	}
+	
+	@Override
+	public List<Subscribe_Bean> searchSub(Integer mem_no) {
+		return rDAO.searchSub(mem_no);
 	}
 	
 	//----------------------首頁分頁--------------------------------

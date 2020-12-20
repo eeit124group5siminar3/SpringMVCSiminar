@@ -43,6 +43,7 @@ import tw.group5.recipe.recipe_Bean.Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Msg_Blog_Bean;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
+import tw.group5.recipe.recipe_Bean.Subscribe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 
 @Controller
@@ -60,9 +61,30 @@ public class Recipe_blog {
 
 	@Autowired
 	private ServletContext ctx;
-	
-	@Autowired
-	private AnalysisBLOG_DAO analysisService;
+
+//	@PostMapping(value = "/checkSub")
+//	public String checkSub(@RequestParam(name = "blog_id") Integer blog_id) {
+//		Member_SignUp OK = (Member_SignUp) session.getAttribute("login_ok");
+//		if (OK != null) {
+//			Integer sub_no = OK.getMember_no();
+//			Blog_Bean getAuthorBean = service.blogBean(blog_id);
+//			Integer au_no = getAuthorBean.getMem_no();
+//			Subscribe_Bean bean = new Subscribe_Bean();
+//			bean.setAuthor_no(au_no);
+//			bean.setMem_no(sub_no);
+//			DATE sub_date = new DATE();
+//			bean.setSub_date(sub_date);
+//
+//			service.insertSub(bean);
+//			System.out.println("overrrrrrrrrrrrrrrrrrrrrrrrrr");
+//			return "";
+//		} else {
+//
+//			return false;
+//		}
+//	}
+
+	// -----------------------------------------------------------------
 
 	// 連到首頁
 	@GetMapping(value = "/blogPage")
@@ -89,7 +111,7 @@ public class Recipe_blog {
 		}
 		m.addAttribute("cateList", cateList);
 		m.addAttribute("cateCounts", cateCounts);
-		
+
 		return "recipe/recipe_blog";
 	}
 
@@ -144,15 +166,15 @@ public class Recipe_blog {
 		m.addAttribute("cateCounts", cateCounts);
 		return "recipe/blog_single";
 	}
-	
-	//查詢分類
+
+	// 查詢分類
 	@PostMapping(value = "/chooseBlogCate")
-	public String chooseBlogCate(@RequestParam(name="cate")String cate,Model m){
+	public String chooseBlogCate(@RequestParam(name = "cate") String cate, Model m) {
 		System.out.println("======================================");
-		System.out.println("cate: "+cate);
-		List<Blog_Bean> cateList=service.categoryBlogList(cate);
+		System.out.println("cate: " + cate);
+		List<Blog_Bean> cateList = service.categoryBlogList(cate);
 		System.out.println("succccccccccccccces");
-		m.addAttribute("cateList",cateList);
+		m.addAttribute("cateList", cateList);
 		return "recipe/blog_catePage";
 	}
 
@@ -197,11 +219,23 @@ public class Recipe_blog {
 		Blog_Bean editBean = new Blog_Bean();
 		Member_SignUp OK = (Member_SignUp) session.getAttribute("login_ok");
 		Integer mem_no = OK.getMember_no();
-		editBean.setMem_no(mem_no);
-		String name = OK.getMember_name();
-		editBean.setName(name);
-		m.addAttribute("editBean", editBean);
-		return "recipe/blog_edit";
+		Member_Detail memDetail = service.detailBean(mem_no);
+		System.out.println("memDetail: " + memDetail);
+		if (memDetail == null) {
+			Member_Detail bean = new Member_Detail();
+			bean.setMem_no(mem_no);
+			m.addAttribute("memDetail", memDetail);
+			m.addAttribute("bean", bean);
+
+			return "recipe/detailForm";
+		} else {
+			editBean.setMem_no(mem_no);
+			String name = OK.getMember_name();
+			editBean.setName(name);
+			m.addAttribute("editBean", editBean);
+			return "recipe/blog_edit";
+
+		}
 	}
 
 	// 送出新增
@@ -216,8 +250,7 @@ public class Recipe_blog {
 		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String date = year + "-" + month + "-" + day;
-		
-		
+
 		bean.setDate(date);
 		System.out.println(bean.getDate());
 
@@ -264,7 +297,7 @@ public class Recipe_blog {
 	public String msgContent(@RequestParam(name = "content") String content,
 			@RequestParam(name = "blog_id") Integer blog_id, Model m) throws ParseException {
 		Msg_Blog_Bean bean = new Msg_Blog_Bean();
-		
+
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		int year = cal.get(Calendar.YEAR);
@@ -272,11 +305,11 @@ public class Recipe_blog {
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String date = year + "-" + month + "-" + day;
 //		Date date=new Date();		
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		Date today=sdf.parse(date);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = sdf.parse(date);
 		bean.setDate(today);
-		
-		System.err.println("bean.getDate(): "+bean.getDate());
+
+		System.err.println("bean.getDate(): " + bean.getDate());
 		Blog_Bean partSearch = service.blogBean(blog_id);
 		bean.setBlog_Bean(partSearch);
 

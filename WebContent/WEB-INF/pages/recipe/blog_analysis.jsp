@@ -95,17 +95,6 @@
 								</tr>
 							</c:forEach>
 						</tbody>
-						<!--         <tfoot> -->
-						<!--         	<tr> -->
-						<!-- 				<td style="border: 0px" colspan="8"></td> -->
-						<!-- 				<td style="border: 0px" colspan="5"> -->
-						<%-- 					<form action="<c:url value='/SelectNameSeller.do'/>" method="POST"> --%>
-						<!-- 						<label for="">活動名稱:</label> <input type="text" id="selectname" name="selectname"> &nbsp;  -->
-						<!-- 						<input name="selectone" type="submit" value="查詢" class="btn btn-primary"> -->
-						<%-- 					</form> --%>
-						<!-- 				</td> -->
-						<!-- 			</tr> -->
-						<!--         </tfoot> -->
 					</table>
 
 				</div>
