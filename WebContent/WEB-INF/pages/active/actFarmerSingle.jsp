@@ -77,7 +77,7 @@
            	活動名額 ${collFarmer.numLim}
 			<hr>
             <p>
-              <img src="<c:url value='ActImageController?id=${collFarmer.actId}&type=ACTFARMER'/>" alt="" class="img-fluid">
+              <a href="<c:url value='ActImageController?id=${collFarmer.actId}&type=ACTFARMER'/>" class="image-popup"><img src="<c:url value='ActImageController?id=${collFarmer.actId}&type=ACTFARMER'/>" alt="" class="img-fluid"></a>
             </p>
             <h6>活動簡介 </h6>
             <p>${collFarmer.actDescri}</p>

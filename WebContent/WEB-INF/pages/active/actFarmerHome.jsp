@@ -135,7 +135,7 @@ function list(){
 		for(var i = 0; i<data.length; i++){
 		content+=
 		`<div class="col-md-12 d-flex"><div class="blog-entry align-self-stretch d-md-flex">
-			<a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="block-20" style="background-image: url('<c:url value='ActImageController?id=\${data[i].actId}&type=ACTFARMER'/>');"></a>
+			<a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="block-20" style="background-image: url('<c:url value='ActImageController?id=\${data[i].actId}&type=ACTFARMER'/>');">&gt;</a>
 				<div class="text d-block pl-md-4">
 						<div class="meta mb-3">
 			                 <div><a href="#">\${data[i].actType}</a></div>
@@ -154,22 +154,18 @@ function list(){
 		totalPages=response.totalPages;
 		content = `
         <li>
-			<div id="blfirst"><a href="javascript:pagechange('first')"> 
-			<img border='0' alt='第一頁' height='30' width='30' src='./images/first-icon.png' /> </a></div>
+			<div id="blfirst"><a href="javascript:pagechange('first')">&lt;&lt;</a></div>
 	
 		</li>
         <li>
-        	<div id="blprev"><a href="javascript:pagechange('pre')">
-			<img border='0' alt='前一頁' height='30' width='30' src='./images/prev-icon.png' /></a></div>
+        	<div id="blprev"><a href="javascript:pagechange('pre')">&lt;</a></div>
 		</li>
 		<li>\${currentPage} / \${totalPages}</li>
 		<li>
-			<div id="blnext"><a href="javascript:pagechange('next')">
-			<img border='0' alt='下一頁' height='30' width='30' src='./images/next-icon.png'/> </a></div>
+			<div id="blnext"><a href="javascript:pagechange('next')">&gt;</a></div>
 		</li>
 		<li>
-			<div id="bllast"><a href="javascript:pagechange('last')">
-			<img border='0' alt='最末頁' height='30' width='30' src='./images/last-icon.png' /> </a></div>
+			<div id="bllast"><a href="javascript:pagechange('last')">&gt;&gt;</a></div>
 		</li>`;
 		$('#page_id').html(content);
 	}
@@ -209,22 +205,18 @@ function searchlist(){
 		totalPages=response.totalPages;
 		content = `
         <li>
-			<div id="blfirst"><a href="javascript:pagechangeP('first')"> 
-			<img border='0' alt='第一頁' height='30' width='30' src='./images/first-icon.png' /> </a></div>
+			<div id="blfirst"><a href="javascript:pagechangeP('first')">&lt;&lt;</a></div>
 	
 		</li>
         <li>
-        	<div id="blprev"><a href="javascript:pagechangeP('pre')">
-			<img border='0' alt='前一頁' height='30' width='30' src='./images/prev-icon.png' /></a></div>
+        	<div id="blprev"><a href="javascript:pagechangeP('pre')">&lt;</a></div>
 		</li>
 		<li>\${currentPage} / \${totalPages}</li>
 		<li>
-			<div id="blnext"><a href="javascript:pagechangeP('next')">
-			<img border='0' alt='下一頁' height='30' width='30' src='./images/next-icon.png'/> </a></div>
+			<div id="blnext"><a href="javascript:pagechangeP('next')">&gt;</a></div>
 		</li>
 		<li>
-			<div id="bllast"><a href="javascript:pagechangeP('last')">
-			<img border='0' alt='最末頁' height='30' width='30' src='./images/last-icon.png' /> </a></div>
+			<div id="bllast"><a href="javascript:pagechangeP('last')">&gt;&gt;</a></div>
 		</li>`;
 		$('#page_id').html(content);
 	}
