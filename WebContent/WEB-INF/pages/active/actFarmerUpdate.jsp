@@ -6,63 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
-	rel="stylesheet">
-
-<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="css/animate.css">
-
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
-
-<link rel="stylesheet" href="css/aos.css">
-
-<link rel="stylesheet" href="css/ionicons.min.css">
-
-<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
-<link rel="stylesheet" href="css/flaticon.css">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 
-<style>
-.backstage-footer-ground {
-	width: 100%;
- 	top: 800px; 
-	position: absolute;
-	box-sizing: border-box;
-	
-}
 
-#project_backstage {
-	width: 150px;
-	position: absolute;
-	font-weight: bold;
-	left: 15px;
-	color: white;
-	display: block;
-}
-
-#backstage_page {
-	position: absolute;
-	top: 150px;
-	left: 250px;
-	right: 50px;
-	text-align: center;
-}
-</style>
-
-<script>
+<script type="text/javascript">
 function backHome(){
 	document.act.action=new ModelAndView("allActFarmer.do");
     document.act.submit();
@@ -73,13 +29,13 @@ function backHome(){
 
 </head>
 <body class="goto-here">
-<!-- --------Header------------------------------------- -->
-	<jsp:include page="/WEB-INF/pages/header.jsp" />
-<!-- --------管理左邊bar-------------------------------- -->
-	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
-<section class="ftco-section ftco-degree-bg">
-<div>	
-<h3 align="center">一日農夫活動修改</h3>
+<!-- --------Header&sideBar------------------------------------- -->
+	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
+
+<!-------------------------內容區--------------------------------->
+<section class="content-wrapper row justify-content-center" style="background-color: #FFFFFF">
+<div style="border-style: solid; border-color:#82ae46;margin:20px;padding:20px; width:800px" >
+<h3 align="center">一日農夫活動修改</h3><hr>
 <form:form action="actFarmerUpdate.do" modelAttribute="afBean" method="POST" enctype="multipart/form-data" name="act">
 <table align="center">
 	<tr>
@@ -165,7 +121,7 @@ function backHome(){
 	<tr>
 		<td colspan="2" align="center">
 			<form:button class="btn btn-primary py-1 px-2" value="Send" >送出</form:button>&emsp;
-			<form:button class="btn btn-primary py-1 px-2" value="back" onclick="backHome()" >回管理頁面</form:button>
+			<form:button class="btn btn-primary py-1 px-2" value="back" onclick="backHome()">回管理頁面</form:button>
 		</td>			
 	</tr>
 
