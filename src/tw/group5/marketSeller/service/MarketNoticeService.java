@@ -43,6 +43,12 @@ public class MarketNoticeService implements IMarketNoticeService {
 		return mDao.selectOne(mId);
 	}
 
+	@Override
+	public List<MarketNotice> sendEmail(Integer mid) {
+		// TODO Auto-generated method stub
+		return mDao.sendEmail(mid);
+	}
+
 //	@Override
 //	public MarketNotice selectOne(int productId, int mid) {
 //		// TODO Auto-generated method stub

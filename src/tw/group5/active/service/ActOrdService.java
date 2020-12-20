@@ -1,6 +1,10 @@
 package tw.group5.active.service;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,6 +26,7 @@ public class ActOrdService {
 	@Autowired
 	private ActOrdDAO actOrdDAO;
 	
+	private Map<Integer, String> actMonthMap;
 	
 	
 	
@@ -111,6 +116,199 @@ public class ActOrdService {
 		return actOrdDAO.countTotal();
 	}
 	
+	public ActOrdService() {
+		actMonthMap = new HashMap<Integer, String>();
+		actMonthMap.put(1, "1月");
+		actMonthMap.put(2, "2月");
+		actMonthMap.put(3, "3月");
+		actMonthMap.put(4, "4月");
+		actMonthMap.put(5, "5月");
+		actMonthMap.put(6, "6月");
+		actMonthMap.put(7, "7月");
+		actMonthMap.put(8, "8月");
+		actMonthMap.put(9, "9月");
+		actMonthMap.put(10, "10月");
+		actMonthMap.put(11, "11月");
+		actMonthMap.put(12, "12月");
+	}
+	
+	// 取得前半年的月份
+		public List<String> getActMonthNameYear() {
+			List<String> list = new ArrayList<String>();
+			list.add("本月");
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(new Date());
+			for (int i = 1; i <= 11; i++) {
+				calendar.add(Calendar.MONTH, -1);
+				Integer MonthNum = calendar.get(Calendar.MONTH) + 1;
+				list.add(actMonthMap.get(MonthNum));
+			}
+			return list;
+		}
+	//獲得活動的月銷售額
+	public List<BigDecimal> getMonthlyActSales() {
+		List<BigDecimal> list = new ArrayList<BigDecimal>();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		for (int i = 0; i <= 11; i++) {
+			Date start = calendar.getTime();
+			calendar.add(Calendar.MONTH, -1);
+			Date last = calendar.getTime();
+			BigDecimal actMonthlySales = actOrdDAO.getMonthlyActSales(last, start);
+			if (actMonthlySales == null) {
+				list.add(new BigDecimal(0));
+			} else {
+				list.add(actMonthlySales);
+			}
+		}
+		return list;
+	}
+	
+	
+	//獲得活動的月訂單數
+	public List<BigDecimal> getMonthlyActCounts() {
+	
+		List<BigDecimal> list = new ArrayList<BigDecimal>();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		for (int i = 0; i <= 11; i++) {
+			Date start = calendar.getTime();
+			calendar.add(Calendar.MONTH, -1);
+			Date last = calendar.getTime();
+			BigDecimal actMonthlySales = actOrdDAO.getMonthlyActCounts(last, start);
+			if (actMonthlySales == null) {
+				list.add(new BigDecimal(0));
+			} else {
+				list.add(actMonthlySales);
+			}
+		}
+		return list;
+	}
+	
+	//體驗類總營收
+	public List<BigDecimal> getMonActTypeSalesOne() {
+		
+		List<BigDecimal> list = new ArrayList<BigDecimal>();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		for (int i = 0; i <= 11; i++) {
+			Date start = calendar.getTime();
+			calendar.add(Calendar.MONTH, -1);
+			Date last = calendar.getTime();
+			BigDecimal monActTypeSalesOne = actOrdDAO.getMonActTypeSalesOne(last, start);
+			if (monActTypeSalesOne == null) {
+				list.add(new BigDecimal(0));
+			} else {
+				list.add(monActTypeSalesOne);
+			}
+		}
+		return list;
+	}
+	//各活動類型(採收類)每個月營收長條圖
+	public List<BigDecimal> getMonActTypeSalesTwo() {
+		
+		List<BigDecimal> list = new ArrayList<BigDecimal>();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		for (int i = 0; i <= 11; i++) {
+			Date start = calendar.getTime();
+			calendar.add(Calendar.MONTH, -1);
+			Date last = calendar.getTime();
+			BigDecimal monActTypeSalesTwo = actOrdDAO.getMonActTypeSalesTwo(last, start);
+			if (monActTypeSalesTwo == null) {
+				list.add(new BigDecimal(0));
+			} else {
+				list.add(monActTypeSalesTwo);
+			}
+		}
+		return list;
+	}
+	
+	//各活動類型(文藝類)每個月營收長條圖
+	public List<BigDecimal> getMonActTypeSalesThree() {
+		
+		List<BigDecimal> list = new ArrayList<BigDecimal>();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		for (int i = 0; i <= 11; i++) {
+			Date start = calendar.getTime();
+			calendar.add(Calendar.MONTH, -1);
+			Date last = calendar.getTime();
+			BigDecimal monActTypeSalesThree = actOrdDAO.getMonActTypeSalesThree(last, start);
+			if (monActTypeSalesThree == null) {
+				list.add(new BigDecimal(0));
+			} else {
+				list.add(monActTypeSalesThree);
+			}
+		}
+		return list;
+	}
+	
+	//各活動類型(綜合類)每個月營收長條圖
+	public List<BigDecimal> getMonActTypeSalesFour() {
+		
+		List<BigDecimal> list = new ArrayList<BigDecimal>();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		for (int i = 0; i <= 11; i++) {
+			Date start = calendar.getTime();
+			calendar.add(Calendar.MONTH, -1);
+			Date last = calendar.getTime();
+			BigDecimal monActTypeSalesFour = actOrdDAO.getMonActTypeSalesFour(last, start);
+			if (monActTypeSalesFour == null) {
+				list.add(new BigDecimal(0));
+			} else {
+				list.add(monActTypeSalesFour);
+			}
+		}
+		return list;
+	}
+	
+// =========================隨機冠DB=========================================
+		
+//	public long random(long begin,long end){ 
+//		 return actOrdDAO.random(begin, end); 
+//	} 
+//	
+//	 public List<String> randomDate(String bgDate,String edDate) {
+//		 return actOrdDAO.randomDate(bgDate, edDate);
+//	}
 // =========================分頁=========================================
 	
 	//計算該訂單總共有幾頁

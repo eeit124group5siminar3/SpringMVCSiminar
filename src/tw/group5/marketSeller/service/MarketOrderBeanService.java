@@ -52,9 +52,15 @@ public class MarketOrderBeanService implements IMarketOrderBeanService {
 	}
 
 	@Override
-	public List<MarketOrderDetailBean> selectSellerOrder(Integer mid) {
+	public List<MarketOrderBean> selectSellerOrder(Integer mid) {
 		// TODO Auto-generated method stub
 		return mDao.selectSellerOrder(mid);
+	}
+
+	@Override
+	public List<MarketOrderDetailBean> selectSellerOrderDetail(Integer mid) {
+		// TODO Auto-generated method stub
+		return mDao.selectSellerOrderDetail(mid);
 	}
 
 }

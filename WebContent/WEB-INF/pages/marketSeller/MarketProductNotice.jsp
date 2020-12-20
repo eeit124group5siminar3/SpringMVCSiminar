@@ -8,7 +8,7 @@
     		<c:forEach var="item" items="${notice}">
     			<div class="col-md-3 col-lg-3 ftco-animate">
     				<div class="product" >
-    					<a href="#" onclick='goProduct(${item.productId})' class="img-prod"><img class="img-fluid" 
+    					<a href="#" onclick='goProduct(${item.marketProductTotalBean.productId})' class="img-prod"><img class="img-fluid" 
     					 src=<c:url value='MarketImageServlet?id=${item.marketProductTotalBean.marketProductImgBean.productId}&type=PRODUCT' />
     					  alt="Colorlib Template">
     			   <c:choose>
