@@ -43,7 +43,12 @@
 	<jsp:include page="/WEB-INF/pages/Admin_message.jsp" />
 
 
+<div align="center">
+<img src="images\nungyulogo.png" width="300px" heigh="320px">
+<p></p>
+<h1 style="font-weight:bold;"><p>歡迎進入農郁後臺管理！</p></h1>
 
+</div>
 <!--     <div class="billboard"> -->
 <!--     <table> -->
 <!--       <th id="billboard_head" colspan="6"  style="font-size: 50px">        公佈欄</th> -->
