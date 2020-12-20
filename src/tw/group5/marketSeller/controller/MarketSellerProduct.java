@@ -119,6 +119,11 @@ public class MarketSellerProduct {
 	public String update(@ModelAttribute(value = "mBean") MarketProductTotalBean mb ){
 
 		productService.update(mb);
+//		int mail= mb.getProductId();
+//		List<MarketNotice> notice = noticeService.sendEmail(mail);
+//		for (MarketNotice marketNotice : notice) {
+//			System.out.println(marketNotice.getBuyerId());
+//		}
 
 		return "marketSeller/MarketProductSuccess";
 	}
