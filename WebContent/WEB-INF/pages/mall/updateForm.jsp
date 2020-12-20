@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <form:form id="updaeteForm" name="updaeteForm" method="post"
 	action="UpdateProduct" enctype="multipart/form-data"
-	modelAttribute="updateBean">
+	modelAttribute="updateBean1">
 
 	<table style="width: 640px">
 		<tr>
@@ -64,7 +64,7 @@
 <!-- 					<tr> -->
 						<td style="padding-top: 0; padding-bottom: 5px"><img
 							height='120' width='120'
-							src=<c:url value='retrieveImageServlet?id=${updateBean.productId}&type=PRODUCT' /> id="updateImage"/>
+							src=<c:url value='retrieveImageServlet?id=${updateBean1.productId}&type=PRODUCT' /> id="updateImage"/>
 						</td>
 						<td style="padding-top: 0; padding-bottom: 5px" colspan='2'><form:input
 								type="file" name="uploadFile" path="multipartFile" size='6' onchange="loadUpdateImageFile(event)"/>

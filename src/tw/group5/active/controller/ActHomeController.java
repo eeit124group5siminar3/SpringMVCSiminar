@@ -102,8 +102,6 @@ public class ActHomeController {
 			@RequestParam(name="searchString",required = false) String searchString,
 			HttpServletRequest rq){
 		List<ActFarmer> list = null;
-//		String searchString = (String) model.getAttribute("searchString");
-
 		
 		if(pageNo == null) {
 			if(model.getAttribute("pageNO") != null) {
@@ -115,13 +113,14 @@ public class ActHomeController {
 		String searchString1 = (String)model.getAttribute("searchString");
 		System.out.println("=========================我換頁了"+searchString1);
 		System.out.println("=========================我換頁了"+ searchString );
+		actFarmerService.setSearchString(searchString);
 
 		actFarmerService.setPageNo(pageNo);
 		actFarmerService.setRecordsPerPage(RECORDS_PER_PAGE);
 		list = actFarmerService.selectNamePage(searchString);
 		Integer tp = actFarmerService.getTotalPageWithSearch();
 		
-		System.out.println("=====================tp::"+tp);
+		System.out.println("=====================tp::我在controller"+tp);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("data", list);
 		map.put("totalPages", tp);
