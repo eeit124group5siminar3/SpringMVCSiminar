@@ -1,5 +1,14 @@
 package tw.group5.mall.controller;
 
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.channels.NonWritableChannelException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,11 +16,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.activation.FileDataSource;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +46,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import oracle.sql.DATE;
 import tw.group5.mall.ShoppingCart;
 import tw.group5.mall.model.OrderItem;
 import tw.group5.mall.model.ProductOrderBean;
@@ -47,7 +71,7 @@ public class MallOrderController {
 			@RequestParam(value = "productId") Integer productId) {
 		cart.deleteOrder(productId);
 		ModelAndView mav = new ModelAndView();
-		Integer shoppingcartItemNum=cart.getItemNumber();
+		Integer shoppingcartItemNum = cart.getItemNumber();
 		mav.setViewName("/mall/shoppingcartContent");
 		mav.addObject("ShoppingCart", cart);
 		mav.addObject("ShoppingCartItemNum", shoppingcartItemNum);
@@ -90,7 +114,7 @@ public class MallOrderController {
 	}
 
 // 送出訂單
-	@RequestMapping(value = "/ProcessOrder",method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/ProcessOrder", method = { RequestMethod.GET, RequestMethod.POST })
 	public String processOrderServlet(@ModelAttribute(value = "pob") ProductOrderBean pob,
 			@SessionAttribute(value = "ShoppingCart", required = false) ShoppingCart cart, Model model) {
 		if (cart == null || cart.getContent().isEmpty()) {
@@ -106,7 +130,7 @@ public class MallOrderController {
 		for (Integer k : set) {
 			ProductOrderItemBean oib = new ProductOrderItemBean();
 			OrderItem oi = carts.get(k);
-			ProducterBean producterBean=orderService.getProducterId(oi.getProducterId());
+			ProducterBean producterBean = orderService.getProducterId(oi.getProducterId());
 //			producterBean.setMember_no(oi.getProducterId());
 //			producterBean.setMember_name(oi.getProducterName());
 			oib.setProducterBean(producterBean);
@@ -119,10 +143,10 @@ public class MallOrderController {
 			oib.setAmount(oi.getQty());
 			oib.setOrderId(null);
 			oib.setProductOrderBean(pob);
-			
+
 			items.add(oib);
 		}
-		
+
 		pob.setItems(items);
 		try {
 			orderService.persistOrder(pob);
@@ -174,25 +198,70 @@ public class MallOrderController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/orderDetailContent");
 		mav.addObject("items", items);
-		mav.addObject("orderId",orderId);
+		mav.addObject("orderId", orderId);
 		mav.setStatus(HttpStatus.OK);
 		return mav;
 	}
 
-
-//// 取消訂單
-//	@PostMapping(value = "/CancelOrder")
-//	public @ResponseBody Map<String, String> cancelOrder(@RequestParam(value = "itemId")Integer itemId){
-//		ProductOrderItemBean orderItem = orderService.getOrderItem(itemId);
-//		Integer productId= orderItem.getProductId();
-//		Integer amount=orderItem.getAmount();
-//		
-//		orderItem.setStatus(-2);
-//		Map<String, String> map=new HashMap<String, String>();
-//		map.put("statusWord", orderItem.getStatusWord());
-//		map.put("statusTagForUser", orderItem.getStatusTagForUser());
-//		return map;
-//	}
+// 輸出清單內容
+//	@GetMapping(value = "/ExportOrder",produces = "text/csv;charset=utf-8")
+	@PostMapping(value = "/ExportOrder")
+	@ResponseBody
+	public void exportOrder(HttpServletResponse response ,@RequestParam(value = "downloadOrder",required = false) Integer[] orderItemIds){
+		System.err.println(orderItemIds);
+		if(orderItemIds!=null) {
+		List<Integer> orderItemIdList = new ArrayList<Integer>();
+		for(int i=0;i<orderItemIds.length;i++) {
+			orderItemIdList.add(orderItemIds[i]);
+		}
+		List<List> list = orderService.getOrderItemList(orderItemIdList);
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		 XSSFSheet sheet = workbook.createSheet("訂單資料");
+	        int rowNum = 0;
+	        System.out.println("Creating excel");
+	        for (List datatype : list) {
+	            Row row = sheet.createRow(rowNum++);
+	            int colNum = 0;
+	            for (Object field : datatype) {
+	                Cell cell = row.createCell(colNum++);
+	                if (field instanceof String) {
+	                    cell.setCellValue((String) field);
+	                } else if (field instanceof Integer) {
+	                    cell.setCellValue((Integer) field);
+	                }else {
+	                	cell.setCellValue(field.toString());
+	                }
+	            }
+	        }	
+	        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	        String today=sdf.format(new java.util.Date());
+	        String filename = "下載的訂單資料"+today+".xls";
+			String headerFileName=null;
+			try {
+				headerFileName = new String(filename.getBytes(), "ISO8859-1");
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        response.setHeader("Content-Disposition", "attachment; filename="+headerFileName);
+	        
+	        OutputStream out = null;
+	        try{
+	        	out = new BufferedOutputStream(response.getOutputStream());
+	            workbook.write(out);
+	        }catch (IOException e){
+	        	System.out.println("excel匯出有誤");
+	        }finally {
+				try {
+					out.close();
+					workbook.close();
+				} catch (IOException e) {
+					System.out.println("讀取內容有誤");
+				}
+	        }
+	}
+	}
+// ,@RequestParam Integer[] orderItemIds
 }
 
 //

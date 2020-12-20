@@ -14,6 +14,12 @@ public class EDMTableReset {
 				Statement stmt = con.createStatement();) {
 
 			try {
+				stmt.executeUpdate(DBService_for_Oracle.getDropProductFavorite());
+				System.out.println("ProductFavorite表格刪除成功");
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			try {
 				stmt.executeUpdate(DBService_for_Oracle.getDropProduct());
 				System.out.println("Product表格刪除成功");
 			} catch (Exception ex) {
