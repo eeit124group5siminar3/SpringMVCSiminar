@@ -9,19 +9,23 @@
 				<table class="table table-hover">
 					<thead class="thead-light">
 						<tr>
-							<th>&nbsp;</th>
+							<th><input type="checkbox" id="orChecked" /></th>
 							<th>訂單編號</th>
 							<th>產品</th>
 							<th>數量</th>
 							<th>下定日期</th>
 							<th>期望送達時段</th>
 							<th>狀態管理</th>
+							<form id="downloadOrder" method="post"
+							action="<c:url value='ExportOrder'/>"></form>
 						</tr>
 					</thead>
 					<c:forEach var="item" items="${manageOrder_DPP}">
 						<tr class="text-center" data-toggle="modal"
 							data-target="#manageOrder" data-whatever="${item.itemId}">
-							<td></td>
+							<td onclick="chooceDownloadOrder(event)"><input
+								type="checkbox" name="downloadOrder" form="downloadOrder"
+								value="${item.itemId}" /></td>
 							<td>${item.productOrderBean.orderId}</td>
 							<td>${item.description}</td>
 							<td>${item.amount}</td>
@@ -42,7 +46,8 @@
 									<li><span>&lt;</span></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href='#manageOrderContent' onclick='manageOrderPage(1)'>&lt;&lt;</a></li>
+									<li><a href='#manageOrderContent'
+										onclick='manageOrderPage(1)'>&lt;&lt;</a></li>
 									<li><a href='#manageOrderContent'
 										onclick='manageOrderPage(${manageOrder_pageNo - 1})'>&lt;</a></li>
 								</c:otherwise>
@@ -124,6 +129,8 @@
 								</c:otherwise>
 							</c:choose>
 						</ul>
+						<button type="submit" form="downloadOrder" class="btn btn-primary py-3 px-4" style="float: left">訂單資料下載</button>
+
 						<a href="<c:url value='/mall_management'/>"
 							class="btn btn-primary py-3 px-4" style="float: right">商品管理</a>
 					</div>
@@ -155,23 +162,24 @@
 <script src="js/main.js"></script>
 <jsp:include page="../js/mall.jsp" />
 <script>
-// function orderManagement(event,orderStatus){
-// 	event.stopPropagation(); 
-// 	console.log(event);
-// 	var orderDetailId=event.path[1].id;
-// 	$.ajax({
-// 		url : "OrderManagement",
-// 		type : "POST",
-// 		data : {
-// 			"orderDetailId" : orderDetailId,
-// 			"status" : orderStatus
-// 		},
-// 		success : function(data, status) {
-// 			event.path[1].innerHTML=data;
-// 		},
-// 		error : function(data, status) {
-// 			event.path[1].innerHTML=data;
-// 		}	
-// 		});	
-// }
+$(document).ready(function() {
+$('#orChecked').change(function(){	
+	if($(this).is(':checked')){
+		var box = $("input[name='download']");
+		if(box.length==box.filter(':not(:checked)').length){
+			$("input[name='download']").prop('checked',true);
+		}else{
+			$("input[name='download']").each(function(){   
+				$(this).prop('checked',$(this).is(':checked')?true:true);
+			});
+		}
+	}else{
+		$("input[name='download']").prop('checked',false);
+		}	
+});
+})
+
+function chooceDownloadOrder(event){
+	event.stopPropagation();
+}
 </script>
