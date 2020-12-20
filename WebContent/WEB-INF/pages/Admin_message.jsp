@@ -47,7 +47,9 @@
   </div>
 	</div>
 </div>
-      
+<input type="hidden" id="previous_name">   
+<input type="hidden" id="click_name">      
+   
       			<script src="https://kit.fontawesome.com/4a5fa9ba76.js" crossorigin="anonymous"></script>
       
 <script src="https://code.jquery.com/jquery-3.5.1.js"
@@ -124,7 +126,8 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 		            <h5>\${member_name}</h5>
 		            <input type="hidden" id="\${member_name}" value="\${member_name}">
 		            <p>\${content}</p>
-		         `)
+		         `);
+		$("."+member_name).removeAttr("onclick");
 	}
 		setMessageInnerHTML(event.data);
 
@@ -217,10 +220,11 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 	//將訊息送至後端
 	function send() {
 		var message = document.getElementById('text').value;
-		console.log(message);
-		console.log(member_name);
+
 		//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
 		websocket.send(JSON.stringify({'message':message,'role':click_member_name,'socketId':"A"}));
+		$("#text").val("");
+		
 	}
 	function _key() { 
 		if(event.keyCode ==13) {
@@ -252,7 +256,6 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 				success : function(data) {
 				}
 			});
-			$("#text").val("");
 		send(); 
 		}
 	} 
@@ -282,7 +285,7 @@ $(document).ready(function(){
                 			"<div class='chat_list active_chat'>"+
                 	        "<div class='chat_people'>"+
                 	          "<div class='chat_img'><img src='https://ptetutorials.com/images/user-profile.png' alt='sunil'></div>"+
-                	          "<div class='chat_ib "+key+"'>"+
+                	          "<div class='chat_ib "+key+"' onclick='refresh("+key+")'>"+
                 	            "<h5>"+key+"</h5>"+
                 	            "<input type='hidden' id='"+key+"' value='"+key+"'>"+
                 	            "<p>"+Data[key]+"</p>"+
@@ -308,8 +311,41 @@ $(document).ready(function(){
 			}
 		});
 
+
 		
 })
+</script>
+<script>
+	function refresh(member_name) { 
+		var ref_previous_name = $("#previous_name").val();  //前次使用者名稱
+		var ref_click_member_name = null;  //點擊左邊列表的當前使用者名稱
+		var ref_name = member_name.value;
+			//取列表內隱藏input的值
+			ref_click_member_name = ref_name;
+			//顯示當前點擊的訊息
+			$("#abc"+ref_click_member_name).css("display","");
+			console.log("第一次點擊"+ref_previous_name);
+			
+			$("#click_name").val(ref_click_member_name);
+
+			//第一次點擊左邊列表 創建此次點擊的變數值
+			if(ref_previous_name == ""){
+				ref_previous_name=ref_click_member_name;
+				console.log("第二次點擊"+ref_previous_name);
+				
+			}
+			//點擊後隱藏前一次對話窗的div內容
+			if(ref_previous_name != ref_click_member_name){
+				$("#abc"+ref_previous_name).css("display","none");
+				console.log("第三次點擊"+ref_previous_name);
+				
+			}
+			//更新上一次點擊的變數值為此次點擊的變數值
+			$("#previous_name").val(ref_click_member_name);
+// 			ref_previous_name=ref_click_member_name;
+			console.log(ref_click_member_name);
+			console.log(ref_previous_name);
+   	}
 </script>
     
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
