@@ -34,7 +34,7 @@ import tw.group5.mall.service.ProductService;
 import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
-@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean",
+@SessionAttributes(names = { "MaintainPageNo", "login_ok", "SelectCategoryTag", "successMsg", "updateBean1",
 		"insertBean" })
 public class MallMaintainController {
 	@Autowired
@@ -68,26 +68,26 @@ public class MallMaintainController {
 	@PostMapping(value = "/Preupdate")
 	public ModelAndView preupdate(HttpServletRequest request, @RequestParam(value = "productId") Integer productId,
 			Model model) {
-		ProductBean updateBean = service.getProduct(productId, null);
-		service.setSelected(updateBean.getCategory());
+		ProductBean updateBean1 = service.getProduct(productId, null);
+		service.setSelected(updateBean1.getCategory());
 		service.setTagName("categoryId");
 		String categoryTag = service.getSelectTag();
-		model.addAttribute("updateBean", updateBean);
+		model.addAttribute("updateBean1", updateBean1);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/mall/updateForm");
 		mav.addObject("SelectCategoryTag", categoryTag);
-//		mav.addObject("updateBean", updateBean);
+//		mav.addObject("updateBean1", updateBean1);
 		return mav;
 	}
 
 // 資料修改
 	@PostMapping(value = "/UpdateProduct")
-	public String productUpdate(@ModelAttribute(value = "updateBean") ProductBean updateBean, Model model,
+	public String productUpdate(@ModelAttribute(value = "updateBean1") ProductBean updateBean1, Model model,
 			@RequestParam(value = "categoryId") Integer category,
 			@SessionAttribute(value = "login_ok") Member_SignUp mb) {
-		updateBean.setCategory(category);
-		List<String> errorMsgs = updateBean.getErrMsg();
-		String discountErr = updateBean.getDiscountErr();
+		updateBean1.setCategory(category);
+		List<String> errorMsgs = updateBean1.getErrMsg();
+		String discountErr = updateBean1.getDiscountErr();
 		String errMsg = "";
 		if (!errorMsgs.isEmpty() || discountErr != null) {
 			if (discountErr != null) {
@@ -105,7 +105,7 @@ public class MallMaintainController {
 			}
 			model.addAttribute("ErrMsg", errMsg);
 		} else {
-			service.updateProduct(updateBean);
+			service.updateProduct(updateBean1);
 		}
 //		model.addAttribute("successMsg", successMsgs);
 		return "/mall/mall_management";

@@ -206,8 +206,8 @@ public class MallOrderController {
 // 輸出清單內容
 //	@GetMapping(value = "/ExportOrder",produces = "text/csv;charset=utf-8")
 	@PostMapping(value = "/ExportOrder")
-	@ResponseBody
-	public void exportOrder(HttpServletResponse response ,@RequestParam(value = "downloadOrder",required = false) Integer[] orderItemIds){
+//	@ResponseBody
+	public String exportOrder(HttpServletResponse response ,@RequestParam(value = "downloadOrder",required = false) Integer[] orderItemIds){
 		System.err.println(orderItemIds);
 		if(orderItemIds!=null) {
 		List<Integer> orderItemIdList = new ArrayList<Integer>();
@@ -260,7 +260,9 @@ public class MallOrderController {
 				}
 	        }
 	}
+		return "/mall/mall_manageOrder";
 	}
+	
 // ,@RequestParam Integer[] orderItemIds
 }
 

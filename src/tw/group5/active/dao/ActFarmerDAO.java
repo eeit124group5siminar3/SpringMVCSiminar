@@ -140,16 +140,18 @@ public class ActFarmerDAO {
 		Integer count = 0;
 		String hql = "select count(*) from ActFarmer where actLock=1";
 		Query<Long> query = null;
-		if(searchString==null) {
+		if(searchString == null) {
 			query = session.createQuery(hql, java.lang.Long.class);
 		}else {
 			hql += "and actName like ?1";
 			query = session.createQuery(hql, java.lang.Long.class);
-			query.setParameter(1, "%"+searchString+"%");			
+			query.setParameter(1, "%"+searchString+"%");	
+			System.out.println("==============這裡是DAO的ELSE"+searchString);
 		}
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
 		count = (int) longNumber;
+		System.out.println("=========在DAO"+count);
 		return count;		
 	}
 	

@@ -113,6 +113,10 @@
 		</div>
 	</div>
 	<br>
+
+
+	<section class="ftco-section">
+		<div class="container"></div>
 	<div class="row justify-content-center">
 		<div>
 			<form class="form-inline my-2 my-lg-0" id="search"
@@ -125,25 +129,22 @@
 			</form>
 		</div>
 	</div>
-
-
-	<section class="ftco-section">
-		<div class="container"></div>
+	<br>
 		<div class="row justify-content-center">
 			<div class="col-md-10 mb-5 text-center" align="center">
 				<ul class="product-category">
 
-					<li><a href='#' onclick='category("五穀根莖")'> 五穀根莖</a></li>
+					<li><a href='#' onclick='category("五榖根莖")'>五榖根莖</a></li>
 					<li><a href='#' onclick='category("奶類")'> 奶類</a></li>
-					<li><a href='#' onclick='category("蛋豆魚肉類")'> 蛋豆魚肉類</a></li>
-					<li><a href='#' onclick='category("蔬菜類")'> 蔬菜類</a></li>
-					<li><a href='#' onclick='category("水果類")'> 水果類</a></li>
-					<li><a href='#' onclick='category("油酯類")'> 油酯類</a></li>
+					<li><a href='#' onclick='category("蛋豆魚肉類")'>蛋豆魚肉類</a></li>
+					<li><a href='#' onclick='category("蔬菜類")'>蔬菜類</a></li>
+					<li><a href='#' onclick='category("水果類")'>水果類</a></li>
+					<li><a href='#' onclick='category("油脂類")'>油脂類</a></li>
 				</ul>
 			</div>
 		</div>
+	<div>
 		<div id="cateChange">
-			<div id="searchSuccess">
 				<div id="Success"></div>
 
 
@@ -164,10 +165,9 @@
 	<jsp:include page="../footer.jsp" />
 
 	<script type="text/javascript">
-	$(function(){
-		 				
+		 		
 		console.log(searchInput)
-		var searchSuccess=$("#searchSuccess");
+// 		var searchSuccess=$("#searchSuccess");
 // 		var params=$('#search').serialize();
 		$("#send").click(function(){
 		var searchInput=$('#searchInput').val();
@@ -182,7 +182,7 @@
             		console.log(XMLHttpRequest);
         			},
 				success:function(data){
-					$("#searchSuccess").html(data);
+					$("#Success").html(data);
        				console.log(data.length);
 						
        			    var html = "";
@@ -210,14 +210,12 @@
 						
                 		console.log('val.ingredients_A: '+val.ingredients_A);
                     	}
-                        $("#searchSuccess").html(`<div class="row filtered-items-wrap" >`+html+`</div>`); 
+                        $("#Success").html(`<div class="row filtered-items-wrap" >`+html+`</div>`); 
 						},
 				error:function(){
 					}	
 				});
 			});
-			});
-
 </script>
 	<script type="text/javascript"> 
 	var currentPage=1;
@@ -339,7 +337,7 @@
 			data:{"cate":cate},
 			datetype:"html",
 			success:function(response){
-				$("#cateChange").html(response);
+				$("#Success").html(response);
 				}
 			
 			});
