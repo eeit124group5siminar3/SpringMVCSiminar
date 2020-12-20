@@ -160,7 +160,7 @@ function list(){
         <li>
         	<div id="blprev"><a href="javascript:pagechange('pre')">&lt;</a></div>
 		</li>
-		<li>\${currentPage} / \${totalPages}</li>
+		<li>第 \${currentPage} 頁/ 共 \${totalPages} 頁</li>
 		<li>
 			<div id="blnext"><a href="javascript:pagechange('next')">&gt;</a></div>
 		</li>
@@ -203,6 +203,7 @@ function searchlist(){
 		
 		currentPage = response.pageNo;
 		totalPages=response.totalPages;
+		console.log(totalPages);
 		content = `
         <li>
 			<div id="blfirst"><a href="javascript:pagechangeP('first')">&lt;&lt;</a></div>
@@ -211,7 +212,7 @@ function searchlist(){
         <li>
         	<div id="blprev"><a href="javascript:pagechangeP('pre')">&lt;</a></div>
 		</li>
-		<li>\${currentPage} / \${totalPages}</li>
+		<li>第 \${currentPage} 頁/ 共 \${totalPages} 頁</li>
 		<li>
 			<div id="blnext"><a href="javascript:pagechangeP('next')">&gt;</a></div>
 		</li>
@@ -219,7 +220,8 @@ function searchlist(){
 			<div id="bllast"><a href="javascript:pagechangeP('last')">&gt;&gt;</a></div>
 		</li>`;
 		$('#page_id').html(content);
-	}
+	},
+
 })
 }
 window.onload = list();
