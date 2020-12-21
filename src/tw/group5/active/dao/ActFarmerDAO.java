@@ -51,14 +51,14 @@ public class ActFarmerDAO {
 	}
 	
 	//計算符合搜尋結果的有幾頁
-	public Integer getTotalPages(String actName) {
-		totalPages = (int) (Math.ceil(getRecordCountScarch(actName) / (double) recordsPerPage));
-		return totalPages;
-	}
+//	public Integer getTotalPages(String actName) {
+//		totalPages = (int) (Math.ceil(getRecordCountScarch() / (double) recordsPerPage));
+//		return totalPages;
+//	}
 	
 	//計算Search的總page
 	public Integer getTotalPageWithSearch() {
-		totalPageWithSearch = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
+		totalPageWithSearch = (int) (Math.ceil(getRecordCountScarch() / (double) recordsPerPage));
 		return totalPageWithSearch;
 	}
 	
@@ -135,18 +135,24 @@ public class ActFarmerDAO {
 	
 	
 	//計算搜尋bar的總數
-	public long getRecordCountScarch(String actName) {
+	public long getRecordCountScarch() {
 		Session session = sessionFactory.getCurrentSession();
 		Integer count = 0;
-		String hql = "select count(*) from ActFarmer where actName like?1";
+		String hql = "select count(*) from ActFarmer where actLock=1";
 		Query<Long> query = null;
-		query = session.createQuery(hql, java.lang.Long.class);
-		query.setParameter(1, "%"+actName+"%");
+		if(searchString == null) {
+			query = session.createQuery(hql, java.lang.Long.class);
+		}else {
+			hql += "and actName like ?1";
+			query = session.createQuery(hql, java.lang.Long.class);
+			query.setParameter(1, "%"+searchString+"%");	
+			System.out.println("==============這裡是DAO的ELSE"+searchString);
+		}
 		Object objectNumber = query.uniqueResult();
 		long longNumber = (long) objectNumber;
 		count = (int) longNumber;
-		return count;
-		
+		System.out.println("=========在DAO"+count);
+		return count;		
 	}
 	
 	
@@ -201,7 +207,7 @@ public class ActFarmerDAO {
 	// 查詢單筆資料ByName
 	public List<ActFarmer> selectName(String actName){
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from ActFarmer where actName like?1";
+		String hql = "from ActFarmer where actName like?1 and actLock=1 order by actId" ;
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(1, "%"+actName+"%");
 		List<ActFarmer> list = query.getResultList();
@@ -212,7 +218,7 @@ public class ActFarmerDAO {
 	public List<ActFarmer> selectNamePage(String actName){
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ActFarmer where actName like?1";
+		String hql = "from ActFarmer where actName like?1 and actLock=1 order by actId";
 		Query<ActFarmer> query = session.createQuery(hql, ActFarmer.class);
 		query.setParameter(1, "%"+actName+"%");
 		query.setFirstResult(startRecordNo);

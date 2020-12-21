@@ -8,10 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>後臺管理</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/admin_chatbox.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<link
+	href="https://bootstrap.hexschool.com/docs/4.2/dist/css/bootstrap.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
   .billboard{
 
@@ -30,37 +39,43 @@
   </head>
 <body>
 	<jsp:include page="/WEB-INF/pages/testAdminH.jsp" />
+	
 	<jsp:include page="/WEB-INF/pages/Admin_message.jsp" />
 
 
+<div align="center">
+<img src="images\nungyulogo.png" width="300px" heigh="320px">
+<p></p>
+<h1 style="font-weight:bold;"><p>歡迎進入農郁後臺管理！</p></h1>
 
-    <div class="billboard">
-    <table>
-      <th id="billboard_head" colspan="6"  style="font-size: 50px">        公佈欄</th>
-      <tr>
-				<td width="1000"><font size="6">標題</font></td>
-        <td width="250"><font size="6">發布日期</font></td>
-        <td width="250"><font size="6">部門</font></td>
+</div>
+<!--     <div class="billboard"> -->
+<!--     <table> -->
+<!--       <th id="billboard_head" colspan="6"  style="font-size: 50px">        公佈欄</th> -->
+<!--       <tr> -->
+<!-- 				<td width="1000"><font size="6">標題</font></td> -->
+<!--         <td width="250"><font size="6">發布日期</font></td> -->
+<!--         <td width="250"><font size="6">部門</font></td> -->
 
-			</tr>
-			<tr>
-				<td><font size="4">測試</font></td>
-        <td><font size="4">2020/11/11</font></td>
-        <td><font size="4">白癡部</font></td>
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><font size="4">測試</font></td> -->
+<!--         <td><font size="4">2020/11/11</font></td> -->
+<!--         <td><font size="4">白癡部</font></td> -->
 
-			</tr>
-			<tr>
-				<td><font size="4">測試1</font></td>
-        <td><font size="4">1911/05/22</font></td>
-        <td><font size="4">智障部</font></td>
-			</tr>
-			<tr>
-				<td><font size="4">測試2</font></td>
-        <td><font size="4">1950/08/09</font></td>
-        <td><font size="4">不不部</font></td>
-			</tr>
-    </table>
-    </div>
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><font size="4">測試1</font></td> -->
+<!--         <td><font size="4">1911/05/22</font></td> -->
+<!--         <td><font size="4">智障部</font></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td><font size="4">測試2</font></td> -->
+<!--         <td><font size="4">1950/08/09</font></td> -->
+<!--         <td><font size="4">不不部</font></td> -->
+<!-- 			</tr> -->
+<!--     </table> -->
+<!--     </div> -->
  
 
 

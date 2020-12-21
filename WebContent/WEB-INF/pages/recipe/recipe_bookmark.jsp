@@ -123,25 +123,14 @@ a{
 				<td>${bean.views}</td>
 				<td>
 				<div class="form-inline justify-content-center">
-						<a href="#" class="btn btn-primary py-2 px-3 " onclick="fun(${bean.rec_id})">移除</a> 
-					&emsp;
 						<a href="<c:url value='/recipeDetail.controller?rec_id=${bean.rec_id}'/>" class="btn btn-primary py-2 px-3 ">查詢</a> 
+					&emsp;
+						<a href="#" class="btn btn-primary py-2 px-3 " onclick="fun(${bean.rec_id})">移除</a> 
 				</div>
 				</td>
 			</tr>
 		</c:forEach>
         </tbody>
-<!--         <tfoot> -->
-<!--         	<tr> -->
-<!-- 				<td style="border: 0px" colspan="8"></td> -->
-<!-- 				<td style="border: 0px" colspan="5"> -->
-<%-- 					<form action="<c:url value='/SelectNameSeller.do'/>" method="POST"> --%>
-<!-- 						<label for="">活動名稱:</label> <input type="text" id="selectname" name="selectname"> &nbsp;  -->
-<!-- 						<input name="selectone" type="submit" value="查詢" class="btn btn-primary"> -->
-<%-- 					</form> --%>
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!--         </tfoot> -->
     </table>
 </div>
 </section>

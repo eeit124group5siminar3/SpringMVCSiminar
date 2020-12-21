@@ -9,6 +9,7 @@
 			url : "SellerContent",
 			type : "POST",
 			data : {
+				
 				"marketPageNo" : marketPageNo
 			},
 			datatype : "html",
@@ -20,6 +21,7 @@
 			}
 		});
 	}
+
 //來去逛逛
   function goShopping(memberNo) {
    $.ajax({
@@ -37,6 +39,27 @@
 	  }
          });
   }
+
+//搜尋
+//   function goShopping() {
+//    $.ajax({
+// 	url : "SelectmallName",
+// 	type : "POST",
+// 	data : {
+// 		"Market_searchString" : searchString,
+// 	       },
+// 	datatype : "html",
+// 	success : function(data, status) {
+// 		$("#mainContent").html(data);
+// 	},
+// 	error : function(data, status) {
+// 		$("#mainContent").html(data);
+// 	  }
+//          });
+//   }
+
+
+  
  //返回
 	function goback() {
 		$.ajax({
@@ -103,7 +126,7 @@
 	// 取消商品訂購
 	function removeItem(productId) {
 		$.ajax({
-			url : "DeleteOrder",
+			url : "DeleteCart",
 			type : "POST",
 			data : {
 				"productId" : productId

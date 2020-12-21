@@ -3,101 +3,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%
-response.setContentType("text/html;charset=UTF-8");
-response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1 no-cache不能存快取
-response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
-%>
+<!DOCTYPE html>
+
 <html lang="zh">
 <head>
 <title>農郁-活動管理</title>
 <meta charset="utf-8">
+
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!--------------------------------- 原本的Bootstrap--------------------------------------- -->
-<!-- <link -->
-<!-- 	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" -->
-<!-- 	rel="stylesheet"> -->
-<!-- <link -->
-<!-- 	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" -->
-<!-- 	rel="stylesheet"> -->
-<!-- <link -->
-<!-- 	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" -->
-<!-- 	rel="stylesheet"> -->
-
-<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="css/animate.css">
-
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
-
-<link rel="stylesheet" href="css/aos.css">
-
-<link rel="stylesheet" href="css/ionicons.min.css">
-
-<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="css/jquery.timepicker.css">
-
-<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 
-<!--------------------------------- 管理員  -------------------------------- -->
-<link
-	href="https://bootstrap.hexschool.com/docs/4.2/dist/css/bootstrap.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 <!-- -------------------DataTable引入的CDN---------------------------------------------------------------------- -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 
 <!-- -------------------Sweetalert引入的CDN---------------------------------------------------------- -->
 <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 
-<style>
 
-#project_backstage {
-	width: 150px;
-	font-weight: bold;
-	top: 150px;
-	left: 15px;
-	color: white;
-	display: block;
-}
-
-#backstage_page {
-	position: absolute;
-	top: 150px;
-	left: 250px;
-	right: 50px;
-	text-align: center;
-}
-
-.btn-primary{
-	background-color: #b8cdd4;
-	border-color:#b8cdd4;
-	hover :#ccc6ad;
-}
-.btn:hover{
-	background-color:#79a6ad;
-	border-color:#79a6ad;
-	
-}
-
-a{
-	color:#3a728a;
-}
-
-</style>
 <script type="text/javascript">
 	function backHome() {
 		document.act.action = "maintainActFarmer.do";
@@ -109,17 +41,12 @@ a{
 
 <body class="goto-here">
 
-<!-- --------Header------------------------------------- -->
-	<jsp:include page="/WEB-INF/pages/header.jsp" />
+<!-- --------Header&sideBar------------------------------------- -->
+	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 
-<div class="form-group">
-<!-- --------管理左邊bar-------------------------------- -->
-<div class="nav">
-	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />	
-</div>
 <!-------------------------內容區--------------------------------->
-<section class="content-wrapper justify-content-center">
-<div class="col-9" style="width:80%; margin:0 auto" >
+<section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">
+<div class="col-12" style="width:98%; margin:20px" >
 	<div class="form-inline row justify-content-center align-items-center">
 		<h2 >活動列表</h2>&emsp;&emsp;&emsp;
 	    <form action="<c:url value='/actFarmerPreInsert.do'/>" method="POST">
@@ -202,9 +129,9 @@ a{
 <!-------------------------/.內容區--------------------------------->
 
 <!-- --------footer------------------------------------- -->
-	<footer class=" footer">
-		<jsp:include page="/WEB-INF/pages/footer.jsp" />
-	</footer>
+<!-- 	<footer class=" footer"> -->
+<%-- 		<jsp:include page="/WEB-INF/pages/footer.jsp" /> --%>
+<!-- 	</footer> -->
 
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
@@ -235,7 +162,6 @@ a{
 	<script>
 	//foreach 寫法 //按鈕形態要改button 不可以是sumbit
 		$('input[name=delete]').click(function() {
-		console.log("why you are not here!");
 		Swal.fire({
 			  title: '確定要刪除此筆資料嗎?',
 			  text: "提醒您，一旦刪除無法復原喔!",

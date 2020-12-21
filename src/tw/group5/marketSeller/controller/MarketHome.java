@@ -57,8 +57,8 @@ public class MarketHome {
 	@PostMapping(value = "/SellerContent")
 	@ResponseBody
 	public ModelAndView showAllSeller(HttpServletRequest request,
-			@RequestParam(value = "marketPageNo", required = false) Integer pageNoP,
-			@RequestParam(value = "Market_searchString", required = false) String searchStringM
+			@RequestParam(value = "marketPageNo", required = false) Integer pageNoP
+			
 			){
 		
 		HttpSession session = request.getSession(false);
@@ -85,6 +85,19 @@ public class MarketHome {
 		mav.addObject("marketPageNo",pageNo);
 		return mav;		
 	}
+	
+	@PostMapping(value = "/SelectmallName")
+	@ResponseBody
+	public List<MarketMallBean> selectmallName(			
+			@RequestParam(value = "Market_searchString", required = false) String searchStringM){
+		List<MarketMallBean> list = sellerService.selectmallname(searchStringM);
+		
+		return list;
+		
+	}
+	
+	
+	
 	//顯示地圖
 	@PostMapping(value = "/showMap")
 	public ModelAndView showMap(HttpServletRequest request,
@@ -128,6 +141,7 @@ public class MarketHome {
 		marketOrder.setProduct(pBean.getProductName());
 		marketOrder.setPrice(pBean.getPrice());
         marketOrder.setStock(pBean.getQuantity());
+        marketOrder.setSellerId(pBean.getMarketMallBean().getMemberNo());
         marketOrder.setQuantity(0);
         if (cart == null) {
 			cart =new MarketCart();

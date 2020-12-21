@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tw.group5.member_SignUp.model.Member_SignUp;
 
-@WebFilter(urlPatterns = {"/mall_order","/mall_management","/mall_manageOrder","/Mall_checkout","/blog_personal","/blogEdit","/mall_wishList","/mall_analysis"}, initParams = @WebInitParam(name = "LOGIN_PATH", value = "Member_Login"))
+@WebFilter(urlPatterns = {"/mall_order","/mall_management","/mall_manageOrder","/Mall_checkout","/blog_personal","/blogEdit","/mall_wishList","/mall_analysis","/analysisPage"}, initParams = @WebInitParam(name = "LOGIN_PATH", value = "Member_Login"))
 public class AccessController extends HttpFilter implements Filter {
 	private String LOGIN_PATH;
 

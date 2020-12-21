@@ -8,76 +8,21 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
-	rel="stylesheet">
-
-<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="css/animate.css">
-
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
-
-<link rel="stylesheet" href="css/aos.css">
-
-<link rel="stylesheet" href="css/ionicons.min.css">
-
-<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
-<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-<style>
-.backstage-footer-ground {
-	width: 100%;
-	top: 800px;
-	position: absolute;
-	box-sizing: border-box;
-	
-}
 
-#project_backstage {
-	width: 150px;
-	position: absolute;
-	font-weight: bold;
-	top: 150px;
-	left: 15px;
-	color: white;
-	display: block;
-}
-
-#backstage_page {
-	position: absolute;
-	top: 150px;
-	left: 250px;
-	right: 50px;
-	text-align: center;	
-}
-
-input{
-
-align-content: center;
-border: #82ae46 2px solid;
-
-}
-
-</style>
+<!-- //============================返回頁面=====================================================// -->
 <script type="text/javascript">
-//============================返回頁面=====================================================//
 
 function backHome(){
 	document.act.action= "allActFarmer.do";
@@ -199,33 +144,32 @@ function fastinsert3(){
 </head>
 
 <body class="goto-here">
-<!-- --------Header------------------------------------- -->
-	<jsp:include page="/WEB-INF/pages/header.jsp" />
-<!-- --------管理左邊bar-------------------------------- -->
-<div class="nav">
-	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />
-</div>	
-<section class="content-wrapper row justify-content-center">
-<div>
+<!-- --------Header&sideBar------------------------------------- -->
+	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
+	
+<!-------------------------內容區--------------------------------->	
+<section class="content-wrapper row justify-content-center" style="background-color: #FFFFFF">
+<div style="border-style: solid; border-color:#82ae46;margin:20px;padding:20px; padding-left:50px; width:800px" >
 <div class="form-inline" >
 <h3>一日農夫申請活動</h3>&emsp;&emsp;&emsp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">活動1</button>&ensp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert2()">活動2</button>&ensp;
   <button class="btn btn-primary " value="fastinsert" onclick="fastinsert3()">活動3</button>&ensp;
 </div>	
+<hr>
 <form:form action="actFarmerInsert.do" modelAttribute="farmerinsert" method="POST" enctype="multipart/form-data" name="act"  >
-<table class="justify-content-right">
+<table class="justify-content-right" >
 	<tr>
 <%-- 		<td><form:label path="actId" type="hidden">活動編號</form:label></td> --%>
-		<td><form:input path="actId" type="hidden" ></form:input></td>
+		<td colspan="4"><form:input path="actId" type="hidden" ></form:input></td>
 	</tr>
 	<tr>
 		<td><form:label for="actName" path="actName">活動名稱<span style="color: red">*</span></form:label></td>
-		<td><form:input path="actName" type="text" id="actName" /><span id="nameMsg"></span></td>
+		<td colspan="3"><form:input path="actName" type="text" id="actName" required="required"/><span id="nameMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="actType">活動類型</form:label></td>
-		<td><form:select path="actType" type="text" id="actType" >		
+		<td colspan="3"><form:select path="actType" type="text" id="actType" >		
 				<form:option value="體驗類">體驗類</form:option>
 				<form:option value="採收類">採收類</form:option>
 				<form:option value="文藝類">文藝類</form:option>
@@ -235,11 +179,11 @@ function fastinsert3(){
 	</tr>
 	<tr>
 		<td><form:label path="actAddr">活動地址<span style="color: red">*</span></form:label></td>
-		<td><form:input path="actAddr" type="text" id="actAddr"/><span id="addrMsg"></span></td>
+		<td colspan="3"><form:input path="actAddr" type="text" id="actAddr" required="required"/><span id="addrMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="tel">連絡電話<span style="color: red">*</span></form:label></td>
-		<td><form:input path="tel" type="text" id="tel" /><span id="telMsg"></span></td>
+		<td colspan="3"><form:input path="tel" type="text" id="tel" required="required"/><span id="telMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="actDateSta">活動開始日期<span style="color: red">*</span></form:label></td>
@@ -249,45 +193,45 @@ function fastinsert3(){
 	</tr>
 	<tr>
 		<td><form:label path="actDateEnd">活動結束日期<span style="color: red">*</span></form:label></td>
-		<td><form:input path="actDateEnd" type="date" id="actDateEnd" /></td>
+		<td><form:input path="actDateEnd" type="date" id="actDateEnd" required="true"/></td>
 		<td><form:label path="actTimeEnd">活動結束時間<span style="color: red">*</span></form:label></td>
-		<td><form:input path="actTimeEnd" type="time" id="actTimeEnd" ></form:input></td>
+		<td><form:input path="actTimeEnd" type="time" id="actTimeEnd" required="true"></form:input></td>
 	</tr>
 	<tr>
 		<td><form:label path="numLim">活動人數上限<span style="color: red">*</span></form:label></td>
-		<td><form:input path="numLim" type="text" id="numLim" /><span id="numLimMsg"></span></td>
+		<td colspan="3"><form:input path="numLim" type="text" id="numLim" required="required"/><span id="numLimMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="price">活動費用<span style="color: red">*</span></form:label></td>
-		<td><form:input path="price" type="text" id="price" /><span id="priceMsg"></span></td>
+		<td colspan="3"><form:input path="price" type="text" id="price" required="required"/><span id="priceMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="actDescri">活動描述:</form:label></td>
 <%-- 		<td><form:input path="actDescri" type="text" required="required"/></td> --%>
-		<td colspan="2"><form:textarea cols="50" rows="6" path="actDescri" id="actDescri"></form:textarea><span id="descriMsg"></span></td>
+		<td colspan="3"><form:textarea cols="50" rows="6" path="actDescri" id="actDescri" required="required"></form:textarea><span id="descriMsg"></span></td>
 	</tr>
 	<tr>
 		<td><form:label path="actImg">活動海報<span style="color: red">*</span></form:label></td>
-		<td><form:input path="multipartFile" type="file" class="InputClass" id="imgInp" accept="image/*"/><span id="fileMsg"></span> 
+		<td colspan="3"><form:input path="multipartFile" type="file" class="InputClass" id="imgInp" accept="image/*" required="true"/><span id="fileMsg"></span> 
 <!-- 			<img height='230' width='230' id="blah" src="#" alt="上傳照片" />		 -->
 		</td>
 	</tr>
 	<tr>
 		<td><form:label path="signDateSta">報名開始日期<span style="color: red">*</span></form:label></td>
-		<td><form:input path="signDateSta" type="date" id="signDateSta" /></td>
+		<td><form:input path="signDateSta" type="date" id="signDateSta" required="true"/></td>
 		<td><form:label path="signTimeSta">報名開始時間<span style="color: red">*</span></form:label></td>
-		<td><form:input path="signTimeSta" type="time" id="signTimeSta" ></form:input></td>
+		<td><form:input path="signTimeSta" type="time" id="signTimeSta" required="true"></form:input></td>
 	</tr>
 	<tr>
 		<td><form:label path="signDateEnd">報名結束日期<span style="color: red">*</span></form:label></td>
-		<td><form:input path="signDateEnd" type="date" id="signDateEnd" /></td>
+		<td><form:input path="signDateEnd" type="date" id="signDateEnd" required="true"/></td>
 		<td><form:label path="signTimeEnd">報名結束時間<span style="color: red">*</span></form:label></td>
-		<td><form:input path="signTimeEnd" type="time" id="signTimeEnd" ></form:input></td>
+		<td><form:input path="signTimeEnd" type="time" id="signTimeEnd" required="true"></form:input></td>
 	</tr>
 	<tr>
 		<td><form:label path="sigStat" required="ture">報名狀態:</form:label></td>
-		<td>
-			<form:radiobutton path="sigStat" value="0" id="sigStat"/>未開放
+		<td colspan="3">
+			<form:radiobutton path="sigStat" value="0" id="sigStat" required="true"/>未開放
 			<form:radiobutton path="sigStat" value="1" id="sigStat"/>開放中
 			<form:radiobutton path="sigStat" value="2" id="sigStat"/>已截止			
 		</td>
@@ -296,7 +240,7 @@ function fastinsert3(){
 	<tr>
 
 		<td colspan="2" align="center"><form:button class="btn btn-primary py-2 px-3" value="Send" id="send">送出</form:button></td>	
-		<td><form:button class="btn btn-primary py-2 px-3" value="back" onclick="backHome()">回管理頁面</form:button></td>		
+		<td colspan="2" align="center"><form:button class="btn btn-primary py-2 px-3" value="back" onclick="backHome()">回管理頁面</form:button></td>		
 	</tr>
 </table>
 </form:form>

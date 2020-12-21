@@ -357,7 +357,7 @@
 		if (event.target.files && event.target.files[0]) {
 			image.src = URL.createObjectURL(event.target.files[0]);
 		} else {
-			image.src = "<c:url value='retrieveImageServlet?id=${updateBean.productId}&type=PRODUCT' />";
+			image.src = "<c:url value='retrieveImageServlet?id=${updateBean1.productId}&type=PRODUCT' />";
 		}
 	};
 	//設定願望清單

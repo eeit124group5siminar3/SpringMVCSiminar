@@ -61,18 +61,18 @@
 
 <!-- 	搜尋bar -->
 	<section class="ftco-section ftco-degree-bg">
-<!-- 		<div class="container" > -->
-<!-- 			<div class="row justify-content-center"> -->
-<!-- 				<div class="col-md-10 mb-5 text-center"> -->
-<!-- 					<ul class="act-type" id="product-category"></ul> -->
-<!-- 					<form class="product-category" action="actFarmerListSearch.do"" method="POST"> -->
-<!-- 						<input type="search" name="searchString" id="searchString" -->
-<%-- 							value="${searchString}"/> --%>
-<!-- 						<button name="searchButton" style="border-radius: 5px;" onclick="list()">查詢</button> -->
+		<div class="container" >
+			<div class="row justify-content-center">
+				<div class="col-md-10 mb-5 text-center">
+					<ul class="act-type" id="product-category"></ul>
+<!-- 					<form class="product-category" action="actFarmerPreListSearch.do" method="POST"> -->
+						<input type="search" name="searchString" id="searchString"
+							value="${searchString}"/>
+						<button class="btn btn-primary"name="searchButton" style="border-radius: 5px;" onclick="searchlist()">查詢</button>
 <!-- 					</form> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div>		 -->
+				</div>
+			</div>
+		</div>		
 <!-- 活動列表 -->
 	 <div class="container ftco-animate col-md-8 mb-5" id="actfarmerlist"></div>
 
@@ -83,7 +83,7 @@
             <div class="block-27"><ul id="page_id"></ul></div>
           </div>
         </div>
-       </form>
+    </form>
 	</section>		
 	
 	
@@ -124,9 +124,61 @@
 <script type="text/javascript">
 var currentPage = 1;
 var totalPages;
+console.log(searchString);
 function list(){
 	$.get({
 	url:"${pageContext.request.contextPath}/actFarmerList.do/"+currentPage,
+	success:function(response){ 
+		console.log(response);
+		let data = response.data;
+		let content="";
+		for(var i = 0; i<data.length; i++){
+		content+=
+		`<div class="col-md-12 d-flex"><div class="blog-entry align-self-stretch d-md-flex">
+			<a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="block-20" style="background-image: url('<c:url value='ActImageController?id=\${data[i].actId}&type=ACTFARMER'/>');">&gt;</a>
+				<div class="text d-block pl-md-4">
+						<div class="meta mb-3">
+			                 <div><a href="#">\${data[i].actType}</a></div>
+						</div>
+						 <h3 class="heading"><a href="#">\${data[i].actName}</a></h3>
+			             	<p>活動地址:  \${data[i].actAddr}<br>活動電話: \${data[i].tel}<br>
+			            	活動日期: \${data[i].actDateSta}~\${data[i].actDateEnd}</p>
+			                <p><a href="<c:url value='getSingleAct.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">了解更多</a>
+		                <a href="<c:url value='actSignPreInsert.do?id=\${data[i].actId}'/>" class="btn btn-primary py-2 px-3">我要報名</a></p>
+			        </div>
+			</div></div>`;
+		}
+		$('#actfarmerlist').html(content);
+		
+		currentPage = response.pageNo;
+		totalPages=response.totalPages;
+		content = `
+        <li>
+			<div id="blfirst"><a href="javascript:pagechange('first')">&lt;&lt;</a></div>
+	
+		</li>
+        <li>
+        	<div id="blprev"><a href="javascript:pagechange('pre')">&lt;</a></div>
+		</li>
+		<li>第 \${currentPage} 頁/ 共 \${totalPages} 頁</li>
+		<li>
+			<div id="blnext"><a href="javascript:pagechange('next')">&gt;</a></div>
+		</li>
+		<li>
+			<div id="bllast"><a href="javascript:pagechange('last')">&gt;&gt;</a></div>
+		</li>`;
+		$('#page_id').html(content);
+	}
+})
+}
+
+function searchlist(){
+	var searchString=$("#searchString").val();
+	var currentPage = 1;
+	var totalPages;
+	$.post({
+	url:"${pageContext.request.contextPath}/actFarmerListSearch.do/"+currentPage,
+	data:{"searchString":searchString},
 	success:function(response){ 
 		console.log(response);
 		let data = response.data;
@@ -151,30 +203,29 @@ function list(){
 		
 		currentPage = response.pageNo;
 		totalPages=response.totalPages;
+		console.log(totalPages);
 		content = `
         <li>
-			<div id="blfirst"><a href="javascript:pagechange('first')"> 
-			<img border='0' alt='第一頁' height='30' width='30' src='./images/first-icon.png' /> </a></div>
+			<div id="blfirst"><a href="javascript:pagechangeP('first')">&lt;&lt;</a></div>
 	
 		</li>
         <li>
-        	<div id="blprev"><a href="javascript:pagechange('pre')">
-			<img border='0' alt='前一頁' height='30' width='30' src='./images/prev-icon.png' /></a></div>
+        	<div id="blprev"><a href="javascript:pagechangeP('pre')">&lt;</a></div>
 		</li>
-		<li>\${currentPage} / \${totalPages}</li>
+		<li>第 \${currentPage} 頁/ 共 \${totalPages} 頁</li>
 		<li>
-			<div id="blnext"><a href="javascript:pagechange('next')">
-			<img border='0' alt='下一頁' height='30' width='30' src='./images/next-icon.png'/> </a></div>
+			<div id="blnext"><a href="javascript:pagechangeP('next')">&gt;</a></div>
 		</li>
 		<li>
-			<div id="bllast"><a href="javascript:pagechange('last')">
-			<img border='0' alt='最末頁' height='30' width='30' src='./images/last-icon.png' /> </a></div>
+			<div id="bllast"><a href="javascript:pagechangeP('last')">&gt;&gt;</a></div>
 		</li>`;
 		$('#page_id').html(content);
-	}
+	},
+
 })
 }
 window.onload = list();
+
 function pagechange(value){	
 	if(value=='first'){
 		currentPage=1;
@@ -202,6 +253,32 @@ function pagechange(value){
 	}
 }
 
+function pagechangeP(value){	
+	if(value=='first'){
+		currentPage=1;
+		searchlist();
+	}else if(value =='pre'){
+		if(currentPage>1){
+			currentPage--;
+			searchlist();
+		}else{
+			currentPage=1;
+			searchlist();
+		}		
+	}
+	else if(value =='next'){
+		if(currentPage<totalPages){
+			currentPage++;
+			searchlist();
+		}else{
+			currentPage=totalPages;
+			searchlist();
+		}	
+	}else{
+		currentPage=totalPages;
+		searchlist();
+	}
+}
 
 </script>
 </body>

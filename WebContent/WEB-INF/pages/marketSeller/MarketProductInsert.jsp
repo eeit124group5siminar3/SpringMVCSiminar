@@ -146,7 +146,8 @@
     </tr>  
         <tr height="36" >
       <td height="61" colspan="6" align="center">
-         <form:button value="Send">新增</form:button>
+         <form:button class="btn btn-primary py-3 px-4" value="Send">新增</form:button>
+         <a class="btn btn-primary py-3 px-4" href="<c:url value='/MarketProduct.selectAll'/>" >返回</a>
       </td>
     </tr>
    
