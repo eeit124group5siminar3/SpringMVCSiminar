@@ -141,7 +141,7 @@
 			var itemId = button.data('whatever');
 			var scoreContent="<img style='width: 50px'></img> <img style='width: 50px'></img> <img style='width: 50px'></img> <img style='width: 50px'></img> <img style='width: 50px'></img><hr /><button type='button' class='btn btn-primary btn-block' id='makechoice'>評分</button>";	
 			$("div#score").empty().append(scoreContent);
-		$("div img").attr("src", "/siminar/images/star0.png").css("margin-left", "30px").mouseover(mouseover).mouseout(mouseout).click(choosen);
+		$("div>img").attr("src", "/siminar/images/star0.png").css("margin-left", "30px").mouseover(mouseover).mouseout(mouseout).click(choosen);
 		 	function mouseover() {
 	            $(this).attr("src", "/siminar/images/star1.png").prevAll().attr("src", "/siminar/images/star1.png").end().nextAll().attr("src", "/siminar/images/star0.png");
 	        }
