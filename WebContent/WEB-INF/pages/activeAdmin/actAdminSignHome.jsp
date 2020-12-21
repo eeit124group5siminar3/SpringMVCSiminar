@@ -37,7 +37,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 
  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
- <link rel="stylesheet" href="css/style.css">
  <link rel="stylesheet" href="css/admin_chatbox.css">
  
 <style>
@@ -71,8 +70,14 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 }
 
 .btn-primary{
-	background-color: #b8cdd4;
-	border-color:#b8cdd4;
+	background-color: #e6e1d3;
+	border-color:#e6e1d3;
+	hover :#ccc6ad;
+}
+.btn:hover{
+	background-color:#ccc6ad;
+	border-color:#ccc6ad;
+	
 }
 
 a{
@@ -165,7 +170,7 @@ a{
 	<script>
 	$(document).ready(function() {
 	    $('#actord').DataTable();
-	} );
+	});
 	</script>
 	
 	<script>
