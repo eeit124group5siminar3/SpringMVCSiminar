@@ -46,7 +46,10 @@ function backHome(){
 <body class="goto-here">
 
 	<jsp:include page="../header.jsp" />
-	
+
+	<c:if test="${!empty login_ok}">
+		<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>	
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
 
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">

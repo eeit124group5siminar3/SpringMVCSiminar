@@ -147,6 +147,9 @@ function fastinsert3(){
 <!-- --------Header&sideBar------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 	
+	<c:if test="${!empty login_ok}">
+		<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <!-------------------------內容區--------------------------------->	
 <section class="content-wrapper row justify-content-center" style="background-color: #FFFFFF">
 <div style="border-style: solid; border-color:#82ae46;margin:20px;padding:20px; padding-left:50px; width:800px" >
