@@ -139,6 +139,7 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 		click_member_name = $(this).find("input").val();
 		//顯示當前點擊的訊息
 		$("#abc"+click_member_name).css("display","");
+		console.log("%%%%%"+previous_name);
 		//第一次點擊左邊列表 創建此次點擊的變數值
 		if(previous_name == ""){
 			previous_name=click_member_name;
