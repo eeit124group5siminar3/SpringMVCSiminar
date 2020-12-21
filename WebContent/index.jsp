@@ -181,7 +181,7 @@
 						<div class="col-md-6">
 							<div
 								class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
-								style="background-image: url(images/category-1.jpg);">
+								style="background-image: url(images/葉菜類.jpg);">
 								<div class="text px-3 py-1">
 									<h2 class="mb-0">
 										<a onclick="gotoMallByCategory(1)">葉菜類</a>
@@ -204,7 +204,7 @@
 				<div class="col-md-4">
 					<div
 						class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
-						style="background-image: url(images/category-3.jpg);">
+						style="background-image: url(images/根莖類.jpg);">
 						<div class="text px-3 py-1">
 							<h2 class="mb-0">
 								<a onclick="gotoMallByCategory(2)">根莖類</a>
@@ -212,7 +212,7 @@
 						</div>
 					</div>
 					<div class="category-wrap ftco-animate img d-flex align-items-end"
-						style="background-image: url(images/category-4.jpg);">
+						style="background-image: url(images/瓜果類.jpg);">
 						<div class="text px-3 py-1">
 							<h2 class="mb-0">
 								<a onclick="gotoMallByCategory(3)">瓜果類</a>

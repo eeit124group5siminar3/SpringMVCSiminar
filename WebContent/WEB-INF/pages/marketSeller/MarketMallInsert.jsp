@@ -44,7 +44,7 @@
  <section class="ftco-section ftco-degree-bg">
 <div>
 
-		<c:if test="${!empty login_ok}">
+    <c:if test="${!empty login_ok}">
 	<jsp:include page="/WEB-INF/pages/Message.jsp" />
 	</c:if>
 <h2 align="center">

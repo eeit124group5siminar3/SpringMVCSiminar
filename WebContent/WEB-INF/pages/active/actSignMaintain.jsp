@@ -20,34 +20,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	<c:if test="${!empty login_ok}">
 		<jsp:include page="/WEB-INF/pages/Message.jsp" />
 	</c:if>
-<!--------------------------------- 原本的Bootstrap--------------------------------------- -->
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
-	rel="stylesheet">
 
-<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="css/animate.css">
-
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
-
-<link rel="stylesheet" href="css/aos.css">
-
-<link rel="stylesheet" href="css/ionicons.min.css">
-
-<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="css/jquery.timepicker.css">
-
-<link rel="stylesheet" href="css/flaticon.css">
-<link rel="stylesheet" href="css/icomoon.css">
-<link rel="stylesheet" href="css/style.css">
 
 <!--------------------------------- 管理員  -------------------------------- -->
 <link
@@ -57,32 +30,30 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
+<link rel="stylesheet" href="css/icomoon.css">
 
 <!-- -------------------DataTable引入的CDN---------------------------------------------------------------------- -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
+
 <style>
 
-
-#project_backstage {
-	width: 150px;
-	position: absolute;
-	font-weight: bold;
-	top: 150px;
-	left: 15px;
-	color: white;
-	display: block;
-}
-
-#backstage_page {
-	position: absolute;
-	top: 150px;
-	left: 250px;
-	right: 50px;
-	text-align: center;
-}
 
 .btn-primary{
 	background-color: #b8cdd4;
@@ -112,14 +83,11 @@ a{
 <body class="goto-here">
 
 <!-- --------Header------------------------------------- -->
-	<jsp:include page="/WEB-INF/pages/header.jsp" />
+	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 
 <div class="form-group">
-<!-- --------管理左邊bar-------------------------------- -->
-<section class="content-wrapper d-flex justify-content-center">
-<div class="nav">
-	<jsp:include page="/WEB-INF/pages/testLeft.jsp" />	
-</div>
+<section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">
+
 <!-------------------------內容區--------------------------------->
 <div class="col-9" style="width:80%; margin:0 auto" >
 <h3 align="center">報名管理-一日農夫</h3>
@@ -194,7 +162,26 @@ a{
 <!-- -------------------DataTable的javascript---------------------------------------------------------------------- -->
 	<script>
 	$(document).ready(function() {
-	    $('#actOrd').DataTable();
+	    $('#actOrd').DataTable({
+	    	language: {
+	    	    "lengthMenu": "顯示 _MENU_ 筆資料",
+	    	    "sProcessing": "處理中...",
+	    	    "sZeroRecords": "没有匹配结果",
+	    	    "sInfo": "目前有 _MAX_ 筆資料",
+	    	    "sInfoEmpty": "目前共有 0 筆紀錄",
+	    	    "sInfoFiltered": " ",
+	    	    "sInfoPostFix": "",
+	    	    "sSearch": "尋找:",
+	    	    "sEmptyTable": "尚未有資料紀錄存在",
+	    	    "oPaginate": {
+	    	        "sFirst": "首頁",
+	    	        "sPrevious": "上一頁",
+	    	        "sNext": "下一頁",
+	    	        "sLast": "末頁"
+	    	    }
+	    	}
+
+		    });
 	} );
 	</script>
 </body>

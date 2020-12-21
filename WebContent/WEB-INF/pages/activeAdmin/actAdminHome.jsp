@@ -164,7 +164,25 @@ a{
 <!-- -------------------DataTable的javascript---------------------------------------------------------------------- -->
 	<script>
 	$(document).ready(function() {
-	    $('#actFarmer').DataTable();
+	    $('#actFarmer').DataTable({
+	    	language: {
+	    	    "lengthMenu": "顯示 _MENU_ 筆資料",
+	    	    "sProcessing": "處理中...",
+	    	    "sZeroRecords": "没有匹配结果",
+	    	    "sInfo": "目前有 _MAX_ 筆資料",
+	    	    "sInfoEmpty": "目前共有 0 筆紀錄",
+	    	    "sInfoFiltered": " ",
+	    	    "sInfoPostFix": "",
+	    	    "sSearch": "尋找:",
+	    	    "sEmptyTable": "尚未有資料紀錄存在",
+	    	    "oPaginate": {
+	    	        "sFirst": "首頁",
+	    	        "sPrevious": "上一頁",
+	    	        "sNext": "下一頁",
+	    	        "sLast": "末頁"
+	    	   		 }
+	    		}
+		    });
 	} );
 	</script>
 <!-- -------------------SweetAlert引入的javascript---------------------------------------------------------------------- -->	
