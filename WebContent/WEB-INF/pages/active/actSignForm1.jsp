@@ -33,7 +33,15 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-    
+
+<script>
+function fastinsert(){
+	var memEmail="test.iiiseminar5@gmail.com";
+
+		$("#memEmail").val(memEmail);
+
+}
+</script>  
  
     
 </head>
@@ -61,7 +69,12 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-7 ftco-animate">
-			<h3 class="mb-4 billing-heading">活動報名</h3>
+          	<div class="form-inline">
+			<h1 class="mb-4 billing-heading" style="font-weight: bold ;font-size:50px; color:#82ae46;">活動報名</h1>  
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			<button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">更改E-mail</button>
+			</div>
+			<hr>
 			<form action="actSignInsert.do" method="POST" class="billing-form">
 	          <div class="row align-items-end">
 	          <div class="col-md-12">
@@ -87,7 +100,7 @@
 		         <div class="col-md-12">
 		            <div class="form-group">
 	                	<label for="memEmail">會員信箱</label>
-	                  	<input type="text" class="form-control" value="${mbBean.member_email}" name="memEmail"/>
+	                  	<input type="text" class="form-control" value="${mbBean.member_email}" name="memEmail" id="memEmail"/>
 	                </div>
 		         </div>
                	 <div class="w-100"></div>
