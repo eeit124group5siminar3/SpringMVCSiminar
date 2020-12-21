@@ -214,18 +214,18 @@
 
 	<script>
 	function fastInput(){
-		document.forms[0][0].value="路人甲";
-		document.forms[0][1].value=0919633486;
-		document.forms[0][2].value="桃園市中壢區中大路300號";
-		document.forms[0][3].value=3;
-		document.forms[0][4].value=87654321;
+		document.forms[1][0].value="路人甲";
+		document.forms[1][1].value=0919633486;
+		document.forms[1][2].value="桃園市中壢區中大路300號";
+		document.forms[1][3].value=3;
+		document.forms[1][4].value=87654321;
 		}
 	function fastReset(){
-		document.forms[0][0].value=document.forms[0][0].defaultValue;
-		document.forms[0][1].value=document.forms[0][1].defaultValue;
-		document.forms[0][2].value=document.forms[0][2].defaultValue;
-		document.forms[0][3].value=1;
-		document.forms[0][4].value=document.forms[0][4].defaultValue;
+		document.forms[1][0].value=document.forms[0][0].defaultValue;
+		document.forms[1][1].value=document.forms[0][1].defaultValue;
+		document.forms[1][2].value=document.forms[0][2].defaultValue;
+		document.forms[1][3].value=1;
+		document.forms[1][4].value=document.forms[0][4].defaultValue;
 		}
 		
 	</script>
