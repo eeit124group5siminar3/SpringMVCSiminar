@@ -204,7 +204,7 @@
      								<h4 class="menu__item-title">\${val.name}</h4>
      								<p class="menu__item-desc">\${val.desc}</p>
      								<span class="menu__item-price">累積人氣: \${val.views}</span>
-     								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >Read more</a>            
+     								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >看食譜去</a>            
      			                    </p>
      							</div>
      						</div>
@@ -251,7 +251,7 @@
 								<h4 class="menu__item-title">\${val.name}</h4>
 								<p class="menu__item-desc">\${val.desc}</p>
 								<span class="menu__item-price">累積人氣: \${val.views}</span>
-								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >Read more</a>            
+								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >看食譜去</a>            
 			                    </p>
 							</div>
 						</div>

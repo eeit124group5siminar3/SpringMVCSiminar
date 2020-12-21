@@ -80,11 +80,10 @@
 					class="nav-link dropdown-tgogle" href="#" id="dropdown04"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 20px">食譜</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a
-							class="dropdown-item"  style="font-size: 15px"
-							href="<c:url value='blogPage'/>">討論區</a>
 						<a class="dropdown-item"  style="font-size: 15px"
 							href="<c:url value='frontPage.controller'/>">食譜</a> 
+						<a class="dropdown-item"  style="font-size: 15px"
+							href="<c:url value='blogPage'/>">討論區</a>
 <!-- 						<a class="dropdown-item" -->
 <%-- 							href="<c:url value='analysisPage'/>">分析圖表</a>  --%>
 <!-- 							<a -->

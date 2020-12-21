@@ -332,7 +332,7 @@
 					</div>
 
 					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">Tag Cloud</h3>
+						<h3 class="heading">熱們標籤</h3>
 						<div class="tagcloud">
 							<a href="#" class="tag-cloud-link">fruits</a> <a href="#"
 								class="tag-cloud-link">tomatoe</a> <a href="#"
@@ -346,7 +346,7 @@
 					</div>
 
 					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">Paragraph</h3>
+						<h3 class="heading">作者介紹</h3>
 						<p>${detailBean.introduction}</p>
 					</div>
 				</div>

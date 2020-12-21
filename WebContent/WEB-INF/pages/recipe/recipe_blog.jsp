@@ -121,7 +121,7 @@
 											<%-- 											<p>${BeanToken.content}</p> --%>
 											<p>
 												<a href="./SinglePage?blog_id=${searchAll[i].blog_id}"
-													class="btn btn-primary py-2 px-3">Read more</a>
+													class="btn btn-primary py-2 px-3">悅讀</a>
 											</p>
 										</div>
 									</div>
@@ -198,7 +198,7 @@
 
 						</c:forEach>
 						<div class="sidebar-box ftco-animate">
-							<h3 class="heading">Tag Cloud</h3>
+							<h3 class="heading">熱們標籤</h3>
 							<div class="tagcloud">
 								<a href="#" class="tag-cloud-link">fruits</a> <a href="#"
 									class="tag-cloud-link">tomatoe</a> <a href="#"

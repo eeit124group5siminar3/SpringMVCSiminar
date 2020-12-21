@@ -191,7 +191,7 @@
 			                data:{
 			                    labels:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
 			                    datasets:[{
-			                        label:'文章熱門度分析',
+			                        label:'文章熱門度',
 			                        data:[
 			                        	month1,
 			                        	month2,
@@ -233,7 +233,7 @@
 			                options:{
 			                    title:{
 			                        display:true,
-			                        text:'most popular month',
+			                        text:'最熱門月份',
 			                        fontSize:25
 			                    },
 			                    legend:{

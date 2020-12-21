@@ -111,7 +111,7 @@ a{
 				<td>
 				<div class="form-inline justify-content-center">
 						<a href="<c:url value='/recipeDetail.controller?rec_id=${bean.rec_id}'/>" class="btn btn-primary py-2 px-3 ">查詢</a> 
-					&emsp;
+					
 						<a href="#" class="btn btn-primary py-2 px-3 " onclick="fun(${bean.rec_id})">移除</a> 
 				</div>
 				</td>
