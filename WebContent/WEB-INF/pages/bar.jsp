@@ -159,8 +159,8 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <form name="form1" action="memberUpdate.controller" method="post">
-                <a href="javascript:document.form1.submit();" class="nav-link">
+                <form name="formsignup" action="memberUpdate.controller" method="post">
+                <a href="javascript:document.formsignup.submit();" class="nav-link">
                   &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
                   <p>資料修改</p>
                 </a>
