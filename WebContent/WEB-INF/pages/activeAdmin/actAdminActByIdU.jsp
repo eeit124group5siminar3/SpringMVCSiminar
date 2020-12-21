@@ -26,6 +26,12 @@
 <!-- -------------------Sweetalert引入的CDN---------------------------------------------------------- -->
 <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 
+<!-- -------------------websocket引入的CDN---------------------------------------------------------------------- -->
+
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+ <link rel="stylesheet" href="css/admin_chatbox.css">
+
 <style>
   .billboard{
 
@@ -74,6 +80,7 @@
 <body class="goto-here">
 
 	<jsp:include page="/WEB-INF/pages/testAdminH.jsp" />
+	<jsp:include page="/WEB-INF/pages/Admin_message.jsp" />
 	
 <!-------------------------內容區--------------------------------->
 <section class="content-wrapper d-flex justify-content-center">

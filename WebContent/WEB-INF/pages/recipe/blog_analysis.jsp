@@ -87,10 +87,10 @@
 						<tbody>
 							<c:forEach var="bean" items="${blogList}">
 								<tr>
-									<td><a href="./SinglePage?blog_id=${bean.blog_id}">${bean.title}</a></td>
-									<td>${bean.date}</td>
-									<td>${bean.name}</td>
-									<td>${bean.counts}</td>
+									<td><a href="./SinglePage?blog_id=${bean.blog_id}" style="font-size: 20px;">${bean.title}</a></td>
+									<td style="font-size: 20px;">${bean.date}</td>
+									<td style="font-size: 20px;">${bean.name}</td>
+									<td style="font-size: 20px;">${bean.counts}</td>
 									<td>
 										<div class="form-inline justify-content-center">
 											<a href="#" onclick="funPerMonth(${bean.blog_id})"

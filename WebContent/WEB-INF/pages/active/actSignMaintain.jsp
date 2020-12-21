@@ -17,6 +17,9 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+	<c:if test="${!empty login_ok}">
+		<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <!--------------------------------- 原本的Bootstrap--------------------------------------- -->
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"

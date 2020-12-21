@@ -44,6 +44,9 @@
 <!-- --------Header&sideBar------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 
+	<c:if test="${!empty login_ok}">
+		<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <!-------------------------內容區--------------------------------->
 <section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">
 <div class="col-12" style="width:98%; margin:20px" >

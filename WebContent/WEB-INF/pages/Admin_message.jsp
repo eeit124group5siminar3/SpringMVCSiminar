@@ -31,7 +31,7 @@
           <div class="type_msg">
             <div class="input_msg_write">
               <input type="text" id="text" class="write_msg" placeholder="請輸入訊息..." onkeydown="_key()" />
-              <button class="msg_send_btn" id="send_message" type="button" onclick="send()"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+              <button class="msg_send_btn" id="send_message" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
             </div>
           </div>
         </div>
@@ -48,7 +48,9 @@
 	</div>
 </div>
 <input type="hidden" id="previous_name">   
-<input type="hidden" id="click_name">      
+<input type="hidden" id="click_name">    
+<input type="hidden" id="previous1_name">    
+  
    
       			<script src="https://kit.fontawesome.com/4a5fa9ba76.js" crossorigin="anonymous"></script>
       
@@ -137,7 +139,6 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 		click_member_name = $(this).find("input").val();
 		//顯示當前點擊的訊息
 		$("#abc"+click_member_name).css("display","");
-
 		//第一次點擊左邊列表 創建此次點擊的變數值
 		if(previous_name == ""){
 			previous_name=click_member_name;
@@ -155,7 +156,39 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 
 	//訊息送出新增我方訊息
 	$("#send_message").on("click",function(){
+		let click_name_key = $("#click_name").val();
+		console.log("@@@"+click_name_key);
+		console.log("@@@@@@@"+click_member_name);
 		var message_content = $("#text").val();
+		if(click_member_name == null){
+			$("#abc"+click_name_key).append("<div style='text-align:right;color:black';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>"+"<br>");
+
+			$("."+click_name_key).find("p").html(message_content);
+			
+			$.ajax({
+				url :"admin_websocket_content.controller",
+				data : {
+					name : click_name_key,
+					socket : message_content,
+				},
+				type : "POST",
+				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+					console.log(data);
+				}
+			});
+			$.ajax({
+				url :"admin_websocket_content_all.controller",
+				data : {
+					name : click_name_key,
+					socket : $("#abc"+click_name_key).html(),
+				},
+				type : "POST",
+				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+				}
+			});
+		}else{
 		$("#abc"+click_member_name).append("<div style='text-align:right;color:black';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>"+"<br>");
 
 		$("."+click_member_name).find("p").html(message_content);
@@ -183,8 +216,8 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 			success : function(data) {
 			}
 		});
-		$("#text").val("");
-		
+		}
+		send();
 	});
 
 
@@ -220,15 +253,56 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 	//將訊息送至後端
 	function send() {
 		var message = document.getElementById('text').value;
+		var click_name = $("#click_name").val();
+		if(click_name == ""){
+			//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
+			websocket.send(JSON.stringify({'message':message,'role':click_member_name,'socketId':"A"}));
+			$("#text").val("");
+		}else{
+			//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
+			websocket.send(JSON.stringify({'message':message,'role':click_name,'socketId':"A"}));
+			$("#text").val("");
+		}
 
-		//message作为发送的信息，role作为发送的对象标识，socketId是此次会话的标识
-		websocket.send(JSON.stringify({'message':message,'role':click_member_name,'socketId':"A"}));
-		$("#text").val("");
+
 		
 	}
 	function _key() { 
 		if(event.keyCode ==13) {
+			console.log("@@@@@@@@@@@@");
+			console.log("@@"+click_member_name);
+			console.log($("#click_name").val());
+			let click_name_key = $("#click_name").val();
 			var message_content = $("#text").val();
+			if(click_member_name == null){
+				$("#abc"+click_name_key).append("<div style='text-align:right;color:black';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>"+"<br>");
+
+				$("."+click_name_key).find("p").html(message_content);
+				
+				$.ajax({
+					url :"admin_websocket_content.controller",
+					data : {
+						name : click_name_key,
+						socket : message_content,
+					},
+					type : "POST",
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(data) {
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url :"admin_websocket_content_all.controller",
+					data : {
+						name : click_name_key,
+						socket : $("#abc"+click_name_key).html(),
+					},
+					type : "POST",
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(data) {
+					}
+				});
+			}else{
 			$("#abc"+click_member_name).append("<div style='text-align:right;color:black';>"+message_content+"<br>"+"<font style='color:#E0E0E0'>"+year+"年"+m+"月"+day+"日"+h+":"+minute+"</font>"+"</div>"+"<br>");
 
 			$("."+click_member_name).find("p").html(message_content);
@@ -256,6 +330,7 @@ if(minute<10){  //分鐘小於10分會顯示個位數，所以＋0
 				success : function(data) {
 				}
 			});
+			}
 		send(); 
 		}
 	} 
@@ -342,10 +417,12 @@ $(document).ready(function(){
 			}
 			//更新上一次點擊的變數值為此次點擊的變數值
 			$("#previous_name").val(ref_click_member_name);
+			
 // 			ref_previous_name=ref_click_member_name;
 			console.log(ref_click_member_name);
 			console.log(ref_previous_name);
    	}
+   	
 </script>
     
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

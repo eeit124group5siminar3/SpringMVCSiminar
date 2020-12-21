@@ -32,6 +32,9 @@ function backHome(){
 <!-- --------Header&sideBar------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 
+	<c:if test="${!empty login_ok}">
+		<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <!-------------------------內容區--------------------------------->
 <section class="content-wrapper row justify-content-center" style="background-color: #FFFFFF">
 <div style="border-style: solid; border-color:#82ae46;margin:20px;padding:20px; width:800px" >
@@ -121,7 +124,8 @@ function backHome(){
 	<tr>
 		<td colspan="2" align="center">
 			<form:button class="btn btn-primary py-1 px-2" value="Send" >送出</form:button>&emsp;
-			<form:button class="btn btn-primary py-1 px-2" value="back" onclick="backHome()">回管理頁面</form:button>
+<%-- 			<form:button class="btn btn-primary py-1 px-2" value="back" onclick="backHome()">回管理頁面</form:button> --%>
+			<a href="<c:url value='allActFarmer.do'/>" class="btn btn-primary py-2 px-3">回管理頁面</a></p>		
 		</td>			
 	</tr>
 

@@ -9,20 +9,21 @@
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <link rel="stylesheet" href="css/fontawesome-free/all.min.css">
 <link rel="stylesheet"
 	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="css/dist/adminlte.min.css">
-<link rel="stylesheet" href="css/icomoon.css">
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/owl.carousel.min.css">
 <link rel="stylesheet" href="css/owl.theme.default.min.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
 
 <script type="text/javascript">
-function backHome(){
+function backhome(){
 	document.act.action=new ModelAndView("allActFarmer.do");
     document.act.submit();
 }
@@ -34,6 +35,10 @@ function backHome(){
 <body>
 <!-- --------Header&sideBar------------------------------------- -->
 	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
+	
+	<c:if test="${!empty login_ok}">
+		<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <!-- --------內容-------------------------------- -->
 <section class="content-wrapper row justify-content-center" style="background-color: #FFFFFF">
 
@@ -106,7 +111,7 @@ function backHome(){
 		</td>
 	</tr>
 	<tr>
-		<td><form:label path="signDateEnd">報名結束日期/時間::</form:label></td>
+		<td><form:label path="signDateEnd">報名結束日期/時間:</form:label></td>
 		<td><form:input path="signDateEnd" type="date" readonly="true"/>
 			<form:input path="signTimeEnd" type="time" readonly="true"/>
 		</td>
@@ -127,7 +132,8 @@ function backHome(){
 		<td colspan="3" align="center">	
 			<input type="hidden" id="actId" name="actId" value="${afBean.actId}"/>
 			<form:button class="btn btn-primary py-2 px-3" value="edit" >修改</form:button>&emsp;
-			<button class="btn btn-primary py-2 px-3" value="back" onclick="backHome()">回管理頁面</button>
+<%-- 			<form:button class="btn btn-primary py-2 px-3" value="back" onclick="backhome();">回管理頁面</form:button> --%>
+			 <a href="<c:url value='allActFarmer.do'/>" class="btn btn-primary py-2 px-3">回管理頁面</a></p>
 		</td>		
 	</tr>
 
@@ -180,10 +186,10 @@ function readURL(input){
 $("#imgInp").change(function(){
 		readURL(this);
 	});
-function backHome(){
-	document.act.action=new ModelAndView("allActFarmer.do");;
-    document.act.submit();
-}
+// function backHome(){
+// 	document.act.action=new ModelAndView("allActFarmer.do");
+//     document.act.submit();
+// }
 
 </script>
 </body>

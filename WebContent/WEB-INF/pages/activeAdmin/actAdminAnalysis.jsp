@@ -40,11 +40,21 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <!-- Theme style -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css" integrity="sha512-rVZC4rf0Piwtw/LsgwXxKXzWq3L0P6atiQKBNuXYRbg2FoRbSTIY0k2DxuJcs7dk4e/ShtMzglHKBOJxW8EQyQ==" crossorigin="anonymous" />  
+
+<!-- -------------------websocket引入的CDN---------------------------------------------------------------------- -->
+
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+ <link rel="stylesheet" href="css/admin_chatbox.css">
+
+
 <title>農郁-活動後臺管理</title>
 </head>
 <body class="hold-transition sidebar-mini">
 <!--------------------------- 	header ------------------------------------------>
 	<jsp:include page="/WEB-INF/pages/testAdminH.jsp" />
+	<jsp:include page="/WEB-INF/pages/Admin_message.jsp" />
+
 
 <!--------------------------- 	內容 ------------------------------------------>
 <div class="wrapper">

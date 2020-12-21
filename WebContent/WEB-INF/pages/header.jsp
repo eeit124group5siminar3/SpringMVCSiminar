@@ -95,10 +95,11 @@
 							href="<c:url value='myRecipe'/>">我的最愛</a>
 					</div></li>
 
-				<li class="nav-item"><c:if test="${empty login_ok}">
+				<li class="nav-item dropdown"><c:if test="${empty login_ok}">
 						<a  class="nav-link" href="<c:url value='login.controller' />" style="font-size: 20px">會員</a>
 					</c:if> <c:if test="${!empty login_ok}">
-						<a class="nav-link" href="<c:url value='backstage.controller' />" style="font-size: 20px">會員</a>
+					<form class="nav-link" name="form1" action="memberUpdate.controller" method="post">
+					<a href="javascript:document.form1.submit();" style="font-size: 20px;color:black">會員</a></form>
 					</c:if></li>
 				<li class="nav-item"><c:if test="${empty login_ok}">
 						<a class="nav-link" href="<c:url value='login.controller' />" style="font-size: 20px">登錄</a>
