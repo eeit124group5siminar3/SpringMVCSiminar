@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -37,7 +38,7 @@
 							class="nav-link active"> <i
 								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
-									產品資料分析 <i class="right fas fa-angle-left"></i></span>
+									產品資料分析 <i class="right fas fa-angle-left"></i>
 								</p>
 						</a>
 							<ul class="nav nav-treeview" id="chooseAnalysis">
@@ -57,6 +58,11 @@
 										<p>訂單數量</p>
 								</a></li>
 							</ul></li>
+							<li class="nav-item"><a href="<c:url value='backstage.controller' />"
+							class="nav-link">
+								<p>返回會員管理</p>
+						</a>
+						</li>
 					</ul>
 				</nav>
 			</div>

@@ -44,7 +44,7 @@
 <tr><td ALIGN='CENTER'><img src="images/farmer_mall.jpg" style="width:200px; height:200px"></td></tr>
 <tr><td ALIGN='CENTER'><H1 >成功</H1></td></tr>
 <tr><td ALIGN='CENTER'><a href="<c:url value='/MarketProduct.selectAll'/>">前往管理商品</a>
-<tr><td ALIGN='CENTER'><a href="<c:url value='/'/>">回首頁</a>
+<tr><td ALIGN='CENTER'><a href="<c:url value='backstage.controller'/>">回首頁</a>
 </table>
 </div>
 <jsp:include page="/WEB-INF/pages/footer.jsp"/>
