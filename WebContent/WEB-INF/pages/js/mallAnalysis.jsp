@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
 function singleProduct() {
+// 	event.stopPropagation();
 		var product = $('#productList').val();
 		$.ajax({
 			url : "SelectProduct",
@@ -25,6 +26,7 @@ function singleProduct() {
 	}
 
 function monthlyProduct() {
+// 	event.stopPropagation();
 	var lastMonthOf = $('#lastMonthOf').val();
 	var monthName=$('#lastMonthOf').find(':selected').text();
 	$.ajax({

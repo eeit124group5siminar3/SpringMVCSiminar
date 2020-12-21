@@ -9,6 +9,8 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+<link rel="stylesheet" href="css/dist/adminlte.min.css">	
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
@@ -63,7 +65,7 @@
 			</div>
 		</div>
 	</div>
-
+<%-- <jsp:include page="/WEB-INF/pages/bar.jsp"/> --%>
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->
 
@@ -81,7 +83,9 @@
 			</div>
 		</div>
 	</div>
-	<section class="ftco-section" id="manageOrderContent"></section>
+	<p style="text-align:center;height:90px" ><font color='red' size='3' id="errMsgs"> ${ErrMsg} </font></p>
+	<jsp:include page="../sidebar.jsp" />
+	<section class="ftco-section content-wrapper" id="manageOrderContent" style="padding-top:0;background-color:#FFFFFF"></section>
 	<jsp:include page="../footer.jsp" />
 
 	<!-- loader -->

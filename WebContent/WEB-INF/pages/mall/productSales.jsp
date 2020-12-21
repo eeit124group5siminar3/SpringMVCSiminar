@@ -4,7 +4,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0">
+			<h1 class="m-0">
 					產品資料分析&nbsp;&nbsp;&nbsp;選擇月份:<span id="monthTag"></span>
 				</h1>
 			</div>
@@ -90,29 +90,29 @@
 				})
 			})
 
-// 	function monthlyProduct() {
-// 		var lastMonthOf = $('#lastMonthOf').val();
-// 		var monthName=$('#lastMonthOf').find(':selected').text();
-// 		$.ajax({
-// 			url : "ProductSales",
-// 			type : "POST",
-// 			data : {
-// 				"lastMonthOf" : lastMonthOf
-// 			},
-// 			datatype : "html",
-// 			success : function(data, status) {
-// 				console.log(data);
-// 				chart.data.labels=data.productList
-// 				chart.data.datasets[0].label = monthName+'各項商品的營業額'
-// 				chart.data.datasets[0].data = data.sales;
-// 				chart.update();
-// 			},
-// 			error : function(data, status) {
-// 				chart.data.labels=data.productList
-// 				chart.data.datasets[0].label = monthName+'各項商品的營業額'
-// 				chart.data.datasets[0].data = data.sales;
-// 				chart.update();
-// 			}
-// 		});
-// 	}
+	// 	function monthlyProduct() {
+	// 		var lastMonthOf = $('#lastMonthOf').val();
+	// 		var monthName=$('#lastMonthOf').find(':selected').text();
+	// 		$.ajax({
+	// 			url : "ProductSales",
+	// 			type : "POST",
+	// 			data : {
+	// 				"lastMonthOf" : lastMonthOf
+	// 			},
+	// 			datatype : "html",
+	// 			success : function(data, status) {
+	// 				console.log(data);
+	// 				chart.data.labels=data.productList
+	// 				chart.data.datasets[0].label = monthName+'各項商品的營業額'
+	// 				chart.data.datasets[0].data = data.sales;
+	// 				chart.update();
+	// 			},
+	// 			error : function(data, status) {
+	// 				chart.data.labels=data.productList
+	// 				chart.data.datasets[0].label = monthName+'各項商品的營業額'
+	// 				chart.data.datasets[0].data = data.sales;
+	// 				chart.update();
+	// 			}
+	// 		});
+	// 	}
 </script>
