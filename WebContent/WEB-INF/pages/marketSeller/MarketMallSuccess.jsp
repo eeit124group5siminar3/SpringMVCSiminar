@@ -32,6 +32,9 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <head>
+    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <meta charset="UTF-8">
 <title>成功</title>
 <jsp:include page="../header.jsp"/>

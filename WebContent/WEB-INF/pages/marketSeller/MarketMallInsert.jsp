@@ -44,7 +44,9 @@
  <section class="ftco-section ftco-degree-bg">
 <div>
 
-
+		<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <h2 align="center">
 店家資訊管理 <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">海產店</button>
 </h2>

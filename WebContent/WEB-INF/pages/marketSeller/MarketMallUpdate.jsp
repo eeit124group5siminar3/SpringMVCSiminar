@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <meta charset="UTF-8">
 <title>店家資訊</title>
 
@@ -46,26 +49,26 @@ body {
 
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="css/jquery.timepicker.css">
-
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
 
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
-<!-- 蔬菜圖 -->
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span></p>
-            <h1 class="mb-0 bread">Checkout</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 蔬菜圖 -->
+
+<jsp:include page="/WEB-INF/pages/bar.jsp"/>
+
+
+<section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">
+
 <div>
 <h2 align="center">
 店家資訊
@@ -130,12 +133,12 @@ body {
 </table>
 </form:form>
 
-			<form class="container" action="<c:url value='Member_Update'></c:url>" >
+			<form class="container" action="<c:url value='/MarketProduct.selectAll'></c:url>" >
 			<div align="center">
-			<input class="btn btn-primary py-3 px-4" type="submit"  value="回管理介面">
+			<input class="btn btn-primary py-3 px-4" type="submit"  value="回商品管理介面">
 			</div>
 			</form>
-		
+		</section>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		 
 		<script>

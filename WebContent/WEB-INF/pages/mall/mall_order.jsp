@@ -82,7 +82,9 @@
 	<section class="ftco-section" id="orderContent"></section>
 
 	<jsp:include page="../footer.jsp" />
-
+<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">

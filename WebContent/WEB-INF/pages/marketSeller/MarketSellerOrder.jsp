@@ -32,6 +32,14 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mall.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
 .col-lg-4 {
 	-webkit-box-flex: 0;
@@ -42,25 +50,15 @@
 </style>
 </head>
 <body class="goto-here">
-	<jsp:include page="../header.jsp" />
+
+	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 	<!-- END nav -->
-
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_1.jpg');">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Cart</span>
-					</p>
-					<h1 class="mb-0 bread">查看預購單</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 
+<section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 ftco-animate">
@@ -106,15 +104,14 @@
 	<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 		<div class="cart-total mb-3">
 		     <p>
-			<a href="<c:url value='Member_Update' />"
-				class="btn btn-primary py-3 px-4">回管理介面</a> <a
+			 <a
 				href="<c:url value='/MarketProduct.selectAll' />"
 				class="btn btn-primary py-3 px-4">商品管理</a>
 		     </p>
 		</div>
 	</div>	
 </div>
-
+</section>
 	<jsp:include page="../footer.jsp" />
 
 

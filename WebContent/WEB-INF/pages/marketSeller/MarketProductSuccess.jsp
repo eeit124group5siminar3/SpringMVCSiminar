@@ -35,7 +35,9 @@
 <meta charset="UTF-8">
 <title>成功</title>
 <jsp:include page="../header.jsp"/>
-
+    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 </head>
 <body>	
