@@ -153,7 +153,7 @@ public class ActSignController {
 		Integer actOrdId= Integer.parseInt(id);
 		ActOrd aoBean = actOrdService.getActOrdOne(actOrdId);
 		String who = mb.getMember_name(); //會員名稱
-		String email = mb.getMember_email(); //會員E-mail
+		String email = aoBean.getMemEmail(); //會員E-mail
 		String actName = aoBean.getActFarmer().getActName(); //參加的活動
 		String ordActNum = aoBean.getOrdActNum().toString(); //報名人數
 		String actDateSta = aoBean.getActFarmer().getActDateSta().toString(); //活動日期時間
