@@ -120,10 +120,10 @@
 			<form class="form-inline my-2 my-lg-0" id="search"
 				action="javascript:void(0);" method="post">
 				<input class="form-control mr-sm-2" type="text" id="searchInput"
-					name="searchInput" placeholder="search delicious"
+					name="searchInput" placeholder="搜尋美食"
 					aria-label="Search" /> <input
 					class="btn btn-outline-success my-2 my-sm-0" onblur="ch()"
-					id="send" type="submit" name="action" value="Search" />
+					id="send" type="submit" name="action" value="搜尋" />
 			</form>
 		</div>
 	</div>
@@ -204,7 +204,7 @@
      								<h4 class="menu__item-title">\${val.name}</h4>
      								<p class="menu__item-desc">\${val.desc}</p>
      								<span class="menu__item-price">累積人氣: \${val.views}</span>
-     								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >Read more</a>            
+     								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >看食譜去</a>            
      			                    </p>
      							</div>
      						</div>
@@ -251,7 +251,7 @@
 								<h4 class="menu__item-title">\${val.name}</h4>
 								<p class="menu__item-desc">\${val.desc}</p>
 								<span class="menu__item-price">累積人氣: \${val.views}</span>
-								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >Read more</a>            
+								<p><a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="btn btn-primary py-2 px-3" >看食譜去</a>            
 			                    </p>
 							</div>
 						</div>

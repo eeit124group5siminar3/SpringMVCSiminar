@@ -140,9 +140,17 @@
 							<c:forEach var='BeanToken' items="${searchMsg}">
 								<ul class="comment-list">
 									<li class="comment">
+									<c:if test="${detailBean.mem_no==BeanToken.mem_no}">
 										<div class="vcard bio">
-											<img src="images/新ちゃん.jpg" alt="Image placeholder">
+											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder">
 										</div>
+									</c:if>	
+									<c:if test="${detailBean.mem_no!=BeanToken.mem_no}">
+										<div class="vcard bio">
+<%-- 											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder"> --%>
+										</div>
+									</c:if>	
+									
 										<div class="comment-body">
 
 											<c:if test="${BeanToken.mem_no!=null}">
@@ -215,7 +223,7 @@
 							class="search-form">
 							<div class="form-group">
 								<span class="icon ion-ios-search"></span> <input type="text"
-									class="form-control" id="searchInput" placeholder="Search...">
+									class="form-control" id="searchInput" placeholder="搜尋文章...">
 								<!-- 									<span> <button type="submit" class="btn btn-primary py-2 px-3" >Search</button></span> -->
 							</div>
 						</form>
@@ -332,7 +340,7 @@
 					</div>
 
 					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">Tag Cloud</h3>
+						<h3 class="heading">熱們標籤</h3>
 						<div class="tagcloud">
 							<a href="#" class="tag-cloud-link">fruits</a> <a href="#"
 								class="tag-cloud-link">tomatoe</a> <a href="#"
@@ -346,7 +354,7 @@
 					</div>
 
 					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">Paragraph</h3>
+						<h3 class="heading">作者介紹</h3>
 						<p>${detailBean.introduction}</p>
 					</div>
 				</div>

@@ -151,7 +151,6 @@ public class Recipe_blog {
 		// 回文資料
 		List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
 		m.addAttribute("searchMsg", searchMsg);
-
 		// 作者資料
 		Member_Detail detailBean = service.detailBean(partSearch.getMem_no());
 		m.addAttribute("detailBean", detailBean);
@@ -323,6 +322,11 @@ public class Recipe_blog {
 			service.insertMsg(bean);
 			int counts = (int) service.BlogMsgCounts(blog_id);
 			List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
+			
+			// 作者資料
+			Member_Detail detailBean = service.detailBean(partSearch.getMem_no());
+			m.addAttribute("detailBean", detailBean);
+			
 			m.addAttribute("counts", counts);
 			m.addAttribute("searchMsg", searchMsg);
 
@@ -334,6 +338,10 @@ public class Recipe_blog {
 			service.insertMsg(bean);
 			int counts = (int) service.BlogMsgCounts(blog_id);
 			List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
+			
+			// 作者資料
+			Member_Detail detailBean = service.detailBean(partSearch.getMem_no());
+			m.addAttribute("detailBean", detailBean);
 			m.addAttribute("counts", counts);
 			m.addAttribute("searchMsg", searchMsg);
 			return "recipe/msgForm";

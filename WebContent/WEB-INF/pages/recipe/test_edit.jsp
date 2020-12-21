@@ -44,8 +44,9 @@
 			<div>
 				<form:label for="inputCate" path="cate" style="font-size: 30px;"
 					class="input-group-text">種類: ${memBean.cate}</form:label>
+				<c:set var="val" value="${memBean.cate}"></c:set>
 				<select class="form-control" required name="cate">
-					<option value="">Open this select menu</option>
+					<option value='<c:out value="${val}"></c:out>'>照舊</option>
 					<option value="米食">米食</option>
 					<option value="麵食">麵食</option>
 					<option value="素食/蔬食">素食/蔬食</option>

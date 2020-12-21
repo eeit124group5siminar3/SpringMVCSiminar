@@ -77,7 +77,7 @@
 				<form:label path="cate" style="font-size:20px;" class="input-group-text">
 				種類: </form:label>
 				<select class="form-control" required name="cate">
-					<option value="">Open this select menu</option>
+					<option value="">請選擇</option>
 					<option value="五榖根莖">五榖根莖</option>
 					<option value="奶類">奶類</option>
 					<option value="蛋豆魚肉類">蛋豆魚肉類</option>
