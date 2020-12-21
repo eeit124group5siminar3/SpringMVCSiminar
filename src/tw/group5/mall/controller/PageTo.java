@@ -47,6 +47,11 @@ public class PageTo {
 	public String analysisPage() {
 		return "/mall/mall_analysis";
 	}
+	
+	@GetMapping(value = "/Member_Update")
+	public String member_Update() {
+		return "/Member_Backstage/Member_Update";
+	}
 //	@GetMapping(value = "/mall_checkout")
 //	public String checkOut() {
 //		return "/mall/mall_checkout";

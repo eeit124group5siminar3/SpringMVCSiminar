@@ -58,9 +58,9 @@
 										<p>訂單數量</p>
 								</a></li>
 							</ul></li>
-							<li class="nav-item"><a href="<c:url value='backstage.controller' />"
-							class="nav-link">
-								<p>返回會員管理</p>
+							<li class="nav-item"><p>
+					<a href="<c:url value='Member_Update'/>" style="font-size: 20px;color:white">返回會員管理</a>
+								</p>
 						</a>
 						</li>
 					</ul>
