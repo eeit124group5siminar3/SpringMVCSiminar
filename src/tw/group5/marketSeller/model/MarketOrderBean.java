@@ -98,7 +98,7 @@ public class MarketOrderBean {
 		this.buyerId = buyerId;
 	}
 	
-	@Column(name = "ALLPRICE")
+	@Column(name = "TOTAL_PRICE")
 	public Integer getAllPrice() {
 		return allPrice;
 	}
