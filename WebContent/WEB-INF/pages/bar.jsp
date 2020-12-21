@@ -159,8 +159,8 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <form name="form1" action="memberUpdate.controller" method="post">
-                <a href="javascript:document.form1.submit();" class="nav-link">
+                <form name="formsignup" action="memberUpdate.controller" method="post">
+                <a href="javascript:document.formsignup.submit();" class="nav-link">
                   &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
                   <p>資料修改</p>
                 </a>
@@ -198,21 +198,22 @@
                 </a>
               </li>
              </c:if>
-			<c:if test="${login_ok.member_permissions!=1}">
+			
+             	<c:if test="${login_ok.member_permissions!=1}">
               <li class="nav-item">
-                <a href="<c:url value='mall_management'  />" class="nav-link">
+            	<a>
                   <i class="far fa-circle nav-icon"></i>
                   <p>商品管理</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<c:url value='mall_manageOrder'  />" class="nav-link">
+                <a>
                   <i class="far fa-circle nav-icon"></i>
                   <p>訂單管理</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<c:url value='mall_analysis'  />" class="nav-link">
+               <a>
                   <i class="far fa-circle nav-icon"></i>
                   <p>商品資料分析</p>
                 </a>

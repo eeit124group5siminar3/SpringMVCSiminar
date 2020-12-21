@@ -58,9 +58,12 @@
 										<p>訂單數量</p>
 								</a></li>
 							</ul></li>
-							<li class="nav-item"><p>
-					<a href="<c:url value='Member_Update'/>" style="font-size: 20px;color:white">返回會員管理</a>
-								</p>
+							<li class="nav-item">  <form name="form1" action="memberUpdate.controller" method="post">
+                <a href="javascript:document.form1.submit();" class="nav-link">
+                  &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
+                  <p>返回會員修改</p>
+                </a>
+                </form>
 						</a>
 						</li>
 					</ul>
