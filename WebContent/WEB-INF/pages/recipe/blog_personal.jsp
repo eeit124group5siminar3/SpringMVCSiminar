@@ -88,7 +88,7 @@
 					<c:if test="${BeanToken.status==1}">
 					<input type="hidden" id="blog_id" value="${BeanToken.blog_id}"/>
 					<div >
-					<span onclick="funBtn(${BeanToken.blog_id})"><span id="btnChange${BeanToken.blog_id}"><span class="btn btn-warning">開啟</span></span></span>
+					<span onclick="funBtn(${BeanToken.blog_id})"><span id="btnChange${BeanToken.blog_id}"><span class="btn btn-warning">關閉</span></span></span>
 					</div>
 					</c:if>		
 					
@@ -96,7 +96,7 @@
 					<c:if test="${BeanToken.status==0}">
 					<input type="hidden" id="blog_id" value="${BeanToken.blog_id}"/>
 					<div >
-					<span  onclick="funBtn(${BeanToken.blog_id})"><span id="btnChange${BeanToken.blog_id}"><span class="btn btn-outline-warning">關閉</span></span></span>
+					<span  onclick="funBtn(${BeanToken.blog_id})"><span id="btnChange${BeanToken.blog_id}"><span class="btn btn-outline-warning">開啟</span></span></span>
 					</div>
 					</c:if>		
 					
@@ -168,11 +168,11 @@
 			success:function(data){
 				if(data){
 					$("#btnChange"+blog_id).html(`<span class="btn btn-warning" 
-							>開啟</span>`);  
+							>關閉</span>`);  
 					}
 				else {			 		
 					$("#btnChange"+blog_id).html(`<span class="btn btn-outline-warning"
-							>關閉</span>`);
+							>開啟</span>`);
 					}
 				}
 			})

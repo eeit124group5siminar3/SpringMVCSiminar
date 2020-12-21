@@ -140,9 +140,17 @@
 							<c:forEach var='BeanToken' items="${searchMsg}">
 								<ul class="comment-list">
 									<li class="comment">
+									<c:if test="${detailBean.mem_no==BeanToken.mem_no}">
 										<div class="vcard bio">
-											<img src="images/新ちゃん.jpg" alt="Image placeholder">
+											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder">
 										</div>
+									</c:if>	
+									<c:if test="${detailBean.mem_no!=BeanToken.mem_no}">
+										<div class="vcard bio">
+<%-- 											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder"> --%>
+										</div>
+									</c:if>	
+									
 										<div class="comment-body">
 
 											<c:if test="${BeanToken.mem_no!=null}">
@@ -215,7 +223,7 @@
 							class="search-form">
 							<div class="form-group">
 								<span class="icon ion-ios-search"></span> <input type="text"
-									class="form-control" id="searchInput" placeholder="Search...">
+									class="form-control" id="searchInput" placeholder="搜尋文章...">
 								<!-- 									<span> <button type="submit" class="btn btn-primary py-2 px-3" >Search</button></span> -->
 							</div>
 						</form>

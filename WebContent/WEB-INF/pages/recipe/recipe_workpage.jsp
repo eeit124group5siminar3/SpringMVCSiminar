@@ -120,10 +120,10 @@
 			<form class="form-inline my-2 my-lg-0" id="search"
 				action="javascript:void(0);" method="post">
 				<input class="form-control mr-sm-2" type="text" id="searchInput"
-					name="searchInput" placeholder="search delicious"
+					name="searchInput" placeholder="搜尋美食"
 					aria-label="Search" /> <input
 					class="btn btn-outline-success my-2 my-sm-0" onblur="ch()"
-					id="send" type="submit" name="action" value="Search" />
+					id="send" type="submit" name="action" value="搜尋" />
 			</form>
 		</div>
 	</div>
