@@ -101,7 +101,7 @@
 			     <td>
 				<form action="<c:url value='/MarketProduct.delete'></c:url>" method="post">
 				<input type="hidden"  id="productid" name="productid" value="${IBean.productId}">     
-                 <input class="btn btn-primary py-2 px-2 " name="delete"  type="submit"  value="刪除">
+                 <input class="btn btn-primary py-2 px-2 " name="delete"  type="button"  value="刪除">
                  </form>
                  </td>
                 </tr>

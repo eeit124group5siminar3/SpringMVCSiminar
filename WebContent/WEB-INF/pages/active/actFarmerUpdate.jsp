@@ -121,7 +121,8 @@ function backHome(){
 	<tr>
 		<td colspan="2" align="center">
 			<form:button class="btn btn-primary py-1 px-2" value="Send" >送出</form:button>&emsp;
-			<form:button class="btn btn-primary py-1 px-2" value="back" onclick="backHome()">回管理頁面</form:button>
+<%-- 			<form:button class="btn btn-primary py-1 px-2" value="back" onclick="backHome()">回管理頁面</form:button> --%>
+			<a href="<c:url value='allActFarmer.do'/>" class="btn btn-primary py-2 px-3">回管理頁面</a></p>		
 		</td>			
 	</tr>
 
