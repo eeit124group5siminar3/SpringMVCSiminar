@@ -43,6 +43,18 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+ href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+ href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
 .memberBackstageUpDate-footer-ground {
 	width: 100%;
@@ -71,63 +83,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <body class="goto-here">
 	<jsp:useBean id="login_ok"
 		class="tw.group5.member_SignUp.model.Member_SignUp" scope="session" />
-					<jsp:include page="/WEB-INF/pages/header.jsp" />
+	<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
+	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 	
 	
 	
-	<div id="project_backstage">
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo">會員管理</button>
-			<div id="demo" class="collapse">
-				<br>
-				<form name="form1" action="memberUpdate.controller" method="post">
-					<li align="left"><a href="javascript:document.form1.submit();"
-						class="hyperlink">資料修改</a></li>
-				</form>
-				<form name="form2" action="memberEvaluation.controller" method="GET">
-					<li align="left"><a href="javascript:document.form2.submit();"
-						class="hyperlink">評價查詢</a></li>
-				</form>
-			</div>
-		</div>
-		<br> <br>
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo1">商城管理</button>
-			<div id="demo1" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-			</div>
-		</div>
-		<br> <br>
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo2">市場管理</button>
-			<div id="demo2" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-			</div>
-		</div>
-		<br> <br>
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo3">食譜管理</button>
-			<div id="demo3" class="collapse">
-				<li align="left"><a href="" class="hyperlink">食譜新增</a></li>
-				<li align="left"><a href="" class="hyperlink">食譜修改</a></li>
-			</div>
-		</div>
-		<br> <br>
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo4">活動管理</button>
-			<div id="demo4" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-			</div>
-		</div>
-	</div>
 
 	<div id="backstage_page">
 		<!-- --------會員管理 內容區--------- -->

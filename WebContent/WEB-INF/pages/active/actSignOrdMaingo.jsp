@@ -11,61 +11,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>農郁-活動訂單列表</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="css/dist/adminlte.min.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-    <link rel="stylesheet" href="css/aos.css">
+ <link
+	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap"
+	rel="stylesheet">
 
-    <link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="css/animate.css">
 
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
 
-    
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
-    
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">   
  
     
 </head>
 <body class="goto-here">
-
-	<jsp:include page="../header.jsp" />
-
+	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 	<c:if test="${!empty login_ok}">
 		<jsp:include page="/WEB-INF/pages/Message.jsp" />
 	</c:if>	
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="<c:url value='/actFarmerHome'/>">Home</a></span> <span>Active</span></p>
-            <h1 class="mb-0 bread">活動報名列表</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <section class="ftco-section ftco-cart">
-			<div class="container">
-				<div class="row">
+<section class="content-wrapper row justify-content-center" style="background-color: #FFFFFF">
     			<div class="col-md-12 ftco-animate">
+    			<h1 align="center">已報名活動</h1>
     				<div class="cart-list">
 	    				<table class="table">
-						    <thead class="thead-primary">
+						    <thead class="thead-primary" style="background-color: #bdbdbd" >
 						      <tr class="text-center">
-						        <th>&nbsp;</th>
+						        <th >&nbsp;</th>
 						        <th>活動名稱</th>
 						        <th>活動開始時間</th>
 						        <th>活動結束時間</th>						        
@@ -119,31 +121,31 @@
 								<tr>
 									<td width='80' height='20'><c:if test="${pageNo > 1}">
 										<div id="blfirst">
-										<a href="<c:url value='actOrdSelect.do?pageNo=1' />"> &lt;&lt;</a>
+										<a href="<c:url value='actOrdSelectMaingo.do?pageNo=1' />"> &lt;&lt;</a>
 										</div>
 									</c:if></td>
 									<td width='80'><c:if test="${pageNo > 1}">
 										<div id="blprev"><a
-											href="<c:url value='actOrdSelect.do?pageNo=${pageNo-1}' />">
+											href="<c:url value='actOrdSelectMaingo.do?pageNo=${pageNo-1}' />">
 										&lt;</a></div>
 									</c:if></td>
 									<td width='150'>第${pageNo} 頁/ 共 ${totalPages} 頁</td>
 									<td width='80'><c:if test="${pageNo != totalPages}">
 										<div id="blnext"><a
-											href="<c:url value='actOrdSelect.do?pageNo=${pageNo+1}' />">&gt;</a></div>
+											href="<c:url value='actOrdSelectMaingo.do?pageNo=${pageNo+1}' />">&gt;</a></div>
 									</c:if></td>
 									<td width='80'><c:if test="${pageNo != totalPages}">
 										<div id="bllast"><a
-											href="<c:url value='actOrdSelect.do?pageNo=${totalPages}' />">&gt;&gt;</a></div>
+											href="<c:url value='actOrdSelectMaingo.do?pageNo=${totalPages}' />">&gt;&gt;</a></div>
 									</c:if></td>
 								</tr>
 							</table>
 							</div>
-						</form>
-						<a href="<c:url value='/actFarmerHome'/>" class="btn btn-primary py-2 px-3">活動列表</a></p>
-							
+						</form>	
+						
+					<a href="<c:url value='allActFarmer.do'/>" class="btn btn-primary py-2 px-3">回管理頁面</a></p>
+						
     			</div>
-    		</div>
     		</div>
 		</section>
 
