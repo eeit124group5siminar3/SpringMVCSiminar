@@ -124,10 +124,17 @@
 					<br>
 				</c:forEach>
 				</form>
-					<a class="btn btn-primary py-3 px-4"  
-						href="<c:url value='blogEdit'/>">發表文章</a>
-					<button type="submit" class="btn btn-primary py-3 px-4"  
-			onclick="javascript:location.href='<c:url value='backstage.controller'/>'">回前頁</button>
+				
+				<form  action="./memberUpdate.controller" name="formsignup_aa" method="post">
+			<button type="button" class="btn btn-primary py-3 px-4"  
+			onclick="javascript:location.href='<c:url value='blogEdit'/>'">發表文章</button>
+					<button type="submit" class="btn btn-primary py-3 px-4">回前頁</button>
+			</form>
+			
+<!-- 					<a class="btn btn-primary py-3 px-4"   -->
+<%-- 						href="<c:url value='blogEdit'/>">發表文章</a> --%>
+<!-- 					<button type="submit" class="btn btn-primary py-3 px-4"   -->
+<%-- 			onclick="javascript:location.href='<c:url value='backstage.controller'/>'">回前頁</button> --%>
 		</fieldset>
 	</div>
 
