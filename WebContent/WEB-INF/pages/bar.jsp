@@ -201,26 +201,26 @@
                 </a>
               </li>
              </c:if>
-<%-- 			<c:if test="${login_ok.member_permissions!=1}"> --%>
-<!--               <li class="nav-item"> -->
-<%--                 <a href="<c:url value='mall_management'  />" class="nav-link"> --%>
-<!--                   <i class="far fa-circle nav-icon"></i> -->
-<!--                   <p>商品管理</p> -->
-<!--                 </a> -->
-<!--               </li> -->
-<!--               <li class="nav-item"> -->
-<%--                 <a href="<c:url value='mall_manageOrder'  />" class="nav-link"> --%>
-<!--                   <i class="far fa-circle nav-icon"></i> -->
-<!--                   <p>訂單管理</p> -->
-<!--                 </a> -->
-<!--               </li> -->
-<!--               <li class="nav-item"> -->
-<%--                 <a href="<c:url value='mall_analysis'  />" class="nav-link"> --%>
-<!--                   <i class="far fa-circle nav-icon"></i> -->
-<!--                   <p>商品資料分析</p> -->
-<!--                 </a> -->
-<!--               </li> -->
-<%--              </c:if>  --%>
+			<c:if test="${login_ok.member_permissions!=1}">
+              <li class="nav-item">
+                <a href="<c:url value='mall_management'  />" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>商品管理</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<c:url value='mall_manageOrder'  />" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>訂單管理</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<c:url value='mall_analysis'  />" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>商品資料分析</p>
+                </a>
+              </li>
+             </c:if> 
             </ul>
           </li>
           <li class="nav-item">
