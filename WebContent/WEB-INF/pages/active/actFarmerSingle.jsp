@@ -54,6 +54,10 @@
 <!-- ------Header--------------------------------------------------------------- -->
 <jsp:include page="/WEB-INF/pages/header.jsp" />
 
+	<c:if test="${!empty login_ok}">
+		<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
+
 <!-- ------上面的圖片--------------------------------------------------------------- -->
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
       <div class="container">
