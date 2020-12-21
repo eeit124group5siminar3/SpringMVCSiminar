@@ -14,14 +14,6 @@ public class Act_EDMTableReset {
 				Act_DBService_for_Oracle.getUseridOracle(), Act_DBService_for_Oracle.getPswdOracle());
 				Statement stmt = con.createStatement();) {
 			
-			//刪除ActFarmer表格
-			try {
-				stmt.executeUpdate(Act_DBService_for_Oracle.getDropActfarmer());
-				System.out.println("ActFarmer表格刪除成功");
-			} catch (SQLException e) {
-				System.out.println("ActFarmer表格刪除e=" + e);
-				e.printStackTrace();
-			}
 			
 			//刪除ActOrd表格
 			try {
@@ -29,6 +21,14 @@ public class Act_EDMTableReset {
 				System.out.println("ActOrd表格刪除成功");
 			} catch (SQLException e) {
 				System.out.println("ActOrd表格刪除e=" + e);
+				e.printStackTrace();
+			}
+			//刪除ActFarmer表格
+			try {
+				stmt.executeUpdate(Act_DBService_for_Oracle.getDropActfarmer());
+				System.out.println("ActFarmer表格刪除成功");
+			} catch (SQLException e) {
+				System.out.println("ActFarmer表格刪除e=" + e);
 				e.printStackTrace();
 			}
 			

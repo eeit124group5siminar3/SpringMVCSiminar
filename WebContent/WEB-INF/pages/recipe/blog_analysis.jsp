@@ -30,38 +30,43 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body class="hold-transition sidebar-mini goto-here">
-	<jsp:include page="../header.jsp" />
-	<div class="wrapper" id="analysisPage">
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<a href="index3.html" class="brand-link"> </a>
-			<div class="sidebar">
-				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-					<div class="info" align="center">
-						<span style="font-size: 20px; color: white; margin-bottom: 0">歡迎使用!&nbsp;&nbsp;${login_ok.member_name}</span>
-					</div>
-				</div>
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column"
-						data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item menu-open"><a href="#"
-							class="nav-link active"> <i
-								class="nav-icon fas fa-tachometer-alt"></i>
-								<p>
-									個人文章資料分析 <i class="right fas fa-angle-left"></i></span>
-								</p>
-						</a>
-							<ul class="nav nav-treeview" style="">
-								<li class="nav-item"><a class="nav-link"> <i
-										class="far fa-circle nav-icon"></i>
-										<p>每月文章討論度分析</p>
-								</a></li>
-							</ul></li>
-					</ul>
-				</nav>
-			</div>
-		</aside>
+<c:if test="${!empty login_ok}">
+<jsp:include page="/WEB-INF/pages/Message.jsp" />
+</c:if>
+<jsp:include page="/WEB-INF/pages/bar.jsp"/>
+<section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">
+
+<!-- 	<div class="wrapper" id="analysisPage"> -->
+<!-- 		<aside class="main-sidebar sidebar-dark-primary elevation-4"> -->
+<!-- 			<a href="index3.html" class="brand-link"> </a> -->
+<!-- 			<div class="sidebar"> -->
+<!-- 				<div class="user-panel mt-3 pb-3 mb-3 d-flex"> -->
+<!-- 					<div class="info" align="center"> -->
+<%-- 						<span style="font-size: 20px; color: white; margin-bottom: 0">歡迎使用!&nbsp;&nbsp;${login_ok.member_name}</span> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<nav class="mt-2"> -->
+<!-- 					<ul class="nav nav-pills nav-sidebar flex-column" -->
+<!-- 						data-widget="treeview" role="menu" data-accordion="false"> -->
+<!-- 						<li class="nav-item menu-open"><a href="#" -->
+<!-- 							class="nav-link active"> <i -->
+<!-- 								class="nav-icon fas fa-tachometer-alt"></i> -->
+<!-- 								<p> -->
+<!-- 									個人文章資料分析 <i class="right fas fa-angle-left"></i></span> -->
+<!-- 								</p> -->
+<!-- 						</a> -->
+<!-- 							<ul class="nav nav-treeview" style=""> -->
+<!-- 								<li class="nav-item"><a class="nav-link"> <i -->
+<!-- 										class="far fa-circle nav-icon"></i> -->
+<!-- 										<p>每月文章討論度分析</p> -->
+<!-- 								</a></li> -->
+<!-- 							</ul></li> -->
+<!-- 					</ul> -->
+<!-- 				</nav> -->
+<!-- 			</div> -->
+<!-- 		</aside> -->
 		<section>
-			<div class="content-wrapper">
+<!-- 			<div class="content-wrapper"> -->
 				<div class="col-9" style="width: 80%; margin: 0 auto" id="blogList">
 					<div
 						class="form-inline row justify-content-center align-items-center">
@@ -130,9 +135,9 @@
 				<div class="container">
 					<canvas id="myChart"></canvas>
 				</div>
-			</div>
+<!-- 			</div> -->
 		</section>
-	</div>
+<!-- 	</div> -->
 	<jsp:include page="../footer.jsp" />
 	<script src="js/jquery.min.js"></script>
 	<script src="js/plugins/bootstrap.bundle.min.js"></script>
