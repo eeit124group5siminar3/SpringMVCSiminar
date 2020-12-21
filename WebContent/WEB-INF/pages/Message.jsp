@@ -28,7 +28,7 @@
           
 <!--             <textarea class="Input_field" placeholder="Send a message..." style="height: 20px;"></textarea> -->
            
-            <button class="Input_button Input_button-send" id="send_message" onclick="send()">
+            <button class="Input_button Input_button-send" id="send_message">
               <div class="Icon" style="width: 18px; height: 18px;">
                 <svg width="57px" height="54px" viewBox="1496 193 57 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 18px; height: 18px;">
                   <g id="Group-9-Copy-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1523.000000, 220.000000) rotate(-270.000000) translate(-1523.000000, -220.000000) translate(1499.000000, 193.000000)">
@@ -107,7 +107,7 @@ $(function(){
 				console.log(data);
 			}
 		});
-		$("#text").val("");
+		send();
 	});
 })
 </script>
