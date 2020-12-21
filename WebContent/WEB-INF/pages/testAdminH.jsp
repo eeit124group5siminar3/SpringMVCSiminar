@@ -13,9 +13,9 @@
 	          <li class="nav-item active"><a href="<c:url value='adminBackstage.controller' />" class="nav-link">回首頁</a></li>
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-tgogle" href="<c:url value='goManageMembers.controller'/>" id="dropdown04" aria-haspopup="true" aria-expanded="false">會員管理</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="#">會員分析</a>
-              </div>
+<!--               <div class="dropdown-menu" aria-labelledby="dropdown04"> -->
+<!--               	<a class="dropdown-item" href="#">會員分析</a> -->
+<!--               </div> -->
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-tgogle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">商城管理</a>

@@ -58,6 +58,9 @@
 <body>
 
 	<div id="Login">
+	<c:if test="${!empty login_ok}">
+<jsp:include page="/WEB-INF/pages/Message.jsp" />
+</c:if>
 		<jsp:include page="../header.jsp" />
 		<!-- Main -->
 		<div data-intercept-banner-container-id="popup-overlay"
