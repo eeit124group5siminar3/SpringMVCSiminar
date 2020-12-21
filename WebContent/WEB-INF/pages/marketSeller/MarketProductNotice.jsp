@@ -16,7 +16,7 @@
     					  <span class='status'style="color:black;font-size:25px;" >補貨囉</span>					
     						</c:when>
     						<c:otherwise>
-    					  <span class='status'style="color:red;font-size:25px;" >未補貨</span>					
+    					  <span class='status'style="color:yellow;font-size:25px; " >未補貨</span>					
     						</c:otherwise>
     				</c:choose>
     					</a>
