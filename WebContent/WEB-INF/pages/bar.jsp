@@ -106,18 +106,21 @@
 					</c:if><c:if test="${!empty login_ok}">
 						<a class="nav-link" href="<c:url value='removeSession.controller' />" style="font-size: 20px">登出</a>
 					</c:if></li>
-				<li class="nav-item cta cta-colored"><a href="<c:url value='/mall_shoppingcart' />" id="shoppingcartItem"
+				<li class="nav-item cta cta-colored" style="padding-top:10px"><a href="<c:url value='/mall_shoppingcart' />" id="shoppingcartItem"
 					class="nav-link"><span class="icon-shopping_cart"></span>[${ShoppingCart.itemNumber}]</a></li>
 					
-				<li class="nav-item cta cta-colored"><a href="<c:url value='' />"
+				<li class="nav-item cta cta-colored" style="padding-top:10px"><a href="<c:url value='' />"
 					class="nav-link"><img height='15' width='15'
 					 src="images/MarketBasket.jpg">[${MarketCart.itemNumber}]</a></li>
+			<c:if test="${!empty login_ok}">				
+				<li class="nav-item cta cta-colored" style="padding-top:10px"><a class="nav-link" style="font-size: 10px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNo.${login_ok.member_no}&nbsp&nbsp${login_ok.member_name}&nbsp您好！ </a></li>
+			</c:if>	
 			</ul>
-			<c:if test="${!empty login_ok}">
-			<ul class="navbar-nav">
-				<li class="nav-item cta cta-colored"><a class="nav-link" style="font-size: 15px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNo.${login_ok.member_no}&nbsp&nbsp${login_ok.member_name}&nbsp您好！ </a></li>
-			</ul>
-			</c:if>
+<%-- 			<c:if test="${!empty login_ok}"> --%>
+<!-- 			<ul class="navbar-nav"> -->
+<!-- 				<li class="nav-item cta cta-colored"><a class="nav-link" style="font-size: 15px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNo.${login_ok.member_no}&nbsp&nbsp${login_ok.member_name}&nbsp您好！ </a></li> -->
+<!-- 			</ul> -->
+<%-- 			</c:if> --%>
 		</div>
 	</div>
 </nav>
