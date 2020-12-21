@@ -8,18 +8,24 @@
     		<c:forEach var="item" items="${notice}">
     			<div class="col-md-3 col-lg-3 ftco-animate">
     				<div class="product" >
-    					<a href="#" onclick='goProduct(${item.marketProductTotalBean.productId})' class="img-prod"><img class="img-fluid" 
+    			   <c:choose>
+    					 <c:when test="${item.marketProductTotalBean.quantity>=1}">
+    					<a href="#" onclick='goProduct(${item.marketProductTotalBean.productId})' class="img-prod">
+    					<img class="img-fluid" 
     					 src=<c:url value='MarketImageServlet?id=${item.marketProductTotalBean.marketProductImgBean.productId}&type=PRODUCT' />
     					  alt="Colorlib Template">
-    			   <c:choose>
-    					    <c:when test="${item.marketProductTotalBean.quantity>=1}">
-    					  <span class='status'style="color:black;font-size:25px;" >補貨囉</span>					
+    					  <span class='status'style="color:black;font-size:25px;" >補貨囉</span>		
+    					  </a>			
     						</c:when>
     						<c:otherwise>
+    					<a href="#" onclick='goProduct(${item.marketProductTotalBean.productId})' class="img-prod">
+    					<img class="img-fluid" style="opacity:0.5;"
+    					 src=<c:url value='MarketImageServlet?id=${item.marketProductTotalBean.marketProductImgBean.productId}&type=PRODUCT' />
+    					  alt="Colorlib Template">
     					  <span class='status'style="color:yellow;font-size:25px; " >未補貨</span>					
+    						 </a>	
     						</c:otherwise>
-    				</c:choose>
-    					</a>
+    				      </c:choose>
     					<div class="text py-3 pb-4 px-3 text-center">
     						<h3><a href="#">${item.marketProductTotalBean.productName}</a></h3>
     						<div class="d-flex">
