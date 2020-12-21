@@ -75,19 +75,19 @@
              </c:if>
 			<c:if test="${login_ok.member_permissions!=1}">
               <li class="nav-item">
-               <a>
+               <a class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>商品管理</p>
                 </a>
               </li>
               <li class="nav-item">
-             <a>
+             <a class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>訂單管理</p>
                 </a>
               </li>
               <li class="nav-item">
-           <a>
+           <a class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>商品資料分析</p>
                 </a>
