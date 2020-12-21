@@ -95,10 +95,11 @@
 							href="<c:url value='myRecipe'/>">我的最愛</a>
 					</div></li>
 
-				<li class="nav-item"><c:if test="${empty login_ok}">
+				<li class="nav-item dropdown"><c:if test="${empty login_ok}">
 						<a  class="nav-link" href="<c:url value='login.controller' />" style="font-size: 20px">會員</a>
 					</c:if> <c:if test="${!empty login_ok}">
-						<a class="nav-link" href="<c:url value='backstage.controller' />" style="font-size: 20px">會員</a>
+					<form class="nav-link" name="form1" action="memberUpdate.controller" method="post">
+					<a href="javascript:document.form1.submit();" style="font-size: 20px;color:black">會員</a></form>
 					</c:if></li>
 				<li class="nav-item"><c:if test="${empty login_ok}">
 						<a class="nav-link" href="<c:url value='login.controller' />" style="font-size: 20px">登錄</a>
@@ -162,14 +163,7 @@
                 </a>
                 </form>
               </li>
-              <li class="nav-item">
-              <form name="form2" action="memberEvaluation.controller" method="GET">
-                <a href="javascript:document.form2.submit();" class="nav-link">
-                  &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
-                  <p>評價查詢</p>
-                </a>
-               </form>
-              </li>
+
             </ul>
           </li>
           <li class="nav-item" >
@@ -201,26 +195,26 @@
                 </a>
               </li>
              </c:if>
-<%-- 			<c:if test="${login_ok.member_permissions!=1}"> --%>
-<!--               <li class="nav-item"> -->
-<%--                 <a href="<c:url value='mall_management'  />" class="nav-link"> --%>
-<!--                   <i class="far fa-circle nav-icon"></i> -->
-<!--                   <p>商品管理</p> -->
-<!--                 </a> -->
-<!--               </li> -->
-<!--               <li class="nav-item"> -->
-<%--                 <a href="<c:url value='mall_manageOrder'  />" class="nav-link"> --%>
-<!--                   <i class="far fa-circle nav-icon"></i> -->
-<!--                   <p>訂單管理</p> -->
-<!--                 </a> -->
-<!--               </li> -->
-<!--               <li class="nav-item"> -->
-<%--                 <a href="<c:url value='mall_analysis'  />" class="nav-link"> --%>
-<!--                   <i class="far fa-circle nav-icon"></i> -->
-<!--                   <p>商品資料分析</p> -->
-<!--                 </a> -->
-<!--               </li> -->
-<%--              </c:if>  --%>
+			<c:if test="${login_ok.member_permissions!=1}">
+              <li class="nav-item">
+                <a href="<c:url value='mall_management'  />" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>商品管理</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<c:url value='mall_manageOrder'  />" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>訂單管理</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<c:url value='mall_analysis'  />" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>商品資料分析</p>
+                </a>
+              </li>
+             </c:if> 
             </ul>
           </li>
           <li class="nav-item">
