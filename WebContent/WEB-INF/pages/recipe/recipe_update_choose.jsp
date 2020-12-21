@@ -62,12 +62,12 @@
 
 </head>
 <body class="goto-here">
+	<div id="deleteSuccess">
 	<c:if test="${!empty login_ok}">
 <jsp:include page="/WEB-INF/pages/Message.jsp" />
 </c:if>
 <jsp:include page="/WEB-INF/pages/bar.jsp"/>
 <section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">
-	<div id="deleteSuccess">
 		<!-------------------------內容區--------------------------------->
 
 		<div id="Success"></div>
