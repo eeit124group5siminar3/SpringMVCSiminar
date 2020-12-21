@@ -44,6 +44,10 @@
 <body class="goto-here">
 	
 	<jsp:include page="../header.jsp" />
+	
+	<c:if test="${!empty login_ok}">
+		<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 <!-- ------------------------內容區 --- ----------------------------------------------------------------->
 <!-- 	上面圖片 -->
