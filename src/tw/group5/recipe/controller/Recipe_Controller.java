@@ -127,13 +127,13 @@ public class Recipe_Controller {
 	public String insertDetail(@ModelAttribute("bean") Member_Detail bean,Model m) {
 		service.insertDetail(bean);
 		m.addAttribute("memDetail",bean);
-		return "Member_Backstage/Member_Backstage";
+		return "Member_Backstage/Member_Update";
 	}
 
 	@PostMapping(value = "/updateDetail")
 	public String updateDetail(@ModelAttribute("memDetail") Member_Detail memDetail) {
 		service.updateDetail(memDetail);
-		return "Member_Backstage/Member_Backstage";
+		return "Member_Backstage/Member_Update";
 	}
 
 	@GetMapping(value = "/completeDetail")
