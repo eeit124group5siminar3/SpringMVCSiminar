@@ -270,6 +270,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<c:url value='myRecipe'/>" class="nav-link">
+                  &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
+                  <p>我的最愛</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<c:url value='completeDetail?mem_no=${login_ok.member_no}'/>" class="nav-link">
                   &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
                   <p>文章管理</p>
@@ -279,6 +285,12 @@
                 <a href="<c:url value='completeDetail?mem_no=${login_ok.member_no}'/>" class="nav-link">
                   &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
                   <p>修改資料</p>
+                </a>
+              </li>
+                 <li class="nav-item">
+                <a href="<c:url value='analysisPage'/>" class="nav-link">
+                  &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
+                  <p>文章分析圖表</p>
                 </a>
               </li>
               </c:if>

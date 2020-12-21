@@ -262,6 +262,6 @@ function fastInput5(){
 	document.forms[0][6].value=1.0;
 	document.forms[0][7].value=5;
 // 	document.forms[0][8].value="/WEB-INF/pages/images/西瓜.jpg";
-	document.forms[0][9].value="包甜，每顆約20公斤";
+	document.forms[0][9].value="包甜，每顆約20台斤";
 	}
 </script>
