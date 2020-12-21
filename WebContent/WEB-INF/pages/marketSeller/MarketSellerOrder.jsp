@@ -42,6 +42,7 @@
 </style>
 </head>
 <body class="goto-here">
+
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->
 

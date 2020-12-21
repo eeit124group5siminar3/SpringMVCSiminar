@@ -54,13 +54,15 @@ body {
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+
 <!-- 蔬菜圖 -->
+<section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">
     <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Checkout</span></p>
-            <h1 class="mb-0 bread">Checkout</h1>
+            <h1 class="mb-0 bread">店家管理</h1>
           </div>
         </div>
       </div>
@@ -135,7 +137,7 @@ body {
 			<input class="btn btn-primary py-3 px-4" type="submit"  value="回管理介面">
 			</div>
 			</form>
-		
+		</section>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		 
 		<script>
