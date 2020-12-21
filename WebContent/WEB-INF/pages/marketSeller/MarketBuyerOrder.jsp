@@ -41,6 +41,9 @@
 }
 </style>
 </head>
+		<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <body class="goto-here">
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->

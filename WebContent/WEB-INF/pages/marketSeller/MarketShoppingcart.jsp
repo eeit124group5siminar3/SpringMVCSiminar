@@ -43,6 +43,9 @@
 <body class="goto-here">
 	<jsp:include page="../header.jsp" />
 	<!-- END nav -->
+	    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 	<div class="hero-wrap hero-bread"
 		style="background-image: url('images/bg_1.jpg');">

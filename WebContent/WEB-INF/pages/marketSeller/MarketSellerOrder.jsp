@@ -53,7 +53,9 @@
 
 	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 	<!-- END nav -->
-
+    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 
 <section class="content-wrapper justify-content-center" style="background-color: #FFFFFF">

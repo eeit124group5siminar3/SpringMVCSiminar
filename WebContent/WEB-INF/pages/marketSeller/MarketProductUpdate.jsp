@@ -54,6 +54,9 @@ fieldset {
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <h1 align="center">商品管理</h1>
 		<fieldset>
 		<form:form id="form1" name="form1" method="post"

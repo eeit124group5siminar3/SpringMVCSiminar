@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 <meta charset="UTF-8">
 <title>店家資訊</title>
 
