@@ -63,7 +63,7 @@
 	background-color: #b8cdd4;
 	border-color:#b8cdd4;
 	hover :#ccc6ad;
-	font-weight:bold
+	font-weight:bold;
 }
 .btn:hover{
 	background-color:#79a6ad;
