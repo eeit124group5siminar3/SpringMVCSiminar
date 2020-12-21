@@ -43,7 +43,7 @@
 					</h3>
 					<p>
 						<a href="./SinglePage?blog_id=${bean.blog_id}"
-							class="btn btn-primary py-2 px-3">Read more</a>
+							class="btn btn-primary py-2 px-3">閱讀</a>
 					</p>
 				</div>
 			</div>

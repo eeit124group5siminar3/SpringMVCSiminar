@@ -26,7 +26,7 @@
 					<p>
 						<a
 							href="<c:url value='/recipeDetail.controller?rec_id=${bean.rec_id}'/>"
-							class="btn btn-primary py-2 px-3">Read more</a>
+							class="btn btn-primary py-2 px-3">看食譜去</a>
 					</p>
 				</div>
 			</div>
