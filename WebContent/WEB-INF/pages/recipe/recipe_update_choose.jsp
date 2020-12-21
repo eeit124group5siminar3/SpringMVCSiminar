@@ -129,6 +129,8 @@
 
 				</form:form>
 			<button type="submit" class="btn btn-primary py-3 px-4"  
+			onclick="javascript:location.href='<c:url value='uploadPage.controller'/>'">繼續新增</button>
+			<button type="submit" class="btn btn-primary py-3 px-4"  
 			onclick="javascript:location.href='<c:url value='backstage.controller'/>'">回前頁</button>
 			</fieldset>
 		</div>

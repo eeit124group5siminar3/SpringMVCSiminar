@@ -63,6 +63,6 @@ public class Recipe_Controller_upload {
 			bean.setDate(date);
 			service.insert(bean);
 			System.out.println("done");
-			return "Member_Backstage/Member_Update";
+			return "redirect:/updatePage.controller";
 		}
 }

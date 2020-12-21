@@ -32,16 +32,7 @@ public class BackstageController {
 	private Recipe_Service recipe_Service;
 
 	@RequestMapping(path = "/backstage.controller", method = RequestMethod.GET)
-	public String MemberBackstage(HttpServletRequest request) {
-		System.err.println("111111");
-		HttpSession session = request.getSession(false);
-		Integer member_no=((Member_SignUp)session.getAttribute("login_ok")).getMember_no();
-		System.err.println(member_no);
-		Member_Detail bean = recipe_Service.detailBean(member_no);
-		System.err.println(bean);
-		if(bean!=null) {
-			session.setAttribute("memDetail", bean);
-		}
+	public String MemberBackstage() {
 		return "Member_Backstage/Member_Backstage";
 	}
 
@@ -77,6 +68,15 @@ public class BackstageController {
 				member_bank_code, member_bank_account);
 
 //		request.getSession(true).setAttribute("reg_buyer",member_bean);
+		
+		//recipe資料
+		HttpSession recipeSession = request.getSession(false);
+		Integer member_no=session.getMember_no();
+		Member_Detail bean = recipe_Service.detailBean(member_no);
+		if(bean!=null) {
+			recipeSession.setAttribute("memDetail", bean);
+		}
+		
 		m.addAttribute("reg_buyer", member_bean);
 		return "/Member_Backstage/Member_Update";
 	}
