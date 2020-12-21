@@ -167,8 +167,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 						<p></p>
 						<label for="inputPassword4">生日</label> <input type="text"
 							class="form-control"
-							placeholder="<jsp:getProperty name="login_ok"
-							property="member_birthday" />"
+							placeholder="${login_ok.member_birthday.toString().substring(0,10)}"
 							disabled>
 						<p></p>
 						<label for="inputPassword4">連絡電話</label> <input type="text"
