@@ -50,15 +50,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	position: absolute;
 }
 
-#project_backstage {
-	width: 150px;
-	position: absolute;
-	font-weight: bold;
-	top: 150px;
-	left: 15px;
-	color: white;
-	display: block;
-}
+
 
 #backstage_page {
 	position: absolute;
@@ -148,60 +140,8 @@ $(function(){
 	<jsp:include page="/WEB-INF/pages/Message.jsp" />
 	</c:if>
 	
-	
-	<div id="project_backstage">
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo">會員管理</button>
-			<div id="demo" class="collapse">
-				<br>
-				<form name="form1" action="memberUpdate.controller" method="post">
-					<li align="left"><a href="javascript:document.form1.submit();"
-						class="hyperlink">資料修改</a></li>
-				</form>
-				<form name="form2" action="memberEvaluation.controller" method="GET">
-					<li align="left"><a href="javascript:document.form2.submit();"
-						class="hyperlink">評價查詢</a></li>
-				</form>
-			</div>
-		</div>
-		<br> <br>
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo1">商城管理</button>
-			<div id="demo1" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-			</div>
-		</div>
-		<br> <br>
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo2">市場管理</button>
-			<div id="demo2" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-			</div>
-		</div>
-		<br> <br>
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo3">食譜管理</button>
-			<div id="demo3" class="collapse">
-				<li align="left"><a href="" class="hyperlink">食譜新增</a></li>
-				<li align="left"><a href="" class="hyperlink">食譜修改</a></li>
-			</div>
-		</div>
-		<br> <br>
-		<div style="margin-left: 25px">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#demo4">活動管理</button>
-			<div id="demo4" class="collapse">
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-				<li align="left"><a href="" class="hyperlink">????</a></li>
-			</div>
-		</div>
-	</div>
+<jsp:include page="/WEB-INF/pages/bar.jsp"/>
+<section class="content-wrapper" style="background-color:#FFFFFF">
 
 	<div id="backstage_page">
 		<!-- --------會員管理 內容區--------- -->
@@ -340,7 +280,7 @@ $(function(){
 
 
 
-
+</section>
 
 
 		<!-- -------------------------------- -->
