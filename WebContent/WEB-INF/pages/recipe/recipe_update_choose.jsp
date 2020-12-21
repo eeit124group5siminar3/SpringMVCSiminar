@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,10 +126,16 @@
 
 
 				</form:form>
-			<button type="submit" class="btn btn-primary py-3 px-4"  
+			<div>
+			
+			<form  action="./memberUpdate.controller" name="formsignup_aa" method="post">
+			<button type="button" class="btn btn-primary py-3 px-4"  
 			onclick="javascript:location.href='<c:url value='uploadPage.controller'/>'">繼續新增</button>
-			<button type="submit" class="btn btn-primary py-3 px-4"  
-			onclick="javascript:location.href='<c:url value='memberUpdate.controller'/>'">回前頁</button>
+					<button type="submit" class="btn btn-primary py-3 px-4">回會員管理</button>
+			</form>
+			</div>
+			
+
 			</fieldset>
 		</div>
 		<!-- 		<div style="text-align: center;"> -->

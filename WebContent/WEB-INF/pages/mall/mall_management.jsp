@@ -9,11 +9,16 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+
+<!-- <link rel="stylesheet" -->
+<!--  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+<link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+<!-- <link rel="stylesheet" -->
+<!--  href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
+
+
 
 <link rel="stylesheet" href="css/dist/adminlte.min.css">
-
-
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
 	rel="stylesheet">
@@ -104,25 +109,27 @@
 	<jsp:include page="../header.jsp" />
 <!-- 	END nav	END nav -->
 
-	<div class="hero-wrap hero-bread"
-		style="background-image: url('images/bg_1.jpg');" id="product_top">
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
-					</p>
-					<h1 class="mb-0 bread">商品管理</h1>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- 	<div class="hero-wrap hero-bread" -->
+<!-- 		style="background-image: url('images/bg_1.jpg');" id="product_top"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div -->
+<!-- 				class="row no-gutters slider-text align-items-center justify-content-center"> -->
+<!-- 				<div class="col-md-9 ftco-animate text-center"> -->
+<!-- 					<p class="breadcrumbs"> -->
+<!-- 						<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span> -->
+<!-- 					</p> -->
+<!-- 					<h1 class="mb-0 bread">商品管理</h1> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 			<p style="text-align:center;height:90px" ><font color='red' size='3' id="errMsgs"> ${ErrMsg} </font></p>
 <jsp:include page="../sidebar.jsp" />
 	<section class="ftco-section content-wrapper" id="managementContent" style="padding-top:0;background-color:#FFFFFF"></section>
 	<jsp:include page="../footer.jsp" />
-
+<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">

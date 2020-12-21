@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -58,13 +58,12 @@
 										<p>訂單數量</p>
 								</a></li>
 							</ul></li>
-							<li class="nav-item">  <form name="form1" action="memberUpdate.controller" method="post">
-                <a href="javascript:document.form1.submit();" class="nav-link">
-                  &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
-                  <p>返回會員修改</p>
-                </a>
-                </form>
-						</a>
+						<li class="nav-item">
+							<form name="form_mallAnalysis" action="memberUpdate.controller" method="post">
+								<a href="javascript:document.form_mallAnalysis.submit();" class="nav-link">
+									<p>返回會員修改</p>
+								</a>
+							</form> </a>
 						</li>
 					</ul>
 				</nav>
@@ -96,6 +95,9 @@
 	<canvas id="sales-chart" height="200"></canvas>
 	<canvas id="visitors-chart" height="200"></canvas>
 	<jsp:include page="../footer.jsp" />
+	<c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/plugins/bootstrap.bundle.min.js"></script>
 	<script src="js/dist/adminlte.js"></script>
