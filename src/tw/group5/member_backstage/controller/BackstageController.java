@@ -41,7 +41,7 @@ public class BackstageController {
 		return "Member_Backstage/Member_Update_OK";
 	}
 	
-	@RequestMapping(path = "/memberUpdate.controller", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	@RequestMapping(path = "/memberUpdate.controller", method = {RequestMethod.POST,RequestMethod.GET}, produces = "text/html;charset=UTF-8")
 	public String MemberUpdate(Model m,HttpServletRequest request) throws ParseException {
 		Member_SignUp session = (Member_SignUp) m.getAttribute("login_ok");
 //		Member_SignUp session = (Member_SignUp )request.getSession(true).getAttribute("login_ok");
@@ -75,6 +75,7 @@ public class BackstageController {
 		Member_Detail bean = recipe_Service.detailBean(member_no);
 		if(bean!=null) {
 			recipeSession.setAttribute("memDetail", bean);
+			return "Member_Backstage/Member_Update";
 		}
 		
 		m.addAttribute("reg_buyer", member_bean);
