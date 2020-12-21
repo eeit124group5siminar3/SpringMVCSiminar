@@ -130,7 +130,7 @@ body {
 </table>
 </form:form>
 
-			<form class="container" action="<c:url value='backstage.controller'></c:url>" >
+			<form class="container" action="<c:url value='Member_Update'></c:url>" >
 			<div align="center">
 			<input class="btn btn-primary py-3 px-4" type="submit"  value="回管理介面">
 			</div>
