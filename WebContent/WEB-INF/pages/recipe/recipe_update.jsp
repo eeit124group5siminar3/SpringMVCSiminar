@@ -51,6 +51,9 @@
 </head>
 <body class="goto-here">
 <div id="deleteSuccess">
+<c:if test="${!empty login_ok}">
+<jsp:include page="/WEB-INF/pages/Message.jsp" />
+</c:if>
 		<jsp:include page="../header.jsp" />
 
 
