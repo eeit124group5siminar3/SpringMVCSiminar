@@ -212,6 +212,34 @@ public class ActSignController {
 		return "/active/actSignOrd";
 		}
 	
+	//查詢會員報名活動會跳到管理頁面的
+	@RequestMapping(value = "actOrdSelectMaingo.do")
+	public String actOrdSelectMaingo( Model model,
+		@RequestParam(value = "pageNo", required = false) Integer pageNo,
+		@SessionAttribute(value = "login_ok",required = false) Member_SignUp mb
+		) {
+		if(mb == null) {
+			return "Member_SignUp/Member_Login";
+		}
+		System.out.println(pageNo);
+		
+		if(pageNo == null) {
+			if(model.getAttribute("pageNo") != null) {
+				pageNo = (Integer) model.getAttribute("pageNo");
+			}else {
+				pageNo = 1;
+			}
+		}
+		actOrdService.setPageNo(pageNo);
+		actOrdService.setRecordsPerPage(RECORDS_PER_PAGE);
+		Integer memNo=mb.getMember_no();
+//		Collection<ActOrd> collActOrds = actOrdService.getActOrds(memNo);
+		Collection<ActOrd> collActOrds = actOrdService.getPageActOrds(memNo);
+		model.addAttribute("totalPages", actOrdService.getTotalPages(memNo));
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("collActOrds", collActOrds);
+		return "/active/actSignOrdMaingo";
+		}
 	
 	
 //	@RequestMapping(value = "actOrdSelectAjax.do/{pageNo}")
