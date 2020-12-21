@@ -148,104 +148,145 @@ function fastinsert3(){
 	<jsp:include page="/WEB-INF/pages/bar.jsp"/>
 	
 <!-------------------------內容區--------------------------------->	
-<section class="content-wrapper row justify-content-center" style="background-color: #FFFFFF">
-<div style="border-style: solid; border-color:#82ae46;margin:20px;padding:20px; padding-left:50px; width:800px" >
-<div class="form-inline" >
-<h3>一日農夫申請活動</h3>&emsp;&emsp;&emsp;
-  <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">活動1</button>&ensp;
-  <button class="btn btn-primary " value="fastinsert" onclick="fastinsert2()">活動2</button>&ensp;
-  <button class="btn btn-primary " value="fastinsert" onclick="fastinsert3()">活動3</button>&ensp;
-</div>	
-<hr>
+<section class="content-wrapper row justify-content-center" style="background-color:#FFFFFF">
+<div>
+    <div class="card card-info" style="width: 50rem; ">
+      <div class="card-header" style="background-color:#b8cdd4;">
+        <span class="card-title" style="font-size: 40px; color:#003440">一日農夫申請活動  </span><span style="font-size: 20px;color:#a63a00 ;font-weight:bold">${afBean.actStatusWord }</span>
+      	<div class="form-inline btn float-right" >
+		<!-- <h3>一日農夫申請活動</h3>&emsp;&emsp;&emsp; -->
+		  <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">活動1</button>&ensp;
+		  <button class="btn btn-primary " value="fastinsert" onclick="fastinsert2()">活動2</button>&ensp;
+		  <button class="btn btn-primary " value="fastinsert" onclick="fastinsert3()">活動3</button>&ensp;
+		</div>	
+      </div>
 <form:form action="actFarmerInsert.do" modelAttribute="farmerinsert" method="POST" enctype="multipart/form-data" name="act"  >
-<table class="justify-content-right" >
-	<tr>
-<%-- 		<td><form:label path="actId" type="hidden">活動編號</form:label></td> --%>
-		<td colspan="4"><form:input path="actId" type="hidden" ></form:input></td>
-	</tr>
-	<tr>
-		<td><form:label for="actName" path="actName">活動名稱<span style="color: red">*</span></form:label></td>
-		<td colspan="3"><form:input path="actName" type="text" id="actName" required="required"/><span id="nameMsg"></span></td>
-	</tr>
-	<tr>
-		<td><form:label path="actType">活動類型</form:label></td>
-		<td colspan="3"><form:select path="actType" type="text" id="actType" >		
+      <div class="card-body">
+<!--       <div class="form-group"> -->
+<%--             <form:label path="actId">活動編號:</form:label> --%>
+<%-- 			<form:input path="actId" type="hidden" ></form:input> --%>
+<!--           <div class="form-inline"> -->
+<%--           	<form:label for="actName" path="actName">活動名稱<span style="color: red">*</span></form:label> --%>
+<%--             <form:input path="sellerId" type="text" class="form-control col" readonly="true"/> --%>
+<!--           </div> -->
+<!--         </div> -->
+<!--         /.form group -->
+        <div class="form-group">
+          <form:label for="actName" path="actName">活動名稱<span style="color: red">*</span></form:label>
+          <form:input class="form-control" path="actName" type="text" id="actName" required="required"/><span id="nameMsg"></span>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="actType">活動類型</form:label>
+          <form:select path="actType" type="text" id="actType" class="form-control">		
 				<form:option value="體驗類">體驗類</form:option>
 				<form:option value="採收類">採收類</form:option>
 				<form:option value="文藝類">文藝類</form:option>
 				<form:option value="綜合類">綜合類</form:option>			
 			</form:select>	
-		</td>
-	</tr>
-	<tr>
-		<td><form:label path="actAddr">活動地址<span style="color: red">*</span></form:label></td>
-		<td colspan="3"><form:input path="actAddr" type="text" id="actAddr" required="required"/><span id="addrMsg"></span></td>
-	</tr>
-	<tr>
-		<td><form:label path="tel">連絡電話<span style="color: red">*</span></form:label></td>
-		<td colspan="3"><form:input path="tel" type="text" id="tel" required="required"/><span id="telMsg"></span></td>
-	</tr>
-	<tr>
-		<td><form:label path="actDateSta">活動開始日期<span style="color: red">*</span></form:label></td>
-		<td><form:input path="actDateSta" type="date" id="actDateSta"/></td>
-		<td><form:label path="actTimeSta">活動開始時間<span style="color: red">*</span></form:label></td>
-		<td><form:input path="actTimeSta" type="time" id="actTimeSta"></form:input></td>
-	</tr>
-	<tr>
-		<td><form:label path="actDateEnd">活動結束日期<span style="color: red">*</span></form:label></td>
-		<td><form:input path="actDateEnd" type="date" id="actDateEnd" required="true"/></td>
-		<td><form:label path="actTimeEnd">活動結束時間<span style="color: red">*</span></form:label></td>
-		<td><form:input path="actTimeEnd" type="time" id="actTimeEnd" required="true"></form:input></td>
-	</tr>
-	<tr>
-		<td><form:label path="numLim">活動人數上限<span style="color: red">*</span></form:label></td>
-		<td colspan="3"><form:input path="numLim" type="text" id="numLim" required="required"/><span id="numLimMsg"></span></td>
-	</tr>
-	<tr>
-		<td><form:label path="price">活動費用<span style="color: red">*</span></form:label></td>
-		<td colspan="3"><form:input path="price" type="text" id="price" required="required"/><span id="priceMsg"></span></td>
-	</tr>
-	<tr>
-		<td><form:label path="actDescri">活動描述:</form:label></td>
-<%-- 		<td><form:input path="actDescri" type="text" required="required"/></td> --%>
-		<td colspan="3"><form:textarea cols="50" rows="6" path="actDescri" id="actDescri" required="required"></form:textarea><span id="descriMsg"></span></td>
-	</tr>
-	<tr>
-		<td><form:label path="actImg">活動海報<span style="color: red">*</span></form:label></td>
-		<td colspan="3"><form:input path="multipartFile" type="file" class="InputClass" id="imgInp" accept="image/*" required="true"/><span id="fileMsg"></span> 
-<!-- 			<img height='230' width='230' id="blah" src="#" alt="上傳照片" />		 -->
-		</td>
-	</tr>
-	<tr>
-		<td><form:label path="signDateSta">報名開始日期<span style="color: red">*</span></form:label></td>
-		<td><form:input path="signDateSta" type="date" id="signDateSta" required="true"/></td>
-		<td><form:label path="signTimeSta">報名開始時間<span style="color: red">*</span></form:label></td>
-		<td><form:input path="signTimeSta" type="time" id="signTimeSta" required="true"></form:input></td>
-	</tr>
-	<tr>
-		<td><form:label path="signDateEnd">報名結束日期<span style="color: red">*</span></form:label></td>
-		<td><form:input path="signDateEnd" type="date" id="signDateEnd" required="true"/></td>
-		<td><form:label path="signTimeEnd">報名結束時間<span style="color: red">*</span></form:label></td>
-		<td><form:input path="signTimeEnd" type="time" id="signTimeEnd" required="true"></form:input></td>
-	</tr>
-	<tr>
-		<td><form:label path="sigStat" required="ture">報名狀態:</form:label></td>
-		<td colspan="3">
-			<form:radiobutton path="sigStat" value="0" id="sigStat" required="true"/>未開放
-			<form:radiobutton path="sigStat" value="1" id="sigStat"/>開放中
-			<form:radiobutton path="sigStat" value="2" id="sigStat"/>已截止			
-		</td>
-	</tr>
-	
-	<tr>
-
-		<td colspan="2" align="center"><form:button class="btn btn-primary py-2 px-3" value="Send" id="send">送出</form:button></td>	
-		<td colspan="2" align="center"><form:button class="btn btn-primary py-2 px-3" value="back" onclick="backHome()">回管理頁面</form:button></td>		
-	</tr>
-</table>
-</form:form>
-</div>
-</div>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="actAddr">活動地址<span style="color: red">*</span></form:label>
+		  <form:input class="form-control" path="actAddr" type="text" id="actAddr" required="required"/><span id="addrMsg"></span>
+		</div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="tel">連絡電話<span style="color: red">*</span></form:label>
+		  <form:input class="form-control" path="tel" type="text" id="tel" required="required"/>        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="actDateSta">活動開始日期<span style="color: red">*</span></form:label>&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;          
+          <form:label path="actTimeSta">活動開始時間<span style="color: red">*</span></form:label>
+          <div class="form-inline">
+          	<form:input path="actDateSta" type="date" id="actDateSta" class="form-control col"/>&emsp;&emsp;
+          	<form:input path="actTimeSta" type="time" id="actTimeSta" class="form-control col"/>
+          </div>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="actDateEnd">活動結束日期<span style="color: red">*</span></form:label>&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;          
+          <form:label path="actTimeEnd">活動結束時間<span style="color: red">*</span></form:label>
+          <div class="form-inline">
+          	<form:input path="actDateEnd" type="date" id="actDateEnd" required="true" class="form-control col"/>&emsp;&emsp;
+          	<form:input path="actTimeEnd" type="time" id="actTimeEnd" required="true" class="form-control col"></form:input>
+          </div>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="numLim">活動人數上限<span style="color: red">*</span></form:label>
+          <form:input path="numLim" type="text" id="numLim" required="required" class="form-control" /><span id="numLimMsg"></span>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="price">活動費用<span style="color: red">*</span></form:label>
+          <form:input path="price" type="text" id="price" required="required" class="form-control"/><span id="priceMsg"></span>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="actImg">活動海報<span style="color: red">*</span></form:label>
+          <div class="form-inline">
+		  <form:input path="multipartFile" type="file" class="InputClass" id="imgInp" accept="image/*" required="true" /><span id="fileMsg"></span>
+          </div>	
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="actDescri">活動描述:</form:label>
+          <form:textarea cols="50" rows="6" path="actDescri" id="actDescri" required="required" class="form-control"></form:textarea><span id="descriMsg"></span>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="signDateSta">報名開始日期<span style="color: red">*</span></form:label>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;          
+          <form:label path="signTimeSta">報名開始時間<span style="color: red">*</span></form:label>
+          <div class="form-inline">
+          	<form:input path="signDateSta" type="date" id="signDateSta" required="true" class="form-control col"/>&emsp;&emsp;
+          	<form:input path="signTimeSta" type="time" id="signTimeSta" required="true" class="form-control col"></form:input>
+          </div>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="signDateEnd">報名結束日期<span style="color: red">*</span></form:label>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;          
+          <form:label path="signTimeEnd">報名結束時間<span style="color: red">*</span></form:label>
+          <div class="form-inline">
+          	<form:input path="signDateEnd" type="date" id="signDateEnd" required="true" class="form-control col"/>&emsp;&emsp;
+          	<form:input path="signTimeEnd" type="time" id="signTimeEnd" required="true" class="form-control col"></form:input>
+          </div>
+        </div>
+        <!-- /.form group -->
+        <div class="form-group">
+          <form:label path="sigStat" required="ture" >報名狀態:</form:label>
+          <div class="form-inline" >
+            <form:radiobutton path="sigStat" value="0" id="sigStat" required="true"/>報名未開放&emsp;&emsp;
+			<form:radiobutton path="sigStat" value="1" id="sigStat"/>活動報名中&emsp;&emsp;
+			<form:radiobutton path="sigStat" value="2" id="sigStat"/>報名已截止
+          </div>
+        </div>
+        <!-- /.form group -->
+<!--         <div class="form-group"> -->
+<%--           <form:label path="actLock">活動狀態:</form:label> --%>
+<!--           <div class="form-inline" > -->
+<%--             <form:radiobutton path="actLock" value="0" id="actLock" disabled="true"/>待審核&emsp;&emsp;&emsp;&emsp; --%>
+<%-- 			<form:radiobutton path="actLock" value="1" id="actLock" disabled="true"/>申請通過&emsp;&emsp;&emsp;&ensp; --%>
+<%-- 			<form:radiobutton path="actLock" value="2" id="actLock" disabled="true"/>申請未通過&emsp;&emsp;&emsp; --%>
+<%-- 			<form:radiobutton path="actLock" value="3" id="actLock" disabled="true"/>活動封鎖 --%>
+<!--           </div> -->
+<!--         </div> -->
+<!--         /.form group -->
+        <div class="form-group form-inline">&emsp;&emsp;&emsp;
+          <form:button class="btn btn-primary py-2 px-3" value="Send" id="send">送出</form:button>&emsp;&emsp;
+          <form:button class="btn btn-primary py-2 px-3" value="back" onclick="backHome()">回管理頁面</form:button>
+        </div>
+        <!-- /.form group -->        
+       </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+   </form:form>    
+   </div>  
 
 <!-- --------------footer----------------------------------------------------------- -->
 </section>

@@ -29,6 +29,7 @@ import tw.group5.marketSeller.service.MarketOrderBeanService;
 import tw.group5.marketSeller.service.MarketProductBeanService;
 import tw.group5.marketSeller.service.MarketSellBeanService;
 import tw.group5.member_SignUp.model.Member_SignUp;
+import tw.group5.util.SendMail;
 import tw.group5.marketSeller.model.MarketMallBean;
 import tw.group5.marketSeller.model.MarketOrder;
 @Controller
@@ -115,6 +116,17 @@ public class MarketShoppingController {
 			oid.setMarketOrderBean(order);
 			items.add(oid);
 		}
+		
+//		String who =mb.getMember_name() ; //會員名稱
+//		String email = mb.getMember_email(); //會員E-mail
+//		String productName = pBean.getProductName(); 
+//		String title = "農郁預購系統通知";
+//		String text= who + "您好:<br>"
+//				+"您的商品" + productName + "庫存為0了<br>";
+//		new SendMail(email, title, text);
+		
+		
+		
 		order.setMarketOrderDetailBean(items);
 		orderService.insert(order);
 		marketCart.deleteAllOrders();

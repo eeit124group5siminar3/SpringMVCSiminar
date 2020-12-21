@@ -113,10 +113,6 @@
 		</div>
 	</div>
 	<br>
-
-
-	<section class="ftco-section">
-		<div class="container"></div>
 	<div class="row justify-content-center">
 		<div>
 			<form class="form-inline my-2 my-lg-0" id="search"
@@ -129,7 +125,10 @@
 			</form>
 		</div>
 	</div>
-	<br>
+
+
+	<section class="ftco-section">
+		<div class="container"></div>
 		<div class="row justify-content-center">
 			<div class="col-md-10 mb-5 text-center" align="center">
 				<ul class="product-category">
@@ -143,8 +142,8 @@
 				</ul>
 			</div>
 		</div>
-	<div>
-		<div id="cateChange">
+<!-- 		<div id="cateChange"> -->
+<!-- 			<div id="searchSuccess"> -->  
 				<div id="Success"></div>
 
 
@@ -156,16 +155,17 @@
 						</div>
 					</div>
 				</div>
-			</div>
+<!-- 			</div> -->
 
-		</div>
+<!-- 		</div> -->
 	</section>
 
 	<!------------------------------------------------------------------>
 	<jsp:include page="../footer.jsp" />
 
 	<script type="text/javascript">
-		 		
+	$(function(){
+		 				
 		console.log(searchInput)
 // 		var searchSuccess=$("#searchSuccess");
 // 		var params=$('#search').serialize();
@@ -216,6 +216,8 @@
 					}	
 				});
 			});
+			});
+
 </script>
 	<script type="text/javascript"> 
 	var currentPage=1;
@@ -274,7 +276,7 @@
 								&lt;</a>
 						</div>
 					</li>
-					<li>\${currentPage}/ \${totalPages}</li>
+					<li>第\${currentPage}頁/ 共\${totalPages}頁</li>
 					<li>
 						<div id="bnext"><a href="#" onclick="pagechange('next')">
 

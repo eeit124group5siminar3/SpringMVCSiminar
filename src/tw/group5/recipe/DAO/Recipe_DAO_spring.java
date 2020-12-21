@@ -69,7 +69,7 @@ public class Recipe_DAO_spring {
 	// 取得資料庫所有資料
 	public List<Recipe_Bean> listOfJavaBean() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "From Recipe_Bean order by recipe_id ";
+		String hql = "From Recipe_Bean order by recipe_id";
 		Query<Recipe_Bean> query = session.createQuery(hql, Recipe_Bean.class);
 		List<Recipe_Bean> list = query.list();
 		return list;
@@ -202,7 +202,7 @@ public class Recipe_DAO_spring {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "From Bookmark_Bean where member_no=:mem_no order by id";
 		Query<Bookmark_Bean> query = session.createQuery(hql, Bookmark_Bean.class);
-		query.setParameter("mem_no", mem_no);
+		query.setParameter("mem_no", mem_no); 
 		List<Bookmark_Bean> list = query.list();
 		return list;
 	}

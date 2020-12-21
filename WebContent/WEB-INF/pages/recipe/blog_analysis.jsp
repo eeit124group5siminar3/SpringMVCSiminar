@@ -82,7 +82,7 @@
 						<tbody>
 							<c:forEach var="bean" items="${blogList}">
 								<tr>
-									<td>${bean.title}</td>
+									<td><a href="./SinglePage?blog_id=${bean.blog_id}">${bean.title}</a></td>
 									<td>${bean.date}</td>
 									<td>${bean.name}</td>
 									<td>${bean.counts}</td>

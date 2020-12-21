@@ -112,32 +112,26 @@
 					  
 							<form>
 								<div id="bpaging">
-								<table border="1" style="margin-right: 0px;">
-								<tr align="center">
+								<table align="center">
+								<tr>
 									<td width='80' height='20'><c:if test="${pageNo > 1}">
-										<div id="blfirst"><a
-											href="<c:url value='actOrdSelect.do?pageNo=1' />">
-											<img border='0' alt='第一頁' height='30' width='30'
-											src='./images/first-icon.png' /> </a></div>
+										<div id="blfirst">
+										<a href="<c:url value='actOrdSelect.do?pageNo=1' />"> &lt;&lt;</a>
+										</div>
 									</c:if></td>
 									<td width='80'><c:if test="${pageNo > 1}">
 										<div id="blprev"><a
 											href="<c:url value='actOrdSelect.do?pageNo=${pageNo-1}' />">
-										<img border='0' alt='前一頁' height='30' width='30'
-											src='./images/prev-icon.png' /></a></div>
+										&lt;</a></div>
 									</c:if></td>
-									<td width='76'>${pageNo} / ${totalPages}</td>
+									<td width='150'>第${pageNo} 頁/ 共 ${totalPages} 頁</td>
 									<td width='80'><c:if test="${pageNo != totalPages}">
 										<div id="blnext"><a
-											href="<c:url value='actOrdSelect.do?pageNo=${pageNo+1}' />">
-										<img border='0' alt='最末頁' height='30' width='30'
-											src='./images/next-icon.png'/> </a></div>
+											href="<c:url value='actOrdSelect.do?pageNo=${pageNo+1}' />">&gt;</a></div>
 									</c:if></td>
 									<td width='80'><c:if test="${pageNo != totalPages}">
 										<div id="bllast"><a
-											href="<c:url value='actOrdSelect.do?pageNo=${totalPages}' />">
-										<img border='0' alt='最末頁' height='30' width='30'
-											src='./images/last-icon.png' /> </a></div>
+											href="<c:url value='actOrdSelect.do?pageNo=${totalPages}' />">&gt;&gt;</a></div>
 									</c:if></td>
 								</tr>
 							</table>

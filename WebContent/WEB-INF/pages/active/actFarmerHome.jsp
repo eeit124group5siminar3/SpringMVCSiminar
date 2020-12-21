@@ -68,7 +68,7 @@
 <!-- 					<form class="product-category" action="actFarmerPreListSearch.do" method="POST"> -->
 						<input type="search" name="searchString" id="searchString"
 							value="${searchString}"/>
-						<button name="searchButton" style="border-radius: 5px;" onclick="searchlist()">查詢</button>
+						<button class="btn btn-primary"name="searchButton" style="border-radius: 5px;" onclick="searchlist()">查詢</button>
 <!-- 					</form> -->
 				</div>
 			</div>

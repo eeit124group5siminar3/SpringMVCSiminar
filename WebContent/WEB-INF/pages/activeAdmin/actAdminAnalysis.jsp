@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <!-- Theme style -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css" integrity="sha512-rVZC4rf0Piwtw/LsgwXxKXzWq3L0P6atiQKBNuXYRbg2FoRbSTIY0k2DxuJcs7dk4e/ShtMzglHKBOJxW8EQyQ==" crossorigin="anonymous" />  
-<title>農郁-活動管理</title>
+<title>農郁-活動後臺管理</title>
 </head>
 <body class="hold-transition sidebar-mini">
 <!--------------------------- 	header ------------------------------------------>
@@ -254,7 +254,7 @@
 <!--             STACKED BAR CHART -->
             <div class="card card-success">
               <div class="card-header">
-                <h3 class="card-title">Stacked Bar Chart</h3>
+                <h3 class="card-title">各種類活動的總營收比較圖</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
