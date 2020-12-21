@@ -106,7 +106,7 @@
 					&emsp;
 					<form action="<c:url value='/actOrdList.do'/>" method="post">
 						<input type="hidden" id="actId" name="actId" value="${actFarmer.actId}"> 
-						<input class="btn btn-primary py-2 px-3 " name="delete" type="submit" value="查詢訂單" > 
+						<input class="btn btn-primary py-2 px-3 " name="select" type="submit" value="查詢訂單" > 
 					</form>
 				</div>
 				</td>
