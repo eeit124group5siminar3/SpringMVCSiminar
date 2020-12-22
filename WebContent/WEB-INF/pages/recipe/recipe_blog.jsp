@@ -198,7 +198,7 @@
 
 						</c:forEach>
 						<div class="sidebar-box ftco-animate">
-							<h3 class="heading">熱們標籤</h3>
+							<h3 class="heading">熱門標籤</h3>
 							<div class="tagcloud">
 								<a href="#" class="tag-cloud-link">fruits</a> <a href="#"
 									class="tag-cloud-link">tomatoe</a> <a href="#"

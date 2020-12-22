@@ -140,14 +140,13 @@
 							<c:forEach var='BeanToken' items="${searchMsg}">
 								<ul class="comment-list">
 									<li class="comment">
-									<c:if test="${detailBean.mem_no==BeanToken.mem_no}">
+									<c:if test="${BeanToken.mem_no!=null}">
 										<div class="vcard bio">
-											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder">
+											<img src="<c:url value='getImage?mem_no=${BeanToken.mem_no}'/>" alt="Image placeholder">
 										</div>
-									</c:if>	
-									<c:if test="${detailBean.mem_no!=BeanToken.mem_no}">
+										</c:if>
+									<c:if test="${BeanToken.mem_no==null}">
 										<div class="vcard bio">
-<%-- 											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder"> --%>
 										</div>
 									</c:if>	
 									
@@ -242,7 +241,7 @@
 						<div class="block-21 mb-4 d-flex">
 
 							<c:if test="${popular1.fileName!=null}">
-								<a class="blog-img mr-4"
+								<a href="./SinglePage?blog_id=${popular1.blog_id}" class="blog-img mr-4"
 									style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular1.blog_id}'/>);"></a>
 							</c:if>
 							<c:if test="${popular1.fileName==null}">
@@ -276,7 +275,7 @@
 						</div>
 						<div class="block-21 mb-4 d-flex">
 							<c:if test="${popular2.fileName!=null}">
-								<a class="blog-img mr-4"
+								<a class="blog-img mr-4" href="./SinglePage?blog_id=${popular2.blog_id}"
 									style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular2.blog_id}'/>);"></a>
 							</c:if>
 							<c:if test="${popular2.fileName==null}">
@@ -307,7 +306,8 @@
 						</div>
 						<div class="block-21 mb-4 d-flex">
 							<c:if test="${popular3.fileName!=null}">
-								<a class="blog-img mr-4"
+								<a class="blog-img mr-4" href="./SinglePage?blog_id=${popular3.blog_id}"
+								
 									style="background-image: url(<c:url value='/getBlogImage?blog_id=${popular3.blog_id}'/>);"></a>
 							</c:if>
 							<c:if test="${popular3.fileName==null}">
@@ -340,7 +340,7 @@
 					</div>
 
 					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">熱們標籤</h3>
+						<h3 class="heading">熱門標籤</h3>
 						<div class="tagcloud">
 							<a href="#" class="tag-cloud-link">fruits</a> <a href="#"
 								class="tag-cloud-link">tomatoe</a> <a href="#"

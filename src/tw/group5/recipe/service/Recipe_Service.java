@@ -121,7 +121,6 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.detailBean(mem_no);
 	}
 
-	
 	//--------------blog------------------------------
 	@Override
 	public Blog_Bean insert(Blog_Bean bean) {

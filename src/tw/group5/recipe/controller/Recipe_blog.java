@@ -15,6 +15,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.formula.ptg.MemErrPtg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -151,9 +152,11 @@ public class Recipe_blog {
 		// 回文資料
 		List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
 		m.addAttribute("searchMsg", searchMsg);
+		
 		// 作者資料
 		Member_Detail detailBean = service.detailBean(partSearch.getMem_no());
 		m.addAttribute("detailBean", detailBean);
+		
 
 		// 分類 類別總數
 		List<String> cateList = service.cateList();
@@ -321,7 +324,7 @@ public class Recipe_blog {
 			bean.setContent(content);
 			service.insertMsg(bean);
 			int counts = (int) service.BlogMsgCounts(blog_id);
-			List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
+			List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);		
 			
 			// 作者資料
 			Member_Detail detailBean = service.detailBean(partSearch.getMem_no());
