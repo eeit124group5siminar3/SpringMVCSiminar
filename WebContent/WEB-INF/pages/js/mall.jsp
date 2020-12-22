@@ -49,7 +49,9 @@
 	}
 	// 模糊查詢
 	function searchProduct() {
-		var searchString = document.forms[1].elements[0].value;
+// 		var searchString = document.searchFrom.elements[0].value;
+var searchString=$("#searchString").val();
+		console.log(searchString);
 		$.ajax({
 			url : "MallContent",
 			type : "POST",
