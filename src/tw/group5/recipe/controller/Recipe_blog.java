@@ -153,19 +153,6 @@ public class Recipe_blog {
 		List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
 		m.addAttribute("searchMsg", searchMsg);
 		
-		List<Member_Detail> memDetailList=service.memDetailList();
-		List<Msg_Blog_Bean> msgMemDetail=new ArrayList<Msg_Blog_Bean>();
-		
-		for(Msg_Blog_Bean a:searchMsg) {
-			for(Member_Detail b:memDetailList) {
-				if(a.getMem_no()==b.getMem_no()) {
-					msgMemDetail.add(a);
-				}
-			}
-			
-		}
-		m.addAttribute("msgMemDetail",msgMemDetail);
-		
 		// 作者資料
 		Member_Detail detailBean = service.detailBean(partSearch.getMem_no());
 		m.addAttribute("detailBean", detailBean);
@@ -337,22 +324,7 @@ public class Recipe_blog {
 			bean.setContent(content);
 			service.insertMsg(bean);
 			int counts = (int) service.BlogMsgCounts(blog_id);
-			List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);
-						
-			List<Member_Detail> memDetailList=service.memDetailList();
-			List<Msg_Blog_Bean> msgMemDetail=new ArrayList<Msg_Blog_Bean>();
-			
-			for(Msg_Blog_Bean a:searchMsg) {
-				for(Member_Detail b:memDetailList) {
-					if(a.getMem_no()==b.getMem_no()) {
-						msgMemDetail.add(a);
-					}
-				}
-				
-			}
-			m.addAttribute("msgMemDetail",msgMemDetail);
-			
-			
+			List<Msg_Blog_Bean> searchMsg = service.searchMsg(blog_id);		
 			
 			// 作者資料
 			Member_Detail detailBean = service.detailBean(partSearch.getMem_no());

@@ -182,15 +182,6 @@ public class Recipe_DAO_spring {
 		Member_Detail bean = session.get(Member_Detail.class, mem_no);
 		return bean;
 	}
-	
-	public List<Member_Detail> memDetailList(){
-		Session session = sessionFactory.getCurrentSession();
-		Query<Member_Detail> query = session.createQuery("From Member_Detail ", Member_Detail.class);
-		List<Member_Detail> list = query.list();
-		return list;
-
-		
-	}
 
 	// -----------------------Bookmark------------------------
 
@@ -347,7 +338,7 @@ public class Recipe_DAO_spring {
 	// 搜尋某一文章 全部回文
 	public List<Msg_Blog_Bean> searchMsg(Integer blog_id) {
 		Session session = sessionFactory.getCurrentSession();
-		Query<Msg_Blog_Bean> query = session.createQuery("From Msg_Blog_Bean where blog_id=:blog_id order by msg_date",
+		Query<Msg_Blog_Bean> query = session.createQuery("From Msg_Blog_Bean where blog_id=:blog_id order by id",
 				Msg_Blog_Bean.class);
 		query.setParameter("blog_id", blog_id);
 		List<Msg_Blog_Bean> list = query.list();
