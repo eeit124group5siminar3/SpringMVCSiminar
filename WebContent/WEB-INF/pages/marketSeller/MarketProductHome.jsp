@@ -7,9 +7,7 @@
 
 <html lang="zh">
 <head>
-    <c:if test="${!empty login_ok}">
-	<jsp:include page="/WEB-INF/pages/Message.jsp" />
-	</c:if>
+
 <title>農郁-預購商品管理</title>
 <meta charset="utf-8">
 
@@ -190,5 +188,7 @@
 		
 	</script>
 </body>
-
+    <c:if test="${!empty login_ok}">
+	<jsp:include page="/WEB-INF/pages/Message.jsp" />
+	</c:if>
 </html>
