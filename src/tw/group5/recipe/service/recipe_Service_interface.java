@@ -87,6 +87,8 @@ public interface recipe_Service_interface {
 
 	List<String> cateList();
 
+	List<Member_Detail> memDetailList();
+
 //	Subscribe_Bean insertSub(Subscribe_Bean bean);
 
 //	boolean deleteSub(Integer id);

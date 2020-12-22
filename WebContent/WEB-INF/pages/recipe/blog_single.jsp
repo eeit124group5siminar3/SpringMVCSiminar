@@ -137,19 +137,24 @@
 						<div id="MsgChange">
 
 							<h3 class="mb-5">${partSearch.counts}&nbsp;&nbsp;則留言</h3>
-							<c:forEach var='BeanToken' items="${searchMsg}">
+							<c:forEach var='BeanToken' items="${msgMemDetail}">
 								<ul class="comment-list">
 									<li class="comment">
-									<c:if test="${detailBean.mem_no==BeanToken.mem_no}">
+<%-- 									<c:if test="${detailBean.mem_no==BeanToken.mem_no}"> --%>
+<%-- 										<c:forEach var='msg' items="${msgMemDetail}"> --%>
+<%-- 											<c:if test="${BeanToken.mem_no==msg.mem_no}"> --%>
 										<div class="vcard bio">
-											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder">
+											<img src="<c:url value='getImage?mem_no=${BeanToken.mem_no}'/>" alt="Image placeholder">
 										</div>
-									</c:if>	
-									<c:if test="${detailBean.mem_no!=BeanToken.mem_no}">
-										<div class="vcard bio">
-<%-- 											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder"> --%>
-										</div>
-									</c:if>	
+<%-- 										</c:if> --%>
+<!-- 										<div class="vcard bio"></div> -->
+<%-- 										</c:forEach> --%>
+<%-- 									</c:if>	 --%>
+<%-- 									<c:if test="${detailBean.mem_no!=BeanToken.mem_no}"> --%>
+<!-- 										<div class="vcard bio"> -->
+<%-- 											<img src="<c:url value='getImage?mem_no=${searchMsg.mem_no}'/>" alt="Image placeholder"> --%>
+<!-- 										</div> -->
+<%-- 									</c:if>	 --%>
 									
 										<div class="comment-body">
 

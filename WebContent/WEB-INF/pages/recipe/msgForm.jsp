@@ -13,16 +13,21 @@
               <c:forEach var='BeanToken' items="${searchMsg}">
                 <ul class="comment-list">
                           <li class="comment">
-                           <c:if test="${detailBean.mem_no==BeanToken.mem_no}">
+                           <c:if test="${BeanToken.mem_no!=null}">
 										<div class="vcard bio">
-											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder">
+											<img src="<c:url value='getImage?mem_no=${BeanToken.mem_no}'/>" alt="Image placeholder">
 										</div>
 									</c:if>	
-									<c:if test="${detailBean.mem_no!=BeanToken.mem_no}">
+                           <c:if test="${BeanToken.mem_no==null}">
 										<div class="vcard bio">
+<%-- 											<img src="<c:url value='getImage?mem_no=${BeanToken.mem_no}'/>" alt="Image placeholder"> --%>
+										</div>
+									</c:if>	
+<%-- 									<c:if test="${detailBean.mem_no!=BeanToken.mem_no}"> --%>
+<!-- 										<div class="vcard bio"> -->
 <%-- 											<img src="<c:url value='getImage?mem_no=${detailBean.mem_no}'/>" alt="Image placeholder"> --%>
-										</div>
-									</c:if>	
+<!-- 										</div> -->
+<%-- 									</c:if>	 --%>
                             <div class="comment-body">
                              <c:if test="${BeanToken.mem_no!=null}">
                               <h3 class="alert alert-success">${BeanToken.name}</h3>

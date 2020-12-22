@@ -121,6 +121,11 @@ public class Recipe_Service implements recipe_Service_interface {
 		return rDAO.detailBean(mem_no);
 	}
 
+	@Override
+	public List<Member_Detail> memDetailList(){
+		return rDAO.memDetailList();
+	}
+	
 	
 	//--------------blog------------------------------
 	@Override

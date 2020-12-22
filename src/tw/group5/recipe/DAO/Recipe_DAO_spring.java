@@ -182,6 +182,15 @@ public class Recipe_DAO_spring {
 		Member_Detail bean = session.get(Member_Detail.class, mem_no);
 		return bean;
 	}
+	
+	public List<Member_Detail> memDetailList(){
+		Session session = sessionFactory.getCurrentSession();
+		Query<Member_Detail> query = session.createQuery("From Member_Detail ", Member_Detail.class);
+		List<Member_Detail> list = query.list();
+		return list;
+
+		
+	}
 
 	// -----------------------Bookmark------------------------
 
@@ -332,6 +341,8 @@ public class Recipe_DAO_spring {
 			return false;
 		}
 	}
+	
+	
 
 	// 搜尋某一文章 全部回文
 	public List<Msg_Blog_Bean> searchMsg(Integer blog_id) {
