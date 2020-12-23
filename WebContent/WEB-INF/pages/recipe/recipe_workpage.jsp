@@ -197,7 +197,7 @@
      						<div class="menu-item" style="width:80%;margin:50px">
      							<div class="menu__item-img" >
      							 <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
-     				            	  style="background-image: url('<c:url value='/getImageA?rec_id=\${val.rec_id}'/>');">
+     				            	  style="background-image: url('<c:url value='/getImageE?rec_id=\${val.rec_id}'/>');">
      			              	</a>
      							</div>
      							<div class="menu__item-content">
@@ -244,7 +244,7 @@
 						<div class="menu-item" style="width:80%;margin:50px">
 							<div class="menu__item-img" >
 							 <a href="<c:url value='/recipeDetail.controller?rec_id=\${val.rec_id}'/>" class="block-20" 
-				            	  style="background-image: url('<c:url value='/getImageA?rec_id=\${val.rec_id}'/>');">
+				            	  style="background-image: url('<c:url value='/getImageE?rec_id=\${val.rec_id}'/>');">
 			              	</a>
 							</div>
 							<div class="menu__item-content">

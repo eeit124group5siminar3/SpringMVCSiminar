@@ -251,7 +251,7 @@ $(function(){
 						<p></p>
 		
 						<label for="inputPassword4" style="float:left">連絡電話<a style="color:red">*</a></label> <span style="color:red"><small id="span_cellphone"></small></span> <input type="text"
-							name="member_cellphone" id="member_cellphone" class="form-control" required>
+							name="member_cellphone" id="member_cellphone" class="form-control" placeholder="請填入電話號碼" required>
 						
 
 					</div>

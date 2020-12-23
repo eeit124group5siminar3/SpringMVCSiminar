@@ -20,9 +20,9 @@
 					<div class="text d-block pl-md-4">
 						<div class="meta mb-3">
 							<div>${partSearch[i].date}</div>
-							<div>
-								<a href="#">${partSearch[i].name}</a>
-							</div>
+<!-- 							<div> -->
+<%-- 								<a href="#">${partSearch[i].name}</a> --%>
+<!-- 							</div> -->
 							<div>
 								<a href="#" class="meta-chat"><span class="icon-chat"></span>
 									${counts[i]}

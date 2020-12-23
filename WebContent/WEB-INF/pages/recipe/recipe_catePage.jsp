@@ -16,7 +16,7 @@
 					<a
 						href="<c:url value='/recipeDetail.controller?rec_id=${bean.rec_id}'/>"
 						class="block-20"
-						style="background-image: url('<c:url value='/getImageA?rec_id=${bean.rec_id}'/>');">
+						style="background-image: url('<c:url value='/getImageE?rec_id=${bean.rec_id}'/>');">
 					</a>
 				</div>
 				<div class="menu__item-content">

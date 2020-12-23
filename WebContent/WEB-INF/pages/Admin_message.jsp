@@ -13,7 +13,7 @@
     <div class="Layout Layout-open-me Layout-expand Layout-right" style="background-color: #3F51B5;color: rgb(255, 255, 255);opacity: 5;border-radius: 10px;">
       <div class="Messenger_messenger">
         <div class="Messenger_header" style="background-color: rgb(22, 46, 98); color: rgb(255, 255, 255);">
-          <h4 class="Messenger_prompt" style="color:white">聯絡客服</h4> <span class="chat_close_icon"><i class="fa fa-window-close" aria-hidden="true"></i></span> </div>
+          <h4 class="Messenger_prompt" style="color:white">客服</h4> <span class="chat_close_icon"><i class="fa fa-window-close" aria-hidden="true"></i></span> </div>
         <div class="Messenger_content">
         
         
