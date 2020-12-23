@@ -224,7 +224,9 @@ public class MallOrderController {
 	            int colNum = 0;
 	            for (Object field : datatype) {
 	                Cell cell = row.createCell(colNum++);
-	                if (field instanceof String) {
+	                if (field==null) {
+	                	cell.setCellValue("");
+	                }else if (field instanceof String) {
 	                    cell.setCellValue((String) field);
 	                } else if (field instanceof Integer) {
 	                    cell.setCellValue((Integer) field);
