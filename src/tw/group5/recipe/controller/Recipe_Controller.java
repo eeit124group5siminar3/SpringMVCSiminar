@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,7 @@ import tw.group5.recipe.recipe_Bean.Member_Detail;
 import tw.group5.recipe.recipe_Bean.Recipe_Bean;
 import tw.group5.recipe.service.recipe_Service_interface;
 import tw.group5.mall.service.ProductService;
+import tw.group5.member_SignUp.model.Member_SignUp;
 
 @Controller
 @SessionAttributes({ "bean", "memDetail" })
@@ -124,16 +128,50 @@ public class Recipe_Controller {
 	}
 
 	@PostMapping(value = "/insertDetail")
-	public String insertDetail(@ModelAttribute("bean") Member_Detail bean,Model m) {
+	public String insertDetail(@ModelAttribute("bean") Member_Detail bean,Model m,HttpServletRequest request) throws ParseException {
 		service.insertDetail(bean);
 		m.addAttribute("memDetail",bean);
-		return "Member_Backstage/Member_Update";
+		
+		Member_SignUp OK = (Member_SignUp) session.getAttribute("login_ok");
+
+//	  HttpSession session1 = request.getSession(false);	
+//	  Integer member_no=((Member_SignUp)session1.getAttribute("login_ok")).getMember_no();
+//	  System.err.println(member_no);
+//	  Member_Detail bean = recipe_Service.detailBean(member_no);
+//	  System.err.println(bean);
+//	  if(bean!=null) {
+//	   session1.setAttribute("memDetail", bean);
+//	  }
+	  
+	  String member_permissions = OK.getMember_permissions();
+	  String member_email = OK.getMember_email();
+	  String member_password = OK.getMember_password();
+	  String member_id = OK.getMember_id();
+	  String member_name = OK.getMember_name();
+	  Date member_birthday = OK.getMember_birthday();
+	  String member_cellphone = OK.getMember_cellphone();
+	  String member_address = OK.getMember_address();
+	  String member_gui_number = OK.getMember_gui_number();
+	  String e_paper = OK.getE_paper();
+	  String member_bank_code = OK.getMember_bank_code();
+	  String member_bank_account = OK.getMember_bank_account();   
+	  
+	  if (member_gui_number == null) {
+	   member_gui_number = "";
+	  }
+
+	  Member_SignUp member_bean = new Member_SignUp(member_permissions, member_email, member_password, member_id,
+	    member_name, member_birthday, member_gui_number, e_paper, member_cellphone, member_address,
+	    member_bank_code, member_bank_account);
+
+	  m.addAttribute("reg_buyer", member_bean);
+	  return "/Member_Backstage/Member_Update";
 	}
 
 	@PostMapping(value = "/updateDetail")
 	public String updateDetail(@ModelAttribute("memDetail") Member_Detail memDetail) {
 		service.updateDetail(memDetail);
-		return "Member_Backstage/Member_Update";
+		return "redirect:/memberUpdate.controller";
 	}
 
 	@GetMapping(value = "/completeDetail")
