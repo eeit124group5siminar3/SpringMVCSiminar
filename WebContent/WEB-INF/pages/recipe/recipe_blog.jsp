@@ -106,9 +106,10 @@
 										<div class="text d-block pl-md-4">
 											<div class="meta mb-3">
 												<div>${searchAll[i].date}</div>
-												<div>
-													<a href="#">${searchAll[i].name}</a>
-												</div>
+<!-- 												<div> -->
+<%-- 													<a href="#">${searchAll[i].name}</a> --%>
+<!-- 												</div> -->
+											
 												<div>
 													<a href="#" class="meta-chat"><span class="icon-chat"></span>
 														${counts[i]}</a>

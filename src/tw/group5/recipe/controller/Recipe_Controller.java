@@ -117,7 +117,7 @@ public class Recipe_Controller {
 		session.setAttribute("mall_pageNo", pageNo);
 		session.setAttribute("mall_searchString", searchString);
 		mallService.setPageNo(pageNo);
-		mallService.setSearchString(searchString);
+		mallService.setSearchString(searchString.trim());
 
 		return "mall/mall_shop";
 
