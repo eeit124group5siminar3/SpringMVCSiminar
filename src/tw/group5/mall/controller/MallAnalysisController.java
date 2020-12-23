@@ -110,7 +110,7 @@ public class MallAnalysisController {
 		Member_SignUp mb = (Member_SignUp) session.getAttribute("login_ok");
 		analysisService.setUserId(mb.getMember_no());
 		String monthTag = analysisService.getMonthSelectTag();
-		List<Long> userProductOrdersOneMonth = analysisService.getUserProductOrdersOneMonth(lastMonthOf);
+		List<BigDecimal> userProductOrdersOneMonth = analysisService.getUserProductOrdersOneMonth(lastMonthOf);
 		List<String> userProductListOneMonth = analysisService.getUserProductListOneMonth(lastMonthOf);
 		map.put("productList", userProductListOneMonth);
 		map.put("orders", userProductOrdersOneMonth);

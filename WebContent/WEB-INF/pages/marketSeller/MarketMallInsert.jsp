@@ -153,12 +153,14 @@ function fastinsert(){
 	var address="320桃園市中壢區中大路300號國立中央大學 (工程二館側面 / 資策會大樓";
 	var mallDescription="專營活海鮮（魚、蝦、蟹、貝），肉類等冷凍產品 各式海、水產批發零售 產品容品質保證、新美味";
 	var pickupTime="取貨時間為平日 10:00-21:00假日 10:00-22:00"
+	var mail="backstage.root@gmail.com";
 	
 	
 		$("#mallName").val(mallName);
 		$("#address").val(address);
 		$("#mallDescription").val(mallDescription);
 		$("#pickupTime").val(pickupTime);
+		$("#mail").val(mail);
 }
 </script>
 <p>&nbsp;</p>

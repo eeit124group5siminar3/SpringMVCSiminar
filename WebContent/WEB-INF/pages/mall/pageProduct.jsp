@@ -17,7 +17,7 @@
 					</c:choose>
 				</c:forEach>
 			</ul>
-			<form class="product-category" action="javascript:void(0)"
+			<form class="product-category" action="javascript:void(0)" name="searchForm"
 				method="GET">
 				<input type="search" name="searchString" id="searchString"
 					value="${mall_searchString}" />

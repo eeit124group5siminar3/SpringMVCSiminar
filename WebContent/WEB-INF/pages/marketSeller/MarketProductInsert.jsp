@@ -46,7 +46,9 @@
 	<jsp:include page="/WEB-INF/pages/Message.jsp" />
 	</c:if>
 <h2 align="center">
-新增商品 <button class="btn btn-primary " value="fastinsert" onclick="fastinsert()">魠魚片</button>
+新增商品 <button class="btn btn-primary " value="fastinsert1" onclick="fastinsert1()">魠魚片</button>
+ <button class="btn btn-primary " value="fastinsert2" onclick="fastinsert2()">澎湖野生大明蝦8尾入</button>
+ <button class="btn btn-primary " value="fastinsert3" onclick="fastinsert3()">干貝</button>
 </h2>
 <!-- 上傳檔案時<form>標籤的 enctype屬性必須是 "multipart/form-data" -->
 <!-- 而且method屬性必須是 "post" -->
@@ -179,11 +181,55 @@ $("#imgInp").change(function() {
   readURL(this);
 });
 
-function fastinsert(){
+function fastinsert1(){
 	var product_name="澎湖每週限量薄鹽土魠魚片400g";
 	var product_area="澎湖";
 	var price="460";
 	var description="【商品規格】名稱：澎湖每週限量薄鹽土魠魚片規格：400g/片產地：台灣澎湖包裝方式：1片/包，真空包裝保存方式：-18°C以下冷凍保存保存期限：1年加工地：高雄市梓官區漁會食品業者登錄字號：E-188505504-00001-8產品責任險：新光保險產品責任險2000萬"
+	var quantity="2";
+	var openDay="2020-12-25";
+	var openDayTime="09:00"
+	var closeDay="2021-03-30";
+	var closeDayTime="17:00";
+	
+		$("#product_name").val(product_name);
+		$("#product_area").val(product_area);
+		$("#price").val(price);
+		$("#description").val(description);
+		$("#quantity").val(quantity);
+		$("#openDay").val(openDay);
+		$("#openDayTime").val(openDayTime);
+		$("#closeDay").val(closeDay);
+		$("#closeDayTime").val(closeDayTime);
+		
+}
+function fastinsert2(){
+	var product_name="澎湖野生大明蝦8尾入";
+	var product_area="澎湖";
+	var price="780";
+	var description="規格說明‧商品組合/內容：澎湖野生大明蝦‧商品重(容)量：450g‧內容物名稱(成分)：明蝦,原產地(國)：台灣(澎湖) ,製造廠商或進口廠商資訊,名稱：高雄市梓官區漁會"
+	var quantity="30";
+	var openDay="2020-12-25";
+	var openDayTime="09:00"
+	var closeDay="2021-03-30";
+	var closeDayTime="17:00";
+	
+		$("#product_name").val(product_name);
+		$("#product_area").val(product_area);
+		$("#price").val(price);
+		$("#description").val(description);
+		$("#quantity").val(quantity);
+		$("#openDay").val(openDay);
+		$("#openDayTime").val(openDayTime);
+		$("#closeDay").val(closeDay);
+		$("#closeDayTime").val(closeDayTime);
+		
+}
+function fastinsert3(){
+	var product_name="干貝";
+	var product_area="澎湖";
+	var price="460";
+	var description="【商品規格】名稱：澎湖每週限量干貝規格：400g/片產地：台灣澎湖包裝方式：1片/包，真空包裝保存方式：-18°C以下冷凍保存保存期限：1年加工地：高雄市梓官區漁會食品業者登錄字號：E-188505504-00001-8產品責任險：新光保險產品責任險2000萬"
 	var quantity="30";
 	var openDay="2020-12-25";
 	var openDayTime="09:00"

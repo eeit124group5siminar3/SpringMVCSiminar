@@ -158,7 +158,6 @@ public class AnalysisService {
 // 取得個人某單一月份各商品的營業額
 	public List<BigDecimal> getUserProductSalesOneMonth(Integer lastMonthOf) {
 		List<BigDecimal> list = new ArrayList<BigDecimal>();
-		List<String> productList = getUserProductListOneMonth(lastMonthOf);
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -170,6 +169,7 @@ public class AnalysisService {
 		Date start = calendar.getTime();
 		calendar.add(Calendar.MONTH, -1);
 		Date last = calendar.getTime();
+		List<String> productList = adao.getUserProductList(last, start);
 		if (productList.size() > 10) {
 			BigDecimal otherSales = new BigDecimal(0);
 			for (int i = 0; i < 10; i++) {
@@ -178,7 +178,9 @@ public class AnalysisService {
 			}
 			for (int i = 10; i < productList.size(); i++) {
 				adao.setProduct(productList.get(i));
+				if(adao.getMonthlyProductSales(last, start)!=null) {
 				otherSales = otherSales.add(adao.getMonthlyProductSales(last, start));
+				}
 			}
 			list.add(otherSales);
 		} else {
@@ -226,7 +228,7 @@ public class AnalysisService {
 	}
 
 // 取得個人某單一月份各商品的訂單數
-	public List<Long> getUserProductOrdersOneMonth(Integer lastMonthOf) {
+	public List<BigDecimal> getUserProductOrdersOneMonth(Integer lastMonthOf) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -238,12 +240,19 @@ public class AnalysisService {
 		Date start = calendar.getTime();
 		calendar.add(Calendar.MONTH, -1);
 		Date last = calendar.getTime();
-		List<Long> list=adao.getMonthlyProductOrder(last, start);
+		List<BigDecimal> list=adao.getMonthlyProductOrder(last, start);
 		if (list.size() > 10) {
-			Long other=(long)0;
+			BigDecimal other=new BigDecimal(0);
 			do {
-				other+=list.get(10);
-				list.remove(10);
+//				System.err.println(list.get(10).toString());
+//				Object ob=list.get(10);
+//				Long lg=Long.valueOf(ob.toString());
+//				System.err.println(ob);
+//				System.err.println(ob.getClass());
+//				Long lg=; 
+//				System.err.println(lg);
+				other.add(list.get(10));
+				list.remove(10); 
 			} while (list.size() > 10);
 			list.add(other);
 		}
