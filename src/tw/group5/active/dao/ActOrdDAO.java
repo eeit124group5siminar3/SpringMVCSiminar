@@ -134,7 +134,7 @@ public class ActOrdDAO {
 	public List<ActOrd> getPageActOrds(Integer memNo) {
 		Session session = sessionFactory.getCurrentSession();
 		Integer startRecordNo = (pageNo - 1) * recordsPerPage;
-		String hql = "from ActOrd where memNO =?0 ORDER BY actOrdId";
+		String hql = "from ActOrd where memNO =?0 ORDER BY actOrdId DESC";
 		Query<ActOrd> query = session.createQuery(hql, ActOrd.class);
 		query.setParameter(0, memNo);
 		query.setFirstResult(startRecordNo);

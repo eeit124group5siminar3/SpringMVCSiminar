@@ -37,16 +37,16 @@ function fastinsert(){
 	var actType="採收類";
 	var actAddr="高雄市杉林區";
 	var tel="07-6776463"
-	var actDateSta="2020-12-26";
+	var actDateSta="2021-01-26";
 	var actTimeSta="8:00"
-	var actDateEnd="2020-12-26";
+	var actDateEnd="2021-01-26";
 	var actTimeEnd="16:30";
 	var numLim="30";
 	var price="1150";
 	var actDescri="12月番茄成熟的季節來來往往的人呀!走在鄉間小路!旁邊就是滿滿的小番茄!不摘下來吃就是對不起自己啊!!!!這次除了摘番茄體驗之外呢!還要帶著大家一起體驗另一項的手工藝坊竹編!!用竹片編織成桌墊 自己做的絕對是最珍貴的!再動手做的過程中，也會讓自己更加的專注，以及放鬆！趕快來參加吧！！！";
-	var signDateSta="2020-10-28";
-	var signTimeSta="12:01";
-	var signDateEnd="2021-12-02";
+	var signDateSta="2020-12-15";
+	var signTimeSta="09:01";
+	var signDateEnd="2021-01-15";
 	var signTimeEnd="23:59";
 	
 		$("#actName").val(actName);
