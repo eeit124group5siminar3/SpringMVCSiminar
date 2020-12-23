@@ -200,20 +200,20 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 					</div>
 				</div>
 
-				<div class="form-group">
-					<div class="form-check">
+<!-- 				<div class="form-group"> -->
+<!-- 					<div class="form-check"> -->
 
-						<c:if test="${login_ok.e_paper =='1'}">
-							<input type="checkbox" class="form-check-input" name="e_paper"
-								id="e_paper" value="1" checked="true" disabled>
-						</c:if>
-						<c:if test="${login_ok.e_paper =='0'}">
-							<input type="checkbox" class="form-check-input" name="e_paper"
-								id="e_paper" value="1" disabled>
-						</c:if>
-						<label class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
-					</div>
-				</div>
+<%-- 						<c:if test="${login_ok.e_paper =='1'}"> --%>
+<!-- 							<input type="checkbox" class="form-check-input" name="e_paper" -->
+<!-- 								id="e_paper" value="1" checked="true" disabled> -->
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${login_ok.e_paper =='0'}"> --%>
+<!-- 							<input type="checkbox" class="form-check-input" name="e_paper" -->
+<!-- 								id="e_paper" value="1" disabled> -->
+<%-- 						</c:if> --%>
+<!-- 						<label class="form-check-label" for="gridCheck"> 訂閱電子報 </label> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 			</fieldset>
 		</div>
 

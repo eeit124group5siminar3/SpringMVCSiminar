@@ -239,20 +239,20 @@ $(function(){
 						</div>
 					</div>
 
-					<div class="form-group">
-						<div class="form-check">
+<!-- 					<div class="form-group"> -->
+<!-- 						<div class="form-check"> -->
 
-							<c:if test="${reg_buyer.e_paper =='1'}">
-								<input type="checkbox" class="form-check-input" name="e_paper"
-									id="e_paper" value="1" checked="true">
-							</c:if>
-							<c:if test="${reg_buyer.e_paper =='0'}">
-								<input type="checkbox" class="form-check-input" name="e_paper"
-									id="e_paper" value="1">
-							</c:if>
-							<label class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
-						</div>
-					</div>
+<%-- 							<c:if test="${reg_buyer.e_paper =='1'}"> --%>
+<!-- 								<input type="checkbox" class="form-check-input" name="e_paper" -->
+<!-- 									id="e_paper" value="1" checked="true"> -->
+<%-- 							</c:if> --%>
+<%-- 							<c:if test="${reg_buyer.e_paper =='0'}"> --%>
+<!-- 								<input type="checkbox" class="form-check-input" name="e_paper" -->
+<!-- 									id="e_paper" value="1"> -->
+<%-- 							</c:if> --%>
+<!-- 							<label class="form-check-label" for="gridCheck"> 訂閱電子報 </label> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<button type="submit" id="submit" class="btn btn-primary">提交</button>
 					<button type="reset" class="btn btn-primary">重置</button>
 				</fieldset>

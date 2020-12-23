@@ -177,6 +177,15 @@ public class Recipe_blog {
 		List<Blog_Bean> cateList = service.categoryBlogList(cate.trim());
 		System.out.println("succccccccccccccces");
 		m.addAttribute("cateList", cateList);
+		
+		List<Integer> counts = new ArrayList<Integer>();
+		for (Blog_Bean b : cateList) {
+			if (b.getStatus() == 1) {
+				counts.add((int) service.BlogMsgCounts(b.getBlog_id()));
+			}
+		}
+		m.addAttribute("counts", counts);
+
 		return "recipe/blog_catePage";
 	}
 

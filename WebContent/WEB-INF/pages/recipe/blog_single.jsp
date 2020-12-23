@@ -189,6 +189,7 @@
 										<textarea class="form-control" id="MsgTextarea" rows="10"
 											cols="40" name="content"></textarea>
 									</div>
+										<span onclick="input()">一鍵輸入</span>
 								</div>
 
 								<div align="right" class="form-group">
@@ -446,6 +447,11 @@
 				})
 			}
 		})
+	</script>
+	<script>
+	function input(){
+		$("#MsgTextarea").val("我一定也要去吃看看!!");
+	}
 	</script>
 
 </body>

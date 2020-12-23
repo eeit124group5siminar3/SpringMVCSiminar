@@ -215,15 +215,15 @@ $("#check_signup").on("submit",function(ev){
 						</div>
 					</div>
 				</c:if>
-				<c:if test="${reg_buyer.e_paper == '0'}">
-					<div class="form-group">
-						<div class="form-check">
-							<input name="e_paper" class="form-check-input" type="checkbox"
-								id="gridCheck" value="0" disabled> <label
-								class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
-						</div>
-					</div>
-				</c:if>
+<%-- 				<c:if test="${reg_buyer.e_paper == '0'}"> --%>
+<!-- 					<div class="form-group"> -->
+<!-- 						<div class="form-check"> -->
+<!-- 							<input name="e_paper" class="form-check-input" type="checkbox" -->
+<!-- 								id="gridCheck" value="0" disabled> <label -->
+<!-- 								class="form-check-label" for="gridCheck"> 訂閱電子報 </label> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<%-- 				</c:if> --%>
 				<input type="submit" name="confirm" class="btn btn-primary"
 					value="確認" /> <input type="button" onclick="history.back()"
 					class="btn btn-primary" value="修改"></input>

@@ -270,13 +270,13 @@ $(function(){
 					</div>
 				</div>
 
-				<div class="form-group">
-					<div class="form-check">
-						<input name="e_paper" class="form-check-input" type="checkbox"
-							id="gridCheck" value="1" checked="true"> <label
-							class="form-check-label" for="gridCheck"> 訂閱電子報 </label>
-					</div>
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<div class="form-check"> -->
+<!-- 						<input name="e_paper" class="form-check-input" type="checkbox" -->
+<!-- 							id="gridCheck" value="1" checked="true"> <label -->
+<!-- 							class="form-check-label" for="gridCheck"> 訂閱電子報 </label> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 				<button type="submit" id="signup" class="btn btn-primary">提交</button>
 			</fieldset>
 		</div>
