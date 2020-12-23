@@ -83,7 +83,7 @@
 											<!--     <a rel="nofollow" data-action="modal#advance" tabindex="-1" href="/tw/recipe/images/2dcf98061afb1116"> -->
 
 											<img title="${detailBean.name}" width="751" height="532"
-												src="<c:url value='getImageA?rec_id=${list.rec_id}'/>" />
+												src="<c:url value='getImageE?rec_id=${list.rec_id}'/>" />
 											<!-- </a> -->
 										</div>
 
