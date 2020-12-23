@@ -174,7 +174,7 @@ public class Recipe_blog {
 	public String chooseBlogCate(@RequestParam(name = "cate") String cate, Model m) {
 		System.out.println("======================================");
 		System.out.println("cate: " + cate);
-		List<Blog_Bean> cateList = service.categoryBlogList(cate);
+		List<Blog_Bean> cateList = service.categoryBlogList(cate.trim());
 		System.out.println("succccccccccccccces");
 		m.addAttribute("cateList", cateList);
 		return "recipe/blog_catePage";

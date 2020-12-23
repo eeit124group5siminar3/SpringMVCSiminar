@@ -240,7 +240,7 @@
 						"searchInput" : searchInput
 					},
 					success : function(data) {
-						$("#searchSuccess").html(data);
+						$("#cateChange").html(data);
 					}
 				})
 			}
