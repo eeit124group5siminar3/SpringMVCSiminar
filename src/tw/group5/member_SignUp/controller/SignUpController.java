@@ -148,8 +148,7 @@ public class SignUpController {
 		
 		//把驗證碼加入Session
 		m.addAttribute("email_code", email_captcha);
-		System.err.println(email_captcha);
-//		new SendMail(member_email, email_title, email_content);
+		new SendMail(member_email, email_title, email_content);
 		
 		
 
