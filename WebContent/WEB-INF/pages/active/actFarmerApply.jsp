@@ -33,12 +33,12 @@ function backHome(){
 //============================神奇按鈕=====================================================//
 
 function fastinsert(){
-	var actName="捏陶藝術體驗";
+	var actName="番茄園";
 	var actType="採收類";
 	var actAddr="高雄市杉林區";
 	var tel="07-6776463"
 	var actDateSta="2021-01-26";
-	var actTimeSta="8:00"
+	var actTimeSta="08:00"
 	var actDateEnd="2021-01-26";
 	var actTimeEnd="16:30";
 	var numLim="30";
