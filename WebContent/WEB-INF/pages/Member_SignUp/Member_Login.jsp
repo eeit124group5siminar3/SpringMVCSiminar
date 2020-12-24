@@ -263,9 +263,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<div class="login-form">
 			<fieldset class="border login-form-fieldset">
 				<legend>會員登入</legend>
-				<button type="button" id="buyer_onebutton">買家session</button>
-				<button type="button" id="seller_onebutton">賣家beansession</button>
-				<br>
+				<button type="button" id="buyer_onebutton">買家</button>&nbsp
+				<button type="button" id="seller_onebutton">賣家</button>&nbsp
 				<button type="button" id="buyer_button">新會員</button>
 				<div id="check_email" class="center"
 					style="color: red; text-align: center; height: 20px"></div>
