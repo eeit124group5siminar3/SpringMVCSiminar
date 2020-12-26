@@ -364,7 +364,7 @@
             </c:if>
 			<c:if test="${login_ok.member_permissions!=1}">
               <li class="nav-item">
-                <a href="<c:url value='/actOrdSelectMaingo.do'/>" class="nav-link">
+                <a href="<c:url value='/actOrdSelect.do'/>" class="nav-link">
                   &emsp;&emsp;<i class="far fa-circle nav-icon"></i>
                   <p>已報名活動</p>
                 </a>

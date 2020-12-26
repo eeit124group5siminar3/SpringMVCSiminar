@@ -146,11 +146,11 @@
 	            $(this).attr("src", "/siminar/images/star1.png").prevAll().attr("src", "/siminar/images/star1.png").end().nextAll().attr("src", "/siminar/images/star0.png");
 	        }
 	        function mouseout() {
-	            $("img").attr("src", "/siminar/images/star0.png")
+	            $("div>img").attr("src", "/siminar/images/star0.png")
 	        }
 	        function choosen() {
 	            $(this).attr("src", "/siminar/images/star1.png").prevAll().attr("src", "/siminar/images/star1.png").end().nextAll().attr("src", "/siminar/images/star0.png");
-	            $("img").unbind("mouseover").unbind("mouseout");
+	            $("div>img").unbind("mouseover").unbind("mouseout");
 	            choosenOne=$(this).index()+1;
 	       		$("button#makechoice").on("click",{itemId:itemId,choosenOne:choosenOne},makechoice);
 	        }

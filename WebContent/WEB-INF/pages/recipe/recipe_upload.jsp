@@ -340,20 +340,20 @@
 	</script>
 	<script type="text/javascript">
 		function input(){
-			$("#inputName").val("鮮蝦中卷南瓜金莎義大利麵");
-			$("#inputIngredients_A").val("南瓜");
-			$("#inputIngredients_B").val("義大利麵");
-			$("#inputIngredients_C").val("無鹽奶油");
-			$("#inputIngredients_D").val("小卷");
-			$("#inputGram_A").val("30");
+			$("#inputName").val("［零失敗料理］咖哩牛肉蛋包飯");
+			$("#inputIngredients_A").val("牛肉");
+			$("#inputIngredients_B").val("紅蘿蔔");
+			$("#inputIngredients_C").val("馬鈴薯");
+			$("#inputIngredients_D").val("咖喱塊");
+			$("#inputGram_A").val("300");
 			$("#inputGram_B").val("100");
 			$("#inputGram_C").val("50");
 			$("#inputGram_D").val("200");
-			$("#inputDesc").val("此料理有三種靈魂金莎蝦球 、金莎中卷 、義大利麵。鹹蛋跟南瓜搭配海鮮義大利麵鹹中帶甜，南瓜金莎義大利麵真的非常「金」奇");
-			$("#inputMethod_A").val("南瓜事先放入蒸煮。蝦子去殼開背、小卷劃刀灑上點海鹽少許油乾煎熟透備用。");
-			$("#inputMethod_B").val("義大利麵跟花椰菜煮倒少許油加一點鹽。花椰菜熟透先取出備用");
-			$("#inputMethod_C").val("煎完鮮蝦小卷鍋不用洗。放入搗碎的鹹蛋拌炒一下再依序放入鴻禧菇、番茄、南瓜泥、灑點義式香料。鹹度可在用黑胡椒調配");
-			$("#inputMethod_D").val("備好南瓜金莎加入煮好的義大利麵拌合，食材盛盤即可開動");
+			$("#inputDesc").val("新手都能上手的日式料理，其實用咖喱塊真的很方便，步驟也很簡單又好上手");
+			$("#inputMethod_A").val("備菜-牛肉 - 切塊,馬鈴薯 - 切塊,紅蘿蔔 - 切塊,洋蔥 - 切大絲狀");
+			$("#inputMethod_B").val("同時再依序把洋蔥、紅蘿蔔炒熟");
+			$("#inputMethod_C").val("加入咖哩塊、糖，用湯匙或鏟子把咖哩塊攪散，煮個5分鐘即可食用");
+			$("#inputMethod_D").val("試味道，即可完成");
 			$("#inputMethod_E").val("完成！");
 
 			}
