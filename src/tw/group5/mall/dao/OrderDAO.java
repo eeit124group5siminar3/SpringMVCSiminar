@@ -215,7 +215,7 @@ public class OrderDAO {
 // 取的選取的訂單內容
 	public List<ProductOrderItemBean> getOrderItemList(List<Integer> ItemIdList){
 		Session session = sessionFactory.getCurrentSession();
-		String hql="from ProductOrderItemBean where orderId in :list";
+		String hql="from ProductOrderItemBean where itemId in :list";
 		Query<ProductOrderItemBean> query=session.createQuery(hql,ProductOrderItemBean.class);
 		query.setParameter("list", ItemIdList);
 		List<ProductOrderItemBean> list=query.list();
